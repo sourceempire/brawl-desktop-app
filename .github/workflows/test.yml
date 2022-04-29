@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 env: 
-  GITHUB_TOKEN: "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"
+  GITHUB_TOKEN: "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"
 
 jobs:
   release:
