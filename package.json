@@ -43,6 +43,7 @@
     "electron-build": "electron-builder",
     "release": "npm run build && electron-builder --linux --win --mac --x64 --ia32 --publish always",
     "release:mac": "npm run build && electron-builder --mac --publish always",
+    "release:windows": "npm run build && electron-builder --win --publish always",
     "build": "npm run react-build && npm run electron-build",
     "start": "concurrently \"npm run react-start\" \"wait-on http://localhost:3000 && electron .\"",
     "increment-version-patch": "npm version patch",
