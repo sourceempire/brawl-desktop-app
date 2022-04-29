@@ -19,6 +19,7 @@ function createWindow() {
       contextIsolation: false,
     },
   });
+  
   const url = isDev
     ? "http://localhost:3000"
     : `file://${path.join(__dirname, "../build/index.html")}`;
@@ -44,8 +45,9 @@ app.on("activate", () => {
   }
 });
 
-electron.ipcMain.on("maximizeWindow", () => {
-  console.log("HELLO")
+electron.ipcMain.on("toggleFullScreen", () => {
+  const currentWindow = BrowserWindow.getFocusedWindow()
+  currentWindow.setFullScreen(!currentWindow.isFullScreen())
 })
 
 
