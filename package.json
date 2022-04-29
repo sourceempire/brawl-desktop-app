@@ -42,7 +42,7 @@
     "react-test": "react-scripts test --env=jsdom",
     "react-eject": "react-scripts eject",
     "electron-build": "electron-builder",
-    "release": "npm run build && electron-builder --linux --win --mac --x64 --ia32 --publish never",
+    "release": "npm run build && electron-builder --linux --win --mac --x64 --ia32 --publish always",
     "build": "npm run react-build && npm run electron-build",
     "start": "concurrently \"npm run react-start\" \"wait-on http://localhost:3000 && electron .\"",
     "increment-version-patch": "npm version patch",
