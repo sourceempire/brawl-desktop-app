@@ -1,7 +1,7 @@
 const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
-const dialog = electron.dialog
+// const dialog = electron.dialog
 const path = require("path");
 const isDev = require("electron-is-dev");
 

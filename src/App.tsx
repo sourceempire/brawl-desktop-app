@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Window from "./window/Window";
+// import Window from "./window/Window";
 
 const TestComponent = styled.div`
   background-color: #6f5858;
