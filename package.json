@@ -1,6 +1,6 @@
 {
   "name": "desktop-app",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Desktop App",
   "author": "Source Empire AB <info@sourceempire.io>",
   "build": {
