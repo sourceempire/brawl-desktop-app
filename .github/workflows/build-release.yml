@@ -5,11 +5,16 @@ name: Build / Release Mac
 
 env: 
   GITHUB_TOKEN: "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"
+  REACT_APP_VERSION: $npm_package_version
+  REACT_APP_NAME: $npm_package_name
 
 on:
   push:
+    # https://stackoverflow.com/questions/61891328/trigger-github-action-only-on-new-tags
+    tags: 
+      - "*"
     branches: [ main ]
-
+    
 jobs:
   build-mac:
     runs-on: macos-latest
