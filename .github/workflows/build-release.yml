@@ -13,7 +13,7 @@ on:
     
 jobs:
   build-mac:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v3
@@ -26,13 +26,12 @@ jobs:
     - name: create env file
       run: |
         touch .env
-        echo REACT_APP_VERSION=$npm_package_version >> .env
-        echo REACT_APP_NAME=$npm_package_name >> .env
+        echo "REACT_APP_VERSION=$npm_package_version" >> .env
+        echo "REACT_APP_NAME=$npm_package_name" >> .env
+        cat .env
 
     - name: "Install dependencies"
       run: npm ci
-    - name: Install dmg-license
-      run: npm i dmg-license
     - name: "Run build and release"
       run: npm run release:mac --if-present
   
@@ -50,12 +49,11 @@ jobs:
     - name: create env file
       run: |
         touch .env
-        echo REACT_APP_VERSION=$npm_package_version >> .env
-        echo REACT_APP_NAME=$npm_package_name >> .env
+        echo "REACT_APP_VERSION=$npm_package_version" >> .env
+        echo "REACT_APP_NAME=$npm_package_name" >> .env
+        cat .env
 
     - name: "Install dependencies"
       run: npm ci
-    - name: Install dmg-license
-      run: npm i dmg-license
     - name: "Run build and release"
       run: npm run release:windows --if-present
