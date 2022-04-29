@@ -6,6 +6,7 @@
   "build": {
     "appId": "io.sourceempire.desktop-app"
   },
+  "repository": "https://github.com/sourceempire/desktop-app-releases",
   "private": true,
   "main": "public/electron-.js",
   "homepage": "./",
@@ -41,7 +42,6 @@
     "react-test": "react-scripts test --env=jsdom",
     "react-eject": "react-scripts eject",
     "electron-build": "electron-builder",
-    "release": "npm run build && electron-builder --linux --win --mac --x64 --ia32 --publish always",
     "release:mac": "npm run build && electron-builder --mac --publish always",
     "release:windows": "npm run build && electron-builder --win --publish always",
     "build": "npm run react-build && npm run electron-build",
