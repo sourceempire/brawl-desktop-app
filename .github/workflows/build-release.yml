@@ -5,8 +5,6 @@ name: Build / Release Mac
 
 env: 
   GITHUB_TOKEN: "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"
-  REACT_APP_VERSION: $npm_package_version
-  REACT_APP_NAME: $npm_package_name
 
 on:
   push:
@@ -16,7 +14,6 @@ on:
 jobs:
   build-mac:
     runs-on: macos-latest
-    if: ${{ github.ref_type == 'tag' && github.event.base_ref=='refs/heads/main' }}
 
     steps:
     - uses: actions/checkout@v3
@@ -25,12 +22,18 @@ jobs:
       with:
         node-version: 16
         cache: 'npm'
+
+    - name: create env file
+      run: |
+        touch .env
+        echo REACT_APP_VERSION=$npm_package_version >> .env
+        echo REACT_APP_NAME=$npm_package_name >> .env
+
     - run: npm ci
     - run: npm run release:mac --if-present
   
   build-windows:
     runs-on: windows-latest
-    if: ${{ github.ref_type == 'tag' && github.event.base_ref=='refs/heads/main' }}
 
     steps:
     - uses: actions/checkout@v3
@@ -39,5 +42,12 @@ jobs:
       with:
         node-version: 16
         cache: 'npm'
+
+    - name: create env file
+      run: |
+        touch .env
+        echo REACT_APP_VERSION=$npm_package_version >> .env
+        echo REACT_APP_NAME=$npm_package_name >> .env
+
     - run: npm ci
     - run: npm run release:windows --if-present
