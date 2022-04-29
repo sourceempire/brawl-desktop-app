@@ -11,7 +11,6 @@ function App() {
 
   return (
     <TestComponent>
-      <p onClick={() => Window.current.toggleFullScreen()}>App Name: {process.env.REACT_APP_NAME}</p>
       <p>Version: {process.env.REACT_APP_VERSION}</p>
     </TestComponent>
   );

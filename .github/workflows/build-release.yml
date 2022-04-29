@@ -28,11 +28,14 @@ jobs:
         node-version: 16
         cache: 'npm'
 
+    - name: Get package info
+      id: package
+      uses: codex-team/action-nodejs-package-info@v1
+
     - name: create env file
       run: |
         touch .env
-        echo "REACT_APP_VERSION=$npm_package_version" >> .env
-        echo "REACT_APP_NAME=$npm_package_name" >> .env
+        echo "REACT_APP_VERSION=${{ steps.package.outputs.version }}" >> .env
         cat .env
 
     - name: "Install dependencies"
@@ -51,11 +54,14 @@ jobs:
         node-version: 16
         cache: 'npm'
 
+    - name: Get package info
+      id: package
+      uses: codex-team/action-nodejs-package-info@v1
+
     - name: create env file
       run: |
         touch .env
-        echo "REACT_APP_VERSION=$npm_package_version" >> .env
-        echo "REACT_APP_NAME=$npm_package_name" >> .env
+        echo "REACT_APP_VERSION=${{ steps.package.outputs.version }}" >> .env
         cat .env
 
     - name: "Install dependencies"
