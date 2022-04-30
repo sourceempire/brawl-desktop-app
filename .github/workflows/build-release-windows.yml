@@ -1,4 +1,4 @@
-name: Build / Release
+name: Build / Release Windows
 
 env: 
   GITHUB_TOKEN: "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"
