@@ -10,16 +10,27 @@ const { autoUpdater } = require("electron-updater");
 let mainWindow;
 
 function createWindow() {
+
+  const backgroundColor = "#232333";
+
   mainWindow = new BrowserWindow({
     width: 1440,
     height: 900,
+    backgroundColor,
+    resizable: false,
     titleBarStyle: "hidden",
+    ...process.platform === "win32" && {
+      titleBarOverlay: {
+        color: backgroundColor,
+        symbolColor: '#FFFFFF'
+      }
+    },
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
     },
   });
-  
+
   const url = isDev
     ? "http://localhost:3000"
     : `file://${path.join(__dirname, "../build/index.html")}`;
