@@ -8,21 +8,24 @@ const isDev = require("electron-is-dev");
 const { autoUpdater } = require("electron-updater");
 
 let mainWindow;
+let loadingWindow;
+let loginWindow;
 
-function createWindow() {
+const backgroundColor = "#232333";
 
-  const backgroundColor = "#232333";
 
+function createMainWindow() {
   mainWindow = new BrowserWindow({
     width: 1440,
     height: 900,
+    minHeight: 900,
+    minWidth: 1440,
     backgroundColor,
-    resizable: false,
     titleBarStyle: "hidden",
     ...process.platform === "win32" && {
       titleBarOverlay: {
         color: backgroundColor,
-        symbolColor: '#FFFFFF'
+        symbolColor: '#FFFFFF',
       }
     },
     webPreferences: {
@@ -32,8 +35,8 @@ function createWindow() {
   });
 
   const url = isDev
-    ? "http://localhost:3000"
-    : `file://${path.join(__dirname, "../build/index.html")}`;
+    ? "http://localhost:3000/home"
+    : `file://${path.join(__dirname, "../build/index.html/home")}`;
   mainWindow.loadURL(url);
   mainWindow.on("closed", () => (mainWindow = null));
 
@@ -42,24 +45,79 @@ function createWindow() {
   }
 }
 
-app.on("ready", createWindow);
+function createLoginWindow() {
+  loginWindow = new BrowserWindow({
+    width: 400,
+    height: 900,
+    resizable: false,
+    backgroundColor,
+    titleBarStyle: "hidden",
+    ...process.platform === "win32" && {
+      titleBarOverlay: {
+        color: backgroundColor,
+        symbolColor: '#FFFFFF',
+      }
+    },
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
+  });
+
+  const url = isDev
+    ? "http://localhost:3000/login"
+    : `file://${path.join(__dirname, "../build/index.html/login")}`;
+  loginWindow.loadURL(url);
+  loginWindow.on("closed", () => (loginWindow = null));
+}
+
+// app.on("ready", createWindow);
+
+function createLoadingWindow() {
+  loadingWindow = new BrowserWindow({
+    width: 500,
+    height: 500,
+    resizable: false,
+    frame: false,
+    backgroundColor,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
+  });
+
+  const url = isDev
+    ? "http://localhost:3000/loading"
+    : `file://${path.join(__dirname, "../build/index.htm/loading")}`;
+  loadingWindow.loadURL(url);
+  loadingWindow.on("closed", () => (loadingWindow = null));
+}
+
+
+
+app.on("ready", createLoadingWindow)
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
-    app.quit();
+    app.quit();   
   }
 });
 
 app.on("activate", () => {
-  if (mainWindow === null) {
-    createWindow();
+  if (loadingWindow === null) {
+    createLoadingWindow();
   }
 });
 
-electron.ipcMain.on("toggleFullScreen", () => {
-  const currentWindow = BrowserWindow.getFocusedWindow()
-  currentWindow.setFullScreen(!currentWindow.isFullScreen())
+electron.ipcMain.on("openMainWindow", () => {
+  createMainWindow()
 })
+
+electron.ipcMain.on("openLoginWindow", () => {
+  createLoginWindow()
+})
+
+
 
 
 // autoUpdater.on("update-available", (_event, releaseNotes, releaseName) => {

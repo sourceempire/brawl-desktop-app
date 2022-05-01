@@ -2,9 +2,8 @@
 
 let Window = { // dummy window for use outside of electron
   version: null,
-  current: {
-    toggleFullScreen: () => {},
-  },
+  openMainWindow: () => {},
+  openLoginWindow: () => {},
   new: (args) => {
     return {
       loadURL: (url) => {
@@ -21,22 +20,9 @@ let Window = { // dummy window for use outside of electron
 if (window.require) { // if in electron
   const { ipcRenderer, shell } = window.require('electron'); // window require to avoid conflict with create react app's own import system
   Window = {
-    current: {
-      toggleFullScreen: () => ipcRenderer.send("toggleFullScreen"),
-    },
-    
-   
-    //version: remote.app.getVersion(),
-    //current:       ()     => remote.getCurrentWindow(),
-    //new:           (args) => new remote.BrowserWindow(args),
+    openMainWindow: () => ipcRenderer.send("openMainWindow"),
+    openLoginWindow: () => ipcRenderer.send("openLoginWindow"),
     openInBrowser: (url)  => shell.openExternal(url),
-    setSize: ({resizable, height, width}) => {
-      // const win = remote.getCurrentWindow();
-      // win.setResizable(resizable);
-      // win.setMinimumSize(width, height);
-      // win.setSize(width, height);
-      // win.center()
-    }
   };
 }
 
