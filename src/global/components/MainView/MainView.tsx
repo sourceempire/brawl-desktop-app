@@ -7,7 +7,15 @@ const MainView = () => {
     <Wrapper>
       <DragableArea />
       <Routes>
-        <Route path="/" element={<p>Version: {process.env.REACT_APP_VERSION}</p>} />
+        <Route
+          path="/"
+          element={
+            <>
+              <p>Main View</p>
+              <p>Version: {process.env.REACT_APP_VERSION}</p>
+            </>
+          }
+        />
       </Routes>
     </Wrapper>
   );
