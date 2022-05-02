@@ -31,7 +31,7 @@ const GlobalStyle = createGlobalStyle`
     body {
         position: relative;
         overflow: hidden;
-        border: ${process.platform == "win32" ? "1px solid rgba(200, 200, 200, 0.1)": "none"};
+        border: ${process.platform == 'win32' ? '1px solid rgba(200, 200, 200, 0.1)' : 'none'};
         line-height: 1;
         max-height: 100vh;
     }
@@ -50,6 +50,6 @@ const GlobalStyle = createGlobalStyle`
         border-collapse: collapse;
         border-spacing: 0;
     }
-`
+`;
 
-export default GlobalStyle
+export default GlobalStyle;

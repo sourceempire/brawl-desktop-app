@@ -4,12 +4,9 @@ import { ThemeProvider } from 'styled-components';
 import reportWebVitals from './reportWebVitals';
 import { App } from './global/components';
 import GlobalStyle from './global/style/globalStyle';
-import { theme } from "./global/style/theme"
+import { theme } from './global/style/theme';
 
-
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>

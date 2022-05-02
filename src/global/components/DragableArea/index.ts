@@ -1,3 +1,3 @@
-import DragableArea from "./DragableArea"
+import DragableArea from './DragableArea';
 
-export default DragableArea
+export default DragableArea;

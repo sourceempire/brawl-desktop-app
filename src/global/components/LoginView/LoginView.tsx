@@ -1,5 +1,7 @@
+import { Wrapper } from './LoginView.styles';
+
 const LoginView = () => {
-    return (<div>Login</div>)
-}
+  return <Wrapper>Login</Wrapper>;
+};
 
 export default LoginView;

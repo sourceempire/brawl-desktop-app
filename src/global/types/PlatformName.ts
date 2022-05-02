@@ -1,5 +1,4 @@
-
 export enum PlatformName {
-    MAC = "darwin",
-    WINDOWS = "win32"
+  MAC = 'darwin',
+  WINDOWS = 'win32'
 }

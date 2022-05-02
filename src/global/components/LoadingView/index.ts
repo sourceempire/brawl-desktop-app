@@ -1,3 +1,3 @@
-import AppLoading from "./LoadingView";
+import AppLoading from './LoadingView';
 
-export default AppLoading
+export default AppLoading;

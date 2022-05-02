@@ -1,16 +1,16 @@
-import { Route, Routes } from "react-router-dom"
-import DragableArea from "../DragableArea"
-import { Wrapper } from "./MainView.styles"
+import { Route, Routes } from 'react-router-dom';
+import DragableArea from '../DragableArea';
+import { Wrapper } from './MainView.styles';
 
 const MainView = () => {
-    return (
-        <Wrapper>
-            <DragableArea />
-            <Routes>
-                <Route path="/" element={<p>Version: {process.env.REACT_APP_VERSION}</p>} />
-            </Routes>
-        </Wrapper>
-    )
-}
+  return (
+    <Wrapper>
+      <DragableArea />
+      <Routes>
+        <Route path="/" element={<p>Version: {process.env.REACT_APP_VERSION}</p>} />
+      </Routes>
+    </Wrapper>
+  );
+};
 
-export default MainView
+export default MainView;
