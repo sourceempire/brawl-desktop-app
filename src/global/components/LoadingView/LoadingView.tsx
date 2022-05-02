@@ -1,5 +1,6 @@
 import { Wrapper } from './LoadingView.styles';
 import Window from '../../../window/Window';
+import { useEffect } from 'react';
 
 const openMainWindow = () => {
   Window.openMainWindow();
@@ -10,6 +11,14 @@ const openLoginWindow = () => {
 };
 
 const LoadingView = () => {
+  const testing = (test: string) => {
+    console.log(test);
+  };
+
+  useEffect(() => {
+    Window.addUpdateCheckListener(testing);
+  }, []);
+
   return (
     <Wrapper>
       <p>This is where the loading should happen</p>

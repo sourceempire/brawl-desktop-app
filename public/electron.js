@@ -1,126 +1,140 @@
 /* eslint-disable */
 
-const electron = require("electron");
+const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 // const dialog = electron.dialog
-const path = require("path");
-const isDev = require("electron-is-dev");
+const path = require('path');
+const url = require('url');
+const isDev = require('electron-is-dev');
 
-const { autoUpdater } = require("electron-updater");
+const { autoUpdater } = require('electron-updater');
 
 let mainWindow;
 let loadingWindow;
 let loginWindow;
 
-const backgroundColor = "#232333";
-
-
-function createMainWindow() {
-  mainWindow = new BrowserWindow({
-    width: 1440,
-    height: 900,
-    minHeight: 900,
-    minWidth: 1440,
+const backgroundColor = '#232333';
+/**
+ *
+ * @param {*} windowObject
+ * @param {*} options
+ */
+function createWindow(appPath, options = {}) {
+  const window = new BrowserWindow({
+    ...options,
     backgroundColor,
-    titleBarStyle: "hidden",
-    ...process.platform === "win32" && {
-      titleBarOverlay: {
-        color: backgroundColor,
-        symbolColor: '#FFFFFF',
-      }
-    },
+    ...(options.frame !== false && {
+      titleBarStyle: 'hidden',
+      ...(process.platform === 'win32' && {
+        titleBarOverlay: {
+          color: backgroundColor,
+          symbolColor: '#FFFFFF'
+        }
+      })
+    }),
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false,
-    },
+      contextIsolation: false
+    }
   });
 
-  const url = isDev
-    ? "http://localhost:3000/home"
-    : `file://${path.join(__dirname, "../build/index.html/home")}`;
-  mainWindow.loadURL(url);
-  mainWindow.on("closed", () => (mainWindow = null));
+  window.loadURL(
+    isDev
+      ? `http://localhost:3000/#/${appPath}`
+      : `${path.join(__dirname, `../build/index.html`)}#/${appPath}`
+  );
 
-  if (!isDev) {
-    autoUpdater.checkForUpdatesAndNotify()
+  return window;
+}
+
+function createMainWindow() {
+  if (mainWindow) {
+    mainWindow.focus();
+  } else {
+    mainWindow = createWindow('main', {
+      width: 1440,
+      height: 900,
+      minHeight: 900,
+      minWidth: 1440
+    });
+
+    mainWindow.on('closed', () => (mainWindow = null));
   }
 }
 
 function createLoginWindow() {
-  loginWindow = new BrowserWindow({
-    width: 400,
-    height: 900,
-    resizable: false,
-    backgroundColor,
-    titleBarStyle: "hidden",
-    ...process.platform === "win32" && {
-      titleBarOverlay: {
-        color: backgroundColor,
-        symbolColor: '#FFFFFF',
-      }
-    },
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
-    },
-  });
+  if (loginWindow) {
+    loginWindow.focus();
+  } else {
+    loginWindow = createWindow('login', {
+      width: 400,
+      height: 900,
+      resizable: false
+    });
 
-  const url = isDev
-    ? "http://localhost:3000/login"
-    : `file://${path.join(__dirname, "../build/index.html/login")}`;
-  loginWindow.loadURL(url);
-  loginWindow.on("closed", () => (loginWindow = null));
+    loginWindow.on('closed', () => (loginWindow = null));
+  }
 }
 
-// app.on("ready", createWindow);
-
 function createLoadingWindow() {
-  loadingWindow = new BrowserWindow({
+  loadingWindow = createWindow('loading', {
     width: 500,
     height: 500,
     resizable: false,
-    frame: false,
-    backgroundColor,
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
-    },
+    frame: false
   });
 
-  const url = isDev
-    ? "http://localhost:3000/loading"
-    : `file://${path.join(__dirname, "../build/index.htm/loading")}`;
-  loadingWindow.loadURL(url);
-  loadingWindow.on("closed", () => (loadingWindow = null));
+  loadingWindow.on('closed', () => (loadingWindow = null));
+
+  if (!isDev) {
+    autoUpdater.checkForUpdatesAndNotify();
+
+    setInterval(() => {
+      loadingWindow.webContents.send('testing', 'Testing testing');
+    }, 1000);
+
+    autoUpdater.on('checking-for-update', () => {
+      loadingWindow.webContents.send('checking-for-update', 'Testing checking-for-update');
+    });
+
+    autoUpdater.on('update-available', () => {
+      loadingWindow.webContents.send('update-available', 'Testing update-available');
+    });
+
+    autoUpdater.on('update-downloaded', () => {
+      loadingWindow.webContents.send('update-downloaded', 'Testing update-downloaded');
+    });
+
+    autoUpdater.on('update-not-available', () => {
+      loadingWindow.webContents.send('update-not-available', 'Testing update-not-available');
+    });
+  }
 }
 
+app.on('ready', createLoadingWindow);
 
-
-app.on("ready", createLoadingWindow)
-
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();   
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit();
   }
 });
 
-app.on("activate", () => {
+app.on('activate', () => {
   if (loadingWindow === null) {
     createLoadingWindow();
   }
 });
 
-electron.ipcMain.on("openMainWindow", () => {
-  createMainWindow()
-})
+electron.ipcMain.on('openMainWindow', () => {
+  createMainWindow();
+});
 
-electron.ipcMain.on("openLoginWindow", () => {
-  createLoginWindow()
-})
+electron.ipcMain.on('openLoginWindow', () => {
+  createLoginWindow();
+});
 
-
-
+autoUpdater.on('error', () => console.log('error'));
 
 // autoUpdater.on("update-available", (_event, releaseNotes, releaseName) => {
 // 	const dialogOpts = {
