@@ -42,7 +42,7 @@ if (window.require) {
     addUpdateDownloadedListener: (callback) => addListener('update-downloaded', callback),
     addUpdateNotAvailableListener: (callback) => addListener('update-not-available', callback),
 
-    restartApp: () => ipcRenderer.sned('restart-app')
+    restartApp: () => ipcRenderer.send('restart-app')
   };
 }
 
