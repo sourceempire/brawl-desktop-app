@@ -15,16 +15,13 @@ let loadingWindow;
 let loginWindow;
 
 const backgroundColor = '#232333';
-/**
- *
- * @param {*} windowObject
- * @param {*} options
- */
+
 async function createWindow(appPath, options = {}) {
   const window = new BrowserWindow({
     ...options,
+    frame: false,
     backgroundColor,
-    ...(options.frame !== false && {
+    ...(appPath !== 'loading' && {
       titleBarStyle: 'hidden',
       ...(process.platform === 'win32' && {
         titleBarOverlay: {
