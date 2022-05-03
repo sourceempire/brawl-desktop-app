@@ -5,7 +5,6 @@ export type Props = {
 };
 
 const ProgressBar = ({ percent }: Props) => {
-  percent.toFixed(1);
   return (
     <Wrapper>
       <Progression percent={percent} />

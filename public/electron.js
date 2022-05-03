@@ -81,11 +81,8 @@ async function createLoadingWindow() {
     loadingWindow = await createWindow('loading', {
       width: 300,
       height: 300,
-      resizable: false,
-      frame: false
+      resizable: false
     });
-
-    electron.dialog.showMessageBox(loadingWindow, { message: 'Testar dialog' });
 
     if (!isDev) {
       const checkingForUpdate = () => {

@@ -60,8 +60,6 @@ const LoadingView = () => {
     Window.addUpdateNotAvailableListener(onUpdateNotAvailable);
   }, []);
 
-  console.log({ downloadInfo });
-
   return (
     <Wrapper>
       <button onClick={openMainWindow}>Open main window</button>

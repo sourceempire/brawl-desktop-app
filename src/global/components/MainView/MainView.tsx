@@ -13,6 +13,7 @@ const MainView = () => {
             <>
               <p>Main View</p>
               <p>Version: {process.env.REACT_APP_VERSION}</p>
+              <p>Fett kul att den uppdaterades</p>
             </>
           }
         />
