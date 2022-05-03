@@ -21,6 +21,7 @@ const GlobalStyle = createGlobalStyle`
         font: inherit;
         vertical-align: baseline;
         user-select: none;
+        font-family: sans-serif;
     }
 
     /* HTML5 display-role reset for older browsers */

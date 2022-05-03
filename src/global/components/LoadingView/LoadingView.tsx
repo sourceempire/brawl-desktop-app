@@ -67,24 +67,16 @@ const LoadingView = () => {
       <button onClick={openMainWindow}>Open main window</button>
       <button onClick={openLoginWindow}>Open login window</button>
 
+      <Text>{loadingText}</Text>
       {loadingText === LoadingText.DOWNLOAD_PROGRESS && downloadInfo !== undefined && (
         <>
-          <Text>{`${downloadInfo.bytesPerSecond / 1000000}MB/s`}</Text>
-          <Text>
-            {`
-              Progress: ${downloadInfo.percent.toFixed(1)}% 
-              ${downloadInfo.transferred}/${downloadInfo.transferred}
-            `}
-          </Text>
           <ProgressBar percent={downloadInfo.percent} />
         </>
       )}
-      <Text>{loadingText}</Text>
 
       {loadingText === LoadingText.UPDATE_DOWNLOADED && (
         <button onClick={() => Window.restartApp()}>Restart App?</button>
       )}
-      <ProgressBar percent={50} />
     </Wrapper>
   );
 };
