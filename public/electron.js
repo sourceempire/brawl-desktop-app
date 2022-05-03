@@ -49,10 +49,10 @@ async function createWindow(appPath, options = {}) {
 }
 
 async function createMainWindow() {
-  if (mainWindow) {
+  if (mainWindow && !mainWindow.isDestroyed()) {
     mainWindow.focus();
   } else {
-    const mainWindow = await createWindow('main', {
+    mainWindow = await createWindow('main', {
       width: 1440,
       height: 900,
       minHeight: 900,
@@ -64,7 +64,7 @@ async function createMainWindow() {
 }
 
 async function createLoginWindow() {
-  if (loginWindow) {
+  if (loginWindow && !loginWindow.isDestroyed()) {
     loginWindow.focus();
   } else {
     loginWindow = await createWindow('login', {
@@ -78,33 +78,54 @@ async function createLoginWindow() {
 }
 
 async function createLoadingWindow() {
-  loadingWindow = await createWindow('loading', {
-    width: 500,
-    height: 500,
-    resizable: false,
-    frame: false
-  });
-
-  loadingWindow.on('closed', () => (loadingWindow = null));
-
-  if (!isDev) {
-    autoUpdater.checkForUpdatesAndNotify();
-
-    autoUpdater.on('checking-for-update', () => {
-      loadingWindow.webContents.send('checking-for-update', 'Testing checking-for-update');
+  if (loadingWindow && !loadingWindow.isDestroyed()) {
+    loadingWindow.focus();
+  } else {
+    loadingWindow = await createWindow('loading', {
+      width: 500,
+      height: 500,
+      resizable: false,
+      frame: false
     });
 
-    autoUpdater.on('update-available', () => {
-      loadingWindow.webContents.send('update-available', 'Testing update-available');
-    });
+    electron.dialog.showMessageBox(loadingWindow, { message: 'Testar dialog' });
 
-    autoUpdater.on('update-downloaded', () => {
-      loadingWindow.webContents.send('update-downloaded', 'Testing update-downloaded');
-    });
+    if (!isDev) {
+      const checkingForUpdate = () => {
+        loadingWindow.webContents.send('checking-for-update', 'Testing checking-for-update');
+      };
 
-    autoUpdater.on('update-not-available', () => {
-      loadingWindow.webContents.send('update-not-available', 'Testing update-not-available');
-    });
+      const updateAvailable = () => {
+        loadingWindow.webContents.send('update-available', 'Testing update-available');
+      };
+
+      const downloadProgress = () => {
+        loadingWindow.webContents.send('download-progress', 'Testing download-progress');
+      };
+
+      const updateDownloaded = () => {
+        loadingWindow.webContents.send('update-downloaded', 'Testing update-downloaded');
+      };
+
+      const updateNotAvailable = () => {
+        loadingWindow.webContents.send('update-not-available', 'Testing update-not-available');
+      };
+
+      autoUpdater.on('checking-for-update', checkingForUpdate);
+      autoUpdater.on('update-available', updateAvailable);
+      autoUpdater.on('download-progress', downloadProgress);
+      autoUpdater.on('update-downloaded', updateDownloaded);
+      autoUpdater.on('update-not-available', updateNotAvailable);
+
+      loadingWindow.on('closed', () => {
+        autoUpdater.removeListener('checking-for-update', checkingForUpdate);
+        autoUpdater.removeListener('update-available', updateAvailable);
+        autoUpdater.removeListener('download-progress', downloadProgress);
+        autoUpdater.removeListener('update-downloaded', updateDownloaded);
+        autoUpdater.removeListener('update-not-available', updateNotAvailable);
+        loadingWindow = null;
+      });
+    }
   }
 }
 
@@ -130,6 +151,16 @@ electron.ipcMain.on('openMainWindow', () => createMainWindow());
 electron.ipcMain.on('openLoginWindow', () => createLoginWindow());
 
 autoUpdater.on('error', () => console.log('error'));
+
+// SSL/TSL: this is the self signed certificate support
+if (isDev) {
+  app.on('certificate-error', (event, webContents, url, error, certificate, callback) => {
+    // On certificate error we disable default behaviour (stop loading the page)
+    // and we then say "it is all fine - true" to the callback
+    event.preventDefault();
+    callback(true);
+  });
+}
 
 // autoUpdater.on("update-available", (_event, releaseNotes, releaseName) => {
 // 	const dialogOpts = {
