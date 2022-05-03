@@ -20,7 +20,8 @@ let Window = {
   addUpdateAvailableListener: (callback) => {},
   addDownloadProgressListener: (callback) => {},
   addUpdateDownloadedListener: (callback) => {},
-  addUpdateNotAvailableListener: (callback) => {}
+  addUpdateNotAvailableListener: (callback) => {},
+  restartApp: () => {}
 };
 
 if (window.require) {
@@ -30,8 +31,8 @@ if (window.require) {
   const addListener = (channel, callback) => ipcRenderer.on(channel, (_, args) => callback(args));
 
   Window = {
-    openMainWindow: () => ipcRenderer.send('openMainWindow'),
-    openLoginWindow: () => ipcRenderer.send('openLoginWindow'),
+    openMainWindow: () => ipcRenderer.send('open-main-window'),
+    openLoginWindow: () => ipcRenderer.send('open-login-window'),
     openInBrowser: (url) => shell.openExternal(url),
 
     checkForUpdates: () => ipcRenderer.send('check-for-update'),
@@ -39,7 +40,9 @@ if (window.require) {
     addUpdateAvailableListener: (callback) => addListener('update-available', callback),
     addDownloadProgressListener: (callback) => addListener('download-progress', callback),
     addUpdateDownloadedListener: (callback) => addListener('update-downloaded', callback),
-    addUpdateNotAvailableListener: (callback) => addListener('update-not-available', callback)
+    addUpdateNotAvailableListener: (callback) => addListener('update-not-available', callback),
+
+    restartApp: () => ipcRenderer.sned('restart-app')
   };
 }
 

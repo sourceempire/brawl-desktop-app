@@ -43,7 +43,7 @@ const LoadingView = () => {
   };
 
   const onUpdateDownloaded = () => {
-    setLoadingText(LoadingText.DOWNLOAD_PROGRESS);
+    setLoadingText(LoadingText.UPDATE_DOWNLOADED);
     // TODO
     // restart app
   };
@@ -78,6 +78,10 @@ const LoadingView = () => {
         </>
       )}
       <Text>{loadingText}</Text>
+
+      {loadingText === LoadingText.UPDATE_DOWNLOADED && (
+        <button onClick={() => Window.restartApp()}>Restart App?</button>
+      )}
     </Wrapper>
   );
 };
