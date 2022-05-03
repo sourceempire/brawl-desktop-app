@@ -64,7 +64,6 @@ const LoadingView = () => {
 
   return (
     <Wrapper>
-      <p>This is where the loading should happen</p>
       <button onClick={openMainWindow}>Open main window</button>
       <button onClick={openLoginWindow}>Open login window</button>
 
@@ -77,6 +76,7 @@ const LoadingView = () => {
               ${downloadInfo.transferred}/${downloadInfo.transferred}
             `}
           </Text>
+          <ProgressBar percent={downloadInfo.percent} />
         </>
       )}
       <Text>{loadingText}</Text>
@@ -84,7 +84,7 @@ const LoadingView = () => {
       {loadingText === LoadingText.UPDATE_DOWNLOADED && (
         <button onClick={() => Window.restartApp()}>Restart App?</button>
       )}
-      <ProgressBar />
+      <ProgressBar percent={50} />
     </Wrapper>
   );
 };

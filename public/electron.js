@@ -82,8 +82,8 @@ async function createLoadingWindow() {
     loadingWindow.focus();
   } else {
     loadingWindow = await createWindow('loading', {
-      width: 500,
-      height: 500,
+      width: 300,
+      height: 300,
       resizable: false,
       frame: false
     });
@@ -150,8 +150,8 @@ electron.ipcMain.on('check-for-update', () => {
 electron.ipcMain.on('open-main-window', () => createMainWindow());
 electron.ipcMain.on('open-login-window', () => createLoginWindow());
 electron.ipcMain.on('restart-app', () => {
-  autoUpdater.quitAndInstall()
-})
+  autoUpdater.quitAndInstall();
+});
 
 autoUpdater.on('error', () => console.log('error'));
 

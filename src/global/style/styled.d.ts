@@ -9,6 +9,9 @@ declare module 'styled-components' {
       secondary: string;
       lightTint: string;
     };
+    borderRadius: {
+      default: string;
+    };
     titleBarHeight: string;
   }
 }

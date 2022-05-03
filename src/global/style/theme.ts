@@ -1,14 +1,6 @@
 import { DefaultTheme } from 'styled-components';
 import { PlatformName } from '../types/PlatformName';
 
-enum Colors {
-  PRIMARY = '#EF9A00',
-  ACCENT = '#94E8B4',
-  BACKGROUND = '#232333',
-  SECONDARY = '#363750',
-  LIGHT_TINT = '#595B83'
-}
-
 const titleBarHeight = () => {
   switch (process.platform) {
     case PlatformName.MAC:
@@ -20,6 +12,18 @@ const titleBarHeight = () => {
   }
 };
 
+export enum Colors {
+  PRIMARY = '#EF9A00',
+  ACCENT = '#94E8B4',
+  BACKGROUND = '#232333',
+  SECONDARY = '#363750',
+  LIGHT_TINT = '#595B83'
+}
+
+export enum BorderRadius {
+  DEFAULT = '3px'
+}
+
 export const theme: DefaultTheme = {
   colors: {
     primary: Colors.PRIMARY,
@@ -28,5 +32,8 @@ export const theme: DefaultTheme = {
     secondary: Colors.SECONDARY,
     lightTint: Colors.LIGHT_TINT
   },
-  titleBarHeight: titleBarHeight()
+  titleBarHeight: titleBarHeight(),
+  borderRadius: {
+    default: BorderRadius.DEFAULT
+  }
 };
