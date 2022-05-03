@@ -3,9 +3,6 @@
   "version": "1.0.17",
   "description": "Desktop App",
   "author": "Source Empire AB <info@sourceempire.io>",
-  "build": {
-    "appId": "io.sourceempire.desktop-app"
-  },
   "repository": "https://github.com/sourceempire/desktop-app-releases",
   "private": true,
   "main": "public/electron.js",
