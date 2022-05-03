@@ -20,7 +20,7 @@ const backgroundColor = '#232333';
  * @param {*} windowObject
  * @param {*} options
  */
-function createWindow(appPath, options = {}) {
+async function createWindow(appPath, options = {}) {
   const window = new BrowserWindow({
     ...options,
     backgroundColor,
@@ -39,7 +39,7 @@ function createWindow(appPath, options = {}) {
     }
   });
 
-  window.loadURL(
+  await window.loadURL(
     isDev
       ? `http://localhost:3000/#/${appPath}`
       : `${path.join(__dirname, `../build/index.html`)}#/${appPath}`
@@ -48,11 +48,11 @@ function createWindow(appPath, options = {}) {
   return window;
 }
 
-function createMainWindow() {
+async function createMainWindow() {
   if (mainWindow) {
     mainWindow.focus();
   } else {
-    mainWindow = createWindow('main', {
+    const mainWindow = await createWindow('main', {
       width: 1440,
       height: 900,
       minHeight: 900,
@@ -63,11 +63,11 @@ function createMainWindow() {
   }
 }
 
-function createLoginWindow() {
+async function createLoginWindow() {
   if (loginWindow) {
     loginWindow.focus();
   } else {
-    loginWindow = createWindow('login', {
+    loginWindow = await createWindow('login', {
       width: 400,
       height: 900,
       resizable: false
@@ -77,8 +77,8 @@ function createLoginWindow() {
   }
 }
 
-function createLoadingWindow() {
-  loadingWindow = createWindow('loading', {
+async function createLoadingWindow() {
+  loadingWindow = await createWindow('loading', {
     width: 500,
     height: 500,
     resizable: false,
