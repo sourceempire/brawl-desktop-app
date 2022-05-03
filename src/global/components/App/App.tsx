@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate, HashRouter } from 'react-router-dom';
+import { Route, Routes, HashRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../../style/theme';
 import LoadingView from '../LoadingView';
