@@ -16,7 +16,11 @@ const LoadingView = () => {
   };
 
   useEffect(() => {
+    Window.checkForUpdates();
     Window.addUpdateCheckListener(testing);
+    Window.addUpdateAvailableListener(testing);
+    Window.addUpdateDownloadedListener(testing);
+    Window.addUpdateNotAvailableListener(testing);
   }, []);
 
   return (

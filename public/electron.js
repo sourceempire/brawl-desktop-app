@@ -90,10 +90,6 @@ async function createLoadingWindow() {
   if (!isDev) {
     autoUpdater.checkForUpdatesAndNotify();
 
-    setInterval(() => {
-      loadingWindow.webContents.send('testing', 'Testing testing');
-    }, 1000);
-
     autoUpdater.on('checking-for-update', () => {
       loadingWindow.webContents.send('checking-for-update', 'Testing checking-for-update');
     });
@@ -126,13 +122,12 @@ app.on('activate', () => {
   }
 });
 
-electron.ipcMain.on('openMainWindow', () => {
-  createMainWindow();
+electron.ipcMain.on('check-for-update', () => {
+  autoUpdater.checkForUpdates();
 });
 
-electron.ipcMain.on('openLoginWindow', () => {
-  createLoginWindow();
-});
+electron.ipcMain.on('openMainWindow', () => createMainWindow());
+electron.ipcMain.on('openLoginWindow', () => createLoginWindow());
 
 autoUpdater.on('error', () => console.log('error'));
 
