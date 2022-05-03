@@ -75,7 +75,7 @@ const LoadingView = () => {
       )}
 
       {loadingText === LoadingText.UPDATE_DOWNLOADED && (
-        <button onClick={() => Window.restartApp()}>Restart App?</button>
+        <button onClick={() => Window.quitAndInstall()}>Quit and install</button>
       )}
     </Wrapper>
   );

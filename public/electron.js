@@ -149,9 +149,7 @@ electron.ipcMain.on('check-for-update', () => {
 
 electron.ipcMain.on('open-main-window', () => createMainWindow());
 electron.ipcMain.on('open-login-window', () => createLoginWindow());
-electron.ipcMain.on('restart-app', () => {
-  autoUpdater.quitAndInstall();
-});
+electron.ipcMain.on('quit-and-install', () => autoUpdater.quitAndInstall());
 
 autoUpdater.on('error', () => console.log('error'));
 
