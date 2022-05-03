@@ -2,6 +2,7 @@ import { Text, Wrapper } from './LoadingView.styles';
 import Window from '../../../window/Window';
 import { useEffect, useState } from 'react';
 import type { ProgressInfo } from 'electron-updater';
+import { ProgressBar } from '../../../ui';
 
 const openMainWindow = () => {
   Window.openMainWindow();
@@ -23,12 +24,6 @@ const LoadingView = () => {
   const [loadingText, setLoadingText] = useState<LoadingText>(LoadingText.NO_TEXT);
   const [downloadInfo, setDowloadInfo] = useState<ProgressInfo>();
 
-  // progress ProgressInfo
-  // bytesPerSecond
-  // percent
-  // total
-  // transferred
-
   const onUpdateCheck = () => {
     setLoadingText(LoadingText.CHECKING_UPDATE);
   };
@@ -49,7 +44,7 @@ const LoadingView = () => {
   };
 
   const onUpdateNotAvailable = () => {
-    console.log('Update not available');
+    setLoadingText(LoadingText.NO_TEXT);
     // TODO
     // Check auth
     // if logged in -> openMainWindow
@@ -65,6 +60,8 @@ const LoadingView = () => {
     Window.addUpdateNotAvailableListener(onUpdateNotAvailable);
   }, []);
 
+  console.log({ downloadInfo });
+
   return (
     <Wrapper>
       <p>This is where the loading should happen</p>
@@ -74,7 +71,12 @@ const LoadingView = () => {
       {loadingText === LoadingText.DOWNLOAD_PROGRESS && downloadInfo !== undefined && (
         <>
           <Text>{`${downloadInfo.bytesPerSecond / 1000000}MB/s`}</Text>
-          <Text>{`Progress: ${downloadInfo.percent}% ${downloadInfo.transferred}/${downloadInfo.transferred}`}</Text>
+          <Text>
+            {`
+              Progress: ${downloadInfo.percent.toFixed(1)}% 
+              ${downloadInfo.transferred}/${downloadInfo.transferred}
+            `}
+          </Text>
         </>
       )}
       <Text>{loadingText}</Text>
@@ -82,6 +84,7 @@ const LoadingView = () => {
       {loadingText === LoadingText.UPDATE_DOWNLOADED && (
         <button onClick={() => Window.restartApp()}>Restart App?</button>
       )}
+      <ProgressBar />
     </Wrapper>
   );
 };
