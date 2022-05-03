@@ -73,11 +73,8 @@ const LoadingView = () => {
 
       {loadingText === LoadingText.DOWNLOAD_PROGRESS && downloadInfo !== undefined && (
         <>
-          <Text>{downloadInfo.bytesPerSecond}</Text>
-          <Text>{downloadInfo.delta}</Text>
-          <Text>{downloadInfo.percent}</Text>
-          <Text>{downloadInfo.total}</Text>
-          <Text>{downloadInfo.transferred}</Text>
+          <Text>{`${downloadInfo.bytesPerSecond / 1000000}MB/s`}</Text>
+          <Text>{`Progress: ${downloadInfo.percent}% ${downloadInfo.transferred}/${downloadInfo.transferred}`}</Text>
         </>
       )}
       <Text>{loadingText}</Text>
