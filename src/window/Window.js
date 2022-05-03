@@ -18,6 +18,7 @@ let Window = {
   checkForUpdates: () => {},
   addUpdateCheckListener: (callback) => {},
   addUpdateAvailableListener: (callback) => {},
+  addDownloadProgressListener: (callback) => {},
   addUpdateDownloadedListener: (callback) => {},
   addUpdateNotAvailableListener: (callback) => {}
 };
@@ -36,6 +37,7 @@ if (window.require) {
     checkForUpdates: () => ipcRenderer.send('check-for-update'),
     addUpdateCheckListener: (callback) => addListener('checking-for-update', callback),
     addUpdateAvailableListener: (callback) => addListener('update-available', callback),
+    addDownloadProgressListener: (callback) => addListener('download-progress', callback),
     addUpdateDownloadedListener: (callback) => addListener('update-downloaded', callback),
     addUpdateNotAvailableListener: (callback) => addListener('update-not-available', callback)
   };

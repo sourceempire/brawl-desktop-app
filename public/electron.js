@@ -99,8 +99,8 @@ async function createLoadingWindow() {
         loadingWindow.webContents.send('update-available', 'Testing update-available');
       };
 
-      const downloadProgress = () => {
-        loadingWindow.webContents.send('download-progress', 'Testing download-progress');
+      const downloadProgress = (progressInfo) => {
+        loadingWindow.webContents.send('download-progress', progressInfo);
       };
 
       const updateDownloaded = () => {
