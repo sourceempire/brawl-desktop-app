@@ -66,15 +66,13 @@ typings/
 build/
 dist/
 
-# css, using scss instead
-*.css
-
 .DS_Store
 
 Thumbs.db
 
 # Visual studio code command
-.vscode/
+.vscode/*
+!.vscode/settings.json
 
 .idea/
 

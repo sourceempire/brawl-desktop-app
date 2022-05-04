@@ -1,13 +1,7 @@
 /* eslint-disable */
-
-const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-// const dialog = electron.dialog
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
-const url = require('url');
 const isDev = require('electron-is-dev');
-
 const { autoUpdater } = require('electron-updater');
 
 let mainWindow;
@@ -105,11 +99,16 @@ async function createLoadingWindow() {
         loadingWindow.webContents.send('update-not-available', 'Testing update-not-available');
       };
 
+      const updateError = () => {
+        loadingWindow.webContents.send('update-not-available', 'Testing update-error');
+      };
+
       autoUpdater.on('checking-for-update', checkingForUpdate);
       autoUpdater.on('update-available', updateAvailable);
       autoUpdater.on('download-progress', downloadProgress);
       autoUpdater.on('update-downloaded', updateDownloaded);
       autoUpdater.on('update-not-available', updateNotAvailable);
+      autoUpdater.on('error', updateError);
 
       loadingWindow.on('closed', () => {
         autoUpdater.removeListener('checking-for-update', checkingForUpdate);
@@ -117,6 +116,7 @@ async function createLoadingWindow() {
         autoUpdater.removeListener('download-progress', downloadProgress);
         autoUpdater.removeListener('update-downloaded', updateDownloaded);
         autoUpdater.removeListener('update-not-available', updateNotAvailable);
+        autoUpdater.removeListener('error', updateError);
         loadingWindow = null;
       });
     }
@@ -131,19 +131,29 @@ app.on('window-all-closed', () => {
   }
 });
 
+// TODO -> This is not evaluated, should probably be implemented in a different way to prevent unwanted behaviour
 app.on('activate', () => {
   if (loadingWindow === null) {
     createLoadingWindow();
   }
 });
 
-electron.ipcMain.on('check-for-update', () => {
-  autoUpdater.checkForUpdates();
+ipcMain.on('check-for-update', (event) => {
+  if (!isDev) {
+    //TODO -> determine difference with checkForUpdatesAndNotify
+    autoUpdater.checkForUpdates();
+  } else {
+    const { id: windowId } = event.sender;
+    const senderWindow = BrowserWindow.fromId(windowId);
+    if (senderWindow) {
+      senderWindow.webContents.send('update-not-available');
+    }
+  }
 });
 
-electron.ipcMain.on('open-main-window', () => createMainWindow());
-electron.ipcMain.on('open-login-window', () => createLoginWindow());
-electron.ipcMain.on('quit-and-install', () => autoUpdater.quitAndInstall());
+ipcMain.on('open-main-window', () => createMainWindow());
+ipcMain.on('open-login-window', () => createLoginWindow());
+ipcMain.on('quit-and-install', () => autoUpdater.quitAndInstall());
 
 autoUpdater.on('error', () => console.log('error'));
 

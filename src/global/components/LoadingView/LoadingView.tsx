@@ -1,79 +1,46 @@
-import { Text, Wrapper } from './LoadingView.styles';
-import Window from '../../../window/Window';
-import { useEffect, useState } from 'react';
-import type { ProgressInfo } from 'electron-updater';
-import { ProgressBar } from '../../../ui';
-
-const openMainWindow = () => {
-  Window.openMainWindow();
-};
-
-const openLoginWindow = () => {
-  Window.openLoginWindow();
-};
-
-enum LoadingText {
-  CHECKING_UPDATE = 'Checking for updates',
-  UPDATE_AVAILABLE = 'New update available',
-  DOWNLOAD_PROGRESS = 'Downloading new update',
-  UPDATE_DOWNLOADED = 'Download completed',
-  NO_TEXT = ''
-}
+import { useEffect } from 'react';
+import { UpdateStatus, useAppUpdater } from 'global/hooks/useAppUpdater';
+import { Animation, ProgressBar } from 'ui';
+import Window from 'window';
+import { LoadingStatusText, TemporaryButton, Wrapper } from './LoadingView.styles';
+import loadingExample from 'assets/animations/loading-example.json';
 
 const LoadingView = () => {
-  const [loadingText, setLoadingText] = useState<LoadingText>(LoadingText.NO_TEXT);
-  const [downloadInfo, setDowloadInfo] = useState<ProgressInfo>();
-
-  const onUpdateCheck = () => {
-    setLoadingText(LoadingText.CHECKING_UPDATE);
-  };
-
-  const onUpdateAvailable = () => {
-    setLoadingText(LoadingText.UPDATE_AVAILABLE);
-  };
-
-  const onDownloadProgress = (info: ProgressInfo) => {
-    setDowloadInfo(info);
-    setLoadingText(LoadingText.DOWNLOAD_PROGRESS);
-  };
-
-  const onUpdateDownloaded = () => {
-    setLoadingText(LoadingText.UPDATE_DOWNLOADED);
-    // TODO
-    // restart app
-  };
-
-  const onUpdateNotAvailable = () => {
-    setLoadingText(LoadingText.NO_TEXT);
-    // TODO
-    // Check auth
-    // if logged in -> openMainWindow
-    // if logged out -> openLoginWindow
-  };
+  const { checkForUpdates, updateStatus, hasProgressInfo, progressInfo } = useAppUpdater();
+  loadingExample.layers[0];
+  useEffect(() => {
+    checkForUpdates();
+  }, [checkForUpdates]);
 
   useEffect(() => {
-    Window.checkForUpdates();
-    Window.addUpdateCheckListener(onUpdateCheck);
-    Window.addUpdateAvailableListener(onUpdateAvailable);
-    Window.addDownloadProgressListener(onDownloadProgress);
-    Window.addUpdateDownloadedListener(onUpdateDownloaded);
-    Window.addUpdateNotAvailableListener(onUpdateNotAvailable);
-  }, []);
+    if (updateStatus === UpdateStatus.UPDATE_DOWNLOADED) {
+      console.log('Should quit and install updates');
+      Window.quitAndInstall();
+    }
+    if (updateStatus === UpdateStatus.NO_UPDATE_AVAILABLE) {
+      console.log('Should determine auth');
+      // TODO
+      // Check auth
+      // if logged in -> openMainWindow
+      // if logged out -> openLoginWindow
+    }
+  }, [updateStatus]);
 
   return (
     <Wrapper>
-      <button onClick={openMainWindow}>Open main window</button>
-      <button onClick={openLoginWindow}>Open login window</button>
+      <TemporaryButton style={{ left: 0 }} onClick={Window.openLoginWindow}>
+        Open login windosf
+      </TemporaryButton>
+      <TemporaryButton style={{ right: 0 }} onClick={Window.openMainWindow}>
+        Open main window tes
+      </TemporaryButton>
 
-      <Text>{loadingText}</Text>
-      {loadingText === LoadingText.DOWNLOAD_PROGRESS && downloadInfo !== undefined && (
+      <Animation src={loadingExample} />
+      <LoadingStatusText>{updateStatus}</LoadingStatusText>
+      {hasProgressInfo && (
         <>
-          <ProgressBar percent={downloadInfo.percent} />
+          <ProgressBar value={progressInfo?.percent} unit={'percent'} />
         </>
-      )}
-
-      {loadingText === LoadingText.UPDATE_DOWNLOADED && (
-        <button onClick={() => Window.quitAndInstall()}>Quit and install</button>
       )}
     </Wrapper>
   );

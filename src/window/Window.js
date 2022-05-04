@@ -21,6 +21,8 @@ let Window = {
   addDownloadProgressListener: (callback) => {},
   addUpdateDownloadedListener: (callback) => {},
   addUpdateNotAvailableListener: (callback) => {},
+  addUpdateErrorListener: (callback) => {},
+
   quitAndInstall: () => {}
 };
 
@@ -41,6 +43,7 @@ if (window.require) {
     addDownloadProgressListener: (callback) => addListener('download-progress', callback),
     addUpdateDownloadedListener: (callback) => addListener('update-downloaded', callback),
     addUpdateNotAvailableListener: (callback) => addListener('update-not-available', callback),
+    addUpdateErrorListener: (callback) => addListener('update-error', callback),
 
     quitAndInstall: () => ipcRenderer.send('quit-and-install')
   };

@@ -1,6 +1,6 @@
-import { Route, Routes, HashRouter } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { theme } from '../../style/theme';
+import { theme } from 'global/style/Theme';
 import LoadingView from '../LoadingView';
 import LoginView from '../LoginView';
 import MainView from '../MainView';

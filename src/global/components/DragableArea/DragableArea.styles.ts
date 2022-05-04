@@ -5,6 +5,5 @@ export const Wrapper = styled.div`
   position: absolute;
   width: 100%;
   height: ${(props) => props.theme.titleBarHeight};
-  // background-color: ${(props) => props.theme.colors.primary};
   -webkit-app-region: drag;
 `;

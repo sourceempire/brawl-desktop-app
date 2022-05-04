@@ -1,14 +1,30 @@
-import { Progression, Wrapper } from './ProgressBar.styles';
+import { Bar, ProgressUnit, Progression, ProgressionWrapper, Wrapper } from './ProgressBar.styles';
 
 export type Props = {
-  percent: number;
+  value?: number;
+  unit?: 'percent';
 };
 
-const ProgressBar = ({ percent }: Props) => {
+const ProgressBar = ({ unit, value }: Props) => {
+  let percent;
+
+  switch (unit) {
+    case 'percent':
+      percent = value;
+      break;
+  }
+
   return (
-    <Wrapper>
-      <Progression percent={percent} />
-    </Wrapper>
+    <>
+      <Wrapper>
+        <Bar>
+          <ProgressionWrapper>
+            <Progression percent={percent} />
+          </ProgressionWrapper>
+        </Bar>
+        {unit && <ProgressUnit>{unit === 'percent' && value}%</ProgressUnit>}
+      </Wrapper>
+    </>
   );
 };
 
