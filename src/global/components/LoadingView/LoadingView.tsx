@@ -19,6 +19,7 @@ const LoadingView = () => {
     }
     if (updateStatus === UpdateStatus.NO_UPDATE_AVAILABLE) {
       console.log('Should determine auth');
+      Window.openLoginWindow();
       // TODO
       // Check auth
       // if logged in -> openMainWindow
