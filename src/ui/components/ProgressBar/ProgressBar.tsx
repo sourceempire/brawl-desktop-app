@@ -22,7 +22,7 @@ const ProgressBar = ({ unit, value }: Props) => {
             <Progression percent={percent} />
           </ProgressionWrapper>
         </Bar>
-        {unit && <ProgressUnit>{unit === 'percent' && value}%</ProgressUnit>}
+        {unit && <ProgressUnit>{unit === 'percent' && value?.toFixed(1)}%</ProgressUnit>}
       </Wrapper>
     </>
   );
