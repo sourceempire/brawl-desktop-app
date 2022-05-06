@@ -2,7 +2,10 @@ import { Fetcher } from 'api';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-export const loginWithUsernameAndPassword = (username: string, password: string) =>
+export const loginWithUsernameAndPassword: (
+  username: string,
+  password: string
+) => Promise<{ succeeded: boolean }> = (username, password) =>
   Fetcher.post(SERVER_URL + 'login', { username: username, password: password });
 
 /**

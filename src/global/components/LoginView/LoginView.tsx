@@ -1,39 +1,43 @@
 import { useEffect, useState } from 'react';
 import * as authRequests from 'api/requests/AuthRequests';
-import { LoginType } from 'global/types/LoginType';
+import { AuthType } from 'global/types/AuthType';
 import Window from 'window';
 import DragableArea from '../DragableArea';
 import { Wrapper } from './LoginView.styles';
 
 const LoginView = () => {
-  const [loginType, setLoginType] = useState<LoginType>('openid');
+  const [authType, setAuthType] = useState<AuthType>('openid');
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
+  const openMainWindow = () => {
+    Window.openMainWindow();
+    Window.closeLoginWindow();
+  };
+
   const getAuthType = async () => {
-    try {
-      const result = await authRequests.getAuthType();
-      if (result.succeeded) {
-        setLoginType(result.type);
-      } else {
-        console.error('Something went wrong');
-      }
-    } catch (error) {
-      console.error(error);
+    const result = await authRequests.getAuthType();
+
+    if (result.succeeded) {
+      setAuthType(result.type);
+    } else {
+      throw 'Something went wrong';
     }
   };
 
   const loginWithUserNameAndPassword = async () => {
     const result = await authRequests.loginWithUsernameAndPassword(username, password);
-    console.log(result);
+
+    if (result.succeeded) {
+      openMainWindow();
+    }
   };
 
   useEffect(() => {
     getAuthType();
 
     authRequests.loginValidate().then(() => {
-      Window.openMainWindow();
-      Window.closeLoginWindow();
+      openMainWindow();
     });
   }, []);
 
@@ -44,7 +48,7 @@ const LoginView = () => {
       <p>Login view</p>
       <p>Version: {process.env.REACT_APP_VERSION}</p>
 
-      {loginType === 'password' ? (
+      {authType === 'password' ? (
         <>
           <div>
             <input value={username} onChange={(e) => setUserName(e.target.value)} />

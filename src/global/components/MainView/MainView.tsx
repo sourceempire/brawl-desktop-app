@@ -7,9 +7,12 @@ import { Wrapper } from './MainView.styles';
 
 const MainView = () => {
   useEffect(() => {
-    authRequests.loginValidate().catch(() => {
-      Window.openLoginWindow();
-      Window.closeMainWindow();
+    authRequests.loginValidate().catch((err) => {
+      if (err.status === 200) {
+        Window.openLoginWindow();
+        Window.closeMainWindow();
+      }
+      console.log(err);
     });
   });
 
