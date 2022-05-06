@@ -1,45 +1,22 @@
 import { useEffect, useState } from 'react';
-import * as authRequests from 'api/requests/AuthRequests';
-import { AuthType } from 'global/types/AuthType';
-import Window from 'window';
+import { useAuth } from 'global/hooks';
 import DragableArea from '../DragableArea';
 import { Wrapper } from './LoginView.styles';
 
 const LoginView = () => {
-  const [authType, setAuthType] = useState<AuthType>('openid');
+  const { authType, loginValidate, getAuthType, loginWithUsernameAndPassword, error } = useAuth();
+
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
-  const openMainWindow = () => {
-    Window.openMainWindow();
-    Window.closeLoginWindow();
-  };
-
-  const getAuthType = async () => {
-    const result = await authRequests.getAuthType();
-
-    if (result.succeeded) {
-      setAuthType(result.type);
-    } else {
-      throw 'Something went wrong';
-    }
-  };
-
-  const loginWithUserNameAndPassword = async () => {
-    const result = await authRequests.loginWithUsernameAndPassword(username, password);
-
-    if (result.succeeded) {
-      openMainWindow();
-    }
-  };
-
   useEffect(() => {
+    loginValidate();
     getAuthType();
+  }, [loginValidate, getAuthType]);
 
-    authRequests.loginValidate().then(() => {
-      openMainWindow();
-    });
-  }, []);
+  if (error) {
+    console.log(error);
+  }
 
   return (
     <Wrapper>
@@ -56,10 +33,10 @@ const LoginView = () => {
           <div>
             <input value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
-          <button onClick={loginWithUserNameAndPassword}>Log in</button>
+          <button onClick={() => loginWithUsernameAndPassword(username, password)}>Log in</button>
         </>
       ) : (
-        <></>
+        <>Implement openid here</>
       )}
     </Wrapper>
   );

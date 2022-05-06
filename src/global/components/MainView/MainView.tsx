@@ -1,20 +1,19 @@
 import { useEffect } from 'react';
-import * as authRequests from 'api/requests/AuthRequests';
 import { Route, Routes } from 'react-router-dom';
-import Window from 'window';
+import { useAuth } from 'global/hooks';
 import DragableArea from '../DragableArea';
 import { Wrapper } from './MainView.styles';
 
 const MainView = () => {
+  const { loginValidate, logout, error } = useAuth();
+
   useEffect(() => {
-    authRequests.loginValidate().catch((err) => {
-      if (err.status === 200) {
-        Window.openLoginWindow();
-        Window.closeMainWindow();
-      }
-      console.log(err);
-    });
-  });
+    loginValidate();
+  }, [loginValidate]);
+
+  if (error) {
+    console.log(error);
+  }
 
   return (
     <Wrapper>
@@ -27,6 +26,7 @@ const MainView = () => {
               <p>Main View</p>
               <p>Version: {process.env.REACT_APP_VERSION}</p>
               <p>Fett kul att den uppdaterades</p>
+              <button onClick={logout}>Log out</button>
             </>
           }
         />

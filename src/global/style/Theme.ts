@@ -1,5 +1,5 @@
 import { DefaultTheme } from 'styled-components';
-import { PlatformName } from '../types/PlatformName';
+import { PlatformName } from 'global/types';
 
 const titleBarHeight = () => {
   switch (process.platform) {

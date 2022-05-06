@@ -12,9 +12,9 @@ const backgroundColor = '#232333';
 
 async function createWindow(appPath, options = {}) {
   const window = new BrowserWindow({
-    ...options,
     frame: false,
     backgroundColor,
+    ...options,
     ...(appPath !== 'loading' && {
       titleBarStyle: 'hidden',
       ...(process.platform === 'win32' && {
@@ -52,9 +52,9 @@ async function createMainWindow() {
 
     mainWindow.on('closed', () => (mainWindow = null));
 
-    // if (loadingWindow && !loadingWindow.isDestroyed()) {
-    //   loadingWindow.close();
-    // }
+    if (loadingWindow && !loadingWindow.isDestroyed()) {
+      loadingWindow.close();
+    }
   }
 }
 
@@ -70,9 +70,9 @@ async function createLoginWindow() {
 
     loginWindow.on('closed', () => (loginWindow = null));
 
-    // if (loadingWindow && !loadingWindow.isDestroyed()) {
-    //   loadingWindow.close();
-    // }
+    if (loadingWindow && !loadingWindow.isDestroyed()) {
+      loadingWindow.close();
+    }
   }
 }
 
@@ -83,7 +83,8 @@ async function createLoadingWindow() {
     loadingWindow = await createWindow('loading', {
       width: 300,
       height: 300,
-      resizable: false
+      resizable: false,
+      backgroundColor: '#363750'
     });
 
     if (!isDev) {

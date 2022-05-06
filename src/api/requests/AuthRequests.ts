@@ -21,3 +21,5 @@ export const getAuthType: () => Promise<{ succeeded: boolean; type: 'password' |
   Fetcher.get(SERVER_URL + 'api/public/auth/type', {});
 
 export const loginValidate = () => Fetcher.get(SERVER_URL + 'login/validate', {});
+
+export const logout = () => Fetcher.post(SERVER_URL + 'api/logout', {});

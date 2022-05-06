@@ -1,14 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ProgressInfo } from 'electron-updater';
+import { UpdateStatus } from 'global/types';
 import Window from 'window';
-
-export enum UpdateStatus {
-  CHECKING_UPDATE = 'Checking for updates',
-  UPDATE_AVAILABLE = 'New update available',
-  DOWNLOAD_PROGRESS = 'Downloading update...',
-  UPDATE_DOWNLOADED = 'Download completed',
-  NO_UPDATE_AVAILABLE = ''
-}
 
 type AppUpdaterHook = () => {
   checkForUpdates: () => void;
@@ -17,7 +10,7 @@ type AppUpdaterHook = () => {
   progressInfo?: ProgressInfo;
 };
 
-export const useAppUpdater: AppUpdaterHook = () => {
+const useAppUpdater: AppUpdaterHook = () => {
   const [updateStatus, setUpdateStatus] = useState<UpdateStatus>();
   const [progressInfo, setProgressInfo] = useState<ProgressInfo>();
 
@@ -85,3 +78,5 @@ export const useAppUpdater: AppUpdaterHook = () => {
     hasProgressInfo: updateStatus === UpdateStatus.DOWNLOAD_PROGRESS && progressInfo !== undefined
   };
 };
+
+export default useAppUpdater;
