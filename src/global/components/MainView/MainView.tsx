@@ -1,8 +1,18 @@
+import { useEffect } from 'react';
+import * as authRequests from 'api/requests/AuthRequests';
 import { Route, Routes } from 'react-router-dom';
+import Window from 'window';
 import DragableArea from '../DragableArea';
 import { Wrapper } from './MainView.styles';
 
 const MainView = () => {
+  useEffect(() => {
+    authRequests.loginValidate().catch(() => {
+      Window.openLoginWindow();
+      Window.closeMainWindow();
+    });
+  });
+
   return (
     <Wrapper>
       <DragableArea />

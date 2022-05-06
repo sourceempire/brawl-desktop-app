@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
+import { loginValidate } from 'api/requests/AuthRequests';
 import { UpdateStatus, useAppUpdater } from 'global/hooks/useAppUpdater';
 import { Animation, ProgressBar } from 'ui';
 import Window from 'window';
 import { LoadingStatusText, TemporaryButton, Wrapper } from './LoadingView.styles';
-import loadingExample from 'assets/animations/loading-example.json';
+import loadingExample from 'assets/animations/loading-example2.json';
 
 const LoadingView = () => {
   const { checkForUpdates, updateStatus, hasProgressInfo, progressInfo } = useAppUpdater();
@@ -12,18 +13,26 @@ const LoadingView = () => {
     checkForUpdates();
   }, [checkForUpdates]);
 
+  const tryLogin = async () => {
+    try {
+      await loginValidate();
+      Window.openMainWindow();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      if (error.status === 200) {
+        Window.openLoginWindow();
+      } else {
+        console.log(error);
+      }
+    }
+  };
+
   useEffect(() => {
     if (updateStatus === UpdateStatus.UPDATE_DOWNLOADED) {
-      console.log('Should quit and install updates');
       Window.quitAndInstall();
     }
     if (updateStatus === UpdateStatus.NO_UPDATE_AVAILABLE) {
-      console.log('Should determine auth');
-      Window.openLoginWindow();
-      // TODO
-      // Check auth
-      // if logged in -> openMainWindow
-      // if logged out -> openLoginWindow
+      tryLogin();
     }
   }, [updateStatus]);
 

@@ -1,5 +1,5 @@
 /* eslint-disable */
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, session } = require('electron');
 const path = require('path');
 const isDev = require('electron-is-dev');
 const { autoUpdater } = require('electron-updater');
@@ -51,6 +51,10 @@ async function createMainWindow() {
     });
 
     mainWindow.on('closed', () => (mainWindow = null));
+
+    // if (loadingWindow && !loadingWindow.isDestroyed()) {
+    //   loadingWindow.close();
+    // }
   }
 }
 
@@ -60,11 +64,15 @@ async function createLoginWindow() {
   } else {
     loginWindow = await createWindow('login', {
       width: 400,
-      height: 900,
+      height: 700,
       resizable: false
     });
 
     loginWindow.on('closed', () => (loginWindow = null));
+
+    // if (loadingWindow && !loadingWindow.isDestroyed()) {
+    //   loadingWindow.close();
+    // }
   }
 }
 
@@ -123,7 +131,20 @@ async function createLoadingWindow() {
   }
 }
 
-app.on('ready', createLoadingWindow);
+app.on('ready', () => {
+  session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
+    // fix undefined origin headers when running from file. Cases: GET -> undefined, POST -> 'null', websocket -> 'file://'
+    if (
+      details.requestHeaders['Origin'] === undefined ||
+      details.requestHeaders['Origin'] == 'null' ||
+      details.requestHeaders['Origin'] == 'file://'
+    ) {
+      details.requestHeaders['Origin'] = 'electron://brawl-gaming-app';
+    }
+    callback({ cancel: false, requestHeaders: details.requestHeaders });
+  });
+  createLoadingWindow();
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -153,9 +174,13 @@ ipcMain.on('check-for-update', (event) => {
 
 ipcMain.on('open-main-window', () => createMainWindow());
 ipcMain.on('open-login-window', () => createLoginWindow());
+ipcMain.on('close-main-window', () => {
+  if (mainWindow && !mainWindow.isDestroyed()) mainWindow.close();
+});
+ipcMain.on('close-login-window', () => {
+  if (loginWindow && !loginWindow.isDestroyed()) loginWindow.close();
+});
 ipcMain.on('quit-and-install', () => autoUpdater.quitAndInstall());
-
-autoUpdater.on('error', () => console.log('error'));
 
 // SSL/TSL: this is the self signed certificate support
 if (isDev) {
@@ -167,28 +192,4 @@ if (isDev) {
   });
 }
 
-// autoUpdater.on("update-available", (_event, releaseNotes, releaseName) => {
-// 	const dialogOpts = {
-// 		type: 'info',
-// 		buttons: ['Ok'],
-// 		title: 'Application Update',
-// 		message: process.platform === 'win32' ? releaseNotes : releaseName,
-// 		detail: 'A new version is being downloaded.'
-// 	}
-// 	dialog.showMessageBox(dialogOpts, (response) => {
-
-// 	});
-// })
-
-// autoUpdater.on("update-downloaded", (_event, releaseNotes, releaseName) => {
-// 	const dialogOpts = {
-// 		type: 'info',
-// 		buttons: ['Restart', 'Later'],
-// 		title: 'Application Update',
-// 		message: process.platform === 'win32' ? releaseNotes : releaseName,
-// 		detail: 'A new version has been downloaded. Restart the application to apply the updates.'
-// 	};
-// 	dialog.showMessageBox(dialogOpts).then((returnValue) => {
-// 		if (returnValue.response === 0) autoUpdater.quitAndInstall()
-// 	})
-// });
+app.commandLine.appendSwitch('ignore-certificate-errors');

@@ -5,6 +5,8 @@ let Window = {
   version: null,
   openMainWindow: () => {},
   openLoginWindow: () => {},
+  closeMainWindow: () => {},
+  closeLoginWindow: () => {},
   new: (args) => {
     return {
       loadURL: (url) => {
@@ -35,6 +37,9 @@ if (window.require) {
   Window = {
     openMainWindow: () => ipcRenderer.send('open-main-window'),
     openLoginWindow: () => ipcRenderer.send('open-login-window'),
+    closeMainWindow: () => ipcRenderer.send('close-main-window'),
+    closeLoginWindow: () => ipcRenderer.send('close-login-window'),
+
     openInBrowser: (url) => shell.openExternal(url),
 
     checkForUpdates: () => ipcRenderer.send('check-for-update'),

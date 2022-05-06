@@ -1,8 +1,8 @@
 import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 import { App } from 'global/components';
-import GlobalStyle from 'global/style/GlobalStyles';
-import { theme } from 'global/style/Themes';
+import GlobalStyle from 'global/style/GlobalStyle';
+import { theme } from 'global/style/Theme';
 import reportWebVitals from './reportWebVitals';
 
 // loading fonts with styled components is problematic:
