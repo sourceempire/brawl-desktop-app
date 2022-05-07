@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useAuth } from 'global/hooks';
 import DragableArea from '../DragableArea';
-import { Wrapper } from './LoginView.styles';
+import { OpenIdLogin } from '../OpenIdLogin/OpenIdLogin';
+import { PasswordLogin } from '../PasswordLogin/PasswordLogin';
+import { Version, Wrapper } from './LoginView.styles';
 
 const LoginView = () => {
-  const { authType, loginValidate, getAuthType, loginWithUsernameAndPassword, error } = useAuth();
-
-  const [username, setUserName] = useState('');
-  const [password, setPassword] = useState('');
+  const { authType, loginValidate, getAuthType, error } = useAuth();
 
   useEffect(() => {
     loginValidate();
@@ -21,23 +20,8 @@ const LoginView = () => {
   return (
     <Wrapper>
       <DragableArea />
-
-      <p>Login view</p>
-      <p>Version: {process.env.REACT_APP_VERSION}</p>
-
-      {authType === 'password' ? (
-        <>
-          <div>
-            <input value={username} onChange={(e) => setUserName(e.target.value)} />
-          </div>
-          <div>
-            <input value={password} onChange={(e) => setPassword(e.target.value)} />
-          </div>
-          <button onClick={() => loginWithUsernameAndPassword(username, password)}>Log in</button>
-        </>
-      ) : (
-        <>Implement openid here</>
-      )}
+      {authType === 'password' ? <PasswordLogin /> : <OpenIdLogin />}
+      <Version>Version: {process.env.REACT_APP_VERSION}</Version>
     </Wrapper>
   );
 };

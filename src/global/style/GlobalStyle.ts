@@ -8,6 +8,9 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'DM Sans';
     color: white;
   }
+  input {
+    font-family: 'DM Sans';
+  }
 `;
 
 export default GlobalStyle;

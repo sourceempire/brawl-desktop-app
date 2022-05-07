@@ -25,6 +25,7 @@ async function createWindow(appPath, options = {}) {
       })
     }),
     webPreferences: {
+      devTools: isDev,
       nodeIntegration: true,
       contextIsolation: false
     }
@@ -63,8 +64,8 @@ async function createLoginWindow() {
     loginWindow.focus();
   } else {
     loginWindow = await createWindow('login', {
-      width: 400,
-      height: 700,
+      width: 300,
+      height: 500,
       resizable: false
     });
 

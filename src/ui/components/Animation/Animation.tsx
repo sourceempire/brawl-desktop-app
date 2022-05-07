@@ -17,7 +17,6 @@ const Animation = ({ src, className }: AnimationProps) => {
   useEffect(() => {
     // To prevent animation from rendering more times during development
     // this only happens if the animation was not set
-
     if (loadingAnimationItem.current === null) {
       loadingAnimationItem.current = Lottie.loadAnimation({
         container: document.querySelector(`#${animationId}`) as HTMLDivElement,
