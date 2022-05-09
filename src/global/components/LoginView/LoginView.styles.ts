@@ -1,9 +1,14 @@
 import styled from 'styled-components';
+import { Button, Input } from 'ui';
 
 export const Wrapper = styled.div`
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
-  padding: 100px 12px;
+  width: 100%;
+  padding: 100px 24px;
   padding-top: ${(props) => props.theme.titleBarHeight};
 `;
 
@@ -17,4 +22,12 @@ export const Version = styled.p`
   opacity: 0.3;
   font-weight: 100;
   text-align: center;
+`;
+
+export const LoginInput = styled(Input)`
+  margin: 18px 0;
+`;
+
+export const LoginButton = styled(Button)`
+  margin-top: 6px;
 `;

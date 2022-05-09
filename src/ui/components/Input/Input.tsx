@@ -9,6 +9,8 @@ type Props = {
   size?: InputSize;
   label?: string;
   icon?: IconType;
+  className?: string;
+  placeholder?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -19,10 +21,12 @@ const Input = ({
   size = InputSize.MEDIUM,
   label,
   icon,
+  className,
+  placeholder,
   onChange
 }: Props) => {
   return (
-    <Wrapper inputSize={size}>
+    <Wrapper inputSize={size} className={className}>
       <Label>{label}</Label>
       {icon && <Icon type={icon} />}
       <InputElement
@@ -33,6 +37,7 @@ const Input = ({
         inputSize={size}
         hasLabel={Boolean(label)}
         hasIcon={Boolean(Icon)}
+        placeholder={placeholder}
       />
     </Wrapper>
   );

@@ -1,9 +1,11 @@
 import styled, { css } from 'styled-components';
 import { InputSize } from 'ui/types';
 
+// TODO -> Add support for which side icons should be
+
 export const iconStyle = css<{ inputSize: InputSize }>`
   svg {
-    opacity: 0.8;
+    opacity: 0.4;
     position: absolute;
     left: ${(props) => getInputPadding(props.inputSize)};
     bottom: ${(props) =>
@@ -15,11 +17,12 @@ export const iconStyle = css<{ inputSize: InputSize }>`
 
 export const Wrapper = styled.div`
   position: relative;
-  margin: 9px 0; // this should not be here, only for testing
   ${iconStyle}
 `;
 
-export const Label = styled.label``;
+export const Label = styled.label`
+  font-size: 13px;
+`;
 
 export const InputElement = styled.input<{
   withBorder: boolean;
@@ -35,49 +38,54 @@ export const InputElement = styled.input<{
   outline-color: transparent;
   transition: border-color 0.3s, outline-color 0.3s;
 
-  padding: 0 ${(props) => getInputPadding(props.inputSize)};
-  height: ${(props) => getInputHeight(props.inputSize)};
-  font-size: ${(props) => getInputFontSize(props.inputSize)};
-  border-radius: ${(props) => props.theme.borderRadius.default};
-  background-color: ${(porps) => porps.theme.colors.lightTint};
-  margin-top: ${(props) => (props.hasLabel ? '6px' : '0')};
-
   :focus {
     outline-offset: 2px;
     outline: 2px solid;
-
-    outline-color: ${(props) => props.theme.colors.accent};
   }
 
-  ${(props) =>
-    props.withBorder &&
+  ::placeholder {
+    color: white;
+    opacity: 0.4;
+  }
+  ${({ theme, inputSize, hasIcon, hasLabel, withBorder }) => css`
+    padding: 0 ${getInputPadding(inputSize)};
+    height: ${getInputHeight(inputSize)};
+    font-size: ${getInputFontSize(inputSize)};
+    border-radius: ${theme.borderRadius.default};
+    background-color: ${theme.colors.lightTint};
+
+    :focus {
+      outline-color: ${theme.colors.accent};
+    }
+
+    ${hasIcon &&
+    css`
+      padding-left: calc((${getIconSize(inputSize)}) + (${getInputPadding(inputSize)} * 2));
+    `}
+
+    ${hasLabel &&
+    css`
+      margin-top: ${hasLabel ? '6px' : '0'};
+    `}
+
+    ${withBorder &&
     css`
       border: 2px solid;
-
-      background-color: ${(props) => props.theme.colors.background};
-      border-color: ${(props) => props.theme.colors.lightTint};
-
+      background-color: ${theme.colors.background};
+      border-color: ${theme.colors.lightTint};
       :focus {
         outline: none;
-
-        border-color: ${(props) => props.theme.colors.accent};
+        border-color: ${theme.colors.accent};
       }
-    `};
-
-  ${(props) =>
-    props.hasIcon &&
-    css`
-      padding-left: calc(
-        (${getIconSize(props.inputSize)}) + (${getInputPadding(props.inputSize)} * 2)
-      );
     `}
+  `}
 `;
 
 const getIconSize = (size: InputSize) =>
   ({
     [InputSize.SMALL]: '15px',
     [InputSize.MEDIUM]: '18px',
-    [InputSize.LARGE]: '21px'
+    [InputSize.LARGE]: '18px'
   }[size]);
 
 const getInputFontSize = (size: InputSize) =>

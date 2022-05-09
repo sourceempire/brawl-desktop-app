@@ -21,7 +21,7 @@ export enum Colors {
 }
 
 export enum BorderRadius {
-  DEFAULT = '6px'
+  DEFAULT = '3px'
 }
 
 export const theme: DefaultTheme = {

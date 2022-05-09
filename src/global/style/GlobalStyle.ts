@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'DM Sans';
     color: white;
   }
-  input {
+  input, button {
     font-family: 'DM Sans';
   }
 `;
