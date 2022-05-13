@@ -1,13 +1,13 @@
 import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
-import { App } from 'global/components';
-import GlobalStyle from 'global/style/GlobalStyle';
-import { theme } from 'global/style/Theme';
+import App from 'views/App';
 import reportWebVitals from './reportWebVitals';
+import GlobalStyle from 'assets/styles/GlobalStyle';
+import { theme } from 'assets/styles/Theme';
 
 // loading fonts with styled components is problematic:
 // https://styled-components.com/docs/faqs#how-do-i-fix-flickering-text-after-server-side-rendering
-import 'global/style/fonts.css';
+import 'assets/styles/fonts.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(

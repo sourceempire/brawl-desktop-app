@@ -23,6 +23,6 @@
   },
   "include": [
     "src", 
-    "src/global/style/styled.d.ts"
+    "src/views/common/styles/styled.d.ts"
   ]
 }
