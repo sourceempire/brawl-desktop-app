@@ -13,18 +13,25 @@ if (process.env.REACT_APP_SERVER_URL === undefined) {
 
 const url = `${process.env.REACT_APP_SERVER_URL}/api/events`;
 
+export type Listener = (message: Event) => void;
+type Listeners = { [key: string]: { [key: string]: Listener } };
+
+type FeedListener = (state: { [key: string]: unknown }) => void;
+type FeedListeners = { [feedType: string]: { [listenerId: string]: FeedListener } };
+
 type Context = {
   addEventListener: (event: string, listener: Listener) => string;
   removeEventListener: (event: string, listenerId: string) => void;
+  subscribeToFeed: (feed: string, listener: (state: { [key: string]: unknown }) => void) => string;
+  unsubscribeFromFeed: (feed: string, feedListenerId: string) => void;
 };
 
 export const ServerEventsContext = React.createContext<Context>({
   addEventListener: () => '',
-  removeEventListener: () => undefined
+  removeEventListener: () => undefined,
+  subscribeToFeed: () => '',
+  unsubscribeFromFeed: () => undefined
 });
-
-export type Listener = (message: Event) => void;
-type Listeners = { [key: string]: { [key: string]: Listener } };
 
 type Props = {
   children: React.ReactNode;
@@ -35,6 +42,7 @@ export const ServerEventsProvider = ({ children }: Props) => {
   const [error, setError] = useState<Error>();
   const socket = useRef<WebSocket>();
   const listeners = useRef<Listeners>({});
+  const feedListeners = useRef<FeedListeners>({});
   const [connectingSocket, setConnectingSocket] = useState(true);
   const [connectionRetries, setConnectionRetries] = useState(0);
 
@@ -42,7 +50,15 @@ export const ServerEventsProvider = ({ children }: Props) => {
     if (listeners.current[event] !== undefined) {
       Object.values(listeners.current[event]).forEach((event) => event(message));
     } else {
-      console.log('Push event was recieved but not caught', { event, message });
+      console.debug('Push event was recieved but not caught', { event, message });
+    }
+  };
+
+  const dispatchFeed = (feed: string, state: { [key: string]: unknown }) => {
+    if (feedListeners.current[feed] !== undefined) {
+      Object.values(feedListeners.current[feed]).forEach((listener) => listener(state));
+    } else {
+      console.warn('Feed update was recieved but no feed listener was set up', { feed, state });
     }
   };
 
@@ -64,7 +80,11 @@ export const ServerEventsProvider = ({ children }: Props) => {
 
   const handleMessage = useCallback((event: MessageEvent<any>) => {
     const data = JSON.parse(event.data);
-    dispatchEvent(data.event, data.message);
+    if (data.feed) {
+      dispatchFeed(data.feed, data.state);
+    } else {
+      dispatchEvent(data.event, data.message);
+    }
   }, []);
 
   const handleError = (message: Event) => {
@@ -73,16 +93,6 @@ export const ServerEventsProvider = ({ children }: Props) => {
     } else {
       setError(Error('Oops, Something went wrong with the co'));
     }
-  };
-
-  const addEventListener = (event: string, listener: Listener) => {
-    const listenerId = uuid();
-    listeners.current[event] = { ...listeners.current[event], [listenerId]: listener };
-    return listenerId;
-  };
-
-  const removeEventListener = (event: string, listenerId: string) => {
-    delete listeners.current[event][listenerId];
   };
 
   const setupSocketConnection = useCallback(async () => {
@@ -117,6 +127,31 @@ export const ServerEventsProvider = ({ children }: Props) => {
     };
   }, [setupSocketConnection, connectionRetries]);
 
+  const addEventListener = (event: string, listener: Listener) => {
+    const listenerId = uuid();
+    listeners.current[event] = { ...listeners.current[event], [listenerId]: listener };
+    return listenerId;
+  };
+
+  const removeEventListener = (event: string, listenerId: string) => {
+    delete listeners.current[event][listenerId];
+  };
+
+  const { current: subscribeToFeed } = useRef((feed: string, listener: FeedListener) => {
+    const feedListenerId = uuid();
+    feedListeners.current[feed] = { ...feedListeners.current[feed], [feedListenerId]: listener };
+    socket.current?.send(JSON.stringify({ event: 'feed-subscribe', message: { feed } }));
+    return feedListenerId;
+  });
+
+  const { current: unsubscribeFromFeed } = useRef((feed: string, feedListenerId: string) => {
+    delete feedListeners.current[feed][feedListenerId];
+
+    if (Object.keys(feedListeners.current?.[feed]).length === 0) {
+      socket.current?.send(JSON.stringify({ event: 'feed-unsubscribe', message: { feed } }));
+    }
+  });
+
   if (error) {
     return (
       <div
@@ -139,7 +174,9 @@ export const ServerEventsProvider = ({ children }: Props) => {
     <ServerEventsContext.Provider
       value={{
         addEventListener,
-        removeEventListener
+        removeEventListener,
+        subscribeToFeed,
+        unsubscribeFromFeed
       }}>
       {children}
     </ServerEventsContext.Provider>
