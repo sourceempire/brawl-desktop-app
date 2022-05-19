@@ -4,9 +4,10 @@ import { useAuth } from 'api/requests';
 import DragableArea from 'common/components/DragableArea';
 import { Route, Routes } from 'react-router-dom';
 import { Wrapper } from './MainView.styles';
+import HomePage from './pages/HomePage';
 
 const MainView = () => {
-  const { loginValidate, logout, error } = useAuth();
+  const { loginValidate, error } = useAuth();
 
   useEffect(() => {
     loginValidate();
@@ -21,16 +22,7 @@ const MainView = () => {
       <DragableArea />
       <ServerEventsProvider>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <p>Main View</p>
-                <p>Version: {process.env.REACT_APP_VERSION}</p>
-                <button onClick={logout}>Log out</button>
-              </>
-            }
-          />
+          <Route path="/" element={<HomePage />} />
         </Routes>
       </ServerEventsProvider>
     </Wrapper>
