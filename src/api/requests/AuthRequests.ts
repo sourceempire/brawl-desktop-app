@@ -6,13 +6,13 @@ export const loginWithUsernameAndPassword: (
   username: string,
   password: string
 ) => Promise<{ succeeded: boolean }> = (username, password) =>
-  Fetcher.post(SERVER_URL + '/login', { username: username, password: password });
+  Fetcher.post(SERVER_URL + '/login', { username, password });
 
 /**
  * Will return auth url for user to auhenication through
  */
 export const loginWithOpenID = (username: string) =>
-  Fetcher.get(SERVER_URL + '/api/public/auth', { username: username });
+  Fetcher.get(SERVER_URL + '/api/public/auth', { username });
 
 export const COMPLETE_URL = SERVER_URL + '/api/public/auth/complete';
 export const FAILED_URL = SERVER_URL + '/api/public/auth/failed';
