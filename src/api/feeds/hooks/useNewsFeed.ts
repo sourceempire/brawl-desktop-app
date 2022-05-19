@@ -8,9 +8,12 @@ type News = {
   time_stamp: string;
 };
 
-const useNewsFeed = (): News[] | undefined => {
+const useNewsFeed = () => {
   const { currentState } = useFeed('news');
-  return currentState?.news as News[];
+  return {
+    news: (currentState.news ?? []) as News[],
+    isLoading: currentState.isLoading
+  };
 };
 
 export default useNewsFeed;

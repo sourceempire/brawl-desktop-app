@@ -3,9 +3,11 @@ import { ServerEventsContext } from 'api/events';
 
 const useFeed = (feed: string) => {
   const { subscribeToFeed, unsubscribeFromFeed } = useContext(ServerEventsContext);
-  const [currentState, setCurrentState] = useState<{ [key: string]: unknown }>();
+  const [currentState, setCurrentState] = useState<{ [key: string]: unknown }>({});
+  const [isLoading, setLoading] = useState(true);
 
   const feedListener = (updatedState: { [key: string]: unknown }) => {
+    setLoading(false);
     setCurrentState(updatedState);
   };
 
@@ -14,7 +16,7 @@ const useFeed = (feed: string) => {
     return () => unsubscribeFromFeed(feed, feedListenerId);
   }, [feed, subscribeToFeed, unsubscribeFromFeed]);
 
-  return { currentState };
+  return { currentState, isLoading };
 };
 
 export default useFeed;
