@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import { IconType } from 'common/ui-components/types';
+import Icon from '../Icon/Icon';
 import { Box, Check, Label, Wrapper } from './Checkbox.styles';
 
 type Props = {
@@ -8,9 +11,17 @@ type Props = {
 };
 
 const Checkbox = ({ label, checked, onChange, className }: Props) => {
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      onChange();
+    }
+  };
+
   return (
     <Wrapper onClick={onChange} className={className}>
-      <Box>{checked && <Check />}</Box>
+      <Box checked={checked} tabIndex={0} onKeyDown={handleKeyPress}>
+        {checked && <Check />}
+      </Box>
       <Label>{label}</Label>
     </Wrapper>
   );

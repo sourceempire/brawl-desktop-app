@@ -10,5 +10,6 @@ export type IconProps = {
 
 export enum IconType {
   PROFILE = 'profile',
-  KEY = 'icon'
+  KEY = 'key',
+  CHECK = 'check'
 }

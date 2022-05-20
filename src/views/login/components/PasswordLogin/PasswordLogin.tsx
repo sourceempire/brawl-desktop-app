@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from 'api/requests';
 import { IconType, InputSize } from 'common/ui-components/types';
-import { LoginButton, LoginInput } from 'views/login/LoginView.styles';
-import { Wrapper } from './PasswordLogin.styles';
+import { LoginButton, LoginInput } from './PasswordLogin.styles';
 
 export const PasswordLogin = () => {
   const { loginWithUsernameAndPassword, error } = useAuth();
@@ -15,7 +14,7 @@ export const PasswordLogin = () => {
   }
 
   return (
-    <Wrapper>
+    <>
       <LoginInput
         value={username}
         onChange={(e) => setUserName(e.target.value)}
@@ -38,6 +37,6 @@ export const PasswordLogin = () => {
       <LoginButton onClick={() => loginWithUsernameAndPassword(username, password)} primary>
         Login
       </LoginButton>
-    </Wrapper>
+    </>
   );
 };

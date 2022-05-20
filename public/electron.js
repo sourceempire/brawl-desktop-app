@@ -64,7 +64,7 @@ async function createLoginWindow() {
     loginWindow.focus();
   } else {
     loginWindow = await createWindow('login', {
-      width: 300,
+      width: 800,
       height: 500,
       resizable: false
     });

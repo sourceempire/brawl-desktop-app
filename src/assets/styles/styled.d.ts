@@ -8,6 +8,10 @@ declare module 'styled-components' {
       background: string;
       secondary: string;
       lightTint: string;
+
+      primaryDark: string;
+      secondaryDark: string;
+      disabledDark: string;
     };
     borderRadius: {
       default: string;
