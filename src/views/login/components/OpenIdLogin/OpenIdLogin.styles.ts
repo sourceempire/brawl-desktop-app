@@ -23,15 +23,24 @@ export const OpenIdButton = styled(Button)`
   }
 `;
 
-export const SignUpText = styled.p`
+export const SignUpText = styled.div`
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 90px;
+  right: 90px;
+  line-height: 1.5;
   bottom: 40px;
   font-size: 14px;
   text-align: center;
+
+  ${({ theme }) => css`
+    p {
+      display: inline;
+      color: ${theme.colors.accent};
+    }
+  `}
 `;
 
+// TODO -> Might make sense to create a component out of this for general links.
 export const SignUpLink = styled(Link)`
   outline-color: transparent;
 

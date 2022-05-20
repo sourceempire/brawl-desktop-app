@@ -3,6 +3,7 @@ import { loginWithOpenID } from 'api/requests';
 import { Checkbox } from 'common/ui-components';
 import { Header, OpenIdButton, SignUpLink, SignUpText } from './OpenIdLogin.styles';
 import { BankIDLogo, YotiLogo } from 'assets/icons';
+import { theme } from 'assets/styles/Theme';
 
 export const OpenIdLogin = () => {
   const [rememberUser, setRememberUser] = useState(false);
@@ -29,8 +30,8 @@ export const OpenIdLogin = () => {
         onChange={() => setRememberUser(!rememberUser)}
       />
       <SignUpText>
-        Don{`'`}t have an account? <SignUpLink to="/login">Sign up</SignUpLink>
-      </SignUpText>{' '}
+        No account? <p>You{`'`}ll be onboarded</p> the first time you sign in.
+      </SignUpText>
     </>
   );
 };
