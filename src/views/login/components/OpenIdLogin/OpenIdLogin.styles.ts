@@ -1,12 +1,20 @@
 import { Button } from 'common/ui-components';
-import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-import { lightenColor } from 'assets/styles/colorBrightness';
 
-export const Header = styled.div`
-  font-family: 'Orbitron';
-  font-size: 24px;
-  margin-bottom: 24px;
+export const LoginWrapper = styled.div<{ inactive: boolean }>`
+  position: relative;
+  width: 50%;
+  height: 100%;
+  padding: 75px;
+  padding-top: 100px;
+  transition: opacity 1s;
+
+  ${({ inactive }) =>
+    inactive &&
+    css`
+      pointer-events: none;
+      opacity: 0;
+    `}
 `;
 
 export const OpenIdButton = styled(Button)`
@@ -40,26 +48,14 @@ export const SignUpText = styled.div`
   `}
 `;
 
-// TODO -> Might make sense to create a component out of this for general links.
-export const SignUpLink = styled(Link)`
-  outline-color: transparent;
-
-  :focus-visible {
-    outline: 2px solid white;
-    outline-offset: 2px;
-    transition: outline-color 0.3s;
-  }
-
-  ${({ theme }) => css`
-    color: ${theme.colors.accent};
-    border-radius: ${theme.borderRadius.default};
-    :hover {
-      color: ${lightenColor(theme.colors.accent, 25)};
-    }
-    :active {
-      display: inline-block;
-      color: ${lightenColor(theme.colors.accent, 50)};
-      transform: translateY(1px);
-    }
-  `}
+export const AppVersion = styled.p`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 12px;
+  width: 100%;
+  font-size: 10px;
+  opacity: 0.3;
+  font-weight: 100;
+  text-align: center;
 `;

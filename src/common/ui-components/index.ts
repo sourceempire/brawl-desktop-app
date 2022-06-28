@@ -5,3 +5,5 @@ export { default as Input } from './components/Input/Input';
 export { default as ProgressBar } from './components/ProgressBar/ProgressBar';
 
 export { default as Icon } from './components/Icon/Icon';
+
+export { Header } from './components/Text/Text.styles';

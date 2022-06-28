@@ -2,15 +2,22 @@
 
 import { useRef, useState } from 'react';
 import * as authRequests from 'api/requests/AuthRequests';
+import {
+  type AuthType,
+  type LoginResult,
+  LoginResultStatus,
+  type RegisterForm
+} from 'api/requests/AuthRequests';
+import { useNavigate } from 'react-router-dom';
 import Window from 'window';
-
-type AuthType = 'password' | 'openid';
 
 export const useAuth = () => {
   // TODO -> Fix typesafe way of doing this
   const [authType, setAuthType] = useState<AuthType>('openid');
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<any>();
+
+  const navigate = useNavigate();
 
   const { current: loginValidate } = useRef(async () => {
     setLoading(true);
@@ -50,6 +57,40 @@ export const useAuth = () => {
     }
   );
 
+  const { current: loginWithOpenId } = useRef(async (identityProvider: string) => {
+    const result = await authRequests.getOpenIdAuthUrl();
+    Window.openAuthWindow(`${result.authUrl}&identity_provider=${identityProvider}`);
+
+    Window.addLoginResultListener((result: LoginResult) => {
+      Window.focus();
+      switch (result.status) {
+        case LoginResultStatus.COMPLETE: {
+          closeLoginWindowAndOpenMain();
+          break;
+        }
+        case LoginResultStatus.REGISTRATION: {
+          navigate('/login/registration');
+          break;
+        }
+        case LoginResultStatus.FAILED: {
+          console.log('failed');
+          // TODO -> Handle failed login attempt
+          break;
+        }
+      }
+      Window.removeLoginResultListener();
+    });
+  });
+
+  const { current: register } = useRef(async (form: RegisterForm) => {
+    const registerResult = await authRequests.register(form);
+    if (registerResult.succeeded) {
+      closeLoginWindowAndOpenMain();
+    } else {
+      // TODO -> Handle failed register attempt
+    }
+  });
+
   const { current: logout } = useRef(async () => {
     try {
       await authRequests.logout();
@@ -64,6 +105,8 @@ export const useAuth = () => {
     loginValidate,
     getAuthType,
     loginWithUsernameAndPassword,
+    loginWithOpenId,
+    register,
     logout,
     isLoading,
     error
