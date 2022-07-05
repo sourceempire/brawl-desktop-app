@@ -6,7 +6,6 @@ const HomePage = () => {
   const { logout } = useAuth();
 
   const { news, isLoading: isLoadingNews } = useNewsFeed();
-  const news2 = useNewsFeed();
 
   return (
     <Wrapper>

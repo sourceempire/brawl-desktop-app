@@ -4,6 +4,7 @@ import { InputElement, Label, Wrapper } from './Input.styles';
 
 type Props = {
   value: string;
+  name?: string;
   type?: string;
   withBorder?: boolean;
   size?: InputSize;
@@ -11,11 +12,13 @@ type Props = {
   icon?: IconType;
   className?: string;
   placeholder?: string;
+  tabIndex?: number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const Input = ({
   value,
+  name,
   type,
   withBorder = false,
   size = InputSize.MEDIUM,
@@ -23,6 +26,7 @@ const Input = ({
   icon,
   className,
   placeholder,
+  tabIndex = 0,
   onChange
 }: Props) => {
   return (
@@ -31,13 +35,15 @@ const Input = ({
       {icon && <Icon type={icon} />}
       <InputElement
         value={value}
+        name={name}
         type={type}
         onChange={onChange}
         withBorder={withBorder}
         inputSize={size}
         hasLabel={Boolean(label)}
-        hasIcon={Boolean(Icon)}
+        hasIcon={Boolean(icon)}
         placeholder={placeholder}
+        tabIndex={tabIndex}
       />
     </Wrapper>
   );

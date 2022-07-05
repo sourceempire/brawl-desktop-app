@@ -2,8 +2,9 @@ import { useEffect } from 'react';
 import { useAuth } from 'api/requests';
 import DragableArea from 'common/components/DragableArea';
 import OpenIdLogin from './components/OpenIdLogin';
+import OpenIdRoutes from './components/OpenIdRoutes';
 import PasswordLogin from './components/PasswordLogin';
-import { Version, Wrapper } from './LoginView.styles';
+import { Wrapper } from './LoginView.styles';
 
 const LoginView = () => {
   const { authType, loginValidate, getAuthType, error } = useAuth();
@@ -20,8 +21,7 @@ const LoginView = () => {
   return (
     <Wrapper>
       <DragableArea />
-      {authType === 'password' ? <PasswordLogin /> : <OpenIdLogin />}
-      <Version>Version: {process.env.REACT_APP_VERSION}</Version>
+      {authType === 'password' ? <PasswordLogin /> : <OpenIdRoutes />}
     </Wrapper>
   );
 };

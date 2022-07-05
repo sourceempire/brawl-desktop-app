@@ -5,6 +5,7 @@ let Window = {
   version: null,
   openMainWindow: () => {},
   openLoginWindow: () => {},
+  openAuthWindow: (authUrl) => {},
   closeMainWindow: () => {},
   closeLoginWindow: () => {},
   new: (args) => {
@@ -25,7 +26,12 @@ let Window = {
   addUpdateNotAvailableListener: (callback) => {},
   addUpdateErrorListener: (callback) => {},
 
-  quitAndInstall: () => {}
+  addLoginResultListener: (callback) => {},
+  removeLoginResultListener: () => {},
+
+  quitAndInstall: () => {},
+
+  focus: () => {}
 };
 
 if (window.require) {
@@ -33,10 +39,12 @@ if (window.require) {
   const { ipcRenderer, shell } = window.require('electron'); // window require to avoid conflict with create react app's own import system
 
   const addListener = (channel, callback) => ipcRenderer.on(channel, (_, args) => callback(args));
+  const removeAllListeners = (channel) => ipcRenderer.removeAllListeners(channel);
 
   Window = {
     openMainWindow: () => ipcRenderer.send('open-main-window'),
     openLoginWindow: () => ipcRenderer.send('open-login-window'),
+    openAuthWindow: (authUrl) => ipcRenderer.send('open-auth-window', authUrl),
     closeMainWindow: () => ipcRenderer.send('close-main-window'),
     closeLoginWindow: () => ipcRenderer.send('close-login-window'),
 
@@ -50,7 +58,12 @@ if (window.require) {
     addUpdateNotAvailableListener: (callback) => addListener('update-not-available', callback),
     addUpdateErrorListener: (callback) => addListener('update-error', callback),
 
-    quitAndInstall: () => ipcRenderer.send('quit-and-install')
+    addLoginResultListener: (callback) => addListener('login-result', callback),
+    removeLoginResultListener: () => removeAllListeners('login-result'),
+
+    quitAndInstall: () => ipcRenderer.send('quit-and-install'),
+
+    focus: () => ipcRenderer.send('focus')
   };
 }
 

@@ -7,16 +7,19 @@ const { autoUpdater } = require('electron-updater');
 let mainWindow;
 let loadingWindow;
 let loginWindow;
+let authWindow;
 
 const backgroundColor = '#232333';
 
 async function createWindow(appPath, options = {}) {
+  const isExternal = appPath.startsWith('http');
+
   const window = new BrowserWindow({
-    frame: false,
+    frame: isExternal,
     backgroundColor,
     ...options,
     ...(appPath !== 'loading' && {
-      titleBarStyle: 'hidden',
+      titleBarStyle: isExternal ? 'default' : 'hidden',
       ...(process.platform === 'win32' && {
         titleBarOverlay: {
           color: backgroundColor,
@@ -31,11 +34,15 @@ async function createWindow(appPath, options = {}) {
     }
   });
 
-  await window.loadURL(
-    isDev
-      ? `http://localhost:3000/#/${appPath}`
-      : `${path.join(__dirname, `../build/index.html`)}#/${appPath}`
-  );
+  if (isExternal) {
+    await window.loadURL(appPath);
+  } else {
+    await window.loadURL(
+      isDev
+        ? `http://localhost:3000/#/${appPath}`
+        : `${path.join(__dirname, `../build/index.html`)}#/${appPath}`
+    );
+  }
 
   return window;
 }
@@ -64,7 +71,7 @@ async function createLoginWindow() {
     loginWindow.focus();
   } else {
     loginWindow = await createWindow('login', {
-      width: 300,
+      width: 800,
       height: 500,
       resizable: false
     });
@@ -133,6 +140,42 @@ async function createLoadingWindow() {
   }
 }
 
+async function createAuthWindow(authUrl) {
+  if (authWindow && !authWindow.isDestroyed) {
+    authWindow.focus();
+  } else {
+    authWindow = await createWindow(authUrl, {
+      width: 450,
+      height: 620,
+      resizable: false,
+      backgroundColor: '#363750'
+    });
+
+    authWindow.webContents.on('did-navigate', (_event, url) => {
+      const { pathname, searchParams } = new URL(url);
+
+      if (pathname.endsWith('failed')) {
+        loginWindow.webContents.send('login-result', {
+          status: 'failed',
+          message: searchParams.get('error_message')
+        });
+      } else if (pathname.endsWith('complete')) {
+        loginWindow.webContents.send('login-result', {
+          status: 'complete'
+        });
+      } else if (pathname.endsWith('registration')) {
+        loginWindow.webContents.send('login-result', {
+          status: 'registration'
+        });
+      }
+
+      authWindow.close();
+    });
+
+    authWindow.on('closed', () => (authWindow = null));
+  }
+}
+
 app.on('ready', () => {
   session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
     // fix undefined origin headers when running from file. Cases: GET -> undefined, POST -> 'null', websocket -> 'file://'
@@ -161,6 +204,14 @@ app.on('activate', () => {
   }
 });
 
+ipcMain.on('focus', (event) => {
+  const { id: windowId } = event.sender;
+  const senderWindow = BrowserWindow.fromId(windowId);
+  if (senderWindow) {
+    senderWindow.show();
+  }
+});
+
 ipcMain.on('check-for-update', (event) => {
   if (!isDev) {
     //TODO -> determine difference with checkForUpdatesAndNotify
@@ -176,6 +227,9 @@ ipcMain.on('check-for-update', (event) => {
 
 ipcMain.on('open-main-window', () => createMainWindow());
 ipcMain.on('open-login-window', () => createLoginWindow());
+ipcMain.on('open-auth-window', (_, authUrl) => {
+  createAuthWindow(authUrl);
+});
 ipcMain.on('close-main-window', () => {
   if (mainWindow && !mainWindow.isDestroyed()) mainWindow.close();
 });

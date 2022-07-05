@@ -82,6 +82,8 @@ const ResetStyle = css`
     font-size: 100%;
     vertical-align: baseline;
     user-select: none;
+    -webkit-user-drag: none;
+    outline: none;
   }
 
   /* HTML5 display-role reset for older browsers */

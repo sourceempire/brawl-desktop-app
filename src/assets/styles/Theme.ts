@@ -21,7 +21,11 @@ enum Colors {
   ACCENT = '#94E8B4',
   BACKGROUND = '#232333',
   SECONDARY = '#363750',
-  LIGHT_TINT = '#595B83'
+  LIGHT_TINT = '#595B83',
+
+  PRIMARY_DARK = 'rgba(0, 0, 0, 0.87)',
+  SECONDARY_DARK = 'rgba(0, 0, 0, 0.54)',
+  DISABLED_DARK = 'rgba(0, 0, 0, 0.38)'
 }
 
 enum BorderRadius {
@@ -34,7 +38,11 @@ export const theme: DefaultTheme = {
     accent: Colors.ACCENT,
     background: Colors.BACKGROUND,
     secondary: Colors.SECONDARY,
-    lightTint: Colors.LIGHT_TINT
+    lightTint: Colors.LIGHT_TINT,
+
+    primaryDark: Colors.PRIMARY_DARK,
+    secondaryDark: Colors.SECONDARY_DARK,
+    disabledDark: Colors.DISABLED_DARK
   },
   titleBarHeight: titleBarHeight(),
   borderRadius: {

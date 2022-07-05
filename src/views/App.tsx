@@ -13,8 +13,8 @@ function App() {
         <AppContainer>
           <Routes>
             <Route path="/loading" element={<LoadingView />} />
-            <Route path="/login" element={<LoginView />} />
-            <Route path="/main/*" element={<MainView />} />
+            <Route path="/login/*" element={<LoginView />} />
+            <Route path="/main" element={<MainView />} />
           </Routes>
         </AppContainer>
       </HashRouter>
