@@ -4,6 +4,7 @@ import { useAuth } from 'api/requests';
 import DragableArea from 'common/components/DragableArea';
 import { Route, Routes } from 'react-router-dom';
 import TournamentListView from '../../views/tournamentlist/TournamentListView';
+import TopBar from './components/TopBar';
 import { Wrapper } from './MainView.styles';
 import HomePage from './pages/HomePage';
 
@@ -22,6 +23,7 @@ const MainView = () => {
     <Wrapper>
       <DragableArea />
       <ServerEventsProvider>
+        <TopBar />
         <Routes>
           <Route path="/tournamentlist" element={<TournamentListView />} />
           <Route path="/" element={<HomePage />} />
