@@ -8,7 +8,7 @@ enum PlatformName {
 const titleBarHeight = () => {
   switch (process.platform) {
     case PlatformName.MAC:
-      return '23.5px';
+      return '24px';
     case PlatformName.WINDOWS:
       return '30px';
     default:
