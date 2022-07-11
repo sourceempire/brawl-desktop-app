@@ -26,7 +26,6 @@ type Filter = {
 export default function TournamentListView() {
   return (
     <Wrapper>
-      <Link to="/main">Main</Link>
       <Tabs underlined={true}>
         <Tab name="Upcomming">
           <Page />
