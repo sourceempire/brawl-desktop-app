@@ -1,5 +1,6 @@
 import useNewsFeed from 'api/feeds/hooks/useNewsFeed';
 import { useAuth } from 'api/requests';
+import { Link } from 'react-router-dom';
 import { Wrapper } from './HomePage.styles';
 
 const HomePage = () => {
@@ -12,6 +13,8 @@ const HomePage = () => {
       <p>Main View</p>
       <p>Version: {process.env.REACT_APP_VERSION}</p>
       <button onClick={logout}>Log out</button>
+      <br />
+      <Link to="/main/tournamentlist">Tournaments</Link>
       <br />
       <br />
       <br />

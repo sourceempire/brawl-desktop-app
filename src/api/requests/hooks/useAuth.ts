@@ -22,7 +22,7 @@ export const useAuth = () => {
   const { current: loginValidate } = useRef(async () => {
     setLoading(true);
     try {
-      await authRequests.loginValidate();
+      const res = await authRequests.loginValidate();
       closeLoginWindowAndOpenMain();
     } catch (err: any) {
       if (err.status !== 200) {

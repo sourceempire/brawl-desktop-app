@@ -4,21 +4,33 @@ import { darkenColor, lightenColor } from 'assets/styles/colorBrightness';
 type Props = {
   primary?: boolean;
   accent?: boolean;
+  hasIcon: boolean;
 };
 
 // TODO -> Add focused style
 // TODO -> Add support for icons
 // TODO -> Add support for which side icons should be
 
+export const iconStyle = css`
+  svg,
+  img {
+    display: inline-block;
+    height: 100%;
+    padding: 8px 10px 8px 15px;
+  }
+`;
+
 export const Wrapper = styled.button<Props>`
-  width: 100%;
+  width: auto;
   border: none;
   color: white;
   height: 30px;
-  padding: 0 15px;
+  padding: 0 0;
+  display: inline-flex;
+  align-items: center;
   cursor: pointer;
-  font-size: 13px;
   outline-color: transparent;
+  ${(props) => props.theme.textStyles.button}
 
   :focus-visible {
     outline: 2px solid white;
@@ -26,7 +38,9 @@ export const Wrapper = styled.button<Props>`
     transition: outline-color 0.3s;
   }
 
-  ${({ theme, primary, accent }) => css`
+  ${iconStyle}
+
+  ${({ theme, primary, accent, hasIcon }) => css`
     border-radius: ${theme.borderRadius.default};
     background-color: ${theme.colors.lightTint};
     :hover {
@@ -35,6 +49,15 @@ export const Wrapper = styled.button<Props>`
     :active {
       background-color: ${lightenColor(theme.colors.lightTint, 50)};
     }
+
+    ${hasIcon &&
+    css`
+      padding: 0 15px 0 0;
+    `}
+    ${!hasIcon &&
+    css`
+      padding: 0 15px;
+    `}
 
     ${accent &&
     css`

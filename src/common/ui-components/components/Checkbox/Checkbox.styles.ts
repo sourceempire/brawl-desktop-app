@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 
 export const Check = styled(CheckIcon)`
   ${({ theme }) => css`
-    fill: ${theme.colors.primaryDark};
+    fill: ${theme.colors.textPrimaryDark};
   `}
 `;
 

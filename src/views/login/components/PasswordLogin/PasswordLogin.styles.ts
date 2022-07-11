@@ -7,4 +7,5 @@ export const LoginInput = styled(Input)`
 
 export const LoginButton = styled(Button)`
   margin-top: 6px;
+  width: 100%;
 `;

@@ -20,7 +20,7 @@ plugins:
   - react-hooks
   - '@typescript-eslint'
   - import
-rules: 
+rules:
   react/react-in-jsx-scope: off
   react-hooks/rules-of-hooks: error
   react-hooks/exhaustive-deps: warn
@@ -34,7 +34,7 @@ rules:
         - all
         - single
         - multiple
-  import/order: 
+  import/order:
     - error
     - groups:
         - builtin
@@ -53,7 +53,7 @@ rules:
         - pattern: assets/**
           group: index
           position: after
-       
+
       pathGroupsExcludedImportTypes:
         - react
         - assets/**
@@ -64,4 +64,3 @@ rules:
 settings:
   react:
     version: detect
-
