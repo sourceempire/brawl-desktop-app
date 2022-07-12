@@ -12,6 +12,8 @@ declare module 'styled-components' {
       primaryDark: string;
       secondaryDark: string;
       disabledDark: string;
+
+      success: string;
     };
     borderRadius: {
       default: string;

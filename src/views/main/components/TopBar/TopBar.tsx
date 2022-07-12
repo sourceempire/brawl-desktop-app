@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import MainNavLink from '../MainNavLink';
-import { PlaceholderLogo, Wrapper } from './TopBar.styles';
+import ProfileMenu from '../ProfileMenu';
+import { PlaceholderLogo, TopBarActions, Wrapper } from './TopBar.styles';
 
 type NavigationItem = {
   name: string;
@@ -16,18 +17,24 @@ const mainNavigationItems: NavigationItem[] = [
 const TopBar = () => {
   return (
     <Wrapper>
-      <Link to="">
-        <PlaceholderLogo />
-      </Link>
+      <TopBarActions>
+        <Link to="">
+          <PlaceholderLogo />
+        </Link>
 
-      {mainNavigationItems.map((navItem) => (
-        <MainNavLink
-          to={navItem.path ?? ''}
-          isUpcomingFeature={navItem.isUpcomingFeature}
-          key={navItem.name}>
-          {navItem.name}
-        </MainNavLink>
-      ))}
+        {mainNavigationItems.map((navItem) => (
+          <MainNavLink
+            to={navItem.path ?? ''}
+            isUpcomingFeature={navItem.isUpcomingFeature}
+            key={navItem.name}>
+            {navItem.name}
+          </MainNavLink>
+        ))}
+      </TopBarActions>
+
+      <TopBarActions>
+        <ProfileMenu />
+      </TopBarActions>
     </Wrapper>
   );
 };

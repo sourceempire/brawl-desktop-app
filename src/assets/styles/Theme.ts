@@ -25,7 +25,9 @@ enum Colors {
 
   PRIMARY_DARK = 'rgba(0, 0, 0, 0.87)',
   SECONDARY_DARK = 'rgba(0, 0, 0, 0.54)',
-  DISABLED_DARK = 'rgba(0, 0, 0, 0.38)'
+  DISABLED_DARK = 'rgba(0, 0, 0, 0.38)',
+
+  SUCCESS = '#65CA57'
 }
 
 enum BorderRadius {
@@ -42,7 +44,9 @@ export const theme: DefaultTheme = {
 
     primaryDark: Colors.PRIMARY_DARK,
     secondaryDark: Colors.SECONDARY_DARK,
-    disabledDark: Colors.DISABLED_DARK
+    disabledDark: Colors.DISABLED_DARK,
+
+    success: Colors.SUCCESS
   },
   titleBarHeight: titleBarHeight(),
   borderRadius: {

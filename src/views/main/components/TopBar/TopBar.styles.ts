@@ -1,11 +1,17 @@
+import ArrowDown from 'common/ui-components/icons/ArrowDown';
 import styled, { css } from 'styled-components/macro';
 
 export const Wrapper = styled.div`
   display: flex;
-  align-items: center;
+  justify-content: space-between;
   height: 48px;
   padding: 0 24px;
   margin-bottom: 24px;
+`;
+
+export const TopBarActions = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 export const PlaceholderLogo = styled.div`
