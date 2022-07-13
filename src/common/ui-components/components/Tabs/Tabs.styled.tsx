@@ -6,7 +6,6 @@ export const Wrapper = styled.div`
   }
 
   .page {
-    position: absolute;
     inset: 0;
     transform: translateX(0);
     opacity: 1;
@@ -14,6 +13,7 @@ export const Wrapper = styled.div`
   }
 
   .page.enter {
+    position: absolute;
     opacity: 0;
     transform: translateX(100px);
   }
@@ -22,6 +22,7 @@ export const Wrapper = styled.div`
     transform: translateX(0) !important;
   }
   .page.exit {
+    position: absolute;
     opacity: 1;
     transform: translateX(0);
   }

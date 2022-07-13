@@ -1,5 +1,5 @@
 import Card from 'common/ui-components/components/Card/Card';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 type HeaderProps = {
   image: string;

@@ -1,5 +1,6 @@
-import Card from 'common/ui-components/components/Card/Card';
+import { csgoMatchSettingsModeShortForm, isCSGOMatchSettings } from 'types/MatchSettings';
 import { TournamentInfo } from 'types/tournaments/TournamentInfo';
+import { capitalize } from 'utils/stringUtils';
 import {
   Column1,
   Column2,
@@ -36,7 +37,8 @@ export default function TournamentInfoCard({ tournamentInfo, onClick }: Props) {
         <Row1>
           <Column1>
             <Game>
-              {tournamentInfo.game} ({tournamentInfo.gameMode})
+              {tournamentInfo.gameName}
+              {tournamentMatchSettings(tournamentInfo)}
             </Game>
             <Name>{tournamentInfo.name}</Name>
           </Column1>
@@ -47,15 +49,23 @@ export default function TournamentInfoCard({ tournamentInfo, onClick }: Props) {
         </Row1>
         <Row2>
           <Column1>
-            <EntryFee>Entry Fee: €{tournamentInfo.entryFee}</EntryFee>
-            <Time>{tournamentInfo.time.toISOString()}</Time>
+            <EntryFee>Entry Fee: €{tournamentInfo.entranceFee}</EntryFee>
+            <Time>{new Date(tournamentInfo.startTime).toISOString()}</Time>
           </Column1>
           <Column2>
-            <Region>{tournamentInfo.region}</Region>
-            <NumberOfTeams>{tournamentInfo.numberOfTeams} Teams</NumberOfTeams>
+            <Region>{capitalize(tournamentInfo.region)}</Region>
+            <NumberOfTeams>{tournamentInfo.teamsAllowed} Teams</NumberOfTeams>
           </Column2>
         </Row2>
       </Info>
     </Wrapper>
   );
+}
+
+function tournamentMatchSettings(tournamentInfo: TournamentInfo) {
+  if (isCSGOMatchSettings(tournamentInfo.matchSettings)) {
+    return ` (${csgoMatchSettingsModeShortForm(tournamentInfo.matchSettings.mode)})`;
+  } else {
+    return '';
+  }
 }

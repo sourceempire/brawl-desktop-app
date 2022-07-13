@@ -1,9 +1,10 @@
 import { Button, Input } from 'common/ui-components';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import SmallCross from 'assets/icons/SmallCross.svg';
 
 export const Wrapper = styled.div`
   padding: 0 24px;
+  margin-bottom: 48px;
 `;
 
 type TournamentGalleryProps = {

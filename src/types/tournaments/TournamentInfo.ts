@@ -1,12 +1,18 @@
+import { MatchSettings } from 'types/MatchSettings';
+
 export interface TournamentInfo {
   id: string;
   name: string;
-  game: string;
-  gameMode: string;
-  time: Date;
-  entryFee: number;
-  currentPrizePool: number;
+  gameId: string;
+  gameName: string;
+  startTime: string;
+  entranceFee: string;
+  matchSettings: MatchSettings;
+  currentPrizePool: string;
   region: string;
-  numberOfTeams: number;
+  teamSize: number;
+  teamsAllowed: number;
+  lockTime: number;
+  registrationClosed: boolean;
   image: string;
 }

@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
   height: 48px;
   padding: 0 24px;
   margin-bottom: 24px;
+  flex-shrink: 0;
 `;
 
 export const PlaceholderLogo = styled.div`

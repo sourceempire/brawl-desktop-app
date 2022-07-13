@@ -4,7 +4,7 @@ import { lightenColor } from 'assets/styles/colorBrightness';
 
 export const Wrapper = styled.div`
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   font-size: 14px;
 `;
