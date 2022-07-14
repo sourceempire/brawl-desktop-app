@@ -1,16 +1,16 @@
-import styled from 'styled-components/macro';
-import { theme } from 'assets/styles/Theme';
+import styled, { css } from 'styled-components/macro';
 
-export const Content = styled.div<{ width?: string; height?: string }>`
-  width: ${({ width }) => (width !== undefined ? width : '536px')};
-  max-width: 100%;
-  height: ${({ height }) => (height !== undefined ? height : 'auto')};
-  padding: 18px;
-  background-color: ${({ theme }) => theme.colors.secondary};
-  inset: 0;
-  margin: auto;
-  transition: opacity 500ms, transform 500ms;
-  border-radius: 3px;
+export const Content = styled.div<{ width?: string; height?: string; timeout: number }>`
+  ${({ width, height, timeout, theme }) => css`
+    width: ${width !== undefined ? width : '536px'};
+    max-width: 100%;
+    height: ${height !== undefined ? height : 'auto'};
+    padding: 18px;
+    background-color: ${theme.colors.secondary};
+    inset: 0;
+    margin: auto;
+    border-radius: 3px;
+  `}
 `;
 
 export const Header = styled.div`
@@ -34,15 +34,26 @@ export const CrossButton = styled.img`
   }
 `;
 
-export const Overlay = styled.div`
+export const Overlay = styled.div<{ timeout: number }>`
   position: absolute;
   display: flex;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
 
-  transition: opacity 300ms ease-out, transform 300ms ease-out;
-  opacity: 1;
-  transform: scale(1);
+  ${({ timeout }) =>
+    css`
+      transition: opacity ${timeout}ms ease-out, transform ${timeout}ms ease-out;
+    `}
+
+  ${Content} {
+    opacity: 0;
+    transform: scale(0.9);
+    ${({ timeout }) =>
+      css`
+        transition: opacity ${timeout}ms, transform ${timeout}ms;
+      `}
+  }
 
   &.enter {
     position: absolute;
@@ -50,11 +61,20 @@ export const Overlay = styled.div`
 
     ${Content} {
       opacity: 0;
-      transform: scale(0.8);
+      transform: scale(0.9);
     }
   }
 
   &.enter-active {
+    opacity: 1;
+
+    ${Content} {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  &.enter-done {
     opacity: 1;
 
     ${Content} {
@@ -75,11 +95,14 @@ export const Overlay = styled.div`
 
   &.exit-active {
     opacity: 0;
-    transition: opacity 500ms, transform 500ms;
+    ${({ timeout }) =>
+      css`
+        transition: opacity ${timeout}ms, transform ${timeout}ms;
+      `}
 
     ${Content} {
       opacity: 0;
-      transform: scale(0.8);
+      transform: scale(0.9);
     }
   }
 `;

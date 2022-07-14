@@ -9,4 +9,5 @@ export const Wrapper = styled.div`
 
 export const Page = styled.div`
   overflow-y: scroll;
+  flex-grow: 1;
 `;

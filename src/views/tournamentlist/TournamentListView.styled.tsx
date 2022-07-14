@@ -1,10 +1,10 @@
 import { Button, Input } from 'common/ui-components';
+import { Select } from 'common/ui-components/components/Select/Select';
 import styled from 'styled-components/macro';
 import SmallCross from 'assets/icons/SmallCross.svg';
 
 export const Wrapper = styled.div`
   padding: 0 24px;
-  margin-bottom: 48px;
 `;
 
 type TournamentGalleryProps = {
@@ -13,6 +13,7 @@ type TournamentGalleryProps = {
 export const TournamentGallery = styled.div<TournamentGalleryProps>`
   transition: transform 0.3s;
   transform: ${(props) => (props.featuredExpanded ? 'translateY(0)' : 'translateY(-166px)')};
+  padding-bottom: 48px;
 `;
 
 export const FilterBar = styled.div`
@@ -61,6 +62,10 @@ export const SearchInput = styled(Input)`
 
 export const FilterButton = styled(Button)`
   margin: 0 3px;
+`;
+
+export const FilterSort = styled(Select)`
+  margin-left: 3px;
 `;
 
 export const TournamentList = styled.ul`

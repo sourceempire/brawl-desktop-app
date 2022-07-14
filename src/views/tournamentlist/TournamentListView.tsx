@@ -11,15 +11,15 @@ import FeaturedTournament from './components/FeaturedTournament/FeaturedTourname
 import TournamentInfoCard from './components/TournamentInfoCard/TournamentInfoCard';
 import TournamentsFilters, {
   Filter,
-  FilterTypes,
   filter
-} from './components/TournamentsFilters/TournamentsFilters';
+} from './components/TournamentsFiltersModal/TournamentsFiltersModal';
 import {
   FilterBar,
   FilterBullet,
   FilterBullets,
   FilterButton,
   FilterControls,
+  FilterSort,
   SearchInput,
   TournamentGallery,
   TournamentList,
@@ -126,11 +126,11 @@ function Page() {
               applyFilters={setActiveFilters}
               previousFilter={activeFilters}
             />
-            <Select onSelect={console.log}>
+            <FilterSort onSelect={console.log}>
               <Option value="1">Sort</Option>
               <Option value="2">b</Option>
               <Option value="3">c</Option>
-            </Select>
+            </FilterSort>
           </FilterControls>
         </FilterBar>
         <TournamentList>

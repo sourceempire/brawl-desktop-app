@@ -10,8 +10,11 @@ type Props = {
   children: ReactNode;
   isOpen: boolean;
   onAfterOpen?: () => void;
+  onBeforeOpen?: () => void;
+  onBeforeClose?: () => void;
+  onAfterClose?: () => void;
   onRequestClose?: () => void;
-  closeTimeoutMS: number;
+  closeTimeoutMS?: number;
   title?: string;
   header?: boolean;
   closeButton?: boolean;
@@ -22,8 +25,11 @@ export default function Modal({
   children,
   isOpen,
   onAfterOpen,
+  onBeforeOpen,
+  onAfterClose,
+  onBeforeClose,
   onRequestClose,
-  closeTimeoutMS,
+  closeTimeoutMS = 300,
   title,
   header = true,
   closeButton = true,
@@ -40,9 +46,19 @@ export default function Modal({
   }, []);
 
   const render = (
-    <CSSTransition in={isOpen} timeout={300} mountOnEnter unmountOnExit>
-      <Overlay {...(closeOnOverlayClick ? { onClick: onRequestClose } : {})}>
-        <Content onClick={(e) => e.stopPropagation()}>
+    <CSSTransition
+      in={isOpen}
+      timeout={closeTimeoutMS}
+      mountOnEnter
+      unmountOnExit
+      {...(onBeforeOpen !== undefined ? { onEnter: onBeforeOpen } : {})}
+      {...(onAfterOpen !== undefined ? { onEntered: onAfterOpen } : {})}
+      {...(onBeforeClose !== undefined ? { onExit: onBeforeClose } : {})}
+      {...(onAfterClose !== undefined ? { onExiting: onAfterClose } : {})}>
+      <Overlay
+        {...(closeOnOverlayClick ? { onMouseDown: onRequestClose } : {})}
+        timeout={closeTimeoutMS}>
+        <Content onMouseDown={(e) => e.stopPropagation()} timeout={closeTimeoutMS}>
           {header && (
             <Header>
               {closeButton && <CrossButton src={Cross} onClick={onRequestClose} />}

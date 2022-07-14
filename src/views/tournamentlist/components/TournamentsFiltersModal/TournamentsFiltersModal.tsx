@@ -1,12 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Checkbox } from 'common/ui-components';
 import Modal from 'common/ui-components/components/Modal/Modal';
 import RadioButton from 'common/ui-components/components/RadioButton/RadioButton';
+import { RangedSlider, Slider } from 'common/ui-components/components/Slider/Slider';
 import Game, { GameName } from 'types/Game';
-import { isCSGOMatchSettings } from 'types/MatchSettings';
+import {
+  CSGOGameModes,
+  csgoMatchSettingsModeShortForm,
+  isCSGOMatchSettings
+} from 'types/MatchSettings';
 import Money from 'types/Money';
 import { TournamentInfo } from 'types/tournaments/TournamentInfo';
-import { CategoryTitle, Label, Option, Options } from './TournamentsFilters.styled';
+import { CategoryTitle, Label, Option, Options } from './TournamentsFiltersModal.styled';
 
 type Props = {
   isOpen: boolean;
@@ -16,6 +21,8 @@ type Props = {
 };
 
 const ALL_GAMES = 'all';
+const ENTRANCE_FEE_MIN = 0;
+const ENTRANCE_FEE_MAX = 1000;
 
 export default function TournamentsFilters({
   isOpen,
@@ -28,70 +35,116 @@ export default function TournamentsFilters({
   const [twoVTwo, setTwoVTwo] = useState(false);
   const [oneVOne, setOneVOne] = useState(false);
   const [europe, setEurope] = useState(false);
-  const [northAmerica, setNorthAmeric] = useState(false);
+  const [northAmerica, setNorthAmerica] = useState(false);
+  const [entranceFee, setEntranceFee] = useState<[number, number]>([
+    ENTRANCE_FEE_MIN,
+    ENTRANCE_FEE_MAX
+  ]);
 
-  useEffect(() => {
-    console.log('previousFilter', previousFilter);
-  }, [previousFilter]);
+  const filters = {
+    [CSGOGameModes.COMPETITIVE]: {
+      name: csgoMatchSettingsModeShortForm(CSGOGameModes.COMPETITIVE),
+      type: FilterTypes.GAME_MODE,
+      value: CSGOGameModes.COMPETITIVE,
+      active: fiveVFive,
+      setter: setFiveVFive
+    },
+    [CSGOGameModes.WINGMAN]: {
+      name: csgoMatchSettingsModeShortForm(CSGOGameModes.WINGMAN),
+      type: FilterTypes.GAME_MODE,
+      value: CSGOGameModes.WINGMAN,
+      active: twoVTwo,
+      setter: setTwoVTwo
+    },
+    [CSGOGameModes.ONE_VS_ONE]: {
+      name: csgoMatchSettingsModeShortForm(CSGOGameModes.ONE_VS_ONE),
+      type: FilterTypes.GAME_MODE,
+      value: CSGOGameModes.ONE_VS_ONE,
+      active: oneVOne,
+      setter: setOneVOne
+    },
+    europe: {
+      name: 'Europe',
+      type: FilterTypes.REGION,
+      value: 'europe',
+      active: europe,
+      setter: setEurope
+    },
+    northAmerica: {
+      name: 'North America',
+      type: FilterTypes.REGION,
+      value: 'northAmerica',
+      active: northAmerica,
+      setter: setNorthAmerica
+    }
+  };
+
+  function loadPrevious() {
+    // Load previous values when opening the modal
+    let gameSet = false;
+    let entranceFeeSet = false;
+
+    Object.values(filters).forEach((filter) => filter.setter(false));
+    for (const filter of previousFilter) {
+      if (filter.type === FilterTypes.GAME_MODE || filter.type === FilterTypes.REGION) {
+        (filters as { [id: string]: { setter: React.Dispatch<React.SetStateAction<boolean>> } })[
+          filter.value
+        ].setter(true);
+      } else if (filter.type === FilterTypes.GAME) {
+        setGame(filter.value);
+        gameSet = true;
+      } else if (filter.type === FilterTypes.ENTRANCE_FEE) {
+        const value = filter.value.split('-').map((i) => parseInt(i)) as [number, number];
+        setEntranceFee(value);
+        entranceFeeSet = true;
+      }
+    }
+
+    if (!gameSet) {
+      setGame(ALL_GAMES);
+    }
+    if (!entranceFeeSet) {
+      setEntranceFee([ENTRANCE_FEE_MIN, ENTRANCE_FEE_MAX]);
+    }
+  }
 
   function getFiltes(): Filter[] {
-    const filters = [] as Filter[];
+    const activeFilters = [] as Filter[];
     if (game !== ALL_GAMES) {
-      filters.push({
+      activeFilters.push({
         name: GameName[game as Game],
         type: FilterTypes.GAME,
         value: game
       });
     }
-    if (fiveVFive) {
-      // TODO should have an enum for csgo game modes
-      filters.push({
-        name: '5v5',
-        type: FilterTypes.GAME_MODE,
-        value: 'competitive'
+    for (const [id, filter] of Object.entries(filters)) {
+      if (filter.active) {
+        activeFilters.push({
+          name: filter.name,
+          type: filter.type,
+          value: filter.value
+        });
+      }
+    }
+    if (entranceFee[0] !== ENTRANCE_FEE_MIN || entranceFee[1] !== ENTRANCE_FEE_MAX) {
+      activeFilters.push({
+        name: `entrance: €${entranceFee[0]}-€${entranceFee[1]}`,
+        type: FilterTypes.ENTRANCE_FEE,
+        value: `${entranceFee[0]}-${entranceFee[1]}`
       });
     }
-    if (twoVTwo) {
-      filters.push({
-        name: '2v2',
-        type: FilterTypes.GAME_MODE,
-        value: 'wingman'
-      });
-    }
-    if (oneVOne) {
-      filters.push({
-        name: '1v1',
-        type: FilterTypes.GAME_MODE,
-        value: 'one_vs_one'
-      });
-    }
-    if (europe) {
-      filters.push({
-        name: 'Europe',
-        type: FilterTypes.REGION,
-        value: 'europe'
-      });
-    }
-    if (northAmerica) {
-      filters.push({
-        name: 'NorthAmerica',
-        type: FilterTypes.REGION,
-        value: 'northAmerica'
-      });
-    }
-    return filters;
+    return activeFilters;
   }
 
   return (
     <Modal
       title="Filter"
       isOpen={isOpen}
-      onAfterOpen={() => {}}
+      onBeforeOpen={loadPrevious}
       onRequestClose={() => {
         onRequestClose();
         applyFilters(getFiltes());
-      }}
-      closeTimeoutMS={300}>
+      }}>
       <Options>
         <CategoryTitle>Game</CategoryTitle>
         <CategoryTitle>Game Mode</CategoryTitle>
@@ -106,11 +159,11 @@ export default function TournamentsFilters({
           <Label>All Games</Label>
         </Option>
         <Option>
-          <Checkbox checked={fiveVFive} onChange={() => setFiveVFive((v) => !v)} />
+          {checkbox(filters[CSGOGameModes.COMPETITIVE])}
           <Label>5v5</Label>
         </Option>
         <Option>
-          <Checkbox checked={europe} onChange={() => setEurope((v) => !v)} />
+          {checkbox(filters['europe'])}
           <Label>Europe</Label>
         </Option>
         <Option>
@@ -123,21 +176,41 @@ export default function TournamentsFilters({
           <Label>{GameName[Game.CSGO]}</Label>
         </Option>
         <Option>
-          <Checkbox checked={twoVTwo} onChange={() => setTwoVTwo((v) => !v)} />
+          {checkbox(filters[CSGOGameModes.WINGMAN])}
           <Label>2v2</Label>
         </Option>
         <Option>
-          <Checkbox checked={northAmerica} onChange={() => setNorthAmeric((v) => !v)} />
+          {checkbox(filters['northAmerica'])}
           <Label>North America</Label>
         </Option>
         <Option></Option>
         <Option>
-          <Checkbox checked={oneVOne} onChange={() => setOneVOne((v) => !v)} />
+          {checkbox(filters[CSGOGameModes.ONE_VS_ONE])}
           <Label>1v1</Label>
         </Option>
       </Options>
+      <span>Entrance Fee {entranceFee && `€${entranceFee[0]}-€${entranceFee[1]}`}</span>
+      <RangedSlider
+        onChange={(start, end) => setEntranceFee([start, end])}
+        value={entranceFee}
+        defaultValue={[ENTRANCE_FEE_MIN, ENTRANCE_FEE_MAX]}
+        min={ENTRANCE_FEE_MIN}
+        max={ENTRANCE_FEE_MAX}
+        showMin
+        showMax
+        valuePreffix="€"
+        minDistance={10}
+        step={10}
+      />
     </Modal>
   );
+}
+
+function checkbox(filter: {
+  active: boolean;
+  setter: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  return <Checkbox checked={filter.active} onChange={() => filter.setter((v) => !v)} />;
 }
 
 export enum FilterTypes {

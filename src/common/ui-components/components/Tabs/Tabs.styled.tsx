@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
 
   .page {
     inset: 0;
+    position: absolute;
     transform: translateX(0);
     opacity: 1;
     transition: opacity 500ms ease-out 300ms, transform 500ms ease-out 300ms;
