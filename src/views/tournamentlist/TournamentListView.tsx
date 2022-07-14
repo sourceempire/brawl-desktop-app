@@ -3,7 +3,7 @@ import useTournamentHubsFeed from 'api/feeds/hooks/useTournamentHubsFeed';
 import Modal from 'common/ui-components/components/Modal/Modal';
 import { Option, Select } from 'common/ui-components/components/Select/Select';
 import { Tab, Tabs } from 'common/ui-components/components/Tabs/Tabs';
-import { InputSize } from 'common/ui-components/types';
+import { IconType, InputSize } from 'common/ui-components/types';
 import Game, { GameName } from 'types/Game';
 import { CSGOMatchSettings } from 'types/MatchSettings';
 import { TournamentInfo } from 'types/tournaments/TournamentInfo';

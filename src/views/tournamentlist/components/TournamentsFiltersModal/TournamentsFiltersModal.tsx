@@ -41,7 +41,7 @@ export default function TournamentsFilters({
     ENTRANCE_FEE_MAX
   ]);
 
-  const filters = {
+  const checkboxes = {
     [CSGOGameModes.COMPETITIVE]: {
       name: csgoMatchSettingsModeShortForm(CSGOGameModes.COMPETITIVE),
       type: FilterTypes.GAME_MODE,
@@ -84,10 +84,10 @@ export default function TournamentsFilters({
     let gameSet = false;
     let entranceFeeSet = false;
 
-    Object.values(filters).forEach((filter) => filter.setter(false));
+    Object.values(checkboxes).forEach((filter) => filter.setter(false));
     for (const filter of previousFilter) {
       if (filter.type === FilterTypes.GAME_MODE || filter.type === FilterTypes.REGION) {
-        (filters as { [id: string]: { setter: React.Dispatch<React.SetStateAction<boolean>> } })[
+        (checkboxes as { [id: string]: { setter: React.Dispatch<React.SetStateAction<boolean>> } })[
           filter.value
         ].setter(true);
       } else if (filter.type === FilterTypes.GAME) {
@@ -117,7 +117,7 @@ export default function TournamentsFilters({
         value: game
       });
     }
-    for (const [id, filter] of Object.entries(filters)) {
+    for (const [id, filter] of Object.entries(checkboxes)) {
       if (filter.active) {
         activeFilters.push({
           name: filter.name,
@@ -159,11 +159,11 @@ export default function TournamentsFilters({
           <Label>All Games</Label>
         </Option>
         <Option>
-          {checkbox(filters[CSGOGameModes.COMPETITIVE])}
+          {checkbox(checkboxes[CSGOGameModes.COMPETITIVE])}
           <Label>5v5</Label>
         </Option>
         <Option>
-          {checkbox(filters['europe'])}
+          {checkbox(checkboxes['europe'])}
           <Label>Europe</Label>
         </Option>
         <Option>
@@ -176,16 +176,16 @@ export default function TournamentsFilters({
           <Label>{GameName[Game.CSGO]}</Label>
         </Option>
         <Option>
-          {checkbox(filters[CSGOGameModes.WINGMAN])}
+          {checkbox(checkboxes[CSGOGameModes.WINGMAN])}
           <Label>2v2</Label>
         </Option>
         <Option>
-          {checkbox(filters['northAmerica'])}
+          {checkbox(checkboxes['northAmerica'])}
           <Label>North America</Label>
         </Option>
         <Option></Option>
         <Option>
-          {checkbox(filters[CSGOGameModes.ONE_VS_ONE])}
+          {checkbox(checkboxes[CSGOGameModes.ONE_VS_ONE])}
           <Label>1v1</Label>
         </Option>
       </Options>

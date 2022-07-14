@@ -1,6 +1,6 @@
 import { IconType } from 'common/ui-components/types';
 import Icon from '../Icon/Icon';
-import { Wrapper } from './Button.styles';
+import { ButtonIcon, Wrapper } from './Button.styles';
 
 type Props = {
   children: React.ReactNode;
@@ -34,9 +34,9 @@ function isIconType(icon: IconType | string): icon is IconType {
 function getIcon(icon: IconType | string | undefined) {
   if (icon !== undefined) {
     if (isIconType(icon)) {
-      return <Icon type={icon} />;
+      return <Icon className="button-icon" type={icon} />;
     } else {
-      return <img src={icon} />;
+      return <ButtonIcon src={icon} />;
     }
   }
 }

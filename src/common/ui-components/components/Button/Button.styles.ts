@@ -20,6 +20,12 @@ export const iconStyle = css`
   }
 `;
 
+export const ButtonIcon = styled.img`
+  display: inline-block;
+  height: 100%;
+  padding: 8px 10px 8px 15px;
+`;
+
 export const Wrapper = styled.button<Props>`
   width: auto;
   border: none;
@@ -38,7 +44,12 @@ export const Wrapper = styled.button<Props>`
     transition: outline-color 0.3s;
   }
 
-  ${iconStyle}
+  .button-icon {
+    display: inline-block;
+    height: 100%;
+    padding: 8px 10px 8px 15px;
+    box-sizing: border-box;
+  }
 
   ${({ theme, primary, accent, hasIcon }) => css`
     border-radius: ${theme.borderRadius.default};
