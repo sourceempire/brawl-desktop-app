@@ -13,7 +13,7 @@ export type ArrowPosition = { left?: number; right?: number };
 
 export const Wrapper = styled.div<{ position: Position; arrowPosition?: ArrowPosition }>`
   position: absolute;
-  padding: 12px;
+  padding: 6px;
 
   ::before {
     content: '';
