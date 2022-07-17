@@ -3,7 +3,7 @@ import { MatchSettingsTypes } from 'types/MatchSettings';
 import { TournamentInfo } from 'types/tournaments/TournamentInfo';
 import useFeed from './useFeed';
 
-export default () => {
+export default function useTournamentHubsFeed() {
   const { currentState, isLoading } = useFeed('tournament.hubs');
 
   let tournamentHubsWithTypedMatchSettings = fixMatchSettingType(
@@ -22,7 +22,7 @@ export default () => {
     tournamentHubs: tournamentHubsWithTypedMatchSettings,
     isLoading
   };
-};
+}
 
 function fixMatchSettingType(tournamentHubs: TournamentInfo[]): TournamentInfo[] {
   return tournamentHubs.map((tournamentHub) => {

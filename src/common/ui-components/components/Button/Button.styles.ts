@@ -5,6 +5,7 @@ type Props = {
   primary?: boolean;
   accent?: boolean;
   hasIcon: boolean;
+  small?: boolean;
 };
 
 // TODO -> Add focused style
@@ -27,16 +28,16 @@ export const ButtonIcon = styled.img`
 `;
 
 export const Wrapper = styled.button<Props>`
+  display: inline-flex;
   width: auto;
   border: none;
   color: white;
-  height: 30px;
   padding: 0 0;
-  display: inline-flex;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
   outline-color: transparent;
-  ${(props) => props.theme.textStyles.button}
+  ${({ theme }) => theme.textStyles.button}
 
   :focus-visible {
     outline: 2px solid white;
@@ -51,7 +52,7 @@ export const Wrapper = styled.button<Props>`
     box-sizing: border-box;
   }
 
-  ${({ theme, primary, accent, hasIcon }) => css`
+  ${({ theme, primary, accent, hasIcon, small }) => css`
     border-radius: ${theme.borderRadius.default};
     background-color: ${theme.colors.lightTint};
     :hover {
@@ -60,6 +61,8 @@ export const Wrapper = styled.button<Props>`
     :active {
       background-color: ${lightenColor(theme.colors.lightTint, 50)};
     }
+
+    height: ${small ? 24 : 30}px;
 
     ${hasIcon &&
     css`
@@ -78,7 +81,7 @@ export const Wrapper = styled.button<Props>`
         background-color: ${lightenColor(theme.colors.accent, 25)};
       }
       :active {
-        background-color: ${darkenColor(theme.colors.accent, 25)};
+        background-color: ${lightenColor(theme.colors.accent, 50)};
       }
     `}
 
@@ -89,7 +92,7 @@ export const Wrapper = styled.button<Props>`
         background-color: ${lightenColor(theme.colors.primary, 25)};
       }
       :active {
-        background-color: ${darkenColor(theme.colors.primary, 10)};
+        background-color: ${lightenColor(theme.colors.primary, 50)};
       }
     `}
   `}

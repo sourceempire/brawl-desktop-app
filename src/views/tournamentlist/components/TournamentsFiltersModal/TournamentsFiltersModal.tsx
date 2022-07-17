@@ -1,17 +1,27 @@
 import { useState } from 'react';
-import { Checkbox } from 'common/ui-components';
+import { Button, Checkbox } from 'common/ui-components';
+import {
+  DatePickerInput,
+  DatePickerInputNative
+} from 'common/ui-components/components/DatePicker/DatePicker';
 import Modal from 'common/ui-components/components/Modal/Modal';
 import RadioButton from 'common/ui-components/components/RadioButton/RadioButton';
-import { RangedSlider, Slider } from 'common/ui-components/components/Slider/Slider';
+import { RangedSlider } from 'common/ui-components/components/Slider/Slider';
 import Game, { GameName } from 'types/Game';
+import { CSGOGameModes, csgoMatchSettingsModeShortForm } from 'types/MatchSettings';
+import { SimpleDate, SimpleDateString } from 'types/SimpleDate';
+import { Filter, FilterTypes } from 'views/tournamentlist/TournamentListView.model';
 import {
-  CSGOGameModes,
-  csgoMatchSettingsModeShortForm,
-  isCSGOMatchSettings
-} from 'types/MatchSettings';
-import Money from 'types/Money';
-import { TournamentInfo } from 'types/tournaments/TournamentInfo';
-import { CategoryTitle, Label, Option, Options } from './TournamentsFiltersModal.styled';
+  ApplyFilterButton,
+  CategoryTitle,
+  Label,
+  MoneyLabel,
+  MoneySlider,
+  MoneyValue,
+  Option,
+  Section1,
+  Section2
+} from './TournamentsFiltersModal.styled';
 
 type Props = {
   isOpen: boolean;
@@ -23,6 +33,8 @@ type Props = {
 const ALL_GAMES = 'all';
 const ENTRANCE_FEE_MIN = 0;
 const ENTRANCE_FEE_MAX = 1000;
+const PRIZE_POOL_MIN = 0;
+const PRIZE_POOL_MAX = 10000;
 
 export default function TournamentsFilters({
   isOpen,
@@ -40,6 +52,9 @@ export default function TournamentsFilters({
     ENTRANCE_FEE_MIN,
     ENTRANCE_FEE_MAX
   ]);
+  const [prizePool, setPrizePool] = useState<[number, number]>([PRIZE_POOL_MIN, PRIZE_POOL_MAX]);
+  const [fromDate, setFromDate] = useState<SimpleDate | undefined>(undefined);
+  const [toDate, setToDate] = useState<SimpleDate | undefined>(undefined);
 
   const checkboxes = {
     [CSGOGameModes.COMPETITIVE]: {
@@ -83,6 +98,9 @@ export default function TournamentsFilters({
     // Load previous values when opening the modal
     let gameSet = false;
     let entranceFeeSet = false;
+    let prizePoolSet = false;
+    let fromDateSet = false;
+    let toDateSet = false;
 
     Object.values(checkboxes).forEach((filter) => filter.setter(false));
     for (const filter of previousFilter) {
@@ -97,6 +115,16 @@ export default function TournamentsFilters({
         const value = filter.value.split('-').map((i) => parseInt(i)) as [number, number];
         setEntranceFee(value);
         entranceFeeSet = true;
+      } else if (filter.type === FilterTypes.PRIZE_POOL) {
+        const value = filter.value.split('-').map((i) => parseInt(i)) as [number, number];
+        setPrizePool(value);
+        prizePoolSet = true;
+      } else if (filter.type === FilterTypes.FROM_DATE) {
+        setFromDate(new SimpleDate(filter.value as SimpleDateString));
+        fromDateSet = true;
+      } else if (filter.type === FilterTypes.TO_DATE) {
+        setToDate(new SimpleDate(filter.value as SimpleDateString));
+        toDateSet = true;
       }
     }
 
@@ -106,9 +134,18 @@ export default function TournamentsFilters({
     if (!entranceFeeSet) {
       setEntranceFee([ENTRANCE_FEE_MIN, ENTRANCE_FEE_MAX]);
     }
+    if (!prizePoolSet) {
+      setPrizePool([PRIZE_POOL_MIN, PRIZE_POOL_MAX]);
+    }
+    if (!fromDateSet) {
+      setFromDate(undefined);
+    }
+    if (!toDateSet) {
+      setToDate(undefined);
+    }
   }
 
-  function getFiltes(): Filter[] {
+  function getFilters(): Filter[] {
     const activeFilters = [] as Filter[];
     if (game !== ALL_GAMES) {
       activeFilters.push({
@@ -133,7 +170,38 @@ export default function TournamentsFilters({
         value: `${entranceFee[0]}-${entranceFee[1]}`
       });
     }
+    if (prizePool[0] !== PRIZE_POOL_MIN || prizePool[1] !== PRIZE_POOL_MAX) {
+      activeFilters.push({
+        name: `prize pool: €${prizePool[0]}-€${prizePool[1]}`,
+        type: FilterTypes.PRIZE_POOL,
+        value: `${prizePool[0]}-${prizePool[1]}`
+      });
+    }
+    if (fromDate) {
+      activeFilters.push({
+        name: `from: ${fromDate}`,
+        type: FilterTypes.FROM_DATE,
+        value: fromDate.toString()
+      });
+    }
+    if (toDate) {
+      activeFilters.push({
+        name: `to: ${toDate}`,
+        type: FilterTypes.TO_DATE,
+        value: toDate.toString()
+      });
+    }
     return activeFilters;
+  }
+
+  function filterThisWeek() {
+    setFromDate(SimpleDate.today());
+    setToDate(SimpleDate.today().addDays(7));
+  }
+
+  function filterThisMonth() {
+    setFromDate(SimpleDate.today());
+    setToDate(SimpleDate.today().addDays(30));
   }
 
   return (
@@ -143,12 +211,11 @@ export default function TournamentsFilters({
       onBeforeOpen={loadPrevious}
       onRequestClose={() => {
         onRequestClose();
-        applyFilters(getFiltes());
-      }}>
-      <Options>
+        applyFilters(getFilters());
+      }}
+      width="536px">
+      <Section1>
         <CategoryTitle>Game</CategoryTitle>
-        <CategoryTitle>Game Mode</CategoryTitle>
-        <CategoryTitle>Region</CategoryTitle>
         <Option>
           <RadioButton
             name="game"
@@ -159,14 +226,6 @@ export default function TournamentsFilters({
           <Label>All Games</Label>
         </Option>
         <Option>
-          {checkbox(checkboxes[CSGOGameModes.COMPETITIVE])}
-          <Label>5v5</Label>
-        </Option>
-        <Option>
-          {checkbox(checkboxes['europe'])}
-          <Label>Europe</Label>
-        </Option>
-        <Option>
           <RadioButton
             name="game"
             value={Game.CSGO}
@@ -175,33 +234,77 @@ export default function TournamentsFilters({
           />
           <Label>{GameName[Game.CSGO]}</Label>
         </Option>
+        <Option></Option>
+        <CategoryTitle>Game Mode</CategoryTitle>
+        <Option>
+          {checkbox(checkboxes[CSGOGameModes.COMPETITIVE])}
+          <Label>5v5</Label>
+        </Option>
         <Option>
           {checkbox(checkboxes[CSGOGameModes.WINGMAN])}
           <Label>2v2</Label>
         </Option>
         <Option>
-          {checkbox(checkboxes['northAmerica'])}
-          <Label>North America</Label>
-        </Option>
-        <Option></Option>
-        <Option>
           {checkbox(checkboxes[CSGOGameModes.ONE_VS_ONE])}
           <Label>1v1</Label>
         </Option>
-      </Options>
-      <span>Entrance Fee {entranceFee && `€${entranceFee[0]}-€${entranceFee[1]}`}</span>
-      <RangedSlider
-        onChange={(start, end) => setEntranceFee([start, end])}
-        value={entranceFee}
-        defaultValue={[ENTRANCE_FEE_MIN, ENTRANCE_FEE_MAX]}
-        min={ENTRANCE_FEE_MIN}
-        max={ENTRANCE_FEE_MAX}
-        showMin
-        showMax
-        valuePreffix="€"
-        minDistance={10}
-        step={10}
-      />
+        <CategoryTitle>Region</CategoryTitle>
+        <Option>
+          {checkbox(checkboxes['europe'])}
+          <Label>Europe</Label>
+        </Option>
+        <Option>
+          {checkbox(checkboxes['northAmerica'])}
+          <Label>North America</Label>
+        </Option>
+      </Section1>
+      <Section2>
+        <MoneySlider>
+          <MoneyLabel>Entry Fee</MoneyLabel>
+          <MoneyValue>{entranceFee && `€${entranceFee[0]} - €${entranceFee[1]}`}</MoneyValue>
+          <RangedSlider
+            onChange={(start, end) => setEntranceFee([start, end])}
+            value={entranceFee}
+            defaultValue={[ENTRANCE_FEE_MIN, ENTRANCE_FEE_MAX]}
+            min={ENTRANCE_FEE_MIN}
+            max={ENTRANCE_FEE_MAX}
+            showMin
+            showMax
+            valuePreffix="€"
+            minDistance={10}
+            step={10}
+          />
+        </MoneySlider>
+
+        <MoneySlider>
+          <MoneyLabel>Prize Pool </MoneyLabel>
+          <MoneyValue>{prizePool && `€${prizePool[0]} - €${prizePool[1]}`}</MoneyValue>
+          <RangedSlider
+            onChange={(start, end) => setPrizePool([start, end])}
+            value={prizePool}
+            defaultValue={[PRIZE_POOL_MIN, PRIZE_POOL_MAX]}
+            min={PRIZE_POOL_MIN}
+            max={PRIZE_POOL_MAX}
+            showMin
+            showMax
+            valuePreffix="€"
+            minDistance={10}
+            step={10}
+          />
+        </MoneySlider>
+        <DatePickerInput value={fromDate} onChange={setFromDate} dark />
+        <DatePickerInput value={toDate} onChange={setToDate} dark />
+        <Button onClick={filterThisWeek}>This Week</Button>
+        <Button onClick={filterThisMonth}>This Month</Button>
+        <ApplyFilterButton
+          primary
+          onClick={() => {
+            onRequestClose();
+            applyFilters(getFilters());
+          }}>
+          Apply Filter
+        </ApplyFilterButton>
+      </Section2>
     </Modal>
   );
 }
@@ -211,69 +314,4 @@ function checkbox(filter: {
   setter: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   return <Checkbox checked={filter.active} onChange={() => filter.setter((v) => !v)} />;
-}
-
-export enum FilterTypes {
-  GAME,
-  GAME_MODE,
-  NAME,
-  ENTRANCE_FEE,
-  PRIZE_POOL,
-  START_TIME,
-  REGION
-}
-
-export type Filter = {
-  name: string;
-  type: FilterTypes;
-  value: string;
-};
-
-export function filter(tournaments: TournamentInfo[], filters: Filter[]): TournamentInfo[] {
-  const numOfFilterTypes = filters.reduce((acc, filter) => {
-    acc.add(filter.type);
-    return acc;
-  }, new Set<FilterTypes>()).size;
-
-  return tournaments.filter(
-    (tournament) =>
-      filters.filter((filter) => {
-        switch (filter.type) {
-          case FilterTypes.GAME:
-            return tournament.gameId === filter.value;
-          case FilterTypes.GAME_MODE:
-            if (isCSGOMatchSettings(tournament.matchSettings)) {
-              // only csgo support gamemodes so far
-              return tournament.matchSettings.mode === filter.value;
-            } else {
-              return false;
-            }
-          case FilterTypes.ENTRANCE_FEE: {
-            const [start, end] = filter.value.split('-');
-            return (
-              new Money(tournament.entranceFee).greaterOrEqualTo(new Money(start)) &&
-              new Money(tournament.entranceFee).lessOrEqualTo(new Money(end))
-            );
-          }
-          case FilterTypes.PRIZE_POOL: {
-            const [start, end] = filter.value.split('-');
-            return (
-              new Money(tournament.currentPrizePool).greaterOrEqualTo(new Money(start)) &&
-              new Money(tournament.currentPrizePool).lessOrEqualTo(new Money(end))
-            );
-          }
-          case FilterTypes.START_TIME: {
-            const [start, end] = filter.value.split('-');
-            return (
-              new Date(tournament.startTime) >= new Date(start) &&
-              new Date(tournament.currentPrizePool) <= new Date(end)
-            );
-          }
-          case FilterTypes.REGION:
-            return tournament.region === filter.value;
-          default:
-            return false; // unknown filter
-        }
-      }).length >= numOfFilterTypes // must match at least one of each type
-  );
 }

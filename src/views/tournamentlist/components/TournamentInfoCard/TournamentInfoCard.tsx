@@ -30,7 +30,7 @@ export default function TournamentInfoCard({ tournamentInfo, onClick }: Props) {
   return (
     <Wrapper padding={false} onClick={onClick}>
       <Header image={tournamentInfo.image}>
-        <Countdown>In 14 days</Countdown>
+        <Countdown>{countdown(new Date(tournamentInfo.startTime))}</Countdown>
       </Header>
       <Line />
       <Info>
@@ -67,5 +67,15 @@ function tournamentMatchSettings(tournamentInfo: TournamentInfo) {
     return ` (${csgoMatchSettingsModeShortForm(tournamentInfo.matchSettings.mode)})`;
   } else {
     return '';
+  }
+}
+
+function countdown(startTime: Date) {
+  const diffInMs = startTime.getTime() - new Date().getTime();
+  const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+  if (diffInDays > 1) {
+    return `In ${Math.floor(diffInDays)} days`;
+  } else {
+    return 'Today';
   }
 }

@@ -7,18 +7,29 @@ type Props = {
   className?: string;
   primary?: boolean;
   accent?: boolean;
+  small?: boolean;
   icon?: IconType | string;
   tabIndex?: number;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const Button = ({ children, className, primary, accent, icon, onClick, tabIndex = 0 }: Props) => {
+const Button = ({
+  children,
+  className,
+  primary,
+  accent,
+  small,
+  icon,
+  onClick,
+  tabIndex = 0
+}: Props) => {
   return (
     <Wrapper
       onClick={onClick}
       className={className}
       primary={primary}
       accent={accent}
+      small={small}
       hasIcon={icon !== undefined}
       tabIndex={tabIndex}>
       {getIcon(icon)}

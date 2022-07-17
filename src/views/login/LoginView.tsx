@@ -9,9 +9,7 @@ const LoginView = () => {
   const { authType, loginValidate, getAuthType, error } = useAuth();
 
   useEffect(() => {
-    loginValidate()
-      .then((r) => console.log('validate', r))
-      .catch((err) => console.log('error', err));
+    loginValidate();
     getAuthType();
   }, [loginValidate, getAuthType]);
 

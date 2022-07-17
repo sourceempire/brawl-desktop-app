@@ -1,29 +1,34 @@
 import { Button, Input } from 'common/ui-components';
 import { Select } from 'common/ui-components/components/Select/Select';
-import styled from 'styled-components/macro';
+import styled, { css } from 'styled-components/macro';
 import SmallCross from 'assets/icons/SmallCross.svg';
 
 export const Wrapper = styled.div`
   padding: 0 24px;
 `;
 
-type TournamentGalleryProps = {
-  featuredExpanded: boolean;
-};
-export const TournamentGallery = styled.div<TournamentGalleryProps>`
+export const TournamentGallery = styled.div<{ featuredExpanded: boolean }>`
   transition: transform 0.3s;
-  transform: ${(props) => (props.featuredExpanded ? 'translateY(0)' : 'translateY(-166px)')};
+  transform: ${({ featuredExpanded }) =>
+    featuredExpanded ? 'translateY(0)' : 'translateY(-166px)'};
   padding-bottom: 48px;
 `;
 
 export const FilterBar = styled.div`
   margin-top: 24px;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
   display: flex;
   justify-content: space-between;
 `;
 
-export const FilterBullets = styled.div``;
+export const FilterBullets = styled.div<{ noChildren: boolean }>`
+  ${({ noChildren }) =>
+    noChildren &&
+    css`
+      height: 30px;
+      margin-bottom: 6px;
+    `}
+`;
 
 type FilterBulletProps = {
   onClick?: React.MouseEventHandler<HTMLDivElement>;
@@ -32,16 +37,17 @@ type FilterBulletProps = {
 export const FilterBullet = styled.div<FilterBulletProps>`
   display: inline-block;
   margin-right: 6px;
-  background-color: ${(props) => props.theme.colors.secondary};
+  background-color: ${({ theme }) => theme.colors.secondary};
   height: 30px;
   border-radius: 15px;
   min-width: 30px;
   line-height: 30px;
   padding-right: 18px;
+  margin-bottom: 6px;
   cursor: pointer;
 
   &:hover {
-    background-color: ${(props) => props.theme.colors.lightTint};
+    background-color: ${({ theme }) => theme.colors.lightTint};
   }
 
   &:before {

@@ -9,7 +9,8 @@ type Props = {
 
 const MainNavLink = ({ to, children, isUpcomingFeature }: Props) => {
   return (
-    <Wrapper to={to} isUpcomingFeature={isUpcomingFeature}>
+    <Wrapper to={to}>
+      {/* isUpcomingFeature={isUpcomingFeature} TODO Fix, couses react warning*/}
       <LinkText>{children}</LinkText>
       {isUpcomingFeature && <UpcomingFeatureBanner>Coming soon</UpcomingFeatureBanner>}
     </Wrapper>

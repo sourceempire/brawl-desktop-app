@@ -59,33 +59,31 @@ type TabsBarProps = {
 };
 
 export const TabsBar = styled.div<TabsBarProps>`
-  display: inline-flex;
-  flex-direction: row;
-  border-bottom: 1px solid
-    ${(props) => (props.underline === true ? 'rgba(255, 255, 255, 0.5)' : 'transparent')};
+  ${({ underline, theme }) => css`
+    display: inline-flex;
+    flex-direction: row;
+    border-bottom: 1px solid ${underline === true ? 'rgba(255, 255, 255, 0.5)' : 'transparent'};
 
-  ${(props) => props.theme.textStyles.menu}
+    ${theme.textStyles.menu}
+  `}
 `;
 
-type TabsBarTabProps = {
-  active?: boolean;
-};
-export const TabsBarTab = styled.div<TabsBarTabProps>`
-  padding: 9px 0px;
-  position: relative;
-  cursor: pointer;
-  margin: 0px 9px;
+export const TabsBarTab = styled.div<{ active?: boolean }>`
+  ${({ active, theme }) => css`
+    padding: 9px 0px;
+    position: relative;
+    cursor: pointer;
+    margin: 0px 9px;
 
-  &:first-child {
-    margin-left: 0px;
-  }
+    &:first-child {
+      margin-left: 0px;
+    }
 
-  &:last-child {
-    margin-right: 0px;
-  }
+    &:last-child {
+      margin-right: 0px;
+    }
 
-  ${(props) =>
-    props.active &&
+    ${active &&
     css`
       cursor: default;
 
@@ -97,7 +95,8 @@ export const TabsBarTab = styled.div<TabsBarTabProps>`
         right: -3px;
         height: 3px;
         border-radius: 1.5px;
-        background-color: ${props.theme.colors.primary};
+        background-color: ${theme.colors.primary};
       }
     `}
+  `}
 `;

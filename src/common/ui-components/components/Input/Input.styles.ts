@@ -10,7 +10,7 @@ export const iconStyle = css<{ inputSize: InputSize }>`
     opacity: 0.4;
     position: absolute;
     left: ${(props) => getInputPadding(props.inputSize)};
-    bottom: ${(props) =>
+    top: ${(props) =>
       `calc((${getInputHeight(props.inputSize)} - ${getIconSize(props.inputSize)}) / 2)`};
     width: ${(props) => getIconSize(props.inputSize)};
     height: ${(props) => getIconSize(props.inputSize)};

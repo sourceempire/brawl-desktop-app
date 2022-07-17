@@ -19,6 +19,9 @@ type Props = {
   header?: boolean;
   closeButton?: boolean;
   closeOnOverlayClick?: boolean;
+  hideOverLay?: boolean;
+  width?: string;
+  noPadding?: boolean;
 };
 
 export default function Modal({
@@ -33,7 +36,10 @@ export default function Modal({
   title,
   header = true,
   closeButton = true,
-  closeOnOverlayClick = true
+  closeOnOverlayClick = true,
+  hideOverLay = false,
+  width,
+  noPadding = false
 }: Props) {
   const element = useRef(document.createElement('div'));
 
@@ -57,8 +63,13 @@ export default function Modal({
       {...(onAfterClose !== undefined ? { onExiting: onAfterClose } : {})}>
       <Overlay
         {...(closeOnOverlayClick ? { onMouseDown: onRequestClose } : {})}
+        hidden={hideOverLay}
         timeout={closeTimeoutMS}>
-        <Content onMouseDown={(e) => e.stopPropagation()} timeout={closeTimeoutMS}>
+        <Content
+          onMouseDown={(e) => e.stopPropagation()}
+          timeout={closeTimeoutMS}
+          width={width}
+          noPadding={noPadding}>
           {header && (
             <Header>
               {closeButton && <CrossButton src={Cross} onClick={onRequestClose} />}

@@ -16,13 +16,14 @@ const url = `${process.env.REACT_APP_SERVER_URL}/api/events`;
 export type Listener = (message: Event) => void;
 type Listeners = { [key: string]: { [key: string]: Listener } };
 
-type FeedListener = (state: { [key: string]: unknown }) => void;
+type State = { [key: string]: unknown };
+type FeedListener = (state: State) => void;
 type FeedListeners = { [feedType: string]: { [listenerId: string]: FeedListener } };
 
 type Context = {
   addEventListener: (event: string, listener: Listener) => string;
   removeEventListener: (event: string, listenerId: string) => void;
-  subscribeToFeed: (feed: string, listener: (state: { [key: string]: unknown }) => void) => string;
+  subscribeToFeed: (feed: string, listener: (state: State) => void) => string;
   unsubscribeFromFeed: (feed: string, feedListenerId: string) => void;
 };
 
@@ -45,6 +46,7 @@ export const ServerEventsProvider = ({ children }: Props) => {
   const feedListeners = useRef<FeedListeners>({});
   const [connectingSocket, setConnectingSocket] = useState(true);
   const [connectionRetries, setConnectionRetries] = useState(0);
+  const feedCachedStates = useRef<{ [feedType: string]: State }>({});
 
   const dispatchEvent = (event: string, message: Event) => {
     if (listeners.current[event] !== undefined) {
@@ -56,6 +58,7 @@ export const ServerEventsProvider = ({ children }: Props) => {
 
   const dispatchFeed = (feed: string, state: { [key: string]: unknown }) => {
     if (feedListeners.current[feed] !== undefined) {
+      feedCachedStates.current[feed] = state;
       Object.values(feedListeners.current[feed]).forEach((listener) => listener(state));
     } else {
       console.warn('Feed update was recieved but no feed listener was set up', { feed, state });
@@ -145,6 +148,10 @@ export const ServerEventsProvider = ({ children }: Props) => {
 
     if (shouldSubscribe) {
       socket.current?.send(JSON.stringify({ event: 'feed-subscribe', message: { feed } }));
+    } else {
+      // already subscribed to feed, serve cache instead
+      const cachedState = feedCachedStates.current[feed];
+      listener(cachedState);
     }
 
     return feedListenerId;

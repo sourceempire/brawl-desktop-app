@@ -1,4 +1,5 @@
 import { DefaultTheme } from 'styled-components';
+import { getPlatform } from 'utils/processUtils';
 
 enum PlatformName {
   MAC = 'darwin',
@@ -6,13 +7,14 @@ enum PlatformName {
 }
 
 const titleBarHeight = () => {
-  switch (process.platform) {
+  switch (getPlatform()) {
     case PlatformName.MAC:
       return '24px';
     case PlatformName.WINDOWS:
       return '30px';
     default:
-      throw 'Platform not supported';
+      console.warn('Platform not supported');
+      return '12px';
   }
 };
 

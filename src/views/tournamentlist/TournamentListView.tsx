@@ -1,18 +1,15 @@
 import { useDeferredValue, useState } from 'react';
 import useTournamentHubsFeed from 'api/feeds/hooks/useTournamentHubsFeed';
-import Modal from 'common/ui-components/components/Modal/Modal';
-import { Option, Select } from 'common/ui-components/components/Select/Select';
+import { Option } from 'common/ui-components/components/Select/Select';
 import { Tab, Tabs } from 'common/ui-components/components/Tabs/Tabs';
-import { IconType, InputSize } from 'common/ui-components/types';
+import { InputSize } from 'common/ui-components/types';
 import Game, { GameName } from 'types/Game';
 import { CSGOMatchSettings } from 'types/MatchSettings';
 import { TournamentInfo } from 'types/tournaments/TournamentInfo';
 import FeaturedTournament from './components/FeaturedTournament/FeaturedTournament';
 import TournamentInfoCard from './components/TournamentInfoCard/TournamentInfoCard';
-import TournamentsFilters, {
-  Filter,
-  filter
-} from './components/TournamentsFiltersModal/TournamentsFiltersModal';
+import TournamentsFilters from './components/TournamentsFiltersModal/TournamentsFiltersModal';
+import { Filter, filter, search } from './TournamentListView.model';
 import {
   FilterBar,
   FilterBullet,
@@ -102,7 +99,7 @@ function Page() {
       />
       <TournamentGallery featuredExpanded={featuredExpanded}>
         <FilterBar>
-          <FilterBullets>
+          <FilterBullets noChildren={activeFilters.length === 0}>
             {activeFilters.map((filter) => (
               <FilterBullet key={filter.type + filter.value} onClick={() => removeFilter(filter)}>
                 {filter.name}
@@ -141,8 +138,4 @@ function Page() {
       </TournamentGallery>
     </>
   );
-}
-
-function search(tournaments: TournamentInfo[], query: string): TournamentInfo[] {
-  return tournaments.filter((tournament) => tournament.name.includes(query));
 }

@@ -3,8 +3,12 @@
 let Window = {
   // dummy window for use outside of electron
   version: null,
-  openMainWindow: () => {},
-  openLoginWindow: () => {},
+  openMainWindow: () => {
+    location.href = '/#/main';
+  },
+  openLoginWindow: () => {
+    location.href = '/#/login';
+  },
   openAuthWindow: (authUrl) => {},
   closeMainWindow: () => {},
   closeLoginWindow: () => {},

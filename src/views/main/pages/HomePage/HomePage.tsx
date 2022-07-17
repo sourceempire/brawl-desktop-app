@@ -14,7 +14,6 @@ const HomePage = () => {
       <p>Version: {process.env.REACT_APP_VERSION}</p>
       <button onClick={logout}>Log out</button>
       <br />
-      <Link to="/main/tournamentlist">Tournaments</Link>
       <br />
       <br />
       <br />
