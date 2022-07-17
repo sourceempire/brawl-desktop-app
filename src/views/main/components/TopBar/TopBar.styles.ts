@@ -1,4 +1,3 @@
-import ArrowDown from 'common/ui-components/icons/ArrowDown';
 import styled, { css } from 'styled-components/macro';
 
 export const Wrapper = styled.div`

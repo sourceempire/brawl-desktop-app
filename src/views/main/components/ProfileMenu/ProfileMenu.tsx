@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useAuth } from 'api/requests';
 import ContextMenu from 'common/ui-components/components/ContextMenu';
 import {
   ArrowIcon,
+  MenuItem,
   ProfileImagePlaceholder,
   UserStatusPlaceholder,
   Wrapper
@@ -13,6 +15,7 @@ import {
  * TODO -> Make the context menu hide when clicking the profile image if the context menu is shown
  */
 const ProfileMenu = () => {
+  const { logout } = useAuth();
   const [showMenu, setShowMenu] = useState<boolean>(false);
 
   return (
@@ -28,7 +31,7 @@ const ProfileMenu = () => {
           position={{ right: 24, top: 80 }}
           arrowPosition={{ right: 20 }}
           onClickOutside={() => setShowMenu(false)}>
-          Hello There
+          <MenuItem onClick={logout}>Log out</MenuItem>
         </ContextMenu>
       )}
     </>

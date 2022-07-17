@@ -37,3 +37,19 @@ export const UserStatusPlaceholder = styled.div`
     background-color: ${theme.colors.statusSuccess};
   `}
 `;
+
+export const MenuItem = styled.div`
+  display: flex;
+  align-items: center;
+  height: 30px;
+  width: 156px;
+  padding: 0 6px;
+  font-size: 11px;
+  cursor: pointer;
+  ${({ theme }) => css`
+    border-radius: ${theme.borderRadius.default};
+    :hover {
+      background-color: ${theme.colors.lightTint};
+    }
+  `}
+`;
