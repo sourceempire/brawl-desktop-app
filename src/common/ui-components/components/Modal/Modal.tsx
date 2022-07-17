@@ -1,0 +1,86 @@
+import { ReactNode, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
+import { CSSTransition } from 'react-transition-group';
+import { Content, CrossButton, Header, Overlay } from './Modal.styles';
+import Cross from 'assets/icons/Cross.svg';
+
+const modalRoot = document.getElementById('modal-root');
+
+type Props = {
+  children: ReactNode;
+  isOpen: boolean;
+  onAfterOpen?: () => void;
+  onBeforeOpen?: () => void;
+  onBeforeClose?: () => void;
+  onAfterClose?: () => void;
+  onRequestClose?: () => void;
+  closeTimeoutMS?: number;
+  title?: string;
+  header?: boolean;
+  closeButton?: boolean;
+  closeOnOverlayClick?: boolean;
+  hideOverLay?: boolean;
+  width?: string;
+  noPadding?: boolean;
+};
+
+export default function Modal({
+  children,
+  isOpen,
+  onAfterOpen,
+  onBeforeOpen,
+  onAfterClose,
+  onBeforeClose,
+  onRequestClose,
+  closeTimeoutMS = 300,
+  title,
+  header = true,
+  closeButton = true,
+  closeOnOverlayClick = true,
+  hideOverLay = false,
+  width,
+  noPadding = false
+}: Props) {
+  const element = useRef(document.createElement('div'));
+
+  useEffect(() => {
+    const el = element.current;
+    modalRoot?.appendChild(el);
+    return () => {
+      modalRoot?.removeChild(el);
+    };
+  }, []);
+
+  const render = (
+    <CSSTransition
+      in={isOpen}
+      timeout={closeTimeoutMS}
+      mountOnEnter
+      unmountOnExit
+      {...(onBeforeOpen !== undefined ? { onEnter: onBeforeOpen } : {})}
+      {...(onAfterOpen !== undefined ? { onEntered: onAfterOpen } : {})}
+      {...(onBeforeClose !== undefined ? { onExit: onBeforeClose } : {})}
+      {...(onAfterClose !== undefined ? { onExiting: onAfterClose } : {})}>
+      <Overlay
+        {...(closeOnOverlayClick ? { onMouseDown: onRequestClose } : {})}
+        hidden={hideOverLay}
+        timeout={closeTimeoutMS}>
+        <Content
+          onMouseDown={(e) => e.stopPropagation()}
+          timeout={closeTimeoutMS}
+          width={width}
+          noPadding={noPadding}>
+          {header && (
+            <Header>
+              {closeButton && <CrossButton src={Cross} onClick={onRequestClose} />}
+              {title !== undefined && title}
+            </Header>
+          )}
+          {children}
+        </Content>
+      </Overlay>
+    </CSSTransition>
+  );
+
+  return createPortal(render, element.current);
+}

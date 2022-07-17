@@ -10,7 +10,7 @@ type NavigationItem = {
 };
 
 const mainNavigationItems: NavigationItem[] = [
-  { name: 'Tournaments', path: 'tournaments' },
+  { name: 'Tournaments', path: 'tournamentlist' },
   { name: 'Quick Match', isUpcomingFeature: true }
 ];
 

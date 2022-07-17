@@ -34,7 +34,7 @@ export const UserStatusPlaceholder = styled.div`
 
   ${({ theme }) => css`
     border: 2px solid ${theme.colors.background};
-    background-color: ${theme.colors.success};
+    background-color: ${theme.colors.statusSuccess};
   `}
 `;
 

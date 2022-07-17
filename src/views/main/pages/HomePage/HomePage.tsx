@@ -11,6 +11,7 @@ const HomePage = () => {
       <br />
       <br />
       <br />
+      <br />
       <p>Testing news feed: (Printing titles)</p>
       <br />
       <br />

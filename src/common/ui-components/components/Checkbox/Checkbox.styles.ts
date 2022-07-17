@@ -4,14 +4,14 @@ import { lightenColor } from 'assets/styles/colorBrightness';
 
 export const Wrapper = styled.div`
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   font-size: 14px;
 `;
 
 export const Check = styled(CheckIcon)`
   ${({ theme }) => css`
-    fill: ${theme.colors.primaryDark};
+    fill: ${theme.colors.textPrimaryDark};
   `}
 `;
 

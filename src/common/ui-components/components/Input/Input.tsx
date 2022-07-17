@@ -9,7 +9,7 @@ type Props = {
   withBorder?: boolean;
   size?: InputSize;
   label?: string;
-  icon?: IconType;
+  icon?: IconType | string;
   className?: string;
   placeholder?: string;
   tabIndex?: number;
@@ -32,7 +32,7 @@ const Input = ({
   return (
     <Wrapper inputSize={size} className={className}>
       <Label>{label}</Label>
-      {icon && <Icon type={icon} />}
+      {getIcon(icon)}
       <InputElement
         value={value}
         name={name}
@@ -41,12 +41,26 @@ const Input = ({
         withBorder={withBorder}
         inputSize={size}
         hasLabel={Boolean(label)}
-        hasIcon={Boolean(icon)}
+        hasIcon={icon !== undefined}
         placeholder={placeholder}
         tabIndex={tabIndex}
       />
     </Wrapper>
   );
 };
+
+function isIconType(icon: IconType | string): icon is IconType {
+  return icon in IconType;
+}
+
+function getIcon(icon: IconType | string | undefined) {
+  if (icon !== undefined) {
+    if (isIconType(icon)) {
+      return <Icon type={icon} />;
+    } else {
+      return <img src={icon} />;
+    }
+  }
+}
 
 export default Input;
