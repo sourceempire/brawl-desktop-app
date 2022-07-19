@@ -1,6 +1,7 @@
-import { Icon } from 'common/ui-components';
-import { IconType, InputSize } from 'common/ui-components/types';
+import { InputSize } from 'common/ui-components/types';
 import { InputElement, Label, Wrapper } from './Input.styles';
+import { getIcon } from 'assets/icons/Icons.model';
+import { SVGComponent } from 'assets/icons/Icons.types';
 
 type Props = {
   value: string;
@@ -9,7 +10,7 @@ type Props = {
   withBorder?: boolean;
   size?: InputSize;
   label?: string;
-  icon?: IconType | string;
+  icon?: SVGComponent | string;
   className?: string;
   placeholder?: string;
   tabIndex?: number;
@@ -32,7 +33,7 @@ const Input = ({
   return (
     <Wrapper inputSize={size} className={className}>
       <Label>{label}</Label>
-      {getIcon(icon)}
+      {getIcon(icon, 'input-icon')}
       <InputElement
         value={value}
         name={name}
@@ -48,19 +49,5 @@ const Input = ({
     </Wrapper>
   );
 };
-
-function isIconType(icon: IconType | string): icon is IconType {
-  return icon in IconType;
-}
-
-function getIcon(icon: IconType | string | undefined) {
-  if (icon !== undefined) {
-    if (isIconType(icon)) {
-      return <Icon type={icon} />;
-    } else {
-      return <img src={icon} />;
-    }
-  }
-}
 
 export default Input;

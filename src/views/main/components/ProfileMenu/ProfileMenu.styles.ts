@@ -1,5 +1,5 @@
-import ArrowDownIcon from 'common/ui-components/icons/ArrowDown';
 import styled, { css } from 'styled-components';
+import Icons from 'assets/icons/Icons';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -18,7 +18,7 @@ export const ProfileImagePlaceholder = styled.div`
   `}
 `;
 
-export const ArrowIcon = styled(ArrowDownIcon)`
+export const ArrowIcon = styled(Icons.ArrowDown)`
   width: 10px;
   margin-right: 12px;
 `;

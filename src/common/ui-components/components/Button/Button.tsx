@@ -1,6 +1,6 @@
-import { IconType } from 'common/ui-components/types';
-import Icon from '../Icon/Icon';
-import { ButtonIcon, Wrapper } from './Button.styles';
+import { Wrapper } from './Button.styles';
+import { getIcon } from 'assets/icons/Icons.model';
+import { SVGComponent } from 'assets/icons/Icons.types';
 
 type Props = {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ type Props = {
   primary?: boolean;
   accent?: boolean;
   small?: boolean;
-  icon?: IconType | string;
+  icon?: SVGComponent | string;
   tabIndex?: number;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
@@ -32,24 +32,10 @@ const Button = ({
       small={small}
       hasIcon={icon !== undefined}
       tabIndex={tabIndex}>
-      {getIcon(icon)}
+      {getIcon(icon, 'button-icon')}
       {children}
     </Wrapper>
   );
 };
-
-function isIconType(icon: IconType | string): icon is IconType {
-  return icon in IconType;
-}
-
-function getIcon(icon: IconType | string | undefined) {
-  if (icon !== undefined) {
-    if (isIconType(icon)) {
-      return <Icon className="button-icon" type={icon} />;
-    } else {
-      return <ButtonIcon src={icon} />;
-    }
-  }
-}
 
 export default Button;

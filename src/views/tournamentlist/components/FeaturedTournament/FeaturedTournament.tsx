@@ -15,7 +15,8 @@ import {
   VisibilityToggle,
   Wrapper
 } from './FeaturedTournament.styled';
-import Clock from 'assets/icons/Clock.svg';
+//import Clock from 'assets/icons/Clock.svg';
+import Icons from 'assets/icons/Icons';
 import Ticket from 'assets/icons/Ticket.svg';
 import Trophy from 'assets/icons/Trophy.svg';
 
@@ -58,7 +59,7 @@ export default function FeaturedTournament({
                 </BulletText>
               </Bullet>
               <Bullet>
-                <BulletIcon src={Clock} />
+                <BulletIcon src={Icons.Clock.url} />
                 <BulletText>
                   <Title>4 Nov 12:00 AM</Title>
                   <Subtitle>Tournament Starts</Subtitle>
