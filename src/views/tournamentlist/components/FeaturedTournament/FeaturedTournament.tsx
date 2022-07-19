@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { TournamentInfo } from 'types/tournaments/TournamentInfo';
 import {
   Bullet,
@@ -15,7 +14,6 @@ import {
   VisibilityToggle,
   Wrapper
 } from './FeaturedTournament.styled';
-//import Clock from 'assets/icons/Clock.svg';
 import Icons from 'assets/icons/Icons';
 import Ticket from 'assets/icons/Ticket.svg';
 import Trophy from 'assets/icons/Trophy.svg';
