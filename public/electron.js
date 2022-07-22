@@ -29,19 +29,20 @@ async function createWindow(appPath, options = {}) {
     }),
     webPreferences: {
       devTools: isDev,
-      nodeIntegration: true,
-      contextIsolation: false
+      nodeIntegration: false, // SHOULD ALWAYS BE FALSE. NEVER ALLOW RENDERER THREAD NODE ACCESS. BIG SECURITY HOLE
+      contextIsolation: true, // SHOULD ALWAYS BE TRUE
+      preload: path.join(__dirname, 'preload.js')
     }
   });
 
   if (isExternal) {
     await window.loadURL(appPath);
   } else {
-    await window.loadURL(
-      isDev
-        ? `http://localhost:3000/#/${appPath}`
-        : `${path.join(__dirname, `../build/index.html`)}#/${appPath}`
-    );
+    if (isDev) {
+      await window.loadURL(`http://localhost:3000/#/${appPath}`);
+    } else {
+      await window.loadFile(path.join(__dirname, `../build/index.html`), { hash: `/${appPath}` });
+    }
   }
 
   return window;
@@ -188,7 +189,12 @@ app.on('ready', () => {
     }
     callback({ cancel: false, requestHeaders: details.requestHeaders });
   });
+
   createLoadingWindow();
+
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) createLoadingWindow();
+  });
 });
 
 app.on('window-all-closed', () => {

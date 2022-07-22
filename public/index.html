@@ -29,7 +29,7 @@
     <!-- Allowed servers -->
     <!-- TODO -> With this meta tag, lottie animations dont run -->
     <!-- TODO -> Add this meta tag back in when solved how to enable lottie rendering svgs in to document in Content-Security-Policy -->
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' *.brawlgaming.com brawl-gaming-server.heroku.app localhost:* *.cloudfront.net 'unsafe-inline'; connect-src ws: wss: http: https:"> -->
+    <meta http-equiv="Content-Security-Policy" content="%REACT_APP_CSP_CONFIG%">
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
