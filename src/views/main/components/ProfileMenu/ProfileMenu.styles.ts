@@ -1,5 +1,6 @@
 import ArrowDownIcon from 'common/ui-components/icons/ArrowDown';
 import styled, { css } from 'styled-components';
+import UserStatus from '../UserStatus/UserStatus';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -23,19 +24,21 @@ export const ArrowIcon = styled(ArrowDownIcon)`
   margin-right: 12px;
 `;
 
-export const UserStatusPlaceholder = styled.div`
+export const MyUserStatus = styled(UserStatus)`
   position: absolute;
   right: -6px;
   bottom: -1px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  box-sizing: content-box;
 
   ${({ theme }) => css`
-    border: 2px solid ${theme.colors.background};
-    background-color: ${theme.colors.statusSuccess};
+    outline: 2px solid ${theme.colors.background};
+    background-color: ${theme.colors.background};
   `}
+`;
+
+export const Username = styled.div`
+  padding: 6px;
+  font-size: 13px;
+  font-weight: bold;
 `;
 
 export const MenuItem = styled.div`
@@ -52,4 +55,11 @@ export const MenuItem = styled.div`
       background-color: ${theme.colors.lightTint};
     }
   `}
+`;
+
+export const HorizontalRule = styled.div`
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 100%;
+  margin: 3px 0;
 `;
