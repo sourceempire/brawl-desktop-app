@@ -28,7 +28,7 @@ const ProfileMenu = () => {
       <Wrapper onClick={() => setShowMenu(true)}>
         <ArrowIcon />
         <ProfileImagePlaceholder>
-          <MyUserStatus status={UserStatuses.OFFLINE} size={14} hideText />
+          <MyUserStatus status={UserStatuses.OFFLINE} hideText />
         </ProfileImagePlaceholder>
       </Wrapper>
       {showMenu && (

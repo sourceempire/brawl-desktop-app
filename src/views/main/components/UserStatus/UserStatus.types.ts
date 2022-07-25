@@ -3,7 +3,6 @@ import { theme } from 'assets/styles/Theme';
 
 export type Props = {
   status: UserStatuses;
-  size?: number;
   className?: string;
   hideText?: boolean;
 };

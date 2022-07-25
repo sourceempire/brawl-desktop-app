@@ -1,10 +1,10 @@
 import { StatusCircle, StatusText, Wrapper } from './UserStatus.styles';
 import { Props } from './UserStatus.types';
 
-const UserStatus = ({ status, size, hideText, className }: Props) => {
+const UserStatus = ({ status, hideText, className }: Props) => {
   return (
     <Wrapper>
-      <StatusCircle status={status} size={size} className={className} />
+      <StatusCircle status={status} className={className} />
       {!hideText && <StatusText>{status}</StatusText>}
     </Wrapper>
   );

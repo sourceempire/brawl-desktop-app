@@ -14,10 +14,10 @@ export const StatusText = styled.div`
 export const StatusCircle = styled.div<Props>`
   border-radius: 50%;
   box-sizing: border-box;
+  height: 9px;
+  width: 9px;
 
-  ${({ size, status }) => css`
-    height: ${size ?? 9}px;
-    width: ${size ?? 9}px;
+  ${({ status }) => css`
     ${StatusStyle[status]};
   `}
 `;

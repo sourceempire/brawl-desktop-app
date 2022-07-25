@@ -28,6 +28,8 @@ export const MyUserStatus = styled(UserStatus)`
   position: absolute;
   right: -6px;
   bottom: -1px;
+  height: 14px;
+  width: 14px;
 
   ${({ theme }) => css`
     outline: 2px solid ${theme.colors.background};
