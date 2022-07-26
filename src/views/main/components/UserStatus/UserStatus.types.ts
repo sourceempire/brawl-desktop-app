@@ -2,19 +2,19 @@ import { FlattenSimpleInterpolation, css } from 'styled-components';
 import { theme } from 'assets/styles/Theme';
 
 export type Props = {
-  status: UserStatuses;
+  status: UserStatusEnum;
   className?: string;
   hideText?: boolean;
 };
 
-export enum UserStatuses {
+export enum UserStatusEnum {
   ONLINE = 'online',
   AWAY = 'away',
   BUSY = 'busy',
   OFFLINE = 'offline'
 }
 
-export const StatusStyle: { [key in UserStatuses]: FlattenSimpleInterpolation } = {
+export const StatusStyle: { [key in UserStatusEnum]: FlattenSimpleInterpolation } = {
   online: css`
     background-color: ${theme.colors.statusSuccess};
   `,

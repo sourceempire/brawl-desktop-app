@@ -11,7 +11,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import Window from 'window';
 
-export const useAuth = () => {
+const useAuth = () => {
   // TODO -> Fix typesafe way of doing this
   const [authType, setAuthType] = useState<AuthType>('openid');
   const [isLoading, setLoading] = useState(false);
@@ -129,3 +129,5 @@ const closeLoginWindowAndOpenMain = () => {
     Window.closeLoginWindow();
   }, 20);
 };
+
+export default useAuth;

@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useAuth } from 'api/requests';
+import { useUserStatusFeed } from 'api/feeds';
+import { setUserStatus, useAuth } from 'api/requests';
 import ContextMenu from 'common/ui-components/components/ContextMenu';
-import UserStatus from '../UserStatus/UserStatus';
-import { UserStatuses } from '../UserStatus/UserStatus.types';
+import UserStatus, { UserStatusEnum } from '../UserStatus';
 import {
   ArrowIcon,
   HorizontalRule,
@@ -21,14 +21,20 @@ import {
  */
 const ProfileMenu = () => {
   const { logout } = useAuth();
+  const { status } = useUserStatusFeed({ userId: '60ecd9cd-cb20-489f-93a3-215424f6d972' });
+
   const [showMenu, setShowMenu] = useState<boolean>(false);
+
+  const setStatus = (status: UserStatusEnum) => {
+    setUserStatus(status);
+  };
 
   return (
     <>
       <Wrapper onClick={() => setShowMenu(true)}>
         <ArrowIcon />
         <ProfileImagePlaceholder>
-          <MyUserStatus status={UserStatuses.OFFLINE} hideText />
+          <MyUserStatus status={status} hideText />
         </ProfileImagePlaceholder>
       </Wrapper>
       {showMenu && (
@@ -38,17 +44,17 @@ const ProfileMenu = () => {
           onClickOutside={() => setShowMenu(false)}>
           <Username>Ottomaskinen</Username>
           <HorizontalRule />
-          <MenuItem>
-            <UserStatus status={UserStatuses.ONLINE} />
+          <MenuItem onClick={() => setStatus(UserStatusEnum.ONLINE)}>
+            <UserStatus status={UserStatusEnum.ONLINE} />
           </MenuItem>
-          <MenuItem>
-            <UserStatus status={UserStatuses.AWAY} />
+          <MenuItem onClick={() => setStatus(UserStatusEnum.AWAY)}>
+            <UserStatus status={UserStatusEnum.AWAY} />
           </MenuItem>
-          <MenuItem>
-            <UserStatus status={UserStatuses.BUSY} />
+          <MenuItem onClick={() => setStatus(UserStatusEnum.BUSY)}>
+            <UserStatus status={UserStatusEnum.BUSY} />
           </MenuItem>
-          <MenuItem>
-            <UserStatus status={UserStatuses.OFFLINE} />
+          <MenuItem onClick={() => setStatus(UserStatusEnum.OFFLINE)}>
+            <UserStatus status={UserStatusEnum.OFFLINE} />
           </MenuItem>
           <HorizontalRule />
           <MenuItem>Change Avatar</MenuItem>

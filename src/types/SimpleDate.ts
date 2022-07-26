@@ -7,6 +7,7 @@ export class SimpleDate {
 
   constructor(string: SimpleDateString);
   constructor(year: number, month: number, day: number);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(...args: any[]) {
     if (args.length === 1 && typeof args[0] === 'string') {
       [this.year, this.month, this.day] = args[0].split('-').map((n) => parseInt(n));

@@ -1,4 +1,5 @@
 import { Fetcher } from 'api';
+import { UserStatusEnum } from 'views/main/components/UserStatus';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
@@ -47,3 +48,7 @@ export const logout = () => Fetcher.post(SERVER_URL + '/api/auth/logout', {});
 
 export const register: (form: RegisterForm) => Promise<{ succeeded: boolean }> = (form) =>
   Fetcher.post(SERVER_URL + '/api/public/auth/register', form);
+
+export const setUserStatus: (status: UserStatusEnum) => Promise<{ succeeded: boolean }> = (
+  status
+) => Fetcher.post(SERVER_URL + '/api/user/status', { status });

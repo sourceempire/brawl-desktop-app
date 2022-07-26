@@ -1,5 +1,6 @@
 import ArrowDownIcon from 'common/ui-components/icons/ArrowDown';
 import styled, { css } from 'styled-components';
+import { UserStatusEnum } from '../UserStatus';
 import UserStatus from '../UserStatus/UserStatus';
 
 export const Wrapper = styled.div`
@@ -31,9 +32,9 @@ export const MyUserStatus = styled(UserStatus)`
   height: 14px;
   width: 14px;
 
-  ${({ theme }) => css`
+  ${({ theme, status }) => css`
     outline: 2px solid ${theme.colors.background};
-    background-color: ${theme.colors.background};
+    background-color: ${status === UserStatusEnum.OFFLINE && theme.colors.background};
   `}
 `;
 

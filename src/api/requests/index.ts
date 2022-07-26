@@ -1,2 +1,2 @@
 export * from './AuthRequests';
-export * from './hooks/useAuth';
+export { default as useAuth } from './hooks/useAuth';
