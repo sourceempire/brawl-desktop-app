@@ -18,6 +18,7 @@ import {
  *
  * TODO -> Make the context menu hide when clicking the profile image if the context menu is shown
  *
+ * TODO -> create a hook that gets logged in users information and use it here to retrieve userId
  */
 const ProfileMenu = () => {
   const { logout } = useAuth();
