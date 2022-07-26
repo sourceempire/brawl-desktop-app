@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useUserStatusFeed } from 'api/feeds';
-import { setUserStatus, useAuth } from 'api/requests';
+import { UserRequests, useAuth } from 'api/requests';
+import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import ContextMenu from 'common/ui-components/components/ContextMenu';
 import UserStatus, { UserStatusEnum } from '../UserStatus';
 import {
@@ -17,17 +18,16 @@ import {
  * TODO -> Make the position of the context menu dynamic
  *
  * TODO -> Make the context menu hide when clicking the profile image if the context menu is shown
- *
- * TODO -> create a hook that gets logged in users information and use it here to retrieve userId
  */
 const ProfileMenu = () => {
+  const { user } = useLoggedInUser();
+  const { status } = useUserStatusFeed({ userId: user.id });
   const { logout } = useAuth();
-  const { status } = useUserStatusFeed({ userId: '60ecd9cd-cb20-489f-93a3-215424f6d972' });
 
   const [showMenu, setShowMenu] = useState<boolean>(false);
 
   const setStatus = (status: UserStatusEnum) => {
-    setUserStatus(status);
+    UserRequests.setUserStatus(status);
   };
 
   return (
