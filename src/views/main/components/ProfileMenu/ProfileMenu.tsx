@@ -30,20 +30,23 @@ const ProfileMenu = () => {
   const { logout } = useAuth();
 
   const [isMenuShown, setIsMenuShown] = useState<boolean>(false);
+  const [localStatus, setLocalStatus] = useState(status);
 
-  const setStatus = (status: UserStatusEnum) => {
-    UserRequests.setUserStatus(status);
+  const setStatus = (newStatus: UserStatusEnum) => {
+    // setLocalStatus allows an optimistic update of the status before it
+    // is set in the backend. If the status update fails, the actual status
+    // will be shown again
+    setLocalStatus(newStatus);
+    UserRequests.setUserStatus(newStatus).catch(() => {
+      setLocalStatus(status);
+    });
   };
 
   useEffect(() => {
-    console.log(isMenuShown);
-  }, [isMenuShown]);
-
-  const showMenu = () => {
-    if (!isMenuShown) {
-      setIsMenuShown(true);
-    }
-  };
+    // updates the local status whenever an update of the actual status is
+    // noticed on the backend
+    setLocalStatus(status);
+  }, [status]);
 
   const hideMenu = () => {
     // setTimeout is needed to prevent a race condition
@@ -51,12 +54,16 @@ const ProfileMenu = () => {
     setTimeout(() => setIsMenuShown(false), 20);
   };
 
+  const showMenu = () => {
+    setIsMenuShown(true);
+  };
+
   return (
     <>
       <Wrapper onClick={showMenu}>
         <ArrowIcon />
         <ProfileImagePlaceholder>
-          <MyUserStatus status={status} hideText />
+          <MyUserStatus status={localStatus} hideText />
         </ProfileImagePlaceholder>
       </Wrapper>
       {isMenuShown && (
