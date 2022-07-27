@@ -64,7 +64,7 @@ const ProfileMenu = () => {
           position={{ right: 24, top: 83 }}
           arrowPosition={{ right: 20 }}
           onClickOutside={hideMenu}>
-          <Username>Ottomaskinen</Username>
+          <Username>{user.usertag}</Username>
           <HorizontalRule />
           {orderedStatusItems.map((status) => (
             <MenuItem key={status} onClick={() => setStatus(status)}>
