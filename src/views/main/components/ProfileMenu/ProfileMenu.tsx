@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useUserStatusFeed } from 'api/feeds';
 import { UserRequests, useAuth } from 'api/requests';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
@@ -14,49 +14,63 @@ import {
   Wrapper
 } from './ProfileMenu.styles';
 
+const orderedStatusItems = [
+  UserStatusEnum.ONLINE,
+  UserStatusEnum.AWAY,
+  UserStatusEnum.BUSY,
+  UserStatusEnum.OFFLINE
+];
+
 /**
  * TODO -> Make the position of the context menu dynamic
- *
- * TODO -> Make the context menu hide when clicking the profile image if the context menu is shown
  */
 const ProfileMenu = () => {
   const { user } = useLoggedInUser();
   const { status } = useUserStatusFeed({ userId: user.id });
   const { logout } = useAuth();
 
-  const [showMenu, setShowMenu] = useState<boolean>(false);
+  const [isMenuShown, setIsMenuShown] = useState<boolean>(false);
 
   const setStatus = (status: UserStatusEnum) => {
     UserRequests.setUserStatus(status);
   };
 
+  useEffect(() => {
+    console.log(isMenuShown);
+  }, [isMenuShown]);
+
+  const showMenu = () => {
+    if (!isMenuShown) {
+      setIsMenuShown(true);
+    }
+  };
+
+  const hideMenu = () => {
+    // setTimeout is needed to prevent a race condition
+    // when clicking the Wraper which opens the menu again
+    setTimeout(() => setIsMenuShown(false), 20);
+  };
+
   return (
     <>
-      <Wrapper onClick={() => setShowMenu(true)}>
+      <Wrapper onClick={showMenu}>
         <ArrowIcon />
         <ProfileImagePlaceholder>
           <MyUserStatus status={status} hideText />
         </ProfileImagePlaceholder>
       </Wrapper>
-      {showMenu && (
+      {isMenuShown && (
         <ContextMenu
-          position={{ right: 24, top: 80 }}
+          position={{ right: 24, top: 83 }}
           arrowPosition={{ right: 20 }}
-          onClickOutside={() => setShowMenu(false)}>
+          onClickOutside={hideMenu}>
           <Username>Ottomaskinen</Username>
           <HorizontalRule />
-          <MenuItem onClick={() => setStatus(UserStatusEnum.ONLINE)}>
-            <UserStatus status={UserStatusEnum.ONLINE} />
-          </MenuItem>
-          <MenuItem onClick={() => setStatus(UserStatusEnum.AWAY)}>
-            <UserStatus status={UserStatusEnum.AWAY} />
-          </MenuItem>
-          <MenuItem onClick={() => setStatus(UserStatusEnum.BUSY)}>
-            <UserStatus status={UserStatusEnum.BUSY} />
-          </MenuItem>
-          <MenuItem onClick={() => setStatus(UserStatusEnum.OFFLINE)}>
-            <UserStatus status={UserStatusEnum.OFFLINE} />
-          </MenuItem>
+          {orderedStatusItems.map((status) => (
+            <MenuItem key={status} onClick={() => setStatus(status)}>
+              <UserStatus status={status} />
+            </MenuItem>
+          ))}
           <HorizontalRule />
           <MenuItem>Change Avatar</MenuItem>
           <HorizontalRule />
