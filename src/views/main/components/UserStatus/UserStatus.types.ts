@@ -8,23 +8,23 @@ export type Props = {
 };
 
 export enum UserStatusEnum {
-  ONLINE = 'online',
-  AWAY = 'away',
-  BUSY = 'busy',
-  OFFLINE = 'offline'
+  ONLINE = 'ONLINE',
+  AWAY = 'AWAY',
+  BUSY = 'BUSY',
+  OFFLINE = 'OFFLINE'
 }
 
 export const StatusStyle: { [key in UserStatusEnum]: FlattenSimpleInterpolation } = {
-  online: css`
+  [UserStatusEnum.ONLINE]: css`
     background-color: ${theme.colors.statusSuccess};
   `,
-  away: css`
+  [UserStatusEnum.AWAY]: css`
     background-color: ${theme.colors.statusWarning};
   `,
-  busy: css`
+  [UserStatusEnum.BUSY]: css`
     background-color: ${theme.colors.statusError};
   `,
-  offline: css`
+  [UserStatusEnum.OFFLINE]: css`
     border: 2px solid rgb(155, 155, 166);
   `
 };

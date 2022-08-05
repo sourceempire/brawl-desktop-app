@@ -5,10 +5,8 @@ type Options = {
   userId: string;
 };
 
-type EnumValues = 'ONLINE' | 'AWAY' | 'BUSY' | 'OFFLINE';
-
 const useUserStatusFeed = ({ userId }: Options) => {
-  const feed = useFeed<{ status: EnumValues }>(`user.status.${userId}`);
+  const feed = useFeed<{ status: UserStatusEnum }>(`user.status.${userId}`);
   return { status: UserStatusEnum[feed.currentState.status] };
 };
 
