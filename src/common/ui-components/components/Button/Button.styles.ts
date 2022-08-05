@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { darkenColor, lightenColor } from 'assets/styles/colorBrightness';
+import { lightenColor } from 'assets/styles/colorBrightness';
 
 type Props = {
   primary?: boolean;

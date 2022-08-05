@@ -24,8 +24,8 @@ rules:
   react/react-in-jsx-scope: off
   react-hooks/rules-of-hooks: error
   react-hooks/exhaustive-deps: warn
-  '@typescript-eslint/no-empty-interface': off
-  '@typescript-eslint/no-empty-function': off
+  '@typescript-eslint/no-empty-interface': warn
+  '@typescript-eslint/no-empty-function': warn
   sort-imports:
     - error
     - ignoreCase: false

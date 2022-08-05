@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { ServerEventsContext } from 'api/events';
 
-const useFeed = (feed: string) => {
+function useFeed<T>(feed: string) {
   const { subscribeToFeed, unsubscribeFromFeed } = useContext(ServerEventsContext);
   const [currentState, setCurrentState] = useState<{ [key: string]: unknown }>({});
   const [isLoading, setLoading] = useState(true);
@@ -16,7 +16,7 @@ const useFeed = (feed: string) => {
     return () => unsubscribeFromFeed(feed, feedListenerId);
   }, [feed, subscribeToFeed, unsubscribeFromFeed]);
 
-  return { currentState, isLoading };
-};
+  return { currentState: currentState as unknown as T, isLoading };
+}
 
 export default useFeed;

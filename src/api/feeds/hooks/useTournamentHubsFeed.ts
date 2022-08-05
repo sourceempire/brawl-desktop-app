@@ -4,11 +4,11 @@ import { TournamentInfo } from 'types/tournaments/TournamentInfo';
 import useFeed from './useFeed';
 
 export default function useTournamentHubsFeed() {
-  const { currentState, isLoading } = useFeed('tournament.hubs');
-
-  let tournamentHubsWithTypedMatchSettings = fixMatchSettingType(
-    (currentState.tournamentHubs ?? []) as TournamentInfo[]
+  const { currentState, isLoading } = useFeed<{ tournamentHubs: TournamentInfo[] }>(
+    'tournament.hubs'
   );
+
+  let tournamentHubsWithTypedMatchSettings = fixMatchSettingType(currentState.tournamentHubs ?? []);
 
   // TODO remove this when server provides everything
   tournamentHubsWithTypedMatchSettings = tournamentHubsWithTypedMatchSettings.map((tournament) => {

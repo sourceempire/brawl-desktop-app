@@ -9,10 +9,10 @@ type News = {
 };
 
 const useNewsFeed = () => {
-  const { currentState } = useFeed('news');
+  const { currentState, isLoading } = useFeed<{ news: News[] }>('news');
   return {
     news: (currentState.news ?? []) as News[],
-    isLoading: currentState.isLoading
+    isLoading
   };
 };
 
