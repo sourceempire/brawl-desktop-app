@@ -16,4 +16,4 @@ export const getLoggedInUser: () => Promise<{ succeeded: boolean; user: User }> 
 
 export const setUserStatus: (status: UserStatusEnum) => Promise<{ succeeded: boolean }> = (
   status
-) => Fetcher.post(`${SERVER_URL}/api/user/status`, { status });
+) => Fetcher.post(`${SERVER_URL}/api/user/status`, { status: status.toLowerCase() });
