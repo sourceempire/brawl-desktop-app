@@ -1,5 +1,5 @@
-import CheckIcon from 'common/ui-components/icons/Check';
 import styled, { css } from 'styled-components';
+import Icons from 'assets/icons/Icons';
 import { lightenColor } from 'assets/styles/colorBrightness';
 
 export const Wrapper = styled.div`
@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
   font-size: 14px;
 `;
 
-export const Check = styled(CheckIcon)`
+export const Check = styled(Icons.Check)`
   ${({ theme }) => css`
     fill: ${theme.colors.textPrimaryDark};
   `}

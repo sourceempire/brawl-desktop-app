@@ -12,21 +12,6 @@ type Props = {
 // TODO -> Add support for icons
 // TODO -> Add support for which side icons should be
 
-export const iconStyle = css`
-  svg,
-  img {
-    display: inline-block;
-    height: 100%;
-    padding: 8px 10px 8px 15px;
-  }
-`;
-
-export const ButtonIcon = styled.img`
-  display: inline-block;
-  height: 100%;
-  padding: 8px 10px 8px 15px;
-`;
-
 export const Wrapper = styled.button<Props>`
   display: inline-flex;
   width: auto;
@@ -38,6 +23,13 @@ export const Wrapper = styled.button<Props>`
   cursor: pointer;
   outline-color: transparent;
   ${({ theme }) => theme.textStyles.button}
+
+  .button-icon {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    padding: 8px 10px 8px 15px;
+  }
 
   :focus-visible {
     outline: 2px solid white;

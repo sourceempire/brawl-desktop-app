@@ -1,7 +1,7 @@
-import ArrowDownIcon from 'common/ui-components/icons/ArrowDown';
 import styled, { css } from 'styled-components';
 import { UserStatusEnum } from '../UserStatus';
 import UserStatus from '../UserStatus/UserStatus';
+import Icons from 'assets/icons/Icons';
 import { theme } from 'assets/styles/Theme';
 
 export const Wrapper = styled.div`
@@ -30,7 +30,7 @@ export const ProfileImagePlaceholder = styled.div`
   `}
 `;
 
-export const ArrowIcon = styled(ArrowDownIcon)`
+export const ArrowIcon = styled(Icons.ArrowDown)`
   width: 10px;
   margin-right: 12px;
 `;
