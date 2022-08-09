@@ -1,8 +1,14 @@
+import { useEffect } from 'react';
 import useNewsFeed from 'api/feeds/hooks/useNewsFeed';
+import { notify } from 'common/notification';
 import { Wrapper } from './HomePage.styles';
 
 const HomePage = () => {
   const { news, isLoading: isLoadingNews } = useNewsFeed();
+
+  useEffect(() => {
+    notify.info('Testing errorrs');
+  }, []);
 
   return (
     <Wrapper>
