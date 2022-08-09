@@ -1,20 +1,10 @@
-import { useEffect } from 'react';
 import useNewsFeed from 'api/feeds/hooks/useNewsFeed';
-import { notify } from 'common/notification';
 import styled from 'styled-components';
 import { Wrapper } from './HomePage.styles';
 import Icons from 'assets/icons/Icons';
 
 const HomePage = () => {
   const { news, isLoading: isLoadingNews } = useNewsFeed();
-
-  // Only temp
-  // Uncomment to see how nitofications look
-  // useEffect(() => {
-  //   notify.error('Testing Error');
-  //   notify.warning('Testing Warning');
-  //   notify.info('Testing Info');
-  // }, []);
 
   return (
     <Wrapper>

@@ -30,7 +30,7 @@ export const Wrapper = styled.div<{ level: NotificationLevel; isClosing: boolean
   animation: fadeIn 0.3s forwards;
   cursor: pointer;
 
-  padding: ${theme.spacing.baseX2} calc(${theme.spacing.base} * 10);
+  padding: ${theme.spacing.baseX2} calc(${theme.spacing.base} * 7);
   ${theme.textStyles.body};
 
   ${({ level }) =>

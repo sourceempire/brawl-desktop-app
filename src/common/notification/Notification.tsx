@@ -15,6 +15,7 @@ export const Notification = ({ text, level, onClose }: Props) => {
     setIsClosing(true);
   };
 
+  // the delay is for animation purposes
   useEffect(() => {
     if (!isClosing) return;
     setTimeout(onClose, 400);

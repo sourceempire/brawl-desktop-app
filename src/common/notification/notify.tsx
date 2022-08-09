@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import { NotificationLevel } from 'types/Notification';
-import Notification from './components/Notification';
+import { Notification } from './Notification';
 
 const sendNotification = (message: string, level: NotificationLevel) => {
   const element = document.createElement('div');
