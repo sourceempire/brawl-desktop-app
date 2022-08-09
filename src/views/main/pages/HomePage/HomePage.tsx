@@ -8,9 +8,13 @@ import Icons from 'assets/icons/Icons';
 const HomePage = () => {
   const { news, isLoading: isLoadingNews } = useNewsFeed();
 
-  useEffect(() => {
-    notify.info('Testing errorrs');
-  }, []);
+  // Only temp
+  // Uncomment to see how nitofications look
+  // useEffect(() => {
+  //   notify.error('Testing Error');
+  //   notify.warning('Testing Warning');
+  //   notify.info('Testing Info');
+  // }, []);
 
   return (
     <Wrapper>
@@ -59,7 +63,7 @@ const HomePage = () => {
   );
 };
 
-// Only temp
+// Only temp, but cool nontheless
 const IconGallery = styled.div`
   @keyframes colors {
     0% {

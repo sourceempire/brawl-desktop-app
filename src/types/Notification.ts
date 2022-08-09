@@ -14,6 +14,6 @@ export const NotificationLevelBackgroundColors = {
 
 export const NotificationLevelColors = {
   [NotificationLevel.INFO]: theme.colors.textPrimaryDark,
-  [NotificationLevel.WARNING]: theme.colors.statusWarning,
-  [NotificationLevel.ERROR]: theme.colors.statusError
+  [NotificationLevel.WARNING]: theme.colors.textPrimaryLight,
+  [NotificationLevel.ERROR]: theme.colors.textPrimaryLight
 };

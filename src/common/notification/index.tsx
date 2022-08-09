@@ -3,9 +3,20 @@ import { NotificationLevel } from 'types/Notification';
 import Notification from './components/Notification';
 
 const sendNotification = (message: string, level: NotificationLevel) => {
-  console.log(message);
-  const root = ReactDOM.createRoot(document.getElementById('notification-root') as HTMLDivElement);
-  root.render(<Notification text={message} level={level} />);
+  const element = document.createElement('div');
+  document.body.appendChild(element);
+  const root = ReactDOM.createRoot(element as HTMLDivElement);
+
+  root.render(
+    <Notification
+      text={message}
+      level={level}
+      onClose={() => {
+        root.unmount();
+        document.body.removeChild(element);
+      }}
+    />
+  );
 };
 
 export const notify = {
