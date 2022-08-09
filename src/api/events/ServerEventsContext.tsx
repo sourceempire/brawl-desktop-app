@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { createContext, useCallback, useEffect, useRef, useState } from 'react';
 import { Fetcher } from 'api';
 import * as authRequests from 'api/requests/AuthRequests';
 import SockJs from 'sockjs-client';
@@ -27,7 +27,7 @@ type Context = {
   unsubscribeFromFeed: (feed: string, feedListenerId: string) => void;
 };
 
-export const ServerEventsContext = React.createContext<Context>({
+export const ServerEventsContext = createContext<Context>({
   addEventListener: () => '',
   removeEventListener: () => undefined,
   subscribeToFeed: () => '',

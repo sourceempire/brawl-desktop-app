@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { ServerEventsProvider } from 'api/events/ServerEventsContext';
 import { useAuth } from 'api/requests';
 import DragableArea from 'common/components/DragableArea';
+import { UserContextProvider } from 'context/UserContext';
 import { Route, Routes } from 'react-router-dom';
 import TournamentListView from '../../views/tournamentlist/TournamentListView';
 import TopBar from './components/TopBar';
@@ -23,13 +24,15 @@ const MainView = () => {
     <Wrapper>
       <DragableArea />
       <ServerEventsProvider>
-        <TopBar />
-        <Page>
-          <Routes>
-            <Route path="/tournamentlist" element={<TournamentListView />} />
-            <Route path="/" element={<HomePage />} />
-          </Routes>
-        </Page>
+        <UserContextProvider>
+          <TopBar />
+          <Page>
+            <Routes>
+              <Route path="/tournamentlist" element={<TournamentListView />} />
+              <Route path="/" element={<HomePage />} />
+            </Routes>
+          </Page>
+        </UserContextProvider>
       </ServerEventsProvider>
     </Wrapper>
   );

@@ -1,7 +1,13 @@
+declare global {
+  interface Window {
+    bridge: any | undefined;
+  }
+}
+
 export function getPlatform() {
-  try {
-    return process.platform;
-  } catch (e) {
+  if (window.bridge) {
+    return window.bridge.getPlatform();
+  } else {
     return '';
   }
 }

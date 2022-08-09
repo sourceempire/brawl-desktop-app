@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
-import Lottie, { AnimationItem } from 'lottie-web';
+// Using lottie light, as full lottie uses eval() to work, and eval() is blocked by the Content Security Policy
+import Lottie, { AnimationItem } from 'lottie-web/build/player/lottie_light';
 import { Wrapper } from './Animation.styles';
 
 /**

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useRef, useState } from 'react';
-import * as authRequests from 'api/requests/AuthRequests';
+import { AuthRequests } from 'api/requests';
 import {
   type AuthType,
   type LoginResult,
@@ -11,7 +11,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import Window from 'window';
 
-export const useAuth = () => {
+const useAuth = () => {
   // TODO -> Fix typesafe way of doing this
   const [authType, setAuthType] = useState<AuthType>('openid');
   const [isLoading, setLoading] = useState(false);
@@ -22,7 +22,7 @@ export const useAuth = () => {
   const { current: loginValidate } = useRef(async () => {
     setLoading(true);
     try {
-      await authRequests.loginValidate();
+      await AuthRequests.loginValidate();
       closeLoginWindowAndOpenMain();
     } catch (err: any) {
       if (err.status !== 200) {
@@ -36,7 +36,7 @@ export const useAuth = () => {
   const { current: getAuthType } = useRef(async () => {
     setLoading(true);
     try {
-      const result = await authRequests.getAuthType();
+      const result = await AuthRequests.getAuthType();
       setAuthType(result.type);
     } catch (err: any) {
       setError(err);
@@ -48,7 +48,7 @@ export const useAuth = () => {
     async (username: string, password: string) => {
       setLoading(true);
       try {
-        await authRequests.loginWithUsernameAndPassword(username, password);
+        await AuthRequests.loginWithUsernameAndPassword(username, password);
         closeLoginWindowAndOpenMain();
       } catch (err) {
         setError(err);
@@ -58,7 +58,7 @@ export const useAuth = () => {
   );
 
   const { current: loginWithOpenId } = useRef(async (identityProvider: string) => {
-    const result = await authRequests.getOpenIdAuthUrl();
+    const result = await AuthRequests.getOpenIdAuthUrl();
     Window.openAuthWindow(`${result.authUrl}&identity_provider=${identityProvider}`);
 
     Window.addLoginResultListener((result: LoginResult) => {
@@ -83,7 +83,7 @@ export const useAuth = () => {
   });
 
   const { current: register } = useRef(async (form: RegisterForm) => {
-    const registerResult = await authRequests.register(form);
+    const registerResult = await AuthRequests.register(form);
     if (registerResult.succeeded) {
       closeLoginWindowAndOpenMain();
     } else {
@@ -93,7 +93,7 @@ export const useAuth = () => {
 
   const { current: logout } = useRef(async () => {
     try {
-      await authRequests.logout();
+      await AuthRequests.logout();
       closeMainWindowAndOpenLogin();
     } catch (err) {
       setError(err);
@@ -129,3 +129,5 @@ const closeLoginWindowAndOpenMain = () => {
     Window.closeLoginWindow();
   }, 20);
 };
+
+export default useAuth;
