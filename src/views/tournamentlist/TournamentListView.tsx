@@ -23,6 +23,7 @@ import {
   Wrapper
 } from './TournamentListView.styled';
 import FilterIcon from 'assets/icons/Filter.svg';
+import Icons from 'assets/icons/Icons';
 import SearchIcon from 'assets/icons/Search.svg';
 
 export default function TournamentListView() {
@@ -108,13 +109,13 @@ function Page() {
           </FilterBullets>
           <FilterControls>
             <SearchInput
-              icon={SearchIcon}
+              icon={Icons.Search.url}
               placeholder="Search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               size={InputSize.SMALL}
             />
-            <FilterButton icon={FilterIcon} onClick={() => setFilterModalOpen(true)}>
+            <FilterButton icon={Icons.Filter} onClick={() => setFilterModalOpen(true)}>
               Filter
             </FilterButton>
             <TournamentsFilters

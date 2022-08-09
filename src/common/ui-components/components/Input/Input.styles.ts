@@ -4,8 +4,7 @@ import styled, { css } from 'styled-components';
 // TODO -> Add support for which side icons should be
 
 export const iconStyle = css<{ inputSize: InputSize }>`
-  svg,
-  img {
+  .input-icon {
     display: inline-block;
     opacity: 0.4;
     position: absolute;
