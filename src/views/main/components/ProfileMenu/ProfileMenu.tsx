@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useUserStatusFeed } from 'api/feeds';
 import { UserRequests, useAuth } from 'api/requests';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
-import notify from 'common/notification';
+import notify from 'common/notifications';
 import ContextMenu from 'common/ui-components/components/ContextMenu';
 import UserStatus, { UserStatusEnum } from '../UserStatus';
 import {
