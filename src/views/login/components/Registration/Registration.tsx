@@ -26,7 +26,6 @@ const Registration = ({ active }: Props) => {
   const [form, updateForm] = useState<Form>(initialState);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.name);
     updateForm({
       ...form,
       [event.target.name]: event.target.value

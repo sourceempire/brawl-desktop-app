@@ -1,10 +1,17 @@
+import { useEffect } from 'react';
 import useNewsFeed from 'api/feeds/hooks/useNewsFeed';
+import notify from 'common/notifications';
 import styled from 'styled-components';
 import { Wrapper } from './HomePage.styles';
 import Icons from 'assets/icons/Icons';
 
 const HomePage = () => {
   const { news, isLoading: isLoadingNews } = useNewsFeed();
+
+  useEffect(() => {
+    notify.info('Message', { timer: 3000 });
+    notify.error('ERROR', { timer: 4000 });
+  }, []);
 
   return (
     <Wrapper>
@@ -53,7 +60,7 @@ const HomePage = () => {
   );
 };
 
-// Only temp
+// Only temp, but cool nontheless
 const IconGallery = styled.div`
   @keyframes colors {
     0% {

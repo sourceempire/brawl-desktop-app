@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useUserStatusFeed } from 'api/feeds';
 import { UserRequests, useAuth } from 'api/requests';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
+import notify from 'common/notifications';
 import ContextMenu from 'common/ui-components/components/ContextMenu';
 import UserStatus, { UserStatusEnum } from '../UserStatus';
 import {
@@ -37,7 +38,9 @@ const ProfileMenu = () => {
     // is set in the backend. If the status update fails, the actual status
     // will be shown again
     setLocalStatus(newStatus);
-    UserRequests.setUserStatus(newStatus).catch(() => {
+    UserRequests.setUserStatus(newStatus).catch((error) => {
+      console.error(error);
+      notify.error(`Could not set status, please try again later.`);
       setLocalStatus(status);
     });
   };

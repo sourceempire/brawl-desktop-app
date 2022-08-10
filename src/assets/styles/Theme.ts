@@ -1,4 +1,4 @@
-import { DefaultTheme } from 'styled-components';
+import { DefaultTheme, css } from 'styled-components';
 import { getPlatform } from 'utils/processUtils';
 
 enum PlatformName {
@@ -42,11 +42,11 @@ enum BorderRadius {
 }
 
 enum Spacing {
-  BASE = '6',
-  BASEx2 = '12',
-  BASEx3 = '18',
-  BASEx4 = '24',
-  BASEx5 = '30'
+  BASE = '6px',
+  BASEx2 = '12px',
+  BASEx3 = '18px',
+  BASEx4 = '24px',
+  BASEx5 = '30px'
 }
 
 enum Fonts {
@@ -54,38 +54,38 @@ enum Fonts {
   STYLIZED = "'Orbitron', sans-serif"
 }
 
-enum TextStyles {
-  HEADER = `
+const TextStyles = {
+  HEADER: css`
     font-size: 20px;
     font-weight: 500;
   `,
-  STYLIZED_HEADER = `
+  STYLIZED_HEADER: css`
     font-family: 'Orbitron', sans-serif;
     font-size: 18px;
     font-weight: bold;
   `,
-  TITLE = `
+  TITLE: css`
     font-size: 13px;
     font-weight: bold;
   `,
-  BODY = `
+  BODY: css`
     font-size: 13px;
     font-weight: normal;
   `,
-  MENU = `
+  MENU: css`
     font-size: 13px;
     font-weight: normal;
     text-transform: uppercase;
   `,
-  BUTTON = `
+  BUTTON: css`
     font-size: 12px;
     font-weight: normal;
   `,
-  NOTE = `
+  NOTE: css`
     font-size: 11px;
     font-weight: normal;
   `
-}
+};
 
 export const theme: DefaultTheme = {
   colors: {

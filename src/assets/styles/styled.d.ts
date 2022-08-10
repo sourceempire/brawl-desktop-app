@@ -36,13 +36,13 @@ declare module 'styled-components' {
       stylized: string;
     };
     textStyles: {
-      header: string;
-      stylizedHeader: string;
-      title: string;
-      body: string;
-      menu: string;
-      button: string;
-      note: string;
+      header: FlattenSimpleInterpolation;
+      stylizedHeader: FlattenSimpleInterpolation;
+      title: striFlattenSimpleInterpolationng;
+      body: FlattenSimpleInterpolation;
+      menu: FlattenSimpleInterpolation;
+      button: FlattenSimpleInterpolation;
+      note: FlattenSimpleInterpolation;
     };
   }
 }
