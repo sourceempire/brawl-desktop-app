@@ -10,7 +10,7 @@ const statusTexts = {
   [UserStatusEnum.OFFLINE]: 'Appear Offline'
 };
 
-const UserStatus = ({ status, hideText, className }: Props) => {
+const UserStatus = ({ status = UserStatusEnum.OFFLINE, hideText, className }: Props) => {
   return (
     <Wrapper>
       <StatusCircle status={status} className={className}>

@@ -2,7 +2,7 @@ import { FlattenSimpleInterpolation, css } from 'styled-components';
 import { theme } from 'assets/styles/Theme';
 
 export type Props = {
-  status: UserStatusEnum;
+  status?: UserStatusEnum;
   className?: string;
   hideText?: boolean;
 };
