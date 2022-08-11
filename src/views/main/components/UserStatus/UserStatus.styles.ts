@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Props, StatusStyle, UserStatusEnum } from './UserStatus.types';
+import { StatusStyle, UserStatusEnum } from './UserStatus.types';
 
 export const Wrapper = styled.div`
   display: flex;
