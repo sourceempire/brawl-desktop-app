@@ -24,6 +24,10 @@ import FilterUrl, { ReactComponent as FilterComponent } from './Filter.svg';
 const Filter = FilterComponent as SVGComponent;
 Filter.url = FilterUrl;
 
+import FriendsUrl, { ReactComponent as FriendsComponent } from './Friends.svg';
+const Friends = FriendsComponent as SVGComponent;
+Friends.url = FriendsUrl;
+
 import KeyUrl, { ReactComponent as KeyComponent } from './Key.svg';
 const Key = KeyComponent as SVGComponent;
 Key.url = KeyUrl;
@@ -60,6 +64,7 @@ const Icons = {
   Cross,
   DatePickerArrow,
   Filter,
+  Friends,
   Key,
   Profile,
   Search,

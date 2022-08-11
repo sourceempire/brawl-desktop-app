@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { ServerEventsContext } from 'api/events';
+import { ServerEventsContext } from 'context';
 
 function useFeed<T>(feed: string) {
   const { subscribeToFeed, unsubscribeFromFeed } = useContext(ServerEventsContext);

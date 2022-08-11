@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ServerEventsContext } from 'api/events';
+import { ServerEventsContext } from 'context';
 
 export const useServerEvents = () => {
   const { addEventListener, removeEventListener } = useContext(ServerEventsContext);
