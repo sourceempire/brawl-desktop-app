@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Props, StatusStyle } from './UserStatus.types';
+import { StatusStyle, UserStatusEnum } from './UserStatus.types';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -11,7 +11,7 @@ export const StatusText = styled.div`
   text-transform: capitalize;
 `;
 
-export const StatusCircle = styled.div<Props>`
+export const StatusCircle = styled.div<{ status: UserStatusEnum }>`
   display: flex;
   justify-content: center;
   align-items: center;

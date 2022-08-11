@@ -31,7 +31,7 @@ const ProfileMenu = () => {
   const { logout } = useAuth();
 
   const [isMenuShown, setIsMenuShown] = useState<boolean>(false);
-  const [localStatus, setLocalStatus] = useState(status);
+  const [localStatus, setLocalStatus] = useState(UserStatusEnum.OFFLINE);
 
   const setStatus = (newStatus: UserStatusEnum) => {
     // setLocalStatus allows an optimistic update of the status before it

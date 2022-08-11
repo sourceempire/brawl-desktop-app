@@ -6,8 +6,8 @@ type Options = {
 };
 
 const useUserStatusFeed = ({ userId }: Options) => {
-  const feed = useFeed<{ status: UserStatusEnum }>(`user.status.${userId}`);
-  return { status: UserStatusEnum[feed.currentState.status] };
+  const { isLoading, currentState } = useFeed<{ status: UserStatusEnum }>(`user.status.${userId}`);
+  return { status: UserStatusEnum[currentState.status], isLoading };
 };
 
 export default useUserStatusFeed;
