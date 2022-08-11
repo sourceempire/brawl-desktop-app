@@ -10,10 +10,12 @@ import {
   HorizontalRule,
   MenuItem,
   MyUserStatus,
-  ProfileImagePlaceholder,
+  ProfileImage,
+  ProfileImageContainer,
   Username,
   Wrapper
 } from './ProfileMenu.styles';
+import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
 
 const orderedStatusItems = [
   UserStatusEnum.ONLINE,
@@ -65,9 +67,10 @@ const ProfileMenu = () => {
     <>
       <Wrapper onClick={showMenu}>
         <ArrowIcon />
-        <ProfileImagePlaceholder>
+        <ProfileImageContainer>
+          <ProfileImage src={tempProfileImage} />
           <MyUserStatus status={localStatus} hideText />
-        </ProfileImagePlaceholder>
+        </ProfileImageContainer>
       </Wrapper>
       {isMenuShown && (
         <ContextMenu
