@@ -46,7 +46,10 @@ enum Spacing {
   BASEx2 = '12px',
   BASEx3 = '18px',
   BASEx4 = '24px',
-  BASEx5 = '30px'
+  BASEx5 = '30px',
+  BASEx6 = '36px',
+  BASEx7 = '42px',
+  BASEx8 = '48px'
 }
 
 enum Fonts {
@@ -106,7 +109,6 @@ export const theme: DefaultTheme = {
     statusSuccess: Colors.STATUS_SUCCESS,
     statusWarning: Colors.STATUS_WARNING
   },
-  titleBarHeight: titleBarHeight(),
   borderRadius: {
     default: BorderRadius.DEFAULT
   },
@@ -115,7 +117,10 @@ export const theme: DefaultTheme = {
     baseX2: Spacing.BASEx2,
     baseX3: Spacing.BASEx3,
     baseX4: Spacing.BASEx4,
-    baseX5: Spacing.BASEx5
+    baseX5: Spacing.BASEx5,
+    baseX6: Spacing.BASEx6,
+    baseX7: Spacing.BASEx7,
+    baseX8: Spacing.BASEx8
   },
   fonts: {
     default: Fonts.DEFAULT,
@@ -129,5 +134,9 @@ export const theme: DefaultTheme = {
     menu: TextStyles.MENU,
     button: TextStyles.BUTTON,
     note: TextStyles.NOTE
-  }
+  },
+
+  titleBarHeight: titleBarHeight(),
+  topBarHeight: Spacing.BASEx8,
+  friendsBarWidth: '230px'
 };

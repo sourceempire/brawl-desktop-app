@@ -1,7 +1,13 @@
 import { Link } from 'react-router-dom';
 import MainNavLink from '../MainNavLink';
 import ProfileMenu from '../ProfileMenu';
+import TopBarItem from '../TopBarItem';
 import { PlaceholderLogo, TopBarActions, Wrapper } from './TopBar.styles';
+import Icons from 'assets/icons/Icons';
+
+type Props = {
+  toggleFriends: () => void;
+};
 
 type NavigationItem = {
   name: string;
@@ -14,7 +20,7 @@ const mainNavigationItems: NavigationItem[] = [
   { name: 'Quick Match', isUpcomingFeature: true }
 ];
 
-const TopBar = () => {
+const TopBar = ({ toggleFriends }: Props) => {
   return (
     <Wrapper>
       <TopBarActions>
@@ -33,6 +39,7 @@ const TopBar = () => {
       </TopBarActions>
 
       <TopBarActions>
+        <TopBarItem icon={<Icons.Friends />} onClick={toggleFriends} />
         <ProfileMenu />
       </TopBarActions>
     </Wrapper>

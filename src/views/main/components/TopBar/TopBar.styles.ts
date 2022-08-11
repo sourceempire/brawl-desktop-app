@@ -3,10 +3,13 @@ import styled, { css } from 'styled-components/macro';
 export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 48px;
   padding: 0 24px;
   margin-bottom: 24px;
   flex-shrink: 0;
+
+  ${({ theme }) => css`
+    height: ${theme.topBarHeight};
+  `}
 `;
 
 export const TopBarActions = styled.div`

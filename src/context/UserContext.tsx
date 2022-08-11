@@ -22,6 +22,7 @@ export const UserContextProvider = ({ children }: Props) => {
   return user ? (
     <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
   ) : (
+    // TODO -> Replace this with something better
     <div>Loading User</div>
   );
 };

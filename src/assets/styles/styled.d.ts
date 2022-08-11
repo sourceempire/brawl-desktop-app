@@ -23,13 +23,15 @@ declare module 'styled-components' {
     borderRadius: {
       default: string;
     };
-    titleBarHeight: string;
     spacing: {
       base: string;
       baseX2: string;
       baseX3: string;
       baseX4: string;
       baseX5: string;
+      baseX6: string;
+      baseX7: string;
+      baseX8: string;
     };
     fonts: {
       default: string;
@@ -44,5 +46,9 @@ declare module 'styled-components' {
       button: FlattenSimpleInterpolation;
       note: FlattenSimpleInterpolation;
     };
+
+    titleBarHeight: string;
+    topBarHeight: string;
+    friendsBarWidth: string;
   }
 }

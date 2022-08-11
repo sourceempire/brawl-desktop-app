@@ -13,9 +13,8 @@ export const Wrapper = styled.div`
   right: -3px;
   padding: 3px;
   border-radius: 3px;
-  cursor: pointer;
   :hover {
-    background-color: ${theme.colors.lightTint};
+    background-color: ${theme.colors.secondary};
   }
 `;
 
