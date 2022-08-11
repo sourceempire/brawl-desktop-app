@@ -12,20 +12,31 @@ export const Wrapper = styled.div`
   box-sizing: content-box;
   right: -3px;
   padding: 3px;
+  padding-left: 6px;
   border-radius: 3px;
   :hover {
     background-color: ${theme.colors.secondary};
   }
 `;
 
-export const ProfileImagePlaceholder = styled.div`
+export const ProfileImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  ${({ theme }) => css`
+    border-radius: ${theme.borderRadius.default};
+  `}
+`;
+
+export const ProfileImageContainer = styled.div`
   position: relative;
   height: 48px;
   width: 48px;
 
   ${({ theme }) => css`
     border-radius: ${theme.borderRadius.default};
-    background-color: #623000;
+    background-color: black;
   `}
 `;
 
@@ -36,13 +47,13 @@ export const ArrowIcon = styled(Icons.ArrowDown)`
 
 export const MyUserStatus = styled(UserStatus)`
   position: absolute;
-  right: -4px;
-  bottom: -1px;
+  right: -6px;
+  bottom: -3px;
   height: 14px;
   width: 14px;
 
   ${({ theme, status }) => css`
-    outline: 2px solid ${theme.colors.background};
+    outline: 3px solid ${theme.colors.background};
     background-color: ${status === UserStatusEnum.OFFLINE && theme.colors.background};
   `}
 `;

@@ -14,6 +14,7 @@ export type ArrowPosition = { left?: number; right?: number };
 export const Wrapper = styled.div<{ position: Position; arrowPosition?: ArrowPosition }>`
   position: absolute;
   padding: 6px;
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.5));
 
   ::before {
     content: '';
