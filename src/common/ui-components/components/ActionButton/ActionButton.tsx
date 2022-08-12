@@ -1,11 +1,7 @@
 import { useLayoutEffect, useRef, useState } from 'react';
-import ContextMenu from 'common/ui-components/components/ContextMenu';
-import type {
-  ArrowPosition,
-  ContextMenuRef,
-  Position
-} from 'common/ui-components/components/ContextMenu/ContextMenu.types';
-import { Hint, Wrapper } from './TopBarItem.styles';
+import ContextMenu from '../ContextMenu';
+import { ArrowPosition, ContextMenuRef, Position } from '../ContextMenu/ContextMenu.types';
+import { Hint, Wrapper } from './ActionButton.styles';
 import { theme } from 'assets/styles/Theme';
 
 type Props = {
@@ -15,7 +11,7 @@ type Props = {
   className?: string;
 };
 
-const TopBarItem = ({ onClick, icon, hint, className }: Props) => {
+const Action = ({ onClick, icon, hint, className }: Props) => {
   const itemRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const contextRef = useRef() as React.MutableRefObject<ContextMenuRef>;
 
@@ -50,13 +46,22 @@ const TopBarItem = ({ onClick, icon, hint, className }: Props) => {
       width: actionWidth
     } = getActionRect();
 
-    const { width: contextMenuWidth } = getHintRect();
+    const { width: hintWidth } = getHintRect();
 
-    const hintLeft = actionLeft - contextMenuWidth / 2 + actionWidth / 2;
+    const hintLeft = actionLeft - hintWidth / 2 + actionWidth / 2;
     const hintTop = actionTop + actionHeight + theme.spacing.base * 1.5;
 
-    setContextArrowPosition({ left: contextMenuWidth / 2 });
-    setHintPosition({ left: hintLeft, top: hintTop });
+    const { innerWidth: windowWidth } = window;
+
+    const hintIsTooFarRight = windowWidth < hintWidth + hintLeft;
+
+    if (hintIsTooFarRight) {
+      setContextArrowPosition({ right: actionWidth / 2 });
+      setHintPosition({ right: theme.spacing.baseX2, top: hintTop });
+    } else {
+      setContextArrowPosition({ left: hintWidth / 2 });
+      setHintPosition({ left: hintLeft, top: hintTop });
+    }
   }, [hint, isHintVisible]);
 
   return (
@@ -78,4 +83,4 @@ const TopBarItem = ({ onClick, icon, hint, className }: Props) => {
   );
 };
 
-export default TopBarItem;
+export default Action;

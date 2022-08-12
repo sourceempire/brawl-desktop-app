@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { Wrapper } from './ContextMenu.styles';
 import type { ArrowPosition, ContextMenuRef, Position } from './ContextMenu.types';
@@ -17,17 +17,21 @@ const ContextMenu = (
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
   useImperativeHandle(forwardedRef, () => ({ contextMenuContainer: ref.current }));
 
-  const handleClickOutside = useCallback(() => {
-    if (!onClickOutside) return;
-    onClickOutside();
-  }, [onClickOutside]);
-
   useEffect(() => {
-    document.addEventListener('click', handleClickOutside, true);
-    return () => {
-      document.removeEventListener('click', handleClickOutside, true);
+    if (!onClickOutside) return;
+
+    const handleMouseClick = (event: MouseEvent) => {
+      const isClickOutside = !ref.current.contains(event.target as HTMLDivElement);
+      if (isClickOutside) {
+        onClickOutside();
+      }
     };
-  }, [handleClickOutside]);
+
+    document.addEventListener('click', handleMouseClick, true);
+    return () => {
+      document.removeEventListener('click', handleMouseClick, true);
+    };
+  }, [onClickOutside]);
 
   return ReactDOM.createPortal(
     <Wrapper ref={ref} position={position} arrowPosition={arrowPosition}>

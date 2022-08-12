@@ -1,3 +1,4 @@
+import Action from 'common/ui-components/components/ActionButton';
 import styled, { css } from 'styled-components/macro';
 
 export const Wrapper = styled.div`
@@ -25,5 +26,11 @@ export const PlaceholderLogo = styled.div`
 
   ${({ theme }) => css`
     background-color: ${theme.colors.primary};
+  `}
+`;
+
+export const TopBarAction = styled(Action)`
+  ${({ theme }) => css`
+    margin-right: ${theme.spacing.baseX3}px;
   `}
 `;

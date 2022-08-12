@@ -1,5 +1,9 @@
 import { SVGComponent } from './Icons.types';
 
+import AddFriendUrl, { ReactComponent as AddFriendComponent } from './AddFriend.svg';
+const AddFriend = AddFriendComponent as SVGComponent;
+AddFriend.url = AddFriendUrl;
+
 import ArrowDownUrl, { ReactComponent as ArrowDownComponent } from './ArrowDown.svg';
 const ArrowDown = ArrowDownComponent as SVGComponent;
 ArrowDown.url = ArrowDownUrl;
@@ -58,6 +62,7 @@ Trophy.url = TrophyUrl;
 
 
 const Icons = {
+  AddFriend,
   ArrowDown,
   Check,
   Clock,

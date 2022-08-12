@@ -19,10 +19,11 @@ export const Wrapper = styled.div<{
         top: 0px;
         height: 8px;
         width: 8px;
-        transform: translate(-50%, -50%) rotate(45deg);
+        transform: translate(${arrowPosition?.left ? '-50%' : '50%'}, -50%) rotate(45deg);
 
         background-color: ${theme.colors.secondary};
         left: ${arrowPosition?.left}px;
+        right: ${arrowPosition?.right}px;
       }
     `}
 
