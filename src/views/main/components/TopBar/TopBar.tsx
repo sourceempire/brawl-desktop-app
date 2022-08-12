@@ -39,7 +39,7 @@ const TopBar = ({ toggleFriends }: Props) => {
       </TopBarActions>
 
       <TopBarActions>
-        <TopBarItem icon={<Icons.Friends />} onClick={toggleFriends} />
+        <TopBarItem icon={<Icons.Friends />} onClick={toggleFriends} hint="Toggle Friends" />
         <ProfileMenu />
       </TopBarActions>
     </Wrapper>

@@ -9,12 +9,12 @@ enum PlatformName {
 const titleBarHeight = () => {
   switch (getPlatform()) {
     case PlatformName.MAC:
-      return '24px';
+      return 24;
     case PlatformName.WINDOWS:
-      return '30px';
+      return 30;
     default:
       console.warn('Platform not supported');
-      return '12px';
+      return 12;
   }
 };
 
@@ -25,9 +25,9 @@ enum Colors {
   SECONDARY = '#363750',
   LIGHT_TINT = '#595B83',
 
-  TEXT_PRIMARY_LIGHT = 'rgba(255, 255, 255, 1)',
-  TEXT_SECONDARY_LIGHT = 'rgba(255, 255, 255, .67)',
-  TEXT_DISABLED_LIGHT = 'rgba(255, 255, 255, .50)',
+  TEXT_PRIMARY_LIGHT = 'rgba(218, 218, 218, 1)', //#DADADA
+  TEXT_SECONDARY_LIGHT = 'rgba(218, 218, 218, .67)',
+  TEXT_DISABLED_LIGHT = 'rgba(218, 218, 218, .50)',
   TEXT_PRIMARY_DARK = 'rgba(0, 0, 0, .87)',
   TEXT_SECONDARY_DARK = 'rgba(0, 0, 0, .54)',
   TEXT_DISABLED_DARK = 'rgba(0, 0, 0, .38)',
@@ -42,14 +42,14 @@ enum BorderRadius {
 }
 
 enum Spacing {
-  BASE = '6px',
-  BASEx2 = '12px',
-  BASEx3 = '18px',
-  BASEx4 = '24px',
-  BASEx5 = '30px',
-  BASEx6 = '36px',
-  BASEx7 = '42px',
-  BASEx8 = '48px'
+  BASE = 6,
+  BASEx2 = 12,
+  BASEx3 = 18,
+  BASEx4 = 24,
+  BASEx5 = 30,
+  BASEx6 = 36,
+  BASEx7 = 42,
+  BASEx8 = 48
 }
 
 enum Fonts {
@@ -138,5 +138,5 @@ export const theme: DefaultTheme = {
 
   titleBarHeight: titleBarHeight(),
   topBarHeight: Spacing.BASEx8,
-  friendsBarWidth: '230px'
+  friendsBarWidth: 230
 };

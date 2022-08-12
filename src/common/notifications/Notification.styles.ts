@@ -15,7 +15,7 @@ export const CloseIcon = styled(Icons.Cross)`
   top: 50%;
   transform: translateY(-50%);
 
-  padding: ${theme.spacing.base};
+  padding: ${theme.spacing.base}px;
   right: ${theme.spacing.base};
   fill: ${theme.colors.textSecondaryDark};
 `;
@@ -30,7 +30,7 @@ export const Wrapper = styled.div<{ level: NotificationLevel; isClosing: boolean
   animation: fadeIn 0.3s forwards;
   cursor: pointer;
 
-  padding: ${theme.spacing.baseX2} calc(${theme.spacing.base} * 7);
+  padding: ${theme.spacing.baseX2}px calc(${theme.spacing.base}px * 7);
   ${theme.textStyles.body};
 
   ${({ level }) =>

@@ -6,7 +6,9 @@ export const Wrapper = styled.div`
   right: 0;
   width: 230px;
   ${({ theme }) => css`
-    height: calc(100vh - ${theme.titleBarHeight} - ${theme.topBarHeight} - ${theme.spacing.baseX4});
+    height: calc(
+      100vh - ${theme.titleBarHeight}px - ${theme.topBarHeight}px - ${theme.spacing.baseX4}px
+    );
     background-color: ${theme.colors.secondary};
   `}
 `;

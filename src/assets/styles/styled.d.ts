@@ -24,14 +24,14 @@ declare module 'styled-components' {
       default: string;
     };
     spacing: {
-      base: string;
-      baseX2: string;
-      baseX3: string;
-      baseX4: string;
-      baseX5: string;
-      baseX6: string;
-      baseX7: string;
-      baseX8: string;
+      base: number;
+      baseX2: number;
+      baseX3: number;
+      baseX4: number;
+      baseX5: number;
+      baseX6: number;
+      baseX7: number;
+      baseX8: number;
     };
     fonts: {
       default: string;
@@ -47,8 +47,8 @@ declare module 'styled-components' {
       note: FlattenSimpleInterpolation;
     };
 
-    titleBarHeight: string;
-    topBarHeight: string;
-    friendsBarWidth: string;
+    titleBarHeight: number;
+    topBarHeight: number;
+    friendsBarWidth: number;
   }
 }

@@ -4,19 +4,22 @@ import styled, { css } from 'styled-components';
 export const LinkText = styled.div<{ isUpcomingFeature?: boolean }>`
   font-weight: bold;
   font-size: 21px;
-  color: #ffffff;
+  ${({ theme }) => css`
+    color: ${theme.colors.textPrimaryLight};
+  `}
 `;
 
 export const UpcomingFeatureBanner = styled.div`
   position: absolute;
   padding: 6px;
-  color: #ffffff;
+
   font-size: 12px;
   right: 0;
   bottom: 0;
   transform: translate(20%, 70%) rotate(-5deg);
   opacity: 0.9;
   ${({ theme }) => css`
+    color: white;
     background-color: ${theme.colors.primary};
   `};
 `;
