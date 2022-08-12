@@ -5,20 +5,24 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  > *:first-child {
-    fill: #dadada;
-  }
-
   ${({ theme }) => css`
-    width: ${theme.spacing.baseX5};
-    height: ${theme.spacing.baseX5};
-    padding: ${theme.spacing.base};
-    margin-right: ${theme.spacing.baseX3};
+    width: ${theme.spacing.baseX5}px;
+    height: ${theme.spacing.baseX5}px;
+    padding: ${theme.spacing.base}px;
+    margin-right: ${theme.spacing.baseX3}px;
     background-color: ${theme.colors.secondary};
     border-radius: ${theme.borderRadius.default};
-
+    > *:first-child {
+      fill: ${theme.colors.textPrimaryLight};
+    }
     :hover {
       background-color: ${theme.colors.lightTint};
     }
+  `}
+`;
+
+export const Hint = styled.div`
+  ${({ theme }) => css`
+    padding: calc(${theme.spacing.base}px / 2);
   `}
 `;

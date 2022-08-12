@@ -75,7 +75,7 @@ const ProfileMenu = () => {
       {isMenuShown && (
         <ContextMenu
           position={{ right: 24, top: 83 }}
-          arrowPosition={{ right: 20 }}
+          arrowPosition={{ left: 144 }}
           onClickOutside={hideMenu}>
           <Username>{user.usertag}</Username>
           <HorizontalRule />

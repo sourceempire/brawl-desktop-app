@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   flex-shrink: 0;
 
   ${({ theme }) => css`
-    height: ${theme.topBarHeight};
+    height: ${theme.topBarHeight}px;
   `}
 `;
 

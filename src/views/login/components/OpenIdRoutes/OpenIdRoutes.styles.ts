@@ -8,7 +8,7 @@ export const AsideWrapper = styled.div`
   top: 0;
   transform: translateX(100%);
   transition: transform 1s;
-  height: calc(100% + ${theme.titleBarHeight});
+  height: calc(100% + ${theme.titleBarHeight}px);
 `;
 
 export const AsideImage = styled.img`

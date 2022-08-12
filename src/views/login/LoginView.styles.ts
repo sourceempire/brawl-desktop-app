@@ -5,5 +5,5 @@ export const Wrapper = styled.div`
   display: flex;
   height: 100%;
   width: 100%;
-  padding-top: ${(props) => props.theme.titleBarHeight};
+  padding-top: ${(props) => props.theme.titleBarHeight}px;
 `;
