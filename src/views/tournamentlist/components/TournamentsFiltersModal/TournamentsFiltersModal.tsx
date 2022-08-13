@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import { Button, Checkbox } from 'common/ui-components';
-import {
-  DatePickerInput,
-  DatePickerInputNative
-} from 'common/ui-components/components/DatePicker/DatePicker';
+import { DatePickerInput } from 'common/ui-components/components/DatePicker/DatePicker';
 import Modal from 'common/ui-components/components/Modal/Modal';
 import RadioButton from 'common/ui-components/components/RadioButton/RadioButton';
 import { RangedSlider } from 'common/ui-components/components/Slider/Slider';

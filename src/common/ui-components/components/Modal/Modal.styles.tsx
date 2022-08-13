@@ -1,26 +1,27 @@
 import styled, { css } from 'styled-components/macro';
 
-export const Content = styled.div<{
+type ContentProps = {
   width?: string;
   height?: string;
   timeout: number;
   noPadding: boolean;
-}>`
+};
+
+export const Content = styled.div<ContentProps>`
+  inset: 0;
+  margin: auto;
+  border-radius: 3px;
+  max-width: 100%;
+
   ${({ width, height, noPadding, theme }) => css`
-    ${width !== undefined &&
-    css`
-      width: 536px;
-    `};
-    max-width: 100%;
-    height: ${height !== undefined ? height : 'auto'};
+    height: ${height ? height : 'auto'};
+    width: ${width ? width : 'auto'};
+    background-color: ${theme.colors.secondary};
+
     ${!noPadding &&
     css`
       padding: 18px;
     `};
-    background-color: ${theme.colors.secondary};
-    inset: 0;
-    margin: auto;
-    border-radius: 3px;
   `}
 `;
 

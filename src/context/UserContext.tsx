@@ -3,7 +3,7 @@ import { UserRequests } from 'api/requests';
 import { User } from 'api/requests/UserRequests';
 
 export const UserContext = createContext<{ user: User }>({
-  user: { id: '', username: '', usertag: '', name: '' }
+  user: { id: '', username: '', userTag: '', name: '' }
 });
 
 type Props = {

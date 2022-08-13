@@ -1,5 +1,9 @@
 import { SVGComponent } from './Icons.types';
 
+import AbortUrl, { ReactComponent as AbortComponent } from './Abort.svg';
+const Abort = AbortComponent as SVGComponent;
+Abort.url = AbortUrl;
+
 import AddFriendUrl, { ReactComponent as AddFriendComponent } from './AddFriend.svg';
 const AddFriend = AddFriendComponent as SVGComponent;
 AddFriend.url = AddFriendUrl;
@@ -62,6 +66,7 @@ Trophy.url = TrophyUrl;
 
 
 const Icons = {
+  Abort,
   AddFriend,
   ArrowDown,
   Check,

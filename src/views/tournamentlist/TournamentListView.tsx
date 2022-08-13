@@ -22,9 +22,7 @@ import {
   TournamentList,
   Wrapper
 } from './TournamentListView.styled';
-import FilterIcon from 'assets/icons/Filter.svg';
 import Icons from 'assets/icons/Icons';
-import SearchIcon from 'assets/icons/Search.svg';
 
 export default function TournamentListView() {
   return (
