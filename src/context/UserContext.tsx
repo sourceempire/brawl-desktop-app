@@ -10,6 +10,7 @@ type Props = {
   children: React.ReactNode;
 };
 
+// TODO -> might be good to create a feed to update user data when things updates
 export const UserContextProvider = ({ children }: Props) => {
   const [user, setUser] = useState<User>();
 
