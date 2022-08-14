@@ -1,18 +1,18 @@
 import styled, { css } from 'styled-components/macro';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ iconColor?: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
 
-  ${({ theme }) => css`
+  ${({ theme, iconColor }) => css`
     width: ${theme.spacing.baseX5}px;
     height: ${theme.spacing.baseX5}px;
     padding: ${theme.spacing.base}px;
     background-color: ${theme.colors.secondary};
     border-radius: ${theme.borderRadius.default};
     > *:first-child {
-      fill: ${theme.colors.textPrimaryLight};
+      fill: ${iconColor ? iconColor : theme.colors.textPrimaryLight};
     }
     :hover {
       background-color: ${theme.colors.lightTint};

@@ -1,7 +1,5 @@
 import { Fetcher } from 'api';
 
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
-
 export type AuthType = 'password' | 'openid';
 
 export enum LoginResultStatus {
@@ -19,6 +17,8 @@ export type RegisterForm = {
   username: string;
   usertag: string;
 };
+
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 export const loginWithUsernameAndPassword: (
   username: string,

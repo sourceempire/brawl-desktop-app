@@ -21,7 +21,9 @@ type Props = {
   closeOnOverlayClick?: boolean;
   hideOverLay?: boolean;
   width?: string;
+  height?: string;
   noPadding?: boolean;
+  className?: string;
 };
 
 export default function Modal({
@@ -39,6 +41,7 @@ export default function Modal({
   closeOnOverlayClick = true,
   hideOverLay = false,
   width,
+  height,
   noPadding = false
 }: Props) {
   const element = useRef(document.createElement('div'));
@@ -69,6 +72,7 @@ export default function Modal({
           onMouseDown={(e) => e.stopPropagation()}
           timeout={closeTimeoutMS}
           width={width}
+          height={height}
           noPadding={noPadding}>
           {header && (
             <Header>

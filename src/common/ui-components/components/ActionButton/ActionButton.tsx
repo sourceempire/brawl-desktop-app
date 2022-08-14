@@ -7,11 +7,12 @@ import { theme } from 'assets/styles/Theme';
 type Props = {
   onClick: () => void;
   icon: React.ReactNode;
+  iconColor?: string;
   hint?: string;
   className?: string;
 };
 
-const Action = ({ onClick, icon, hint, className }: Props) => {
+const ActionButton = ({ onClick, icon, hint, iconColor, className }: Props) => {
   const itemRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const contextRef = useRef() as React.MutableRefObject<ContextMenuRef>;
 
@@ -71,6 +72,7 @@ const Action = ({ onClick, icon, hint, className }: Props) => {
         onClick={onClick}
         onMouseEnter={showHint}
         onMouseLeave={hideHint}
+        iconColor={iconColor}
         className={className}>
         {icon}
       </Wrapper>
@@ -83,4 +85,4 @@ const Action = ({ onClick, icon, hint, className }: Props) => {
   );
 };
 
-export default Action;
+export default ActionButton;
