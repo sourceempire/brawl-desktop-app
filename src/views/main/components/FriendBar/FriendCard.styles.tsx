@@ -1,19 +1,21 @@
+import React from 'react';
+import { Animation } from 'common/ui-components';
 import styled, { css } from 'styled-components/macro';
+import simpleLoading from 'assets/animations/simple-loading.json';
 import Icons from 'assets/icons/Icons';
 
-export const Wrapper = styled.div`
+export const FriendCard = styled.div`
   display: flex;
   align-items: center;
 
   ${({ theme }) => css`
-    height: ${theme.spacing.baseX7}px;
     margin-left: -${theme.spacing.base}px;
     margin-right: -${theme.spacing.base}px;
-    padding: 0 ${theme.spacing.base}px;
+    padding: ${theme.spacing.base}px;
     border-radius: ${theme.borderRadius.default};
 
     :hover {
-      outline: 1px solid rgba(255, 255, 255, 0.4);
+      outline: 1px solid ${theme.colors.lightTint};
     }
   `}
 `;
@@ -28,18 +30,18 @@ export const UserImage = styled.img`
   `}
 `;
 
-export const UserTagWrapper = styled.div`
+const UserTagWrapper = styled.div`
   position: relative;
   display: flex;
   align-items: center;
   flex-grow: 1;
   ${({ theme }) => css`
-    margin-left: ${theme.spacing.baseX2}px;
     ${theme.textStyles.body}
+    margin-left: ${theme.spacing.baseX2}px;
   `}
 `;
 
-export const UserTag = styled.div`
+const UserTagText = styled.div`
   position: absolute;
   left: 0;
   right: 0;
@@ -51,6 +53,12 @@ export const UserTag = styled.div`
   `}
 `;
 
+export const UserTag = ({ children }: { children: React.ReactNode }) => (
+  <UserTagWrapper>
+    <UserTagText>{children}</UserTagText>
+  </UserTagWrapper>
+);
+
 export const RequestSentText = styled.div`
   opacity: 0.5;
   ${({ theme }) => css`
@@ -61,3 +69,12 @@ export const RequestSentText = styled.div`
 export const RemoveRequestIcon = styled(Icons.Abort)`
   padding: 1px;
 `;
+
+const LoadingAnimation = styled(Animation)`
+  ${({ theme }) => css`
+    width: ${theme.spacing.baseX5}px;
+    height: ${theme.spacing.baseX4}px;
+  `}
+`;
+
+export const SimpleLoading = () => <LoadingAnimation src={simpleLoading} />;

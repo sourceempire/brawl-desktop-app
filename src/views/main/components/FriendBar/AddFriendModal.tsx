@@ -1,10 +1,12 @@
-import { useDeferredValue, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useServerEvents } from 'api/events';
 import { PotentialFriend, potentialFriendsSearch } from 'api/requests/FriendRequests';
+import notify from 'common/notifications';
 import { Input } from 'common/ui-components';
 import Modal from 'common/ui-components/components/Modal/Modal';
 import { InputSize } from 'common/ui-components/types';
 import { AddFriendCard } from './AddFriendCard';
-import { Players } from './AddFriendModal.styles';
+import { Players, maxNumberOfUsers } from './AddFriendModal.styles';
 import Icons from 'assets/icons/Icons';
 
 type Props = {
@@ -16,6 +18,7 @@ export const AddFriendModal = ({ isOpen, onClose }: Props) => {
   const [searchString, setSearchString] = useState('');
   const [potentialFriends, setPotentialFriends] = useState<PotentialFriend[]>([]);
   const [shouldUpdate, setShouldUpdate] = useState<boolean>(false);
+  const { addServerEventListener, removeServerEventListener } = useServerEvents();
 
   const search = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchString(event.target.value);
@@ -23,10 +26,11 @@ export const AddFriendModal = ({ isOpen, onClose }: Props) => {
 
   const getPotentialFriends = async (searchString: string) => {
     try {
-      const result = await potentialFriendsSearch(searchString, 7);
+      const result = await potentialFriendsSearch({ searchString, limit: maxNumberOfUsers });
       return setPotentialFriends(result.users);
     } catch (message) {
-      return console.error(message);
+      console.error(message);
+      notify.error('Could not retreive list of users');
     }
   };
 
@@ -39,6 +43,14 @@ export const AddFriendModal = ({ isOpen, onClose }: Props) => {
       getPotentialFriends(searchString).finally(() => setShouldUpdate(false));
     }
   }, [shouldUpdate, searchString]);
+
+  useEffect(() => {
+    const listenerId = addServerEventListener('friend-request-accepted', (event) => {
+      console.log({ event });
+      getPotentialFriends(searchString);
+    });
+    return () => removeServerEventListener('friend-request-accepted', listenerId);
+  }, [addServerEventListener, removeServerEventListener, searchString]);
 
   return (
     <Modal isOpen={isOpen} title="Add Friend" width="350px" onRequestClose={onClose}>
@@ -55,6 +67,7 @@ export const AddFriendModal = ({ isOpen, onClose }: Props) => {
             key={user.id}
             user={user}
             onFriendRequestSuccess={() => setShouldUpdate(true)}
+            onFriendRequestCancel={() => setShouldUpdate(true)}
           />
         ))}
       </Players>

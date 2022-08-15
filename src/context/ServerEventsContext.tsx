@@ -21,15 +21,15 @@ type FeedListener = (state: State) => void;
 type FeedListeners = { [feedType: string]: { [listenerId: string]: FeedListener } };
 
 type Context = {
-  addEventListener: (event: string, listener: Listener) => string;
-  removeEventListener: (event: string, listenerId: string) => void;
+  addServerEventListener: (event: string, listener: Listener) => string;
+  removeServerEventListener: (event: string, listenerId: string) => void;
   subscribeToFeed: (feed: string, listener: (state: State) => void) => string;
   unsubscribeFromFeed: (feed: string, feedListenerId: string) => void;
 };
 
 export const ServerEventsContext = createContext<Context>({
-  addEventListener: () => '',
-  removeEventListener: () => undefined,
+  addServerEventListener: () => '',
+  removeServerEventListener: () => undefined,
   subscribeToFeed: () => '',
   unsubscribeFromFeed: () => undefined
 });
@@ -130,15 +130,15 @@ export const ServerEventsProvider = ({ children }: Props) => {
     };
   }, [setupSocketConnection, connectionRetries]);
 
-  const addEventListener = (event: string, listener: Listener) => {
+  const addServerEventListener = useCallback((event: string, listener: Listener) => {
     const listenerId = uuid();
     listeners.current[event] = { ...listeners.current[event], [listenerId]: listener };
     return listenerId;
-  };
+  }, []);
 
-  const removeEventListener = (event: string, listenerId: string) => {
+  const removeServerEventListener = useCallback((event: string, listenerId: string) => {
     delete listeners.current[event][listenerId];
-  };
+  }, []);
 
   const { current: subscribeToFeed } = useRef((feed: string, listener: FeedListener) => {
     const shouldSubscribe = Object.keys(feedListeners.current[feed] ?? {}).length === 0;
@@ -186,8 +186,8 @@ export const ServerEventsProvider = ({ children }: Props) => {
   return (
     <ServerEventsContext.Provider
       value={{
-        addEventListener,
-        removeEventListener,
+        addServerEventListener,
+        removeServerEventListener,
         subscribeToFeed,
         unsubscribeFromFeed
       }}>
