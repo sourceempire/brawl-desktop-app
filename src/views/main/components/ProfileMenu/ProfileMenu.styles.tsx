@@ -58,11 +58,37 @@ export const MyUserStatus = styled(UserStatus)`
   `}
 `;
 
-export const Username = styled.div`
-  padding: 6px;
-  font-size: 13px;
-  font-weight: bold;
+const UserTagWrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+
+  ${({ theme }) => css`
+    height: ${theme.spacing.baseX4}px;
+    margin-left: ${theme.spacing.base}px;
+    margin-top: ${theme.spacing.base}px;
+  `}
 `;
+
+const UserTagText = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  ${({ theme }) => css`
+    ${theme.textStyles.title}
+    padding-right: ${theme.spacing.base}px;
+  `}
+`;
+
+export const UserTag = ({ children }: { children: React.ReactNode }) => (
+  <UserTagWrapper>
+    <UserTagText>{children}</UserTagText>
+  </UserTagWrapper>
+);
 
 export const MenuItem = styled.div`
   display: flex;

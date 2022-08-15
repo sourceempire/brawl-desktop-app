@@ -45,8 +45,7 @@ export const AddFriendModal = ({ isOpen, onClose }: Props) => {
   }, [shouldUpdate, searchString]);
 
   useEffect(() => {
-    const listenerId = addServerEventListener('friend-request-accepted', (event) => {
-      console.log({ event });
+    const listenerId = addServerEventListener('friend-request-accepted', () => {
       getPotentialFriends(searchString);
     });
     return () => removeServerEventListener('friend-request-accepted', listenerId);
