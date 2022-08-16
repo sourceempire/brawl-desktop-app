@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components/macro';
 import simpleLoading from 'assets/animations/simple-loading.json';
 import Icons from 'assets/icons/Icons';
 
-export const FriendCard = styled.div`
+export const UserCard = styled.div`
   display: flex;
   align-items: center;
 

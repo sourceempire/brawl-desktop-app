@@ -3,19 +3,26 @@ import { useAuth } from 'api/requests';
 import DragableArea from 'common/components/DragableArea';
 import RootContextProvider from 'context';
 import { Route, Routes } from 'react-router-dom';
+import { useUpdateEffect } from 'utils/hooks';
 import TournamentListView from '../../views/tournamentlist/TournamentListView';
-import Friends from './components/FriendBar';
+import FriendBar from './components/FriendBar';
 import TopBar from './components/TopBar';
 import { RoutesContainer, Wrapper } from './MainView.styles';
 import HomePage from './pages/HomePage';
 
 const MainView = () => {
   const { loginValidate, error } = useAuth();
-  const [areFriendsVisible, setFriendsVisible] = useState(false);
+  const [isFriendBarVisible, setFriendBarVisible] = useState(
+    localStorage.getItem('isFriendBarVisible') === 'true'
+  );
 
   const toggleFriends = () => {
-    setFriendsVisible(!areFriendsVisible);
+    setFriendBarVisible(!isFriendBarVisible);
   };
+
+  useUpdateEffect(() => {
+    localStorage.setItem('isFriendBarVisible', isFriendBarVisible?.toString());
+  }, [isFriendBarVisible]);
 
   useEffect(() => {
     loginValidate();
@@ -30,13 +37,13 @@ const MainView = () => {
       <DragableArea />
       <RootContextProvider>
         <TopBar toggleFriends={toggleFriends} />
-        <RoutesContainer areFriendsVisible={areFriendsVisible}>
+        <RoutesContainer isFriendBarVisible={isFriendBarVisible}>
           <Routes>
             <Route path="/tournamentlist" element={<TournamentListView />} />
             <Route path="/" element={<HomePage />} />
           </Routes>
         </RoutesContainer>
-        <Friends visible={areFriendsVisible} />
+        <FriendBar visible={isFriendBarVisible} />
       </RootContextProvider>
     </Wrapper>
   );

@@ -7,8 +7,8 @@ import {
 import { PublicUser } from 'api/requests/UserRequests';
 import notify from 'common/notifications';
 import { ProfileImage } from './FriendBar.styles';
-import { FriendCard, SimpleLoading, UserTag } from './FriendCard.styles';
 import { AcceptAction, DeclineAction, RequestActions } from './FriendRequestCard.styles';
+import { SimpleLoading, UserCard, UserTag } from './Shared.styles';
 import Icons from 'assets/icons/Icons';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
 
@@ -17,24 +17,24 @@ type Props = {
 };
 
 const FriendRequestCard = ({ user }: Props) => {
-  const [isLoading, setLoading] = useState(false);
+  const [isLoadingRequest, setLoadingRequest] = useState(false);
 
   const makeRequest = async (request: FriendRequest) => {
-    setLoading(true);
+    setLoadingRequest(true);
     try {
       await request(user.id);
     } catch (error) {
-      setLoading(false);
+      setLoadingRequest(false);
       console.error(error);
       notify.error('Something went wrong');
     }
   };
 
   return (
-    <FriendCard key={user.id}>
+    <UserCard>
       <ProfileImage src={tempProfileImage} />
       <UserTag>{user.userTag}</UserTag>
-      {isLoading ? (
+      {isLoadingRequest ? (
         <SimpleLoading />
       ) : (
         <RequestActions>
@@ -52,7 +52,7 @@ const FriendRequestCard = ({ user }: Props) => {
           />
         </RequestActions>
       )}
-    </FriendCard>
+    </UserCard>
   );
 };
 

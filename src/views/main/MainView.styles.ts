@@ -7,12 +7,12 @@ export const Wrapper = styled.div`
   height: 100%;
 `;
 
-export const RoutesContainer = styled.div<{ areFriendsVisible: boolean }>`
+export const RoutesContainer = styled.div<{ isFriendBarVisible: boolean }>`
   overflow-y: scroll;
   flex-grow: 1;
-  ${({ theme, areFriendsVisible }) => css`
+  ${({ theme, isFriendBarVisible }) => css`
     padding: 0 ${theme.spacing.baseX4}px;
-    ${areFriendsVisible &&
+    ${isFriendBarVisible &&
     css`
       padding-right: calc(${theme.spacing.baseX4}px + ${theme.friendsBarWidth}px);
     `}

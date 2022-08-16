@@ -45,10 +45,16 @@ export const AddFriendModal = ({ isOpen, onClose }: Props) => {
   }, [shouldUpdate, searchString]);
 
   useEffect(() => {
-    const listenerId = addServerEventListener('friend-request-accepted', () => {
+    const requestDeclineListenerId = addServerEventListener('friend-request-declined', () => {
       getPotentialFriends(searchString);
     });
-    return () => removeServerEventListener('friend-request-accepted', listenerId);
+    const requestAcceptListenerId = addServerEventListener('friend-request-accepted', () => {
+      getPotentialFriends(searchString);
+    });
+    return () => {
+      removeServerEventListener('friend-request-declined', requestDeclineListenerId);
+      removeServerEventListener('friend-request-accepted', requestAcceptListenerId);
+    };
   }, [addServerEventListener, removeServerEventListener, searchString]);
 
   return (
