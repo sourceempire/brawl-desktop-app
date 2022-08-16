@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { MutableRefObject, useEffect, useRef } from 'react';
 // Using lottie light, as full lottie uses eval() to work, and eval() is blocked by the Content Security Policy
 import Lottie, { AnimationItem } from 'lottie-web/build/player/lottie_light';
 import { Wrapper } from './Animation.styles';
@@ -13,7 +13,7 @@ type AnimationProps = {
 
 const Animation = ({ src, className }: AnimationProps) => {
   const container = useRef<HTMLDivElement>(null);
-  const loadingAnimationItem = useRef<AnimationItem>();
+  const loadingAnimationItem = useRef<AnimationItem>() as MutableRefObject<AnimationItem>;
 
   useEffect(() => {
     loadingAnimationItem.current = Lottie.loadAnimation({
@@ -23,7 +23,7 @@ const Animation = ({ src, className }: AnimationProps) => {
     });
 
     return () => {
-      (loadingAnimationItem.current as AnimationItem).destroy();
+      loadingAnimationItem.current.destroy();
     };
   }, [src]);
 

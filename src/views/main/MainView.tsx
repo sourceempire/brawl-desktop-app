@@ -4,7 +4,7 @@ import DragableArea from 'common/components/DragableArea';
 import RootContextProvider from 'context';
 import { Route, Routes } from 'react-router-dom';
 import TournamentListView from '../../views/tournamentlist/TournamentListView';
-import Friends from './components/Friends';
+import Friends from './components/FriendBar';
 import TopBar from './components/TopBar';
 import { RoutesContainer, Wrapper } from './MainView.styles';
 import HomePage from './pages/HomePage';

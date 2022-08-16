@@ -1,16 +1,17 @@
 import { useState } from 'react';
 import { Input } from 'common/ui-components';
-import Modal from 'common/ui-components/components/Modal/Modal';
 import { InputSize } from 'common/ui-components/types';
 import { AddFriendModal } from './AddFriendModal';
-import { FriendAction, FriendActions, Wrapper } from './Friends.styles';
+import { FriendAction, FriendActions, Wrapper } from './FriendBar.styles';
+import FriendRequests from './FriendRequests';
+import Friends from './Friends';
 import Icons from 'assets/icons/Icons';
 
 type Props = {
   visible: boolean;
 };
 
-const Friends = ({ visible }: Props) => {
+const FriendBar = ({ visible }: Props) => {
   const [friendsFilter, setFriendFilter] = useState('');
   const [isAddFriendModalOpen, setAddFriendModalOpen] = useState(false);
   if (!visible) return null;
@@ -31,9 +32,12 @@ const Friends = ({ visible }: Props) => {
           hint="Add Friend"
         />
       </FriendActions>
+      <FriendRequests />
+      <Friends />
+
       <AddFriendModal isOpen={isAddFriendModalOpen} onClose={() => setAddFriendModalOpen(false)} />
     </Wrapper>
   );
 };
 
-export default Friends;
+export default FriendBar;

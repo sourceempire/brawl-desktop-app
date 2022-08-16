@@ -12,7 +12,7 @@ import {
   MyUserStatus,
   ProfileImage,
   ProfileImageContainer,
-  Username,
+  UserTag,
   Wrapper
 } from './ProfileMenu.styles';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
@@ -77,7 +77,7 @@ const ProfileMenu = () => {
           position={{ right: 24, top: 83 }}
           arrowPosition={{ left: 144 }}
           onClickOutside={hideMenu}>
-          <Username>{user.userTag}</Username>
+          <UserTag>{user.userTag}</UserTag>
           <HorizontalRule />
           {orderedStatusItems.map((status) => (
             <MenuItem key={status} onClick={() => setStatus(status)}>

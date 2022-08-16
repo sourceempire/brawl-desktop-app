@@ -1,11 +1,14 @@
 import Fetcher from 'api/Fetcher';
 import { UserStatusEnum } from 'views/main/components/UserStatus';
 
-export type User = {
+export type PublicUser = {
   id: string;
+  userTag: string;
+};
+
+export type User = PublicUser & {
   name: string;
   username: string;
-  userTag: string;
 };
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;

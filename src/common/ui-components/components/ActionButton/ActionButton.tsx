@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import ContextMenu from '../ContextMenu';
 import { ArrowPosition, ContextMenuRef, Position } from '../ContextMenu/ContextMenu.types';
-import { Hint, Wrapper } from './ActionButton.styles';
+import { Hint, Size, Wrapper } from './ActionButton.styles';
 import { theme } from 'assets/styles/Theme';
 
 type Props = {
@@ -9,10 +9,12 @@ type Props = {
   icon: React.ReactNode;
   iconColor?: string;
   hint?: string;
+  isCircle?: boolean;
+  size?: Size;
   className?: string;
 };
 
-const ActionButton = ({ onClick, icon, hint, iconColor, className }: Props) => {
+const ActionButton = ({ onClick, icon, hint, iconColor, isCircle, size, className }: Props) => {
   const itemRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const contextRef = useRef() as React.MutableRefObject<ContextMenuRef>;
 
@@ -73,6 +75,8 @@ const ActionButton = ({ onClick, icon, hint, iconColor, className }: Props) => {
         onMouseEnter={showHint}
         onMouseLeave={hideHint}
         iconColor={iconColor}
+        isCircle={isCircle}
+        size={size}
         className={className}>
         {icon}
       </Wrapper>
