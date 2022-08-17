@@ -8,12 +8,12 @@ import notify from 'common/notifications';
 import ActionButton from 'common/ui-components/components/ActionButton';
 import { ProfileImage } from './FriendBar.styles';
 import {
-  FriendCard,
   RemoveRequestIcon,
   RequestSentText,
   SimpleLoading,
+  UserCard,
   UserTag
-} from './FriendCard.styles';
+} from './Shared.styles';
 import Icons from 'assets/icons/Icons';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
 
@@ -67,7 +67,7 @@ export const AddFriendCard = ({ user, onFriendRequestSuccess, onFriendRequestCan
   }, [isCancelingRequest, user.isRequestSent]);
 
   return (
-    <FriendCard>
+    <UserCard>
       <ProfileImage size="small" src={tempProfileImage} />
       <UserTag>{user.userTag}</UserTag>
 
@@ -85,6 +85,6 @@ export const AddFriendCard = ({ user, onFriendRequestSuccess, onFriendRequestCan
       ) : (
         <ActionButton hint="Add friend" icon={<Icons.AddFriend />} onClick={sendRequest} />
       )}
-    </FriendCard>
+    </UserCard>
   );
 };

@@ -18,7 +18,7 @@ const FriendRequests = () => {
   return (
     <Wrapper isExpanded={isExpanded}>
       <Title onClick={() => setExpanded(!isExpanded)}>
-        Friend Requests ({numberOfRequests})
+        Friend Requests - {numberOfRequests}
         <ArrowDown />
       </Title>
       {requestUsers.map((user) => (

@@ -14,6 +14,7 @@ type Props = {
 const FriendBar = ({ visible }: Props) => {
   const [friendsFilter, setFriendFilter] = useState('');
   const [isAddFriendModalOpen, setAddFriendModalOpen] = useState(false);
+
   if (!visible) return null;
 
   return (

@@ -63,6 +63,11 @@ const ProfileMenu = () => {
     setIsMenuShown(true);
   };
 
+  const handleStatusChange = (status: UserStatusEnum) => {
+    hideMenu();
+    setStatus(status);
+  };
+
   return (
     <>
       <Wrapper onClick={showMenu}>
@@ -80,7 +85,7 @@ const ProfileMenu = () => {
           <UserTag>{user.userTag}</UserTag>
           <HorizontalRule />
           {orderedStatusItems.map((status) => (
-            <MenuItem key={status} onClick={() => setStatus(status)}>
+            <MenuItem key={status} onClick={() => handleStatusChange(status)}>
               <UserStatus status={status} />
             </MenuItem>
           ))}
