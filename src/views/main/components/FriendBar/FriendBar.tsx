@@ -20,6 +20,14 @@ const FriendBar = ({ visible }: Props) => {
   const [searchString, setSearchString] = useState('');
   const [isAddFriendModalOpen, setAddFriendModalOpen] = useState(false);
 
+  const openAddFriendModal = () => {
+    setAddFriendModalOpen(true);
+  };
+
+  const closeAddFriendModal = () => {
+    setAddFriendModalOpen(false);
+  };
+
   if (!visible) return null;
 
   return (
@@ -33,18 +41,14 @@ const FriendBar = ({ visible }: Props) => {
             size={InputSize.SMALL}
             placeholder="Friends Filter"
           />
-          <FriendAction
-            icon={<Icons.AddFriend />}
-            onClick={() => setAddFriendModalOpen(true)}
-            hint="Add Friend"
-          />
+          <FriendAction icon={<Icons.AddFriend />} onClick={openAddFriendModal} hint="Add Friend" />
         </FriendActions>
         <ScrollContent>
           <FriendRequests />
-          <Friends searchString={searchString} />
+          <Friends searchString={searchString} openAddFriendModal={openAddFriendModal} />
         </ScrollContent>
       </Wrapper>
-      <AddFriendModal isOpen={isAddFriendModalOpen} onClose={() => setAddFriendModalOpen(false)} />
+      <AddFriendModal isOpen={isAddFriendModalOpen} onClose={closeAddFriendModal} />
     </>
   );
 };

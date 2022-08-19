@@ -2,19 +2,27 @@ import { useEffect, useMemo, useState } from 'react';
 import useFriendsFeed from 'api/feeds/hooks/useFriendsFeed';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import { PublicUser } from 'api/requests/UserRequests';
+import { Button } from 'common/ui-components';
 import { useUpdateEffect } from 'utils/hooks';
 import { UserStatusEnum } from '../UserStatus';
 import { Title } from './FriendBar.styles';
 import FriendCard from './FriendCard';
-import { FriendList, Wrapper } from './Friends.styles';
+import {
+  BigAddFriendIcon,
+  FriendList,
+  NoFriendsContainer,
+  NoFriendsText,
+  Wrapper
+} from './Friends.styles';
 
 type FriendRef = { status: UserStatusEnum };
 
 type Props = {
   searchString: string;
+  openAddFriendModal: () => void;
 };
 
-const Friends = ({ searchString }: Props) => {
+const Friends = ({ searchString, openAddFriendModal }: Props) => {
   const { user } = useLoggedInUser();
   const { friends, isLoading } = useFriendsFeed({ userId: user.id });
   const [filteredFriends, setFilteredFriends] = useState<PublicUser[]>([]);
@@ -68,6 +76,17 @@ const Friends = ({ searchString }: Props) => {
             />
           ))}
         </FriendList>
+      )}
+      {friends.length === 0 && (
+        <NoFriendsContainer>
+          <BigAddFriendIcon />
+          <NoFriendsText>
+            You have no friends yet
+            <br />
+            Add friends now
+          </NoFriendsText>
+          <Button onClick={openAddFriendModal}>Add Friends</Button>
+        </NoFriendsContainer>
       )}
     </Wrapper>
   );
