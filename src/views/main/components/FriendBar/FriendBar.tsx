@@ -1,8 +1,13 @@
 import { useState } from 'react';
-import { Input } from 'common/ui-components';
 import { InputSize } from 'common/ui-components/types';
 import { AddFriendModal } from './AddFriendModal';
-import { FriendAction, FriendActions, ScrollContent, Wrapper } from './FriendBar.styles';
+import {
+  FriendAction,
+  FriendActions,
+  ScrollContent,
+  SearchFriendsInput,
+  Wrapper
+} from './FriendBar.styles';
 import FriendRequests from './FriendRequests';
 import Friends from './Friends';
 import Icons from 'assets/icons/Icons';
@@ -12,7 +17,7 @@ type Props = {
 };
 
 const FriendBar = ({ visible }: Props) => {
-  const [friendsFilter, setFriendFilter] = useState('');
+  const [searchString, setSearchString] = useState('');
   const [isAddFriendModalOpen, setAddFriendModalOpen] = useState(false);
 
   if (!visible) return null;
@@ -21,10 +26,10 @@ const FriendBar = ({ visible }: Props) => {
     <>
       <Wrapper>
         <FriendActions>
-          <Input
+          <SearchFriendsInput
             icon={Icons.Search}
-            value={friendsFilter}
-            onChange={(event) => setFriendFilter(event.target.value)}
+            value={searchString}
+            onChange={(event) => setSearchString(event.target.value)}
             size={InputSize.SMALL}
             placeholder="Friends Filter"
           />
@@ -36,7 +41,7 @@ const FriendBar = ({ visible }: Props) => {
         </FriendActions>
         <ScrollContent>
           <FriendRequests />
-          <Friends />
+          <Friends searchString={searchString} />
         </ScrollContent>
       </Wrapper>
       <AddFriendModal isOpen={isAddFriendModalOpen} onClose={() => setAddFriendModalOpen(false)} />
