@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useUserStatusFeed } from 'api/feeds';
 import { UserRequests, useAuth } from 'api/requests';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import notify from 'common/notifications';
 import ContextMenu from 'common/ui-components/components/ContextMenu';
 import UserStatus, { UserStatusEnum } from '../UserStatus';
+import { statusTexts } from '../UserStatus/UserStatus';
+import { StatusText } from '../UserStatus/UserStatus.styles';
 import {
   ArrowIcon,
   HorizontalRule,
@@ -28,6 +30,8 @@ const orderedStatusItems = [
  * TODO -> Make the position of the context menu dynamic
  */
 const ProfileMenu = () => {
+  const element = useRef() as React.MutableRefObject<HTMLDivElement>;
+
   const { user } = useLoggedInUser();
   const { status } = useUserStatusFeed({ userId: user.id });
   const { logout } = useAuth();
@@ -54,9 +58,7 @@ const ProfileMenu = () => {
   }, [status]);
 
   const hideMenu = () => {
-    // setTimeout is needed to prevent a race condition
-    // when clicking the Wraper which opens the menu again
-    setTimeout(() => setIsMenuShown(false), 20);
+    setIsMenuShown(false);
   };
 
   const showMenu = () => {
@@ -70,7 +72,7 @@ const ProfileMenu = () => {
 
   return (
     <>
-      <Wrapper onClick={showMenu}>
+      <Wrapper onClick={showMenu} ref={element}>
         <ArrowIcon />
         <ProfileImageContainer>
           <ProfileImage src={tempProfileImage} />
@@ -81,12 +83,14 @@ const ProfileMenu = () => {
         <ContextMenu
           position={{ right: 24, top: 83 }}
           arrowPosition={{ left: 144 }}
-          onClickOutside={hideMenu}>
+          onClickOutside={hideMenu}
+          ignoredElementOnClickOutside={element.current}>
           <UserTag>{user.userTag}</UserTag>
           <HorizontalRule />
           {orderedStatusItems.map((status) => (
             <MenuItem key={status} onClick={() => handleStatusChange(status)}>
               <UserStatus status={status} />
+              <StatusText>{statusTexts[status]}</StatusText>
             </MenuItem>
           ))}
           <HorizontalRule />

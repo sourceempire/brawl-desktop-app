@@ -12,6 +12,7 @@ export const StatusText = styled.div`
 `;
 
 export const StatusCircle = styled.div<{ status: UserStatusEnum }>`
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;

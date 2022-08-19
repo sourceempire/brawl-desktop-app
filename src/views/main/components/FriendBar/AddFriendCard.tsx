@@ -6,8 +6,8 @@ import {
 } from 'api/requests/FriendRequests';
 import notify from 'common/notifications';
 import ActionButton from 'common/ui-components/components/ActionButton';
-import { ProfileImage } from './FriendBar.styles';
 import {
+  ProfileImage,
   RemoveRequestIcon,
   RequestSentText,
   SimpleLoading,
@@ -29,7 +29,8 @@ export const AddFriendCard = ({ user, onFriendRequestSuccess, onFriendRequestCan
 
   const handleError = (error: unknown) => {
     console.error(error);
-    notify.error('Something went wrong', { timer: 5 });
+    notify.error('Something went wrong', { timer: 5000 });
+    setSendingRequest(false);
   };
 
   const sendRequest = async () => {
@@ -75,7 +76,7 @@ export const AddFriendCard = ({ user, onFriendRequestSuccess, onFriendRequestCan
         <SimpleLoading />
       ) : user.isRequestSent ? (
         <>
-          <RequestSentText>Request sent</RequestSentText>
+          <RequestSentText>Request pending</RequestSentText>
           <ActionButton
             icon={<RemoveRequestIcon />}
             onClick={cancelRequest}

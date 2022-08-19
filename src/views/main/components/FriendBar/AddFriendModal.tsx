@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useDeferredValue, useEffect, useState } from 'react';
 import { useServerEvents } from 'api/events';
 import { PotentialFriend, potentialFriendsSearch } from 'api/requests/FriendRequests';
 import notify from 'common/notifications';
 import { Input } from 'common/ui-components';
 import Modal from 'common/ui-components/components/Modal/Modal';
 import { InputSize } from 'common/ui-components/types';
+import { useDebounce } from 'utils/hooks';
 import { AddFriendCard } from './AddFriendCard';
 import { Players, maxNumberOfUsers } from './AddFriendModal.styles';
 import Icons from 'assets/icons/Icons';
@@ -19,6 +20,8 @@ export const AddFriendModal = ({ isOpen, onClose }: Props) => {
   const [potentialFriends, setPotentialFriends] = useState<PotentialFriend[]>([]);
   const [shouldUpdate, setShouldUpdate] = useState<boolean>(false);
   const { addServerEventListener, removeServerEventListener } = useServerEvents();
+
+  const debouncedSearchString = useDebounce(searchString, 250);
 
   const search = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchString(event.target.value);
@@ -35,8 +38,8 @@ export const AddFriendModal = ({ isOpen, onClose }: Props) => {
   };
 
   useEffect(() => {
-    getPotentialFriends(searchString);
-  }, [searchString]);
+    getPotentialFriends(debouncedSearchString);
+  }, [debouncedSearchString]);
 
   useEffect(() => {
     if (shouldUpdate) {

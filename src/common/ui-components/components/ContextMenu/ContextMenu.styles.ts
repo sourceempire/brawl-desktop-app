@@ -8,7 +8,7 @@ export const Wrapper = styled.div<{
 }>`
   position: absolute;
   padding: 6px;
-  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.75));
 
   ${({ arrowPosition, theme }) =>
     arrowPosition &&

@@ -47,12 +47,12 @@ export const ArrowIcon = styled(Icons.ArrowDown)`
 
 export const MyUserStatus = styled(UserStatus)`
   position: absolute;
-  right: -6px;
-  bottom: -3px;
-  height: 14px;
-  width: 14px;
+  right: -4px;
+  bottom: -2px;
 
   ${({ theme, status }) => css`
+    height: 14px;
+    width: 14px;
     outline: 3px solid ${theme.colors.background};
     background-color: ${status === UserStatusEnum.OFFLINE && theme.colors.background};
   `}
@@ -67,7 +67,6 @@ const UserTagWrapper = styled.div`
   ${({ theme }) => css`
     height: ${theme.spacing.baseX4}px;
     margin-left: ${theme.spacing.base}px;
-    margin-top: ${theme.spacing.base}px;
   `}
 `;
 
@@ -93,12 +92,11 @@ export const UserTag = ({ children }: { children: React.ReactNode }) => (
 export const MenuItem = styled.div`
   display: flex;
   align-items: center;
-  height: 30px;
   width: 156px;
-  padding: 0 6px;
-  font-size: 11px;
   cursor: pointer;
   ${({ theme }) => css`
+    ${theme.textStyles.note}
+    padding: ${theme.spacing.baseX2}px ${theme.spacing.base}px;
     border-radius: ${theme.borderRadius.default};
     :hover {
       background-color: ${theme.colors.lightTint};

@@ -4,6 +4,7 @@ import { lightenColor } from 'assets/styles/colorBrightness';
 type Props = {
   primary?: boolean;
   accent?: boolean;
+  alert?: boolean;
   hasIcon: boolean;
   small?: boolean;
 };
@@ -44,7 +45,7 @@ export const Wrapper = styled.button<Props>`
     box-sizing: border-box;
   }
 
-  ${({ theme, primary, accent, hasIcon, small }) => css`
+  ${({ theme, primary, accent, alert, hasIcon, small }) => css`
     border-radius: ${theme.borderRadius.default};
     background-color: ${theme.colors.lightTint};
     :hover {
@@ -85,6 +86,17 @@ export const Wrapper = styled.button<Props>`
       }
       :active {
         background-color: ${lightenColor(theme.colors.primary, 50)};
+      }
+    `}
+
+    ${alert &&
+    css`
+      background-color: ${theme.colors.statusError};
+      :hover {
+        background-color: ${lightenColor(theme.colors.statusError, 25)};
+      }
+      :active {
+        background-color: ${lightenColor(theme.colors.statusError, 50)};
       }
     `}
   `}

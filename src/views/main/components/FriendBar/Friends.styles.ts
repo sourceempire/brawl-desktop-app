@@ -8,4 +8,8 @@ export const Wrapper = styled.div`
 
 export const FriendList = styled.div`
   display: grid;
+  ${({ theme }) => css`
+    grid-gap: ${theme.spacing.base}px;
+    margin-bottom: ${theme.spacing.baseX3}px;
+  `}
 `;

@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components/macro';
 import UserStatus, { UserStatusEnum } from '../UserStatus';
 import { UserCard } from './Shared.styles';
 
@@ -18,17 +18,16 @@ export const FriendUserCard = styled(UserCard)<{ status: UserStatusEnum }>`
 `;
 
 export const ProfileImageWrapper = styled.div`
+  display: flex;
   position: relative;
 `;
 
 export const FriendUserStatus = styled(UserStatus)`
   position: absolute;
-  right: 0;
-  bottom: 0;
-
-  transform: translate(50%, 0);
+  right: -3px;
+  bottom: -3px;
   ${({ theme, status }) => css`
-    outline: 3px solid ${theme.colors.secondary};
+    outline: 2px solid ${theme.colors.secondary};
     height: ${theme.spacing.baseX2}px;
     width: ${theme.spacing.baseX2}px;
 
@@ -36,5 +35,21 @@ export const FriendUserStatus = styled(UserStatus)`
     css`
       background-color: ${theme.colors.secondary};
     `}
+  `}
+`;
+
+export const FriendContextMenu = styled.div``;
+
+export const FriendOptions = styled.div`
+  width: 120px;
+`;
+export const FriendOption = styled.div`
+  ${({ theme }) => css`
+    ${theme.textStyles.note}
+    padding: calc(${theme.spacing.base}px * 1.5) ${theme.spacing.base}px;
+    border-radius: ${theme.borderRadius.default};
+    :hover {
+      background-color: ${theme.colors.lightTint};
+    }
   `}
 `;

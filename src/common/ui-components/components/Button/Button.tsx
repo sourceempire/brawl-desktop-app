@@ -7,6 +7,7 @@ type Props = {
   className?: string;
   primary?: boolean;
   accent?: boolean;
+  alert?: boolean;
   small?: boolean;
   icon?: SVGComponent | string;
   tabIndex?: number;
@@ -18,6 +19,7 @@ const Button = ({
   className,
   primary,
   accent,
+  alert,
   small,
   icon,
   onClick,
@@ -29,6 +31,7 @@ const Button = ({
       className={className}
       primary={primary}
       accent={accent}
+      alert={alert}
       small={small}
       hasIcon={icon !== undefined}
       tabIndex={tabIndex}>
