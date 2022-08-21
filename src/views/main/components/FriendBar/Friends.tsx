@@ -77,7 +77,7 @@ const Friends = ({ searchString, openAddFriendModal }: Props) => {
           ))}
         </FriendList>
       )}
-      {friends.length === 0 && (
+      {friends?.length === 0 && (
         <NoFriendsContainer>
           <BigAddFriendIcon />
           <NoFriendsText>
