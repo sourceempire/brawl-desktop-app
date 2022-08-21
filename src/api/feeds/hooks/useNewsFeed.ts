@@ -1,11 +1,11 @@
 import useFeed from './useFeed';
 
-type News = {
+export type News = {
   id: string;
   title: string;
   content: string;
-  image_url: string;
-  time_stamp: string;
+  imageUrl: string;
+  timestamp: string;
 };
 
 const useNewsFeed = () => {
