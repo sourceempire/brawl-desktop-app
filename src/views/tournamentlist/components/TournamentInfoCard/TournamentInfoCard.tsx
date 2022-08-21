@@ -24,11 +24,12 @@ import {
 type Props = {
   tournamentInfo: TournamentInfo;
   onClick?: ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void) | undefined;
+  className?: string;
 };
 
-export default function TournamentInfoCard({ tournamentInfo, onClick }: Props) {
+export default function TournamentInfoCard({ tournamentInfo, onClick, className }: Props) {
   return (
-    <Wrapper padding={false} onClick={onClick}>
+    <Wrapper padding={false} onClick={onClick} className={className}>
       <Header image={tournamentInfo.image}>
         <Countdown>{countdown(new Date(tournamentInfo.startTime))}</Countdown>
       </Header>
