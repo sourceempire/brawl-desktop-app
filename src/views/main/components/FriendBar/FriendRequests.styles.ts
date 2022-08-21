@@ -12,7 +12,7 @@ export const Wrapper = styled.div<{ isExpanded: boolean }>`
   ${({ theme, isExpanded }) => css`
     height: ${isExpanded ? 'auto' : `${theme.spacing.baseX3}px`};
     overflow: ${isExpanded ? 'visible' : 'hidden'};
-    margin-top: ${theme.spacing.baseX2}px;
+    margin-top: ${theme.spacing.base}px;
 
     ${ArrowDown} {
       transition: transform 0.2s;

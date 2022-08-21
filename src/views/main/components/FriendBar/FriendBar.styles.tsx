@@ -1,4 +1,5 @@
 import React from 'react';
+import { Input } from 'common/ui-components';
 import ActionButton from 'common/ui-components/components/ActionButton';
 import styled, { css } from 'styled-components/macro';
 
@@ -17,6 +18,10 @@ export const Wrapper = styled.div`
     border-top-left-radius: ${theme.borderRadius.default};
     background-color: ${theme.colors.secondary};
   `}
+`;
+
+export const SearchFriendsInput = styled(Input)`
+  z-index: 2;
 `;
 
 export const FriendActions = styled.div`

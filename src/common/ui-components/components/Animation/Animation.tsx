@@ -13,7 +13,7 @@ type AnimationProps = {
 
 const Animation = ({ src, className }: AnimationProps) => {
   const container = useRef<HTMLDivElement>(null);
-  const loadingAnimationItem = useRef<AnimationItem>() as MutableRefObject<AnimationItem>;
+  const loadingAnimationItem = useRef() as MutableRefObject<AnimationItem>;
 
   useEffect(() => {
     loadingAnimationItem.current = Lottie.loadAnimation({
