@@ -7,6 +7,8 @@ import { Title } from './FriendBar.styles';
 import FriendCard from './FriendCard';
 import { FriendList, Wrapper } from './Friends.styles';
 
+type FriendRef = { status: UserStatusEnum };
+
 const Friends = () => {
   const { user } = useLoggedInUser();
   const { friends, isLoading } = useFriendsFeed({ userId: user.id });
@@ -17,7 +19,7 @@ const Friends = () => {
     setStatusDidChange(true);
   };
 
-  const friendRefs = useMemo<{ current: { status: UserStatusEnum } | null }[]>(
+  const friendRefs = useMemo<{ current: FriendRef | null }[]>(
     () =>
       friends?.map(() => ({
         current: null

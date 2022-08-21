@@ -6,9 +6,8 @@ import {
 } from 'api/requests/FriendRequests';
 import { PublicUser } from 'api/requests/UserRequests';
 import notify from 'common/notifications';
-import { ProfileImage } from './FriendBar.styles';
 import { AcceptAction, DeclineAction, RequestActions } from './FriendRequestCard.styles';
-import { SimpleLoading, UserCard, UserTag } from './Shared.styles';
+import { ProfileImage, SimpleLoading, UserCard, UserTag } from './Shared.styles';
 import Icons from 'assets/icons/Icons';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
 

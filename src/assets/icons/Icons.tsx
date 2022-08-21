@@ -44,6 +44,10 @@ import ProfileUrl, { ReactComponent as ProfileComponent } from './Profile.svg';
 const Profile = ProfileComponent as SVGComponent;
 Profile.url = ProfileUrl;
 
+import RemoveFriendUrl, { ReactComponent as RemoveFriendComponent } from './RemoveFriend.svg';
+const RemoveFriend = RemoveFriendComponent as SVGComponent;
+RemoveFriend.url = RemoveFriendUrl;
+
 import SearchUrl, { ReactComponent as SearchComponent } from './Search.svg';
 const Search = SearchComponent as SVGComponent;
 Search.url = SearchUrl;
@@ -77,6 +81,7 @@ const Icons = {
   Friends,
   Key,
   Profile,
+  RemoveFriend,
   Search,
   SelectArrow,
   SmallCross,

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Input } from 'common/ui-components';
 import { InputSize } from 'common/ui-components/types';
 import { AddFriendModal } from './AddFriendModal';
-import { FriendAction, FriendActions, Wrapper } from './FriendBar.styles';
+import { FriendAction, FriendActions, ScrollContent, Wrapper } from './FriendBar.styles';
 import FriendRequests from './FriendRequests';
 import Friends from './Friends';
 import Icons from 'assets/icons/Icons';
@@ -18,26 +18,29 @@ const FriendBar = ({ visible }: Props) => {
   if (!visible) return null;
 
   return (
-    <Wrapper>
-      <FriendActions>
-        <Input
-          icon={Icons.Search}
-          value={friendsFilter}
-          onChange={(event) => setFriendFilter(event.target.value)}
-          size={InputSize.SMALL}
-          placeholder="Friends Filter"
-        />
-        <FriendAction
-          icon={<Icons.AddFriend />}
-          onClick={() => setAddFriendModalOpen(true)}
-          hint="Add Friend"
-        />
-      </FriendActions>
-      <FriendRequests />
-      <Friends />
-
+    <>
+      <Wrapper>
+        <FriendActions>
+          <Input
+            icon={Icons.Search}
+            value={friendsFilter}
+            onChange={(event) => setFriendFilter(event.target.value)}
+            size={InputSize.SMALL}
+            placeholder="Friends Filter"
+          />
+          <FriendAction
+            icon={<Icons.AddFriend />}
+            onClick={() => setAddFriendModalOpen(true)}
+            hint="Add Friend"
+          />
+        </FriendActions>
+        <ScrollContent>
+          <FriendRequests />
+          <Friends />
+        </ScrollContent>
+      </Wrapper>
       <AddFriendModal isOpen={isAddFriendModalOpen} onClose={() => setAddFriendModalOpen(false)} />
-    </Wrapper>
+    </>
   );
 };
 

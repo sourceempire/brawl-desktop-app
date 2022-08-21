@@ -74,6 +74,7 @@ const TextStyles = {
   BODY: css`
     font-size: 13px;
     font-weight: normal;
+    line-height: 1.4;
   `,
   MENU: css`
     font-size: 13px;

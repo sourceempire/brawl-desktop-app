@@ -3,10 +3,12 @@ import { Animation } from 'common/ui-components';
 import styled, { css } from 'styled-components/macro';
 import simpleLoading from 'assets/animations/simple-loading.json';
 import Icons from 'assets/icons/Icons';
+import { theme } from 'assets/styles/Theme';
 
 export const UserCard = styled.div`
   display: flex;
   align-items: center;
+  position: relative;
 
   ${({ theme }) => css`
     margin-left: -${theme.spacing.base}px;
@@ -15,9 +17,9 @@ export const UserCard = styled.div`
     border-radius: ${theme.borderRadius.default};
 
     :hover {
-      outline: 1px solid ${theme.colors.lightTint};
+      outline: 2px solid ${theme.colors.lightTint};
     }
-  `}
+  `};
 `;
 
 export const UserImage = styled.img`
@@ -66,8 +68,29 @@ export const RequestSentText = styled.div`
   `}
 `;
 
-export const RemoveRequestIcon = styled(Icons.Abort)`
+export const RemoveRequestIcon = styled(Icons.RemoveFriend)`
   padding: 1px;
+`;
+
+type ProfileImageSize = 'small' | 'medium' | 'large';
+
+export const getProfileImageSize = (size?: ProfileImageSize) => {
+  switch (size) {
+    case 'small':
+      return theme.spacing.baseX5 + 'px';
+    case 'medium':
+      return theme.spacing.baseX6 + 'px';
+    case 'large':
+      return theme.spacing.baseX7 + 'px';
+  }
+};
+
+export const ProfileImage = styled.img<{ size?: ProfileImageSize }>`
+  ${({ theme, size }) => css`
+    height: ${getProfileImageSize(size ?? 'medium')};
+    width: ${getProfileImageSize(size ?? 'medium')};
+    border-radius: ${theme.borderRadius.default};
+  `}
 `;
 
 const LoadingAnimation = styled(Animation)`
