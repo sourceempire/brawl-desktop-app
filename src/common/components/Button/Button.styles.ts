@@ -21,7 +21,6 @@ export const Wrapper = styled.button<Props>`
   padding: 0 0;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   outline-color: transparent;
   ${({ theme }) => theme.textStyles.button}
 

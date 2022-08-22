@@ -93,7 +93,6 @@ export const MenuItem = styled.div`
   display: flex;
   align-items: center;
   width: 156px;
-  cursor: pointer;
   ${({ theme }) => css`
     ${theme.textStyles.note}
     padding: ${theme.spacing.baseX2}px ${theme.spacing.base}px;

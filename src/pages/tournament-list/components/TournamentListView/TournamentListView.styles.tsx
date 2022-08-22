@@ -44,7 +44,6 @@ export const FilterBullet = styled.div<FilterBulletProps>`
   line-height: 30px;
   padding-right: 18px;
   margin-bottom: 6px;
-  cursor: pointer;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.lightTint};
