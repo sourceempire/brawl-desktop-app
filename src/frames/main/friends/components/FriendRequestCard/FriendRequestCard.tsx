@@ -5,7 +5,7 @@ import {
   declineFriendRequest
 } from 'api/requests/FriendRequests';
 import { PublicUser } from 'api/requests/UserRequests';
-import notify from 'common/notifications';
+import popup from 'common/popup';
 import { ProfileImage, SimpleLoading, UserCard, UserTag } from '../Shared.styles';
 import { AcceptAction, DeclineAction, RequestActions } from './FriendRequestCard.styles';
 import Icons from 'assets/icons/Icons';
@@ -25,7 +25,7 @@ const FriendRequestCard = ({ user }: Props) => {
     } catch (error) {
       setLoadingRequest(false);
       console.error(error);
-      notify.error('Something went wrong');
+      popup.error('Something went wrong');
     }
   };
 

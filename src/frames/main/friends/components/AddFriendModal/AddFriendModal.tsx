@@ -4,7 +4,7 @@ import { PotentialFriend, potentialFriendsSearch } from 'api/requests/FriendRequ
 import { Input } from 'common/components';
 import { InputSize } from 'common/components/Input/Input.types';
 import Modal from 'common/components/Modal/Modal';
-import notify from 'common/notifications';
+import popup from 'common/popup';
 import { useDebounce } from 'utils/hooks';
 import AddFriendCard from '../AddFriendCard';
 import { Players, maxNumberOfUsers } from './AddFriendModal.styles';
@@ -33,7 +33,7 @@ const AddFriendModal = ({ isOpen, onClose }: Props) => {
       return setPotentialFriends(result.users);
     } catch (message) {
       console.error(message);
-      notify.error('Could not retreive list of users');
+      popup.error('Could not retreive list of users');
     }
   };
 

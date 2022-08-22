@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useUserStatusFeed } from 'api/feeds';
 import { UserRequests, useAuth } from 'api/requests';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
-import notify from 'common/notifications';
 import ContextMenu from 'common/components/ContextMenu';
+import popup from 'common/popup';
 import UserStatus, { UserStatusEnum } from '../../../../common/components/UserStatus';
 import { statusTexts } from '../../../../common/components/UserStatus/UserStatus';
 import { StatusText } from '../../../../common/components/UserStatus/UserStatus.styles';
@@ -46,7 +46,7 @@ const ProfileMenu = () => {
     setLocalStatus(newStatus);
     UserRequests.setUserStatus(newStatus).catch((error) => {
       console.error(error);
-      notify.error(`Could not set status, please try again later.`);
+      popup.error(`Could not set status, please try again later.`);
       setLocalStatus(status);
     });
   };

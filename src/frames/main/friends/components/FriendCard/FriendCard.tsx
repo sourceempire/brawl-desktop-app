@@ -5,7 +5,7 @@ import { PublicUser } from 'api/requests/UserRequests';
 import { ContextMenu } from 'common/components';
 import { ContextMenuRef, Position } from 'common/components/ContextMenu/ContextMenu.types';
 import { UserStatusEnum } from 'common/components/UserStatus';
-import notify from 'common/notifications';
+import popup from 'common/popup';
 import { useUpdateEffect } from 'utils/hooks';
 import RemoveFriendConfirmationModal from '../RemoveFriendModal';
 import { ProfileImage, UserTag } from '../Shared.styles';
@@ -91,7 +91,7 @@ const FriendCard = (
   const removeFriend = () => {
     setRemoveFriendModalOpen(false);
     friendApi.removeFriend(user.id).catch((error) => {
-      notify.error(`Something went wrong trying to remove friend: ${user.userTag}`);
+      popup.error(`Something went wrong trying to remove friend: ${user.userTag}`);
       console.error(error);
     });
   };

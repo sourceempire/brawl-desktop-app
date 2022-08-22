@@ -5,7 +5,7 @@ import {
   sendFriendRequest
 } from 'api/requests/FriendRequests';
 import ActionButton from 'common/components/ActionButton';
-import notify from 'common/notifications';
+import popup from 'common/popup';
 import { ProfileImage, SimpleLoading, UserCard, UserTag } from '../Shared.styles';
 import { RemoveRequestIcon, RequestSentText } from './AddFriendCard.styles';
 import Icons from 'assets/icons/Icons';
@@ -23,7 +23,7 @@ export const AddFriendCard = ({ user, onFriendRequestSuccess, onFriendRequestCan
 
   const handleError = (error: unknown) => {
     console.error(error);
-    notify.error('Something went wrong', { timer: 5000 });
+    popup.error('Something went wrong', { timer: 5000 });
     setSendingRequest(false);
   };
 
