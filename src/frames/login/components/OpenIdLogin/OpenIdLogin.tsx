@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from 'api/requests';
-import { Checkbox, Header } from 'common/ui-components';
+import { Checkbox, Text } from 'common/components';
 import { AppVersion, LoginWrapper, OpenIdButton, SignUpText } from './OpenIdLogin.styles';
 import { BankIDLogo, YotiLogo } from 'assets/icons';
 
@@ -24,7 +24,7 @@ export const OpenIdLogin = ({ inactive = false }: Props) => {
 
   return (
     <LoginWrapper inactive={inactive}>
-      <Header>Sign in</Header>
+      <Text.Header>Sign in</Text.Header>
       <OpenIdButton onClick={() => login('bankid-se')} tabIndex={tabIndex}>
         <p>Sign in with BankID</p>
         <img src={BankIDLogo} />

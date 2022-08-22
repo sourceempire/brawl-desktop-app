@@ -1,4 +1,4 @@
-import { Button, Input } from 'common/ui-components';
+import { Button, Input } from 'common/components';
 import styled from 'styled-components';
 
 export const LoginInput = styled(Input)`

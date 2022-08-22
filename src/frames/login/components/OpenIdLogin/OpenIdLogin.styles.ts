@@ -1,4 +1,4 @@
-import { Button } from 'common/ui-components';
+import { Button } from 'common/components';
 import styled, { css } from 'styled-components';
 
 export const LoginWrapper = styled.div<{ inactive: boolean }>`

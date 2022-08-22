@@ -1,4 +1,4 @@
-import { Animation } from 'common/ui-components';
+import { Animation } from 'common/components';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`

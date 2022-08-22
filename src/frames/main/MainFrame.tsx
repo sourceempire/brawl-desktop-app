@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { useAuth } from 'api/requests';
 import DragableArea from 'common/components/DragableArea';
 import RootContextProvider from 'context';
-import { FriendBar } from 'packages/friends';
+import { FriendBar } from 'frames/main/friends';
+import HomePage from 'pages/home';
 import { Route, Routes } from 'react-router-dom';
 import { useUpdateEffect } from 'utils/hooks';
-import TournamentListView from '../../packages/tournament-list/TournamentListView';
-import TopBar from './components/TopBar';
+import TournamentListView from '../../pages/tournament-list';
 import { RoutesContainer, Wrapper } from './MainFrame.styles';
-import HomePage from './pages/HomePage';
+import TopBar from './top-bar/TopBar';
 
 const MainView = () => {
   const { loginValidate, error } = useAuth();

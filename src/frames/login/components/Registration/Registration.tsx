@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from 'api/requests';
-import { Header } from 'common/ui-components';
+import { Text } from 'common/components';
 import { useNavigate } from 'react-router-dom';
 import { LoginWrapper } from '../OpenIdLogin/OpenIdLogin.styles';
 import { LoginInput } from '../PasswordLogin/PasswordLogin.styles';
@@ -36,7 +36,7 @@ const Registration = ({ active }: Props) => {
 
   return (
     <LoginWrapper inactive={!active}>
-      <Header>Sign up</Header>
+      <Text.Header>Sign up</Text.Header>
       <LoginInput
         label="Email"
         onChange={handleChange}

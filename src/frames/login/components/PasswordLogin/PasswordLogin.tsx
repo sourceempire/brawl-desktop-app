@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from 'api/requests';
-import { InputSize } from 'common/ui-components/types';
+import { InputSize } from 'common/components/Input/Input.types';
 import { LoginButton, LoginInput } from './PasswordLogin.styles';
 import Icons from 'assets/icons/Icons';
 

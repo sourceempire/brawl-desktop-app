@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAuth } from 'api/requests';
+import { ProgressBar } from 'common/components';
 import { useAppUpdater } from 'common/hooks';
-import { ProgressBar } from 'common/ui-components';
 import Window from 'window';
 import { LoadingAnimation, LoadingStatusText, Wrapper } from './LoadingView.styles';
 import { UpdateStatus } from './types';

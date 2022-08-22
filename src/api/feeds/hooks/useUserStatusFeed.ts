@@ -1,4 +1,4 @@
-import { UserStatusEnum } from 'frames/main/components/UserStatus';
+import { UserStatusEnum } from 'common/components/UserStatus';
 import useFeed from './useFeed';
 
 type Options = {
