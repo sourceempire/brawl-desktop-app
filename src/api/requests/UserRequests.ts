@@ -1,5 +1,5 @@
 import Fetcher from 'api/Fetcher';
-import { UserStatusEnum } from 'views/main/components/UserStatus';
+import { UserStatusEnum } from 'frames/main/components/UserStatus';
 
 export type PublicUser = {
   id: string;
