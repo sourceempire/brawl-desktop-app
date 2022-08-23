@@ -1,4 +1,4 @@
-import { UserStatusEnum } from 'views/main/components/UserStatus';
+import { UserStatusEnum } from 'common/components/UserStatus';
 import useFeed from './useFeed';
 
 type Options = {
@@ -7,6 +7,11 @@ type Options = {
 
 const useUserStatusFeed = ({ userId }: Options) => {
   const { isLoading, currentState } = useFeed<{ status: UserStatusEnum }>(`user.status.${userId}`);
+
+  if (!isLoading) {
+    return { status: UserStatusEnum[currentState.status], isLoading };
+  }
+
   return { status: UserStatusEnum[currentState.status], isLoading };
 };
 
