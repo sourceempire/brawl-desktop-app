@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { darkenColor, lightenColor } from 'assets/styles/colorBrightness';
+import { Card } from 'common/components';
+import styled from 'styled-components';
 
 type Props = {
   width?: string;

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Animation } from 'common/components';
 import styled, { css } from 'styled-components/macro';
+import { Animation } from 'common/components';
 import simpleLoading from 'assets/animations/simple-loading.json';
 import { theme } from 'assets/styles/Theme';
 

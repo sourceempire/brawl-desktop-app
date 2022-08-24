@@ -1,56 +1,55 @@
-
 @font-face {
   font-family: 'DM Sans';
-  src: url("../../assets/fonts/DMSans/DMSans-Regular.ttf");
+  src: url('../../assets/fonts/DMSans/DMSans-Regular.ttf');
   font-weight: 400;
   font-style: normal;
   font-display: block;
 }
 @font-face {
   font-family: 'DM Sans';
-  src: url("../../assets/fonts/DMSans/DMSans-Italic.ttf");
+  src: url('../../assets/fonts/DMSans/DMSans-Italic.ttf');
   font-weight: 400;
   font-style: italic;
   font-display: block;
 }
 @font-face {
   font-family: 'DM Sans';
-  src: url("../../assets/fonts/DMSans/DMSans-Medium.ttf");
+  src: url('../../assets/fonts/DMSans/DMSans-Medium.ttf');
   font-weight: 500;
   font-style: normal;
   font-display: block;
 }
 @font-face {
   font-family: 'DM Sans';
-  src: url("../../assets/fonts/DMSans/DMSans-MediumItalic.ttf");
+  src: url('../../assets/fonts/DMSans/DMSans-MediumItalic.ttf');
   font-weight: 500;
   font-style: italic;
   font-display: block;
 }
 @font-face {
   font-family: 'DM Sans';
-  src: url("../../assets/fonts/DMSans/DMSans-Bold.ttf");
+  src: url('../../assets/fonts/DMSans/DMSans-Bold.ttf');
   font-weight: 700;
   font-style: normal;
   font-display: block;
 }
 @font-face {
   font-family: 'DM Sans';
-  src: url("../../assets/fonts/DMSans/DMSans-BoldItalic.ttf");
+  src: url('../../assets/fonts/DMSans/DMSans-BoldItalic.ttf');
   font-weight: 700;
   font-style: italic;
   font-display: block;
 }
 @font-face {
   font-family: 'Orbitron';
-  src: url("../../assets/fonts/Orbitron/Orbitron-Regular.ttf");
+  src: url('../../assets/fonts/Orbitron/Orbitron-Regular.ttf');
   font-weight: 400;
   font-style: normal;
   font-display: block;
 }
 @font-face {
   font-family: 'Orbitron';
-  src: url("../../assets/fonts/Orbitron/Orbitron-Bold.ttf");
+  src: url('../../assets/fonts/Orbitron/Orbitron-Bold.ttf');
   font-weight: 700;
   font-style: normal;
   font-display: block;

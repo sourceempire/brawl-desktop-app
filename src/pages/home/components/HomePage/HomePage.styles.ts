@@ -1,6 +1,6 @@
+import styled from 'styled-components/macro';
 import TournamentInfoCard from 'pages/tournament-list/components/TournamentInfoCard/TournamentInfoCard';
 import { Header as TournamentInfoCardHeader } from 'pages/tournament-list/components/TournamentInfoCard/TournamentInfoCard.styles';
-import styled from 'styled-components/macro';
 
 export const Wrapper = styled.div`
   display: grid;

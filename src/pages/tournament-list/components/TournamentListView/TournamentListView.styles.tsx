@@ -1,6 +1,6 @@
+import styled, { css } from 'styled-components/macro';
 import { Button, Input } from 'common/components';
 import { Select } from 'common/components/Select';
-import styled, { css } from 'styled-components/macro';
 import SmallCross from 'assets/icons/SmallCross.svg';
 
 export const Wrapper = styled.div`

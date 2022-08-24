@@ -42,15 +42,28 @@ rules:
         - builtin
         - external
         - internal
+        - parent
+        - sibling
+        - index
       pathGroups:
         - pattern: react
-          group: builtin
+          group: external
           position: before
-        - pattern: global/**
+        - pattern: common/**
           group: internal
-        - pattern: ui
+        - pattern: context/**
           group: internal
-        - pattern: window
+        - pattern: frames/**
+          group: internal
+        - pattern: pages/**
+          group: internal
+        - pattern: types/**
+          group: internal
+        - pattern: types/**
+          group: internal
+        - pattern: utils/**
+          group: internal
+        - pattern: window/**
           group: internal
         - pattern: assets/**
           group: index
@@ -66,3 +79,4 @@ rules:
 settings:
   react:
     version: detect
+    

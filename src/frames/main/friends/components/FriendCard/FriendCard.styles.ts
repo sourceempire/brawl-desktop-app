@@ -1,5 +1,5 @@
-import UserStatus, { UserStatusEnum } from 'common/components/UserStatus';
 import styled, { css } from 'styled-components/macro';
+import UserStatus, { UserStatusEnum } from 'common/components/UserStatus';
 import { UserCard } from '../Shared.styles';
 
 export const FriendUserCard = styled(UserCard)<{ isHidden: boolean }>`

@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from 'styled-components';
 import { rgba } from 'utils/styledUtils';
 
 export const Wrapper = styled.div`

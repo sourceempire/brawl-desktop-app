@@ -1,6 +1,6 @@
 import React from 'react';
-import { ActionButton, Input } from 'common/components';
 import styled, { css } from 'styled-components/macro';
+import { ActionButton, Input } from 'common/components';
 
 export const Wrapper = styled.div`
   position: fixed;

@@ -1,5 +1,5 @@
-import Card from 'common/components/Card/Card';
 import styled, { css } from 'styled-components/macro';
+import { Card } from 'common/components';
 
 export const Wrapper = styled(Card)`
   width: 100%;
