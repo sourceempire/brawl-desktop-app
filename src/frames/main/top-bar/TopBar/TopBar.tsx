@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
+import { ActionButton } from 'common/components';
 import MainNavLink from '../MainNavLink';
 import ProfileMenu from '../ProfileMenu';
-import { PlaceholderLogo, TopBarAction, TopBarActions, Wrapper } from './TopBar.styles';
+import Wallet from '../Wallet';
+import { PlaceholderLogo, TopBarActions, Wrapper } from './TopBar.styles';
 import Icons from 'assets/icons/Icons';
 
 type Props = {
@@ -38,7 +40,8 @@ const TopBar = ({ toggleFriends }: Props) => {
       </TopBarActions>
 
       <TopBarActions>
-        <TopBarAction icon={<Icons.Friends />} onClick={toggleFriends} hint="Toggle Friends" />
+        <ActionButton icon={<Icons.Friends />} onClick={toggleFriends} hint="Toggle Friends" />
+        <Wallet />
         <ProfileMenu />
       </TopBarActions>
     </Wrapper>

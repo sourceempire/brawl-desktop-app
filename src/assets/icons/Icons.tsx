@@ -40,6 +40,10 @@ import KeyUrl, { ReactComponent as KeyComponent } from './Key.svg';
 const Key = KeyComponent as SVGComponent;
 Key.url = KeyUrl;
 
+import PlusUrl, { ReactComponent as PlusComponent } from './Plus.svg';
+const Plus = PlusComponent as SVGComponent;
+Plus.url = PlusUrl;
+
 import ProfileUrl, { ReactComponent as ProfileComponent } from './Profile.svg';
 const Profile = ProfileComponent as SVGComponent;
 Profile.url = ProfileUrl;
@@ -79,6 +83,7 @@ const Icons = {
   Filter,
   Friends,
   Key,
+  Plus,
   Profile,
   RemoveFriend,
   Search,
