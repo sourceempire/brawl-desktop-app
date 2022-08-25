@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from 'api/requests';
-import DragableArea from 'common/components/DragableArea';
 import RootContextProvider from 'context';
+import { Route, Routes } from 'react-router-dom';
+import DragableArea from 'common/components/DragableArea';
 import { FriendBar } from 'frames/main/friends';
 import HomePage from 'pages/home';
-import { Route, Routes } from 'react-router-dom';
 import { useUpdateEffect } from 'utils/hooks';
 import TournamentListView from '../../pages/tournament-list';
 import { RoutesContainer, Wrapper } from './MainFrame.styles';

@@ -39,7 +39,7 @@ const FriendBar = ({ visible }: Props) => {
       <Wrapper>
         <FriendActions>
           <SearchFriendsInput
-            icon={Icons.Search}
+            icon={<Icons.Search />}
             value={searchString}
             onChange={handleSearch}
             size={InputSize.SMALL}

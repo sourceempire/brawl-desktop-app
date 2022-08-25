@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from 'api/requests';
 import { InputSize } from 'common/components/Input/Input.types';
-import { LoginButton, LoginInput } from './PasswordLogin.styles';
+import { LoginButton, LoginInput, Wrapper } from './PasswordLogin.styles';
 import Icons from 'assets/icons/Icons';
 
 export const PasswordLogin = () => {
@@ -15,14 +15,14 @@ export const PasswordLogin = () => {
   }
 
   return (
-    <>
+    <Wrapper>
       <LoginInput
         value={username}
         onChange={(e) => setUserName(e.target.value)}
         placeholder="Enter Email Address"
         label="Email"
         size={InputSize.SMALL}
-        icon={Icons.Profile}
+        icon={<Icons.Profile />}
       />
 
       <LoginInput
@@ -32,12 +32,12 @@ export const PasswordLogin = () => {
         label="Password"
         placeholder="Enter Password"
         size={InputSize.SMALL}
-        icon={Icons.Key}
+        icon={<Icons.Key />}
       />
 
       <LoginButton onClick={() => loginWithUsernameAndPassword(username, password)} primary>
         Login
       </LoginButton>
-    </>
+    </Wrapper>
   );
 };

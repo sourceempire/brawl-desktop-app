@@ -1,7 +1,5 @@
 import { InputSize } from 'common/components/Input/Input.types';
-import { InputElement, Label, Wrapper } from './Input.styles';
-import { getIcon } from 'assets/icons/Icons.model';
-import { SVGComponent } from 'assets/icons/Icons.types';
+import { IconWrapper, InputElement, InputWrapper, Label, Wrapper } from './Input.styles';
 
 type Props = {
   value: string;
@@ -10,7 +8,7 @@ type Props = {
   withBorder?: boolean;
   size?: InputSize;
   label?: string;
-  icon?: SVGComponent | string;
+  icon?: React.ReactElement;
   className?: string;
   placeholder?: string;
   tabIndex?: number;
@@ -30,22 +28,25 @@ const Input = ({
   tabIndex = 0,
   onChange
 }: Props) => {
+  const hasIcon = Boolean(icon);
+
   return (
-    <Wrapper inputSize={size} className={className}>
+    <Wrapper className={className}>
       <Label>{label}</Label>
-      {getIcon(icon, 'input-icon')}
-      <InputElement
-        value={value}
-        name={name}
-        type={type}
-        onChange={onChange}
-        withBorder={withBorder}
-        inputSize={size}
-        hasLabel={Boolean(label)}
-        hasIcon={icon !== undefined}
-        placeholder={placeholder}
-        tabIndex={tabIndex}
-      />
+      <InputWrapper inputSize={size} hasLabel={Boolean(label)} hasIcon={hasIcon}>
+        <IconWrapper inputSize={size}>{icon}</IconWrapper>
+        <InputElement
+          value={value}
+          name={name}
+          type={type}
+          onChange={onChange}
+          withBorder={withBorder}
+          inputSize={size}
+          hasIcon={hasIcon}
+          placeholder={placeholder}
+          tabIndex={tabIndex}
+        />
+      </InputWrapper>
     </Wrapper>
   );
 };
