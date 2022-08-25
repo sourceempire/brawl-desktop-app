@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components/macro';
-import Action from 'common/components/ActionButton';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -16,6 +15,11 @@ export const Wrapper = styled.div`
 export const TopBarActions = styled.div`
   display: flex;
   align-items: center;
+  > * {
+    ${({ theme }) => css`
+      margin-right: ${theme.spacing.baseX3}px;
+    `}
+  }
 `;
 
 export const PlaceholderLogo = styled.div`
@@ -26,11 +30,5 @@ export const PlaceholderLogo = styled.div`
 
   ${({ theme }) => css`
     background-color: ${theme.colors.primary};
-  `}
-`;
-
-export const TopBarAction = styled(Action)`
-  ${({ theme }) => css`
-    margin-right: ${theme.spacing.baseX3}px;
   `}
 `;
