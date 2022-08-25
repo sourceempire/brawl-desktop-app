@@ -1,34 +1,60 @@
-import { InputSize } from 'common/components/Input/Input.types';
 import styled, { css } from 'styled-components';
+import { InputSize } from 'common/components/Input/Input.types';
 
 // TODO -> Add support for which side icons should be
 
-export const iconStyle = css<{ inputSize: InputSize }>`
-  .input-icon {
-    display: inline-block;
-    opacity: 0.4;
-    position: absolute;
-    left: ${(props) => getInputPadding(props.inputSize)};
-    top: ${(props) =>
-      `calc((${getInputHeight(props.inputSize)} - ${getIconSize(props.inputSize)}) / 2)`};
-    width: ${(props) => getIconSize(props.inputSize)};
-    height: ${(props) => getIconSize(props.inputSize)};
-  }
-`;
+export const Wrapper = styled.div``;
 
-export const Wrapper = styled.div`
-  position: relative;
-  ${iconStyle}
+export const IconWrapper = styled.div<{ inputSize: InputSize }>`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.4;
+  top: 0;
+  bottom: 0;
+  ${({ inputSize }) => css`
+    width: calc((${getIconSize(inputSize)}) + (${getInputPadding(inputSize)} * 2));
+    // IconWrapper should only take one child.
+    & > :first-child {
+      width: ${getIconSize(inputSize)};
+      height: ${getIconSize(inputSize)};
+    }
+  `}
 `;
 
 export const Label = styled.label`
   font-size: 13px;
 `;
 
+export const InputWrapper = styled.div<{
+  inputSize: InputSize;
+  hasLabel: boolean;
+  hasIcon: boolean;
+}>`
+  position: relative;
+  ${({ theme, inputSize, hasLabel, hasIcon }) => css`
+    height: ${getInputHeight(inputSize)};
+    border-radius: ${theme.borderRadius.default};
+    background-color: red;
+
+    ${hasLabel &&
+    css`
+      margin-top: ${hasLabel ? '6px' : '0'};
+    `}
+
+    ${!hasIcon &&
+    css`
+      ${IconWrapper} {
+        display: none;
+      }
+    `}
+  `}
+`;
+
 export const InputElement = styled.input<{
   withBorder: boolean;
   inputSize: InputSize;
-  hasLabel: boolean;
   hasIcon: boolean;
 }>`
   width: 100%;
@@ -48,9 +74,9 @@ export const InputElement = styled.input<{
     color: white;
     opacity: 0.4;
   }
-  ${({ theme, inputSize, hasIcon, hasLabel, withBorder }) => css`
+  ${({ theme, inputSize, hasIcon, withBorder }) => css`
     padding: 0 ${getInputPadding(inputSize)};
-    height: ${getInputHeight(inputSize)};
+    height: 100%;
     font-size: ${getInputFontSize(inputSize)};
     border-radius: ${theme.borderRadius.default};
     background-color: ${theme.colors.lightTint};
@@ -62,11 +88,6 @@ export const InputElement = styled.input<{
     ${hasIcon &&
     css`
       padding-left: calc((${getIconSize(inputSize)}) + (${getInputPadding(inputSize)} * 2));
-    `}
-
-    ${hasLabel &&
-    css`
-      margin-top: ${hasLabel ? '6px' : '0'};
     `}
 
     ${withBorder &&

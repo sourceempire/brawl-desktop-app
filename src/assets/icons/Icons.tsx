@@ -68,7 +68,6 @@ import TrophyUrl, { ReactComponent as TrophyComponent } from './Trophy.svg';
 const Trophy = TrophyComponent as SVGComponent;
 Trophy.url = TrophyUrl;
 
-
 const Icons = {
   Abort,
   AddFriend,
