@@ -1,32 +1,22 @@
 import styled, { css } from 'styled-components/macro';
+import { ActionButtonSize, WrapperProps } from './ActionButton.types';
 import { theme } from 'assets/styles/Theme';
 
-export type Size = 'small' | 'medium' | 'large';
-
-const getButtonSize = (size: Size) => {
-  switch (size) {
-    case 'small':
-      return '20px';
-    case 'medium':
-      return theme.spacing.baseX5 + 'px';
-    case 'large':
-      return theme.spacing.baseX6 + 'px';
-  }
+const buttonSize = {
+  [ActionButtonSize.SMALL]: '20px',
+  [ActionButtonSize.MEDIUM]: theme.spacing.baseX5 + 'px',
+  [ActionButtonSize.LARGE]: theme.spacing.baseX6 + 'px'
 };
 
-export const Wrapper = styled.div<{
-  iconColor?: string;
-  isCircle?: boolean;
-  size?: Size;
-}>`
+export const Wrapper = styled.div<WrapperProps>`
   display: flex;
   justify-content: center;
   align-items: center;
 
-  ${({ theme, iconColor, isCircle, size = 'medium' }) => css`
-    width: ${getButtonSize(size)};
-    height: ${getButtonSize(size)};
-    padding: ${size === 'small' ? `5px` : `${theme.spacing.base}px`};
+  ${({ theme, iconColor, isCircle, size }) => css`
+    width: ${buttonSize[size]};
+    height: ${buttonSize[size]};
+    padding: ${size === ActionButtonSize.SMALL ? `5px` : `${theme.spacing.base}px`};
     background-color: ${theme.colors.secondary};
     border-radius: ${isCircle ? '50%' : theme.borderRadius.default};
     > *:first-child {
@@ -35,12 +25,5 @@ export const Wrapper = styled.div<{
     :hover {
       background-color: ${theme.colors.lightTint};
     }
-  `}
-`;
-
-export const Hint = styled.div`
-  white-space: nowrap;
-  ${({ theme }) => css`
-    padding: calc(${theme.spacing.base}px / 2);
   `}
 `;

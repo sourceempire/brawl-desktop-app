@@ -40,13 +40,11 @@ const FriendRequestCard = ({ user }: Props) => {
           <AcceptAction
             onClick={() => makeRequest(acceptFriendRequest)}
             icon={<Icons.Check />}
-            size="small"
             isCircle
           />
           <DeclineAction
             onClick={() => makeRequest(declineFriendRequest)}
             icon={<Icons.Cross />}
-            size="small"
             isCircle
           />
         </RequestActions>
