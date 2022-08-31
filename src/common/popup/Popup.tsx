@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { NotificationLevel } from 'types/Notification';
-import { CloseIcon, Wrapper } from './Popup.styles';
+import { CloseIcon, PopupText, Wrapper } from './Popup.styles';
 
 type Props = {
   text: string;
@@ -39,7 +39,7 @@ export const Notification = ({ text, level, onClose, timer }: Props) => {
 
   return (
     <Wrapper level={level} onClick={handleClose} isClosing={isClosing}>
-      {text}
+      <PopupText>{text}</PopupText>
       <CloseIcon />
     </Wrapper>
   );

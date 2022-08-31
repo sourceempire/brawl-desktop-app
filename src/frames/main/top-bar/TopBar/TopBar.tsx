@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ActionButton } from 'common/components';
 import MainNavLink from '../MainNavLink';
+import Party from '../Party';
 import ProfileMenu from '../ProfileMenu';
 import Wallet from '../Wallet';
 import { PlaceholderLogo, TopBarActions, Wrapper } from './TopBar.styles';
@@ -40,6 +41,7 @@ const TopBar = ({ toggleFriends }: Props) => {
       </TopBarActions>
 
       <TopBarActions>
+        <Party />
         <ActionButton icon={<Icons.Friends />} onClick={toggleFriends} hint="Toggle Friends" />
         <Wallet />
         <ProfileMenu />

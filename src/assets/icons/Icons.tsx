@@ -20,6 +20,10 @@ import ClockUrl, { ReactComponent as ClockComponent } from './Clock.svg';
 const Clock = ClockComponent as SVGComponent;
 Clock.url = ClockUrl;
 
+import CogUrl, { ReactComponent as CogComponent} from './Cog.svg';
+const Cog = CogComponent as SVGComponent;
+Cog.url = CogUrl;
+
 import CrossUrl, { ReactComponent as CrossComponent } from './Cross.svg';
 const Cross = CrossComponent as SVGComponent;
 Cross.url = CrossUrl;
@@ -39,6 +43,10 @@ Friends.url = FriendsUrl;
 import KeyUrl, { ReactComponent as KeyComponent } from './Key.svg';
 const Key = KeyComponent as SVGComponent;
 Key.url = KeyUrl;
+
+import PartyUrl, { ReactComponent as PartyComponent } from './Party.svg';
+const Party = PartyComponent as SVGComponent;
+Party.url = PartyUrl
 
 import PlusUrl, { ReactComponent as PlusComponent } from './Plus.svg';
 const Plus = PlusComponent as SVGComponent;
@@ -64,6 +72,10 @@ import SmallCrossUrl, { ReactComponent as SmallCrossComponent } from './SmallCro
 const SmallCross = SmallCrossComponent as SVGComponent;
 SmallCross.url = SmallCrossUrl;
 
+import StarUrl, {ReactComponent as StarComponent} from './Star.svg'
+const Star = StarComponent as SVGComponent;
+Star.url = StarUrl
+
 import TicketUrl, { ReactComponent as TicketComponent } from './Ticket.svg';
 const Ticket = TicketComponent as SVGComponent;
 Ticket.url = TicketUrl;
@@ -78,17 +90,20 @@ const Icons = {
   ArrowDown,
   Check,
   Clock,
+  Cog,
   Cross,
   DatePickerArrow,
   Filter,
   Friends,
   Key,
+  Party,
   Plus,
   Profile,
   RemoveFriend,
   Search,
   SelectArrow,
   SmallCross,
+  Star,
   Ticket,
   Trophy
 };
