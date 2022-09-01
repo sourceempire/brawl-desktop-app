@@ -7,7 +7,7 @@ type Props = {
   children: React.ReactNode;
   position: Position;
   arrowPosition?: ArrowPosition;
-  ignoredElementOnClickOutside?: HTMLElement;
+  ignoredElementOnClickOutside?: HTMLElement | null;
   onClickOutside?: () => void;
 };
 

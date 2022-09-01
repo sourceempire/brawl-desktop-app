@@ -95,7 +95,7 @@ export const MenuItem = styled.div`
   width: 156px;
   ${({ theme }) => css`
     ${theme.textStyles.note}
-    padding: ${theme.spacing.baseX2}px ${theme.spacing.base}px;
+    padding: ${theme.spacing.base}px ${theme.spacing.base}px;
     border-radius: ${theme.borderRadius.default};
     :hover {
       background-color: ${theme.colors.lightTint};
