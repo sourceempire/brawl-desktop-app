@@ -13,26 +13,38 @@ const Wallet = () => {
   const { Hint: MoneyHint } = useHint({
     isVisible: isMoneyHintVisible,
     hintText: 'Balance',
-    parentElementRef: moneyContainerRef
+    parentElementRef: moneyContainerRef,
+    timeToVisibility: 500
   });
 
   const { Hint: DepositHint } = useHint({
     isVisible: isDepositHintVisible,
     hintText: 'Deposit',
-    parentElementRef: depositContainerRef
+    parentElementRef: depositContainerRef,
+    timeToVisibility: 500
   });
+
+  const handleMoneyClick = () => {
+    setMoneyHintVisible(false);
+  };
+
+  const handleDepositClick = () => {
+    setDepositHintVisible(false);
+  };
 
   return (
     <>
       <Wrapper>
         <MoneyContainer
           ref={moneyContainerRef}
+          onClick={handleMoneyClick}
           onMouseEnter={() => setMoneyHintVisible(true)}
           onMouseLeave={() => setMoneyHintVisible(false)}>
           €42.80
         </MoneyContainer>
         <DepositButton
           ref={depositContainerRef}
+          onClick={handleDepositClick}
           onMouseEnter={() => setDepositHintVisible(true)}
           onMouseLeave={() => setDepositHintVisible(false)}>
           <DepositIcon />

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components/macro';
 import { ActionButton, Input } from 'common/components';
+import { lightenColor } from 'assets/styles/colorBrightness';
 
 export const Wrapper = styled.div`
   position: fixed;
@@ -36,6 +37,9 @@ export const FriendAction = styled(ActionButton)`
     margin-left: ${theme.spacing.base}px;
     margin-right: 0;
     background-color: ${theme.colors.lightTint};
+    :hover {
+      background-color: ${lightenColor(theme.colors.lightTint, 25)};
+    }
   `}
 `;
 

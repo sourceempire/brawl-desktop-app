@@ -13,7 +13,7 @@ export const Wrapper = styled.div<WrapperProps>`
   justify-content: center;
   align-items: center;
 
-  ${({ theme, iconColor, isCircle, size }) => css`
+  ${({ theme, iconColor, isCircle, size, active }) => css`
     width: ${buttonSize[size]};
     height: ${buttonSize[size]};
     padding: ${size === ActionButtonSize.SMALL ? `5px` : `${theme.spacing.base}px`};
@@ -25,5 +25,17 @@ export const Wrapper = styled.div<WrapperProps>`
     :hover {
       background-color: ${theme.colors.lightTint};
     }
+    ${active &&
+    css`
+      background-color: ${theme.colors.accent};
+      color: ${theme.colors.textPrimaryDark};
+      fill: ${theme.colors.textPrimaryDark};
+
+      :hover {
+        background-color: ${theme.colors.accent};
+        color: ${theme.colors.textPrimaryDark};
+        fill: ${theme.colors.textPrimaryDark};
+      }
+    `}
   `}
 `;
