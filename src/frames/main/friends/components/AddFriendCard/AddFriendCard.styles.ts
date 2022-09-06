@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components/macro';
+import EllipsisText from 'common/components/EllipsisText';
 import Icons from 'assets/icons/Icons';
 
 export const RequestSentText = styled.div`
@@ -10,4 +11,10 @@ export const RequestSentText = styled.div`
 
 export const RemoveRequestIcon = styled(Icons.RemoveFriend)`
   padding: 1px;
+`;
+
+export const UserTag = styled(EllipsisText)`
+  ${({ theme }) => css`
+    margin-left: ${theme.spacing.baseX2}px;
+  `}
 `;

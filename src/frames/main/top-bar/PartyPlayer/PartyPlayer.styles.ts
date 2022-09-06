@@ -33,9 +33,16 @@ export const LeaderStar = styled(Icons.Star)`
 
 export const PlayerAction = styled.div`
   ${({ theme }) => css`
-    padding: calc(${theme.spacing.base}px / 2) ${theme.spacing.base}px;
+    margin-left: -${theme.spacing.base}px;
+    margin-right: -${theme.spacing.base}px;
+    border-radius: ${theme.borderRadius.default};
+    padding: calc(${theme.spacing.base}px) ${theme.spacing.base}px;
     :hover {
       background-color: ${theme.colors.lightTint};
     }
   `}
+`;
+
+export const MenuWrapper = styled.div`
+  width: 150px;
 `;

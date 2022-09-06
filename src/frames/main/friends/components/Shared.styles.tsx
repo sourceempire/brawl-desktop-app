@@ -1,6 +1,6 @@
-import React from 'react';
 import styled, { css } from 'styled-components/macro';
 import { Animation } from 'common/components';
+import { InnerWrapper, OuterWrapper } from 'common/components/EllipsisText/EllipsisText.styles';
 import simpleLoading from 'assets/animations/simple-loading.json';
 import { theme } from 'assets/styles/Theme';
 
@@ -30,35 +30,6 @@ export const UserImage = styled.img`
     border-radius: ${theme.borderRadius.default};
   `}
 `;
-
-const UserTagWrapper = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  flex-grow: 1;
-  ${({ theme }) => css`
-    ${theme.textStyles.body}
-    margin-left: ${theme.spacing.baseX2}px;
-  `}
-`;
-
-const UserTagText = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  ${({ theme }) => css`
-    padding-right: ${theme.spacing.base}px;
-  `}
-`;
-
-export const UserTag = ({ children }: { children: React.ReactNode }) => (
-  <UserTagWrapper>
-    <UserTagText>{children}</UserTagText>
-  </UserTagWrapper>
-);
 
 type ProfileImageSize = 'small' | 'medium' | 'large';
 
@@ -121,7 +92,7 @@ const SkeletionProfileImage = styled.div`
   width: ${getProfileImageSize('medium')};
 `;
 
-const SkeletonUserTag = styled(UserTagText)`
+const SkeletonUserTag = styled(InnerWrapper)`
   ${skeletonLoadingStyle}
   height: 16px;
 `;
@@ -129,8 +100,8 @@ const SkeletonUserTag = styled(UserTagText)`
 export const UserCardSkeleton = () => (
   <SkeletonContainer>
     <SkeletionProfileImage />
-    <UserTagWrapper>
+    <OuterWrapper>
       <SkeletonUserTag />
-    </UserTagWrapper>
+    </OuterWrapper>
   </SkeletonContainer>
 );

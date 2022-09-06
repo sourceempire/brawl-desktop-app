@@ -1,4 +1,6 @@
+import React from 'react';
 import styled, { css } from 'styled-components/macro';
+import EllipsisText from '../EllipsisText';
 import type { ArrowPosition, Position } from './ContextMenu.types';
 
 type WrapperProps = {
@@ -39,12 +41,10 @@ export const Wrapper = styled.div<WrapperProps>`
     `}
 `;
 
-export const Title = styled.div`
-  ${({ theme }) =>
-    css`
-      ${theme.textStyles.title}
-      padding-bottom: ${theme.spacing.base}px;
-      border-bottom: 2px solid ${theme.colors.textPrimaryLight};
-      margin-bottom: ${theme.spacing.base}px;
-    `}
+export const Title = styled(EllipsisText)`
+  ${({ theme }) => css`
+    ${theme.textStyles.title}
+    height: ${theme.spacing.baseX4}px;
+    margin-bottom: ${theme.spacing.base * 0.5}px;
+  `}
 `;

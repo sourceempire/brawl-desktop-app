@@ -1,8 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const Settings = styled.div`
-  ${({ theme }) => css``}
-`;
+export const Settings = styled.div``;
 
 export const Label = styled.div`
   font-size: 13px;

@@ -16,7 +16,7 @@ export const useFriendList = ({ searchString }: Options) => {
   const { user } = useLoggedInUser();
   const { friends, isLoading: isLoadingFriends } = useFriendsFeed({ userId: user.id });
   const [friendItems, setFriendItems] = useState<FriendItem[]>([]);
-  const [isLoadingStatuses, setIsLoadingStatuses] = useState(true);
+  const [isLoadingStatuses, setLoadingStatuses] = useState(true);
   const [numberOfOnlineFriends, setNumberOfOnlineFriends] = useState<number>();
   const [statusDidChange, setStatusDidChange] = useState(false);
 
@@ -38,7 +38,7 @@ export const useFriendList = ({ searchString }: Options) => {
       .every((isLoading) => isLoading === false);
 
     if (shouldStopLoading) {
-      setIsLoadingStatuses(false);
+      setLoadingStatuses(false);
     }
   }, [friendRefs]);
 

@@ -5,8 +5,9 @@ import {
   declineFriendRequest
 } from 'api/requests/FriendRequests';
 import { PublicUser } from 'api/requests/UserRequests';
+import EllipsisText from 'common/components/EllipsisText';
 import popup from 'common/popup';
-import { ProfileImage, SimpleLoading, UserCard, UserTag } from '../Shared.styles';
+import { ProfileImage, SimpleLoading, UserCard } from '../Shared.styles';
 import { AcceptAction, DeclineAction, RequestActions } from './FriendRequestCard.styles';
 import Icons from 'assets/icons/Icons';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
@@ -32,7 +33,7 @@ const FriendRequestCard = ({ user }: Props) => {
   return (
     <UserCard>
       <ProfileImage src={tempProfileImage} />
-      <UserTag>{user.userTag}</UserTag>
+      <EllipsisText>{user.userTag}</EllipsisText>
       {isLoadingRequest ? (
         <SimpleLoading />
       ) : (

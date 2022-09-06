@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components/macro';
+import EllipsisText from 'common/components/EllipsisText';
 import UserStatus, { UserStatusEnum } from 'common/components/UserStatus';
 import { UserCard } from '../Shared.styles';
 
@@ -37,10 +38,19 @@ export const FriendOptions = styled.div`
 export const FriendOption = styled.div`
   ${({ theme }) => css`
     ${theme.textStyles.note}
+    margin-left: -${theme.spacing.base}px;
+    margin-right: -${theme.spacing.base}px;
     padding: calc(${theme.spacing.base}px * 1.5) ${theme.spacing.base}px;
     border-radius: ${theme.borderRadius.default};
     :hover {
       background-color: ${theme.colors.lightTint};
     }
+  `}
+`;
+
+export const UserTag = styled(EllipsisText)`
+  ${({ theme }) => css`
+    ${theme.textStyles.title}
+    margin-left: ${theme.spacing.baseX2}px;
   `}
 `;

@@ -2,9 +2,10 @@ import { usePartyFeed } from 'api/feeds';
 import { createParty } from 'api/requests/PartyRequests';
 import { ActionButton } from 'common/components';
 import popup from 'common/popup';
+import PartyInvite from '../PartyInvite/PartyInvite';
 import PartyPlayer from '../PartyPlayer';
 import PartySettings from '../PartySettings';
-import { InvitePlayerAction, Wrapper } from './Party.styles';
+import { Wrapper } from './Party.styles';
 import Icons from 'assets/icons/Icons';
 
 const handleCreateParty = () => {
@@ -23,12 +24,7 @@ const Lobby = () => {
       {Array(party.partySize - party.players.length)
         .fill('')
         .map((_, index) => (
-          <InvitePlayerAction
-            key={index}
-            icon={<Icons.Plus />}
-            onClick={() => console.log('ADD FRIEND')}
-            hint="Invite Player"
-          />
+          <PartyInvite key={index} />
         ))}
 
       <PartySettings />

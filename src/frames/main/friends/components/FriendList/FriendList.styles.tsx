@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   `}
 `;
 
-export const FriendList = styled.div`
+export const Friends = styled.div`
   display: grid;
   ${({ theme }) => css`
     grid-gap: ${theme.spacing.base}px;

@@ -1,6 +1,6 @@
 export type Party = {
   id: string;
-  invites: [];
+  invites: string[];
   isFull: false;
   leaderId: string;
   partySize: number;
