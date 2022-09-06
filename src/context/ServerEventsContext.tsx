@@ -86,6 +86,9 @@ export const ServerEventsProvider = ({ children }: Props) => {
     if (data.feed) {
       dispatchFeed(data.feed, data.state);
     } else {
+      if (data.message.error) {
+        console.error(data.event, data.message);
+      }
       dispatchEvent(data.event, data.message);
     }
   }, []);
