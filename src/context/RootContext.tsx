@@ -1,3 +1,4 @@
+import { PartyContextProvider } from './PartyContext';
 import { ServerEventsProvider } from './ServerEventsContext';
 import { UserContextProvider } from './UserContext';
 
@@ -8,7 +9,9 @@ type Props = {
 const RootContextProvider = ({ children }: Props) => {
   return (
     <UserContextProvider>
-      <ServerEventsProvider>{children}</ServerEventsProvider>
+      <ServerEventsProvider>
+        <PartyContextProvider>{children}</PartyContextProvider>
+      </ServerEventsProvider>
     </UserContextProvider>
   );
 };

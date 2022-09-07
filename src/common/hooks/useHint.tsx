@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import {
   ArrowPosition,
   ContextMenuRef,
@@ -11,17 +11,21 @@ type Options = {
   hintText?: string;
   parentElementRef: React.MutableRefObject<HTMLElement>;
   isVisible: boolean;
+  timeToVisibility?: number; // in miliseconds
 };
 
-const useHint = ({ hintText, parentElementRef, isVisible }: Options) => {
+const useHint = ({ hintText, parentElementRef, isVisible, timeToVisibility = 0 }: Options) => {
+  const timeoutRef = useRef<NodeJS.Timeout>();
   const contextRef = useRef() as React.MutableRefObject<ContextMenuRef>;
 
   const [hintPosition, setHintPosition] = useState<Position>({ top: 0, left: 0 });
   const [contextArrowPosition, setContextArrowPosition] = useState<ArrowPosition>();
+  const [isVisibleLocal, setVisibleLocal] = useState(false);
 
   useLayoutEffect(() => {
     if (!hintText) return;
     if (!isVisible) return;
+    if (!isVisibleLocal) return;
 
     const { current: parentContainer } = parentElementRef;
     const { contextMenuContainer } = contextRef.current;
@@ -53,7 +57,17 @@ const useHint = ({ hintText, parentElementRef, isVisible }: Options) => {
       setContextArrowPosition({ left: hintWidth / 2 });
       setHintPosition({ left: hintLeft, top: hintTop });
     }
-  }, [hintText, isVisible, parentElementRef]);
+  }, [hintText, isVisible, parentElementRef, isVisibleLocal]);
+
+  useEffect(() => {
+    if (timeoutRef.current) {
+      setVisibleLocal(false);
+      clearTimeout(timeoutRef.current);
+    }
+    if (!isVisible) return;
+
+    timeoutRef.current = setTimeout(() => setVisibleLocal(true), timeToVisibility);
+  }, [isVisible, timeToVisibility]);
 
   return {
     Hint: (
@@ -62,7 +76,7 @@ const useHint = ({ hintText, parentElementRef, isVisible }: Options) => {
         contextRef={contextRef}
         hintPosition={hintPosition}
         contextArrowPosition={contextArrowPosition}
-        isVisible={isVisible}
+        isVisible={isVisibleLocal}
       />
     )
   };

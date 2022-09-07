@@ -58,44 +58,18 @@ export const MyUserStatus = styled(UserStatus)`
   `}
 `;
 
-const UserTagWrapper = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  flex-grow: 1;
-
-  ${({ theme }) => css`
-    height: ${theme.spacing.baseX4}px;
-    margin-left: ${theme.spacing.base}px;
-  `}
-`;
-
-const UserTagText = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  ${({ theme }) => css`
-    ${theme.textStyles.title}
-    padding-right: ${theme.spacing.base}px;
-  `}
-`;
-
-export const UserTag = ({ children }: { children: React.ReactNode }) => (
-  <UserTagWrapper>
-    <UserTagText>{children}</UserTagText>
-  </UserTagWrapper>
-);
+export const MenuWrapper = styled.div``;
 
 export const MenuItem = styled.div`
   display: flex;
   align-items: center;
   width: 156px;
+
   ${({ theme }) => css`
     ${theme.textStyles.note}
-    padding: ${theme.spacing.baseX2}px ${theme.spacing.base}px;
+    margin-left: -${theme.spacing.base}px;
+    margin-right: -${theme.spacing.base}px;
+    padding: ${theme.spacing.base}px ${theme.spacing.base}px;
     border-radius: ${theme.borderRadius.default};
     :hover {
       background-color: ${theme.colors.lightTint};
@@ -104,7 +78,7 @@ export const MenuItem = styled.div`
 `;
 
 export const HorizontalRule = styled.div`
-  height: 1px;
+  height: 2px;
   background-color: rgba(255, 255, 255, 0.5);
   width: 100%;
   margin: 3px 0;

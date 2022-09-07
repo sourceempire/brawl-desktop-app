@@ -16,7 +16,7 @@ export const CloseIcon = styled(Icons.Cross)`
   transform: translateY(-50%);
 
   padding: ${theme.spacing.base}px;
-  right: ${theme.spacing.base};
+  right: ${theme.spacing.base}px;
   fill: ${theme.colors.textSecondaryDark};
 `;
 
@@ -72,3 +72,5 @@ export const Wrapper = styled.div<{ level: NotificationLevel; isClosing: boolean
     }
   }
 `;
+
+export const PopupText = styled.div``;

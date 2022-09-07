@@ -8,14 +8,15 @@ import { UserStatusEnum } from 'common/components/UserStatus';
 import popup from 'common/popup';
 import { useUpdateEffect } from 'utils/hooks';
 import RemoveFriendConfirmationModal from '../RemoveFriendModal';
-import { ProfileImage, UserTag } from '../Shared.styles';
+import { ProfileImage } from '../Shared.styles';
 import {
   FriendContextMenu,
   FriendOption,
   FriendOptions,
   FriendUserCard,
   FriendUserStatus,
-  ProfileImageWrapper
+  ProfileImageWrapper,
+  UserTag
 } from './FriendCard.styles';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
 import { theme } from 'assets/styles/Theme';

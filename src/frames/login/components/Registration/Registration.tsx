@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from 'api/requests';
-import { Text } from 'common/components';
 import { useNavigate } from 'react-router-dom';
+import { Text } from 'common/components';
 import { LoginWrapper } from '../OpenIdLogin/OpenIdLogin.styles';
 import { LoginInput } from '../PasswordLogin/PasswordLogin.styles';
 import { Button, ButtonsWrapper } from './Registration.styles';

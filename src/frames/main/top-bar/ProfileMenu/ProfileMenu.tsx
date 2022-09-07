@@ -11,10 +11,10 @@ import {
   ArrowIcon,
   HorizontalRule,
   MenuItem,
+  MenuWrapper,
   MyUserStatus,
   ProfileImage,
   ProfileImageContainer,
-  UserTag,
   Wrapper
 } from './ProfileMenu.styles';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
@@ -81,24 +81,25 @@ const ProfileMenu = () => {
       </Wrapper>
       {isMenuShown && (
         <ContextMenu
+          title={user.userTag}
           position={{ right: 24, top: 83 }}
           arrowPosition={{ left: 144 }}
           onClickOutside={hideMenu}
           ignoredElementOnClickOutside={element.current}>
-          <UserTag>{user.userTag}</UserTag>
-          <HorizontalRule />
-          {orderedStatusItems.map((status) => (
-            <MenuItem key={status} onClick={() => handleStatusChange(status)}>
-              <UserStatus status={status} />
-              <StatusText>{statusTexts[status]}</StatusText>
-            </MenuItem>
-          ))}
-          <HorizontalRule />
-          <MenuItem>Change Avatar</MenuItem>
-          <HorizontalRule />
-          <MenuItem>Account Settings</MenuItem>
-          <HorizontalRule />
-          <MenuItem onClick={logout}>Log out</MenuItem>
+          <MenuWrapper>
+            {orderedStatusItems.map((status) => (
+              <MenuItem key={status} onClick={() => handleStatusChange(status)}>
+                <UserStatus status={status} />
+                <StatusText>{statusTexts[status]}</StatusText>
+              </MenuItem>
+            ))}
+            <HorizontalRule />
+            <MenuItem>Change Avatar</MenuItem>
+            <HorizontalRule />
+            <MenuItem>Account Settings</MenuItem>
+            <HorizontalRule />
+            <MenuItem onClick={logout}>Log out</MenuItem>
+          </MenuWrapper>
         </ContextMenu>
       )}
     </>

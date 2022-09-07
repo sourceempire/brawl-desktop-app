@@ -84,6 +84,9 @@ const ResetStyle = css`
     user-select: none;
     -webkit-user-drag: none;
     outline: none;
+    ::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   /* HTML5 display-role reset for older browsers */

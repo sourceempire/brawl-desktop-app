@@ -19,6 +19,9 @@ export const TopBarActions = styled.div`
     ${({ theme }) => css`
       margin-right: ${theme.spacing.baseX3}px;
     `}
+    :last-child {
+      margin-right: 0;
+    }
   }
 `;
 

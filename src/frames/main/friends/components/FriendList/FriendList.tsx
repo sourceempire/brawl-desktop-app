@@ -4,8 +4,8 @@ import { Title } from '../FriendBar/FriendBar.styles';
 import FriendCard from '../FriendCard';
 import {
   BigAddFriendIcon,
-  FriendList,
   FriendListSkeleton,
+  Friends,
   NoFriendsContainer,
   NoFriendsText,
   Wrapper
@@ -16,7 +16,7 @@ type Props = {
   openAddFriendModal: () => void;
 };
 
-const Friends = ({ searchString, openAddFriendModal }: Props) => {
+const FriendList = ({ searchString, openAddFriendModal }: Props) => {
   const {
     friendItems,
     numberOfFriends,
@@ -31,7 +31,7 @@ const Friends = ({ searchString, openAddFriendModal }: Props) => {
   return (
     <Wrapper>
       <Title>Friends{!isLoading && ` - ${numberOfOnlineFriends}/${numberOfFriends}`}</Title>
-      <FriendList>
+      <Friends>
         {friendItems.map((friendItem, index) => (
           <FriendCard
             key={friendItem.friend.id}
@@ -42,7 +42,7 @@ const Friends = ({ searchString, openAddFriendModal }: Props) => {
           />
         ))}
         {isLoading && <FriendListSkeleton cardCount={6} />}
-      </FriendList>
+      </Friends>
 
       {numberOfFriends === 0 && (
         <NoFriendsContainer>
@@ -59,4 +59,4 @@ const Friends = ({ searchString, openAddFriendModal }: Props) => {
   );
 };
 
-export default Friends;
+export default FriendList;
