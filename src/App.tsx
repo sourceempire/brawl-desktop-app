@@ -1,8 +1,8 @@
+import { HashRouter, Route, Routes } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 import LoadingView from 'frames/loading/LoadingView';
 import LoginView from 'frames/login/LoginFrame';
 import MainView from 'frames/main/MainFrame';
-import { HashRouter, Route, Routes } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
 import { AppContainer } from './App.styles';
 import { theme } from 'assets/styles/Theme';
 

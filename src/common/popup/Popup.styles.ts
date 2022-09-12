@@ -1,9 +1,5 @@
 import styled, { css } from 'styled-components';
-import {
-  NotificationLevel,
-  NotificationLevelBackgroundColors,
-  NotificationLevelColors
-} from 'types/Notification';
+import { PopupLevel, PopupColors, PopupBackgroundColors } from 'types/Popup';
 import Icons from 'assets/icons/Icons';
 import { theme } from 'assets/styles/Theme';
 
@@ -20,7 +16,7 @@ export const CloseIcon = styled(Icons.Cross)`
   fill: ${theme.colors.textSecondaryDark};
 `;
 
-export const Wrapper = styled.div<{ level: NotificationLevel; isClosing: boolean }>`
+export const Wrapper = styled.div<{ level: PopupLevel; isClosing: boolean }>`
   position: fixed;
   left: 50%;
   top: 200px;
@@ -34,8 +30,8 @@ export const Wrapper = styled.div<{ level: NotificationLevel; isClosing: boolean
 
   ${({ level }) =>
     css`
-      color: ${NotificationLevelColors[level]};
-      background-color: ${NotificationLevelBackgroundColors[level]};
+      color: ${PopupColors[level]};
+      background-color: ${PopupBackgroundColors[level]};
       is
     `};
   ${({ isClosing }) =>

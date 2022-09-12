@@ -19,6 +19,8 @@ declare module 'styled-components' {
       statusError: string;
       statusSuccess: string;
       statusWarning: string;
+
+      notificationRed: string;
     };
     borderRadius: {
       default: string;

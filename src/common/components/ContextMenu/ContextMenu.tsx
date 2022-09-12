@@ -1,8 +1,7 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import ReactDOM from 'react-dom';
+import { Title, Wrapper } from 'common/components/ContextMenu/ContextMenu.styles';
 import { HorizontalRule } from 'frames/main/top-bar/ProfileMenu/ProfileMenu.styles';
-import EllipsisText from '../EllipsisText';
-import { Title, Wrapper } from './ContextMenu.styles';
 import type { ArrowPosition, ContextMenuRef, Position } from './ContextMenu.types';
 
 type Props = {

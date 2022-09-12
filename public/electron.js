@@ -1,5 +1,5 @@
 /* eslint-disable */
-const { app, BrowserWindow, ipcMain, session } = require('electron');
+const { app, BrowserWindow, ipcMain, session, Notification } = require('electron');
 const path = require('path');
 const isDev = require('electron-is-dev');
 const { autoUpdater } = require('electron-updater');
@@ -208,6 +208,10 @@ app.on('activate', () => {
   if (loadingWindow === null) {
     createLoadingWindow();
   }
+});
+
+ipcMain.on('notification', (_, { title, subtitle, body, silent, icon }) => {
+  new Notification({ title, subtitle, body, silent, icon }).show();
 });
 
 ipcMain.on('focus', (event) => {

@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
-import { NotificationLevel } from 'types/Notification';
+import { PopupLevel } from 'types/Popup';
 import { CloseIcon, PopupText, Wrapper } from './Popup.styles';
 
 type Props = {
   text: string;
-  level: NotificationLevel;
+  level: PopupLevel;
   timer?: number;
   onClose: () => void;
 };
 
-export const Notification = ({ text, level, onClose, timer }: Props) => {
+export const Popup = ({ text, level, onClose, timer }: Props) => {
   const timeout = useRef<NodeJS.Timeout>();
   const [isClosing, setIsClosing] = useState(false);
 

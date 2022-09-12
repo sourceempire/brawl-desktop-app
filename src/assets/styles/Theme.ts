@@ -34,7 +34,9 @@ enum Colors {
 
   STATUS_ERROR = '#DD3A3A',
   STATUS_SUCCESS = '#65CA57',
-  STATUS_WARNING = '#F4A52F'
+  STATUS_WARNING = '#F4A52F',
+
+  NOTIFICATION_RED = '#fa3e3e'
 }
 
 enum BorderRadius {
@@ -108,7 +110,9 @@ export const theme: DefaultTheme = {
 
     statusError: Colors.STATUS_ERROR,
     statusSuccess: Colors.STATUS_SUCCESS,
-    statusWarning: Colors.STATUS_WARNING
+    statusWarning: Colors.STATUS_WARNING,
+
+    notificationRed: Colors.NOTIFICATION_RED
   },
   borderRadius: {
     default: BorderRadius.DEFAULT

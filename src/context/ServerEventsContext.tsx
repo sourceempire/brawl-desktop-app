@@ -147,7 +147,10 @@ export const ServerEventsProvider = ({ children }: Props) => {
     const shouldSubscribe = Object.keys(feedListeners.current[feed] ?? {}).length === 0;
 
     const feedListenerId = uuid();
-    feedListeners.current[feed] = { ...feedListeners.current[feed], [feedListenerId]: listener };
+    feedListeners.current[feed] = {
+      ...feedListeners.current[feed],
+      [feedListenerId]: listener
+    };
 
     if (shouldSubscribe) {
       socket.current?.send(JSON.stringify({ event: 'feed-subscribe', message: { feed } }));
