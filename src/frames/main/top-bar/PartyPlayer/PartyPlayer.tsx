@@ -26,7 +26,8 @@ export const PartyPlayer = ({ userId }: Props) => {
     contextMenuRef,
     relatedElementRef
   } = useContextMenuPosition({
-    isVisible: isMenuVisible
+    isVisible: isMenuVisible,
+    offsetX: -50
   });
 
   const isLeader = userId === party.leaderId;

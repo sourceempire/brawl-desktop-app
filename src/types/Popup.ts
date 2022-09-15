@@ -14,6 +14,6 @@ export const PopupBackgroundColors = {
 
 export const PopupColors = {
   [PopupLevel.INFO]: theme.colors.textPrimaryDark,
-  [PopupLevel.WARNING]: theme.colors.textPrimaryLight,
+  [PopupLevel.WARNING]: theme.colors.textPrimaryDark,
   [PopupLevel.ERROR]: theme.colors.textPrimaryLight
 };

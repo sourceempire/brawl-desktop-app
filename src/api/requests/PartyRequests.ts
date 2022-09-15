@@ -12,6 +12,12 @@ export const invitePlayer = (invitedUserId: string) =>
 export const revokeInvite = (invitedUserId: string) =>
   Fetcher.post(`${SERVER_URL}/api/party/invite/revoke`, { invitedUserId });
 
+export const acceptInvite = (partyId: string) =>
+  Fetcher.post(`${SERVER_URL}/api/party/invite/accept`, { partyId });
+
+export const declineInvite = (partyId: string) =>
+  Fetcher.post(`${SERVER_URL}/api/party/invite/decline`, { partyId });
+
 export const updatePartyTeamName = (teamName: string) =>
   Fetcher.post(`${SERVER_URL}/api/party/update_team_name`, { teamName });
 

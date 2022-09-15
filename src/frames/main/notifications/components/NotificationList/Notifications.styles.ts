@@ -24,3 +24,15 @@ export const NotificationsCount = styled.div`
     transform: translate(calc(50%), calc(-50%));
   `}
 `;
+
+export const NotificationList = styled.div`
+  width: 350px;
+  overflow: scroll;
+  max-height: 320px;
+  ${({ theme }) => css`
+    margin-left: -${theme.spacing.base}px;
+    margin-right: -${theme.spacing.base}px;
+    margin-bottom: -${theme.spacing.base * 1.5}px;
+    padding-bottom: ${theme.spacing.base * 1.5};
+  `}
+`;

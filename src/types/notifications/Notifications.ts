@@ -2,15 +2,15 @@ enum NotificationType {
   PARTY_INVITE = 'partyInvite'
 }
 
-interface NotificationInfo {
+export interface NotificationInfo {
   type: NotificationType;
 }
 
-interface PartyInviteNotificationInfo extends NotificationInfo {
+export interface PartyInviteNotificationInfo extends NotificationInfo {
   type: NotificationType.PARTY_INVITE;
   partyId: string;
   inviterId: string;
-  isActive: string;
+  isActive: boolean;
 }
 
 export interface Notification {
@@ -18,15 +18,19 @@ export interface Notification {
   userId: string;
   info: NotificationInfo;
   isRead: boolean;
-  created_at: string;
+  createdAt: Date;
 }
 
-const isPartyInviteNotification = (
+type NotificationFeedFormat = Omit<Notification, 'createdAt'> & { createdAt: string };
+
+export type NotificationFeed = {
+  totalCount: number;
+  unreadNotificationsCount: number;
+  notifications: NotificationFeedFormat[];
+};
+
+export const isPartyInviteNotification = (
   notificationInfo: NotificationInfo
 ): notificationInfo is PartyInviteNotificationInfo => {
   return notificationInfo.type === NotificationType.PARTY_INVITE;
-};
-
-export const typeGuard = {
-  isPartyInviteNotification
 };

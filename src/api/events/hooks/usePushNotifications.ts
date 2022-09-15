@@ -6,7 +6,7 @@ export const usePushNotifications = () => {
   const { addServerEventListener, removeServerEventListener } = useServerEvents();
 
   const onPushNotification = useCallback((c: any) => {
-    Window.notification({ title: 'HEJJ' });
+    Window.notification({ title: 'HEJJ', icon: '' });
   }, []);
 
   useEffect(() => {

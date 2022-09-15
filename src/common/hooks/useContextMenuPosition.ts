@@ -8,9 +8,10 @@ import { theme } from 'assets/styles/Theme';
 
 type Options = {
   isVisible?: boolean;
+  offsetX?: number;
 };
 
-function useContextMenuPosition({ isVisible = true }: Options) {
+function useContextMenuPosition({ isVisible = true, offsetX = 0 }: Options) {
   const relatedElementRef = useRef<HTMLDivElement>(null);
   const contextMenuRef = useRef<ContextMenuRef>(null);
   const [position, setPosition] = useState<Position>({ left: 100, top: 100 });
@@ -36,9 +37,9 @@ function useContextMenuPosition({ isVisible = true }: Options) {
     const left = relatedElementLeft - contextMenuWidth / 2 + relatedElementWidth / 2;
     const top = relatedElementTop + relatedElementHeight + theme.spacing.base * 1.5;
 
-    setPosition({ left, top });
-    setArrowPosition({ left: contextMenuContainer.offsetWidth / 2 });
-  }, [isVisible]);
+    setPosition({ left: left + offsetX, top });
+    setArrowPosition({ left: contextMenuContainer.offsetWidth / 2 - offsetX });
+  }, [isVisible, offsetX]);
 
   // TODO -> calculate arrowPosition if position outside bottom
   // TODO -> calculate arrowPosition if position outside top

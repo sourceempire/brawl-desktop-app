@@ -10,13 +10,17 @@ export const Wrapper = styled.div`
   align-items: center;
   height: 100%;
   box-sizing: content-box;
-  right: -3px;
-  padding: 3px;
-  padding-left: 6px;
-  border-radius: 3px;
+
   :hover {
     background-color: ${theme.colors.secondary};
   }
+
+  ${({ theme }) => css`
+    padding-left: ${theme.spacing.base}px;
+    border-radius: ${theme.borderRadius.default};
+    right: -${theme.spacing.base / 2}px;
+    padding: ${theme.spacing.base / 2}px;
+  `}
 `;
 
 export const ProfileImage = styled.img`
@@ -78,7 +82,7 @@ export const MenuItem = styled.div`
 `;
 
 export const HorizontalRule = styled.div`
-  height: 2px;
+  height: 1px;
   background-color: rgba(255, 255, 255, 0.5);
   width: 100%;
   margin: 3px 0;

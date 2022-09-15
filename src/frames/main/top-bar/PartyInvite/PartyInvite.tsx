@@ -33,7 +33,8 @@ const PartyInvite = () => {
   const { friendItems } = useFriendList({ searchString });
 
   const { relatedElementRef, contextMenuRef, position, arrowPosition } = useContextMenuPosition({
-    isVisible: isMenuVisible
+    isVisible: isMenuVisible,
+    offsetX: -70
   });
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,7 +80,7 @@ const PartyInvite = () => {
               placeholder="Search for friend to invite"
               size={InputSize.SMALL}
             />
-            <HorizontalRule />
+
             <Players>
               {playerList.map(({ friend }) => {
                 const hasInvite = party.invites.includes(friend.id);

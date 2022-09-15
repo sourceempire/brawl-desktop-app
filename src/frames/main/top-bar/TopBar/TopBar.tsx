@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ActionButton } from 'common/components';
+import Notifications from '../../notifications/components/NotificationList';
 import MainNavLink from '../MainNavLink';
-import Notifications from '../Notifications';
 import Party from '../Party';
 import ProfileMenu from '../ProfileMenu';
 import Wallet from '../Wallet';

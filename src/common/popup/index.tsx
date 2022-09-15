@@ -4,6 +4,7 @@ import { Popup } from './Popup';
 
 type PopupOptions = {
   timer?: number;
+  onClose?: () => void;
 };
 
 const setPopupMessage = (message: string, level: PopupLevel, options?: PopupOptions) => {
@@ -17,6 +18,7 @@ const setPopupMessage = (message: string, level: PopupLevel, options?: PopupOpti
       level={level}
       timer={options?.timer}
       onClose={() => {
+        options?.onClose?.();
         root.unmount();
         document.body.removeChild(element);
       }}

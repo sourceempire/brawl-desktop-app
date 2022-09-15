@@ -144,13 +144,15 @@ export const ServerEventsProvider = ({ children }: Props) => {
   }, []);
 
   const { current: subscribeToFeed } = useRef((feed: string, listener: FeedListener) => {
-    const shouldSubscribe = Object.keys(feedListeners.current[feed] ?? {}).length === 0;
+    let shouldSubscribe = false;
+
+    if (!feedListeners.current[feed]) {
+      shouldSubscribe = true;
+      feedListeners.current[feed] = {};
+    }
 
     const feedListenerId = uuid();
-    feedListeners.current[feed] = {
-      ...feedListeners.current[feed],
-      [feedListenerId]: listener
-    };
+    feedListeners.current[feed][feedListenerId] = listener;
 
     if (shouldSubscribe) {
       socket.current?.send(JSON.stringify({ event: 'feed-subscribe', message: { feed } }));

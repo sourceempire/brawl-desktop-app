@@ -11,9 +11,10 @@ type WrapperProps = {
 export const Wrapper = styled.div<WrapperProps>`
   position: absolute;
 
-  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.75));
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.2));
 
   ${({ position, theme }) => css`
+    border: 1px solid ${theme.colors.lightTint};
     top: ${position.top}px;
     right: ${position.right}px;
     bottom: ${position.bottom}px;
@@ -30,8 +31,10 @@ export const Wrapper = styled.div<WrapperProps>`
         content: '';
         position: absolute;
         top: 0px;
-        height: 8px;
-        width: 8px;
+        height: 10px;
+        width: 10px;
+        border-left: 1px solid ${theme.colors.lightTint};
+        border-top: 1px solid ${theme.colors.lightTint};
         transform: translate(${arrowPosition?.left ? '-50%' : '50%'}, -50%) rotate(45deg);
         background-color: ${theme.colors.secondary};
         left: ${arrowPosition?.left}px;
@@ -44,6 +47,6 @@ export const Title = styled(EllipsisText)`
   ${({ theme }) => css`
     ${theme.textStyles.title}
     height: ${theme.spacing.baseX4}px;
-    margin-bottom: ${theme.spacing.base * 0.5}px;
+    margin-bottom: ${theme.spacing.base}px;
   `}
 `;

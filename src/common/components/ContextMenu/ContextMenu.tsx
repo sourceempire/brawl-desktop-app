@@ -1,7 +1,6 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { Title, Wrapper } from 'common/components/ContextMenu/ContextMenu.styles';
-import { HorizontalRule } from 'frames/main/top-bar/ProfileMenu/ProfileMenu.styles';
 import type { ArrowPosition, ContextMenuRef, Position } from './ContextMenu.types';
 
 type Props = {
@@ -61,7 +60,6 @@ const ContextMenu = (
   return ReactDOM.createPortal(
     <Wrapper ref={ref} position={position} arrowPosition={arrowPosition}>
       {title && <Title>{title}</Title>}
-      {title && <HorizontalRule />}
       {children}
     </Wrapper>,
     document.getElementById('context-menu-root') as HTMLDivElement

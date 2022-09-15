@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { PopupLevel, PopupColors, PopupBackgroundColors } from 'types/Popup';
+import { PopupBackgroundColors, PopupColors, PopupLevel } from 'types/Popup';
 import Icons from 'assets/icons/Icons';
 import { theme } from 'assets/styles/Theme';
 
@@ -21,7 +21,7 @@ export const Wrapper = styled.div<{ level: PopupLevel; isClosing: boolean }>`
   left: 50%;
   top: 200px;
   transform: translateX(-50%);
-  border-radius: 20px;
+  border-radius: 30px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   animation: fadeIn 0.3s forwards;
 
@@ -32,7 +32,6 @@ export const Wrapper = styled.div<{ level: PopupLevel; isClosing: boolean }>`
     css`
       color: ${PopupColors[level]};
       background-color: ${PopupBackgroundColors[level]};
-      is
     `};
   ${({ isClosing }) =>
     isClosing &&
