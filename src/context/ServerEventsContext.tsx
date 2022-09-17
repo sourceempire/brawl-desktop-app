@@ -13,15 +13,15 @@ if (process.env.REACT_APP_SERVER_URL === undefined) {
 
 const url = `${process.env.REACT_APP_SERVER_URL}/api/events`;
 
-export type Listener = (message: Event) => void;
-type Listeners = { [key: string]: { [key: string]: Listener } };
+export type Listener<T> = (message: T) => void;
+type Listeners = { [key: string]: { [key: string]: Listener<any> } };
 
 type State = { [key: string]: unknown };
 type FeedListener = (state: State) => void;
 type FeedListeners = { [feedType: string]: { [listenerId: string]: FeedListener } };
 
 type Context = {
-  addServerEventListener: (event: string, listener: Listener) => string;
+  addServerEventListener: <T>(event: string, listener: Listener<T>) => string;
   removeServerEventListener: (event: string, listenerId: string) => void;
   subscribeToFeed: (feed: string, listener: (state: State) => void) => string;
   unsubscribeFromFeed: (feed: string, feedListenerId: string) => void;
@@ -102,7 +102,7 @@ export const ServerEventsProvider = ({ children }: Props) => {
   };
 
   const setupSocketConnection = useCallback(async () => {
-    const result = await Fetcher.get(url + '/request', {});
+    const result = await Fetcher.get<{ token: string }>(url + '/request', {});
 
     const sockjs = new SockJs(url);
 
@@ -133,7 +133,7 @@ export const ServerEventsProvider = ({ children }: Props) => {
     };
   }, [setupSocketConnection, connectionRetries]);
 
-  const addServerEventListener = useCallback((event: string, listener: Listener) => {
+  const addServerEventListener = useCallback(function <T>(event: string, listener: Listener<T>) {
     const listenerId = uuid();
     listeners.current[event] = { ...listeners.current[event], [listenerId]: listener };
     return listenerId;

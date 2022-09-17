@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */ //TODO -> Try to find a way to not use any
 /*
  * Fetcher v1.1
  * Updated 4.12.2019
@@ -5,12 +6,16 @@
  * - Added upload method
  */
 
-function checkStatus(res) {
-  return new Promise((resolve, reject) => {
+type FetcherResponse = {
+  succeeded: boolean;
+};
+
+function checkStatus<T>(res: any) {
+  return new Promise<FetcherResponse & T>((resolve, reject) => {
     if (res.headers.has('X-XSRF-TOKEN')) {
       localStorage.setItem('XSRF-TOKEN', res.headers.get('X-XSRF-TOKEN'));
     }
-    res.json().then((body) => {
+    res.json().then((body: FetcherResponse & T) => {
       if (res.ok && body.succeeded === true) {
         resolve(body);
       } else {
@@ -24,9 +29,9 @@ function checkStatus(res) {
   });
 }
 
-function addParams(url, params) {
+function addParams(url: string, params?: Record<string, any>) {
   const query = new URLSearchParams();
-  for (var key in params) {
+  for (const key in params) {
     if (key === 'headers') continue;
 
     const value = params[key];
@@ -48,7 +53,7 @@ function addParams(url, params) {
   }
 }
 
-function headers(options) {
+function headers(options: Record<string, any>) {
   const headers = {
     'Content-Type': 'application/json',
     ...options.headers
@@ -59,7 +64,7 @@ function headers(options) {
   return headers;
 }
 
-function addCSRFToken(options) {
+function addCSRFToken(options: Record<string, any>) {
   const headers = options.headers || {};
   if (localStorage.getItem('XSRF-TOKEN')) {
     headers['X-XSRF-TOKEN'] = localStorage.getItem('XSRF-TOKEN');
@@ -68,7 +73,12 @@ function addCSRFToken(options) {
 }
 
 const Fetcher = {
-  do: (method, url, params, options = {}) => {
+  do: (
+    method: string,
+    url: string,
+    params: Record<string, any>,
+    options: Record<string, any> = {}
+  ) => {
     if (method === 'post') {
       return Fetcher.post(url, params, options);
     } else if (method === 'get') {
@@ -77,37 +87,58 @@ const Fetcher = {
       return Fetcher.delete(url, params, options);
     }
   },
-  get: (url, params, options = {}) =>
-    fetch(addParams(url, params), {
+  get: async function <T>(
+    url: string,
+    params?: Record<string, any>,
+    options: Record<string, any> = {}
+  ) {
+    const res = await fetch(addParams(url, params), {
       ...options,
       method: 'GET',
       credentials: 'include',
       headers: headers(options)
-    }).then(checkStatus),
+    });
 
-  post: (url, body, options = {}) =>
-    fetch(url, {
+    return await checkStatus<T>(res);
+  },
+
+  post: async function <T>(
+    url: string,
+    body?: Record<string, any>,
+    options: Record<string, any> = {}
+  ) {
+    const res = await fetch(url, {
       ...options,
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify(body),
       headers: headers(options)
-    }).then(checkStatus),
+    });
 
-  delete: (url, params, options = {}) =>
-    fetch(addParams(url, params), {
+    return await checkStatus<T>(res);
+  },
+
+  delete: async function <T>(
+    url: string,
+    params?: Record<string, any>,
+    options: Record<string, any> = {}
+  ) {
+    const res = await fetch(addParams(url, params), {
       ...options,
       method: 'DELETE',
       credentials: 'include',
       headers: headers(options)
-    }).then(checkStatus),
-
-  upload: (url, body, options = {}) =>
+    });
+    return await checkStatus<T>(res);
+  },
+  upload: (url: string, body: Record<string, any>, options = {}) =>
     fetch(url, {
       ...options,
       method: 'POST',
       credentials: 'include',
-      body: body,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      body: body, // TODO -> Handle body not being stringyfied
       headers: addCSRFToken(options)
     }).then(checkStatus)
 };

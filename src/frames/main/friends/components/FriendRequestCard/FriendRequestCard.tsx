@@ -1,9 +1,5 @@
 import { useState } from 'react';
-import {
-  type FriendRequest,
-  acceptFriendRequest,
-  declineFriendRequest
-} from 'api/requests/FriendRequests';
+import { acceptFriendRequest, declineFriendRequest } from 'api/requests/FriendRequests';
 import { PublicUser } from 'api/requests/UserRequests';
 import popup from 'common/popup';
 import { UserTag } from '../FriendCard/FriendCard.styles';
@@ -19,7 +15,7 @@ type Props = {
 const FriendRequestCard = ({ user }: Props) => {
   const [isLoadingRequest, setLoadingRequest] = useState(false);
 
-  const makeRequest = async (request: FriendRequest) => {
+  const makeRequest = async (request: typeof acceptFriendRequest) => {
     setLoadingRequest(true);
     try {
       await request(user.id);

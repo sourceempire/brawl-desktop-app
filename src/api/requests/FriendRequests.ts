@@ -4,7 +4,6 @@ import { User } from './UserRequests';
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 export type PotentialFriend = User & { isRequestSent: boolean };
-export type FriendRequest = (friendId: string) => Promise<{ succeeded: boolean }>;
 
 export const potentialFriendsSearch: (options: { searchString: string; limit: number }) => Promise<{
   succeeded: boolean;
@@ -16,17 +15,17 @@ export const potentialFriendsSearch: (options: { searchString: string; limit: nu
   });
 };
 
-export const sendFriendRequest: FriendRequest = (requestFriendId) =>
+export const sendFriendRequest = (requestFriendId: string) =>
   Fetcher.post(`${SERVER_URL}/api/friends/request`, { requestFriendId });
 
-export const cancelFriendRequest: FriendRequest = (requestFriendId) =>
+export const cancelFriendRequest = (requestFriendId: string) =>
   Fetcher.post(`${SERVER_URL}/api/friends/request/cancel`, { requestFriendId });
 
-export const acceptFriendRequest: FriendRequest = (requestFriendId) =>
+export const acceptFriendRequest = (requestFriendId: string) =>
   Fetcher.post(`${SERVER_URL}/api/friends/request/accept`, { requestFriendId });
 
-export const declineFriendRequest: FriendRequest = (requestFriendId) =>
+export const declineFriendRequest = (requestFriendId: string) =>
   Fetcher.post(`${SERVER_URL}/api/friends/request/decline`, { requestFriendId });
 
-export const removeFriend: FriendRequest = (friendId) =>
+export const removeFriend = (friendId: string) =>
   Fetcher.post(`${SERVER_URL}/api/friends/remove`, { friendId });

@@ -8,7 +8,7 @@ type Options = {
 const useFriendsFeed = ({ userId }: Options) => {
   const { currentState, isLoading } = useFeed<{ friends: PublicUser[] }>(`friends.${userId}`);
   return {
-    friends: currentState.friends,
+    friends: currentState?.friends ?? [],
     isLoading
   };
 };

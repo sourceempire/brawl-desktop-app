@@ -51,11 +51,9 @@ export const PartyPlayer = ({ userId }: Props) => {
           arrowPosition={menuArrowPosition}
           position={menuPosition}
           onClickOutside={() => setMenuVisible(false)}>
-          {isLoggedInUser && (
-            <MenuWrapper>
-              <PlayerAction onClick={handleLeaveParty}>Leave Party</PlayerAction>
-            </MenuWrapper>
-          )}
+          <MenuWrapper>
+            {isLoggedInUser && <PlayerAction onClick={handleLeaveParty}>Leave Party</PlayerAction>}
+          </MenuWrapper>
         </ContextMenu>
       )}
     </>
