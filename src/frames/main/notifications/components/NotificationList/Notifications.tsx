@@ -23,6 +23,8 @@ const Notifications = () => {
     offsetX: -150
   });
 
+  console.log(position);
+
   const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
     const { scrollTop, scrollHeight, clientHeight } = event.currentTarget;
     const scrollBottom = scrollHeight - scrollTop - clientHeight;

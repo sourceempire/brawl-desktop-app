@@ -4,7 +4,7 @@ import useUserFeed from 'api/feeds/hooks/useUserFeed';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import * as PartyRequests from 'api/requests/PartyRequests';
 import { ContextMenu } from 'common/components';
-import { useContextMenuPosition } from 'common/hooks';
+import { useContextMenuPosition, useHint } from 'common/hooks';
 import popup from 'common/popup';
 import { LeaderStar, MenuWrapper, PlayerAction, PlayerImage, Wrapper } from './PartyPlayer.styles';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
@@ -19,6 +19,7 @@ export const PartyPlayer = ({ userId }: Props) => {
   const user = useUserFeed({ userId });
 
   const [isMenuVisible, setMenuVisible] = useState(false);
+  const [isHintVisible, setHintVisible] = useState(false);
 
   const {
     arrowPosition: menuArrowPosition,
@@ -33,6 +34,12 @@ export const PartyPlayer = ({ userId }: Props) => {
   const isLeader = userId === party.leaderId;
   const isLoggedInUser = userId === loggedInUser.id;
   const isLoggedInUserLeader = party.leaderId === loggedInUser.id;
+
+  const { parentRef, Hint } = useHint({
+    hintText: isLoggedInUser ? 'You' : user?.userTag,
+    isVisible: isHintVisible,
+    timeToVisibility: 300
+  });
 
   const giveLeader = () => {
     PartyRequests.giveLeader(userId).catch((error) => popup.error(error.error));
@@ -51,11 +58,29 @@ export const PartyPlayer = ({ userId }: Props) => {
     request();
   };
 
+  const onMouseEnter = () => {
+    if (!isMenuVisible) {
+      setHintVisible(true);
+    }
+  };
+
+  const openMenu = () => {
+    setMenuVisible(true);
+    setHintVisible(false);
+  };
+
+  // TODO -> Im not liking the solution with two refs here but cant figure out a better way at the moment;
   return (
     <>
-      <Wrapper ref={relatedElementRef} onClick={() => setMenuVisible(true)}>
-        {isLeader && <LeaderStar />}
-        <PlayerImage src={tempProfileImage} />
+      <Wrapper
+        ref={relatedElementRef}
+        onClick={openMenu}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={() => setHintVisible(false)}>
+        <div ref={parentRef}>
+          {isLeader && <LeaderStar />}
+          <PlayerImage src={tempProfileImage} />
+        </div>
       </Wrapper>
       {isMenuVisible && (
         <ContextMenu
@@ -85,6 +110,7 @@ export const PartyPlayer = ({ userId }: Props) => {
           </MenuWrapper>
         </ContextMenu>
       )}
+      {Hint}
     </>
   );
 };

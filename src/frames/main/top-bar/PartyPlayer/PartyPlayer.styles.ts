@@ -3,11 +3,18 @@ import Icons from 'assets/icons/Icons';
 
 export const Wrapper = styled.div`
   position: relative;
+
   ${({ theme }) => css`
     margin-right: ${theme.spacing.baseX2}px;
     height: ${theme.spacing.baseX5}px;
     width: ${theme.spacing.baseX5}px;
     border-radius: ${theme.borderRadius.default};
+    :hover {
+      outline: 2px solid ${theme.colors.secondary.hover};
+    }
+    :active {
+      outline: 2px solid ${theme.colors.secondary.active};
+    }
   `}
 `;
 

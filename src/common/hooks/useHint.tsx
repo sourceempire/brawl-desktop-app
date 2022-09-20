@@ -9,14 +9,14 @@ import { theme } from 'assets/styles/Theme';
 
 type Options = {
   hintText?: string;
-  parentElementRef: React.MutableRefObject<HTMLElement>;
   isVisible: boolean;
   timeToVisibility?: number; // in miliseconds
 };
 
-const useHint = ({ hintText, parentElementRef, isVisible, timeToVisibility = 0 }: Options) => {
+const useHint = ({ hintText, isVisible, timeToVisibility = 0 }: Options) => {
   const timeoutRef = useRef<NodeJS.Timeout>();
   const contextRef = useRef() as React.MutableRefObject<ContextMenuRef>;
+  const parentRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   const [hintPosition, setHintPosition] = useState<Position>({ top: 0, left: 0 });
   const [contextArrowPosition, setContextArrowPosition] = useState<ArrowPosition>();
@@ -27,7 +27,7 @@ const useHint = ({ hintText, parentElementRef, isVisible, timeToVisibility = 0 }
     if (!isVisible) return;
     if (!isVisibleLocal) return;
 
-    const { current: parentContainer } = parentElementRef;
+    const { current: parentContainer } = parentRef;
     const { contextMenuContainer } = contextRef.current;
 
     // It is not possible to call getBoundingClientRect directly in a layout effect
@@ -57,7 +57,7 @@ const useHint = ({ hintText, parentElementRef, isVisible, timeToVisibility = 0 }
       setContextArrowPosition({ left: hintWidth / 2 });
       setHintPosition({ left: hintLeft, top: hintTop });
     }
-  }, [hintText, isVisible, parentElementRef, isVisibleLocal]);
+  }, [hintText, isVisible, parentRef, isVisibleLocal]);
 
   useEffect(() => {
     if (timeoutRef.current) {
@@ -78,7 +78,8 @@ const useHint = ({ hintText, parentElementRef, isVisible, timeToVisibility = 0 }
         contextArrowPosition={contextArrowPosition}
         isVisible={isVisibleLocal}
       />
-    )
+    ),
+    parentRef
   };
 };
 
