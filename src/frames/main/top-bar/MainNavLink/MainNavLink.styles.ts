@@ -20,7 +20,7 @@ export const UpcomingFeatureBanner = styled.div`
   opacity: 0.9;
   ${({ theme }) => css`
     color: white;
-    background-color: ${theme.colors.primary};
+    background-color: ${theme.colors.primary.base};
   `};
 `;
 
