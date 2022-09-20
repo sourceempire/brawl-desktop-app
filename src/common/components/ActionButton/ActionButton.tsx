@@ -47,7 +47,7 @@ const ActionButton = (
     parentElementRef: itemRef,
     hintText: hint,
     isVisible: isHintVisible,
-    timeToVisibility: 500
+    timeToVisibility: 300
   });
 
   const handleClick = () => {

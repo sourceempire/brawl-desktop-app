@@ -43,7 +43,7 @@ export const SignUpText = styled.div`
   ${({ theme }) => css`
     p {
       display: inline;
-      color: ${theme.colors.accent};
+      color: ${theme.colors.accent.base};
     }
   `}
 `;

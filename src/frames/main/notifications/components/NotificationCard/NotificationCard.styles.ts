@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import EllipsisText from 'common/components/EllipsisText';
 import { skeletonLoadingStyle } from 'common/components/SkeletonLoading/SkeletionLoading.styles';
-import { lightenColor } from 'assets/styles/colorBrightness';
 
 export const Text = styled(EllipsisText)`
   ${({ theme }) => theme.textStyles.body}
@@ -23,12 +22,15 @@ export const Wrapper = styled.div<{ isRead: boolean }>`
 
     ${!isRead &&
     css`
-      background-color: ${theme.colors.lightTint};
+      background-color: ${theme.colors.secondary.hover};
 
       ${Text} {
-        color: ${theme.colors.accent};
+        color: ${theme.colors.accent.base};
       }
     `}
+    :hover {
+      background-color: ${theme.colors.secondary.hover};
+    }
   `}
 `;
 
@@ -68,7 +70,7 @@ export const IsReadIndicator = styled.div<{ isRead: boolean }>`
       display: block;
       width: ${theme.spacing.base * 1.5}px;
       height: ${theme.spacing.base * 1.5}px;
-      background-color: ${theme.colors.accent};
+      background-color: ${theme.colors.accent.base};
       opacity: ${isRead ? 0 : 1};
     }
   `}
@@ -77,7 +79,7 @@ export const IsReadIndicator = styled.div<{ isRead: boolean }>`
 const notificationLoadingStyle = css`
   ${skeletonLoadingStyle}
   ${({ theme }) => css`
-    background-color: ${theme.colors.lightTint};
+    background-color: ${theme.colors.secondary.hover};
   `}
 `;
 

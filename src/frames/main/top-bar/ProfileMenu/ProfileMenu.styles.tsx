@@ -2,7 +2,19 @@ import styled, { css } from 'styled-components';
 import { UserStatusEnum } from '../../../../common/components/UserStatus';
 import UserStatus from '../../../../common/components/UserStatus/UserStatus';
 import Icons from 'assets/icons/Icons';
-import { theme } from 'assets/styles/Theme';
+
+export const MyUserStatus = styled(UserStatus)`
+  position: absolute;
+  right: -4px;
+  bottom: -2px;
+
+  ${({ theme, status }) => css`
+    height: 14px;
+    width: 14px;
+    outline: 3px solid ${theme.colors.background.base};
+    background-color: ${status === UserStatusEnum.OFFLINE && theme.colors.background.base};
+  `}
+`;
 
 export const Wrapper = styled.div`
   position: relative;
@@ -11,15 +23,18 @@ export const Wrapper = styled.div`
   height: 100%;
   box-sizing: content-box;
 
-  :hover {
-    background-color: ${theme.colors.secondary};
-  }
-
   ${({ theme }) => css`
     padding-left: ${theme.spacing.base}px;
     border-radius: ${theme.borderRadius.default};
     right: -${theme.spacing.base / 2}px;
-    padding: ${theme.spacing.base / 2}px;
+    padding: ${theme.spacing.base}px;
+
+    :hover {
+      background-color: ${theme.colors.background.hover};
+      ${MyUserStatus} {
+        outline: 3px solid ${theme.colors.background.hover};
+      }
+    }
   `}
 `;
 
@@ -49,41 +64,28 @@ export const ArrowIcon = styled(Icons.ArrowDown)`
   margin-right: 12px;
 `;
 
-export const MyUserStatus = styled(UserStatus)`
-  position: absolute;
-  right: -4px;
-  bottom: -2px;
-
-  ${({ theme, status }) => css`
-    height: 14px;
-    width: 14px;
-    outline: 3px solid ${theme.colors.background};
-    background-color: ${status === UserStatusEnum.OFFLINE && theme.colors.background};
-  `}
-`;
-
 export const MenuWrapper = styled.div``;
 
 export const MenuItem = styled.div`
   display: flex;
   align-items: center;
-  width: 156px;
+  width: 170px;
 
   ${({ theme }) => css`
     ${theme.textStyles.note}
     margin-left: -${theme.spacing.base}px;
     margin-right: -${theme.spacing.base}px;
-    padding: ${theme.spacing.base}px ${theme.spacing.base}px;
+    padding: ${theme.spacing.base * 1.5}px ${theme.spacing.base}px;
     border-radius: ${theme.borderRadius.default};
     :hover {
-      background-color: ${theme.colors.lightTint};
+      background-color: ${theme.colors.secondary.hover};
     }
   `}
 `;
 
 export const HorizontalRule = styled.div`
   height: 1px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.2);
   width: 100%;
   margin: 3px 0;
 `;

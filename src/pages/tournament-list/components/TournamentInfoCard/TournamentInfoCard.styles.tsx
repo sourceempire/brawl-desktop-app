@@ -16,7 +16,7 @@ export const Header = styled.div<{ image: string }>`
 `;
 
 export const Line = styled.div`
-  background-color: ${({ theme }) => theme.colors.accent};
+  background-color: ${({ theme }) => theme.colors.accent.base};
   height: 6px;
 `;
 

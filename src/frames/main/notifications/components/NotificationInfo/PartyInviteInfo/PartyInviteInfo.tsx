@@ -4,8 +4,7 @@ import popup from 'common/popup';
 import { PartyInviteNotificationInfo } from 'types/notifications/Notifications';
 import { useTimeSince } from 'utils/hooks';
 import { Image, Text, TimeAgo, UserTag } from '../../NotificationCard/NotificationCard.styles';
-import { Info, Wrapper } from '../NotificationInfo.styles';
-import { ActionButton, Actions } from './PartyInviteInfo.styles';
+import { ActionButton, Actions, Info, Wrapper } from '../NotificationInfo.styles';
 import temporaryProfileImage from 'assets/images/temporary-profile-image.jpg';
 
 type Props = {
@@ -19,7 +18,7 @@ const PartyInviteInfo = ({ info, createdAt }: Props) => {
 
   const handleAccept = () => {
     PartyRequests.acceptInvite(info.partyId).catch((error) =>
-      popup.error(error.error, { timer: 3000 })
+      popup.warning(error.error, { timer: 3000 })
     );
   };
 
@@ -40,10 +39,10 @@ const PartyInviteInfo = ({ info, createdAt }: Props) => {
       </Info>
       {info.isActive && (
         <Actions>
+          <ActionButton onClick={handleDecline}>Decline</ActionButton>
           <ActionButton primary onClick={handleAccept}>
             Accept
           </ActionButton>
-          <ActionButton onClick={handleDecline}>Decline</ActionButton>
         </Actions>
       )}
     </Wrapper>

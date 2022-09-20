@@ -16,7 +16,7 @@ export const SelectWrapper = styled.select`
   padding: 0 15px;
   ${(props) => props.theme.textStyles.button}
   height: 30px;
-  background-color: ${(props) => props.theme.colors.lightTint};
+  background-color: ${(props) => props.theme.colors.lightTint.base};
 
   &:focus-visible {
     outline: none;

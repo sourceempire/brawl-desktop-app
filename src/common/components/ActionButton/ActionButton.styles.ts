@@ -17,22 +17,26 @@ export const Wrapper = styled.div<WrapperProps>`
     width: ${buttonSize[size]};
     height: ${buttonSize[size]};
     padding: ${size === ActionButtonSize.SMALL ? `5px` : `${theme.spacing.base}px`};
-    background-color: ${theme.colors.secondary};
+    background-color: ${theme.colors.secondary.base};
     border-radius: ${isCircle ? '50%' : theme.borderRadius.default};
     > *:first-child {
       fill: ${iconColor ? iconColor : theme.colors.textPrimaryLight};
     }
     :hover {
-      background-color: ${theme.colors.lightTint};
+      background-color: ${theme.colors.secondary.hover};
     }
+    :active {
+      background-color: ${theme.colors.secondary.active};
+    }
+
     ${active &&
     css`
-      background-color: ${theme.colors.accent};
+      background-color: ${theme.colors.accent.base};
       color: ${theme.colors.textPrimaryDark};
       fill: ${theme.colors.textPrimaryDark};
 
       :hover {
-        background-color: ${theme.colors.accent};
+        background-color: ${theme.colors.accent.base};
         color: ${theme.colors.textPrimaryDark};
         fill: ${theme.colors.textPrimaryDark};
       }

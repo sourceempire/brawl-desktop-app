@@ -17,13 +17,24 @@ export const MoneyContainer = styled.div`
   justify-content: center;
   align-items: center;
   ${({ theme }) => css`
-    color: ${theme.colors.accent};
-    background-color: ${theme.colors.secondary};
+    color: ${theme.colors.accent.base};
+    background-color: ${theme.colors.secondary.base};
     padding: 0 ${theme.spacing.base}px;
     :hover {
-      background-color: ${theme.colors.lightTint};
+      background-color: ${theme.colors.secondary.hover};
+    }
+    :active {
+      background-color: ${theme.colors.secondary.active};
     }
   `}
+`;
+
+export const DepositIcon = styled(Icons.Plus)`
+  ${({ theme }) => css`
+    fill: ${theme.colors.accent.base};
+    width: ${theme.spacing.baseX2}px;
+    height: ${theme.spacing.baseX2}px;
+  `};
 `;
 
 export const DepositButton = styled.div`
@@ -32,19 +43,20 @@ export const DepositButton = styled.div`
   justify-content: center;
   align-items: center;
   ${({ theme }) => css`
-    background-color: #32784d; // TODO -> Add to theme
+    background-color: ${theme.colors.depositGreen.base};
     width: ${theme.spacing.baseX5}px;
 
     :hover {
-      background-color: #45a86b;
+      background-color: ${theme.colors.depositGreen.hover};
+      ${DepositIcon} {
+        fill: ${theme.colors.accent.hover};
+      }
     }
-  `};
-`;
-
-export const DepositIcon = styled(Icons.Plus)`
-  ${({ theme }) => css`
-    fill: ${theme.colors.accent}; // TODO -> Add to theme
-    width: ${theme.spacing.baseX2}px;
-    height: ${theme.spacing.baseX2}px;
+    :active {
+      background-color: ${theme.colors.depositGreen.active};
+      ${DepositIcon} {
+        fill: ${theme.colors.accent.active};
+      }
+    }
   `};
 `;

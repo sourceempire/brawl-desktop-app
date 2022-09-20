@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components/macro';
 import { ActionButton, Input } from 'common/components';
+import { hsla } from 'utils/styledUtils';
 import { lightenColor } from 'assets/styles/colorBrightness';
 
 export const Wrapper = styled.div`
@@ -16,7 +17,7 @@ export const Wrapper = styled.div`
     );
 
     border-top-left-radius: ${theme.borderRadius.default};
-    background-color: ${theme.colors.secondary};
+    background-color: ${theme.colors.secondary.base};
   `}
 `;
 
@@ -36,9 +37,12 @@ export const FriendAction = styled(ActionButton)`
   ${({ theme }) => css`
     margin-left: ${theme.spacing.base}px;
     margin-right: 0;
-    background-color: ${theme.colors.lightTint};
+    background-color: ${theme.colors.lightTint.base};
     :hover {
-      background-color: ${lightenColor(theme.colors.lightTint, 25)};
+      background-color: ${theme.colors.lightTint.hover};
+    }
+    :active {
+      background-color: ${theme.colors.lightTint.active};
     }
   `}
 `;
@@ -73,13 +77,19 @@ export const ScrollContentWrapper = styled.div`
     top: 0;
     ${({ theme }) => css`
       height: ${theme.spacing.baseX2}px;
-      background: linear-gradient(${theme.colors.secondary}, ${theme.colors.secondary}00);
+      background: linear-gradient(
+        ${theme.colors.secondary.base},
+        ${hsla(theme.colors.secondary.base, 0)}
+      );
     `}
   }
   :after {
     ${({ theme }) => css`
       height: ${theme.spacing.baseX4}px;
-      background: linear-gradient(${theme.colors.secondary}00, ${theme.colors.secondary});
+      background: linear-gradient(
+        ${hsla(theme.colors.secondary.base, 0)},
+        ${theme.colors.secondary.base}
+      );
     `}
     bottom: 0;
   }

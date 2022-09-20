@@ -6,7 +6,7 @@ export const Radio = styled.input`
   font: inherit;
   width: 18px;
   height: 18px;
-  border: 2px solid ${({ theme }) => theme.colors.accent};
+  border: 2px solid ${({ theme }) => theme.colors.accent.base};
   border-radius: 50%;
   position: relative;
 
@@ -17,7 +17,7 @@ export const Radio = styled.input`
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: ${({ theme }) => theme.colors.accent};
+    background-color: ${({ theme }) => theme.colors.accent.base};
     transform: scale(0);
     transition: 120ms transform ease-in-out;
   }

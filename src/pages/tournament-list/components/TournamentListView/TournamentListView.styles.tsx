@@ -37,7 +37,7 @@ type FilterBulletProps = {
 export const FilterBullet = styled.div<FilterBulletProps>`
   display: inline-block;
   margin-right: 6px;
-  background-color: ${({ theme }) => theme.colors.secondary};
+  background-color: ${({ theme }) => theme.colors.secondary.base};
   height: 30px;
   border-radius: 15px;
   min-width: 30px;
@@ -46,7 +46,7 @@ export const FilterBullet = styled.div<FilterBulletProps>`
   margin-bottom: 6px;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.lightTint};
+    background-color: ${({ theme }) => theme.colors.secondary.hover};
   }
 
   &:before {

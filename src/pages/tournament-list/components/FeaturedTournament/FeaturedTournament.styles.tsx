@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { rgba } from 'utils/styledUtils';
+import { hsla, rgba } from 'utils/styledUtils';
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -70,7 +70,7 @@ export const Bullet = styled.div`
   width: 166px;
   height: 42px;
   border-radius: 21px;
-  background-color: ${({ theme }) => rgba(theme.colors.secondary, 0.6)};
+  background-color: ${({ theme }) => hsla(theme.colors.secondary.base, 0.6)};
   margin: 0 9px; // becomes 18 in space between
 `;
 

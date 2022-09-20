@@ -14,7 +14,7 @@ export const DropDown = styled.div<{ dark: boolean, above: boolean, inline: bool
     position: ${inline ? 'static' : 'absolute'};
     left: 0;
     padding: 12px 18px 18px 18px;
-    background-color: ${dark ? theme.colors.background : theme.colors.secondary};
+    background-color: ${dark ? theme.colors.background.base : theme.colors.secondary.base};
     border-radius: ${theme.borderRadius.default};
 
     ${above? 
@@ -55,11 +55,11 @@ export const Day = styled.span<{ active: boolean; picked: boolean; today: boolea
 
     background-color: ${() => {
       if (picked) {
-        return theme.colors.primary;
+        return theme.colors.primary.base;
       } else if (dark && active) {
-        return theme.colors.secondary;
+        return theme.colors.secondary.base;
       } else if (!dark && active) {
-        return theme.colors.lightTint;
+        return theme.colors.lightTint.base;
       }
       return 'transparent';
     }};
@@ -72,16 +72,16 @@ export const Day = styled.span<{ active: boolean; picked: boolean; today: boolea
     ${!picked &&
     today &&
     css`
-      border: 2px solid ${theme.colors.accent};
+      border: 2px solid ${theme.colors.accent.base};
       line-height: 20px;
     `}
 
     &:hover {
       background-color: ${() => {
         if (picked) {
-          return lightenColor(theme.colors.primary, 25);
+          return theme.colors.primary.hover;
         } else if (active) {
-          return lightenColor(theme.colors.lightTint, 25);
+          return theme.colors.lightTint.hover;
         }
         return 'transparent';
       }};
@@ -102,7 +102,7 @@ export const PrevArrow = styled(Arrow)`
     height: 18px;
     padding: 6px;
     box-sizing: border-box;
-    background-color: ${theme.colors.lightTint};
+    background-color: ${theme.colors.lightTint.base};
     border-radius: ${theme.borderRadius.default};
   `}
 `;
@@ -126,7 +126,7 @@ export const DateInput = styled.span<{ isEmpty: boolean }>`
     display: inline-flex;
     width: 100%;
     height: 30px;
-    background-color: ${theme.colors.lightTint};
+    background-color: ${theme.colors.lightTint.base};
     border-radius: ${theme.borderRadius.default};
     align-items: center;
     padding: 6px;
@@ -137,10 +137,10 @@ export const DateInput = styled.span<{ isEmpty: boolean }>`
     `}
 
     &:hover {
-      background-color: ${lightenColor(theme.colors.lightTint, 25)};
+      background-color: ${theme.colors.lightTint.hover};
     }
     &:active {
-      background-color: ${lightenColor(theme.colors.lightTint, 50)};
+      background-color: ${theme.colors.lightTint.active};
     }
 
     &::after {

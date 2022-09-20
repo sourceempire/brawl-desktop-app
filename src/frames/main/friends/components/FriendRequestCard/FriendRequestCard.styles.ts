@@ -1,5 +1,5 @@
-import ActionButton from 'common/components/ActionButton';
 import styled, { css } from 'styled-components';
+import ActionButton from 'common/components/ActionButton';
 
 export const RequestActions = styled.div`
   display: grid;
@@ -11,7 +11,7 @@ export const RequestActions = styled.div`
 
 export const RequestAction = styled(ActionButton)`
   ${({ theme }) => css`
-    background-color: ${theme.colors.lightTint};
+    background-color: ${theme.colors.lightTint.base};
   `}
 `;
 

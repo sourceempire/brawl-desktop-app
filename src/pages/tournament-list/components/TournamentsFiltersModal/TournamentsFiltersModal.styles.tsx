@@ -40,7 +40,7 @@ export const MoneySlider = styled.div`
 export const MoneyLabel = styled.span``;
 
 export const MoneyValue = styled.span`
-  color: ${({ theme }) => theme.colors.accent};
+  color: ${({ theme }) => theme.colors.accent.base};
   float: right;
 `;
 

@@ -14,13 +14,13 @@ export const Wrapper = styled.div<WrapperProps>`
   filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.2));
 
   ${({ position, theme }) => css`
-    border: 1px solid ${theme.colors.lightTint};
+    border: 1px solid ${theme.colors.lightTint.base};
     top: ${position.top}px;
     right: ${position.right}px;
     bottom: ${position.bottom}px;
     left: ${position.left}px;
     padding: calc(${theme.spacing.base}px * 1.5) ${theme.spacing.baseX2}px;
-    background-color: ${theme.colors.secondary};
+    background-color: ${theme.colors.secondary.base};
     border-radius: ${theme.borderRadius.default};
   `}
 
@@ -33,10 +33,10 @@ export const Wrapper = styled.div<WrapperProps>`
         top: 0px;
         height: 10px;
         width: 10px;
-        border-left: 1px solid ${theme.colors.lightTint};
-        border-top: 1px solid ${theme.colors.lightTint};
+        border-left: 1px solid ${theme.colors.lightTint.base};
+        border-top: 1px solid ${theme.colors.lightTint.base};
         transform: translate(${arrowPosition?.left ? '-50%' : '50%'}, -50%) rotate(45deg);
-        background-color: ${theme.colors.secondary};
+        background-color: ${theme.colors.secondary.base};
         left: ${arrowPosition?.left}px;
         right: ${arrowPosition?.right}px;
       }

@@ -38,7 +38,7 @@ export const PlayerAction = styled.div`
     border-radius: ${theme.borderRadius.default};
     padding: calc(${theme.spacing.base}px) ${theme.spacing.base}px;
     :hover {
-      background-color: ${theme.colors.lightTint};
+      background-color: ${theme.colors.secondary.hover};
     }
   `}
 `;
