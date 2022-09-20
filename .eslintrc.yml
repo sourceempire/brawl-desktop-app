@@ -63,7 +63,7 @@ rules:
           group: internal
         - pattern: utils/**
           group: internal
-        - pattern: window/**
+        - pattern: electron-window/**
           group: internal
         - pattern: assets/**
           group: index
