@@ -8,16 +8,16 @@ import News from '../News/News';
 import { PromotedTournament, Wrapper } from './HomePage.styles';
 
 const HomePage = () => {
-  const { news: newsList } = useNewsFeed();
+  // const { news: newsList } = useNewsFeed();
 
   return (
     <Wrapper>
       <PromotedTournament tournamentInfo={exampleTournamentInfo()}></PromotedTournament>
       <Hero></Hero>
       <LatestWinners></LatestWinners>
-      {newsList.map((news) => (
+      {/* {newsList.map((news) => (
         <News key={news.id} news={news as NewsType}></News>
-      ))}
+      ))} */}
     </Wrapper>
   );
 };

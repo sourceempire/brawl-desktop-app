@@ -46,12 +46,12 @@ export const Wrapper = styled.button<Props>`
 
   ${({ theme, primary, accent, alert, hasIcon, small }) => css`
     border-radius: ${theme.borderRadius.default};
-    background-color: ${theme.colors.lightTint};
+    background-color: ${theme.colors.lightTint.base};
     :hover {
-      background-color: ${lightenColor(theme.colors.lightTint, 25)};
+      background-color: ${theme.colors.lightTint.hover};
     }
     :active {
-      background-color: ${lightenColor(theme.colors.lightTint, 50)};
+      background-color: ${theme.colors.lightTint.active};
     }
 
     height: ${small ? 24 : 30}px;
@@ -67,24 +67,24 @@ export const Wrapper = styled.button<Props>`
 
     ${accent &&
     css`
-      background-color: ${theme.colors.accent};
+      background-color: ${theme.colors.accent.base};
       color: rgba(0, 0, 0, 87);
       :hover {
-        background-color: ${lightenColor(theme.colors.accent, 25)};
+        background-color: ${theme.colors.accent.hover};
       }
       :active {
-        background-color: ${lightenColor(theme.colors.accent, 50)};
+        background-color: ${theme.colors.accent.active};
       }
     `}
 
     ${primary &&
     css`
-      background-color: ${theme.colors.primary};
+      background-color: ${theme.colors.primary.base};
       :hover {
-        background-color: ${lightenColor(theme.colors.primary, 25)};
+        background-color: ${theme.colors.primary.hover};
       }
       :active {
-        background-color: ${lightenColor(theme.colors.primary, 50)};
+        background-color: ${theme.colors.primary.active};
       }
     `}
 

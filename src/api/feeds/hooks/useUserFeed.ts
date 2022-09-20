@@ -8,7 +8,7 @@ type Options = {
 const useUserFeed = ({ userId }: Options) => {
   const { currentState } = useFeed<{ user: PublicUser }>(`user.${userId}`);
 
-  return currentState.user;
+  return currentState?.user;
 };
 
 export default useUserFeed;

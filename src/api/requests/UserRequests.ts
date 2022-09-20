@@ -13,10 +13,12 @@ export type User = PublicUser & {
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-export const getLoggedInUser: () => Promise<{ succeeded: boolean; user: User }> = () => {
-  return Fetcher.get(`${SERVER_URL}/api/user`, {});
+export const getLoggedInUser = () => {
+  return Fetcher.get<{ user: User }>(`${SERVER_URL}/api/user`, {});
 };
 
-export const setUserStatus: (status: UserStatusEnum) => Promise<{ succeeded: boolean }> = (
-  status
-) => Fetcher.post(`${SERVER_URL}/api/user/status`, { status: status.toLowerCase() });
+export const getPublicUser = (userId: string) =>
+  Fetcher.get<{ user: PublicUser }>(`${SERVER_URL}/api/user`, { id: userId });
+
+export const setUserStatus = (status: UserStatusEnum) =>
+  Fetcher.post(`${SERVER_URL}/api/user/status`, { status: status.toLowerCase() });

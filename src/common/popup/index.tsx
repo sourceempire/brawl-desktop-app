@@ -1,26 +1,24 @@
 import ReactDOM from 'react-dom/client';
-import { NotificationLevel } from 'types/Notification';
-import { Notification } from './Popup';
+import { PopupLevel } from 'types/Popup';
+import { Popup } from './Popup';
 
-type NotificationOptions = {
+type PopupOptions = {
   timer?: number;
+  onClose?: () => void;
 };
 
-const setNotification = (
-  message: string,
-  level: NotificationLevel,
-  options?: NotificationOptions
-) => {
+const setPopupMessage = (message: string, level: PopupLevel, options?: PopupOptions) => {
   const element = document.createElement('div');
   document.body.appendChild(element);
   const root = ReactDOM.createRoot(element as HTMLDivElement);
 
   root.render(
-    <Notification
+    <Popup
       text={message}
       level={level}
       timer={options?.timer}
       onClose={() => {
+        options?.onClose?.();
         root.unmount();
         document.body.removeChild(element);
       }}
@@ -29,12 +27,12 @@ const setNotification = (
 };
 
 const popup = {
-  info: (message: string, options?: NotificationOptions) =>
-    setNotification(message, NotificationLevel.INFO, options),
-  warning: (message: string, options?: NotificationOptions) =>
-    setNotification(message, NotificationLevel.WARNING, options),
-  error: (message: string, options?: NotificationOptions) =>
-    setNotification(message, NotificationLevel.ERROR, options)
+  info: (message: string, options?: PopupOptions) =>
+    setPopupMessage(message, PopupLevel.INFO, options),
+  warning: (message: string, options?: PopupOptions) =>
+    setPopupMessage(message, PopupLevel.WARNING, options),
+  error: (message: string, options?: PopupOptions) =>
+    setPopupMessage(message, PopupLevel.ERROR, options)
 };
 
 export default popup;

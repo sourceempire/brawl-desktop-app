@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import Icons from 'assets/icons/Icons';
-import { lightenColor } from 'assets/styles/colorBrightness';
 
 export const Wrapper = styled.div`
   display: inline-flex;
@@ -23,13 +22,13 @@ export const Box = styled.div<{ checked: boolean }>`
   outline-color: transparent;
 
   ${({ theme, checked }) => css`
-    background-color: ${checked ? theme.colors.accent : 'trasnparent'};
-    border: 2px solid ${theme.colors.accent};
+    background-color: ${checked ? theme.colors.accent.base : 'trasnparent'};
+    border: 2px solid ${theme.colors.accent.base};
     border-radius: ${(props) => props.theme.borderRadius.default};
 
     :hover {
-      border: 2px solid ${lightenColor(theme.colors.accent, 25)};
-      background-color: ${checked ? lightenColor(theme.colors.accent, 25) : 'trasnparent'};
+      border: 2px solid ${theme.colors.accent.hover};
+      background-color: ${checked ? theme.colors.accent.hover : 'trasnparent'};
     }
 
     :focus-visible {
@@ -45,7 +44,7 @@ export const Checks = styled.div`
   width: 100%;
 
   ${({ theme }) => css`
-    background-color: ${theme.colors.accent};
+    background-color: ${theme.colors.accent.base};
   `}
 `;
 

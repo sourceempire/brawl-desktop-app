@@ -19,13 +19,13 @@ export const FriendUserStatus = styled(UserStatus)`
   right: -3px;
   bottom: -3px;
   ${({ theme, status }) => css`
-    outline: 2px solid ${theme.colors.secondary};
+    outline: 2px solid ${theme.colors.secondary.base};
     height: ${theme.spacing.baseX2}px;
     width: ${theme.spacing.baseX2}px;
 
     ${status === UserStatusEnum.OFFLINE &&
     css`
-      background-color: ${theme.colors.secondary};
+      background-color: ${theme.colors.secondary.base};
     `}
   `}
 `;
@@ -43,7 +43,7 @@ export const FriendOption = styled.div`
     padding: calc(${theme.spacing.base}px * 1.5) ${theme.spacing.base}px;
     border-radius: ${theme.borderRadius.default};
     :hover {
-      background-color: ${theme.colors.lightTint};
+      background-color: ${theme.colors.secondary.hover};
     }
   `}
 `;

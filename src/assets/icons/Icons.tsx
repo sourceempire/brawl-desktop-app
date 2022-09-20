@@ -44,6 +44,10 @@ import KeyUrl, { ReactComponent as KeyComponent } from './Key.svg';
 const Key = KeyComponent as SVGComponent;
 Key.url = KeyUrl;
 
+import NotificationUrl, { ReactComponent as NotificationComponent } from './Notification.svg';
+const Notification = NotificationComponent as SVGComponent;
+Notification.url = NotificationUrl;
+
 import PartyUrl, { ReactComponent as PartyComponent } from './Party.svg';
 const Party = PartyComponent as SVGComponent;
 Party.url = PartyUrl
@@ -96,6 +100,7 @@ const Icons = {
   Filter,
   Friends,
   Key,
+  Notification,
   Party,
   Plus,
   Profile,

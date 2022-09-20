@@ -17,11 +17,11 @@ export const StyledThumb = styled.div`
     line-height: 18px;
     width: 18px;
     text-align: center;
-    background-color: ${theme.colors.secondary};
+    background-color: ${theme.colors.secondary.base};
     color: transparent;
     border-radius: 50%;
     cursor: grab;
-    border: 2px solid ${theme.colors.accent};
+    border: 2px solid ${theme.colors.accent.base};
   `}
 `;
 
@@ -34,10 +34,10 @@ export const StyledTrack = styled.div<{ index: number; range: boolean }>`
     border-radius: 3px;
     ${range
       ? css`
-          background: ${index === 1 ? theme.colors.accent : theme.colors.textPrimaryLight};
+          background: ${index === 1 ? theme.colors.accent.base : theme.colors.textPrimaryLight};
         `
       : css`
-          background: ${index === 1 ? theme.colors.textPrimaryLight : theme.colors.accent};
+          background: ${index === 1 ? theme.colors.textPrimaryLight : theme.colors.accent.base};
         `}
   `}
 `;

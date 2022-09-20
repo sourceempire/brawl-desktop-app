@@ -11,7 +11,7 @@ export const FriendToRemove = styled.p`
   display: inline;
   ${({ theme }) => css`
     ${theme.textStyles.body}
-    color: ${theme.colors.accent};
+    color: ${theme.colors.accent.base};
   `}
 `;
 

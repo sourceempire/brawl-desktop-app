@@ -3,11 +3,31 @@ import 'styled-components';
 declare module 'styled-components' {
   export interface DefaultTheme {
     colors: {
-      primary: string;
-      accent: string;
-      background: string;
-      secondary: string;
-      lightTint: string;
+      primary: {
+        base: string;
+        hover: string;
+        active: string;
+      };
+      accent: {
+        base: string;
+        hover: string;
+        active: string;
+      };
+      background: {
+        base: string;
+        hover: string;
+        active: string;
+      };
+      secondary: {
+        base: string;
+        hover: string;
+        active: string;
+      };
+      lightTint: {
+        base: string;
+        hover: string;
+        active: string;
+      };
 
       textPrimaryLight: string;
       textSecondaryLight: string;
@@ -19,6 +39,13 @@ declare module 'styled-components' {
       statusError: string;
       statusSuccess: string;
       statusWarning: string;
+
+      depositGreen: {
+        base: string;
+        hover: string;
+        active: string;
+      };
+      notificationRed: string;
     };
     borderRadius: {
       default: string;

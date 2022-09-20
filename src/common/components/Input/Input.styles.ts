@@ -79,10 +79,10 @@ export const InputElement = styled.input<{
     height: 100%;
     font-size: ${getInputFontSize(inputSize)};
     border-radius: ${theme.borderRadius.default};
-    background-color: ${theme.colors.lightTint};
+    background-color: ${theme.colors.lightTint.base};
 
     :focus {
-      outline-color: ${theme.colors.accent};
+      outline-color: ${theme.colors.accent.base};
     }
 
     ${hasIcon &&
@@ -93,11 +93,11 @@ export const InputElement = styled.input<{
     ${withBorder &&
     css`
       border: 2px solid;
-      background-color: ${theme.colors.background};
-      border-color: ${theme.colors.lightTint};
+      background-color: ${theme.colors.background.base};
+      border-color: ${theme.colors.lightTint.base};
       :focus {
         outline: none;
-        border-color: ${theme.colors.accent};
+        border-color: ${theme.colors.accent.base};
       }
     `}
   `}

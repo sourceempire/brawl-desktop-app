@@ -1,4 +1,3 @@
-import { Card } from 'common/components';
 import styled from 'styled-components';
 
 type Props = {
@@ -11,7 +10,7 @@ export const Wrapper = styled.div<Props>`
   display: flex;
   flex-direction: column;
   position: relative;
-  background-color: ${(props) => props.theme.colors.secondary};
+  background-color: ${(props) => props.theme.colors.secondary.base};
   ${(props) => (props.padding ? 'padding: 12px;' : '')}
   border-radius: ${(props) => props.theme.borderRadius.default};
   ${(props) => (props.width ? `width: ${props.width};` : '')}

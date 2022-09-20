@@ -2,38 +2,52 @@
 
 let Window = {
   // dummy window for use outside of electron
-  version: null,
+  // version: null,
   openMainWindow: () => {
     location.href = '/#/main';
   },
   openLoginWindow: () => {
     location.href = '/#/login';
   },
-  openAuthWindow: (authUrl) => {},
+  openAuthWindow: (authUrl: any) => {},
   closeMainWindow: () => {},
   closeLoginWindow: () => {},
-  new: (args) => {
-    return {
-      loadURL: (url) => {
-        window.open(url, '_blank');
-      }
-    };
-  },
-  openInBrowser: (url) => window.open(url, '_blank'),
-  setSize: () => {},
+  // new: (args: any) => {
+  //   return {
+  //     loadURL: (url: any) => {
+  //       window.open(url, '_blank');
+  //     }
+  //   };
+  // },
+  openInBrowser: (url: any) => window.open(url, '_blank'),
+  // setSize: () => {},
 
   checkForUpdates: () => {},
-  addUpdateCheckListener: (callback) => {},
-  addUpdateAvailableListener: (callback) => {},
-  addDownloadProgressListener: (callback) => {},
-  addUpdateDownloadedListener: (callback) => {},
-  addUpdateNotAvailableListener: (callback) => {},
-  addUpdateErrorListener: (callback) => {},
+  addUpdateCheckListener: (callback: any) => {},
+  addUpdateAvailableListener: (callback: any) => {},
+  addDownloadProgressListener: (callback: any) => {},
+  addUpdateDownloadedListener: (callback: any) => {},
+  addUpdateNotAvailableListener: (callback: any) => {},
+  addUpdateErrorListener: (callback: any) => {},
 
-  addLoginResultListener: (callback) => {},
+  addLoginResultListener: (callback: any) => {},
   removeLoginResultListener: () => {},
 
   quitAndInstall: () => {},
+
+  notification: ({
+    title,
+    subtitle,
+    body,
+    silent,
+    icon
+  }: {
+    title?: string;
+    subtitle?: string;
+    body?: string;
+    silent?: string;
+    icon?: string;
+  }) => {},
 
   focus: () => {}
 };
@@ -58,6 +72,7 @@ if (window.bridge) {
     addLoginResultListener: window.bridge.addLoginResultListener,
     removeLoginResultListener: window.bridge.removeLoginResultListener,
     quitAndInstall: window.bridge.quitAndInstall,
+    notification: window.bridge.notification,
     focus: window.bridge.focus
   };
 }

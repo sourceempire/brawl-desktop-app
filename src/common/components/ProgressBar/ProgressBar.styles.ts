@@ -13,7 +13,7 @@ export const Bar = styled.div`
   height: 18px;
   padding: 3px;
   width: 100%;
-  background-color: ${(props) => props.theme.colors.background};
+  background-color: ${(props) => props.theme.colors.background.base};
   overflow: hidden;
   border-radius: 9px;
 `;

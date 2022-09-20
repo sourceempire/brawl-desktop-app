@@ -10,13 +10,15 @@ type ContentProps = {
 export const Content = styled.div<ContentProps>`
   inset: 0;
   margin: auto;
-  border-radius: 3px;
+
   max-width: 100%;
 
   ${({ width, height, noPadding, theme }) => css`
     height: ${height ? height : 'auto'};
     width: ${width ? width : 'auto'};
-    background-color: ${theme.colors.secondary};
+    background-color: ${theme.colors.secondary.base};
+    border: 1px solid ${theme.colors.lightTint.base};
+    border-radius: ${theme.borderRadius.default};
 
     ${!noPadding &&
     css`
@@ -41,7 +43,7 @@ export const CrossButton = styled.img`
   padding: 12px;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.lightTint};
+    background-color: ${({ theme }) => theme.colors.lightTint.hover};
     border-radius: 3px;
   }
 `;

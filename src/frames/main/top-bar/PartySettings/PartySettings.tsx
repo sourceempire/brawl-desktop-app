@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { usePartyFeed } from 'api/feeds';
 import * as PartyRequests from 'api/requests/PartyRequests';
 import { ActionButton, ContextMenu, Input } from 'common/components';
+import { InputSize } from 'common/components/Input/Input.types';
 import { useContextMenuPosition } from 'common/hooks';
 import popup from 'common/popup';
 import { useDebounce, useUpdateEffect } from 'utils/hooks';
@@ -52,7 +53,7 @@ const PartySettings = () => {
         ref={relatedElementRef}
         icon={<Icons.Cog />}
         onClick={handleOpenMenu}
-        hint="Party settings"
+        hint={isMenuVisible ? undefined : 'Party settings'}
       />
       {isMenuVisible && (
         <ContextMenu
@@ -68,6 +69,7 @@ const PartySettings = () => {
               value={teamName ?? ''}
               onChange={handleTeamNameChange}
               placeholder="Enter a team name"
+              size={InputSize.SMALL}
             />
 
             <Label>Party Size</Label>

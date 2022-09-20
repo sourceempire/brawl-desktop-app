@@ -19,13 +19,9 @@ const titleBarHeight = () => {
 };
 
 enum Colors {
-  PRIMARY = '#EF9A00',
   ACCENT = '#94E8B4',
-  BACKGROUND = '#232333',
-  SECONDARY = '#363750',
-  LIGHT_TINT = '#595B83',
 
-  TEXT_PRIMARY_LIGHT = 'rgba(218, 218, 218, 1)', //#DADADA
+  TEXT_PRIMARY_LIGHT = 'rgba(255, 255, 255, 1)',
   TEXT_SECONDARY_LIGHT = 'rgba(218, 218, 218, .67)',
   TEXT_DISABLED_LIGHT = 'rgba(218, 218, 218, .50)',
   TEXT_PRIMARY_DARK = 'rgba(0, 0, 0, .87)',
@@ -34,7 +30,9 @@ enum Colors {
 
   STATUS_ERROR = '#DD3A3A',
   STATUS_SUCCESS = '#65CA57',
-  STATUS_WARNING = '#F4A52F'
+  STATUS_WARNING = '#F4A52F',
+
+  NOTIFICATION_RED = '#fa3e3e'
 }
 
 enum BorderRadius {
@@ -93,11 +91,31 @@ const TextStyles = {
 
 export const theme: DefaultTheme = {
   colors: {
-    primary: Colors.PRIMARY,
-    accent: Colors.ACCENT,
-    background: Colors.BACKGROUND,
-    secondary: Colors.SECONDARY,
-    lightTint: Colors.LIGHT_TINT,
+    primary: {
+      base: 'hsl(39, 100%, 47%)',
+      hover: 'hsl(39, 100%, 57%)',
+      active: 'hsl(39, 100%, 67%)'
+    },
+    accent: {
+      base: 'hsl(143, 65%, 75%)',
+      hover: 'hsl(143, 65%, 85%)',
+      active: 'hsl(143, 65%, 95%)'
+    },
+    background: {
+      base: 'hsl(240, 19%, 17%)',
+      hover: 'hsl(240, 19%, 27%)',
+      active: 'hsl(240, 19%, 17%)'
+    },
+    secondary: {
+      base: 'hsl(238, 19%, 26%)',
+      hover: 'hsl(238, 19%, 36%)',
+      active: 'hsl(238, 19%, 46%)'
+    },
+    lightTint: {
+      base: 'hsl(237, 19%, 43%)',
+      hover: 'hsl(237, 19%, 53%)',
+      active: 'hsl(237, 19%, 63%)'
+    },
 
     textPrimaryLight: Colors.TEXT_PRIMARY_LIGHT,
     textSecondaryLight: Colors.TEXT_SECONDARY_LIGHT,
@@ -108,7 +126,14 @@ export const theme: DefaultTheme = {
 
     statusError: Colors.STATUS_ERROR,
     statusSuccess: Colors.STATUS_SUCCESS,
-    statusWarning: Colors.STATUS_WARNING
+    statusWarning: Colors.STATUS_WARNING,
+
+    notificationRed: Colors.NOTIFICATION_RED,
+    depositGreen: {
+      base: 'hsl(143, 41%, 33%)',
+      hover: 'hsl(143, 41%, 43%)',
+      active: 'hsl(143, 41%, 53%)'
+    }
   },
   borderRadius: {
     default: BorderRadius.DEFAULT

@@ -8,6 +8,7 @@ import { InputSize } from 'common/components/Input/Input.types';
 import { useContextMenuPosition } from 'common/hooks';
 import popup from 'common/popup';
 import { ProfileImage } from 'frames/main/friends/components/Shared.styles';
+import { useFriendList } from 'frames/main/friends/hooks/useFriendList';
 import { HorizontalRule } from '../ProfileMenu/ProfileMenu.styles';
 import {
   CancelInviteAction,
@@ -24,15 +25,16 @@ import Icons from 'assets/icons/Icons';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
 
 const PartyInvite = () => {
-  const { user } = useLoggedInUser();
-  const { friends } = useFriendsFeed({ userId: user.id });
   const { party } = usePartyFeed();
 
   const [isMenuVisible, setMenuVisible] = useState(false);
   const [searchString, setSearchString] = useState('');
 
+  const { friendItems } = useFriendList({ searchString });
+
   const { relatedElementRef, contextMenuRef, position, arrowPosition } = useContextMenuPosition({
-    isVisible: isMenuVisible
+    isVisible: isMenuVisible,
+    offsetX: -70
   });
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,10 +51,10 @@ const PartyInvite = () => {
 
   const playerList = useMemo(
     () =>
-      friends
-        ?.filter((friend) => friend.userTag.toLowerCase().includes(searchString.toLowerCase()))
-        .filter((friend) => !party.players.includes(friend.id)),
-    [friends, party.players, searchString]
+      friendItems
+        ?.filter(({ friend }) => friend.userTag.toLowerCase().includes(searchString.toLowerCase()))
+        ?.filter(({ friend }) => !party.players.includes(friend.id)),
+    [friendItems, party.players, searchString]
   );
 
   return (
@@ -78,9 +80,9 @@ const PartyInvite = () => {
               placeholder="Search for friend to invite"
               size={InputSize.SMALL}
             />
-            <HorizontalRule />
+
             <Players>
-              {playerList.map((friend) => {
+              {playerList.map(({ friend }) => {
                 const hasInvite = party.invites.includes(friend.id);
 
                 return (

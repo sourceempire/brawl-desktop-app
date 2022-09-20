@@ -26,6 +26,7 @@ contextBridge.exposeInMainWorld('bridge', {
   addLoginResultListener: (callback) => addListener('login-result', callback),
   removeLoginResultListener: () => removeAllListeners('login-result'),
   quitAndInstall: () => ipcRenderer.send('quit-and-install'),
+  notification: (notificationData) => ipcRenderer.send('notification', notificationData),
   focus: () => ipcRenderer.send('focus'),
   getPlatform: () => process.platform
 });

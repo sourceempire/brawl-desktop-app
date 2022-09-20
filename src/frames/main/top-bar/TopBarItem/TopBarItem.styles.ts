@@ -10,13 +10,13 @@ export const Wrapper = styled.div`
     height: ${theme.spacing.baseX5}px;
     padding: ${theme.spacing.base}px;
     margin-right: ${theme.spacing.baseX3}px;
-    background-color: ${theme.colors.secondary};
+    background-color: ${theme.colors.secondary.base};
     border-radius: ${theme.borderRadius.default};
     > *:first-child {
       fill: ${theme.colors.textPrimaryLight};
     }
     :hover {
-      background-color: ${theme.colors.lightTint};
+      background-color: ${theme.colors.secondary.hover};
     }
   `}
 `;

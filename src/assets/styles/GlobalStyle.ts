@@ -8,14 +8,14 @@ const GlobalStyle = createGlobalStyle`
     border: ${getPlatform() == 'win32' ? '1px solid rgba(200, 200, 200, 0.1)' : 'none'};
     font-family: 'DM Sans';
     color: white;
-    background-color: ${(props) => props.theme.colors.background};
+    background-color: ${(props) => props.theme.colors.background.base};
     ${(props) => props.theme.textStyles.body};
   }
   input, button {
     font-family: 'DM Sans';
   }
   a {
-    color: ${(props) => props.theme.colors.accent};
+    color: ${(props) => props.theme.colors.accent.base};
     text-decoration: none;
   }
 `;

@@ -1,12 +1,12 @@
-import { Animation } from 'common/components';
 import styled from 'styled-components';
+import { Animation } from 'common/components';
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: ${(props) => props.theme.colors.secondary};
+  background-color: ${(props) => props.theme.colors.secondary.base};
   height: 100%;
 `;
 

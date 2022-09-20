@@ -16,7 +16,7 @@ export const UserCard = styled.div`
     border-radius: ${theme.borderRadius.default};
 
     :hover {
-      outline: 2px solid ${theme.colors.lightTint};
+      outline: 2px solid ${theme.colors.secondary.hover};
     }
   `};
 `;
@@ -63,7 +63,7 @@ export const SimpleLoading = () => <LoadingAnimation src={simpleLoading} />;
 
 const skeletonLoadingStyle = css`
   ${({ theme }) => css`
-    background-color: ${theme.colors.lightTint};
+    background-color: ${theme.colors.lightTint.base};
     border-radius: ${theme.borderRadius.default};
   `}
 

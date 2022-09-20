@@ -23,3 +23,9 @@ export function rgba(hex: string, alpha: number) {
   const color = hexToRgb(hex);
   return `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`;
 }
+
+// TODO -> validate that the string is correct?
+export function hsla(hsl: string, alpha: number) {
+  const hslParams = hsl.split('(')[1].split(')')[0].split(',');
+  return `hsla(${hslParams[0]}, ${hslParams[1]}, ${hslParams[2]}, ${alpha})`;
+}

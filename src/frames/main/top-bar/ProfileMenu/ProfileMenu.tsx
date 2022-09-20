@@ -6,6 +6,7 @@ import ContextMenu from 'common/components/ContextMenu';
 import UserStatus, { UserStatusEnum } from 'common/components/UserStatus';
 import { statusTexts } from 'common/components/UserStatus/UserStatus';
 import { StatusText } from 'common/components/UserStatus/UserStatus.styles';
+import { useContextMenuPosition } from 'common/hooks';
 import popup from 'common/popup';
 import {
   ArrowIcon,
@@ -30,8 +31,6 @@ const orderedStatusItems = [
  * TODO -> Make the position of the context menu dynamic
  */
 const ProfileMenu = () => {
-  const element = useRef() as React.MutableRefObject<HTMLDivElement>;
-
   const { user } = useLoggedInUser();
   const { status } = useUserStatusFeed({ userId: user.id });
   const { logout } = useAuth();
@@ -39,8 +38,12 @@ const ProfileMenu = () => {
   const [isMenuShown, setIsMenuShown] = useState<boolean>(false);
   const [localStatus, setLocalStatus] = useState(UserStatusEnum.OFFLINE);
 
+  const { contextMenuRef, relatedElementRef, position, arrowPosition } = useContextMenuPosition({
+    isVisible: isMenuShown
+  });
+
   const setStatus = (newStatus: UserStatusEnum) => {
-    // setLocalStatus allows an optimistic update of the status before it
+    // setLocalStatus allows for an optimistic update of the status before it
     // is set in the backend. If the status update fails, the actual status
     // will be shown again
     setLocalStatus(newStatus);
@@ -72,8 +75,8 @@ const ProfileMenu = () => {
 
   return (
     <>
-      <Wrapper onClick={showMenu} ref={element}>
-        <ArrowIcon />
+      <Wrapper onClick={showMenu} ref={relatedElementRef}>
+        {/* <ArrowIcon /> */}
         <ProfileImageContainer>
           <ProfileImage src={tempProfileImage} />
           <MyUserStatus status={localStatus} hideText />
@@ -81,11 +84,12 @@ const ProfileMenu = () => {
       </Wrapper>
       {isMenuShown && (
         <ContextMenu
+          ref={contextMenuRef}
           title={user.userTag}
-          position={{ right: 24, top: 83 }}
-          arrowPosition={{ left: 144 }}
+          position={position}
+          arrowPosition={arrowPosition}
           onClickOutside={hideMenu}
-          ignoredElementOnClickOutside={element.current}>
+          ignoredElementOnClickOutside={relatedElementRef.current}>
           <MenuWrapper>
             {orderedStatusItems.map((status) => (
               <MenuItem key={status} onClick={() => handleStatusChange(status)}>
@@ -95,7 +99,6 @@ const ProfileMenu = () => {
             ))}
             <HorizontalRule />
             <MenuItem>Change Avatar</MenuItem>
-            <HorizontalRule />
             <MenuItem>Account Settings</MenuItem>
             <HorizontalRule />
             <MenuItem onClick={logout}>Log out</MenuItem>

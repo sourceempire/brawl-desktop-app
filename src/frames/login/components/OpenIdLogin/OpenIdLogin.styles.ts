@@ -1,5 +1,5 @@
-import { Button } from 'common/components';
 import styled, { css } from 'styled-components';
+import { Button } from 'common/components';
 
 export const LoginWrapper = styled.div<{ inactive: boolean }>`
   position: relative;
@@ -43,7 +43,7 @@ export const SignUpText = styled.div`
   ${({ theme }) => css`
     p {
       display: inline;
-      color: ${theme.colors.accent};
+      color: ${theme.colors.accent.base};
     }
   `}
 `;

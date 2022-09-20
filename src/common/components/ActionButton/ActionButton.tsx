@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import useHint from 'common/hooks/useHint';
 import { Wrapper } from './ActionButton.styles';
 import { ActionButtonSize } from './ActionButton.types';
@@ -31,11 +31,23 @@ const ActionButton = (
   useImperativeHandle(forwardedRef, () => itemRef.current);
   const [isHintVisible, setHintVisible] = useState(false);
 
+  useEffect(() => {
+    if (!hint) {
+      setHintVisible(false);
+    }
+  }, [hint]);
+
+  const handleMouseEnter = () => {
+    if (hint) {
+      setHintVisible(true);
+    }
+  };
+
   const { Hint } = useHint({
     parentElementRef: itemRef,
     hintText: hint,
     isVisible: isHintVisible,
-    timeToVisibility: 500
+    timeToVisibility: 300
   });
 
   const handleClick = () => {
@@ -48,7 +60,7 @@ const ActionButton = (
       <Wrapper
         ref={itemRef}
         onClick={handleClick}
-        onMouseEnter={() => setHintVisible(true)}
+        onMouseEnter={handleMouseEnter}
         onMouseLeave={() => setHintVisible(false)}
         iconColor={iconColor}
         isCircle={isCircle}
