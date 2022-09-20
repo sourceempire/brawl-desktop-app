@@ -4,6 +4,12 @@
  * Updated 4.12.2019
  * - Added do method
  * - Added upload method
+ *
+ *
+ * Fetcher v1.2
+ * Updated 9.20.2022
+ * - converted to typescript
+ * - all methods now use generics
  */
 
 type FetcherResponse = {
@@ -73,18 +79,18 @@ function addCSRFToken(options: Record<string, any>) {
 }
 
 const Fetcher = {
-  do: (
+  do: async function <T>(
     method: string,
     url: string,
     params: Record<string, any>,
     options: Record<string, any> = {}
-  ) => {
+  ) {
     if (method === 'post') {
-      return Fetcher.post(url, params, options);
+      return Fetcher.post<T>(url, params, options);
     } else if (method === 'get') {
-      return Fetcher.get(url, params, options);
+      return Fetcher.get<T>(url, params, options);
     } else if (method === 'delete') {
-      return Fetcher.delete(url, params, options);
+      return Fetcher.delete<T>(url, params, options);
     }
   },
   get: async function <T>(
@@ -131,8 +137,8 @@ const Fetcher = {
     });
     return await checkStatus<T>(res);
   },
-  upload: (url: string, body: Record<string, any>, options = {}) =>
-    fetch(url, {
+  upload: async function <T>(url: string, body: Record<string, any>, options = {}) {
+    const res = await fetch(url, {
       ...options,
       method: 'POST',
       credentials: 'include',
@@ -140,7 +146,9 @@ const Fetcher = {
       // @ts-expect-error
       body: body, // TODO -> Handle body not being stringyfied
       headers: addCSRFToken(options)
-    }).then(checkStatus)
+    });
+    return await checkStatus<T>(res);
+  }
 };
 
 export default Fetcher;
