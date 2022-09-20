@@ -47,7 +47,15 @@ let Window = {
     body?: string;
     silent?: string;
     icon?: string;
-  }) => {},
+  }) => {
+    console.log({
+      title,
+      subtitle,
+      body,
+      silent,
+      icon
+    });
+  },
 
   focus: () => {}
 };

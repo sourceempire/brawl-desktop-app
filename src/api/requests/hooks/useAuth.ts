@@ -8,8 +8,8 @@ import {
   LoginResultStatus,
   type RegisterForm
 } from 'api/requests/AuthRequests';
+import Window from 'electron-window';
 import { useNavigate } from 'react-router-dom';
-import Window from 'window';
 
 const useAuth = () => {
   // TODO -> Fix typesafe way of doing this

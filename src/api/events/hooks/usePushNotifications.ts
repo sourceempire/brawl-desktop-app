@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from 'react';
-import Window from 'window';
+import Window from 'electron-window';
 import { Notification } from 'types/notifications/Notifications';
 import { getPushNotificationMessage } from '../push-notifications';
 import { useServerEvents } from './useServerEvents';

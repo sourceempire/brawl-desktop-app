@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ProgressInfo } from 'electron-updater';
-import Window from 'window';
+import Window from 'electron-window';
 import { UpdateStatus } from '../../frames/loading/types';
 
 type AppUpdaterHook = () => {

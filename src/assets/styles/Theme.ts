@@ -18,27 +18,6 @@ const titleBarHeight = () => {
   }
 };
 
-enum Colors {
-  ACCENT = '#94E8B4',
-
-  TEXT_PRIMARY_LIGHT = 'rgba(255, 255, 255, 1)',
-  TEXT_SECONDARY_LIGHT = 'rgba(218, 218, 218, .67)',
-  TEXT_DISABLED_LIGHT = 'rgba(218, 218, 218, .50)',
-  TEXT_PRIMARY_DARK = 'rgba(0, 0, 0, .87)',
-  TEXT_SECONDARY_DARK = 'rgba(0, 0, 0, .54)',
-  TEXT_DISABLED_DARK = 'rgba(0, 0, 0, .38)',
-
-  STATUS_ERROR = '#DD3A3A',
-  STATUS_SUCCESS = '#65CA57',
-  STATUS_WARNING = '#F4A52F',
-
-  NOTIFICATION_RED = '#fa3e3e'
-}
-
-enum BorderRadius {
-  DEFAULT = '3px'
-}
-
 enum Spacing {
   BASE = 6,
   BASEx2 = 12,
@@ -117,18 +96,18 @@ export const theme: DefaultTheme = {
       active: 'hsl(237, 19%, 63%)'
     },
 
-    textPrimaryLight: Colors.TEXT_PRIMARY_LIGHT,
-    textSecondaryLight: Colors.TEXT_SECONDARY_LIGHT,
-    textDisabledLight: Colors.TEXT_DISABLED_LIGHT,
-    textPrimaryDark: Colors.TEXT_PRIMARY_DARK,
-    textSecondaryDark: Colors.TEXT_SECONDARY_DARK,
-    textDisabledDark: Colors.TEXT_DISABLED_DARK,
+    textPrimaryLight: 'rgba(255, 255, 255, 1)',
+    textSecondaryLight: 'rgba(218, 218, 218, .67)',
+    textDisabledLight: 'rgba(218, 218, 218, .50)',
+    textPrimaryDark: 'rgba(0, 0, 0, .87)',
+    textSecondaryDark: 'rgba(0, 0, 0, .54)',
+    textDisabledDark: 'rgba(0, 0, 0, .38)',
 
-    statusError: Colors.STATUS_ERROR,
-    statusSuccess: Colors.STATUS_SUCCESS,
-    statusWarning: Colors.STATUS_WARNING,
+    statusError: '#DD3A3A',
+    statusSuccess: '#65CA57',
+    statusWarning: '#F4A52F',
 
-    notificationRed: Colors.NOTIFICATION_RED,
+    notificationRed: 'hsl(0, 95%, 61%)',
     depositGreen: {
       base: 'hsl(143, 41%, 33%)',
       hover: 'hsl(143, 41%, 43%)',
@@ -136,7 +115,7 @@ export const theme: DefaultTheme = {
     }
   },
   borderRadius: {
-    default: BorderRadius.DEFAULT
+    default: '3px'
   },
   spacing: {
     base: Spacing.BASE,

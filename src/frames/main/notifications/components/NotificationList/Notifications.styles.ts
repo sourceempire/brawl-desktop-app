@@ -21,7 +21,7 @@ export const NotificationsCount = styled.div`
     width: ${theme.spacing.baseX3}px;
     background-color: ${theme.colors.notificationRed};
     color: white;
-    transform: translate(calc(50%), calc(-50%));
+    transform: translate(calc(50% - 2px), calc(-50% + 2px));
   `}
 `;
 
