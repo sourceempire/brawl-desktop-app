@@ -32,9 +32,23 @@ export const PartyPlayer = ({ userId }: Props) => {
 
   const isLeader = userId === party.leaderId;
   const isLoggedInUser = userId === loggedInUser.id;
+  const isLoggedInUserLeader = party.leaderId === loggedInUser.id;
 
-  const handleLeaveParty = () => {
+  const giveLeader = () => {
+    PartyRequests.giveLeader(userId).catch((error) => popup.error(error.error));
+  };
+
+  const kickPlayer = () => {
+    PartyRequests.kickPlayer(userId).catch((error) => popup.error(error));
+  };
+
+  const leaveParty = () => {
     PartyRequests.leaveParty().catch((error) => popup.error(error.error));
+  };
+
+  const makeRequest = (request: () => void) => {
+    setMenuVisible(false);
+    request();
   };
 
   return (
@@ -52,7 +66,22 @@ export const PartyPlayer = ({ userId }: Props) => {
           position={menuPosition}
           onClickOutside={() => setMenuVisible(false)}>
           <MenuWrapper>
-            {isLoggedInUser && <PlayerAction onClick={handleLeaveParty}>Leave Party</PlayerAction>}
+            {!isLoggedInUser && (
+              <>
+                {isLoggedInUserLeader && (
+                  <>
+                    <PlayerAction onClick={() => makeRequest(giveLeader)}>Give leader</PlayerAction>
+                    <PlayerAction onClick={() => makeRequest(kickPlayer)}>Kick player</PlayerAction>
+                  </>
+                )}
+              </>
+            )}
+
+            {isLoggedInUser && (
+              <>
+                <PlayerAction onClick={() => makeRequest(leaveParty)}>Leave party</PlayerAction>
+              </>
+            )}
           </MenuWrapper>
         </ContextMenu>
       )}
