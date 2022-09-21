@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import {
   ArrowPosition,
   ContextMenuRef,
@@ -9,10 +9,10 @@ import { theme } from 'assets/styles/Theme';
 type Options = {
   isVisible?: boolean;
   offsetX?: number;
+  relatedElementRef: React.MutableRefObject<HTMLElement>;
 };
 
-function useContextMenuPosition({ isVisible = true, offsetX = 0 }: Options) {
-  const relatedElementRef = useRef<HTMLDivElement>(null);
+function useContextMenuPosition({ isVisible = true, offsetX = 0, relatedElementRef }: Options) {
   const contextMenuRef = useRef<ContextMenuRef>(null);
   const [position, setPosition] = useState<Position>({ left: 100, top: 100 });
   const [arrowPosition, setArrowPosition] = useState<ArrowPosition>({ left: 0 });
@@ -39,7 +39,7 @@ function useContextMenuPosition({ isVisible = true, offsetX = 0 }: Options) {
 
     setPosition({ left: left + offsetX, top });
     setArrowPosition({ left: contextMenuContainer.offsetWidth / 2 - offsetX });
-  }, [isVisible, offsetX]);
+  }, [isVisible, offsetX, relatedElementRef]);
 
   // TODO -> calculate arrowPosition if position outside bottom
   // TODO -> calculate arrowPosition if position outside top
@@ -86,9 +86,9 @@ function useContextMenuPosition({ isVisible = true, offsetX = 0 }: Options) {
 
     setPosition({ ...verticalPosition, ...horizontalPosition });
     setArrowPosition(newArrowPosition);
-  }, [position, isVisible]);
+  }, [position, isVisible, relatedElementRef]);
 
-  return { position, arrowPosition, contextMenuRef, relatedElementRef };
+  return { position, arrowPosition, contextMenuRef };
 }
 
 export default useContextMenuPosition;
