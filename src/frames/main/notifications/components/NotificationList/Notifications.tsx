@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import usePushNotifications from 'api/events/hooks/usePushNotifications';
 import useNotificationFeed from 'api/feeds/hooks/useNotificationsFeed';
 import { ActionButton, ContextMenu } from 'common/components';
@@ -18,9 +18,11 @@ const Notifications = () => {
 
   const [isMenuVisible, setMenuVisible] = useState(false);
 
-  const { contextMenuRef, relatedElementRef, position, arrowPosition } = useContextMenuPosition({
+  const actionButtonRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const { contextMenuRef, position, arrowPosition } = useContextMenuPosition({
     isVisible: isMenuVisible,
-    offsetX: -150
+    offsetX: -150,
+    relatedElementRef: actionButtonRef
   });
 
   console.log(position);
@@ -45,7 +47,7 @@ const Notifications = () => {
     <>
       <Wrapper>
         <ActionButton
-          ref={relatedElementRef}
+          ref={actionButtonRef}
           icon={<Icons.Notification />}
           onClick={() => setMenuVisible(true)}
           hint={isMenuVisible ? undefined : 'Notifications'}
@@ -58,7 +60,7 @@ const Notifications = () => {
           ref={contextMenuRef}
           position={position}
           arrowPosition={arrowPosition}
-          ignoredElementOnClickOutside={relatedElementRef.current}
+          ignoredElementOnClickOutside={actionButtonRef.current}
           onClickOutside={() => setMenuVisible(false)}>
           <Title>NOTIFICATIONS</Title>
           <NotificationList onScroll={handleScroll}>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import useHint from 'common/hooks/useHint';
 import { DepositButton, DepositIcon, MoneyContainer, Wrapper } from './Wallet.styles';
 
@@ -7,16 +7,20 @@ const Wallet = () => {
   const [isDepositHintVisible, setDepositHintVisible] = useState(false);
   const [isMoneyHintVisible, setMoneyHintVisible] = useState(false);
 
-  const { Hint: MoneyHint, parentRef: moneyRef } = useHint({
+  const moneyContainerRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const { Hint: MoneyHint } = useHint({
     isVisible: isMoneyHintVisible,
     hintText: 'Balance',
-    timeToVisibility: 500
+    timeToVisibility: 500,
+    relatedElementRef: moneyContainerRef
   });
 
-  const { Hint: DepositHint, parentRef: depositRef } = useHint({
+  const depositButtonRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const { Hint: DepositHint } = useHint({
     isVisible: isDepositHintVisible,
     hintText: 'Deposit',
-    timeToVisibility: 500
+    timeToVisibility: 500,
+    relatedElementRef: depositButtonRef
   });
 
   const handleMoneyClick = () => {
@@ -31,14 +35,14 @@ const Wallet = () => {
     <>
       <Wrapper>
         <MoneyContainer
-          ref={moneyRef}
+          ref={moneyContainerRef}
           onClick={handleMoneyClick}
           onMouseEnter={() => setMoneyHintVisible(true)}
           onMouseLeave={() => setMoneyHintVisible(false)}>
           €42.80
         </MoneyContainer>
         <DepositButton
-          ref={depositRef}
+          ref={depositButtonRef}
           onClick={handleDepositClick}
           onMouseEnter={() => setDepositHintVisible(true)}
           onMouseLeave={() => setDepositHintVisible(false)}>

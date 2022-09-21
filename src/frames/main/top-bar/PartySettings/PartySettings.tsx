@@ -17,8 +17,11 @@ const PartySettings = () => {
   const [isMenuVisible, setMenuVisible] = useState(false);
   const [teamName, setTeamName] = useState<string | null>(initialTeamName);
   const [partySize, setPartySize] = useState<number>(initialPartySize);
-  const { contextMenuRef, relatedElementRef, position, arrowPosition } = useContextMenuPosition({
-    isVisible: isMenuVisible
+  const settingsRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const { contextMenuRef, position, arrowPosition } = useContextMenuPosition({
+    isVisible: isMenuVisible,
+    offsetX: -50,
+    relatedElementRef: settingsRef
   });
 
   const debouncedTeamName = useDebounce(teamName, 250);
@@ -50,7 +53,7 @@ const PartySettings = () => {
   return (
     <>
       <ActionButton
-        ref={relatedElementRef}
+        ref={settingsRef}
         icon={<Icons.Cog />}
         onClick={handleOpenMenu}
         hint={isMenuVisible ? undefined : 'Party settings'}
@@ -62,7 +65,7 @@ const PartySettings = () => {
           arrowPosition={arrowPosition}
           ref={contextMenuRef}
           onClickOutside={() => setMenuVisible(false)}
-          ignoredElementOnClickOutside={relatedElementRef.current}>
+          ignoredElementOnClickOutside={settingsRef.current}>
           <Settings>
             <Label>Party Team Name</Label>
             <Input

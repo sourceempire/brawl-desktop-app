@@ -28,13 +28,15 @@ const ActionButton = (
   forwardedRef: React.ForwardedRef<HTMLDivElement>
 ) => {
   const [isHintVisible, setHintVisible] = useState(false);
-  const { Hint, parentRef: actionButtonRef } = useHint({
+  const actionRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const { Hint } = useHint({
     hintText: hint,
     isVisible: isHintVisible,
-    timeToVisibility: 300
+    timeToVisibility: 300,
+    relatedElementRef: actionRef
   });
 
-  useImperativeHandle(forwardedRef, () => actionButtonRef.current);
+  useImperativeHandle(forwardedRef, () => actionRef.current);
 
   useEffect(() => {
     if (!hint) {
@@ -56,7 +58,7 @@ const ActionButton = (
   return (
     <>
       <Wrapper
-        ref={actionButtonRef}
+        ref={actionRef}
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={() => setHintVisible(false)}

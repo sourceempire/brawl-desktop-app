@@ -1,6 +1,5 @@
-import React, { useMemo, useState } from 'react';
-import { useFriendsFeed, usePartyFeed } from 'api/feeds';
-import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
+import React, { useMemo, useRef, useState } from 'react';
+import { usePartyFeed } from 'api/feeds';
 import * as PartyRequests from 'api/requests/PartyRequests';
 import { ContextMenu } from 'common/components';
 import { Title as ContextMenuTitle } from 'common/components/ContextMenu/ContextMenu.styles';
@@ -9,7 +8,6 @@ import { useContextMenuPosition } from 'common/hooks';
 import popup from 'common/popup';
 import { ProfileImage } from 'frames/main/friends/components/Shared.styles';
 import { useFriendList } from 'frames/main/friends/hooks/useFriendList';
-import { HorizontalRule } from '../ProfileMenu/ProfileMenu.styles';
 import {
   CancelInviteAction,
   FriendSearchInput,
@@ -32,9 +30,11 @@ const PartyInvite = () => {
 
   const { friendItems } = useFriendList({ searchString });
 
-  const { relatedElementRef, contextMenuRef, position, arrowPosition } = useContextMenuPosition({
+  const invitePlayerActionRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const { contextMenuRef, position, arrowPosition } = useContextMenuPosition({
     isVisible: isMenuVisible,
-    offsetX: -70
+    offsetX: -70,
+    relatedElementRef: invitePlayerActionRef
   });
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,7 +60,7 @@ const PartyInvite = () => {
   return (
     <>
       <InvitePlayerAction
-        ref={relatedElementRef}
+        ref={invitePlayerActionRef}
         icon={<Icons.Plus />}
         onClick={() => setMenuVisible(true)}
         hint={!isMenuVisible ? 'Invite Player' : undefined}
@@ -71,7 +71,7 @@ const PartyInvite = () => {
           arrowPosition={arrowPosition}
           ref={contextMenuRef}
           onClickOutside={() => setMenuVisible(false)}
-          ignoredElementOnClickOutside={relatedElementRef.current}>
+          ignoredElementOnClickOutside={invitePlayerActionRef.current}>
           <Wrapper>
             <ContextMenuTitle>INVITE MEMBER</ContextMenuTitle>
             <FriendSearchInput

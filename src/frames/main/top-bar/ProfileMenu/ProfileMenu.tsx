@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { useUserStatusFeed } from 'api/feeds';
 import { UserRequests, useAuth } from 'api/requests';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
@@ -9,7 +9,6 @@ import { StatusText } from 'common/components/UserStatus/UserStatus.styles';
 import { useContextMenuPosition } from 'common/hooks';
 import popup from 'common/popup';
 import {
-  ArrowIcon,
   HorizontalRule,
   MenuItem,
   MenuWrapper,
@@ -38,8 +37,11 @@ const ProfileMenu = () => {
   const [isMenuShown, setIsMenuShown] = useState<boolean>(false);
   const [localStatus, setLocalStatus] = useState(UserStatusEnum.OFFLINE);
 
-  const { contextMenuRef, relatedElementRef, position, arrowPosition } = useContextMenuPosition({
-    isVisible: isMenuShown
+  const profileMenuRef = useRef() as MutableRefObject<HTMLDivElement>;
+
+  const { contextMenuRef, position, arrowPosition } = useContextMenuPosition({
+    isVisible: isMenuShown,
+    relatedElementRef: profileMenuRef
   });
 
   const setStatus = (newStatus: UserStatusEnum) => {
@@ -75,7 +77,7 @@ const ProfileMenu = () => {
 
   return (
     <>
-      <Wrapper onClick={showMenu} ref={relatedElementRef}>
+      <Wrapper onClick={showMenu} ref={profileMenuRef}>
         {/* <ArrowIcon /> */}
         <ProfileImageContainer>
           <ProfileImage src={tempProfileImage} />
@@ -89,7 +91,7 @@ const ProfileMenu = () => {
           position={position}
           arrowPosition={arrowPosition}
           onClickOutside={hideMenu}
-          ignoredElementOnClickOutside={relatedElementRef.current}>
+          ignoredElementOnClickOutside={profileMenuRef.current}>
           <MenuWrapper>
             {orderedStatusItems.map((status) => (
               <MenuItem key={status} onClick={() => handleStatusChange(status)}>

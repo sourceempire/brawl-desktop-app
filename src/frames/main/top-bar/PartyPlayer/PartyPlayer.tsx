@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { usePartyFeed } from 'api/feeds';
 import useUserFeed from 'api/feeds/hooks/useUserFeed';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
@@ -21,24 +21,26 @@ export const PartyPlayer = ({ userId }: Props) => {
   const [isMenuVisible, setMenuVisible] = useState(false);
   const [isHintVisible, setHintVisible] = useState(false);
 
+  const partyPlayerRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const {
     arrowPosition: menuArrowPosition,
     position: menuPosition,
-    contextMenuRef,
-    relatedElementRef
+    contextMenuRef
   } = useContextMenuPosition({
     isVisible: isMenuVisible,
-    offsetX: -50
+    offsetX: -50,
+    relatedElementRef: partyPlayerRef
   });
 
   const isLeader = userId === party.leaderId;
   const isLoggedInUser = userId === loggedInUser.id;
   const isLoggedInUserLeader = party.leaderId === loggedInUser.id;
 
-  const { parentRef, Hint } = useHint({
+  const { Hint } = useHint({
     hintText: isLoggedInUser ? 'You' : user?.userTag,
     isVisible: isHintVisible,
-    timeToVisibility: 300
+    timeToVisibility: 300,
+    relatedElementRef: partyPlayerRef
   });
 
   const giveLeader = () => {
@@ -73,20 +75,18 @@ export const PartyPlayer = ({ userId }: Props) => {
   return (
     <>
       <Wrapper
-        ref={relatedElementRef}
+        ref={partyPlayerRef}
         onClick={openMenu}
         onMouseEnter={onMouseEnter}
         onMouseLeave={() => setHintVisible(false)}>
-        <div ref={parentRef}>
-          {isLeader && <LeaderStar />}
-          <PlayerImage src={tempProfileImage} />
-        </div>
+        {isLeader && <LeaderStar />}
+        <PlayerImage src={tempProfileImage} />
       </Wrapper>
       {isMenuVisible && (
         <ContextMenu
           title={user?.userTag}
           ref={contextMenuRef}
-          ignoredElementOnClickOutside={relatedElementRef.current}
+          ignoredElementOnClickOutside={partyPlayerRef.current}
           arrowPosition={menuArrowPosition}
           position={menuPosition}
           onClickOutside={() => setMenuVisible(false)}>
