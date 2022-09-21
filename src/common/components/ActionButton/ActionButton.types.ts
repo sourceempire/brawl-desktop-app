@@ -3,6 +3,7 @@ export type WrapperProps = {
   isCircle?: boolean;
   size: ActionButtonSize;
   active?: boolean;
+  disabled?: boolean;
 };
 
 export enum ActionButtonSize {

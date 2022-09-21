@@ -1,4 +1,5 @@
 import { Fetcher } from 'api';
+import { Nothing } from 'types/Nothing';
 
 export type AuthType = 'password' | 'openid';
 
@@ -20,10 +21,7 @@ export type RegisterForm = {
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-export const loginWithUsernameAndPassword: (
-  username: string,
-  password: string
-) => Promise<{ succeeded: boolean }> = (username, password) =>
+export const loginWithUsernameAndPassword = (username: string, password: string) =>
   Fetcher.post(SERVER_URL + '/api/public/auth/login', { username, password });
 
 /**

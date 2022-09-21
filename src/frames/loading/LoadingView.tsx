@@ -25,7 +25,7 @@ const LoadingView = () => {
   }, [updateStatus, loginValidate]);
 
   if (error) {
-    console.log(error);
+    console.error(error);
     return null;
   }
 

@@ -73,7 +73,7 @@ const useAuth = () => {
           break;
         }
         case LoginResultStatus.FAILED: {
-          console.log('failed');
+          console.error('failed');
           // TODO -> Handle failed login attempt
           break;
         }
@@ -83,12 +83,10 @@ const useAuth = () => {
   });
 
   const { current: register } = useRef(async (form: RegisterForm) => {
-    const registerResult = await AuthRequests.register(form);
-    if (registerResult.succeeded) {
-      closeLoginWindowAndOpenMain();
-    } else {
-      // TODO -> Handle failed register attempt
-    }
+    await AuthRequests.register(form);
+    closeLoginWindowAndOpenMain();
+
+    // TODO -> Handle failed register attempt
   });
 
   const { current: logout } = useRef(async () => {

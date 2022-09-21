@@ -12,6 +12,7 @@ type Props = {
   className?: string;
   placeholder?: string;
   tabIndex?: number;
+  maxLength?: number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -26,6 +27,7 @@ const Input = ({
   className,
   placeholder,
   tabIndex = 0,
+  maxLength,
   onChange
 }: Props) => {
   const hasIcon = Boolean(icon);
@@ -36,6 +38,7 @@ const Input = ({
       <InputWrapper inputSize={size} hasLabel={Boolean(label)} hasIcon={hasIcon}>
         <IconWrapper inputSize={size}>{icon}</IconWrapper>
         <InputElement
+          maxLength={maxLength}
           value={value}
           name={name}
           type={type}

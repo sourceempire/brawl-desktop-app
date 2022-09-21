@@ -12,6 +12,7 @@ type Props = {
   size?: ActionButtonSize;
   className?: string;
   active?: boolean;
+  disabled?: boolean;
 };
 
 const ActionButton = (
@@ -23,7 +24,8 @@ const ActionButton = (
     isCircle,
     size = ActionButtonSize.MEDIUM,
     className,
-    active
+    active,
+    disabled
   }: Props,
   forwardedRef: React.ForwardedRef<HTMLDivElement>
 ) => {
@@ -66,7 +68,8 @@ const ActionButton = (
         isCircle={isCircle}
         size={size}
         className={className}
-        active={active}>
+        active={active}
+        disabled={disabled}>
         {icon}
       </Wrapper>
       {Hint}

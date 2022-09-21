@@ -24,8 +24,8 @@ export const acceptInvite = (partyId: string) =>
 export const declineInvite = (partyId: string) =>
   Fetcher.post(`${SERVER_URL}/api/party/invite/decline`, { partyId });
 
-export const updatePartyTeamName = (teamName: string) =>
-  Fetcher.post(`${SERVER_URL}/api/party/update_team_name`, { teamName });
+export const updatePartyTeamName = (teamName: string | null) =>
+  Fetcher.post(`${SERVER_URL}/api/party/update_team_name`, { teamName: teamName || null });
 
 export const updatePartySize = (partySize: number) =>
   Fetcher.post(`${SERVER_URL}/api/party/update_party_size`, { partySize });

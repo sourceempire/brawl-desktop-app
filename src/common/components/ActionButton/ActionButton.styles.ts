@@ -13,7 +13,7 @@ export const Wrapper = styled.div<WrapperProps>`
   justify-content: center;
   align-items: center;
 
-  ${({ theme, iconColor, isCircle, size, active }) => css`
+  ${({ theme, iconColor, isCircle, size, active, disabled }) => css`
     width: ${buttonSize[size]};
     height: ${buttonSize[size]};
     padding: ${size === ActionButtonSize.SMALL ? `5px` : `${theme.spacing.base}px`};
@@ -40,6 +40,12 @@ export const Wrapper = styled.div<WrapperProps>`
         color: ${theme.colors.textPrimaryDark};
         fill: ${theme.colors.textPrimaryDark};
       }
+    `}
+
+    ${disabled &&
+    css`
+      pointer-events: none;
+      opacity: 0.2;
     `}
   `}
 `;

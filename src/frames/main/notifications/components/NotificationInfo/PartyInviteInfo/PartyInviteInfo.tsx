@@ -3,7 +3,7 @@ import * as PartyRequests from 'api/requests/PartyRequests';
 import popup from 'common/popup';
 import { PartyInviteNotificationInfo } from 'types/notifications/Notifications';
 import { useTimeSince } from 'utils/hooks';
-import { Image, Text, TimeAgo, UserTag } from '../../NotificationCard/NotificationCard.styles';
+import { Highlight, Image, Text, TimeAgo } from '../../NotificationCard/NotificationCard.styles';
 import { ActionButton, Actions, Info, Wrapper } from '../NotificationInfo.styles';
 import temporaryProfileImage from 'assets/images/temporary-profile-image.jpg';
 
@@ -33,7 +33,7 @@ const PartyInviteInfo = ({ info, createdAt }: Props) => {
       <Image src={temporaryProfileImage} />
       <Info>
         <Text>
-          Party invite from <UserTag>{inviter?.userTag}</UserTag>
+          Party invite from <Highlight>{inviter?.userTag}</Highlight>
         </Text>
         <TimeAgo>{timeSince}</TimeAgo>
       </Info>

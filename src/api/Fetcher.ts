@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */ //TODO -> Try to find a way to not use any
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /*
  * Fetcher v1.1
  * Updated 4.12.2019
@@ -12,17 +12,19 @@
  * - all methods now use generics
  */
 
-type FetcherResponse = {
-  succeeded: boolean;
+type Response = {
+  succeeded?: boolean;
 };
 
-function checkStatus<T>(res: any) {
-  return new Promise<FetcherResponse & T>((resolve, reject) => {
+function checkStatus<T>(res: globalThis.Response) {
+  return new Promise<T>((resolve, reject) => {
     if (res.headers.has('X-XSRF-TOKEN')) {
-      localStorage.setItem('XSRF-TOKEN', res.headers.get('X-XSRF-TOKEN'));
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      localStorage.setItem('XSRF-TOKEN', res.headers.get('X-XSRF-TOKEN')!);
     }
-    res.json().then((body: FetcherResponse & T) => {
+    res.json().then((body: Response & T) => {
       if (res.ok && body.succeeded === true) {
+        delete body.succeeded;
         resolve(body);
       } else {
         reject({

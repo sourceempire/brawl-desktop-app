@@ -95,7 +95,7 @@ export const TabsBarTab = styled.div<{ active?: boolean }>`
         right: -3px;
         height: 3px;
         border-radius: 1.5px;
-        background-color: ${theme.colors.primary};
+        background-color: ${theme.colors.primary.base};
       }
     `}
   `}
