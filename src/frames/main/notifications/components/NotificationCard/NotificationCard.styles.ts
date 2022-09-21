@@ -3,11 +3,18 @@ import EllipsisText from 'common/components/EllipsisText';
 import { skeletonLoadingStyle } from 'common/components/SkeletonLoading/SkeletionLoading.styles';
 
 export const Text = styled(EllipsisText)`
-  ${({ theme }) => theme.textStyles.body}
+  ${({ theme }) => css`
+    ${theme.textStyles.body}
+    color: ${theme.colors.textSecondaryLight};
+    margin-bottom: ${theme.spacing.base / 2}px;
+  `}
 `;
 
-export const UserTag = styled.label`
+export const Highlight = styled.label`
   font-weight: bold;
+  ${({ theme }) => css`
+    color: ${theme.colors.textPrimaryLight};
+  `}
 `;
 
 export const Wrapper = styled.div<{ isRead: boolean }>`
@@ -24,7 +31,7 @@ export const Wrapper = styled.div<{ isRead: boolean }>`
     css`
       background-color: ${theme.colors.secondary.hover};
 
-      ${Text} {
+      ${Text}, ${Highlight} {
         color: ${theme.colors.accent.base};
       }
     `}

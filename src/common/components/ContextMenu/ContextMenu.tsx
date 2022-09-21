@@ -9,11 +9,20 @@ type Props = {
   position: Position;
   arrowPosition?: ArrowPosition;
   ignoredElementOnClickOutside?: HTMLElement | null;
+  className?: string;
   onClickOutside?: () => void;
 };
 
 const ContextMenu = (
-  { children, title, position, arrowPosition, onClickOutside, ignoredElementOnClickOutside }: Props,
+  {
+    children,
+    title,
+    position,
+    arrowPosition,
+    onClickOutside,
+    className,
+    ignoredElementOnClickOutside
+  }: Props,
   forwardedRef: React.ForwardedRef<ContextMenuRef>
 ) => {
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
@@ -58,7 +67,7 @@ const ContextMenu = (
   }, [onClickOutside, ignoredElementOnClickOutside]);
 
   return ReactDOM.createPortal(
-    <Wrapper ref={ref} position={position} arrowPosition={arrowPosition}>
+    <Wrapper ref={ref} className={className} position={position} arrowPosition={arrowPosition}>
       {title && <Title>{title}</Title>}
       {children}
     </Wrapper>,

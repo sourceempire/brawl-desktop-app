@@ -122,7 +122,7 @@ function Page() {
               applyFilters={setActiveFilters}
               previousFilter={activeFilters}
             />
-            <FilterSort onSelect={console.log}>
+            <FilterSort onSelect={console.debug}>
               <Option value="1">Sort</Option>
               <Option value="2">b</Option>
               <Option value="3">c</Option>

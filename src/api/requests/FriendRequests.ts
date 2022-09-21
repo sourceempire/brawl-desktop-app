@@ -5,11 +5,14 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 export type PotentialFriend = User & { isRequestSent: boolean };
 
-export const potentialFriendsSearch: (options: { searchString: string; limit: number }) => Promise<{
-  succeeded: boolean;
-  users: PotentialFriend[];
-}> = ({ searchString, limit }) => {
-  return Fetcher.post(`${SERVER_URL}/api/user/search/not_friends`, {
+export const potentialFriendsSearch = ({
+  searchString,
+  limit
+}: {
+  searchString: string;
+  limit: number;
+}) => {
+  return Fetcher.post<{ users: PotentialFriend[] }>(`${SERVER_URL}/api/user/search/not_friends`, {
     searchString: searchString,
     limit: limit
   });

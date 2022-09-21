@@ -68,4 +68,6 @@ export const Wrapper = styled.div<{ level: PopupLevel; isClosing: boolean }>`
   }
 `;
 
-export const PopupText = styled.div``;
+export const PopupText = styled.div`
+  text-align: center;
+`;

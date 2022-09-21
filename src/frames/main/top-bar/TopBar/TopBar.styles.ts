@@ -32,6 +32,6 @@ export const PlaceholderLogo = styled.div`
   margin-right: 24px;
 
   ${({ theme }) => css`
-    background-color: ${theme.colors.primary};
+    background-color: ${theme.colors.primary.base};
   `}
 `;

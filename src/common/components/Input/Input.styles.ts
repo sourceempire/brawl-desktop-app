@@ -36,7 +36,6 @@ export const InputWrapper = styled.div<{
   ${({ theme, inputSize, hasLabel, hasIcon }) => css`
     height: ${getInputHeight(inputSize)};
     border-radius: ${theme.borderRadius.default};
-    background-color: red;
 
     ${hasLabel &&
     css`
