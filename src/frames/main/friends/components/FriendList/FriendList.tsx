@@ -44,7 +44,7 @@ const FriendList = ({ searchString, openAddFriendModal }: Props) => {
         {isLoading && <FriendListSkeleton cardCount={6} />}
       </Friends>
 
-      {numberOfFriends === 0 && (
+      {numberOfFriends === 0 && !isLoading && (
         <NoFriendsContainer>
           <BigAddFriendIcon />
           <NoFriendsText>

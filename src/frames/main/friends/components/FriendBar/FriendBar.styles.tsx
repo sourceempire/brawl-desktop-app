@@ -12,11 +12,14 @@ export const Wrapper = styled.div`
   right: 0;
   width: 230px;
   ${({ theme }) => css`
-    height: calc(
+    /* height: calc(
       100vh - ${theme.titleBarHeight}px - ${theme.topBarHeight}px - ${theme.spacing.baseX4}px
-    );
+    ); */
 
-    border-top-left-radius: ${theme.borderRadius.default};
+    height: 100vh;
+
+    padding-top: ${theme.titleBarHeight}px;
+    // border-top-left-radius: ${theme.borderRadius.default};
     background-color: ${theme.colors.secondary.base};
   `}
 `;
@@ -28,7 +31,7 @@ export const SearchFriendsInput = styled(Input)`
 export const FriendActions = styled.div`
   display: flex;
   ${({ theme }) => css`
-    padding: ${theme.spacing.baseX2}px;
+    padding: 0 ${theme.spacing.baseX2}px;
     padding-bottom: 0;
   `}
 `;

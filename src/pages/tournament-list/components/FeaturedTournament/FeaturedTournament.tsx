@@ -1,4 +1,4 @@
-import { TournamentInfo } from 'types/tournaments/TournamentInfo';
+import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import {
   Bullet,
   BulletIcon,
@@ -19,7 +19,7 @@ import Ticket from 'assets/icons/Ticket.svg';
 import Trophy from 'assets/icons/Trophy.svg';
 
 type Props = {
-  tournamentInfo: TournamentInfo;
+  tournamentInfo: TournamentHub;
   onClick?: ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void) | undefined;
   expanded: boolean;
   setExpanded: React.Dispatch<React.SetStateAction<boolean>>;

@@ -1,6 +1,6 @@
 import { isCSGOMatchSettings } from 'types/MatchSettings';
 import Money from 'types/Money';
-import { TournamentInfo } from 'types/tournaments/TournamentInfo';
+import { TournamentHub } from 'types/tournaments/TournamentInfo';
 
 export enum FilterTypes {
   GAME,
@@ -19,7 +19,7 @@ export type Filter = {
   value: string;
 };
 
-export function filter(tournaments: TournamentInfo[], filters: Filter[]): TournamentInfo[] {
+export function filter(tournaments: TournamentHub[], filters: Filter[]): TournamentHub[] {
   const numOfFilterTypes = filters.reduce((acc, filter) => {
     acc.add(filter.type);
     return acc;
@@ -67,7 +67,7 @@ export function filter(tournaments: TournamentInfo[], filters: Filter[]): Tourna
   );
 }
 
-export function search(tournaments: TournamentInfo[], query: string): TournamentInfo[] {
+export function search(tournaments: TournamentHub[], query: string): TournamentHub[] {
   return tournaments.filter((tournament) =>
     tournament.name.toLowerCase().includes(query.toLocaleLowerCase())
   );

@@ -1,11 +1,12 @@
 import { useDeferredValue, useState } from 'react';
 import useTournamentHubsFeed from 'api/feeds/hooks/useTournamentHubsFeed';
+import { useNavigate } from 'react-router-dom';
 import { InputSize } from 'common/components/Input/Input.types';
 import { Option } from 'common/components/Select';
 import { Tab, Tabs } from 'common/components/Tabs';
 import Game, { GameName } from 'types/Game';
 import { CSGOMatchSettings } from 'types/MatchSettings';
-import { TournamentInfo } from 'types/tournaments/TournamentInfo';
+import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import FeaturedTournament from '../FeaturedTournament/FeaturedTournament';
 import TournamentInfoCard from '../TournamentInfoCard/TournamentInfoCard';
 import TournamentsFilters from '../TournamentsFiltersModal/TournamentsFiltersModal';
@@ -52,9 +53,9 @@ function Page() {
   const searchQueryDeffered = useDeferredValue(searchQuery);
   const [filterModalOpen, setFilterModalOpen] = useState(false);
 
-  const { tournamentHubs: tournamentList } = useTournamentHubsFeed();
+  const { tournamentHubs } = useTournamentHubsFeed();
 
-  const exampleTournamentInfo = (n: number): TournamentInfo => ({
+  const exampleTournamentInfo = (n: number): TournamentHub => ({
     id: 'eee18f6d-2a99-4176-b01d-271e1283692' + n,
     name: 'Sweden Masters Invitational',
     gameId: '4747a477-3445-4b0a-9db9-bf0e68238208',
@@ -71,23 +72,13 @@ function Page() {
     image: 'https://picsum.photos/600/200?random=' + n
   });
 
-  const tournaments = [
-    exampleTournamentInfo(1),
-    exampleTournamentInfo(2),
-    exampleTournamentInfo(3),
-    exampleTournamentInfo(4),
-    exampleTournamentInfo(5),
-    exampleTournamentInfo(6),
-    exampleTournamentInfo(7),
-    exampleTournamentInfo(8),
-    exampleTournamentInfo(9)
-  ];
-
   function removeFilter(filter: Filter) {
     setActiveFilters((filters) =>
       filters.filter((f) => f.type !== filter.type || f.value !== filter.value)
     );
   }
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -130,9 +121,15 @@ function Page() {
           </FilterControls>
         </FilterBar>
         <TournamentList>
-          {search(filter(tournamentList, activeFilters), searchQueryDeffered).map((tournament) => (
-            <TournamentInfoCard key={tournament.id} tournamentInfo={tournament} />
-          ))}
+          {search(filter(tournamentHubs, activeFilters), searchQueryDeffered).map(
+            (tournamentHub) => (
+              <TournamentInfoCard
+                key={tournamentHub.id}
+                tournamentInfo={tournamentHub}
+                onClick={() => navigate(`hub/${tournamentHub.id}`)}
+              />
+            )
+          )}
         </TournamentList>
       </TournamentGallery>
     </>

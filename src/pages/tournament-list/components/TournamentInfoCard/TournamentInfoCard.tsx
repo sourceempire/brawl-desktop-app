@@ -1,5 +1,5 @@
 import { csgoMatchSettingsModeShortForm, isCSGOMatchSettings } from 'types/MatchSettings';
-import { TournamentInfo } from 'types/tournaments/TournamentInfo';
+import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import { capitalize } from 'utils/stringUtils';
 import {
   Column1,
@@ -22,7 +22,7 @@ import {
 } from './TournamentInfoCard.styles';
 
 type Props = {
-  tournamentInfo: TournamentInfo;
+  tournamentInfo: TournamentHub;
   onClick?: ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void) | undefined;
   className?: string;
 };
@@ -63,7 +63,7 @@ export default function TournamentInfoCard({ tournamentInfo, onClick, className 
   );
 }
 
-function tournamentMatchSettings(tournamentInfo: TournamentInfo) {
+function tournamentMatchSettings(tournamentInfo: TournamentHub) {
   if (isCSGOMatchSettings(tournamentInfo.matchSettings)) {
     return ` (${csgoMatchSettingsModeShortForm(tournamentInfo.matchSettings.mode)})`;
   } else {

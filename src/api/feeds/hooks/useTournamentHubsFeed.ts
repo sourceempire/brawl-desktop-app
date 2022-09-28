@@ -1,12 +1,14 @@
 import Game, { GameName } from 'types/Game';
 import { MatchSettingsTypes } from 'types/MatchSettings';
-import { TournamentInfo } from 'types/tournaments/TournamentInfo';
+import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import useFeed from './useFeed';
 
 export default function useTournamentHubsFeed() {
-  const { currentState, isLoading } = useFeed<{ tournamentHubs: TournamentInfo[] }>(
+  const { currentState, isLoading } = useFeed<{ tournamentHubs: TournamentHub[] }>(
     'tournament.hubs'
   );
+
+  console.log(currentState, isLoading);
 
   let tournamentHubsWithTypedMatchSettings = fixMatchSettingType(currentState.tournamentHubs ?? []);
 
@@ -24,7 +26,7 @@ export default function useTournamentHubsFeed() {
   };
 }
 
-function fixMatchSettingType(tournamentHubs: TournamentInfo[]): TournamentInfo[] {
+function fixMatchSettingType(tournamentHubs: TournamentHub[]): TournamentHub[] {
   return tournamentHubs.map((tournamentHub) => {
     if (tournamentHub.gameId === Game.CSGO) {
       tournamentHub.matchSettings.__type = MatchSettingsTypes.CSGO;

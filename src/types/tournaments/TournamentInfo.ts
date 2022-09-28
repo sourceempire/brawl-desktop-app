@@ -1,6 +1,6 @@
 import { MatchSettings } from 'types/MatchSettings';
 
-export interface TournamentInfo {
+export interface TournamentHub {
   id: string;
   name: string;
   gameId: string;
@@ -16,3 +16,20 @@ export interface TournamentInfo {
   registrationClosed: boolean;
   image: string;
 }
+
+export type Tournament = {
+  id: string;
+  gameId: string;
+  tournamentHubId: string;
+  tournamentNumber: number; // incremented
+  teamSize: number;
+  startTime: number; // epoch milli
+  teamsAllowed: number;
+  entranceFee: number;
+  bracketType: string; // TODO -> use an enum
+  started: boolean;
+  locked: boolean;
+  canceled: boolean;
+  createdAt: number; // epoch milli
+  matchSettings: MatchSettings;
+};

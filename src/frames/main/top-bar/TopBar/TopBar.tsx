@@ -10,6 +10,7 @@ import Icons from 'assets/icons/Icons';
 
 type Props = {
   toggleFriends: () => void;
+  isFriendBarVisible: boolean;
 };
 
 type NavigationItem = {
@@ -19,13 +20,13 @@ type NavigationItem = {
 };
 
 const mainNavigationItems: NavigationItem[] = [
-  { name: 'Tournaments', path: 'tournamentlist' },
+  { name: 'Tournaments', path: 'tournaments' },
   { name: 'Quick Match', isUpcomingFeature: true }
 ];
 
-const TopBar = ({ toggleFriends }: Props) => {
+const TopBar = ({ toggleFriends, isFriendBarVisible }: Props) => {
   return (
-    <Wrapper>
+    <Wrapper isFriendBarVisible={isFriendBarVisible}>
       <TopBarActions>
         <Link to="">
           <PlaceholderLogo />

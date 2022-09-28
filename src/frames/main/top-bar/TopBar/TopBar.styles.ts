@@ -1,14 +1,18 @@
 import styled, { css } from 'styled-components/macro';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ isFriendBarVisible: boolean }>`
   display: flex;
   justify-content: space-between;
   padding: 0 24px;
   margin-bottom: 24px;
   flex-shrink: 0;
 
-  ${({ theme }) => css`
+  ${({ theme, isFriendBarVisible }) => css`
     height: ${theme.topBarHeight}px;
+    ${isFriendBarVisible &&
+    css`
+      width: calc(100% - ${theme.friendsBarWidth}px);
+    `}
   `}
 `;
 

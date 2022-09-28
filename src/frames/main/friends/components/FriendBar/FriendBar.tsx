@@ -36,7 +36,7 @@ const FriendBar = ({ visible }: Props) => {
 
   return (
     <>
-      <Wrapper>
+      <Wrapper onPointerDown={(e) => e.stopPropagation}>
         <FriendActions>
           <SearchFriendsInput
             icon={<Icons.Search />}

@@ -1,0 +1,37 @@
+import { NavLink as ReactRouterNavLink } from 'react-router-dom';
+import styled, { css } from 'styled-components/macro';
+
+export const Wrapper = styled.div`
+  display: flex;
+  position: relative;
+  gap: 12px;
+  height: 100%;
+`;
+
+export const NavLink = styled(ReactRouterNavLink)`
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 12px;
+  top: 2px;
+
+  ${({ theme }) => css`
+    ${theme.textStyles.title}
+    color: ${theme.colors.textPrimaryLight};
+  `}
+`;
+
+export const ActiveLine = styled.div<{ shouldAnimate: boolean }>`
+  position: absolute;
+  bottom: -2px;
+  height: 2px;
+  width: 1px;
+  transform-origin: left;
+
+  ${({ theme, shouldAnimate }) => css`
+    background-color: ${theme.colors.primary.base};
+
+    transition: ${shouldAnimate ? 'transform 0.3s' : 'transform 0'};
+  `}
+`;

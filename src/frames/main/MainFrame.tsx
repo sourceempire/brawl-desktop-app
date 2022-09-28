@@ -5,6 +5,8 @@ import { Route, Routes } from 'react-router-dom';
 import DragableArea from 'common/components/DragableArea';
 import { FriendBar } from 'frames/main/friends';
 import HomePage from 'pages/home';
+import TournamentPage from 'pages/tournament';
+import TournamentHubPage from 'pages/tournament-hub';
 import { useUpdateEffect } from 'utils/hooks';
 import TournamentListView from '../../pages/tournament-list';
 import { RoutesContainer, Wrapper } from './MainFrame.styles';
@@ -36,11 +38,17 @@ const MainView = () => {
     <Wrapper>
       <DragableArea />
       <RootContextProvider>
-        <TopBar toggleFriends={toggleFriends} />
+        <TopBar toggleFriends={toggleFriends} isFriendBarVisible={isFriendBarVisible} />
         <RoutesContainer isFriendBarVisible={isFriendBarVisible}>
           <Routes>
-            <Route path="/tournamentlist" element={<TournamentListView />} />
-            <Route path="/" element={<HomePage />} />
+            <Route path="/">
+              <Route index element={<HomePage />} />
+              <Route path="tournaments">
+                <Route index element={<TournamentListView />} />
+                <Route path="hub/:hubId" element={<TournamentHubPage />} />
+                <Route path=":tournamentId/*" element={<TournamentPage />} />
+              </Route>
+            </Route>
           </Routes>
         </RoutesContainer>
         <FriendBar visible={isFriendBarVisible} />
