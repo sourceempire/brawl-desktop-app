@@ -19,8 +19,9 @@ export interface TournamentHub {
 
 export type Tournament = {
   id: string;
+  name: string;
   gameId: string;
-  tournamentHubId: string;
+  tournamentHubId?: string;
   tournamentNumber: number; // incremented
   teamSize: number;
   startTime: number; // epoch milli

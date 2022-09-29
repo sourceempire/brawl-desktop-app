@@ -1,3 +1,5 @@
+import { keyframes } from 'styled-components';
+
 function hexToRgb(hex: string) {
   // http://stackoverflow.com/a/5624139
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
@@ -29,3 +31,16 @@ export function hsla(hsl: string, alpha: number) {
   const hslParams = hsl.split('(')[1].split(')')[0].split(',');
   return `hsla(${hslParams[0]}, ${hslParams[1]}, ${hslParams[2]}, ${alpha})`;
 }
+
+export const bounceAnimation = (start: number, middle: number, end: number) =>
+  keyframes`
+    0% {
+      transform: scale(${start});
+    }
+    50% {
+      transform: scale(${middle});
+    }
+    100% {
+      transform: scale(${end});
+    }
+`;

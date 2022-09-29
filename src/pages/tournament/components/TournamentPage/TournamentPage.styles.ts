@@ -22,8 +22,17 @@ export const TournamentContent = styled.div`
 `;
 
 export const TournamentNavbar = styled.div`
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  grid-template-columns: 1fr auto 1fr;
   height: 52px;
   ${({ theme }) => css`
     border-bottom: 2px solid ${theme.colors.lightTint.base};
   `}
+`;
+
+export const RightAlignedContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;

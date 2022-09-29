@@ -3,7 +3,7 @@ export const getTimeSince = (date: Date) => {
     return count === 1 ? '' : 's';
   };
 
-  const seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000);
+  const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
 
   const days = seconds / 86400;
   if (days > 1) {

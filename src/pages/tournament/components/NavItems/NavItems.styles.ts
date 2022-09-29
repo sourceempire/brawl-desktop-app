@@ -3,8 +3,9 @@ import styled, { css } from 'styled-components/macro';
 
 export const Wrapper = styled.div`
   display: flex;
+  flex-grow: 1;
   position: relative;
-  gap: 12px;
+  gap: 6px;
   height: 100%;
 `;
 
@@ -17,7 +18,7 @@ export const NavLink = styled(ReactRouterNavLink)`
   top: 2px;
 
   ${({ theme }) => css`
-    ${theme.textStyles.title}
+    ${theme.textStyles.menu}
     color: ${theme.colors.textPrimaryLight};
   `}
 `;
