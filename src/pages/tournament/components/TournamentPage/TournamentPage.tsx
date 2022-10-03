@@ -18,9 +18,12 @@ const TournamentPage = () => {
 
   const { tournament, isLoading } = useTournamentFeed(tournamentId);
 
+  if (isLoading) return null;
+
   return (
     <Wrapper>
       <TournamentInfo tournament={tournament} />
+
       <TournamentContent>
         <TournamentNavbar>
           <NavItems tournamentId={tournamentId} />
@@ -35,7 +38,7 @@ const TournamentPage = () => {
         </TournamentNavbar>
 
         <Routes>
-          <Route index element={<Match />} />
+          <Route index element={<Match tournament={tournament} />} />
           <Route path="bracket" element={<div>Bracket</div>} />
           <Route path="rules" element={<div>Rules</div>} />
           <Route path="chat" element={<div>Chat</div>} />

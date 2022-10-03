@@ -159,7 +159,10 @@ export const ServerEventsProvider = ({ children }: Props) => {
     } else {
       // already subscribed to feed, serve cache instead
       const cachedState = feedCachedStates.current[feed];
-      listener(cachedState);
+
+      if (cachedState !== undefined) {
+        listener(cachedState);
+      }
     }
 
     return feedListenerId;

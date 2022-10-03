@@ -13,7 +13,7 @@ type Props = {
 };
 
 const PartyInviteInfo = ({ info, createdAt }: Props) => {
-  const inviter = useUserFeed({ userId: info?.inviterId });
+  const { user: inviter } = useUserFeed({ userId: info?.inviterId });
   const timeSince = useTimeSince(createdAt);
 
   const handleAccept = () => {
@@ -33,7 +33,7 @@ const PartyInviteInfo = ({ info, createdAt }: Props) => {
       <Image src={temporaryProfileImage} />
       <Info>
         <Text>
-          Party invite from <Highlight>{inviter?.userTag}</Highlight>
+          Party invite from <Highlight>{inviter.userTag}</Highlight>
         </Text>
         <TimeAgo>{timeSince}</TimeAgo>
       </Info>

@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 1fr 1fr 1fr;
-  height: 166px;
+  height: 250px;
   width: 100%;
   align-items: center;
   justify-items: center;
@@ -20,4 +20,6 @@ export const TournamentName = styled.div`
   ${({ theme }) => theme.textStyles.stylizedHeader}
 `;
 
-export const TeamContainer = styled.div``;
+export const TeamContainer = styled.div`
+  font-size: 20px;
+`;

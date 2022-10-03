@@ -1,4 +1,4 @@
-import { PublicUser } from 'api/requests/UserRequests';
+import { PublicUser } from 'types/user/User';
 import useFeed from './useFeed';
 
 type Options = {
@@ -6,9 +6,12 @@ type Options = {
 };
 
 const useUserFeed = ({ userId }: Options) => {
-  const { currentState } = useFeed<{ user: PublicUser }>(`user.${userId}`);
+  const { currentState, isLoading } = useFeed<{ user: PublicUser }>(`user.${userId}`);
 
-  return currentState?.user;
+  return {
+    isLoading,
+    user: currentState?.user ?? {}
+  };
 };
 
 export default useUserFeed;
