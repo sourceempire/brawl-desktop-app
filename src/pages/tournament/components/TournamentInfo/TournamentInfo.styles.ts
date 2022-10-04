@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
   display: grid;
@@ -17,9 +17,17 @@ export const MiddleInfo = styled.div`
 `;
 
 export const TournamentName = styled.div`
-  ${({ theme }) => theme.textStyles.stylizedHeader}
+  font-size: 30px;
+  font-family: 'Orbitron';
 `;
 
 export const TeamContainer = styled.div`
   font-size: 20px;
+`;
+
+export const SmallText = styled.div`
+  ${({ theme }) => css`
+    color: ${theme.colors.textDisabledLight};
+    margin: ${theme.spacing.baseX2}px 0;
+  `}
 `;

@@ -1,7 +1,13 @@
 import useCurrentTournamentMatchFeed from 'api/feeds/hooks/useCurrentTournamentMatchFeed';
 import { Tournament } from 'types/tournaments/TournamentInfo';
 import CountDown from '../CountDown';
-import { MiddleInfo, TeamContainer, TournamentName, Wrapper } from './TournamentInfo.styles';
+import {
+  MiddleInfo,
+  SmallText,
+  TeamContainer,
+  TournamentName,
+  Wrapper
+} from './TournamentInfo.styles';
 
 type Props = {
   tournament: Tournament;
@@ -20,7 +26,7 @@ const TournamentInfo = ({ tournament }: Props) => {
         <TournamentName>
           {tournament.name} {tournament.tournamentNumber}
         </TournamentName>
-        Starts in
+        <SmallText>Round 1 of 4 starts in</SmallText>
         <CountDown startTime={tournament.startTime} />
       </MiddleInfo>
 
