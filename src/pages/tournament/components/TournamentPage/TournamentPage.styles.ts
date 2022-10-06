@@ -4,6 +4,7 @@ export const Wrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   ${({ theme }) => css`
     gap: ${theme.spacing.baseX3}px;
@@ -12,7 +13,13 @@ export const Wrapper = styled.div`
 `;
 
 export const TournamentContent = styled.div`
+  display: flex;
+  flex-direction: column;
+
   flex-grow: 1;
+  width: 100%;
+  max-width: 1440px;
+  max-height: 512px;
 
   ${({ theme }) => css`
     padding: 0 ${theme.spacing.baseX3}px ${theme.spacing.baseX2}px;
@@ -29,6 +36,7 @@ export const TournamentNavbar = styled.div`
   height: 52px;
   ${({ theme }) => css`
     border-bottom: 2px solid ${theme.colors.lightTint.base};
+    margin-bottom: ${theme.spacing.baseX3}px;
   `}
 `;
 

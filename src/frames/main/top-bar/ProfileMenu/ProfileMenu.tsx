@@ -41,7 +41,8 @@ const ProfileMenu = () => {
 
   const { contextMenuRef, position, arrowPosition } = useContextMenuPosition({
     isVisible: isMenuShown,
-    relatedElementRef: profileMenuRef
+    relatedElementRef: profileMenuRef,
+    offsetX: -60
   });
 
   const setStatus = (newStatus: UserStatusEnum) => {

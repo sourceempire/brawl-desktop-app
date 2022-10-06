@@ -1,4 +1,4 @@
-import { PublicUser } from 'api/requests/UserRequests';
+import { PublicUser } from 'types/user/User';
 import useFeed from './useFeed';
 
 type Options = {

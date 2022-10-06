@@ -1,11 +1,11 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { useUserStatusFeed } from 'api/feeds';
 import * as friendApi from 'api/requests/FriendRequests';
-import { PublicUser } from 'api/requests/UserRequests';
 import { ContextMenu } from 'common/components';
 import { ContextMenuRef, Position } from 'common/components/ContextMenu/ContextMenu.types';
 import { UserStatusEnum } from 'common/components/UserStatus';
 import popup from 'common/popup';
+import { PublicUser } from 'types/user/User';
 import { useUpdateEffect } from 'utils/hooks';
 import RemoveFriendConfirmationModal from '../RemoveFriendModal';
 import { ProfileImage } from '../Shared.styles';

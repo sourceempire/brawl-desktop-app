@@ -1,6 +1,7 @@
 import useTournamentFeed from 'api/feeds/hooks/useTournamentFeed';
 import { Link, Route, Routes, useParams } from 'react-router-dom';
 import { Button } from 'common/components';
+import Backdrop from 'common/components/Backdrop';
 import CurrentMatchStage from '../CurrentMatchStage';
 import { MatchStage } from '../CurrentMatchStage/CurrentMatchStage.types';
 import Match from '../Match';
@@ -18,9 +19,13 @@ const TournamentPage = () => {
 
   const { tournament, isLoading } = useTournamentFeed(tournamentId);
 
+  if (isLoading) return null;
+
   return (
     <Wrapper>
+      <Backdrop />
       <TournamentInfo tournament={tournament} />
+
       <TournamentContent>
         <TournamentNavbar>
           <NavItems tournamentId={tournamentId} />
@@ -35,7 +40,7 @@ const TournamentPage = () => {
         </TournamentNavbar>
 
         <Routes>
-          <Route index element={<Match />} />
+          <Route index element={<Match tournament={tournament} />} />
           <Route path="bracket" element={<div>Bracket</div>} />
           <Route path="rules" element={<div>Rules</div>} />
           <Route path="chat" element={<div>Chat</div>} />

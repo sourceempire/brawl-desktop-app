@@ -18,7 +18,7 @@ export const NavLink = styled(ReactRouterNavLink)`
   top: 2px;
 
   ${({ theme }) => css`
-    ${theme.textStyles.menu}
+    ${theme.textStyles.body}
     color: ${theme.colors.textPrimaryLight};
   `}
 `;

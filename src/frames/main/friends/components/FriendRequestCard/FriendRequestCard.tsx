@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { acceptFriendRequest, declineFriendRequest } from 'api/requests/FriendRequests';
-import { PublicUser } from 'api/requests/UserRequests';
 import popup from 'common/popup';
+import { PublicUser } from 'types/user/User';
 import { UserTag } from '../FriendCard/FriendCard.styles';
 import { ProfileImage, SimpleLoading, UserCard } from '../Shared.styles';
 import { AcceptAction, DeclineAction, RequestActions } from './FriendRequestCard.styles';

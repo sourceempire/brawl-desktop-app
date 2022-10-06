@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import { UserRequests } from 'api/requests';
-import { User } from 'api/requests/UserRequests';
+import { User } from 'types/user/User';
 
 export const UserContext = createContext<{ user: User }>({
   user: { id: '', username: '', userTag: '', name: '' }
