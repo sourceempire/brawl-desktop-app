@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components/macro';
 
 export const Wrapper = styled.div`
   height: 100%;
@@ -33,14 +33,20 @@ export const TournamentNavbar = styled.div`
   grid-auto-flow: column;
   align-items: center;
   grid-template-columns: 1fr auto 1fr;
-  height: 52px;
+  min-height: 52px;
   ${({ theme }) => css`
     border-bottom: 2px solid ${theme.colors.lightTint.base};
-    margin-bottom: ${theme.spacing.baseX3}px;
   `}
 `;
 
 export const RightAlignedContainer = styled.div`
   display: flex;
   justify-content: flex-end;
+`;
+
+export const TournamentRoutesWrapper = styled.div`
+  position: relative;
+  flex-grow: 1;
+  padding-top: 18px;
+  overflow: scroll;
 `;
