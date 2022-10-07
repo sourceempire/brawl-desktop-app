@@ -10,10 +10,17 @@ export const RulesMarkdown = styled(ReactMarkdown)`
     `}
   }
 
-  p {
+  h2 {
     font-size: 16px;
     ${({ theme }) => css`
       margin-bottom: ${theme.spacing.baseX2}px;
+    `}
+  }
+
+  p {
+    font-size: 16px;
+    ${({ theme }) => css`
+      margin-bottom: ${theme.spacing.baseX4}px;
     `}
   }
 `;
