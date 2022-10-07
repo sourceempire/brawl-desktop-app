@@ -1,4 +1,5 @@
 import Fetcher from 'api/Fetcher';
+import { Bracket } from 'types/tournaments/Bracket';
 import { Tournament } from 'types/tournaments/TournamentInfo';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
@@ -27,3 +28,6 @@ export const getTournament = (params: GetTournamentParams) =>
 
 export const joinTournament = (tournamentHubId: string) =>
   Fetcher.post(`${SERVER_URL}/api/tournament/join`, { tournamentHubId });
+
+export const getBracket = (tournamentId: string) =>
+  Fetcher.get<{ bracket: Bracket }>(`${SERVER_URL}/api/tournament/bracket`, { tournamentId });

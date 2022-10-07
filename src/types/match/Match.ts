@@ -12,7 +12,7 @@ export type Match = {
   winnerTeamId?: string;
   gameId: Game;
   matchType: MatchType;
-  teams: Team[];
+  teams?: Team[];
 };
 
 export type CSGOMapResult = {
