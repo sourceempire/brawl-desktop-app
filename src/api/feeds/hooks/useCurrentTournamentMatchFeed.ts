@@ -11,12 +11,12 @@ const useCurrentTournamentMatchFeed = (touramentId: string) => {
   );
 
   const loggedInUserTeam = useMemo(
-    () => currentState?.match?.teams.find((team) => team.players.includes(user.id)),
+    () => currentState?.match?.teams?.find((team) => team.players.includes(user.id)),
     [currentState?.match?.teams, user.id]
   );
 
   const secondTeam = useMemo(
-    () => currentState?.match?.teams.find((team) => !team.players.includes(user.id)),
+    () => currentState?.match?.teams?.find((team) => !team.players.includes(user.id)),
     [currentState?.match?.teams, user.id]
   );
 

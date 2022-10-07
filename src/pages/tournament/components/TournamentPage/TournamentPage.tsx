@@ -2,6 +2,7 @@ import useTournamentFeed from 'api/feeds/hooks/useTournamentFeed';
 import { Link, Route, Routes, useParams } from 'react-router-dom';
 import { Button } from 'common/components';
 import Backdrop from 'common/components/Backdrop';
+import Bracket from '../Bracket';
 import CurrentMatchStage from '../CurrentMatchStage';
 import { MatchStage } from '../CurrentMatchStage/CurrentMatchStage.types';
 import Match from '../Match';
@@ -12,6 +13,7 @@ import {
   RightAlignedContainer,
   TournamentContent,
   TournamentNavbar,
+  TournamentRoutesWrapper,
   Wrapper
 } from './TournamentPage.styles';
 
@@ -30,7 +32,7 @@ const TournamentPage = () => {
       <TournamentContent>
         <TournamentNavbar>
           <NavItems tournamentId={tournamentId} />
-          <CurrentMatchStage currentStage={MatchStage.COMPLETE} />
+          <CurrentMatchStage currentStage={MatchStage.VETO} />
           <RightAlignedContainer>
             {tournament.tournamentHubId && (
               <Link to={`/main/tournaments/hub/${tournament.tournamentHubId}`}>
@@ -40,13 +42,15 @@ const TournamentPage = () => {
           </RightAlignedContainer>
         </TournamentNavbar>
 
-        <Routes>
-          <Route index element={<Match tournament={tournament} />} />
-          <Route path="bracket" element={<div>Bracket</div>} />
-          <Route path="rules" element={<Rules />} />
-          <Route path="chat" element={<div>Chat</div>} />
-          <Route path="match-history" element={<div>Match History</div>} />
-        </Routes>
+        <TournamentRoutesWrapper>
+          <Routes>
+            <Route index element={<Match tournament={tournament} />} />
+            <Route path="bracket" element={<Bracket tournamentId={tournament.id} />} />
+            <Route path="rules" element={<Rules />} />
+            <Route path="chat" element={<div>Chat</div>} />
+            <Route path="match-history" element={<div>Match History</div>} />
+          </Routes>
+        </TournamentRoutesWrapper>
       </TournamentContent>
     </Wrapper>
   );
