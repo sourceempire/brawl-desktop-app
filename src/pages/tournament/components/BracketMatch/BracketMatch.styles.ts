@@ -94,7 +94,7 @@ export const Team = styled.div`
   gap: ${teamGap}px;
 `;
 
-export const TeamScoreWrapper = styled.div`
+export const TeamScore = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -127,7 +127,7 @@ export const Team1 = styled(Team)`
     ${TeamLogo} {
       border-top-left-radius: ${theme.borderRadius.default};
     }
-    ${TeamScoreWrapper} {
+    ${TeamScore} {
       border-top-right-radius: ${theme.borderRadius.default};
     }
   `}
@@ -138,7 +138,7 @@ export const Team2 = styled(Team)`
     ${TeamLogo} {
       border-bottom-left-radius: ${theme.borderRadius.default};
     }
-    ${TeamScoreWrapper} {
+    ${TeamScore} {
       border-bottom-right-radius: ${theme.borderRadius.default};
     }
   `}

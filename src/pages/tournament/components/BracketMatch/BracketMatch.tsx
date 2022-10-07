@@ -1,6 +1,14 @@
 import useMatchFeed from 'api/feeds/hooks/useMatchFeed';
-import { Team1, Team2, TeamLogo, TeamLogoImage, TeamName, Wrapper } from './BracketMatch.styles';
-import TeamScore from './TeamScore';
+import useTeamScore from 'pages/tournament/hooks/useTeamScore';
+import {
+  Team1,
+  Team2,
+  TeamLogo,
+  TeamLogoImage,
+  TeamName,
+  TeamScore,
+  Wrapper
+} from './BracketMatch.styles';
 import placeholderTeamLogo from 'assets/images/placeholder-team-logo.png';
 
 type Props = {
@@ -13,6 +21,8 @@ type Props = {
 
 const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }: Props) => {
   const { match, isLoading } = useMatchFeed(matchId);
+  const team1Score = useTeamScore({ match, teamId: match.teams?.[0].id });
+  const team2Score = useTeamScore({ match, teamId: match.teams?.[1].id });
 
   if (isLoading) return null;
 
@@ -27,7 +37,7 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
         <TeamName>{match.teams?.[0].teamName}</TeamName>
-        <TeamScore match={match} team={match.teams?.[0]} />
+        <TeamScore>{team1Score}</TeamScore>
       </Team1>
 
       <Team2>
@@ -35,7 +45,7 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
         <TeamName>{match.teams?.[1].teamName}</TeamName>
-        <TeamScore match={match} team={match.teams?.[1]} />
+        <TeamScore>{team2Score}</TeamScore>
       </Team2>
     </Wrapper>
   );
