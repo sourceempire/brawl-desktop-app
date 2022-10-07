@@ -36,6 +36,7 @@ export const TournamentNavbar = styled.div`
   min-height: 52px;
   ${({ theme }) => css`
     border-bottom: 2px solid ${theme.colors.lightTint.base};
+    margin-bottom: ${theme.spacing.baseX3}px;
   `}
 `;
 
