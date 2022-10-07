@@ -6,6 +6,7 @@ import CurrentMatchStage from '../CurrentMatchStage';
 import { MatchStage } from '../CurrentMatchStage/CurrentMatchStage.types';
 import Match from '../Match';
 import NavItems from '../NavItems';
+import Rules from '../Rules';
 import TournamentInfo from '../TournamentInfo';
 import {
   RightAlignedContainer,
@@ -42,7 +43,7 @@ const TournamentPage = () => {
         <Routes>
           <Route index element={<Match tournament={tournament} />} />
           <Route path="bracket" element={<div>Bracket</div>} />
-          <Route path="rules" element={<div>Rules</div>} />
+          <Route path="rules" element={<Rules />} />
           <Route path="chat" element={<div>Chat</div>} />
           <Route path="match-history" element={<div>Match History</div>} />
         </Routes>
