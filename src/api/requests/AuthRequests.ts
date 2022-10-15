@@ -1,5 +1,4 @@
 import { Fetcher } from 'api';
-import { Nothing } from 'types/Nothing';
 
 export type AuthType = 'password' | 'openid';
 

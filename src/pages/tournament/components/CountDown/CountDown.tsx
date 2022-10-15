@@ -104,7 +104,7 @@ const CountDown = ({ startTime }: Props) => {
         </Unit>
       )}
 
-      {hasSeconds && (
+      {hasSeconds ? (
         <Unit>
           <Seconds>
             {padZeroes(units.seconds, 1)
@@ -115,11 +115,10 @@ const CountDown = ({ startTime }: Props) => {
           </Seconds>
           <div>Seconds</div>
         </Unit>
+      ) : (
+        /**TODO -> make something happen when time runs out */
+        <div>Time ran out</div>
       )}
-
-      {/**TODO -> make something happen when time runs out */}
-      {!hasSeconds && <div>Time ran out</div>}
-      {}
     </Wrapper>
   );
 };

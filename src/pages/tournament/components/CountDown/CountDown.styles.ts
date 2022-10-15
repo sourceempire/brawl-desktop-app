@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components/macro';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -26,7 +26,7 @@ export const Number = styled.div`
   ${({ theme }) => css`
     ${theme.textStyles.stylizedHeader}
     border-radius: ${theme.borderRadius.default};
-    background-color: ${theme.colors.secondary.base};
+    background-color: ${theme.colors.lightTint.base};
   `}
 `;
 

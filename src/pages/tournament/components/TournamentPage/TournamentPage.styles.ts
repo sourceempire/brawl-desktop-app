@@ -48,6 +48,6 @@ export const RightAlignedContainer = styled.div`
 export const TournamentRoutesWrapper = styled.div`
   position: relative;
   flex-grow: 1;
-  padding-top: 18px;
+
   overflow: scroll;
 `;
