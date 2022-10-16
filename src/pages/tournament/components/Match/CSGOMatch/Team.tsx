@@ -25,7 +25,7 @@ const Team = ({ team, reversed }: Props) => {
         const isPlayerReady = match?.veto?.playersReady?.[playerId] ?? true;
         return (
           <PlayerContainer key={playerId} transparent={!isPlayerReady} reversed={reversed}>
-            <PlayerInfo userId={playerId} transparent={!isPlayerReady} />
+            <PlayerInfo userId={playerId} transparent={!isPlayerReady} reversed={reversed} />
             <CurrentState>
               {isReadyCheck && <ReadyCheckAction userId={playerId} />}
               {isVeto && <div>veto</div>}
