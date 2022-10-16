@@ -23,6 +23,7 @@
     "electron-updater": "^5.0.1",
     "lottie-web": "^5.9.4",
     "react": "^18.1.0",
+    "react-cropper": "^2.1.8",
     "react-dom": "^18.1.0",
     "react-markdown": "^8.0.3",
     "react-router-dom": "^6.3.0",

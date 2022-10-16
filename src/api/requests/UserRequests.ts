@@ -13,3 +13,7 @@ export const getPublicUser = (userId: string) =>
 
 export const setUserStatus = (status: UserStatusEnum) =>
   Fetcher.post(`${SERVER_URL}/api/user/status`, { status: status.toLowerCase() });
+
+export const uploadAvatar = (avatar: Blob) => {
+  return Fetcher.postBlob(`${SERVER_URL}/api/user/avatar/upload`, avatar);
+};

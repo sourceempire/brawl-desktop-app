@@ -8,6 +8,7 @@ import { statusTexts } from 'common/components/UserStatus/UserStatus';
 import { StatusText } from 'common/components/UserStatus/UserStatus.styles';
 import { useContextMenuPosition } from 'common/hooks';
 import popup from 'common/popup';
+import ChangeAvatarModal from '../ChangeAvatarModal/ChangeAvatarModal';
 import {
   HorizontalRule,
   MenuItem,
@@ -36,6 +37,8 @@ const ProfileMenu = () => {
 
   const [isMenuShown, setIsMenuShown] = useState<boolean>(false);
   const [localStatus, setLocalStatus] = useState(UserStatusEnum.OFFLINE);
+
+  const [showAvatarModal, setShowAvatarModal] = useState(false);
 
   const profileMenuRef = useRef() as MutableRefObject<HTMLDivElement>;
 
@@ -76,6 +79,11 @@ const ProfileMenu = () => {
     setStatus(status);
   };
 
+  const handleShowAvatarModal = () => {
+    hideMenu();
+    setShowAvatarModal(true);
+  };
+
   return (
     <>
       <Wrapper onClick={showMenu} ref={profileMenuRef}>
@@ -101,13 +109,15 @@ const ProfileMenu = () => {
               </MenuItem>
             ))}
             <HorizontalRule />
-            <MenuItem>Change Avatar</MenuItem>
+            <MenuItem onClick={handleShowAvatarModal}>Change Avatar</MenuItem>
             <MenuItem>Account Settings</MenuItem>
             <HorizontalRule />
             <MenuItem onClick={logout}>Log out</MenuItem>
           </MenuWrapper>
         </ContextMenu>
       )}
+
+      <ChangeAvatarModal isOpen={showAvatarModal} onClose={() => setShowAvatarModal(false)} />
     </>
   );
 };
