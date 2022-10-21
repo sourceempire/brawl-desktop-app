@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { uploadAvatar } from 'api/requests/UserRequests';
+import * as UserRequests from 'api/requests/UserRequests';
 import Cropper, { ReactCropperElement } from 'react-cropper';
 import { Button } from 'common/components';
 import { ImageContainer, Wrapper } from './AvatarCropper.styles';
@@ -37,7 +37,7 @@ const AvatarCropper = ({ file, clearFile }: Props) => {
     croppedCanvas.toBlob((blob) => {
       if (!blob) return;
 
-      uploadAvatar(blob).then(console.log).catch(console.error);
+      UserRequests.uploadAvatar(blob).then(clearFile).catch(console.error);
     });
   };
 

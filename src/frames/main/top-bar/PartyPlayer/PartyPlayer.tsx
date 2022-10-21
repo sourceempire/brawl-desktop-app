@@ -80,7 +80,7 @@ export const PartyPlayer = ({ userId }: Props) => {
         onMouseEnter={onMouseEnter}
         onMouseLeave={() => setHintVisible(false)}>
         {isLeader && <LeaderStar />}
-        <PlayerImage src={tempProfileImage} />
+        <PlayerImage src={user.imageUrl ? user.imageUrl : tempProfileImage} />
       </Wrapper>
       {isMenuVisible && (
         <ContextMenu
