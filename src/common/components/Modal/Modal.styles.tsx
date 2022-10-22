@@ -8,6 +8,7 @@ type ContentProps = {
 };
 
 export const Content = styled.div<ContentProps>`
+  position: relative;
   inset: 0;
   margin: auto;
 

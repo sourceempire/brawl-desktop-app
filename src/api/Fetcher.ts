@@ -139,17 +139,27 @@ const Fetcher = {
     });
     return await checkStatus<T>(res);
   },
-  upload: async function <T>(url: string, body: Record<string, any>, options = {}) {
+  upload: async function <T>(url: string, body: Blob, options = {}) {
     const res = await fetch(url, {
       ...options,
       method: 'POST',
       credentials: 'include',
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      body: body, // TODO -> Handle body not being stringyfied
+      body: body, // TODO -> Handle body not being blob
       headers: addCSRFToken(options)
     });
     return await checkStatus<T>(res);
+  },
+  postBlob: async (url: string, blob: Blob, options = {}) => {
+    const formData = new FormData();
+    formData.append('blob', blob);
+    const res = await fetch(url, {
+      ...options,
+      method: 'POST',
+      credentials: 'include',
+      body: formData,
+      headers: addCSRFToken(options)
+    });
+    return checkStatus(res);
   }
 };
 

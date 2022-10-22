@@ -1,5 +1,5 @@
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import { useUserStatusFeed } from 'api/feeds';
+import { useUserFeed, useUserStatusFeed } from 'api/feeds';
 import { UserRequests, useAuth } from 'api/requests';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import ContextMenu from 'common/components/ContextMenu';
@@ -8,6 +8,7 @@ import { statusTexts } from 'common/components/UserStatus/UserStatus';
 import { StatusText } from 'common/components/UserStatus/UserStatus.styles';
 import { useContextMenuPosition } from 'common/hooks';
 import popup from 'common/popup';
+import ChangeAvatarModal from '../ChangeAvatarModal/ChangeAvatarModal';
 import {
   HorizontalRule,
   MenuItem,
@@ -30,12 +31,15 @@ const orderedStatusItems = [
  * TODO -> Make the position of the context menu dynamic
  */
 const ProfileMenu = () => {
-  const { user } = useLoggedInUser();
-  const { status } = useUserStatusFeed({ userId: user.id });
+  const loggedInUser = useLoggedInUser();
+  const { user } = useUserFeed({ userId: loggedInUser.user.id });
+  const { status } = useUserStatusFeed({ userId: loggedInUser.user.id });
   const { logout } = useAuth();
 
   const [isMenuShown, setIsMenuShown] = useState<boolean>(false);
   const [localStatus, setLocalStatus] = useState(UserStatusEnum.OFFLINE);
+
+  const [showAvatarModal, setShowAvatarModal] = useState(false);
 
   const profileMenuRef = useRef() as MutableRefObject<HTMLDivElement>;
 
@@ -76,12 +80,17 @@ const ProfileMenu = () => {
     setStatus(status);
   };
 
+  const handleShowAvatarModal = () => {
+    hideMenu();
+    setShowAvatarModal(true);
+  };
+
   return (
     <>
       <Wrapper onClick={showMenu} ref={profileMenuRef}>
         {/* <ArrowIcon /> */}
         <ProfileImageContainer>
-          <ProfileImage src={tempProfileImage} />
+          <ProfileImage src={user.imageUrl ? user.imageUrl : tempProfileImage} />
           <MyUserStatus status={localStatus} hideText />
         </ProfileImageContainer>
       </Wrapper>
@@ -101,13 +110,15 @@ const ProfileMenu = () => {
               </MenuItem>
             ))}
             <HorizontalRule />
-            <MenuItem>Change Avatar</MenuItem>
+            <MenuItem onClick={handleShowAvatarModal}>Change Avatar</MenuItem>
             <MenuItem>Account Settings</MenuItem>
             <HorizontalRule />
             <MenuItem onClick={logout}>Log out</MenuItem>
           </MenuWrapper>
         </ContextMenu>
       )}
+
+      <ChangeAvatarModal isOpen={showAvatarModal} onClose={() => setShowAvatarModal(false)} />
     </>
   );
 };
