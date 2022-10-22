@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 import { useFeed } from 'api/feeds';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
-import { Party, PartyState } from 'types/Party';
+import { PartyState } from 'types/Party';
 
 export const PartyContext = createContext<PartyState>({
   isInParty: false

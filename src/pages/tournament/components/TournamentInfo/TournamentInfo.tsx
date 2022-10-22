@@ -1,4 +1,4 @@
-import useCurrentTournamentMatchFeed from 'api/feeds/hooks/useCurrentTournamentMatchFeed';
+import useMatchFeed from 'api/feeds/hooks/useMatchFeed';
 import { Tournament } from 'types/tournaments/TournamentInfo';
 import CountDown from '../CountDown';
 import {
@@ -11,16 +11,17 @@ import {
 
 type Props = {
   tournament: Tournament;
+  currentMatchId: string;
 };
 
-const TournamentInfo = ({ tournament }: Props) => {
-  const { loggedInUserTeam, secondTeam, isLoading } = useCurrentTournamentMatchFeed(tournament.id);
+const TournamentInfo = ({ tournament, currentMatchId }: Props) => {
+  const { team1, team2, isLoading } = useMatchFeed(currentMatchId);
 
   if (isLoading) return null;
 
   return (
     <Wrapper>
-      <TeamContainer>{loggedInUserTeam?.teamName}</TeamContainer>
+      <TeamContainer>{team1?.teamName}</TeamContainer>
 
       <MiddleInfo>
         <TournamentName>
@@ -30,7 +31,7 @@ const TournamentInfo = ({ tournament }: Props) => {
         <CountDown startTime={tournament.startTime} />
       </MiddleInfo>
 
-      <TeamContainer>{secondTeam?.teamName}</TeamContainer>
+      <TeamContainer>{team2?.teamName}</TeamContainer>
     </Wrapper>
   );
 };

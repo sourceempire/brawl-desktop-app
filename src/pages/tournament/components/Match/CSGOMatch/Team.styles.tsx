@@ -1,21 +1,7 @@
 import styled, { css } from 'styled-components';
+import { hsla } from 'utils/styledUtils';
 
 export const Wrapper = styled.div`
-  display: grid;
-  flex-grow: 1;
-  grid-auto-flow: column;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 12px;
-`;
-
-export const MiddleContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-`;
-
-export const TeamContainer = styled.div`
   display: grid;
   grid-template-rows: repeat(5, 1fr);
   flex-direction: column;
@@ -24,24 +10,33 @@ export const TeamContainer = styled.div`
   `}
 `;
 
-export const PlayerContainer = styled.div<{ reversed?: boolean }>`
+type PlayerContainerProps = {
+  reversed?: boolean;
+  transparent: boolean;
+};
+
+export const PlayerContainer = styled.div<PlayerContainerProps>`
   display: grid;
 
   grid-auto-flow: column;
   grid-template-columns: auto 1fr auto;
   align-items: center;
 
-  padding: 6px;
-  ${({ theme, reversed }) => css`
+  ${({ theme, reversed, transparent }) => css`
     ${reversed &&
     css`
       direction: rtl;
     `}
 
+    padding: ${theme.spacing.base}px;
     gap: ${theme.spacing.baseX3}px;
     border-radius: ${theme.borderRadius.default};
-    background-color: ${theme.colors.lightTint.base};
+    background-color: ${transparent
+      ? hsla(theme.colors.lightTint.base, 0.5)
+      : theme.colors.lightTint.base};
   `};
 `;
 
-export const Action = styled.div``;
+export const CurrentState = styled.div`
+  padding: 0 12px;
+`;

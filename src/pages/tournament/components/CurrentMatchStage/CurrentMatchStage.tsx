@@ -1,20 +1,29 @@
 import { useEffect, useState } from 'react';
+import useMatchFeed from 'api/feeds/hooks/useMatchFeed';
+import { CSGOMatch, CSGOMatchStage } from 'types/match/Match';
 import { CheckIcon, Edge, Stage, StageDot, StageName, Wrapper } from './CurrentMatchStage.styles';
-import { MatchStage, StageStatus } from './CurrentMatchStage.types';
+import { StageStatus } from './CurrentMatchStage.types';
 
 type Props = {
-  currentStage: MatchStage;
+  matchId: string;
 };
 
-const CurrentMatchStage = ({ currentStage }: Props) => {
+const CurrentMatchStage = ({ matchId }: Props) => {
+  const matchInfo = useMatchFeed(matchId);
+
+  const match = matchInfo.match as CSGOMatch;
+
+  console.log(match);
+
   const [preventAnimations, setPreventAnimations] = useState<boolean>(true);
+
   useEffect(() => {
     setTimeout(() => setPreventAnimations(false), 1000);
   }, []);
 
-  const readyStageStatus = getReadyStageStatus(currentStage);
-  const vetoStageStatus = getVetoStageStatus(currentStage);
-  const matchStageStatus = getMatchStageStatus(currentStage);
+  const readyStageStatus = getReadyStageStatus(match.matchStage);
+  const vetoStageStatus = getVetoStageStatus(match.matchStage);
+  const matchStageStatus = getMatchStageStatus(match.matchStage);
 
   return (
     <Wrapper preventAnimations={preventAnimations}>
@@ -56,36 +65,36 @@ const CurrentMatchStage = ({ currentStage }: Props) => {
 
 export default CurrentMatchStage;
 
-function getReadyStageStatus(currentStage: MatchStage) {
+function getReadyStageStatus(currentStage: CSGOMatchStage) {
   switch (currentStage) {
-    case MatchStage.WAITING:
+    case CSGOMatchStage.NOT_STARTED:
       return StageStatus.NOT_STARTED;
-    case MatchStage.READY:
+    case CSGOMatchStage.READY:
       return StageStatus.ONGOING;
     default:
       return StageStatus.COMPLETED;
   }
 }
 
-function getVetoStageStatus(currentStage: MatchStage) {
+function getVetoStageStatus(currentStage: CSGOMatchStage) {
   switch (currentStage) {
-    case MatchStage.WAITING:
-    case MatchStage.READY:
+    case CSGOMatchStage.NOT_STARTED:
+    case CSGOMatchStage.READY:
       return StageStatus.NOT_STARTED;
-    case MatchStage.VETO:
+    case CSGOMatchStage.VETO:
       return StageStatus.ONGOING;
     default:
       return StageStatus.COMPLETED;
   }
 }
 
-function getMatchStageStatus(currentStage: MatchStage) {
+function getMatchStageStatus(currentStage: CSGOMatchStage) {
   switch (currentStage) {
-    case MatchStage.WAITING:
-    case MatchStage.READY:
-    case MatchStage.VETO:
+    case CSGOMatchStage.NOT_STARTED:
+    case CSGOMatchStage.READY:
+    case CSGOMatchStage.VETO:
       return StageStatus.NOT_STARTED;
-    case MatchStage.MATCH:
+    case CSGOMatchStage.ONGOING:
       return StageStatus.ONGOING;
     default:
       return StageStatus.COMPLETED;

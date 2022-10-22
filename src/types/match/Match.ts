@@ -21,10 +21,40 @@ export type CSGOMapResult = {
   score: Record<TeamId, Score>;
 };
 
+export enum CSGOMatchStage {
+  NOT_STARTED = 'notStarted',
+  READY = 'readyCheck',
+  VETO = 'veto',
+  ONGOING = 'ongoing',
+  COMPLETE = 'complete'
+}
+
+export enum CSGOVetoStatus {
+  NOT_STARTED = 'notStarted',
+  READY_CHECK = 'readyCheck',
+  BANNING_MAPS = 'banningMaps',
+  COMPLETED = 'completed'
+}
+
+type CSGOMapName = string;
+
+export type CSGOVeto = {
+  matchId: string;
+  status: CSGOVetoStatus;
+  teamToBanMap: TeamId;
+  playersReady: Record<TeamId, boolean>;
+  bannedMaps: Record<CSGOMapName, boolean>;
+  readyCheckTime: number;
+  mapBanTime: number;
+  readyCheckExpiration: number | null; // EpochMillis
+};
+
 export type CSGOMatch = Match & {
   matchSettings: CSGOMatchSettings;
   seriesScore: Record<TeamId, Score>;
   mapsInfo?: CSGOMapResult[];
+  matchStage: CSGOMatchStage;
+  veto: CSGOVeto;
 };
 
 export const isCSGOMatch = (match: Match): match is CSGOMatch => {
