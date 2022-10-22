@@ -3,11 +3,3 @@ export enum StageStatus {
   ONGOING,
   COMPLETED
 }
-
-export enum MatchStage {
-  WAITING,
-  READY,
-  VETO,
-  MATCH,
-  COMPLETE
-}
