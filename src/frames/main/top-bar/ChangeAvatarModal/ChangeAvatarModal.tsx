@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import useUserAvatarsFeed from 'api/feeds/hooks/useUserAvatarsFeed';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import * as UserRequests from 'api/requests/UserRequests';
@@ -38,6 +38,15 @@ const ChangeAvatarModal = ({ isOpen, onClose }: Props) => {
     if (!fileToUpload) return;
   }, [fileToUpload]);
 
+  const avatarsMemo = useMemo(
+    () =>
+      avatars.sort(
+        (avatarA, avatarB) =>
+          new Date(avatarB.createdAt).getTime() - new Date(avatarA.createdAt).getTime()
+      ),
+    [avatars]
+  );
+
   return (
     <Modal isOpen={isOpen} title="Select an avatarr" onRequestClose={onClose}>
       {fileToUpload && (
@@ -47,18 +56,13 @@ const ChangeAvatarModal = ({ isOpen, onClose }: Props) => {
       <Wrapper hide={fileToUpload !== undefined}>
         <NewAvatarAction setFile={setFile} />
         <AvatarChoice src={tempProfileImage} onClick={removeAvatar} />
-        {avatars
-          .sort(
-            (avatarA, avatarB) =>
-              new Date(avatarB.createdAt).getTime() - new Date(avatarA.createdAt).getTime()
-          )
-          .map((avatar) => (
-            <AvatarChoice
-              key={avatar.id}
-              src={avatar.imageUrl}
-              onClick={() => chooseAvatar(avatar.id)}
-            />
-          ))}
+        {avatarsMemo.map((avatar) => (
+          <AvatarChoice
+            key={avatar.id}
+            src={avatar.imageUrl}
+            onClick={() => chooseAvatar(avatar.id)}
+          />
+        ))}
       </Wrapper>
     </Modal>
   );

@@ -1,9 +1,8 @@
-import { useState } from 'react';
 import { NewAvatarIcon } from './ChangeAvatarModal.styles';
 import { Wrapper } from './NewAvatarAction.styles';
 
 const fileInputId = 'avatar-upload';
-const acceptedFormats = ['image/png', 'image/jpeg'].join(',');
+const acceptedFormats = ['image/png', 'image/jpeg', 'image/webp', 'image/svg+xml'].join(',');
 
 type Props = {
   setFile: (file: File) => void;

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import * as UserRequests from 'api/requests/UserRequests';
 import Cropper, { ReactCropperElement } from 'react-cropper';
 import { Button } from 'common/components';
+import popup from 'common/popup';
 import { ImageContainer, Wrapper } from './AvatarCropper.styles';
 
 import 'cropperjs/dist/cropper.css';
@@ -37,8 +38,10 @@ const AvatarCropper = ({ file, clearFile }: Props) => {
     croppedCanvas.toBlob((blob) => {
       if (!blob) return;
 
-      UserRequests.uploadAvatar(blob).then(clearFile).catch(console.error);
-    });
+      UserRequests.uploadAvatar(blob)
+        .then(clearFile)
+        .catch((error) => popup.error(error.error, { timer: 3000 }));
+    }, 'image/webp');
   };
 
   if (!imageUrl) return null;
