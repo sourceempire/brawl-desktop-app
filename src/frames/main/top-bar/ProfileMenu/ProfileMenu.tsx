@@ -1,5 +1,5 @@
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import { useUserFeed, useUserStatusFeed } from 'api/feeds';
+import { useUserStatusFeed } from 'api/feeds';
 import { UserRequests, useAuth } from 'api/requests';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import ContextMenu from 'common/components/ContextMenu';
@@ -31,9 +31,8 @@ const orderedStatusItems = [
  * TODO -> Make the position of the context menu dynamic
  */
 const ProfileMenu = () => {
-  const loggedInUser = useLoggedInUser();
-  const { user } = useUserFeed({ userId: loggedInUser.user.id });
-  const { status } = useUserStatusFeed({ userId: loggedInUser.user.id });
+  const { user } = useLoggedInUser();
+  const { status } = useUserStatusFeed({ userId: user.id });
   const { logout } = useAuth();
 
   const [isMenuShown, setIsMenuShown] = useState<boolean>(false);

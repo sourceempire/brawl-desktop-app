@@ -1,24 +1,21 @@
-import { createContext, useEffect, useState } from 'react';
-import { UserRequests } from 'api/requests';
-import { User } from 'types/user/User';
+import { createContext } from 'react';
+import { useUserFeed } from 'api/feeds';
+import { PublicUser } from 'types/user/User';
 
-export const UserContext = createContext<{ user: User }>({
-  user: { id: '', username: '', userTag: '', name: '' }
+export const UserContext = createContext<{ user: PublicUser }>({
+  user: { id: '', userTag: '' }
 });
 
 type Props = {
+  userId: string;
   children: React.ReactNode;
 };
 
 // TODO -> might be good to create a feed to update user data when things updates
-export const UserContextProvider = ({ children }: Props) => {
-  const [user, setUser] = useState<User>();
+export const UserContextProvider = ({ children, userId }: Props) => {
+  const { user, isLoading } = useUserFeed({ userId });
 
-  useEffect(() => {
-    UserRequests.getLoggedInUser()
-      .then((res) => setUser(res.user))
-      .catch(console.error);
-  }, []);
+  if (isLoading) return <div>Loading user</div>;
 
   return user ? (
     <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>

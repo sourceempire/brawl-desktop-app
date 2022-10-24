@@ -32,6 +32,7 @@ export const LeaderStar = styled(Icons.Star)`
   top: 0;
   right: 0;
   transform: translate(40%, -40%);
+  filter: drop-shadow(0 0 2px black);
   ${({ theme }) => css`
     height: ${theme.spacing.baseX2}px;
     width: ${theme.spacing.baseX2}px;

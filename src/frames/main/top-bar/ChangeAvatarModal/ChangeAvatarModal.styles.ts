@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { AvatarImage } from './AvatarChoice.styles';
 import Icons from 'assets/icons/Icons';
 
 export const Wrapper = styled.div<{ hide: boolean }>`
@@ -8,8 +9,8 @@ export const Wrapper = styled.div<{ hide: boolean }>`
   gap: 18px;
   max-height: 420px;
   overflow: scroll;
-  margin: -6px;
-  padding: 6px;
+  margin: -10px;
+  padding: 10px;
 
   ${({ hide }) =>
     hide &&
@@ -18,18 +19,7 @@ export const Wrapper = styled.div<{ hide: boolean }>`
     `}
 `;
 
-export const AvatarChoice = styled.img`
-  object-fit: contain;
-  height: 100%;
-  width: 100%;
-  ${({ theme }) => css`
-    background-color: ${theme.colors.lightTint.base};
-    border-radius: ${theme.borderRadius.default};
-    :hover {
-      outline: 6px solid ${theme.colors.lightTint.base};
-    }
-  `};
-`;
+export const DefaultAvatarChoice = styled(AvatarImage)``;
 
 export const NewAvatarIcon = styled(Icons.Plus)`
   height: 59px;

@@ -18,4 +18,5 @@ export type Avatar = {
   createdAt: string;
   id: string;
   imageUrl: string;
+  default: boolean;
 };

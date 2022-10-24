@@ -4,8 +4,10 @@ import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import * as UserRequests from 'api/requests/UserRequests';
 import { Modal } from 'common/components';
 import popup from 'common/popup';
+import AvatarChoice from './AvatarChoice';
+import { Wrapper as AvatarChoiceWrapper, ImageContainer } from './AvatarChoice.styles';
 import AvatarCropper from './AvatarCropper';
-import { AvatarChoice, Wrapper } from './ChangeAvatarModal.styles';
+import { DefaultAvatarChoice, Wrapper } from './ChangeAvatarModal.styles';
 import NewAvatarAction from './NewAvatarAction';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
 
@@ -25,27 +27,18 @@ const ChangeAvatarModal = ({ isOpen, onClose }: Props) => {
   };
 
   const chooseAvatar = (avatarId: string) => {
-    UserRequests.chooseAvatar(avatarId).catch(popup.error);
+    UserRequests.chooseAvatar(avatarId).catch((error: any) => popup.error(error.error));
     onClose();
   };
 
   const removeAvatar = () => {
-    UserRequests.removeAvatar().catch(popup.error);
+    UserRequests.removeAvatar().catch((error: any) => popup.error(error.error));
     onClose();
   };
 
   useEffect(() => {
     if (!fileToUpload) return;
   }, [fileToUpload]);
-
-  const avatarsMemo = useMemo(
-    () =>
-      avatars.sort(
-        (avatarA, avatarB) =>
-          new Date(avatarB.createdAt).getTime() - new Date(avatarA.createdAt).getTime()
-      ),
-    [avatars]
-  );
 
   return (
     <Modal isOpen={isOpen} title="Select an avatarr" onRequestClose={onClose}>
@@ -55,14 +48,14 @@ const ChangeAvatarModal = ({ isOpen, onClose }: Props) => {
 
       <Wrapper hide={fileToUpload !== undefined}>
         <NewAvatarAction setFile={setFile} />
-        <AvatarChoice src={tempProfileImage} onClick={removeAvatar} />
-        {avatarsMemo.map((avatar) => (
-          <AvatarChoice
-            key={avatar.id}
-            src={avatar.imageUrl}
-            onClick={() => chooseAvatar(avatar.id)}
-          />
+        {avatars.map((avatar) => (
+          <AvatarChoice key={avatar.id} avatar={avatar} onClick={chooseAvatar} />
         ))}
+        <AvatarChoiceWrapper disabled={!user.imageUrl}>
+          <ImageContainer>
+            <DefaultAvatarChoice src={tempProfileImage} onClick={removeAvatar} />
+          </ImageContainer>
+        </AvatarChoiceWrapper>
       </Wrapper>
     </Modal>
   );

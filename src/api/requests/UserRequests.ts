@@ -21,3 +21,6 @@ export const chooseAvatar = (avatarId: string) =>
   Fetcher.post(`${SERVER_URL}/api/user/avatar`, { avatarId });
 
 export const removeAvatar = () => Fetcher.delete(`${SERVER_URL}/api/user/avatar`);
+
+export const deleteAvatar = (avatarId: string) =>
+  Fetcher.post(`${SERVER_URL}/api/user/avatars/delete`, { avatarId });

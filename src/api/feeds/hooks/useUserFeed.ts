@@ -5,13 +5,13 @@ type Options = {
   userId: string;
 };
 
-const useUserFeed = ({ userId }: Options) => {
-  const { currentState, isLoading } = useFeed<{ user: PublicUser }>(`user.${userId}`);
+function useUserFeed<T = PublicUser>({ userId }: Options) {
+  const { currentState, isLoading } = useFeed<{ user: T }>(`user.${userId}`);
 
   return {
     isLoading,
-    user: currentState?.user ?? {}
+    user: currentState?.user as T
   };
-};
+}
 
 export default useUserFeed;

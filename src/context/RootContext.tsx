@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import { UserRequests } from 'api/requests';
 import { PartyContextProvider } from './PartyContext';
 import { ServerEventsProvider } from './ServerEventsContext';
 import { UserContextProvider } from './UserContext';
@@ -7,12 +9,22 @@ type Props = {
 };
 
 const RootContextProvider = ({ children }: Props) => {
+  const [loggedInUserId, setLoggedInUserId] = useState<string>();
+
+  useEffect(() => {
+    UserRequests.getLoggedInUser()
+      .then((res) => setLoggedInUserId(res.user.id))
+      .catch(console.error);
+  }, []);
+
+  if (!loggedInUserId) return <div>Setting up root context</div>; // Do not let this slip in to production, skeletion loading?
+
   return (
-    <UserContextProvider>
-      <ServerEventsProvider>
+    <ServerEventsProvider>
+      <UserContextProvider userId={loggedInUserId}>
         <PartyContextProvider>{children}</PartyContextProvider>
-      </ServerEventsProvider>
-    </UserContextProvider>
+      </UserContextProvider>
+    </ServerEventsProvider>
   );
 };
 

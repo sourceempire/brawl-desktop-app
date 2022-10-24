@@ -9,10 +9,16 @@ import { theme } from 'assets/styles/Theme';
 type Options = {
   isVisible?: boolean;
   offsetX?: number;
+  offsetY?: number;
   relatedElementRef: React.MutableRefObject<HTMLElement>;
 };
 
-function useContextMenuPosition({ isVisible = true, offsetX = 0, relatedElementRef }: Options) {
+function useContextMenuPosition({
+  isVisible = true,
+  offsetX = 0,
+  offsetY = 0,
+  relatedElementRef
+}: Options) {
   const contextMenuRef = useRef<ContextMenuRef>(null);
   const [position, setPosition] = useState<Position>({ left: 100, top: 100 });
   const [arrowPosition, setArrowPosition] = useState<ArrowPosition>({ left: 0 });
@@ -37,9 +43,9 @@ function useContextMenuPosition({ isVisible = true, offsetX = 0, relatedElementR
     const left = relatedElementLeft - contextMenuWidth / 2 + relatedElementWidth / 2;
     const top = relatedElementTop + relatedElementHeight + theme.spacing.base * 1.5;
 
-    setPosition({ left: left + offsetX, top });
+    setPosition({ left: left + offsetX, top: top + offsetY });
     setArrowPosition({ left: contextMenuContainer.offsetWidth / 2 - offsetX });
-  }, [isVisible, offsetX, relatedElementRef]);
+  }, [isVisible, offsetX, offsetY, relatedElementRef]);
 
   // TODO -> calculate arrowPosition if position outside bottom
   // TODO -> calculate arrowPosition if position outside top

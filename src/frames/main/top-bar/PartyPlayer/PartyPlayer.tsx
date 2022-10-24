@@ -16,7 +16,7 @@ type Props = {
 export const PartyPlayer = ({ userId }: Props) => {
   const { user: loggedInUser } = useLoggedInUser();
   const { party } = usePartyFeed();
-  const { user } = useUserFeed({ userId });
+  const { user, isLoading: isLoadingPartyPlayer } = useUserFeed({ userId });
 
   const [isMenuVisible, setMenuVisible] = useState(false);
   const [isHintVisible, setHintVisible] = useState(false);
@@ -72,6 +72,11 @@ export const PartyPlayer = ({ userId }: Props) => {
   };
 
   // TODO -> Im not liking the solution with two refs here but cant figure out a better way at the moment;
+
+  if (isLoadingPartyPlayer) {
+    return <Wrapper />;
+  }
+
   return (
     <>
       <Wrapper
