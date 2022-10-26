@@ -47,6 +47,7 @@ export type CSGOVeto = {
   readyCheckTime: number;
   mapBanTime: number;
   readyCheckExpiration: number | null; // EpochMillis
+  currentMapBanExpiration: number | null; // EpochMillis
 };
 
 export type CSGOMatch = Match & {
@@ -54,7 +55,7 @@ export type CSGOMatch = Match & {
   seriesScore: Record<TeamId, Score>;
   mapsInfo?: CSGOMapResult[];
   matchStage: CSGOMatchStage;
-  veto: CSGOVeto;
+  veto?: CSGOVeto;
 };
 
 export const isCSGOMatch = (match: Match): match is CSGOMatch => {

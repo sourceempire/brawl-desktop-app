@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
 
 type PlayerContainerProps = {
   reversed?: boolean;
-  transparent: boolean;
+  transparent?: boolean;
 };
 
 export const PlayerContainer = styled.div<PlayerContainerProps>`

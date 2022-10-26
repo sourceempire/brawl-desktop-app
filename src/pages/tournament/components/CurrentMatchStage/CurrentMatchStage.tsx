@@ -13,8 +13,6 @@ const CurrentMatchStage = ({ matchId }: Props) => {
 
   const match = matchInfo.match as CSGOMatch;
 
-  console.log(match);
-
   const [preventAnimations, setPreventAnimations] = useState<boolean>(true);
 
   useEffect(() => {

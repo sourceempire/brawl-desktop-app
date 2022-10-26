@@ -10,14 +10,14 @@ export const ProfileImageWrapper = styled.div`
   width: 69px;
 `;
 
-export const PlayerProfileImage = styled(ProfileImage)<{ transparent: boolean }>`
+export const PlayerProfileImage = styled(ProfileImage)<{ transparent?: boolean }>`
   height: 100%;
   width: 100%;
 
   ${({ transparent }) =>
     transparent &&
     css`
-      opacity: 0.5;
+      opacity: 0.3;
     `}
 `;
 
@@ -40,7 +40,7 @@ export const LeaderIcon = styled(Icons.Star)<{ reversed?: boolean }>`
         `}
 `;
 
-export const UserTag = styled(EllipsisText)<{ transparent: boolean }>`
+export const UserTag = styled(EllipsisText)<{ transparent?: boolean }>`
   padding: 20px;
   font-size: 16px;
   ${InnerWrapper} {
@@ -50,6 +50,6 @@ export const UserTag = styled(EllipsisText)<{ transparent: boolean }>`
   ${({ transparent }) =>
     transparent &&
     css`
-      opacity: 0.5;
+      opacity: 0.3;
     `}
 `;

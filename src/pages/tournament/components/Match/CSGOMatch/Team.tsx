@@ -13,28 +13,72 @@ type Props = {
 const Team = ({ team, reversed }: Props) => {
   const { match } = useMatchContext<CSGOMatch>();
 
+  const isNotStarted = match.matchStage === CSGOMatchStage.NOT_STARTED;
   const isReadyCheck = match.matchStage === CSGOMatchStage.READY;
   const isVeto = match.matchStage === CSGOMatchStage.VETO;
 
   if (!team) return null;
 
-  return (
-    <Wrapper>
-      {team?.players.map((playerId) => {
-        console.log(match);
-        const isPlayerReady = match?.veto?.playersReady?.[playerId] ?? true;
-        return (
-          <PlayerContainer key={playerId} transparent={!isPlayerReady} reversed={reversed}>
-            <PlayerInfo userId={playerId} transparent={!isPlayerReady} reversed={reversed} />
-            <CurrentState>
-              {isReadyCheck && <ReadyCheckAction userId={playerId} />}
-              {isVeto && <div>veto</div>}
-            </CurrentState>
-          </PlayerContainer>
-        );
-      })}
-    </Wrapper>
-  );
+  if (isNotStarted) {
+    return (
+      <Wrapper>
+        {team?.players.map((playerId) => {
+          const isLeader = team.teamLeaderId === playerId;
+          return (
+            <PlayerContainer key={playerId} reversed={reversed}>
+              <PlayerInfo userId={playerId} isLeader={isLeader} reversed={reversed} />
+            </PlayerContainer>
+          );
+        })}
+      </Wrapper>
+    );
+  }
+
+  if (isReadyCheck) {
+    return (
+      <Wrapper>
+        {team?.players.map((playerId) => {
+          const isLeader = team.teamLeaderId === playerId;
+          const isPlayerReady = match?.veto?.playersReady?.[playerId] ?? true;
+          return (
+            <PlayerContainer key={playerId} transparent={!isPlayerReady} reversed={reversed}>
+              <PlayerInfo
+                userId={playerId}
+                isLeader={isLeader}
+                transparent={!isPlayerReady}
+                reversed={reversed}
+              />
+              <CurrentState>{isReadyCheck && <ReadyCheckAction userId={playerId} />}</CurrentState>
+            </PlayerContainer>
+          );
+        })}
+      </Wrapper>
+    );
+  }
+
+  if (isVeto) {
+    return (
+      <Wrapper>
+        {team?.players.map((playerId) => {
+          const isLeader = team.teamLeaderId === playerId;
+          const isBanningPlayer = isLeader && match.veto?.teamToBanMap === team.id;
+
+          return (
+            <PlayerContainer key={playerId} reversed={reversed} transparent={!isBanningPlayer}>
+              <PlayerInfo
+                userId={playerId}
+                isLeader={isLeader}
+                transparent={!isBanningPlayer}
+                reversed={reversed}
+              />
+            </PlayerContainer>
+          );
+        })}
+      </Wrapper>
+    );
+  }
+
+  return null;
 };
 
 export default Team;
