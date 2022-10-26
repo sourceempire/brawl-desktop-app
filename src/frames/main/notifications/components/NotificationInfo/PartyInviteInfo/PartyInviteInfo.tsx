@@ -33,7 +33,7 @@ const PartyInviteInfo = ({ info, createdAt }: Props) => {
       <Image src={temporaryProfileImage} />
       <Info>
         <Text>
-          Party invite from <Highlight>{inviter.userTag}</Highlight>
+          Party invite from <Highlight>{inviter?.userTag}</Highlight>
         </Text>
         <TimeAgo>{timeSince}</TimeAgo>
       </Info>

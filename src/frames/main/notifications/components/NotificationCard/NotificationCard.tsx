@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import * as NotificationRequests from 'api/requests/NotificationRequests';
 import popup from 'common/popup';
 import { Notification, isPartyInviteNotification } from 'types/notifications/Notifications';

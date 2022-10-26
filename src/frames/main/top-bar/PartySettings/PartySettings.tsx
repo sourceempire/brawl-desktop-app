@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { usePartyFeed } from 'api/feeds';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import * as PartyRequests from 'api/requests/PartyRequests';
-import { ActionButton, ContextMenu, Input } from 'common/components';
+import { ActionButton, Button, ContextMenu } from 'common/components';
 import { InputSize } from 'common/components/Input/Input.types';
 import { useContextMenuPosition } from 'common/hooks';
 import popup from 'common/popup';
@@ -24,6 +24,9 @@ const PartySettings = () => {
   const { party } = usePartyFeed();
   const { current: initialTeamName } = useRef(party.teamName);
   const { current: initialPartySize } = useRef(party.partySize);
+
+  const fileInputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+  const [teamImageFile, setTeamImageFile] = useState<File>(); // TODO -> We need to set a flow and have a design for this
 
   const [isMenuVisible, setMenuVisible] = useState(false);
   const [teamName, setTeamName] = useState<string | null>(initialTeamName);
@@ -52,6 +55,17 @@ const PartySettings = () => {
       popup.error(error.error);
       setPartySize(party.partySize);
     });
+  };
+
+  const handleFileInputButtonClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) return;
+    if (event.target.files.length !== 1) return;
+
+    setTeamImageFile(event.target.files[0]);
   };
 
   useUpdateEffect(() => {
@@ -120,6 +134,11 @@ const PartySettings = () => {
             ) : (
               <SettingsDisplay>{party.partySize}</SettingsDisplay>
             )}
+
+            <Label>Team Image</Label>
+
+            <Button onClick={handleFileInputButtonClick}>Add Team Image</Button>
+            <input ref={fileInputRef} onChange={handleFileInputChange} type="file" hidden></input>
           </Settings>
         </ContextMenu>
       )}
