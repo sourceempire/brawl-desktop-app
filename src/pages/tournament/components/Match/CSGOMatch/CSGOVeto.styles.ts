@@ -1,6 +1,21 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { Button } from 'common/components';
 import EllipsisText from 'common/components/EllipsisText';
+
+const banAnimaton = keyframes`
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.2;
+  }
+`;
 
 export const Wrapper = styled.div`
   display: flex;
@@ -32,7 +47,7 @@ export const CSGOMapImage = styled.img`
 type CSGOMapWrapperProps = {
   disabled: boolean;
   active: boolean;
-  transparent: boolean;
+  banned: boolean;
 };
 
 export const CSGOMapWrapper = styled.div<CSGOMapWrapperProps>`
@@ -41,7 +56,7 @@ export const CSGOMapWrapper = styled.div<CSGOMapWrapperProps>`
   height: 96px;
   overflow: hidden;
 
-  ${({ theme, disabled, active, transparent }) => css`
+  ${({ theme, disabled, active, banned }) => css`
     border-radius: ${theme.borderRadius.default};
 
     ${disabled &&
@@ -49,9 +64,9 @@ export const CSGOMapWrapper = styled.div<CSGOMapWrapperProps>`
       pointer-events: none;
     `}
 
-    ${transparent &&
+    ${banned &&
     css`
-      opacity: 0.3;
+      animation: ${banAnimaton} 0.5s forwards;
     `}
 
     ${active

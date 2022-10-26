@@ -31,7 +31,9 @@ const CSGOVeto = () => {
   const loggedInUserIsLeader = loggedInUsersTeam.teamLeaderId === user.id;
   const loggedInUserIsBanningPlayer = isBanningTeam && loggedInUserIsLeader;
 
-  const maps = Object.keys(match.veto.bannedMaps);
+  const maps = Object.keys(match.veto.bannedMaps).sort((mapNameA, mapNameB) =>
+    mapNameA > mapNameB ? 1 : -1
+  );
 
   const handleMapBan = () => {
     if (!mapToBan) return;
@@ -53,7 +55,7 @@ const CSGOVeto = () => {
           return (
             <CSGOMapWrapper
               key={mapName}
-              transparent={isBanned}
+              banned={isBanned}
               active={isActive}
               disabled={isDisabled}
               onClick={() => setMapToBan(mapName)}>
