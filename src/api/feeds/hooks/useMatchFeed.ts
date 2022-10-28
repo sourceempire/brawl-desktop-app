@@ -39,6 +39,8 @@ const useMatchFeed = (matchId: string) => {
     [currentState?.match?.teams, team1?.id]
   );
 
+  console.log(currentState.match);
+
   return {
     match: currentState.match ?? {},
     team1,

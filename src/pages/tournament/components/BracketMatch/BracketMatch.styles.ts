@@ -94,15 +94,20 @@ export const Team = styled.div`
   gap: ${teamGap}px;
 `;
 
-export const TeamScore = styled.div`
+export const TeamScore = styled.div<{ winner: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
   height: ${teamHeight}px;
   width: ${teamHeight}px;
-  ${({ theme }) => css`
+  ${({ theme, winner }) => css`
     background-color: ${theme.colors.lightTint.base};
+    ${winner &&
+    css`
+      background-color: ${theme.colors.accent.base};
+      color: ${theme.colors.textPrimaryDark};
+    `}
   `}
 `;
 
