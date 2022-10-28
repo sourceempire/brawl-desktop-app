@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components/macro';
 import { bounceAnimation, hsla } from 'utils/styledUtils';
 import { StageStatus } from './CurrentMatchStage.types';
 import Icons from 'assets/icons/Icons';
@@ -40,17 +40,6 @@ export const Stage = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-`;
-
-export const StageName = styled.div`
-  position: absolute;
-  bottom: 0;
-  transform: translateY(150%);
-
-  ${({ theme }) => css`
-    ${theme.textStyles.note}
-    color: ${theme.colors.textPrimaryLight}
-  `}
 `;
 
 export const StageDot = styled.div<{ status: StageStatus }>`
@@ -133,5 +122,16 @@ export const Edge = styled.div<{ fadeIn: boolean; fadeOut: boolean; preventAnima
         animation: ${slideOut} ${animationTime}s forwards;
       }
     `}
+  `}
+`;
+
+export const StageName = styled.div`
+  position: absolute;
+  bottom: 0;
+  transform: translateY(150%);
+
+  ${({ theme }) => css`
+    ${theme.textStyles.note}
+    color: ${theme.colors.textPrimaryLight}
   `}
 `;

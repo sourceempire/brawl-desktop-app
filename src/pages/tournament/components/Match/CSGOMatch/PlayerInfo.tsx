@@ -5,11 +5,12 @@ import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
 
 type Props = {
   userId: UserId;
-  transparent: boolean;
+  isLeader: boolean;
+  transparent?: boolean;
   reversed?: boolean;
 };
 
-const PlayerInfo = ({ userId, transparent, reversed }: Props) => {
+const PlayerInfo = ({ userId, isLeader, transparent, reversed }: Props) => {
   const { user, isLoading } = useUserFeed({ userId });
 
   if (isLoading) return null;
@@ -17,8 +18,12 @@ const PlayerInfo = ({ userId, transparent, reversed }: Props) => {
   return (
     <>
       <ProfileImageWrapper>
-        <LeaderIcon reversed={reversed} />
-        <PlayerProfileImage src={tempProfileImage} size="large" transparent={transparent} />
+        <PlayerProfileImage
+          src={user.imageUrl ? user.imageUrl : tempProfileImage}
+          size="large"
+          transparent={transparent}
+        />
+        {isLeader && <LeaderIcon reversed={reversed} />}
       </ProfileImageWrapper>
       <UserTag transparent={transparent}>{user.userTag}</UserTag>
     </>

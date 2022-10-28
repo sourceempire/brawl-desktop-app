@@ -13,7 +13,7 @@ const ReadyCheckAction = ({ userId }: Props) => {
   const { user: loggedInUser } = useLoggedInUser();
   const { match } = useMatchContext<CSGOMatch>();
 
-  const isPlayerReady = match.veto.playersReady[userId];
+  const isPlayerReady = match.veto?.playersReady[userId];
 
   if (isPlayerReady) {
     return (

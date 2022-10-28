@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import EllipsisText from 'common/components/EllipsisText';
 
 export const Wrapper = styled.div`
   display: grid;
@@ -17,8 +18,10 @@ export const MiddleInfo = styled.div`
 `;
 
 export const TournamentName = styled.div`
-  font-size: 30px;
+  width: 120%;
+  font-size: 24px;
   font-family: 'Orbitron';
+  text-align: center;
 `;
 
 export const TeamContainer = styled.div`
