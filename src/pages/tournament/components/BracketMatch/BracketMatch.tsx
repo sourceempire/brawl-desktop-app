@@ -37,7 +37,7 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
         <TeamName>{match.teams?.[0].teamName}</TeamName>
-        <TeamScore>{team1Score}</TeamScore>
+        <TeamScore winner={match.winnerTeamId === match.teams?.[0].id}>{team1Score}</TeamScore>
       </Team1>
 
       <Team2>
@@ -45,7 +45,7 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
         <TeamName>{match.teams?.[1].teamName}</TeamName>
-        <TeamScore>{team2Score}</TeamScore>
+        <TeamScore winner={match.winnerTeamId === match.teams?.[1].id}>{team2Score}</TeamScore>
       </Team2>
     </Wrapper>
   );

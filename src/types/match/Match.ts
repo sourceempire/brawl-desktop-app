@@ -25,6 +25,7 @@ export enum CSGOMatchStage {
   NOT_STARTED = 'notStarted',
   READY = 'readyCheck',
   VETO = 'veto',
+  STARTING_MATCH = 'startingMatch',
   ONGOING = 'ongoing',
   COMPLETE = 'complete'
 }

@@ -80,6 +80,7 @@ function getVetoStageStatus(currentStage: CSGOMatchStage) {
     case CSGOMatchStage.READY:
       return StageStatus.NOT_STARTED;
     case CSGOMatchStage.VETO:
+    case CSGOMatchStage.STARTING_MATCH:
       return StageStatus.ONGOING;
     default:
       return StageStatus.COMPLETED;
