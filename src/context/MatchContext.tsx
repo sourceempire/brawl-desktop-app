@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react';
 import useMatchFeed from 'api/feeds/hooks/useMatchFeed';
-import { Match } from 'types/match/Match';
+import { CSGOMatch, CSGOMatchStage, Match } from 'types/match/Match';
 import { Team } from 'types/team/Team';
 
 type MatchContextType = {
@@ -32,6 +32,8 @@ export const MatchContextProvider = ({ children, matchId }: Props) => {
 
 export function useMatchContext<T = Match>() {
   const context = useContext(MatchContext);
+
+  (context.match as CSGOMatch).matchStage = CSGOMatchStage.ONGOING;
 
   return {
     ...context,
