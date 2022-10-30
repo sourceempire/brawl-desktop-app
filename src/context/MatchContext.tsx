@@ -33,8 +33,6 @@ export const MatchContextProvider = ({ children, matchId }: Props) => {
 export function useMatchContext<T = Match>() {
   const context = useContext(MatchContext);
 
-  (context.match as CSGOMatch).matchStage = CSGOMatchStage.ONGOING;
-
   return {
     ...context,
     match: context.match as unknown as T
