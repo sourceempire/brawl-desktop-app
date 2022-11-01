@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import CSGOMatchRequests from 'api/requests/match/CSGOMatchRequests';
 import popup from 'common/popup';
@@ -59,7 +59,7 @@ const CSGOVeto = () => {
               active={isActive}
               disabled={isDisabled}
               onClick={() => setMapToBan(mapName)}>
-              <CSGOMapImage src={csgoMaps[mapName].imageUrl} />
+              <CSGOMapImage src={csgoMaps[mapName].imageUrl.small} />
               <CSGOMapName>{csgoMaps[mapName].displayName}</CSGOMapName>
             </CSGOMapWrapper>
           );

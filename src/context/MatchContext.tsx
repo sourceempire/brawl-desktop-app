@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react';
 import useMatchFeed from 'api/feeds/hooks/useMatchFeed';
-import { Match } from 'types/match/Match';
+import { CSGOMatch, CSGOMatchStage, Match } from 'types/match/Match';
 import { Team } from 'types/team/Team';
 
 type MatchContextType = {

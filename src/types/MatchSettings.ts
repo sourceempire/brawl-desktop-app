@@ -13,6 +13,7 @@ export interface CSGOMatchSettings extends MatchSettings {
   __type: MatchSettingsTypes.CSGO;
   mode: CSGOGameModes;
   seriesType: string;
+  maps?: string[];
 }
 
 export enum CSGOGameModes {

@@ -24,6 +24,10 @@ import CogUrl, { ReactComponent as CogComponent} from './Cog.svg';
 const Cog = CogComponent as SVGComponent;
 Cog.url = CogUrl;
 
+import CopyUrl, {ReactComponent as CopyComponent} from './Copy.svg';
+const Copy = CopyComponent as SVGComponent;
+Copy.url = CopyUrl;
+
 import CrossUrl, { ReactComponent as CrossComponent } from './Cross.svg';
 const Cross = CrossComponent as SVGComponent;
 Cross.url = CrossUrl;
@@ -95,6 +99,7 @@ const Icons = {
   Check,
   Clock,
   Cog,
+  Copy,
   Cross,
   DatePickerArrow,
   Filter,

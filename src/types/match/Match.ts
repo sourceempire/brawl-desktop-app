@@ -57,6 +57,7 @@ export type CSGOMatch = Match & {
   mapsInfo?: CSGOMapResult[];
   matchStage: CSGOMatchStage;
   veto?: CSGOVeto;
+  joinLink: string | null;
 };
 
 export const isCSGOMatch = (match: Match): match is CSGOMatch => {

@@ -13,26 +13,10 @@ type Props = {
 const Team = ({ team, reversed }: Props) => {
   const { match } = useMatchContext<CSGOMatch>();
 
-  const isNotStarted = match.matchStage === CSGOMatchStage.NOT_STARTED;
   const isReadyCheck = match.matchStage === CSGOMatchStage.READY;
   const isVeto = match.matchStage === CSGOMatchStage.VETO;
 
   if (!team) return null;
-
-  if (isNotStarted) {
-    return (
-      <Wrapper>
-        {team?.players.map((playerId) => {
-          const isLeader = team.teamLeaderId === playerId;
-          return (
-            <PlayerContainer key={playerId} reversed={reversed}>
-              <PlayerInfo userId={playerId} isLeader={isLeader} reversed={reversed} />
-            </PlayerContainer>
-          );
-        })}
-      </Wrapper>
-    );
-  }
 
   if (isReadyCheck) {
     return (
@@ -78,7 +62,18 @@ const Team = ({ team, reversed }: Props) => {
     );
   }
 
-  return null;
+  return (
+    <Wrapper>
+      {team?.players.map((playerId) => {
+        const isLeader = team.teamLeaderId === playerId;
+        return (
+          <PlayerContainer key={playerId} reversed={reversed}>
+            <PlayerInfo userId={playerId} isLeader={isLeader} reversed={reversed} />
+          </PlayerContainer>
+        );
+      })}
+    </Wrapper>
+  );
 };
 
 export default Team;
