@@ -34,3 +34,14 @@ export type Tournament = {
   createdAt: number; // epoch milli
   matchSettings: MatchSettings;
 };
+
+export type TournamentMatchInfo = {
+  matchId: string;
+  roundIndex: number;
+  roundName: string;
+};
+
+export type TournamentMatchHistory = {
+  tournamentId: string;
+  matchList: TournamentMatchInfo[];
+};

@@ -1,27 +1,17 @@
-import useMatchFeed from 'api/feeds/hooks/useMatchFeed';
 import { Tournament } from 'types/tournaments/TournamentInfo';
 import CountDown from '../CountDown';
-import {
-  MiddleInfo,
-  SmallText,
-  TeamContainer,
-  TournamentName,
-  Wrapper
-} from './TournamentInfo.styles';
+import { TeamContainer } from './TeamContainer';
+import { MiddleInfo, SmallText, TournamentName, Wrapper } from './TournamentInfo.styles';
 
 type Props = {
   tournament: Tournament;
-  currentMatchId: string;
+  currentMatchId: string | null;
 };
 
 const TournamentInfo = ({ tournament, currentMatchId }: Props) => {
-  const { team1, team2, isLoading } = useMatchFeed(currentMatchId);
-
-  if (isLoading) return null;
-
   return (
     <Wrapper>
-      <TeamContainer>{team1?.teamName}</TeamContainer>
+      {currentMatchId ? <TeamContainer currentMatchId={currentMatchId} teamNumber={1} /> : <div />}
 
       <MiddleInfo>
         <TournamentName>
@@ -31,7 +21,7 @@ const TournamentInfo = ({ tournament, currentMatchId }: Props) => {
         <CountDown startTime={tournament.startTime} />
       </MiddleInfo>
 
-      <TeamContainer>{team2?.teamName}</TeamContainer>
+      {currentMatchId ? <TeamContainer currentMatchId={currentMatchId} teamNumber={2} /> : <div />}
     </Wrapper>
   );
 };

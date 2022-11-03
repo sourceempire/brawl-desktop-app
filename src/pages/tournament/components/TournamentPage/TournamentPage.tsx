@@ -1,12 +1,14 @@
+import { useTournamentMatchHistoryFeed } from 'api/feeds';
 import useCurrentTournamentMatchFeed from 'api/feeds/hooks/useCurrentTournamentMatchFeed';
 import useTournamentFeed from 'api/feeds/hooks/useTournamentFeed';
-import { Link, Route, Routes, useParams } from 'react-router-dom';
+import { Link, Navigate, Route, Routes, useParams } from 'react-router-dom';
 import { Button } from 'common/components';
 import Backdrop from 'common/components/Backdrop';
 import { MatchContextProvider } from 'context/MatchContext';
 import Bracket from '../Bracket';
 import CurrentMatchStage from '../CurrentMatchStage';
 import Match from '../Match';
+import MatchHistory from '../MatchHistory/MatchHistory';
 import NavItems from '../NavItems';
 import Rules from '../Rules';
 import TournamentInfo from '../TournamentInfo';
@@ -22,8 +24,8 @@ const TournamentPage = () => {
   const { tournamentId } = useParams() as { tournamentId: string };
 
   const { tournament, isLoading: isLoadingTournament } = useTournamentFeed(tournamentId);
-
   const { matchId, isLoading: isLoadingMatchId } = useCurrentTournamentMatchFeed(tournamentId);
+  const { matchHistoryList } = useTournamentMatchHistoryFeed(tournamentId);
 
   if (isLoadingMatchId || isLoadingTournament) return null;
 
@@ -34,8 +36,8 @@ const TournamentPage = () => {
 
       <TournamentContent>
         <TournamentNavbar>
-          <NavItems tournamentId={tournamentId} />
-          <CurrentMatchStage matchId={matchId} />
+          <NavItems tournamentId={tournamentId} matchId={matchId} />
+          {matchId ? <CurrentMatchStage matchId={matchId} /> : <div />}
           <RightAlignedContainer>
             {tournament.tournamentHubId && (
               <Link to={`/main/tournaments/hub/${tournament.tournamentHubId}`}>
@@ -47,18 +49,20 @@ const TournamentPage = () => {
 
         <TournamentRoutesWrapper>
           <Routes>
-            <Route
-              index
-              element={
-                <MatchContextProvider matchId={matchId}>
-                  <Match />
-                </MatchContextProvider>
-              }
-            />
+            {matchId && (
+              <Route
+                index
+                element={
+                  <MatchContextProvider matchId={matchId}>
+                    <Match />
+                  </MatchContextProvider>
+                }
+              />
+            )}
             <Route path="bracket" element={<Bracket tournamentId={tournament.id} />} />
             <Route path="rules" element={<Rules />} />
-            <Route path="chat" element={<div>Chat</div>} />
-            <Route path="match-history" element={<div>Match History</div>} />
+            <Route path="match-history/*" element={<MatchHistory matchList={matchHistoryList} />} />
+            <Route path="*" element={<Navigate to="bracket" replace />} />
           </Routes>
         </TournamentRoutesWrapper>
       </TournamentContent>

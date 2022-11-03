@@ -8,8 +8,6 @@ export default function useTournamentHubsFeed() {
     'tournament.hubs'
   );
 
-  console.log(currentState, isLoading);
-
   let tournamentHubsWithTypedMatchSettings = fixMatchSettingType(currentState.tournamentHubs ?? []);
 
   // TODO remove this when server provides everything

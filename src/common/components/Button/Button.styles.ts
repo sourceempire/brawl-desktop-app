@@ -22,6 +22,7 @@ export const Wrapper = styled.button<Props>`
   align-items: center;
   justify-content: center;
   outline-color: transparent;
+
   ${({ theme }) => theme.textStyles.button}
 
   .button-icon {

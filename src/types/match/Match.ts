@@ -16,7 +16,7 @@ export type Match = {
 };
 
 export type CSGOMapResult = {
-  csgoMap: string;
+  mapName: string;
   mapWinner?: TeamId;
   score: Record<TeamId, Score>;
 };
@@ -62,4 +62,19 @@ export type CSGOMatch = Match & {
 
 export const isCSGOMatch = (match: Match): match is CSGOMatch => {
   return match.gameId === Game.CSGO;
+};
+
+export type MatchResult = {
+  matchId: string;
+  gameId: string;
+};
+
+export type CSGOMatchResult = MatchResult & {
+  seriesWinner: string; // teamId
+  seriesScore: Record<TeamId, Score>;
+  mapsInfo: CSGOMapResult[];
+};
+
+export const isCSGOMatchResult = (matchResult: MatchResult): matchResult is CSGOMatchResult => {
+  return matchResult.gameId === Game.CSGO;
 };
