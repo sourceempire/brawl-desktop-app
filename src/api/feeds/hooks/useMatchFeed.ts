@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
-import { CSGOMatch, CSGOMatchStage, CSGOVetoStatus, Match } from 'types/match/Match';
+import { Match } from 'types/match/Match';
 import useFeed from './useFeed';
 
 const useMatchFeed = (matchId: string) => {
@@ -38,8 +38,6 @@ const useMatchFeed = (matchId: string) => {
     () => currentState?.match?.teams?.find((team) => team.id !== team1?.id),
     [currentState?.match?.teams, team1?.id]
   );
-
-  console.log(currentState.match);
 
   return {
     match: currentState.match ?? {},

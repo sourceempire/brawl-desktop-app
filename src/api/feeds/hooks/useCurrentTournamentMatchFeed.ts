@@ -4,7 +4,7 @@ import useFeed from './useFeed';
 const useCurrentTournamentMatchFeed = (touramentId: string) => {
   const { user } = useLoggedInUser();
 
-  const { currentState, isLoading } = useFeed<{ matchId: string }>(
+  const { currentState, isLoading } = useFeed<{ matchId: string | null }>(
     `tournament.match.${touramentId}.${user.id}`
   );
 

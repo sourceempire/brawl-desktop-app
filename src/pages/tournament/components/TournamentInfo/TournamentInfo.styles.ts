@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import EllipsisText from 'common/components/EllipsisText';
 
 export const Wrapper = styled.div`
   display: grid;

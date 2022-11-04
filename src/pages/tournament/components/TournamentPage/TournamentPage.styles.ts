@@ -36,7 +36,8 @@ export const TournamentNavbar = styled.div`
   min-height: 52px;
   ${({ theme }) => css`
     border-bottom: 2px solid ${theme.colors.lightTint.base};
-    margin-bottom: ${theme.spacing.baseX3}px;
+    margin: 0 -${theme.spacing.baseX3}px;
+    padding: 0 ${theme.spacing.baseX3}px;
   `}
 `;
 
@@ -48,6 +49,10 @@ export const RightAlignedContainer = styled.div`
 export const TournamentRoutesWrapper = styled.div`
   position: relative;
   flex-grow: 1;
-
   overflow: scroll;
+
+  ${({ theme }) => css`
+    padding: ${theme.spacing.baseX3}px ${theme.spacing.baseX3}px 0;
+    margin: 0 -${theme.spacing.baseX3}px;
+  `}
 `;

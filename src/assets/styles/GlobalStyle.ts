@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 import { getPlatform } from 'utils/processUtils';
 import ResetStyle from './ResetStyle';
@@ -17,7 +18,9 @@ const GlobalStyle = createGlobalStyle`
   a {
     color: ${(props) => props.theme.colors.accent.base};
     text-decoration: none;
+    cursor: default;
   }
+
 `;
 
 export default GlobalStyle;
