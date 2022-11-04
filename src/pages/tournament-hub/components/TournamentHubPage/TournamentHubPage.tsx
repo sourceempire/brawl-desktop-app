@@ -32,6 +32,7 @@ const TournamentHubPage = () => {
   }, [hubId]);
 
   useEffect(() => {
+    // Replace with a feed
     getLoggedInUserTournament();
   }, [getLoggedInUserTournament]);
 

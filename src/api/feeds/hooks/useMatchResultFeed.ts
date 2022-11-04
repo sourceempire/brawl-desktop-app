@@ -3,7 +3,7 @@ import { Team } from 'types/team/Team';
 import useFeed from './useFeed';
 
 type FeedType = {
-  matchResult: MatchResult;
+  matchResult: MatchResult | null;
   teams: { [teamId: string]: Team };
 };
 

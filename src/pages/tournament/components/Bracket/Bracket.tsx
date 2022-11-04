@@ -10,6 +10,8 @@ type Props = {
 const Bracket = ({ tournamentId }: Props) => {
   const [bracket, setBracket] = useState<BracketType>();
 
+  console.log(bracket);
+
   useEffect(() => {
     getBracket(tournamentId)
       .then((result) => {

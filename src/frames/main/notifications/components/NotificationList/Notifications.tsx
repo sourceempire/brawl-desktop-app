@@ -35,6 +35,10 @@ const Notifications = () => {
     }
   };
 
+  const hideMenu = () => {
+    setMenuVisible(false);
+  };
+
   const showUnreadCount = !isLoading && unreadCount !== 0;
   const unreadCountDisplay = unreadCount > 99 ? '99+' : unreadCount?.toString();
 
@@ -65,7 +69,11 @@ const Notifications = () => {
             {notifications.length === 0 && <NoNotifications />}
 
             {notifications.map((notification) => (
-              <NotificationCard key={notification.id} notification={notification} />
+              <NotificationCard
+                key={notification.id}
+                notification={notification}
+                onClick={hideMenu}
+              />
             ))}
 
             {Array(loadingCardsCount)
