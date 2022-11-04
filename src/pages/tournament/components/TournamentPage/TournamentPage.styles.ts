@@ -52,10 +52,7 @@ export const TournamentRoutesWrapper = styled.div`
   overflow: scroll;
 
   ${({ theme }) => css`
-    padding-top: ${theme.spacing.baseX3}px;
-    margin-left: -${theme.spacing.baseX3}px;
-    margin-right: -${theme.spacing.baseX3}px;
-    padding-left: ${theme.spacing.baseX3}px;
-    padding-right: ${theme.spacing.baseX3}px;
+    padding: ${theme.spacing.baseX3}px ${theme.spacing.baseX3}px 0;
+    margin: 0 -${theme.spacing.baseX3}px;
   `}
 `;

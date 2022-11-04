@@ -14,8 +14,6 @@ type Props = {
 const CSGOMatchResult = ({ matchResult, teams }: Props) => {
   const { user } = useLoggedInUser();
 
-  // const team1Id = Object.values(teams).find((team) => team.players.includes(user.id))?.id;
-
   const teamIds = Object.keys(teams).sort((team1Id, team2Id) => {
     const loggedInUserIsInTeam =
       teams[team1Id].players.includes(user.id) || teams[team2Id].players.includes(user.id);
