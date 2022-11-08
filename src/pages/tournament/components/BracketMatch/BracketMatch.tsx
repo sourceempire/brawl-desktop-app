@@ -24,7 +24,6 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
   const team1Score = useTeamScore({ match, teamId: match.teams?.[0].id });
   const team2Score = useTeamScore({ match, teamId: match.teams?.[1].id });
 
-  console.log(isLoading);
   if (isLoading) return null;
 
   return (
