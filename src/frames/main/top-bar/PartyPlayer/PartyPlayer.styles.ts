@@ -23,6 +23,7 @@ export const PlayerImage = styled.img`
   width: 100%;
   ${({ theme }) => css`
     border-radius: ${theme.borderRadius.default};
+    background-color: ${theme.colors.secondary.base};
   `}
 `;
 

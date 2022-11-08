@@ -30,7 +30,7 @@ const PartyInviteInfo = ({ info, createdAt }: Props) => {
 
   return (
     <Wrapper>
-      <Image src={temporaryProfileImage} />
+      <Image src={inviter?.imageUrl ?? temporaryProfileImage} />
       <Info>
         <Text>
           Party invite from <Highlight>{inviter?.userTag}</Highlight>

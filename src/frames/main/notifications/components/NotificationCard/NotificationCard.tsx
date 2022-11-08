@@ -6,9 +6,10 @@ import { IsReadIndicator, Wrapper } from './NotificationCard.styles';
 
 type Props = {
   notification: Notification;
+  onClick: () => void;
 };
 
-const NotificationCard = ({ notification }: Props) => {
+const NotificationCard = ({ notification, onClick }: Props) => {
   const { id, info, isRead, createdAt } = notification;
 
   const handleClick = () => {
@@ -19,7 +20,9 @@ const NotificationCard = ({ notification }: Props) => {
     }
 
     if (!isRead) {
-      NotificationRequests.setNotificationRead(id).catch(console.error);
+      NotificationRequests.setNotificationRead(id).then(onClick).catch(console.error);
+    } else {
+      onClick();
     }
   };
 

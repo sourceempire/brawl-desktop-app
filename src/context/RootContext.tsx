@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { UserRequests } from 'api/requests';
+import { MatchResultModalContextProvider } from './MatchResultModalContext';
 import { PartyContextProvider } from './PartyContext';
 import { ServerEventsProvider } from './ServerEventsContext';
 import { UserContextProvider } from './UserContext';
@@ -22,7 +23,9 @@ const RootContextProvider = ({ children }: Props) => {
   return (
     <ServerEventsProvider>
       <UserContextProvider userId={loggedInUserId}>
-        <PartyContextProvider>{children}</PartyContextProvider>
+        <PartyContextProvider>
+          <MatchResultModalContextProvider>{children}</MatchResultModalContextProvider>
+        </PartyContextProvider>
       </UserContextProvider>
     </ServerEventsProvider>
   );
