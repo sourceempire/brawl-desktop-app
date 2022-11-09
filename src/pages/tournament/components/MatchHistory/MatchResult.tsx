@@ -10,7 +10,7 @@ const MatchResult = () => {
 
   if (isLoading) return null;
 
-  if (matchResult && isCSGOMatchResult(matchResult)) {
+  if (isCSGOMatchResult(matchResult)) {
     return <CSGOMatchResult matchResult={matchResult} teams={teams} />;
   }
 

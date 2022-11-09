@@ -75,6 +75,8 @@ export type CSGOMatchResult = MatchResult & {
   mapsInfo: CSGOMapResult[];
 };
 
-export const isCSGOMatchResult = (matchResult: MatchResult): matchResult is CSGOMatchResult => {
-  return matchResult.gameId === Game.CSGO;
+export const isCSGOMatchResult = (
+  matchResult: MatchResult | null
+): matchResult is CSGOMatchResult => {
+  return matchResult?.gameId === Game.CSGO;
 };

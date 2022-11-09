@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Modal } from 'common/components';
+import MatchResultModalContent from 'frames/main/modals/MatchResultModal/MatchResultModalContent';
+
+// TODO -> setup listener for match end event
+// TODO -> When match end event is received, set related notification read.
 
 export const MatchResultModalContext = React.createContext({
   setMatchResultId: (matchId: string) => {},
@@ -12,23 +16,23 @@ type Props = {
 
 export const MatchResultModalContextProvider = ({ children }: Props) => {
   const [matchId, setMatchId] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const setMatchResultId = (matchId: string) => {
-    setIsModalOpen(true);
     setMatchId(matchId);
+    setModalOpen(true);
   };
 
   const hideModal = () => {
-    setIsModalOpen(false);
+    setModalOpen(false);
   };
 
   return (
     <MatchResultModalContext.Provider value={{ setMatchResultId, hideModal }}>
       <>
         {children}
-        <Modal isOpen={isModalOpen} onRequestClose={hideModal}>
-          <div>{matchId}</div>
+        <Modal isOpen={isModalOpen} onRequestClose={hideModal} closeButton={false}>
+          {matchId && <MatchResultModalContent matchId={matchId} />}
         </Modal>
       </>
     </MatchResultModalContext.Provider>

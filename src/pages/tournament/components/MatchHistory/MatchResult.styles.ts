@@ -12,6 +12,7 @@ export const Wrapper = styled.div`
 
 type BackdropProps = {
   mapImageUrl: string;
+  disableFade?: boolean;
 };
 
 const fadeInKeyframes = keyframes`
@@ -29,10 +30,15 @@ export const Backdrop = styled.div<BackdropProps>`
   z-index: 0;
   content: '';
   inset: 0;
-  animation: ${fadeInKeyframes} 0.6s forwards;
-  ${({ theme, mapImageUrl }) => css`
+  background-position: 0 -230px;
+  ${({ theme, mapImageUrl, disableFade }) => css`
     background-image: url(${mapImageUrl});
     background-size: cover;
+
+    ${!disableFade &&
+    css`
+      animation: ${fadeInKeyframes} 0.6s forwards;
+    `}
 
     :before {
       content: '';
@@ -41,7 +47,7 @@ export const Backdrop = styled.div<BackdropProps>`
       backdrop-filter: grayscale(1);
       background-image: linear-gradient(
         ${hsla(theme.colors.secondary.base, 0.8)},
-        ${theme.colors.secondary.base} 90%
+        ${theme.colors.secondary.base} 80%
       );
     }
   `}

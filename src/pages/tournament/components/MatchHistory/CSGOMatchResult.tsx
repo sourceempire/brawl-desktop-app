@@ -9,9 +9,10 @@ import TeamTable from './TeamTable';
 type Props = {
   matchResult: CSGOMatchResultType;
   teams: { [teamId: string]: Team };
+  disableBackgroundFadeIn?: boolean;
 };
 
-const CSGOMatchResult = ({ matchResult, teams }: Props) => {
+const CSGOMatchResult = ({ matchResult, teams, disableBackgroundFadeIn }: Props) => {
   const { user } = useLoggedInUser();
 
   const teamIds = Object.keys(teams).sort((team1Id, team2Id) => {
@@ -33,7 +34,7 @@ const CSGOMatchResult = ({ matchResult, teams }: Props) => {
 
   return (
     <Wrapper>
-      <Backdrop mapImageUrl={mapImage} />
+      <Backdrop mapImageUrl={mapImage} disableFade={disableBackgroundFadeIn} />
       <Content>
         <Score>
           <MapScore isWinner={mapInfo.mapWinner === team1.id}>{mapInfo.score[team1.id]}</MapScore>
