@@ -17,7 +17,7 @@ type Props = {
 };
 
 const ChangeAvatarModal = ({ isOpen, onClose }: Props) => {
-  const { user } = useLoggedInUser();
+  const user = useLoggedInUser();
   const { avatars } = useUserAvatarsFeed(user.id);
 
   const [fileToUpload, setFileToUpload] = useState<File>();

@@ -20,7 +20,7 @@ import Icons from 'assets/icons/Icons';
 const PARTY_NAME_MAX_LENGTH = 20;
 
 const PartySettings = () => {
-  const { user: loggedInUser } = useLoggedInUser();
+  const loggedInUser = useLoggedInUser();
   const { party } = usePartyFeed();
   const { current: initialTeamName } = useRef(party.teamName);
   const { current: initialPartySize } = useRef(party.partySize);

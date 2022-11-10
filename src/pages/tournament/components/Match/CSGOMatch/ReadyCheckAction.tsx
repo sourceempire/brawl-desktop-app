@@ -10,7 +10,7 @@ type Props = {
 };
 
 const ReadyCheckAction = ({ userId }: Props) => {
-  const { user: loggedInUser } = useLoggedInUser();
+  const loggedInUser = useLoggedInUser();
   const { match } = useMatchContext<CSGOMatch>();
 
   const isPlayerReady = match.veto?.playersReady[userId];

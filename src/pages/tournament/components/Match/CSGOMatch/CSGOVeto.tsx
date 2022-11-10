@@ -17,7 +17,7 @@ import {
 } from './CSGOVeto.styles';
 
 const CSGOVeto = () => {
-  const { user } = useLoggedInUser();
+  const user = useLoggedInUser();
   const { match } = useMatchContext<CSGOMatch>();
   const [mapToBan, setMapToBan] = useState<string>();
 

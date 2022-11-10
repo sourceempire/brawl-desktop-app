@@ -13,7 +13,7 @@ type Options = {
 type FriendItem = { friend: PublicUser; isHidden: boolean };
 
 export const useFriendList = ({ searchString }: Options) => {
-  const { user } = useLoggedInUser();
+  const user = useLoggedInUser();
   const { friends, isLoading: isLoadingFriends } = useFriendsFeed({ userId: user.id });
   const [friendItems, setFriendItems] = useState<FriendItem[]>([]);
   const [isLoadingStatuses, setLoadingStatuses] = useState(true);

@@ -5,7 +5,7 @@ import { useDebounce } from 'utils/hooks';
 import useFeed from './useFeed';
 
 const useNotificationFeed = () => {
-  const { user } = useLoggedInUser();
+  const user = useLoggedInUser();
 
   const shouldUpdateLimit = useRef(true);
   const [limit, setLimit] = useState(10);

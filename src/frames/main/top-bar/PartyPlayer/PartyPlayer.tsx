@@ -14,7 +14,7 @@ type Props = {
 };
 
 export const PartyPlayer = ({ userId }: Props) => {
-  const { user: loggedInUser } = useLoggedInUser();
+  const loggedInUser = useLoggedInUser();
   const { party } = usePartyFeed();
   const { user, isLoading: isLoadingPartyPlayer } = useUserFeed({ userId });
 

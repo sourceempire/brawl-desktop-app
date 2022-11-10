@@ -13,7 +13,7 @@ type Props = {
 };
 
 const CSGOMatchResult = ({ matchResult, teams, disableBackgroundFadeIn }: Props) => {
-  const { user } = useLoggedInUser();
+  const user = useLoggedInUser();
 
   const teamIds = Object.keys(teams).sort((team1Id, team2Id) => {
     const loggedInUserIsInTeam =

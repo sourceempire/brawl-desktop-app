@@ -58,7 +58,7 @@ const OngoingCSGOMatch = () => {
               <ClipBoard>
                 <CopyIcon />
               </ClipBoard>
-              <ServerUrl>{match.joinLink}asdasdasdasdasdasd</ServerUrl>
+              <ServerUrl>{match.joinLink}</ServerUrl>
             </ServerUrlWrapper>
             <JoinServerButton primary>Connect to server</JoinServerButton>
           </JoinServerWrapper>

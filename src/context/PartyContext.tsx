@@ -12,7 +12,7 @@ type Props = {
 };
 
 export const PartyContextProvider = ({ children }: Props) => {
-  const { user } = useLoggedInUser();
+  const user = useLoggedInUser();
   const { currentState } = useFeed<PartyState>(`party.${user.id}`);
   const { party, isInParty } = currentState;
   return <PartyContext.Provider value={{ isInParty, party }}>{children}</PartyContext.Provider>;

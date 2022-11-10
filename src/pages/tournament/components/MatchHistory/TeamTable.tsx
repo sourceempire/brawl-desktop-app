@@ -51,7 +51,7 @@ const TeamTable = ({ team }: Props) => {
 export default TeamTable;
 
 const PlayerCell = ({ userId }: { userId: string }) => {
-  const { user: loggedInUser } = useLoggedInUser();
+  const loggedInUser = useLoggedInUser();
   const { user } = useUserFeed({ userId });
 
   if (!user) return <TableData />;
