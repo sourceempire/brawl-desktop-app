@@ -1,36 +1,24 @@
-import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import { csgoMaps } from 'types/csgo/maps';
-import { CSGOMatchResult as CSGOMatchResultType } from 'types/match/Match';
+import { CSGOMatch } from 'types/match/Match';
 import { Team } from 'types/team/Team';
 import { MapName, MapScore, Score, TeamTables } from './CSGOMatchResult.styles';
 import { Backdrop, Content, Wrapper } from './MatchResult.styles';
+import RoundWinnerIndicatorList from './RoundWinnerIndicatorList';
 import TeamTable from './TeamTable';
 
 type Props = {
-  matchResult: CSGOMatchResultType;
-  teams: { [teamId: string]: Team };
+  match: CSGOMatch;
+  team1: Team;
+  team2: Team;
   disableBackgroundFadeIn?: boolean;
 };
 
-const CSGOMatchResult = ({ matchResult, teams, disableBackgroundFadeIn }: Props) => {
-  const user = useLoggedInUser();
+const CSGOMatchResult = ({ match, team1, team2, disableBackgroundFadeIn }: Props) => {
+  if (!match.mapsInfo) return null;
 
-  const teamIds = Object.keys(teams).sort((team1Id, team2Id) => {
-    const loggedInUserIsInTeam =
-      teams[team1Id].players.includes(user.id) || teams[team2Id].players.includes(user.id);
-
-    if (loggedInUserIsInTeam) {
-      return -1;
-    }
-    return 0;
-  });
-
-  const mapInfo = matchResult.mapsInfo[0];
-  const mapDisplayName = csgoMaps[matchResult.mapsInfo[0].mapName].displayName;
-  const mapImage = csgoMaps[matchResult.mapsInfo[0].mapName].imageUrl.big;
-
-  const team1 = teams[teamIds[0]];
-  const team2 = teams[teamIds[1]];
+  const mapInfo = match.mapsInfo[0];
+  const mapDisplayName = csgoMaps[match.mapsInfo[0].mapName].displayName;
+  const mapImage = csgoMaps[match.mapsInfo[0].mapName].imageUrl.big;
 
   return (
     <Wrapper>
@@ -43,7 +31,11 @@ const CSGOMatchResult = ({ matchResult, teams, disableBackgroundFadeIn }: Props)
         </Score>
         <TeamTables>
           <TeamTable team={team1} />
-          <div>ds</div>
+          <RoundWinnerIndicatorList
+            team1={team1}
+            team2={team2}
+            gameMode={match.matchSettings.mode}
+          />
           <TeamTable team={team2} />
         </TeamTables>
       </Content>

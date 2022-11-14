@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-import { MatchResultModalContext } from 'context/MatchResultModalContext';
 import { MatchEndNotificationInfo } from 'types/notifications/Notifications';
 import { useTimeSince } from 'utils/hooks';
 import { Image, Text, TimeAgo } from '../../NotificationCard/NotificationCard.styles';
@@ -12,17 +10,11 @@ type Props = {
 };
 
 //TODO: Check the actual game of the match and change logo accordingly
-const MatchEndInfo = ({ info, createdAt }: Props) => {
+const MatchEndInfo = ({ createdAt }: Props) => {
   const timeSince = useTimeSince(createdAt);
 
-  const { setMatchResultId } = useContext(MatchResultModalContext);
-
-  const handleClick = () => {
-    setMatchResultId(info.matchId);
-  };
-
   return (
-    <Wrapper onClick={handleClick}>
+    <Wrapper>
       <Image src={csgoLogo} />
       <Info>
         <Text>Match ended, click here for result</Text>

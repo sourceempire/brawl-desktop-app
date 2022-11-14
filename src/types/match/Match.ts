@@ -2,9 +2,10 @@ import Game from 'types/Game';
 import { CSGOMatchSettings } from 'types/MatchSettings';
 import { Team, TeamId } from 'types/team/Team';
 
-enum MatchType {
+export enum MatchType {
   TOURNAMENT = 'tournament'
 }
+
 type Score = number;
 
 export type Match = {
@@ -62,21 +63,4 @@ export type CSGOMatch = Match & {
 
 export const isCSGOMatch = (match: Match): match is CSGOMatch => {
   return match.gameId === Game.CSGO;
-};
-
-export type MatchResult = {
-  matchId: string;
-  gameId: string;
-};
-
-export type CSGOMatchResult = MatchResult & {
-  seriesWinner: string; // teamId
-  seriesScore: Record<TeamId, Score>;
-  mapsInfo: CSGOMapResult[];
-};
-
-export const isCSGOMatchResult = (
-  matchResult: MatchResult | null
-): matchResult is CSGOMatchResult => {
-  return matchResult?.gameId === Game.CSGO;
 };

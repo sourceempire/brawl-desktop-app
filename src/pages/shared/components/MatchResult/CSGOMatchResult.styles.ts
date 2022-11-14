@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { TeamId } from 'types/team/Team';
 
 export const Score = styled.div`
   display: grid;

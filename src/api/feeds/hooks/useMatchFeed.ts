@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import { Match } from 'types/match/Match';
 import useFeed from './useFeed';
@@ -6,19 +5,17 @@ import useFeed from './useFeed';
 const useMatchFeed = (matchId: string) => {
   const { currentState, isLoading } = useFeed<{ match: Match }>(`match.${matchId}`);
 
-  const user = useLoggedInUser();
+  const loggedInUser = useLoggedInUser();
 
-  const team1 = useMemo(
-    () =>
-      currentState?.match?.teams?.find((team) => team.players.includes(user.id)) ??
-      currentState?.match?.teams?.[0],
-    [currentState?.match?.teams, user.id]
-  );
+  const teams = Object.values(currentState.match?.teams ?? {});
 
-  const team2 = useMemo(
-    () => currentState?.match?.teams?.find((team) => team.id !== team1?.id),
-    [currentState?.match?.teams, team1?.id]
-  );
+  let team1 = teams[0];
+  let team2 = teams[1];
+
+  if (teams[1]?.players.includes(loggedInUser.id)) {
+    team1 = teams[1];
+    team2 = teams[0];
+  }
 
   return {
     match: currentState.match ?? {},

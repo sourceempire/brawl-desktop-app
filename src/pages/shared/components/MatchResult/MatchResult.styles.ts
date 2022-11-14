@@ -3,7 +3,6 @@ import { hsla } from 'utils/styledUtils';
 
 export const Wrapper = styled.div`
   position: relative;
-  padding-top: 100px;
   height: 100%;
   ${({ theme }) => css`
     padding: ${theme.spacing.base * 10}px ${theme.spacing.baseX3}px 0;

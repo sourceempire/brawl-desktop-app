@@ -12,4 +12,3 @@ export { default as useUserStatusFeed } from './hooks/useUserStatusFeed';
 export { default as useTournamentMatchHistoryFeed } from './hooks/useTournamentMatchHistoryFeed';
 export { default as useCurrentTournamentMatchFeed } from './hooks/useCurrentTournamentMatchFeed';
 export { default as useMatchFeed } from './hooks/useMatchFeed';
-export { default as useMatchResultFeed } from './hooks/useMatchResultFeed';
