@@ -2,9 +2,7 @@ import { createContext } from 'react';
 import { useUserFeed } from 'api/feeds';
 import { PublicUser } from 'types/user/User';
 
-export const UserContext = createContext<{ user: PublicUser }>({
-  user: { id: '', userTag: '' }
-});
+export const UserContext = createContext<PublicUser>({ id: '', userTag: '' });
 
 type Props = {
   userId: string;
@@ -18,7 +16,7 @@ export const UserContextProvider = ({ children, userId }: Props) => {
   if (isLoading) return <div>Loading user</div>;
 
   return user ? (
-    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={user}>{children}</UserContext.Provider>
   ) : (
     // TODO -> Replace this with something better
     <div>Loading User</div>

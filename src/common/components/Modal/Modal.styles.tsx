@@ -51,6 +51,7 @@ export const CrossButton = styled.img`
 
 export const Overlay = styled.div<{ timeout: number; hidden: boolean }>`
   ${({ timeout, hidden }) => css`
+    z-index: 1;
     position: absolute;
     display: flex;
     inset: 0;

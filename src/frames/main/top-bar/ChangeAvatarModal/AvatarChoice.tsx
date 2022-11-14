@@ -19,7 +19,7 @@ type Props = {
 };
 
 const AvatarChoice = ({ avatar, onClick }: Props) => {
-  const { user } = useLoggedInUser();
+  const user = useLoggedInUser();
 
   const imageRef = useRef() as React.MutableRefObject<HTMLImageElement>;
   const [showImageMenu, setShowImageMenu] = useState(false);

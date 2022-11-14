@@ -31,7 +31,7 @@ const orderedStatusItems = [
  * TODO -> Make the position of the context menu dynamic
  */
 const ProfileMenu = () => {
-  const { user } = useLoggedInUser();
+  const user = useLoggedInUser();
   const { status } = useUserStatusFeed({ userId: user.id });
   const { logout } = useAuth();
 

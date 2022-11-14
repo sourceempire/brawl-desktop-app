@@ -3,14 +3,7 @@ import { useUserFeed } from 'api/feeds';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import EllipsisText from 'common/components/EllipsisText';
 import { Team } from 'types/team/Team';
-import {
-  ProfileImage,
-  TableCell,
-  TableData,
-  TableHeader,
-  TeamLogo,
-  Wrapper
-} from './TeamTable.styles';
+import { ProfileImage, TableData, TableHeader, TeamLogo, Wrapper } from './TeamTable.styles';
 import placeholderTeamLogo from 'assets/images/placeholder-team-logo.png';
 
 type Props = {
@@ -51,7 +44,7 @@ const TeamTable = ({ team }: Props) => {
 export default TeamTable;
 
 const PlayerCell = ({ userId }: { userId: string }) => {
-  const { user: loggedInUser } = useLoggedInUser();
+  const loggedInUser = useLoggedInUser();
   const { user } = useUserFeed({ userId });
 
   if (!user) return <TableData />;

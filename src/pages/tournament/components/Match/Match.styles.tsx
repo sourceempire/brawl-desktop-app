@@ -1,5 +1,4 @@
-import styled, { css } from 'styled-components';
-import { hsla } from 'utils/styledUtils';
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: grid;

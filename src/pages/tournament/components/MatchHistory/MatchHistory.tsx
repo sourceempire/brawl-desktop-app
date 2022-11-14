@@ -1,8 +1,8 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Button } from 'common/components';
+import MatchResult from 'pages/shared/components/MatchResult';
 import { TournamentMatchInfo } from 'types/tournaments/TournamentInfo';
 import { MatchResultWrapper, MatchRoundLink, Matches, Wrapper } from './MatchHistory.styles';
-import MatchResult from './MatchResult';
 
 type Props = {
   matchList: TournamentMatchInfo[];

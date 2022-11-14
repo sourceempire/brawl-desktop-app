@@ -6,7 +6,7 @@ import FriendRequestCard from '../FriendRequestCard';
 import { ArrowDown, Wrapper } from './FriendRequestList.styles';
 
 const FriendRequests = () => {
-  const { user: loggedInUser } = useLoggedInUser();
+  const loggedInUser = useLoggedInUser();
   const { requestUsers, isLoading } = useFriendRequestFeed({ userId: loggedInUser.id });
   const [isExpanded, setExpanded] = useState(true);
 

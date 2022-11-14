@@ -66,15 +66,13 @@ export const TableCell = styled.div<TableCellProps>`
     :nth-child(16n + 16) {
       background-color: ${theme.colors.lightTint.base};
     }
-  `}
-`;
 
-export const TableHeader = styled(TableCell)``;
-
-export const TableData = styled(TableCell)`
-  ${({ theme }) => css`
     :nth-child(8n + 5) {
       color: ${theme.colors.accent.base};
     }
   `}
 `;
+
+export const TableHeader = styled(TableCell)``;
+
+export const TableData = styled(TableCell)``;
