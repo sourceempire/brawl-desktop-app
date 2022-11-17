@@ -1,17 +1,18 @@
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import { Fragment, MutableRefObject, useRef } from 'react';
+import { CSGORoundEndReason, CSGORoundResult, CSGOTeamSide } from 'types/match/Match';
 import { CSGOGameModes } from 'types/MatchSettings';
 import { Team } from 'types/team/Team';
 import {
-  CSGORoundResult,
-  CSGOTeamSide,
-  MiddleLine,
-  RoundWinnerIndicator,
+  RoundNumber,
+  RoundWinner,
   ScrollContainer,
   SideSwapIndicator,
   Wrapper
 } from './RoundWinnerIndicatorList.styles';
+import Icons from 'assets/icons/Icons';
 
 const { COMPETITIVE, WINGMAN, ONE_VS_ONE } = CSGOGameModes;
+const { ELIMINATION, EXPLODE, DEFUSE, TIME } = CSGORoundEndReason;
 
 const gameModeRoundCount = {
   [COMPETITIVE]: 30,
@@ -25,60 +26,61 @@ type Props = {
   team2: Team;
 };
 
+const RoundWinnerIcon = ({ reason }: { reason: CSGORoundEndReason }) => {
+  switch (reason) {
+    case ELIMINATION:
+      return <Icons.Skull fill="white" height={15} />;
+    case EXPLODE:
+      return <Icons.Explosion fill="white" height={15} />;
+    case DEFUSE:
+      return <Icons.DefuseKit fill="white" height={15} />;
+    case TIME:
+      return <Icons.Clock fill="white" height={15} />;
+  }
+};
+
 const RoundWinnerIndicatorList = ({ team1, team2, gameMode }: Props) => {
-  const [middleLineHeight, setMiddleLineHeight] = useState<number>(0);
   const scrollContainerRef = useRef() as MutableRefObject<HTMLDivElement>;
 
   // MOCK
   // TODO -> Create feed for round results
-  const roundResults: CSGORoundResult[] = Array(40)
+  const roundResults: CSGORoundResult[] = Array(16)
     .fill('')
     .map(() => ({
       winner: [team1.id, team2.id][Math.floor(Math.random() * 2)],
-      side: [CSGOTeamSide.T, CSGOTeamSide.CT][Math.floor(Math.random() * 2)]
+      side: [CSGOTeamSide.T, CSGOTeamSide.CT][Math.floor(Math.random() * 2)],
+      reason: Object.values(CSGORoundEndReason)[Math.floor(Math.random() * 4)]
     }));
-
-  useEffect(() => {
-    setMiddleLineHeight(scrollContainerRef.current.scrollHeight);
-  }, [roundResults]);
 
   return (
     <Wrapper>
       <ScrollContainer ref={scrollContainerRef}>
-        <div>
-          {roundResults.map((roundResult, index) => {
-            const currentRound = index + 1;
-            let sideSwapRound: number;
-            let modulu: number;
+        {roundResults.map((roundResult, index) => {
+          const totalRoundCount = gameModeRoundCount[gameMode];
+          const currentRound = index + 1;
 
-            if (currentRound > gameModeRoundCount[gameMode]) {
-              sideSwapRound = 3;
-              modulu = 1;
-            } else {
-              sideSwapRound = gameModeRoundCount[gameMode] / 2;
-              modulu = 0;
-            }
+          const isSideSwapRound =
+            currentRound <= totalRoundCount
+              ? currentRound % (totalRoundCount / 2) === 0
+              : (currentRound - totalRoundCount) % 3 === 0;
 
-            const isLastRound = roundResults.length === currentRound;
-            const isSideSwapRound = currentRound % sideSwapRound === modulu;
-            const showSideSwapRound = isSideSwapRound && !isLastRound;
+          const isLastRound = roundResults.length === currentRound;
+          const showSideSwapDelimiter = isSideSwapRound && !isLastRound;
 
-            return (
-              <>
-                <RoundWinnerIndicator
-                  key={index}
-                  side={roundResult.side}
-                  position={roundResult.winner === team1.id ? 'left' : 'right'}
-                />
-                {showSideSwapRound && <SideSwapIndicator />}
-              </>
-            );
-          })}
-          <MiddleLine height={middleLineHeight} />
-        </div>
+          return (
+            <Fragment key={index}>
+              <RoundWinner
+                side={roundResult.side}
+                position={roundResult.winner === team1.id ? 'left' : 'right'}>
+                <RoundWinnerIcon reason={roundResult.reason} />
+                <RoundNumber>{index + 1}</RoundNumber>
+              </RoundWinner>
+
+              {showSideSwapDelimiter && <SideSwapIndicator />}
+            </Fragment>
+          );
+        })}
       </ScrollContainer>
-
-      {/* <BottomShadow /> */}
     </Wrapper>
   );
 };

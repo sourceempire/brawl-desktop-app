@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { TeamId } from 'types/team/Team';
 
 export const Score = styled.div`
   display: grid;
@@ -36,5 +35,5 @@ export const TeamTables = styled.div`
   padding-top: 50px;
   display: grid;
   justify-items: center;
-  grid-template-columns: 47% auto 47%;
+  grid-template-columns: 46% auto 46%;
 `;

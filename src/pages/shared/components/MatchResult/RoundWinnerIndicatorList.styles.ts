@@ -1,98 +1,112 @@
 import styled, { css } from 'styled-components';
-import { TeamId } from 'types/team/Team';
-import { hsla } from 'utils/styledUtils';
-
-export enum CSGOTeamSide {
-  T = 'T',
-  CT = 'CT'
-}
-
-export type CSGORoundResult = {
-  winner: TeamId;
-  side: CSGOTeamSide;
-};
+import { CSGOTeamSide } from 'types/match/Match';
 
 export const Wrapper = styled.div`
   position: relative;
-  width: 100%;
   height: 100%;
+  width: 100%;
 `;
 
 export const ScrollContainer = styled.div`
   position: absolute;
+  margin-top: 46px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 6px;
   inset: 0;
   overflow: scroll;
-  margin-top: 46px;
 `;
 
-export const MiddleLine = styled.div<{ height: number }>`
+export const RoundNumber = styled.div`
   position: absolute;
-  top: 0;
-  left: 31px;
-  width: 2px;
-
-  ${({ height, theme }) => css`
-    background-color: ${theme.colors.lightTint.base};
-    height: ${height}px;
-  `}
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  opacity: 0.4;
 `;
 
-export const RoundWinnerIndicator = styled.div<{ side: CSGOTeamSide; position: 'right' | 'left' }>`
-  height: 24px;
-  width: 6px;
-  margin: 0 auto;
+export const RoundWinner = styled.div<{ side: CSGOTeamSide; position: 'right' | 'left' }>`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 55px;
+  height: 30px;
+  flex-shrink: 0;
 
   ${({ theme }) => css`
-    margin-bottom: ${theme.spacing.base}px;
+    border-radius: ${theme.borderRadius.default};
   `}
+
+  :before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 100%;
+  }
+
+  svg {
+    filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.5));
+  }
 
   ${({ side }) =>
     side === CSGOTeamSide.CT &&
     css`
-      background-color: orange;
+      svg {
+        fill: #3caccf;
+      }
+      :before {
+        background-color: #3caccf;
+      }
     `}
 
   ${({ side }) =>
     side === CSGOTeamSide.T &&
     css`
-      background-color: lightblue;
+      svg {
+        fill: #f8b847;
+      }
+      :before {
+        background-color: orange;
+      }
     `}
 
-  ${({ position }) =>
+  ${({ position, side }) =>
     position === 'left' &&
     css`
-      transform: translateX(-9px);
+      background-image: ${side === CSGOTeamSide.CT
+        ? 'linear-gradient(90deg, #3cacca55, #3caccf00 90%)'
+        : 'linear-gradient(90deg, #f8b84755, #f8b84700 90%)'};
+
+      :before {
+        left: 0;
+      }
+
+      ${RoundNumber} {
+        right: 0px;
+      }
     `}
 
-    ${({ position }) =>
+    ${({ position, side }) =>
     position === 'right' &&
     css`
-      transform: translateX(9px);
+      background-image: ${side === CSGOTeamSide.CT
+        ? 'linear-gradient(-90deg, #3cacca55, #3caccf00 90%)'
+        : 'linear-gradient(-90deg, #f8b84755, #f8b84700 90%)'};
+      :before {
+        right: 0;
+      }
+      ${RoundNumber} {
+        left: 0;
+      }
     `}
 `;
 
 export const SideSwapIndicator = styled.div`
-  width: 20px;
-  height: 2px;
   background-color: red;
   margin: 0 auto;
-
-  margin-bottom: 6px;
-  ${({ theme }) => css`
-    background-color: ${theme.colors.lightTint.base};
-  `}
-`;
-
-export const BottomShadow = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 18px;
-  ${({ theme }) => css`
-    background: linear-gradient(
-      ${hsla(theme.colors.secondary.base, 0)},
-      ${theme.colors.secondary.base}
-    );
-  `}
+  margin-bottom: 12px;
 `;

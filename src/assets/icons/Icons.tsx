@@ -36,6 +36,14 @@ import DatePickerArrowUrl, { ReactComponent as DatePickerArrowComponent } from '
 const DatePickerArrow = DatePickerArrowComponent as SVGComponent;
 DatePickerArrow.url = DatePickerArrowUrl;
 
+import DefuseKitUrl, { ReactComponent as DefuseKitComponent } from './DefuseKit.svg';
+const DefuseKit = DefuseKitComponent as SVGComponent;
+DefuseKit.url = DefuseKitUrl;
+
+import ExplosionUrl, { ReactComponent as ExplosionComponent } from './Explosion.svg';
+const Explosion = ExplosionComponent as SVGComponent;
+Explosion.url = ExplosionUrl;
+
 import FilterUrl, { ReactComponent as FilterComponent } from './Filter.svg';
 const Filter = FilterComponent as SVGComponent;
 Filter.url = FilterUrl;
@@ -76,6 +84,10 @@ import SelectArrowUrl, { ReactComponent as SelectArrowComponent } from './Select
 const SelectArrow = SelectArrowComponent as SVGComponent;
 SelectArrow.url = SelectArrowUrl;
 
+import SkullUrl, { ReactComponent as SkullComponent } from './Skull.svg';
+const Skull = SkullComponent as SVGComponent;
+Skull.url = SkullUrl;
+
 import SmallCrossUrl, { ReactComponent as SmallCrossComponent } from './SmallCross.svg';
 const SmallCross = SmallCrossComponent as SVGComponent;
 SmallCross.url = SmallCrossUrl;
@@ -102,6 +114,8 @@ const Icons = {
   Copy,
   Cross,
   DatePickerArrow,
+  DefuseKit,
+  Explosion,
   Filter,
   Friends,
   Key,
@@ -112,6 +126,7 @@ const Icons = {
   RemoveFriend,
   Search,
   SelectArrow,
+  Skull,
   SmallCross,
   Star,
   Ticket,
