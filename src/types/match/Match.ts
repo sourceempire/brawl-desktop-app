@@ -16,6 +16,24 @@ export type Match = {
   teams?: Team[];
 };
 
+export enum CSGOTeamSide {
+  T = 'T',
+  CT = 'CT'
+}
+
+export enum CSGORoundEndReason {
+  DEFUSE = 'defuse',
+  EXPLODE = 'explode',
+  ELIMINATION = 'eliminaton',
+  TIME = 'time'
+}
+
+export type CSGORoundResult = {
+  winner: TeamId;
+  side: CSGOTeamSide;
+  reason: CSGORoundEndReason;
+};
+
 export type CSGOMapResult = {
   mapName: string;
   mapWinner?: TeamId;
