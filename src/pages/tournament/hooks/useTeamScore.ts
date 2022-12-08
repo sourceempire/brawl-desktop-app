@@ -1,16 +1,16 @@
-import { Match, isCSGOMatch } from 'types/match/Match';
+import { MatchStats } from 'types/match/Match';
 
 type Options = {
-  match: Match;
+  matchStats?: MatchStats;
   teamId?: string;
 };
 
-const useTeamScore = ({ match, teamId }: Options) => {
-  if (!teamId) return null;
+const useTeamScore = ({ matchStats, teamId }: Options) => {
+  if (!teamId || !matchStats) return null;
 
-  if (isCSGOMatch(match) && match.mapsInfo?.[0]?.score && teamId) {
-    return match.mapsInfo[0].score && match.mapsInfo[0].score[teamId];
-  }
+  if (!matchStats.maps[0].teams[teamId]) return null;
+
+  return matchStats.maps[0].teams[teamId] && matchStats.maps[0].teams[teamId].score;
 
   return null;
 };

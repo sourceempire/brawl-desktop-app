@@ -1,5 +1,5 @@
 import { csgoMaps } from 'types/csgo/maps';
-import { CSGOMatch } from 'types/match/Match';
+import { CSGOMatch, MatchStats, RoundWin } from 'types/match/Match';
 import { Team } from 'types/team/Team';
 import { MapName, MapScore, Score, TeamTables } from './CSGOMatchResult.styles';
 import { Backdrop, Content, Wrapper } from './MatchResult.styles';
@@ -7,36 +7,44 @@ import RoundWinnerIndicatorList from './RoundWinnerIndicatorList';
 import TeamTable from './TeamTable';
 
 type Props = {
+  matchStats: MatchStats;
   match: CSGOMatch;
+  roundWins: RoundWin[];
   team1: Team;
   team2: Team;
   disableBackgroundFadeIn?: boolean;
 };
 
-const CSGOMatchResult = ({ match, team1, team2, disableBackgroundFadeIn }: Props) => {
-  if (!match.mapsInfo) return null;
-
-  const mapInfo = match.mapsInfo[0];
-  const mapDisplayName = csgoMaps[match.mapsInfo[0].mapName].displayName;
-  const mapImage = csgoMaps[match.mapsInfo[0].mapName].imageUrl.big;
-
+const CSGOMatchResult = ({
+  matchStats,
+  match,
+  roundWins,
+  team1,
+  team2,
+  disableBackgroundFadeIn
+}: Props) => {
+  if (!matchStats.maps) return null;
+  const map = matchStats.maps[0];
+  const mapDisplayName = csgoMaps[map.mapName].displayName;
+  const mapImage = csgoMaps[map.mapName].imageUrl.big;
   return (
     <Wrapper>
       <Backdrop mapImageUrl={mapImage} disableFade={disableBackgroundFadeIn} />
       <Content>
         <Score>
-          <MapScore isWinner={mapInfo.mapWinner === team1.id}>{mapInfo.score[team1.id]}</MapScore>
+          <MapScore isWinner={map.winner === team1.id}>{map.teams[team1.id].score}</MapScore>
           <MapName>{mapDisplayName}</MapName>
-          <MapScore isWinner={mapInfo.mapWinner === team2.id}>{mapInfo.score[team2.id]}</MapScore>
+          <MapScore isWinner={map.winner === team2.id}>{map.teams[team2.id].score}</MapScore>
         </Score>
         <TeamTables>
-          <TeamTable team={team1} />
+          <TeamTable team={team1} teamStats={map.teams[team1.id]} />
           <RoundWinnerIndicatorList
             team1={team1}
             team2={team2}
+            roundWins={roundWins}
             gameMode={match.matchSettings.mode}
           />
-          <TeamTable team={team2} />
+          <TeamTable team={team2} teamStats={map.teams[team2.id]} />
         </TeamTables>
       </Content>
     </Wrapper>
