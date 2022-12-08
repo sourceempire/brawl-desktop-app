@@ -2,15 +2,25 @@ import React from 'react';
 import { useUserFeed } from 'api/feeds';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import EllipsisText from 'common/components/EllipsisText';
+import { TeamStats } from 'types/match/Match';
 import { Team } from 'types/team/Team';
-import { ProfileImage, TableData, TableHeader, TeamLogo, Wrapper } from './TeamTable.styles';
+import {
+  MVPCount,
+  ProfileImage,
+  TableData,
+  TableHeader,
+  TeamLogo,
+  Wrapper
+} from './TeamTable.styles';
+import Icons from 'assets/icons/Icons';
 import placeholderTeamLogo from 'assets/images/placeholder-team-logo.png';
 
 type Props = {
   team: Team;
+  teamStats: TeamStats;
 };
 
-const TeamTable = ({ team }: Props) => {
+const TeamTable = ({ team, teamStats }: Props) => {
   return (
     <Wrapper>
       <TableHeader>
@@ -21,22 +31,37 @@ const TeamTable = ({ team }: Props) => {
       <TableHeader>D</TableHeader>
       <TableHeader>A</TableHeader>
       <TableHeader>+/-</TableHeader>
-      <TableHeader>K/D</TableHeader>
-      <TableHeader>ADR</TableHeader>
-      <TableHeader>HS%</TableHeader>
+      <TableHeader>MVP</TableHeader>
+      <TableHeader>HS</TableHeader>
 
-      {team.players.map((userId) => (
-        <React.Fragment key={userId}>
-          <PlayerCell userId={userId} />
-          <TableData>-</TableData>
-          <TableData>-</TableData>
-          <TableData>-</TableData>
-          <TableData>-</TableData>
-          <TableData>-</TableData>
-          <TableData>-</TableData>
-          <TableData>-</TableData>
-        </React.Fragment>
-      ))}
+      {team.players.map((userId) => {
+        const { kills, deaths, assists, mvp, headshotKills } = teamStats.players[userId];
+
+        const headshotPercentage = isNaN(headshotKills / kills)
+          ? 0
+          : `${((headshotKills / kills) * 100).toFixed(1)}`;
+
+        return (
+          <React.Fragment key={userId}>
+            <PlayerCell userId={userId} />
+            <TableData>{kills}</TableData>
+            <TableData>{deaths}</TableData>
+            <TableData>{assists}</TableData>
+            <TableData>{kills - deaths}</TableData>
+            <TableData>
+              {mvp === 0 ? (
+                mvp
+              ) : (
+                <>
+                  <Icons.Star fill="yellow" height={14} />
+                  <MVPCount>{mvp}</MVPCount>
+                </>
+              )}
+            </TableData>
+            <TableData>{headshotPercentage}%</TableData>
+          </React.Fragment>
+        );
+      })}
     </Wrapper>
   );
 };
