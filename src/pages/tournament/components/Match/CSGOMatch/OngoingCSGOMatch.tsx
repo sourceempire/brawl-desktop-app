@@ -1,3 +1,4 @@
+import { useMatchStatsFeed } from 'api/feeds/hooks/useMatchStatsFeed';
 import popup from 'common/popup';
 import { useMatchContext } from 'context/MatchContext';
 import { SimpleLoading } from 'frames/main/friends/components/Shared.styles';
@@ -19,6 +20,7 @@ import {
 
 const OngoingCSGOMatch = () => {
   const { match, team1, team2 } = useMatchContext<CSGOMatch>();
+  const { matchStats } = useMatchStatsFeed(match.id);
 
   if (!match.matchSettings.maps?.[0]) return null;
   if (!team1 || !team2) return null;
@@ -30,9 +32,11 @@ const OngoingCSGOMatch = () => {
   const { displayName, imageUrl } = csgoMaps[map];
 
   const handleCopyServerUrl = () => {
-    if (!match?.joinLink) return;
-    navigator.clipboard.writeText(match.joinLink);
-    popup.info(`Copied '${match.joinLink}' to clipboard`, { timer: 2000 });
+    if (!match?.serverAddress) return;
+    const textToCopy = `connect ${match.serverAddress}`;
+
+    navigator.clipboard.writeText('connect ' + match.serverAddress);
+    popup.info(`Copied '${textToCopy}' to clipboard`, { timer: 2000 });
   };
 
   return (
@@ -41,9 +45,9 @@ const OngoingCSGOMatch = () => {
         <MapImage src={imageUrl.big} />
         <MapName>{displayName}</MapName>
 
-        <Score>{match.mapsInfo?.[0]?.score[team1.id]}</Score>
+        <Score>{matchStats?.maps?.[0]?.teams[team1.id].score}</Score>
         <Score>-</Score>
-        <Score>{match.mapsInfo?.[0]?.score[team2.id]}</Score>
+        <Score>{matchStats?.maps?.[0]?.teams[team2.id].score}</Score>
       </MapImageWrapper>
       {isStarting && (
         <>
@@ -58,7 +62,7 @@ const OngoingCSGOMatch = () => {
               <ClipBoard>
                 <CopyIcon />
               </ClipBoard>
-              <ServerUrl>{match.joinLink}</ServerUrl>
+              <ServerUrl>connect {match.serverAddress}</ServerUrl>
             </ServerUrlWrapper>
             <JoinServerButton primary>Connect to server</JoinServerButton>
           </JoinServerWrapper>

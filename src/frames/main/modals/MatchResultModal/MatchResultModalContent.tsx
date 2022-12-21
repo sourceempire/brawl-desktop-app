@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useMatchFeed } from 'api/feeds';
+import { useMatchStatsFeed } from 'api/feeds/hooks/useMatchStatsFeed';
 import { getTournamentByMatchId } from 'api/requests/TournamentRequests';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'common/components';
@@ -17,13 +18,19 @@ type Props = {
 
 const MatchResultModalContent = ({ matchId }: Props) => {
   const navigate = useNavigate();
-  const { match, team1, team2, isLoading } = useMatchFeed(matchId);
+  const { match, team1, team2, isLoading: isLoadingMatch } = useMatchFeed(matchId);
+  const {
+    matchStats,
+    roundWins,
+    isLoading: isLoadingMatchStats,
+    hasMatchStats
+  } = useMatchStatsFeed(matchId);
   const { hideModal } = useContext(MatchResultModalContext);
 
   const [tournament, setTournament] = useState<Tournament>();
 
   useEffect(() => {
-    if (isLoading) return;
+    if (isLoadingMatch || isLoadingMatchStats) return;
     if (!match) return;
 
     if (match.matchType === MatchType.TOURNAMENT) {
@@ -31,9 +38,7 @@ const MatchResultModalContent = ({ matchId }: Props) => {
         setTournament(result.tournament);
       });
     }
-  }, [isLoading, match]);
-
-  if (isLoading) return null;
+  }, [isLoadingMatch, isLoadingMatchStats, match]);
 
   const handleNavigate = () => {
     if (tournament) {
@@ -42,6 +47,12 @@ const MatchResultModalContent = ({ matchId }: Props) => {
 
     hideModal();
   };
+
+  if (isLoadingMatch || isLoadingMatchStats) return null;
+
+  if (!hasMatchStats) {
+    return <Wrapper>No match result for this match yet</Wrapper>;
+  }
 
   return (
     <Wrapper>
@@ -52,7 +63,14 @@ const MatchResultModalContent = ({ matchId }: Props) => {
       )}
 
       {isCSGOMatch(match) && (
-        <CSGOMatchResult match={match} team1={team1} team2={team2} disableBackgroundFadeIn />
+        <CSGOMatchResult
+          matchStats={matchStats}
+          roundWins={roundWins}
+          match={match}
+          team1={team1}
+          team2={team2}
+          disableBackgroundFadeIn
+        />
       )}
 
       <Buttons>

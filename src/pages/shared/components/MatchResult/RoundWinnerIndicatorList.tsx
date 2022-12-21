@@ -1,5 +1,5 @@
-import { Fragment, MutableRefObject, useRef } from 'react';
-import { CSGORoundEndReason, CSGORoundResult, CSGOTeamSide } from 'types/match/Match';
+import { Fragment, MutableRefObject, useEffect, useRef } from 'react';
+import { CSGORoundEndReason, CSGORoundResult, CSGOTeamSide, RoundWin } from 'types/match/Match';
 import { CSGOGameModes } from 'types/MatchSettings';
 import { Team } from 'types/team/Team';
 import {
@@ -22,6 +22,7 @@ const gameModeRoundCount = {
 
 type Props = {
   gameMode: CSGOGameModes;
+  roundWins: RoundWin[];
   team1: Team;
   team2: Team;
 };
@@ -39,23 +40,17 @@ const RoundWinnerIcon = ({ reason }: { reason: CSGORoundEndReason }) => {
   }
 };
 
-const RoundWinnerIndicatorList = ({ team1, team2, gameMode }: Props) => {
+const RoundWinnerIndicatorList = ({ team1, team2, roundWins, gameMode }: Props) => {
   const scrollContainerRef = useRef() as MutableRefObject<HTMLDivElement>;
 
-  // MOCK
-  // TODO -> Create feed for round results
-  const roundResults: CSGORoundResult[] = Array(16)
-    .fill('')
-    .map(() => ({
-      winner: [team1.id, team2.id][Math.floor(Math.random() * 2)],
-      side: [CSGOTeamSide.T, CSGOTeamSide.CT][Math.floor(Math.random() * 2)],
-      reason: Object.values(CSGORoundEndReason)[Math.floor(Math.random() * 4)]
-    }));
+  useEffect(() => {
+    scrollContainerRef.current.scrollTo({ top: 1000, behavior: 'smooth' });
+  }, [roundWins.length]);
 
   return (
     <Wrapper>
       <ScrollContainer ref={scrollContainerRef}>
-        {roundResults.map((roundResult, index) => {
+        {roundWins.map((roundResult, index) => {
           const totalRoundCount = gameModeRoundCount[gameMode];
           const currentRound = index + 1;
 
@@ -64,7 +59,7 @@ const RoundWinnerIndicatorList = ({ team1, team2, gameMode }: Props) => {
               ? currentRound % (totalRoundCount / 2) === 0
               : (currentRound - totalRoundCount) % 3 === 0;
 
-          const isLastRound = roundResults.length === currentRound;
+          const isLastRound = roundWins.length === currentRound;
           const showSideSwapDelimiter = isSideSwapRound && !isLastRound;
 
           return (

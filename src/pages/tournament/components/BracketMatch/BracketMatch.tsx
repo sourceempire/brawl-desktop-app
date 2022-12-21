@@ -1,4 +1,5 @@
 import useMatchFeed from 'api/feeds/hooks/useMatchFeed';
+import { useMatchStatsFeed } from 'api/feeds/hooks/useMatchStatsFeed';
 import useTeamScore from 'pages/tournament/hooks/useTeamScore';
 import {
   Team1,
@@ -21,10 +22,12 @@ type Props = {
 
 const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }: Props) => {
   const { match, isLoading } = useMatchFeed(matchId);
-  const team1Score = useTeamScore({ match, teamId: match.teams?.[0].id });
-  const team2Score = useTeamScore({ match, teamId: match.teams?.[1].id });
+  const { matchStats, isLoading: isLoadingMatchStats } = useMatchStatsFeed(matchId);
 
-  if (isLoading) return null;
+  const team1Score = useTeamScore({ matchStats, teamId: match.teams?.[0].id });
+  const team2Score = useTeamScore({ matchStats, teamId: match.teams?.[1].id });
+
+  if (isLoading || isLoadingMatchStats) return null;
 
   return (
     <Wrapper
@@ -37,7 +40,7 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
         <TeamName>{match.teams?.[0].teamName}</TeamName>
-        <TeamScore winner={match.winnerTeamId === match.teams?.[0].id}>{team1Score}</TeamScore>
+        <TeamScore winner={matchStats.winner === match.teams?.[0].id}>{team1Score}</TeamScore>
       </Team1>
 
       <Team2>
@@ -45,7 +48,7 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
         <TeamName>{match.teams?.[1].teamName}</TeamName>
-        <TeamScore winner={match.winnerTeamId === match.teams?.[1].id}>{team2Score}</TeamScore>
+        <TeamScore winner={matchStats.winner === match.teams?.[1].id}>{team2Score}</TeamScore>
       </Team2>
     </Wrapper>
   );

@@ -1,6 +1,7 @@
 import Game from 'types/Game';
 import { CSGOMatchSettings } from 'types/MatchSettings';
 import { Team, TeamId } from 'types/team/Team';
+import { UserId } from 'types/user/User';
 
 export enum MatchType {
   TOURNAMENT = 'tournament'
@@ -17,15 +18,15 @@ export type Match = {
 };
 
 export enum CSGOTeamSide {
-  T = 'T',
-  CT = 'CT'
+  T = 't',
+  CT = 'ct'
 }
 
 export enum CSGORoundEndReason {
-  DEFUSE = 'defuse',
-  EXPLODE = 'explode',
-  ELIMINATION = 'eliminaton',
-  TIME = 'time'
+  DEFUSE = 'bombDefused',
+  EXPLODE = 'bombExploded',
+  ELIMINATION = 'elimination',
+  TIME = 'timeout'
 }
 
 export type CSGORoundResult = {
@@ -72,11 +73,46 @@ export type CSGOVeto = {
 
 export type CSGOMatch = Match & {
   matchSettings: CSGOMatchSettings;
-  seriesScore: Record<TeamId, Score>;
-  mapsInfo?: CSGOMapResult[];
   matchStage: CSGOMatchStage;
   veto?: CSGOVeto;
-  joinLink: string | null;
+  serverAddress: string | null;
+};
+
+export type PlayerStats = {
+  assists: number;
+  bombDefuses: number;
+  bombPlants: number;
+  deaths: number;
+  headshotKills: number;
+  kills: number;
+  mvp: number;
+  teamKills: number;
+};
+
+export type TeamStats = {
+  score: Score;
+  players: Record<UserId, PlayerStats>;
+};
+
+export type MapStats = {
+  mapName: CSGOMapName;
+  winner?: TeamId;
+  teams: Record<TeamId, TeamStats>;
+};
+
+export type MatchStats = {
+  winner?: TeamId;
+  gameId: string;
+  maps: MapStats[];
+};
+
+export type RoundWin = {
+  mapIndex: number;
+  matchId: string;
+  reason: CSGORoundEndReason;
+  roundIndex: 0;
+  side: CSGOTeamSide;
+  winner: string;
 };
 
 export const isCSGOMatch = (match: Match): match is CSGOMatch => {
