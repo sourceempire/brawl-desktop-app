@@ -12,7 +12,7 @@ enum Direction {
   RIGHT
 }
 
-export function Tabs({ children, underlined = false }: TabsProp) {
+export function Tabs({ children }: TabsProp) {
   if (!Array.isArray(children)) {
     children = [children];
   }

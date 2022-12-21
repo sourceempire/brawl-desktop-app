@@ -107,13 +107,13 @@ function getMonthNumberOfDays(month: number, year: number): number {
   return 32 - new Date(year, month, 32).getDate();
 }
 
-function isLeapMonth(month: Month, year: number): boolean {
-  return month.index === 1 && isLeapYear(year);
-}
+// function isLeapMonth(month: Month, year: number): boolean {
+//   return month.index === 1 && isLeapYear(year);
+// }
 
-function isLeapYear(year: number): boolean {
-  if (year % 4 !== 0) return false;
-  if (year % 100 === 0) return false;
-  if (year % 400 !== 0) return false;
-  return true;
-}
+// function isLeapYear(year: number): boolean {
+//   if (year % 4 !== 0) return false;
+//   if (year % 100 === 0) return false;
+//   if (year % 400 !== 0) return false;
+//   return true;
+// }

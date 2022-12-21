@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 import { getPlatform } from 'utils/processUtils';
 import ResetStyle from './ResetStyle';

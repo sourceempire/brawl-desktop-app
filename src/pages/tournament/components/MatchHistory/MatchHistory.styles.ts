@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-import { Button } from 'common/components';
 
 export const Wrapper = styled.div`
   flex-grow: 1;

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { hsla, rgba } from 'utils/styledUtils';
+import { hsla } from 'utils/styledUtils';
 
 export const Wrapper = styled.div`
   width: 100%;
