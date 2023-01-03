@@ -17,8 +17,8 @@ export const Content = styled.div<ContentProps>`
   ${({ width, height, noPadding, theme }) => css`
     height: ${height ? height : 'auto'};
     width: ${width ? width : 'auto'};
-    background-color: ${theme.colors.secondary.base};
-    border: 1px solid ${theme.colors.surface.base};
+    background-color: ${theme.colors.surface.base};
+    border: 1px solid ${theme.colors.secondary.base};
     border-radius: ${theme.borderRadius.default};
 
     ${!noPadding &&

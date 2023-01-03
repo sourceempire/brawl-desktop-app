@@ -20,7 +20,7 @@ export const Wrapper = styled.div`
 
     padding-top: ${theme.titleBarHeight}px;
     // border-top-left-radius: ${theme.borderRadius.default};
-    background-color: ${theme.colors.secondary.base};
+    background-color: ${theme.colors.surface.base};
   `}
 `;
 
@@ -40,12 +40,12 @@ export const FriendAction = styled(ActionButton)`
   ${({ theme }) => css`
     margin-left: ${theme.spacing.base}px;
     margin-right: 0;
-    background-color: ${theme.colors.surface.base};
+    background-color: ${theme.colors.secondary.base};
     :hover {
-      background-color: ${theme.colors.surface.hover};
+      background-color: ${theme.colors.secondary.hover};
     }
     :active {
-      background-color: ${theme.colors.surface.active};
+      background-color: ${theme.colors.secondary.active};
     }
   `}
 `;
@@ -81,8 +81,8 @@ export const ScrollContentWrapper = styled.div`
     ${({ theme }) => css`
       height: ${theme.spacing.baseX2}px;
       background: linear-gradient(
-        ${theme.colors.secondary.base},
-        ${hsla(theme.colors.secondary.base, 0)}
+        ${theme.colors.surface.base},
+        ${hsla(theme.colors.surface.base, 0)}
       );
     `}
   }
@@ -90,8 +90,8 @@ export const ScrollContentWrapper = styled.div`
     ${({ theme }) => css`
       height: ${theme.spacing.baseX4}px;
       background: linear-gradient(
-        ${hsla(theme.colors.secondary.base, 0)},
-        ${theme.colors.secondary.base}
+        ${hsla(theme.colors.surface.base, 0)},
+        ${theme.colors.surface.base}
       );
     `}
     bottom: 0;
