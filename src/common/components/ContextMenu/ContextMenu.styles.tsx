@@ -14,7 +14,7 @@ export const Wrapper = styled.div<WrapperProps>`
   filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.2));
 
   ${({ position, theme }) => css`
-    border: 1px solid ${theme.colors.lightTint.base};
+    border: 1px solid ${theme.colors.surface.base};
     top: ${position.top}px;
     right: ${position.right}px;
     bottom: ${position.bottom}px;
@@ -33,8 +33,8 @@ export const Wrapper = styled.div<WrapperProps>`
         top: 0px;
         height: 10px;
         width: 10px;
-        border-left: 1px solid ${theme.colors.lightTint.base};
-        border-top: 1px solid ${theme.colors.lightTint.base};
+        border-left: 1px solid ${theme.colors.surface.base};
+        border-top: 1px solid ${theme.colors.surface.base};
         transform: translate(${arrowPosition?.left ? '-50%' : '50%'}, -50%) rotate(45deg);
         background-color: ${theme.colors.secondary.base};
         left: ${arrowPosition?.left}px;

@@ -23,7 +23,17 @@ declare module 'styled-components' {
         hover: string;
         active: string;
       };
-      lightTint: {
+      surface: {
+        base: string;
+        hover: string;
+        active: string;
+      };
+      surfaceSecondary: {
+        base: string;
+        hover: string;
+        active: string;
+      };
+      surfaceElements: {
         base: string;
         hover: string;
         active: string;

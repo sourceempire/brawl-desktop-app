@@ -40,12 +40,12 @@ export const FriendAction = styled(ActionButton)`
   ${({ theme }) => css`
     margin-left: ${theme.spacing.base}px;
     margin-right: 0;
-    background-color: ${theme.colors.lightTint.base};
+    background-color: ${theme.colors.surface.base};
     :hover {
-      background-color: ${theme.colors.lightTint.hover};
+      background-color: ${theme.colors.surface.hover};
     }
     :active {
-      background-color: ${theme.colors.lightTint.active};
+      background-color: ${theme.colors.surface.active};
     }
   `}
 `;

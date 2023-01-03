@@ -54,11 +54,11 @@ export const StageDot = styled.div<{ status: StageStatus }>`
   ${({ theme, status }) => css`
     width: ${theme.spacing.base * 1.7}px;
     height: ${theme.spacing.base * 1.7}px;
-    border: 3px solid ${theme.colors.lightTint.base};
+    border: 3px solid ${theme.colors.surface.base};
 
     ${(status === StageStatus.ONGOING || status === StageStatus.COMPLETED) &&
     css`
-      border: 0 solid ${hsla(theme.colors.lightTint.base, 0)};
+      border: 0 solid ${hsla(theme.colors.surface.base, 0)};
     `}
 
     ${status === StageStatus.ONGOING &&
@@ -71,7 +71,7 @@ export const StageDot = styled.div<{ status: StageStatus }>`
     ${status === StageStatus.COMPLETED &&
     css`
       transform: scale(2);
-      background-color: ${theme.colors.lightTint.base};
+      background-color: ${theme.colors.surface.base};
     `}
   `}
 `;
@@ -89,7 +89,7 @@ export const Edge = styled.div<{ fadeIn: boolean; fadeOut: boolean; preventAnima
   height: 2px;
   overflow: hidden;
   ${({ theme, fadeIn, fadeOut, preventAnimations }) => css`
-    background-color: ${theme.colors.lightTint.base};
+    background-color: ${theme.colors.surface.base};
 
     :after,
     :before {
@@ -102,9 +102,9 @@ export const Edge = styled.div<{ fadeIn: boolean; fadeOut: boolean; preventAnima
       inset: 0;
       background-image: linear-gradient(
         -90deg,
-        ${theme.colors.lightTint.base},
+        ${theme.colors.surface.base},
         ${theme.colors.accent.base},
-        ${theme.colors.lightTint.base}
+        ${theme.colors.surface.base}
       );
     }
 

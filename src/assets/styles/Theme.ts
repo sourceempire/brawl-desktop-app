@@ -90,12 +90,21 @@ export const theme: DefaultTheme = {
       hover: 'hsl(238, 19%, 36%)',
       active: 'hsl(238, 19%, 46%)'
     },
-    lightTint: {
-      base: 'hsl(237, 19%, 43%)',
-      hover: 'hsl(237, 19%, 53%)',
-      active: 'hsl(237, 19%, 63%)'
+    surface: {
+      base: 'hsl(240, 19%, 21%)',
+      hover: 'hsl(240, 19%, 31%)',
+      active: 'hsl(240, 19%, 41%)'
     },
-
+    surfaceSecondary: {
+      base: 'hsl(238, 19%, 34%)',
+      hover: 'hsl(238, 19%, 44%)',
+      active: 'hsl(238, 19%, 54%)'
+    },
+    surfaceElements: {
+      base: 'hsl(240, 19%, 29%)',
+      hover: 'hsl(240, 19%, 39%)',
+      active: 'hsl(240, 19%, 49%)'
+    },
     textPrimaryLight: 'rgba(255, 255, 255, 1)',
     textSecondaryLight: 'rgba(218, 218, 218, .67)',
     textDisabledLight: 'rgba(218, 218, 218, .50)',

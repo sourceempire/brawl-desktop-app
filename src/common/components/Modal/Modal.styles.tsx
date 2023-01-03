@@ -18,7 +18,7 @@ export const Content = styled.div<ContentProps>`
     height: ${height ? height : 'auto'};
     width: ${width ? width : 'auto'};
     background-color: ${theme.colors.secondary.base};
-    border: 1px solid ${theme.colors.lightTint.base};
+    border: 1px solid ${theme.colors.surface.base};
     border-radius: ${theme.borderRadius.default};
 
     ${!noPadding &&
@@ -44,7 +44,7 @@ export const CrossButton = styled.img`
   padding: 12px;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.lightTint.hover};
+    background-color: ${({ theme }) => theme.colors.surface.hover};
     border-radius: 3px;
   }
 `;

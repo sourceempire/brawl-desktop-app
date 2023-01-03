@@ -26,7 +26,7 @@ export const Number = styled.div`
   ${({ theme }) => css`
     ${theme.textStyles.stylizedHeader}
     border-radius: ${theme.borderRadius.default};
-    background-color: ${theme.colors.lightTint.base};
+    background-color: ${theme.colors.surface.base};
   `}
 `;
 

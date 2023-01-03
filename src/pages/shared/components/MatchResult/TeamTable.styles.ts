@@ -63,7 +63,7 @@ export const TableCell = styled.div<TableCellProps>`
     :nth-child(14n + 12),
     :nth-child(14n + 13),
     :nth-child(14n + 14) {
-      background-color: ${theme.colors.lightTint.base};
+      background-color: ${theme.colors.surface.base};
     }
 
     :nth-child(7n + 5) {

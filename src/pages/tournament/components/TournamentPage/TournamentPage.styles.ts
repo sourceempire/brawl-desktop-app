@@ -35,7 +35,7 @@ export const TournamentNavbar = styled.div`
   grid-template-columns: 1fr auto 1fr;
   min-height: 52px;
   ${({ theme }) => css`
-    border-bottom: 2px solid ${theme.colors.lightTint.base};
+    border-bottom: 2px solid ${theme.colors.surface.base};
     margin: 0 -${theme.spacing.baseX3}px;
     padding: 0 ${theme.spacing.baseX3}px;
   `}

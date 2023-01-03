@@ -31,7 +31,7 @@ export const Maps = styled.div`
   height: min-content;
 
   ${({ theme }) => css`
-    background-color: ${theme.colors.lightTint.base};
+    background-color: ${theme.colors.surface.base};
     gap: ${theme.spacing.base}px;
     padding: ${theme.spacing.base}px;
     border-radius: ${theme.borderRadius.default};
@@ -75,7 +75,7 @@ export const CSGOMapWrapper = styled.div<CSGOMapWrapperProps>`
         `
       : css`
           :hover {
-            outline: 3px solid ${theme.colors.lightTint.hover};
+            outline: 3px solid ${theme.colors.surface.hover};
           }
         `}
   `}
@@ -106,7 +106,7 @@ export const ActionContainer = styled.div`
   width: 100%;
 
   ${({ theme }) => css`
-    background-color: ${theme.colors.lightTint.base};
+    background-color: ${theme.colors.surface.base};
     border-radius: ${theme.borderRadius.default};
   `}
 `;

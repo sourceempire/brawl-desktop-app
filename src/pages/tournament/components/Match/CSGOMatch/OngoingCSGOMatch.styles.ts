@@ -85,7 +85,7 @@ export const ClipBoard = styled.div`
   height: 100%;
   width: 30px;
   ${({ theme }) => css`
-    background-color: ${theme.colors.lightTint.hover};
+    background-color: ${theme.colors.surface.hover};
     margin-right: ${theme.spacing.base}px;
   `}
 `;
@@ -104,16 +104,16 @@ export const ServerUrlWrapper = styled.div`
   overflow: hidden;
   flex-grow: 1;
   ${({ theme }) => css`
-    background-color: ${theme.colors.lightTint.base};
+    background-color: ${theme.colors.surface.base};
     border-radius: ${theme.borderRadius.default};
     :hover {
-      background-color: ${theme.colors.lightTint.hover};
+      background-color: ${theme.colors.surface.hover};
       ${ClipBoard} {
-        background-color: ${theme.colors.lightTint.active};
+        background-color: ${theme.colors.surface.active};
       }
     }
     :active {
-      background-color: ${hsla(theme.colors.lightTint.active, 0.8)};
+      background-color: ${hsla(theme.colors.surface.active, 0.8)};
     }
   `}
 `;

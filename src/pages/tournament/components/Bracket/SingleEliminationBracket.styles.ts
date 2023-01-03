@@ -17,7 +17,7 @@ export const RoundName = styled.div<{ active: boolean }>`
     padding: ${theme.spacing.base}px ${theme.spacing.baseX3}px;
     border-radius: ${theme.borderRadius.default};
 
-    background-color: ${active ? theme.colors.accent.base : theme.colors.lightTint.base};
+    background-color: ${active ? theme.colors.accent.base : theme.colors.surface.base};
     color: ${active ? theme.colors.textPrimaryDark : theme.colors.textPrimaryLight};
   `}
 `;
