@@ -33,7 +33,7 @@ declare module 'styled-components' {
         hover: string;
         active: string;
       };
-      surfaceElements: {
+      surfaceElement: {
         base: string;
         hover: string;
         active: string;

@@ -100,7 +100,7 @@ export const theme: DefaultTheme = {
       hover: 'hsl(238, 19%, 44%)',
       active: 'hsl(238, 19%, 54%)'
     },
-    surfaceElements: {
+    surfaceElement: {
       base: 'hsl(240, 19%, 29%)',
       hover: 'hsl(240, 19%, 39%)',
       active: 'hsl(240, 19%, 49%)'
