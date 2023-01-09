@@ -37,7 +37,6 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@types/sockjs-client": "^1.5.1",
     "@types/styled-components": "^5.1.25",
     "@types/uuid": "^8.3.4",
@@ -63,7 +62,6 @@
     "start": "concurrently \"npm run react-start\" \"wait-on http://localhost:3000 && electron .\"",
     "build": "npm run react-build && npm run electron-build",
     "electron-build": "electron-builder",
-    "electron": "electron .",
     "release:mac": "npm run build && electron-builder --mac --publish always",
     "release:windows": "npm run build && electron-builder --win --publish always",
     "increment-version-patch": "npm version patch",
