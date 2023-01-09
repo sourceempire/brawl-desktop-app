@@ -106,7 +106,7 @@ export const ActionContainer = styled.div`
   width: 100%;
 
   ${({ theme }) => css`
-    background-color: ${theme.colors.surface.base};
+    background-color: ${theme.colors.surfaceSecondary.base};
     border-radius: ${theme.borderRadius.default};
   `}
 `;

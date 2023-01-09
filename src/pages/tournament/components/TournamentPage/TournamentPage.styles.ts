@@ -23,7 +23,7 @@ export const TournamentContent = styled.div`
 
   ${({ theme }) => css`
     padding: 0 ${theme.spacing.baseX3}px ${theme.spacing.baseX2}px;
-    background-color: ${theme.colors.secondary.base};
+    background-color: ${theme.colors.surface.base};
     border-radius: ${theme.borderRadius.default};
   `}
 `;
