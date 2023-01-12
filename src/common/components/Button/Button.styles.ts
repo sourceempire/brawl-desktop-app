@@ -47,12 +47,12 @@ export const Wrapper = styled.button<Props>`
 
   ${({ theme, primary, accent, alert, hasIcon, small }) => css`
     border-radius: ${theme.borderRadius.default};
-    background-color: ${theme.colors.lightTint.base};
+    background-color: ${theme.colors.secondary.base};
     :hover {
-      background-color: ${theme.colors.lightTint.hover};
+      background-color: ${theme.colors.secondary.hover};
     }
     :active {
-      background-color: ${theme.colors.lightTint.active};
+      background-color: ${theme.colors.secondary.active};
     }
 
     height: ${small ? 24 : 30}px;

@@ -23,7 +23,7 @@ export const TournamentContent = styled.div`
 
   ${({ theme }) => css`
     padding: 0 ${theme.spacing.baseX3}px ${theme.spacing.baseX2}px;
-    background-color: ${theme.colors.secondary.base};
+    background-color: ${theme.colors.surface.base};
     border-radius: ${theme.borderRadius.default};
   `}
 `;
@@ -35,7 +35,7 @@ export const TournamentNavbar = styled.div`
   grid-template-columns: 1fr auto 1fr;
   min-height: 52px;
   ${({ theme }) => css`
-    border-bottom: 2px solid ${theme.colors.lightTint.base};
+    border-bottom: 2px solid ${theme.colors.surface.base};
     margin: 0 -${theme.spacing.baseX3}px;
     padding: 0 ${theme.spacing.baseX3}px;
   `}

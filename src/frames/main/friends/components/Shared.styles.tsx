@@ -63,7 +63,7 @@ export const SimpleLoading = () => <LoadingAnimation src={simpleLoading} />;
 
 const skeletonLoadingStyle = css`
   ${({ theme }) => css`
-    background-color: ${theme.colors.lightTint.base};
+    background-color: ${theme.colors.surface.base};
     border-radius: ${theme.borderRadius.default};
   `}
 

@@ -54,11 +54,11 @@ export const StageDot = styled.div<{ status: StageStatus }>`
   ${({ theme, status }) => css`
     width: ${theme.spacing.base * 1.7}px;
     height: ${theme.spacing.base * 1.7}px;
-    border: 3px solid ${theme.colors.lightTint.base};
+    border: 3px solid ${theme.colors.surfaceElement.hover};
 
     ${(status === StageStatus.ONGOING || status === StageStatus.COMPLETED) &&
     css`
-      border: 0 solid ${hsla(theme.colors.lightTint.base, 0)};
+      border: 0 solid ${hsla(theme.colors.surfaceElement.hover, 0)};
     `}
 
     ${status === StageStatus.ONGOING &&
@@ -71,7 +71,7 @@ export const StageDot = styled.div<{ status: StageStatus }>`
     ${status === StageStatus.COMPLETED &&
     css`
       transform: scale(2);
-      background-color: ${theme.colors.lightTint.base};
+      background-color: ${theme.colors.surfaceElement.hover};
     `}
   `}
 `;
@@ -89,7 +89,7 @@ export const Edge = styled.div<{ fadeIn: boolean; fadeOut: boolean; preventAnima
   height: 2px;
   overflow: hidden;
   ${({ theme, fadeIn, fadeOut, preventAnimations }) => css`
-    background-color: ${theme.colors.lightTint.base};
+    background-color: ${theme.colors.surfaceElement.hover};
 
     :after,
     :before {
@@ -102,9 +102,9 @@ export const Edge = styled.div<{ fadeIn: boolean; fadeOut: boolean; preventAnima
       inset: 0;
       background-image: linear-gradient(
         -90deg,
-        ${theme.colors.lightTint.base},
+        ${theme.colors.surfaceElement.hover},
         ${theme.colors.accent.base},
-        ${theme.colors.lightTint.base}
+        ${theme.colors.surfaceElement.hover}
       );
     }
 

@@ -35,7 +35,7 @@ export const AvatarImage = styled.img`
   width: 100%;
   transition: transform 0.3s;
   ${({ theme }) => css`
-    background-color: ${theme.colors.lightTint.base};
+    background-color: ${theme.colors.surface.base};
   `};
 `;
 

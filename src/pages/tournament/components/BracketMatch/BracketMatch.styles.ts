@@ -77,7 +77,7 @@ export const TeamLogo = styled.div`
   ${({ theme }) => css`
     height: ${theme.spacing.baseX5}px;
     width: ${theme.spacing.baseX5}px;
-    background-color: ${theme.colors.lightTint.base};
+    background-color: ${theme.colors.surface.base};
   `};
 `;
 
@@ -102,7 +102,7 @@ export const TeamScore = styled.div<{ winner: boolean }>`
   height: ${teamHeight}px;
   width: ${teamHeight}px;
   ${({ theme, winner }) => css`
-    background-color: ${theme.colors.lightTint.base};
+    background-color: ${theme.colors.surface.base};
     ${winner &&
     css`
       background-color: ${theme.colors.accent.base};
@@ -123,7 +123,7 @@ export const TeamName = styled.div`
 
   ${({ theme }) => css`
     padding: 0 ${theme.spacing.base}px;
-    background-color: ${theme.colors.lightTint.base};
+    background-color: ${theme.colors.surface.base};
   `}
 `;
 

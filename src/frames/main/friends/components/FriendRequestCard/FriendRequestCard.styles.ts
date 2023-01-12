@@ -11,7 +11,7 @@ export const RequestActions = styled.div`
 
 export const RequestAction = styled(ActionButton)`
   ${({ theme }) => css`
-    background-color: ${theme.colors.lightTint.base};
+    background-color: ${theme.colors.surface.base};
   `}
 `;
 

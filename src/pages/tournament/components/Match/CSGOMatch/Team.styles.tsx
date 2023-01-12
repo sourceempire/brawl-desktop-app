@@ -32,8 +32,8 @@ export const PlayerContainer = styled.div<PlayerContainerProps>`
     gap: ${theme.spacing.baseX3}px;
     border-radius: ${theme.borderRadius.default};
     background-color: ${transparent
-      ? hsla(theme.colors.lightTint.base, 0.5)
-      : theme.colors.lightTint.base};
+      ? hsla(theme.colors.surfaceElement.base, 0.5)
+      : theme.colors.surfaceElement.base};
   `};
 `;
 

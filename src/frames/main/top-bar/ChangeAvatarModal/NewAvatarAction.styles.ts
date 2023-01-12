@@ -6,13 +6,13 @@ export const Wrapper = styled.label`
   align-items: center;
   ${({ theme }) => css`
     border-radius: ${theme.borderRadius.default};
-    background-color: ${theme.colors.lightTint.base};
+    background-color: ${theme.colors.surface.base};
 
     :hover {
-      background-color: ${theme.colors.lightTint.hover};
+      background-color: ${theme.colors.surface.hover};
     }
     :active {
-      background-color: ${theme.colors.lightTint.active};
+      background-color: ${theme.colors.surface.active};
     }
   `}
 `;

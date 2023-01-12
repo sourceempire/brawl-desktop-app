@@ -59,7 +59,7 @@ export const Day = styled.span<{ active: boolean; picked: boolean; today: boolea
       } else if (dark && active) {
         return theme.colors.secondary.base;
       } else if (!dark && active) {
-        return theme.colors.lightTint.base;
+        return theme.colors.surface.base;
       }
       return 'transparent';
     }};
@@ -81,7 +81,7 @@ export const Day = styled.span<{ active: boolean; picked: boolean; today: boolea
         if (picked) {
           return theme.colors.primary.hover;
         } else if (active) {
-          return theme.colors.lightTint.hover;
+          return theme.colors.surface.hover;
         }
         return 'transparent';
       }};
@@ -102,7 +102,7 @@ export const PrevArrow = styled(Arrow)`
     height: 18px;
     padding: 6px;
     box-sizing: border-box;
-    background-color: ${theme.colors.lightTint.base};
+    background-color: ${theme.colors.surface.base};
     border-radius: ${theme.borderRadius.default};
   `}
 `;
@@ -126,7 +126,7 @@ export const DateInput = styled.span<{ isEmpty: boolean }>`
     display: inline-flex;
     width: 100%;
     height: 30px;
-    background-color: ${theme.colors.lightTint.base};
+    background-color: ${theme.colors.surface.base};
     border-radius: ${theme.borderRadius.default};
     align-items: center;
     padding: 6px;
@@ -137,10 +137,10 @@ export const DateInput = styled.span<{ isEmpty: boolean }>`
     `}
 
     &:hover {
-      background-color: ${theme.colors.lightTint.hover};
+      background-color: ${theme.colors.surface.hover};
     }
     &:active {
-      background-color: ${theme.colors.lightTint.active};
+      background-color: ${theme.colors.surface.active};
     }
 
     &::after {

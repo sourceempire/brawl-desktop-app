@@ -37,7 +37,7 @@ export const InvitePlayerCard = styled.div<{ hasInvite: boolean }>`
 
   ${({ theme, hasInvite }) => css`
     :hover {
-      background-color: ${hasInvite ? 'transparent' : theme.colors.lightTint.base};
+      background-color: ${hasInvite ? 'transparent' : theme.colors.surface.base};
     }
   `}
 `;
@@ -66,9 +66,9 @@ export const PendingText = styled.div`
 
 export const CancelInviteAction = styled(ActionButton)`
   ${({ theme }) => css`
-    background-color: ${theme.colors.lightTint.base};
+    background-color: ${theme.colors.surface.base};
     :hover {
-      background-color: ${theme.colors.lightTint.hover};
+      background-color: ${theme.colors.surface.hover};
     }
   `}
 `;

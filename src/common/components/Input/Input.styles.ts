@@ -78,7 +78,7 @@ export const InputElement = styled.input<{
     height: 100%;
     font-size: ${getInputFontSize(inputSize)};
     border-radius: ${theme.borderRadius.default};
-    background-color: ${theme.colors.lightTint.base};
+    background-color: ${theme.colors.secondary.base};
 
     :focus {
       outline-color: ${theme.colors.accent.base};
@@ -93,7 +93,7 @@ export const InputElement = styled.input<{
     css`
       border: 2px solid;
       background-color: ${theme.colors.background.base};
-      border-color: ${theme.colors.lightTint.base};
+      border-color: ${theme.colors.surface.base};
       :focus {
         outline: none;
         border-color: ${theme.colors.accent.base};
