@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Days, Hours, Minutes, Number, Seconds, Unit, Wrapper } from './CountDown.styles';
 
 type Props = {
@@ -19,9 +19,13 @@ const CountDown = ({ startTime }: Props) => {
     minutes: 0,
     seconds: 0
   });
-
+  const intervalRef = useRef<number>();
   const updateUnits = useCallback(() => {
     const timeDifference = startTime - Date.now();
+    if (timeDifference <= 0) {
+      clearInterval(intervalRef.current);
+      return;
+    }
 
     const days = getDays(timeDifference);
     const hours = getHours(timeDifference);
@@ -37,11 +41,15 @@ const CountDown = ({ startTime }: Props) => {
   }, [startTime]);
 
   useEffect(() => {
-    if (!startTime || startTime - Date.now() < 0) return;
+    if (!startTime) return;
 
     updateUnits();
-    const interval = setInterval(() => updateUnits(), 1000);
-    return () => clearInterval(interval);
+    intervalRef.current = window.setInterval(() => updateUnits(), 1000);
+    return () => {
+      if (intervalRef.current) {
+        window.clearInterval(intervalRef.current);
+      }
+    };
   }, [startTime, updateUnits]);
 
   function filterDayNumbersPredicate(dayNumber: string, index: number) {
