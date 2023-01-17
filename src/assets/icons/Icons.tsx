@@ -56,6 +56,14 @@ import KeyUrl, { ReactComponent as KeyComponent } from './Key.svg';
 const Key = KeyComponent as SVGComponent;
 Key.url = KeyUrl;
 
+import LockOpenUrl, { ReactComponent as LockOpenComponent } from './LockOpen.svg';
+const LockOpen = KeyComponent as SVGComponent;
+LockOpen.url = LockOpenUrl;
+
+import LockClosedUrl, { ReactComponent as LockClosedComponent } from './LockClosed.svg';
+const LockClosed = KeyComponent as SVGComponent;
+LockClosed.url = LockClosedUrl;
+
 import NotificationUrl, { ReactComponent as NotificationComponent } from './Notification.svg';
 const Notification = NotificationComponent as SVGComponent;
 Notification.url = NotificationUrl;
@@ -96,6 +104,10 @@ import StarUrl, {ReactComponent as StarComponent} from './Star.svg'
 const Star = StarComponent as SVGComponent;
 Star.url = StarUrl
 
+import SwordUrl, {ReactComponent as SwordComponent} from './Sword.svg'
+const Sword = SwordComponent as SVGComponent;
+Sword.url = SwordUrl
+
 import TicketUrl, { ReactComponent as TicketComponent } from './Ticket.svg';
 const Ticket = TicketComponent as SVGComponent;
 Ticket.url = TicketUrl;
@@ -119,6 +131,8 @@ const Icons = {
   Filter,
   Friends,
   Key,
+  LockClosed,
+  LockOpen,
   Notification,
   Party,
   Plus,
@@ -129,6 +143,7 @@ const Icons = {
   Skull,
   SmallCross,
   Star,
+  Sword,
   Ticket,
   Trophy
 };
