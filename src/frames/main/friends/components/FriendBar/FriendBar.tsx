@@ -39,7 +39,7 @@ const FriendBar = ({ visible }: Props) => {
       <Wrapper onPointerDown={(e) => e.stopPropagation}>
         <FriendActions>
           <SearchFriendsInput
-            icon={<Icons.Search />}
+            icon={<Icons.Search fill="white" height={14} />}
             value={searchString}
             onChange={handleSearch}
             size={InputSize.SMALL}

@@ -2,7 +2,6 @@ import { ReactNode, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
 import { Content, CrossButton, Header, Overlay } from './Modal.styles';
-import Cross from 'assets/icons/Cross.svg';
 
 const modalRoot = document.getElementById('modal-root');
 
@@ -76,7 +75,7 @@ export default function Modal({
           noPadding={noPadding}>
           {header && (
             <Header>
-              {closeButton && <CrossButton src={Cross} onClick={onRequestClose} />}
+              {closeButton && <CrossButton onClick={onRequestClose} />}
               {title !== undefined && title}
             </Header>
           )}

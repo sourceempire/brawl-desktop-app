@@ -22,7 +22,7 @@ export const PasswordLogin = () => {
         placeholder="Enter Email Address"
         label="Email"
         size={InputSize.SMALL}
-        icon={<Icons.Profile />}
+        icon={<Icons.Profile fill="white" />}
       />
 
       <LoginInput
@@ -32,7 +32,7 @@ export const PasswordLogin = () => {
         label="Password"
         placeholder="Enter Password"
         size={InputSize.SMALL}
-        icon={<Icons.Key />}
+        icon={<Icons.Key fill="white" />}
       />
 
       <LoginButton onClick={() => loginWithUsernameAndPassword(username, password)} primary>

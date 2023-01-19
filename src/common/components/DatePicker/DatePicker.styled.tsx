@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components/macro';
 import { Wrapper as Button } from '../Button/Button.styles';
 import { ReactComponent as Arrow } from 'assets/icons/DatePickerArrow.svg';
 import SelectArrow from 'assets/icons/SelectArrow.svg';
-import { lightenColor } from 'assets/styles/colorBrightness';
 
 export const Wrapper = styled.div`
   position: relative;
@@ -100,6 +99,7 @@ export const PrevArrow = styled(Arrow)`
   ${({ theme }) => css`
     width: 18px;
     height: 18px;
+    fill: white;
     padding: 6px;
     box-sizing: border-box;
     background-color: ${theme.colors.surface.base};

@@ -98,7 +98,7 @@ function Page() {
           </FilterBullets>
           <FilterControls>
             <SearchInput
-              icon={<Icons.Search />}
+              icon={<Icons.Search fill="white" height={14} />}
               placeholder="Search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}

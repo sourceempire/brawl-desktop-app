@@ -2,6 +2,8 @@ import styled, { css } from 'styled-components';
 import Icons from 'assets/icons/Icons';
 
 export const ArrowDown = styled(Icons.SelectArrow)`
+  width: 12px;
+  height: 12px;
   fill: white;
   ${({ theme }) => css`
     margin-left: ${theme.spacing.base}px;
