@@ -15,6 +15,9 @@ export const Wrapper = styled.div`
 export const FriendSearchInput = styled(Input)`
   ${({ theme }) => css`
     margin-bottom: ${theme.spacing.base * 1.5}px;
+    input {
+      background-color: ${theme.colors.surfaceSecondary.base};
+    }
   `}
 `;
 
