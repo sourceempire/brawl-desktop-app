@@ -2,12 +2,13 @@ import React, { useRef, useState } from 'react';
 import { usePartyFeed } from 'api/feeds';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import * as PartyRequests from 'api/requests/PartyRequests';
-import { ActionButton, Button, ContextMenu } from 'common/components';
+import { ActionButton, ContextMenu } from 'common/components';
 import { InputSize } from 'common/components/Input/Input.types';
 import { useContextMenuPosition } from 'common/hooks';
 import popup from 'common/popup';
 import { useDebounce, usePrevious, useUpdateEffect } from 'utils/hooks';
 import {
+  AddTeamImageBtn,
   Label,
   PartySettingsInput,
   PartySizes,
@@ -137,7 +138,7 @@ const PartySettings = () => {
 
             <Label>Team Image</Label>
 
-            <Button onClick={handleFileInputButtonClick}>Add Team Image</Button>
+            <AddTeamImageBtn onClick={handleFileInputButtonClick}>Add Team Image</AddTeamImageBtn>
             <input ref={fileInputRef} onChange={handleFileInputChange} type="file" hidden></input>
           </Settings>
         </ContextMenu>
