@@ -45,11 +45,11 @@ export const FilterBullet = styled.div<FilterBulletProps>`
   padding-right: 18px;
   margin-bottom: 6px;
 
-  &:hover {
+  :hover {
     background-color: ${({ theme }) => theme.colors.secondary.hover};
   }
 
-  &:before {
+  :before {
     content: url(${SmallCross});
     padding: 12px;
   }

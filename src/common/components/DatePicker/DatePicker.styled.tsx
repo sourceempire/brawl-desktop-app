@@ -76,7 +76,7 @@ export const Day = styled.span<{ active: boolean; picked: boolean; today: boolea
       line-height: 20px;
     `}
 
-    &:hover {
+    :hover {
       background-color: ${() => {
         if (picked) {
           return theme.colors.primary.hover;
@@ -136,14 +136,14 @@ export const DateInput = styled.span<{ isEmpty: boolean }>`
       letter-spacing: 0.7px;
     `}
 
-    &:hover {
+    :hover {
       background-color: ${theme.colors.surfaceElement.hover};
     }
-    &:active {
+    :active {
       background-color: ${theme.colors.surface.active};
     }
 
-    &::after {
+    :after {
       content: '';
       position: absolute;
       background-color: white;
