@@ -126,7 +126,7 @@ export const DateInput = styled.span<{ isEmpty: boolean }>`
     display: inline-flex;
     width: 100%;
     height: 30px;
-    background-color: ${theme.colors.surface.base};
+    background-color: ${theme.colors.surfaceElement.base};
     border-radius: ${theme.borderRadius.default};
     align-items: center;
     padding: 6px;
@@ -137,7 +137,7 @@ export const DateInput = styled.span<{ isEmpty: boolean }>`
     `}
 
     &:hover {
-      background-color: ${theme.colors.surface.hover};
+      background-color: ${theme.colors.surfaceElement.hover};
     }
     &:active {
       background-color: ${theme.colors.surface.active};
@@ -146,7 +146,10 @@ export const DateInput = styled.span<{ isEmpty: boolean }>`
     &::after {
       content: '';
       position: absolute;
-      background-image: url(${SelectArrow});
+      background-color: white;
+      mask-image: url(${SelectArrow});
+      mask-repeat: no-repeat;
+      mask-position: center;
       background-repeat: no-repeat;
       background-position: center;
       top: 9px;
