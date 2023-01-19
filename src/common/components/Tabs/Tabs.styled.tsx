@@ -75,11 +75,11 @@ export const TabsBarTab = styled.div<{ active?: boolean }>`
     cursor: pointer;
     margin: 0px 9px;
 
-    &:first-child {
+    :first-child {
       margin-left: 0px;
     }
 
-    &:last-child {
+    :last-child {
       margin-right: 0px;
     }
 
@@ -87,7 +87,7 @@ export const TabsBarTab = styled.div<{ active?: boolean }>`
     css`
       cursor: default;
 
-      &:after {
+      :after {
         content: '';
         position: absolute;
         bottom: -1px;

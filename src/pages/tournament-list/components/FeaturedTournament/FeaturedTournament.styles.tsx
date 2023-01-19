@@ -10,7 +10,7 @@ export const VisibilityToggle = styled.div`
   margin: 18px 0;
   display: inline-block;
 
-  &:after {
+  :after {
     content: '▾';
     margin-left: 6px;
   }

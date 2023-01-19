@@ -43,7 +43,7 @@ export const CrossButton = styled.img`
   top: -12px;
   padding: 12px;
 
-  &:hover {
+  :hover {
     background-color: ${({ theme }) => theme.colors.surface.hover};
     border-radius: 3px;
   }
