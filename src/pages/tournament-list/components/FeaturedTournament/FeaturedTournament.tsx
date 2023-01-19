@@ -1,3 +1,4 @@
+import Icons from 'common/components/Icon/Icons';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import {
   Bullet,
@@ -14,9 +15,6 @@ import {
   VisibilityToggle,
   Wrapper
 } from './FeaturedTournament.styles';
-import Icons from 'assets/icons/Icons';
-import Ticket from 'assets/icons/Ticket.svg';
-import Trophy from 'assets/icons/Trophy.svg';
 
 type Props = {
   tournamentInfo: TournamentHub;
@@ -43,14 +41,14 @@ export default function FeaturedTournament({
             <Name>ISC European Championship</Name>
             <Bullets>
               <Bullet>
-                <BulletIcon src={Trophy} />
+                <BulletIcon src={Icons.Trophy.url} />
                 <BulletText>
                   <Title>€2500</Title>
                   <Subtitle>Current Prize Pool</Subtitle>
                 </BulletText>
               </Bullet>
               <Bullet>
-                <BulletIcon src={Ticket} />
+                <BulletIcon src={Icons.Ticket.url} />
                 <BulletText>
                   <Title>€10</Title>
                   <Subtitle>Entry Fee</Subtitle>

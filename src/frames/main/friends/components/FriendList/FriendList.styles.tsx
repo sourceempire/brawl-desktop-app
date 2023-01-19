@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
+import Icons from 'common/components/Icon/Icons';
 import { UserCardSkeleton } from '../Shared.styles';
-import Icons from 'assets/icons/Icons';
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`

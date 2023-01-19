@@ -6,7 +6,7 @@ import Party from '../Party';
 import ProfileMenu from '../ProfileMenu';
 import Wallet from '../Wallet';
 import { PlaceholderLogo, TopBarActions, Wrapper } from './TopBar.styles';
-import Icons from 'assets/icons/Icons';
+import Icons from 'common/components/Icon/Icons';
 
 type Props = {
   toggleFriends: () => void;

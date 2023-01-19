@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components/macro';
 import { Wrapper as Button } from '../Button/Button.styles';
+import Icons from '../Icon/Icons';
 import { ReactComponent as Arrow } from 'assets/icons/DatePickerArrow.svg';
-import SelectArrow from 'assets/icons/SelectArrow.svg';
-import { lightenColor } from 'assets/styles/colorBrightness';
 
 export const Wrapper = styled.div`
   position: relative;
@@ -96,7 +95,7 @@ export const Header = styled.div`
   margin-bottom: 6px;
 `;
 
-export const PrevArrow = styled(Arrow)`
+export const PrevArrow = styled(Icons.DatePickerArrow)`
   ${({ theme }) => css`
     width: 18px;
     height: 18px;
@@ -146,7 +145,7 @@ export const DateInput = styled.span<{ isEmpty: boolean }>`
     &::after {
       content: '';
       position: absolute;
-      background-image: url(${SelectArrow});
+      background-image: url(${Icons.SelectArrow.url});
       background-repeat: no-repeat;
       background-position: center;
       top: 9px;

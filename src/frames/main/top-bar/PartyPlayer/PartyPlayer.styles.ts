@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import Icons from 'assets/icons/Icons';
+import Icons from 'common/components/Icon/Icons';
 
 export const Wrapper = styled.div`
   position: relative;

@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 import { Button } from 'common/components';
 import EllipsisText from 'common/components/EllipsisText';
+import Icons from 'common/components/Icon/Icons';
 import { hsla } from 'utils/styledUtils';
-import Icons from 'assets/icons/Icons';
 
 export const Wrapper = styled.div`
   width: 100%;
