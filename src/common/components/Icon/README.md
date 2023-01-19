@@ -37,6 +37,7 @@ or
 
 ```tsx
 import exampleIcon from 'path/to/example-example.svg'
+
 <Icon icon={exampleIcon} fill="white" height={15}/>
 ```
 
