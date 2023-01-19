@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import Icons from 'common/components/Icon/Icons';
+import { Icons } from 'common/components/Icon';
 import { AvatarImage } from './AvatarChoice.styles';
 
 export const Wrapper = styled.div<{ hide: boolean }>`

@@ -2,7 +2,7 @@ import React from 'react';
 import { useUserFeed } from 'api/feeds';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import EllipsisText from 'common/components/EllipsisText';
-import Icons from 'common/components/Icon/Icons';
+import { Icons } from 'common/components/Icon';
 import { TeamStats } from 'types/match/Match';
 import { Team } from 'types/team/Team';
 import {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { acceptFriendRequest, declineFriendRequest } from 'api/requests/FriendRequests';
-import Icons from 'common/components/Icon/Icons';
+import { Icons } from 'common/components/Icon';
 import popup from 'common/popup';
 import { PublicUser } from 'types/user/User';
 import { UserTag } from '../FriendCard/FriendCard.styles';

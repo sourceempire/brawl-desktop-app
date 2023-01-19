@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Icons from 'common/components/Icon/Icons';
+import { Icons } from 'common/components/Icon';
 import { InputSize } from 'common/components/Input/Input.types';
 import AddFriendModal from '../AddFriendModal';
 import FriendList from '../FriendList';

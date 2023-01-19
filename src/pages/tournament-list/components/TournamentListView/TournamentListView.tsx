@@ -1,8 +1,8 @@
 import { useDeferredValue, useState } from 'react';
 import useTournamentHubsFeed from 'api/feeds/hooks/useTournamentHubsFeed';
 import { useNavigate } from 'react-router-dom';
-import { IconEnum } from 'common/components/Icon/Icon.types';
-import Icons from 'common/components/Icon/Icons';
+import { Icons } from 'common/components/Icon';
+import { IconEnum } from 'common/components/Icon';
 import { InputSize } from 'common/components/Input/Input.types';
 import { Option } from 'common/components/Select';
 import { Tab, Tabs } from 'common/components/Tabs';

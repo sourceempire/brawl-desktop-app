@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components/macro';
-import Icons from 'common/components/Icon/Icons';
+import { Icons } from 'common/components/Icon';
 
 export const Wrapper = styled.div`
   display: flex;

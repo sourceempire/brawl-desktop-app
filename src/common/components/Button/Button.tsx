@@ -1,4 +1,4 @@
-import { IconEnum, SVGComponent } from '../Icon/Icon.types';
+import { IconEnum, SVGComponent } from '../Icon';
 import { ButtonIcon, Wrapper } from './Button.styles';
 
 type Props = {

@@ -1,6 +1,6 @@
 import { isInternalIcon, isSVGComponent } from './Icon.model';
 import { IconEnum, SVGComponent } from './Icon.types';
-import Icons from './Icons';
+import { Icons } from '.';
 
 type IconProps = {
   icon: IconEnum | SVGComponent | string;

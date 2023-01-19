@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components/macro';
 import { Animation } from 'common/components';
-import Icons from 'common/components/Icon/Icons';
+import { Icons } from 'common/components/Icon';
 import simpleLoading from 'assets/animations/simple-loading.json';
 
 export const Wrapper = styled.div``;

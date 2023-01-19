@@ -1,4 +1,4 @@
-import Icons from 'common/components/Icon/Icons';
+import { Icons } from 'common/components/Icon';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import {
   Bullet,

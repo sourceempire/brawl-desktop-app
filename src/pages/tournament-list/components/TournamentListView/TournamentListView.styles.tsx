@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components/macro';
 import { Button, Input } from 'common/components';
-import Icons from 'common/components/Icon/Icons';
+import { Icons } from 'common/components/Icon';
 import { Select } from 'common/components/Select';
 
 export const Wrapper = styled.div`

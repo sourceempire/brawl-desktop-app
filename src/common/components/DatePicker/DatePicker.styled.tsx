@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components/macro';
 import { Wrapper as Button } from '../Button/Button.styles';
-import Icons from '../Icon/Icons';
-import { ReactComponent as Arrow } from 'assets/icons/DatePickerArrow.svg';
+import { Icons } from '../Icon';
 
 export const Wrapper = styled.div`
   position: relative;

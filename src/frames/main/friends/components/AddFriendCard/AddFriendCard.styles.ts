@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components/macro';
 import EllipsisText from 'common/components/EllipsisText';
-import Icons from 'common/components/Icon/Icons';
+import { Icons } from 'common/components/Icon';
 
 export const RequestSentText = styled.div`
   opacity: 0.5;

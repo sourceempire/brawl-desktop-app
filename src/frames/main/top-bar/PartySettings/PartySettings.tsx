@@ -3,7 +3,7 @@ import { usePartyFeed } from 'api/feeds';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import * as PartyRequests from 'api/requests/PartyRequests';
 import { ActionButton, Button, ContextMenu } from 'common/components';
-import Icons from 'common/components/Icon/Icons';
+import { Icons } from 'common/components/Icon';
 import { InputSize } from 'common/components/Input/Input.types';
 import { useContextMenuPosition } from 'common/hooks';
 import popup from 'common/popup';

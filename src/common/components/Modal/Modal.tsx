@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
-import Icons from '../Icon/Icons';
+import { Icons } from '../Icon';
 import { Content, CrossButton, Header, Overlay } from './Modal.styles';
 
 const modalRoot = document.getElementById('modal-root');

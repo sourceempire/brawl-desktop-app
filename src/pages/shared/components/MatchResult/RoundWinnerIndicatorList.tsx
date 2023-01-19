@@ -1,5 +1,5 @@
 import { Fragment, MutableRefObject, useEffect, useRef } from 'react';
-import Icons from 'common/components/Icon/Icons';
+import { Icons } from 'common/components/Icon';
 import { CSGORoundEndReason, CSGORoundResult, CSGOTeamSide, RoundWin } from 'types/match/Match';
 import { CSGOGameModes } from 'types/MatchSettings';
 import { Team } from 'types/team/Team';
