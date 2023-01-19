@@ -26,7 +26,7 @@ export const getTimeSince = (date: Date) => {
   return 'a few seconds ago';
 };
 
-export const convertDateAndTime = (startTime: string) => {
+export const formatDateAndTime = (startTime: string) => {
   const dateString = new Date(startTime).toISOString();
   const dateObject = new Date(dateString);
   const formattedDate = dateObject.toLocaleString('default', { month: 'short', day: 'numeric' });
@@ -37,7 +37,7 @@ export const convertDateAndTime = (startTime: string) => {
   return formattedDate + ' ' + formattedTime;
 };
 
-export const convertTournamentLockTime = (startTime: string, lockTime: number) => {
+export const formatTournamentLockTime = (startTime: string, lockTime: number) => {
   const dateString = new Date(startTime).toISOString();
   const dateObject = new Date(dateString);
   const lockTimeDate = new Date(dateObject.getTime() - lockTime);

@@ -9,15 +9,11 @@ export const Header = styled.div<{ image: string }>`
     height: 90px;
     border-radius: ${theme.borderRadius.default} ${theme.borderRadius.default} 0 0;
     position: relative;
-    &::before {
+    :before {
       content: '';
       position: absolute;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       background-color: rgba(0, 0, 0, 0.3);
-      transition: background-color 0.3s ease;
-      top: 0;
-      left: 0;
     }
   `}
 `;
@@ -25,13 +21,10 @@ export const Header = styled.div<{ image: string }>`
 export const Wrapper = styled(Card)`
   width: 100%;
   height: 214px;
-  transition: background-color 0.3s ease;
   :hover {
-    :hover {
-      background-color: ${({ theme }) => theme.colors.surfaceElement.base};
-    }
+    background-color: ${({ theme }) => theme.colors.surfaceElement.base};
     ${Header} {
-      &::before {
+      :before {
         background-color: rgba(0, 0, 0, 0.2);
       }
     }
@@ -70,6 +63,7 @@ export const GameMode = styled.div`
 export const GameModeIcon = styled(Icons.Sword)`
   height: 14px;
   width: 14px;
+  fill: #94ace8;
   margin: 0px 6px 0px 0px;
 `;
 
@@ -95,7 +89,7 @@ export const Column3 = styled.div`
   text-align: right;
 `;
 
-export const Name = styled.div`
+export const TournamentName = styled.div`
   height: 100%;
   width: 100%;
   padding: 6px;
@@ -123,15 +117,17 @@ export const PrizePoolIcon = styled(Icons.Trophy)`
   fill: ${({ theme }) => theme.colors.primary.base};
 `;
 
-export const StatusIconLocked = styled.img`
+export const StatusIconLocked = styled(Icons.LockClosed)`
   height: 14px;
   width: 14px;
+  fill: ${({ theme }) => theme.colors.textPrimaryLight};
   margin: 0px 6px 0px 0px;
 `;
 
-export const StatusIconOpen = styled.img`
+export const StatusIconOpen = styled(Icons.LockOpen)`
   height: 14px;
   width: 14px;
+  fill: ${({ theme }) => theme.colors.textPrimaryLight};
   margin: 0px 6px 0px 0px;
 `;
 
@@ -155,7 +151,7 @@ export const EntryFeeIcon = styled(Icons.Ticket)`
   fill: ${({ theme }) => theme.colors.accent.base};
 `;
 
-export const Time = styled.div`
+export const StartTime = styled.div`
   color: ${({ theme }) => theme.colors.textSecondaryLight};
 `;
 

@@ -1,5 +1,5 @@
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
-import { convertDateAndTime } from 'utils/dateUtils';
+import { formatDateAndTime } from 'utils/dateUtils';
 import { getTournamentModeShort } from 'utils/tournamentUtils';
 import {
   Column1,
@@ -12,22 +12,20 @@ import {
   Header,
   Info,
   Line,
-  Name,
   PrizePool,
   PrizePoolHeader,
   PrizePoolIcon,
   Row1,
   Row2,
+  StartTime,
   StatusIconLocked,
   StatusIconOpen,
   StatusText,
-  Time,
+  TournamentName,
   TournamentStatus,
   TwoColHeader,
   Wrapper
 } from './TournamentInfoCard.styles';
-import LockClosed from 'assets/icons/LockClosed.svg';
-import LockOpen from 'assets/icons/LockOpen.svg';
 
 type Props = {
   tournamentInfo: TournamentHub;
@@ -39,18 +37,14 @@ export default function TournamentInfoCard({ tournamentInfo, onClick, className 
   return (
     <Wrapper padding={false} onClick={onClick} className={className}>
       <Header image={tournamentInfo.image}>
-        <Name>{tournamentInfo.name}</Name>
+        <TournamentName>{tournamentInfo.name}</TournamentName>
       </Header>
       <Line />
       <Info>
         <Row1>
           <Column1>
             <TournamentStatus>
-              {tournamentInfo.registrationClosed ? (
-                <StatusIconLocked src={LockClosed} />
-              ) : (
-                <StatusIconOpen src={LockOpen} />
-              )}
+              {tournamentInfo.registrationClosed ? <StatusIconLocked /> : <StatusIconOpen />}
               {tournamentInfo.registrationClosed ? (
                 <StatusText>Registration Closed</StatusText>
               ) : (
@@ -59,7 +53,7 @@ export default function TournamentInfoCard({ tournamentInfo, onClick, className 
             </TournamentStatus>
           </Column1>
           <Column2>
-            <Time>Starts {convertDateAndTime(tournamentInfo.startTime)}</Time>
+            <StartTime>Starts {formatDateAndTime(tournamentInfo.startTime)}</StartTime>
           </Column2>
         </Row1>
         <Row2>

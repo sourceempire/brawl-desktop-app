@@ -12,15 +12,11 @@ export const Hero = styled.div<{ visible: boolean; image: string }>`
     text-align: center;
     border-radius: ${theme.borderRadius.default};
     position: relative;
-    &::before {
+    :before {
       content: '';
       position: absolute;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       background-color: rgba(0, 0, 0, 0.3);
-      transition: background-color 0.3s ease;
-      top: 0;
-      left: 0;
     }
   `}
 `;
@@ -29,7 +25,7 @@ export const Wrapper = styled.div`
   width: 100%;
   :hover {
     ${Hero} {
-      &::before {
+      :before {
         background-color: rgba(0, 0, 0, 0.2);
       }
     }

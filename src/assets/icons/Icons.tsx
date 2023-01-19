@@ -57,11 +57,11 @@ const Key = KeyComponent as SVGComponent;
 Key.url = KeyUrl;
 
 import LockOpenUrl, { ReactComponent as LockOpenComponent } from './LockOpen.svg';
-const LockOpen = KeyComponent as SVGComponent;
+const LockOpen = LockOpenComponent as SVGComponent;
 LockOpen.url = LockOpenUrl;
 
 import LockClosedUrl, { ReactComponent as LockClosedComponent } from './LockClosed.svg';
-const LockClosed = KeyComponent as SVGComponent;
+const LockClosed = LockClosedComponent as SVGComponent;
 LockClosed.url = LockClosedUrl;
 
 import NotificationUrl, { ReactComponent as NotificationComponent } from './Notification.svg';
