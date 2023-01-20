@@ -16,6 +16,7 @@ export const useCountdown = (startTime: number, options: Options = {}) => {
   const { updateInterval = 1000, onCountdownFinish } = options;
 
   const [timeUnits, setTimeUnits] = useState<TimeUnits>(getTimeUnits(getRemainingTime(startTime)));
+  const [finished, setFinished] = useState<boolean>(getRemainingTime(startTime) === 0);
 
   useEffect(() => {
     if (!startTime) return;
@@ -23,8 +24,9 @@ export const useCountdown = (startTime: number, options: Options = {}) => {
     const interval = setInterval(() => {
       const timeRemaining = getRemainingTime(startTime);
 
-      if (timeRemaining < 0) {
+      if (timeRemaining === 0) {
         clearInterval(interval);
+        setFinished(true);
         setTimeUnits({ days: 0, hours: 0, minutes: 0, seconds: 0 });
         onCountdownFinish?.();
         return;
@@ -41,11 +43,15 @@ export const useCountdown = (startTime: number, options: Options = {}) => {
   const hasMinutes = hasHours || timeUnits.minutes !== 0;
   const hasSeconds = hasMinutes || timeUnits.seconds !== 0;
 
-  return { ...timeUnits, hasDays, hasHours, hasMinutes, hasSeconds };
+  return { ...timeUnits, hasDays, hasHours, hasMinutes, hasSeconds, finished };
 };
 
 function getRemainingTime(startTime: number) {
-  return startTime - Date.now();
+  const remainingTime = startTime - Date.now();
+
+  if (remainingTime < 0) return 0;
+
+  return remainingTime;
 }
 
 function getTimeUnits(timeRemaining: number) {

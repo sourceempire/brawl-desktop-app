@@ -1,4 +1,4 @@
-import { useCountdown } from 'pages/tournament/hooks/useCountdown';
+import { useCountdown } from 'utils/hooks/useCountdown';
 import { Days, Hours, Minutes, Number, Seconds, Unit, Wrapper } from './CountDown.styles';
 
 type Props = {
@@ -6,7 +6,7 @@ type Props = {
 };
 
 const CountDown = ({ startTime }: Props) => {
-  const { days, hasDays, hours, hasHours, minutes, hasMinutes, seconds, hasSeconds } =
+  const { days, hasDays, hours, hasHours, minutes, hasMinutes, seconds, hasSeconds, finished } =
     useCountdown(startTime);
 
   function filterDayNumbersPredicate(dayNumber: string, index: number) {
@@ -22,62 +22,65 @@ const CountDown = ({ startTime }: Props) => {
     }
   }
 
+  console.log(finished);
+
   return (
     <Wrapper>
-      {hasDays && (
-        <Unit>
-          <Days>
-            {padZeroes(days, 2)
-              .split('')
-              .filter((d, index) => filterDayNumbersPredicate(d, index))
-              .map((d, index) => (
-                <Number key={index}>{d}</Number>
-              ))}
-          </Days>
-          <div>Days</div>
-        </Unit>
-      )}
-
-      {hasHours && (
-        <Unit>
-          <Hours>
-            {padZeroes(hours, 1)
-              .split('')
-              .map((h, index) => (
-                <Number key={index}>{h}</Number>
-              ))}
-          </Hours>
-          <div>Hours</div>
-        </Unit>
-      )}
-
-      {hasMinutes && (
-        <Unit>
-          <Minutes>
-            {padZeroes(minutes, 1)
-              .split('')
-              .map((h, index) => (
-                <Number key={index}>{h}</Number>
-              ))}
-          </Minutes>
-          <div>Minutes</div>
-        </Unit>
-      )}
-
-      {hasSeconds ? (
-        <Unit>
-          <Seconds>
-            {padZeroes(seconds, 1)
-              .split('')
-              .map((h, index) => (
-                <Number key={index}>{h}</Number>
-              ))}
-          </Seconds>
-          <div>Seconds</div>
-        </Unit>
-      ) : (
-        /**TODO -> make something happen when time runs out */
+      {finished ? (
         <div>Time ran out</div>
+      ) : (
+        <>
+          {hasDays && (
+            <Unit>
+              <Days>
+                {padZeroes(days, 2)
+                  .split('')
+                  .filter((d, index) => filterDayNumbersPredicate(d, index))
+                  .map((d, index) => (
+                    <Number key={index}>{d}</Number>
+                  ))}
+              </Days>
+              <div>Days</div>
+            </Unit>
+          )}
+
+          {hasHours && (
+            <Unit>
+              <Hours>
+                {padZeroes(hours, 1)
+                  .split('')
+                  .map((h, index) => (
+                    <Number key={index}>{h}</Number>
+                  ))}
+              </Hours>
+              <div>Hours</div>
+            </Unit>
+          )}
+
+          {hasMinutes && (
+            <Unit>
+              <Minutes>
+                {padZeroes(minutes, 1)
+                  .split('')
+                  .map((h, index) => (
+                    <Number key={index}>{h}</Number>
+                  ))}
+              </Minutes>
+              <div>Minutes</div>
+            </Unit>
+          )}
+
+          <Unit>
+            <Seconds>
+              {padZeroes(seconds, 1)
+                .split('')
+                .map((h, index) => (
+                  <Number key={index}>{h}</Number>
+                ))}
+            </Seconds>
+            <div>Seconds</div>
+          </Unit>
+        </>
       )}
     </Wrapper>
   );
