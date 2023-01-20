@@ -1,23 +1,29 @@
-import { csgoMatchSettingsModeShortForm, isCSGOMatchSettings } from 'types/MatchSettings';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
-import { capitalize } from 'utils/stringUtils';
+import { formatDateAndTime } from 'utils/dateUtils';
+import { getTournamentModeShort } from 'utils/tournamentUtils';
 import {
   Column1,
   Column2,
-  Countdown,
+  Column3,
   EntryFee,
-  Game,
+  EntryFeeIcon,
+  GameMode,
+  GameModeIcon,
   Header,
   Info,
   Line,
-  Name,
-  NumberOfTeams,
   PrizePool,
   PrizePoolHeader,
-  Region,
+  PrizePoolIcon,
   Row1,
   Row2,
-  Time,
+  StartTime,
+  StatusIconLocked,
+  StatusIconOpen,
+  StatusText,
+  TournamentName,
+  TournamentStatus,
+  TwoColHeader,
   Wrapper
 } from './TournamentInfoCard.styles';
 
@@ -31,52 +37,49 @@ export default function TournamentInfoCard({ tournamentInfo, onClick, className 
   return (
     <Wrapper padding={false} onClick={onClick} className={className}>
       <Header image={tournamentInfo.image}>
-        <Countdown>{countdown(new Date(tournamentInfo.startTime))}</Countdown>
+        <TournamentName>{tournamentInfo.name}</TournamentName>
       </Header>
       <Line />
       <Info>
         <Row1>
           <Column1>
-            <Game>
-              {tournamentInfo.gameName}
-              {tournamentMatchSettings(tournamentInfo)}
-            </Game>
-            <Name>{tournamentInfo.name}</Name>
+            <TournamentStatus>
+              {tournamentInfo.registrationClosed ? <StatusIconLocked /> : <StatusIconOpen />}
+              {tournamentInfo.registrationClosed ? (
+                <StatusText>Registration Closed</StatusText>
+              ) : (
+                <StatusText>Registration Open</StatusText>
+              )}
+            </TournamentStatus>
           </Column1>
           <Column2>
-            <PrizePoolHeader>Prize Pool</PrizePoolHeader>
-            <PrizePool>€{tournamentInfo.currentPrizePool}</PrizePool>
+            <StartTime>Starts {formatDateAndTime(tournamentInfo.startTime)}</StartTime>
           </Column2>
         </Row1>
         <Row2>
           <Column1>
-            <EntryFee>Entry Fee: €{tournamentInfo.entranceFee}</EntryFee>
-            <Time>{new Date(tournamentInfo.startTime).toISOString()}</Time>
+            <PrizePool>€{tournamentInfo.currentPrizePool}</PrizePool>
+            <TwoColHeader>
+              <PrizePoolIcon />
+              <PrizePoolHeader>Prize Pool*</PrizePoolHeader>
+            </TwoColHeader>
           </Column1>
           <Column2>
-            <Region>{capitalize(tournamentInfo.region)}</Region>
-            <NumberOfTeams>{tournamentInfo.teamsAllowed} Teams</NumberOfTeams>
+            <EntryFee>€{tournamentInfo.entranceFee} /person</EntryFee>
+            <TwoColHeader>
+              <EntryFeeIcon />
+              <PrizePoolHeader>Entry Fee</PrizePoolHeader>
+            </TwoColHeader>
           </Column2>
+          <Column3>
+            <GameMode>{getTournamentModeShort(tournamentInfo)}</GameMode>
+            <TwoColHeader>
+              <GameModeIcon />
+              <PrizePoolHeader>Game Mode</PrizePoolHeader>
+            </TwoColHeader>
+          </Column3>
         </Row2>
       </Info>
     </Wrapper>
   );
-}
-
-function tournamentMatchSettings(tournamentInfo: TournamentHub) {
-  if (isCSGOMatchSettings(tournamentInfo.matchSettings)) {
-    return ` (${csgoMatchSettingsModeShortForm(tournamentInfo.matchSettings.mode)})`;
-  } else {
-    return '';
-  }
-}
-
-function countdown(startTime: Date) {
-  const diffInMs = startTime.getTime() - new Date().getTime();
-  const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
-  if (diffInDays > 1) {
-    return `In ${Math.floor(diffInDays)} days`;
-  } else {
-    return 'Today';
-  }
 }

@@ -1,10 +1,6 @@
 import styled, { css } from 'styled-components/macro';
 import { Card } from 'common/components';
-
-export const Wrapper = styled(Card)`
-  width: 100%;
-  height: 214px;
-`;
+import Icons from 'assets/icons/Icons';
 
 export const Header = styled.div<{ image: string }>`
   ${({ image, theme }) => css`
@@ -12,7 +8,27 @@ export const Header = styled.div<{ image: string }>`
     background-size: cover;
     height: 90px;
     border-radius: ${theme.borderRadius.default} ${theme.borderRadius.default} 0 0;
+    position: relative;
+    :before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.3);
+    }
   `}
+`;
+
+export const Wrapper = styled(Card)`
+  width: 100%;
+  height: 214px;
+  :hover {
+    background-color: ${({ theme }) => theme.colors.surfaceElement.base};
+    ${Header} {
+      :before {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
 `;
 
 export const Line = styled.div`
@@ -40,6 +56,17 @@ export const Info = styled.div`
   line-height: 1.6em;
 `;
 
+export const GameMode = styled.div`
+  font-weight: bold;
+`;
+
+export const GameModeIcon = styled(Icons.Sword)`
+  height: 14px;
+  width: 14px;
+  fill: #94ace8;
+  margin: 0px 6px 0px 0px;
+`;
+
 export const Row1 = styled.div`
   display: flex;
   flex-direction: row;
@@ -56,23 +83,79 @@ export const Row2 = styled.div`
 
 export const Column1 = styled.div``;
 export const Column2 = styled.div`
+  text-align: center;
+`;
+export const Column3 = styled.div`
   text-align: right;
 `;
 
-export const Game = styled.div``;
-export const Name = styled.div`
+export const TournamentName = styled.div`
+  height: 100%;
+  width: 100%;
+  padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   font-weight: bold;
+  font-size: 15px;
+  position: absolute;
 `;
 
 export const PrizePoolHeader = styled.div`
-  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.textSecondaryLight};
 `;
 
 export const PrizePool = styled.div`
-  color: ${({ theme }) => theme.colors.statusSuccess};
+  font-weight: bold;
 `;
 
-export const EntryFee = styled.div``;
-export const Time = styled.div``;
-export const Region = styled.div``;
-export const NumberOfTeams = styled.div``;
+export const PrizePoolIcon = styled(Icons.Trophy)`
+  height: 14px;
+  width: 14px;
+  margin: 0px 6px 0px 0px;
+  fill: ${({ theme }) => theme.colors.primary.base};
+`;
+
+export const StatusIconLocked = styled(Icons.LockClosed)`
+  height: 14px;
+  width: 14px;
+  fill: ${({ theme }) => theme.colors.textPrimaryLight};
+  margin: 0px 6px 0px 0px;
+`;
+
+export const StatusIconOpen = styled(Icons.LockOpen)`
+  height: 14px;
+  width: 14px;
+  fill: ${({ theme }) => theme.colors.textPrimaryLight};
+  margin: 0px 6px 0px 0px;
+`;
+
+export const StatusText = styled.div`
+  font-weight: bold;
+`;
+
+export const TournamentStatus = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const EntryFee = styled.div`
+  font-weight: bold;
+`;
+
+export const EntryFeeIcon = styled(Icons.Ticket)`
+  height: 14px;
+  width: 14px;
+  margin: 0px 6px 0px 0px;
+  fill: ${({ theme }) => theme.colors.accent.base};
+`;
+
+export const StartTime = styled.div`
+  color: ${({ theme }) => theme.colors.textSecondaryLight};
+`;
+
+export const TwoColHeader = styled.div`
+  display: flex;
+  align-items: center;
+`;
