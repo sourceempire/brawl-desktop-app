@@ -1,5 +1,5 @@
+import { useFeed } from 'brawl-websocket';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
-import useFeed from './useFeed';
 
 type FeedType = {
   tournamentHub: TournamentHub;
@@ -7,12 +7,12 @@ type FeedType = {
 };
 
 const useTournamentHubFeed = (tournamentHubId: string) => {
-  const { currentState, isLoading } = useFeed<FeedType>(`tournament.hub.${tournamentHubId}`);
+  const { data, loading } = useFeed<FeedType>(`tournament.hub.${tournamentHubId}`);
 
   return {
-    tournamentHub: currentState.tournamentHub ?? {},
-    tournamentIds: currentState.tournamentIds ?? [],
-    isLoading
+    tournamentHub: data.tournamentHub ?? {},
+    tournamentIds: data.tournamentIds ?? [],
+    isLoading: loading
   };
 };
 

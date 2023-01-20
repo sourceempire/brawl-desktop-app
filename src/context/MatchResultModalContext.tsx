@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useServerEvents } from 'api/events';
+import React, { useCallback, useState } from 'react';
+import { useEvent } from 'brawl-websocket';
 import { Modal } from 'common/components';
 import MatchResultModalContent from 'frames/main/modals/MatchResultModal/MatchResultModalContent';
 
@@ -15,7 +15,6 @@ type Props = {
 export const MatchResultModalContextProvider = ({ children }: Props) => {
   const [matchId, setMatchId] = useState<string | null>(null);
   const [isModalOpen, setModalOpen] = useState(false);
-  const { addServerEventListener, removeServerEventListener } = useServerEvents();
 
   const hideModal = () => {
     setModalOpen(false);
@@ -33,14 +32,7 @@ export const MatchResultModalContextProvider = ({ children }: Props) => {
     [setMatchResultId]
   );
 
-  useEffect(() => {
-    const listenerId = addServerEventListener<{ matchId: string }>(
-      'match-ended',
-      handleMatchEndedEvent
-    );
-
-    return () => removeServerEventListener('match-ended', listenerId);
-  }, [addServerEventListener, handleMatchEndedEvent, removeServerEventListener]);
+  useEvent('match-ended', handleMatchEndedEvent);
 
   return (
     <MatchResultModalContext.Provider value={{ setMatchResultId, hideModal }}>

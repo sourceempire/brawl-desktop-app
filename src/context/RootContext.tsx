@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { UserRequests } from 'api/requests';
+import ServerSubscriptionProvider from 'brawl-websocket';
 import { MatchResultModalContextProvider } from './MatchResultModalContext';
 import { PartyContextProvider } from './PartyContext';
-import { ServerEventsProvider } from './ServerEventsContext';
 import { UserContextProvider } from './UserContext';
 
 type Props = {
@@ -18,16 +18,20 @@ const RootContextProvider = ({ children }: Props) => {
       .catch(console.error);
   }, []);
 
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
+
+  if (serverUrl === undefined) throw Error('no server url was provided');
+
   if (!loggedInUserId) return <div>Setting up root context</div>; // Do not let this slip in to production, skeletion loading?
 
   return (
-    <ServerEventsProvider>
+    <ServerSubscriptionProvider serverUrl={serverUrl}>
       <UserContextProvider userId={loggedInUserId}>
         <PartyContextProvider>
           <MatchResultModalContextProvider>{children}</MatchResultModalContextProvider>
         </PartyContextProvider>
       </UserContextProvider>
-    </ServerEventsProvider>
+    </ServerSubscriptionProvider>
   );
 };
 

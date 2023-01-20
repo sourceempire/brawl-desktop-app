@@ -1,14 +1,12 @@
+import { useFeed } from 'brawl-websocket';
 import Game, { GameName } from 'types/Game';
 import { MatchSettingsTypes } from 'types/MatchSettings';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
-import useFeed from './useFeed';
 
 export default function useTournamentHubsFeed() {
-  const { currentState, isLoading } = useFeed<{ tournamentHubs: TournamentHub[] }>(
-    'tournament.hubs'
-  );
+  const { data, loading } = useFeed<{ tournamentHubs: TournamentHub[] }>('tournament.hubs');
 
-  let tournamentHubsWithTypedMatchSettings = fixMatchSettingType(currentState.tournamentHubs ?? []);
+  let tournamentHubsWithTypedMatchSettings = fixMatchSettingType(data.tournamentHubs ?? []);
 
   // TODO remove this when server provides everything
   tournamentHubsWithTypedMatchSettings = tournamentHubsWithTypedMatchSettings.map((tournament) => {
@@ -20,7 +18,7 @@ export default function useTournamentHubsFeed() {
 
   return {
     tournamentHubs: tournamentHubsWithTypedMatchSettings,
-    isLoading
+    isLoading: loading
   };
 }
 

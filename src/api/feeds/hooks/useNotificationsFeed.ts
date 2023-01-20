@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
+import { useFeed } from 'brawl-websocket';
 import type { Notification, NotificationFeed } from 'types/notifications/Notifications';
 import { useDebounce } from 'utils/hooks';
-import useFeed from './useFeed';
 
 const useNotificationFeed = () => {
   const user = useLoggedInUser();
@@ -15,9 +15,13 @@ const useNotificationFeed = () => {
     shouldUpdateLimit.current = true;
   }, [debouncedLimit]);
 
+  const { data, loading } = useFeed<NotificationFeed>(
+    `notifications.${user.id}?limit=${debouncedLimit}`
+  );
+
   const requestMoreNotifications = () => {
     // No need to get more notifications if there are none
-    if (limit >= currentState.totalCount) return;
+    if (limit >= data.totalCount) return;
 
     if (shouldUpdateLimit.current) {
       shouldUpdateLimit.current = false;
@@ -25,23 +29,19 @@ const useNotificationFeed = () => {
     }
   };
 
-  const { currentState, isLoading } = useFeed<NotificationFeed>(
-    `notifications.${user.id}?limit=${debouncedLimit}`
-  );
-
   const notifications = useMemo<Notification[]>(() => {
-    return currentState.notifications?.map((notification) => ({
+    return data.notifications?.map((notification) => ({
       ...notification,
       createdAt: new Date(notification.createdAt)
     }));
-  }, [currentState.notifications]);
+  }, [data.notifications]);
 
   return {
-    totalCount: currentState.totalCount ?? 0,
-    unreadCount: currentState.unreadNotificationsCount ?? 0,
+    totalCount: data.totalCount ?? 0,
+    unreadCount: data.unreadNotificationsCount ?? 0,
     notifications: notifications ?? [],
     requestMoreNotifications,
-    isLoading
+    isLoading: loading
   };
 };
 

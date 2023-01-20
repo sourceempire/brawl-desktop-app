@@ -1,5 +1,3 @@
-export { default as useFeed } from './hooks/useFeed';
-
 export { default as useFriendRequestFeed } from './hooks/useFriendRequestsFeed';
 export { default as useFriendsFeed } from './hooks/useFriendsFeed';
 export { default as useNotificationFeed } from './hooks/useFriendRequestsFeed';
