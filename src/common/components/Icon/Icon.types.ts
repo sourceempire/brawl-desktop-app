@@ -13,6 +13,8 @@ export enum IconEnum {
   Filter = 'Filter',
   Friends = 'Friends',
   Key = 'Key',
+  LockClosed = 'LockClosed',
+  LockOpen = 'LockOpen',
   Notification = 'Notification',
   Party = 'Party',
   Plus = 'Plus',
@@ -23,6 +25,7 @@ export enum IconEnum {
   Skull = 'Skull',
   SmallCross = 'SmallCross',
   Star = 'Star',
+  Sword = 'Sword',
   Ticket = 'Ticket',
   Trophy = 'Trophy'
 }

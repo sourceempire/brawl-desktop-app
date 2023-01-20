@@ -74,7 +74,7 @@ export const Day = styled.span<{ active: boolean; picked: boolean; today: boolea
       line-height: 20px;
     `}
 
-    &:hover {
+    :hover {
       background-color: ${() => {
         if (picked) {
           return theme.colors.primary.hover;
@@ -124,7 +124,7 @@ export const DateInput = styled.span<{ isEmpty: boolean }>`
     display: inline-flex;
     width: 100%;
     height: 30px;
-    background-color: ${theme.colors.surface.base};
+    background-color: ${theme.colors.surfaceElement.base};
     border-radius: ${theme.borderRadius.default};
     align-items: center;
     padding: 6px;
@@ -134,14 +134,14 @@ export const DateInput = styled.span<{ isEmpty: boolean }>`
       letter-spacing: 0.7px;
     `}
 
-    &:hover {
-      background-color: ${theme.colors.surface.hover};
+    :hover {
+      background-color: ${theme.colors.surfaceElement.hover};
     }
-    &:active {
+    :active {
       background-color: ${theme.colors.surface.active};
     }
 
-    &::after {
+    :after {
       content: '';
       position: absolute;
       background-image: url(${Icons.SelectArrow.url});

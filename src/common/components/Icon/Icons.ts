@@ -1,61 +1,67 @@
 import { IconEnum, SVGComponent } from './Icon.types';
-import * as AbortIcon from './icons/Abort.svg';
-import * as AddFriendIcon from './icons/AddFriend.svg';
-import * as ArrowDownIcon from './icons/ArrowDown.svg';
-import * as CheckIcon from './icons/Check.svg';
-import * as ClockIcon from './icons/Clock.svg';
-import * as CogIcon from './icons/Cog.svg';
-import * as CopyIcon from './icons/Copy.svg';
-import * as CrossIcon from './icons/Cross.svg';
-import * as DatePickerArrowIcon from './icons/DatePickerArrow.svg';
-import * as DefuseKitIcon from './icons/DefuseKit.svg';
-import * as ExplosionIcon from './icons/Explosion.svg';
-import * as FilterIcon from './icons/Filter.svg';
-import * as FriendsIcon from './icons/Friends.svg';
-import * as KeyIcon from './icons/Key.svg';
-import * as NotificationIcon from './icons/Notification.svg';
-import * as PartyIcon from './icons/Party.svg';
-import * as PlusIcon from './icons/Plus.svg';
-import * as ProfileIcon from './icons/Profile.svg';
-import * as RemoveFriendIcon from './icons/RemoveFriend.svg';
-import * as SearchIcon from './icons/Search.svg';
-import * as SelectArrowIcon from './icons/SelectArrow.svg';
-import * as SkullIcon from './icons/Skull.svg';
-import * as SmallCrossIcon from './icons/SmallCross.svg';
-import * as StarIcon from './icons/Star.svg';
-import * as TicketIcon from './icons/Ticket.svg';
-import * as TrophyIcon from './icons/Trophy.svg';
+import * as Abort from './icons/Abort.svg';
+import * as AddFriend from './icons/AddFriend.svg';
+import * as ArrowDown from './icons/ArrowDown.svg';
+import * as Check from './icons/Check.svg';
+import * as Clock from './icons/Clock.svg';
+import * as Cog from './icons/Cog.svg';
+import * as Copy from './icons/Copy.svg';
+import * as Cross from './icons/Cross.svg';
+import * as DatePickerArrow from './icons/DatePickerArrow.svg';
+import * as DefuseKit from './icons/DefuseKit.svg';
+import * as Explosion from './icons/Explosion.svg';
+import * as Filter from './icons/Filter.svg';
+import * as Friends from './icons/Friends.svg';
+import * as Key from './icons/Key.svg';
+import * as LockClosed from './icons/LockClosed.svg';
+import * as LockOpen from './icons/LockOpen.svg';
+import * as Notification from './icons/Notification.svg';
+import * as Party from './icons/Party.svg';
+import * as Plus from './icons/Plus.svg';
+import * as Profile from './icons/Profile.svg';
+import * as RemoveFriend from './icons/RemoveFriend.svg';
+import * as Search from './icons/Search.svg';
+import * as SelectArrow from './icons/SelectArrow.svg';
+import * as Skull from './icons/Skull.svg';
+import * as SmallCross from './icons/SmallCross.svg';
+import * as Star from './icons/Star.svg';
+import * as Sword from './icons/Sword.svg';
+import * as Ticket from './icons/Ticket.svg';
+import * as Trophy from './icons/Trophy.svg';
 
 const Icons: { [key in IconEnum]: SVGComponent } = {
-  [IconEnum.Abort]: createSVGIcon(AbortIcon),
-  [IconEnum.AddFriend]: createSVGIcon(AddFriendIcon),
-  [IconEnum.ArrowDown]: createSVGIcon(ArrowDownIcon),
-  [IconEnum.Check]: createSVGIcon(CheckIcon),
-  [IconEnum.Clock]: createSVGIcon(ClockIcon),
-  [IconEnum.Cog]: createSVGIcon(CogIcon),
-  [IconEnum.Copy]: createSVGIcon(CopyIcon),
-  [IconEnum.Cross]: createSVGIcon(CrossIcon),
-  [IconEnum.DatePickerArrow]: createSVGIcon(DatePickerArrowIcon),
-  [IconEnum.DefuseKit]: createSVGIcon(DefuseKitIcon),
-  [IconEnum.Explosion]: createSVGIcon(ExplosionIcon),
-  [IconEnum.Filter]: createSVGIcon(FilterIcon),
-  [IconEnum.Friends]: createSVGIcon(FriendsIcon),
-  [IconEnum.Key]: createSVGIcon(KeyIcon),
-  [IconEnum.Notification]: createSVGIcon(NotificationIcon),
-  [IconEnum.Party]: createSVGIcon(PartyIcon),
-  [IconEnum.Plus]: createSVGIcon(PlusIcon),
-  [IconEnum.Profile]: createSVGIcon(ProfileIcon),
-  [IconEnum.RemoveFriend]: createSVGIcon(RemoveFriendIcon),
-  [IconEnum.Search]: createSVGIcon(SearchIcon),
-  [IconEnum.SelectArrow]: createSVGIcon(SelectArrowIcon),
-  [IconEnum.Skull]: createSVGIcon(SkullIcon),
-  [IconEnum.SmallCross]: createSVGIcon(SmallCrossIcon),
-  [IconEnum.Star]: createSVGIcon(StarIcon),
-  [IconEnum.Ticket]: createSVGIcon(TicketIcon),
-  [IconEnum.Trophy]: createSVGIcon(TrophyIcon)
+  [IconEnum.Abort]: createSVGIcon(Abort),
+  [IconEnum.AddFriend]: createSVGIcon(AddFriend),
+  [IconEnum.ArrowDown]: createSVGIcon(ArrowDown),
+  [IconEnum.Check]: createSVGIcon(Check),
+  [IconEnum.Clock]: createSVGIcon(Clock),
+  [IconEnum.Cog]: createSVGIcon(Cog),
+  [IconEnum.Copy]: createSVGIcon(Copy),
+  [IconEnum.Cross]: createSVGIcon(Cross),
+  [IconEnum.DatePickerArrow]: createSVGIcon(DatePickerArrow),
+  [IconEnum.DefuseKit]: createSVGIcon(DefuseKit),
+  [IconEnum.Explosion]: createSVGIcon(Explosion),
+  [IconEnum.Filter]: createSVGIcon(Filter),
+  [IconEnum.Friends]: createSVGIcon(Friends),
+  [IconEnum.Key]: createSVGIcon(Key),
+  [IconEnum.LockClosed]: createSVGIcon(LockClosed),
+  [IconEnum.LockOpen]: createSVGIcon(LockOpen),
+  [IconEnum.Notification]: createSVGIcon(Notification),
+  [IconEnum.Party]: createSVGIcon(Party),
+  [IconEnum.Plus]: createSVGIcon(Plus),
+  [IconEnum.Profile]: createSVGIcon(Profile),
+  [IconEnum.RemoveFriend]: createSVGIcon(RemoveFriend),
+  [IconEnum.Search]: createSVGIcon(Search),
+  [IconEnum.SelectArrow]: createSVGIcon(SelectArrow),
+  [IconEnum.Skull]: createSVGIcon(Skull),
+  [IconEnum.SmallCross]: createSVGIcon(SmallCross),
+  [IconEnum.Star]: createSVGIcon(Star),
+  [IconEnum.Sword]: createSVGIcon(Sword),
+  [IconEnum.Ticket]: createSVGIcon(Ticket),
+  [IconEnum.Trophy]: createSVGIcon(Trophy)
 };
 
-function createSVGIcon(icon: typeof AbortIcon) {
+function createSVGIcon(icon: typeof Abort) {
   const svgComponent = icon.ReactComponent as SVGComponent;
   svgComponent.url = icon.default;
   return svgComponent;
