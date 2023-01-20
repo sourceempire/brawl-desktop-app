@@ -22,7 +22,6 @@
     "dotenv": "^16.0.0",
     "electron-is-dev": "^2.0.0",
     "electron-updater": "^5.0.1",
-    "git": "github:sourceempire/brawl-fetch#v0.0.3",
     "lottie-web": "^5.9.4",
     "react": "^18.1.0",
     "react-cropper": "^2.1.8",
