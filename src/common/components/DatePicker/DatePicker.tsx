@@ -8,6 +8,8 @@ import { DAY_NAMES, changeMonth, getMonth } from './DatePicker.model';
 import {
   Actions,
   DateInput,
+  DateInputArrow,
+  DateInputWrapper,
   Day,
   DayName,
   Days,
@@ -150,17 +152,19 @@ export function DatePickerInput({ value, onChange, dark = false }: InputProps) {
     };
   }, [isDatePickerOpen]);
 
+  const toggle = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+    ignoreEvent.current = e.nativeEvent;
+    setIsDatePickerOpen((open) => !open);
+  };
+
   return (
     <Wrapper>
-      <DateInput
-        onClick={(e) => {
-          ignoreEvent.current = e.nativeEvent;
-          setIsDatePickerOpen((o) => !o);
-        }}
-        ref={inputRef}
-        isEmpty={value === undefined}>
-        {value ? value.formatString() : '---- / -- / --'}
-      </DateInput>
+      <DateInputWrapper>
+        <DateInput onClick={toggle} ref={inputRef} isEmpty={value === undefined}>
+          {value ? value.formatString() : '---- / -- / --'}
+        </DateInput>
+        <DateInputArrow />
+      </DateInputWrapper>
       {isDatePickerOpen && (
         <DatePicker
           value={value}
