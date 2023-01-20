@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
+import { Icons } from 'common/components/Icon';
 import { AvatarImage } from './AvatarChoice.styles';
-import Icons from 'assets/icons/Icons';
 
 export const Wrapper = styled.div<{ hide: boolean }>`
   display: grid;

@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { useServerEvents } from 'api/events';
 import { PotentialFriend, potentialFriendsSearch } from 'api/requests/FriendRequests';
 import { Input } from 'common/components';
+import { Icons } from 'common/components/Icon';
 import { InputSize } from 'common/components/Input/Input.types';
 import Modal from 'common/components/Modal/Modal';
 import popup from 'common/popup';
 import { useDebounce } from 'utils/hooks';
 import AddFriendCard from '../AddFriendCard';
 import { Players, maxNumberOfUsers } from './AddFriendModal.styles';
-import Icons from 'assets/icons/Icons';
 
 type Props = {
   isOpen: boolean;

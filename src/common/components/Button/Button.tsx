@@ -1,6 +1,5 @@
-import { Wrapper } from './Button.styles';
-import { getIcon } from 'assets/icons/Icons.model';
-import { SVGComponent } from 'assets/icons/Icons.types';
+import { IconEnum, SVGComponent } from '../Icon';
+import { ButtonIcon, Wrapper } from './Button.styles';
 
 type Props = {
   children: React.ReactNode;
@@ -9,7 +8,7 @@ type Props = {
   accent?: boolean;
   alert?: boolean;
   small?: boolean;
-  icon?: SVGComponent | string;
+  icon?: IconEnum | SVGComponent | string;
   tabIndex?: number;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
@@ -35,7 +34,7 @@ const Button = ({
       small={small}
       hasIcon={icon !== undefined}
       tabIndex={tabIndex}>
-      {getIcon(icon, 'button-icon')}
+      {icon && <ButtonIcon icon={icon} />}
       {children}
     </Wrapper>
   );

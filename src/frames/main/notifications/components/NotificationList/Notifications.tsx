@@ -3,12 +3,12 @@ import usePushNotifications from 'api/events/hooks/usePushNotifications';
 import useNotificationFeed from 'api/feeds/hooks/useNotificationsFeed';
 import { ActionButton, ContextMenu } from 'common/components';
 import { Title } from 'common/components/ContextMenu/ContextMenu.styles';
+import { Icons } from 'common/components/Icon';
 import { useContextMenuPosition } from 'common/hooks';
 import NoNotifications from '../NoNotifications/NoNotifications';
 import NotificationCard from '../NotificationCard';
 import { NotificationCardSkeletion } from '../NotificationCard/NotificationCard.skeletion';
 import { NotificationList, NotificationsCount, Wrapper } from './Notifications.styles';
-import Icons from 'assets/icons/Icons';
 
 const Notifications = () => {
   usePushNotifications();

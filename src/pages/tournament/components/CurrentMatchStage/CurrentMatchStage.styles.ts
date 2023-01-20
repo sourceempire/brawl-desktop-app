@@ -1,7 +1,7 @@
 import styled, { css, keyframes } from 'styled-components/macro';
+import { Icons } from 'common/components/Icon';
 import { bounceAnimation, hsla } from 'utils/styledUtils';
 import { StageStatus } from './CurrentMatchStage.types';
-import Icons from 'assets/icons/Icons';
 
 const animationTime = 0.3;
 

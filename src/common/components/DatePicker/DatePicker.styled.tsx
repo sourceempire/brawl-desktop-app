@@ -1,8 +1,6 @@
 import styled, { css } from 'styled-components/macro';
 import { Wrapper as Button } from '../Button/Button.styles';
-import { ReactComponent as Arrow } from 'assets/icons/DatePickerArrow.svg';
-import SelectArrow from 'assets/icons/SelectArrow.svg';
-import { lightenColor } from 'assets/styles/colorBrightness';
+import { Icons } from '../Icon';
 
 export const Wrapper = styled.div`
   position: relative;
@@ -96,7 +94,7 @@ export const Header = styled.div`
   margin-bottom: 6px;
 `;
 
-export const PrevArrow = styled(Arrow)`
+export const PrevArrow = styled(Icons.DatePickerArrow)`
   ${({ theme }) => css`
     width: 18px;
     height: 18px;
@@ -142,20 +140,19 @@ export const DateInput = styled.span<{ isEmpty: boolean }>`
     :active {
       background-color: ${theme.colors.surface.active};
     }
-
-    :after {
-      content: '';
-      position: absolute;
-      background-color: white;
-      mask-image: url(${SelectArrow});
-      mask-repeat: no-repeat;
-      mask-position: center;
-      background-repeat: no-repeat;
-      background-position: center;
-      top: 9px;
-      right: 9px;
-      width: 12px;
-      height: 12px;
-    }
   `}
+`;
+
+export const DateInputArrow = styled(Icons.SelectArrow)`
+  fill: white;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+`;
+
+export const DateInputWrapper = styled.div`
+  position: relative;
 `;

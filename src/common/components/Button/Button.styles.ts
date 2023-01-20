@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Icon } from '../Icon/Icon';
 import { lightenColor } from 'assets/styles/colorBrightness';
 
 type Props = {
@@ -13,6 +14,22 @@ type Props = {
 // TODO -> Add support for icons
 // TODO -> Add support for which side icons should be
 
+const iconStyle = css`
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  padding: 8px 10px 8px 15px;
+  box-sizing: border-box;
+`;
+
+export const ButtonIcon = styled(Icon)`
+  ${iconStyle};
+`;
+
+export const ButtonIconImg = styled.img`
+  ${iconStyle};
+`;
+
 export const Wrapper = styled.button<Props>`
   display: inline-flex;
   width: auto;
@@ -25,24 +42,10 @@ export const Wrapper = styled.button<Props>`
 
   ${({ theme }) => theme.textStyles.button}
 
-  .button-icon {
-    display: inline-block;
-    height: 100%;
-    width: 100%;
-    padding: 8px 10px 8px 15px;
-  }
-
   :focus-visible {
     outline: 2px solid white;
     outline-offset: 2px;
     transition: outline-color 0.3s;
-  }
-
-  .button-icon {
-    display: inline-block;
-    height: 100%;
-    padding: 8px 10px 8px 15px;
-    box-sizing: border-box;
   }
 
   ${({ theme, primary, accent, alert, hasIcon, small }) => css`

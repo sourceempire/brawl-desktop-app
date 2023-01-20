@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { ActionButton } from 'common/components';
+import { Icons } from 'common/components/Icon';
 import Notifications from '../../notifications/components/NotificationList';
 import MainNavLink from '../MainNavLink';
 import Party from '../Party';
 import ProfileMenu from '../ProfileMenu';
 import Wallet from '../Wallet';
 import { PlaceholderLogo, TopBarActions, Wrapper } from './TopBar.styles';
-import Icons from 'assets/icons/Icons';
 
 type Props = {
   toggleFriends: () => void;

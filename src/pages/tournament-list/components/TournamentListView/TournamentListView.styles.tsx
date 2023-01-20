@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components/macro';
 import { Button, Input } from 'common/components';
+import { Icons } from 'common/components/Icon';
 import { Select } from 'common/components/Select';
-import SmallCross from 'assets/icons/SmallCross.svg';
 
 export const Wrapper = styled.div`
   padding: 0 24px;
@@ -49,8 +49,8 @@ export const FilterBullet = styled.div<FilterBulletProps>`
     background-color: ${({ theme }) => theme.colors.secondary.hover};
   }
 
-  :before {
-    content: url(${SmallCross});
+  &:before {
+    content: url(${Icons.SmallCross.url});
     padding: 12px;
   }
 `;

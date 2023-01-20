@@ -1,6 +1,8 @@
 import { useDeferredValue, useState } from 'react';
 import useTournamentHubsFeed from 'api/feeds/hooks/useTournamentHubsFeed';
 import { useNavigate } from 'react-router-dom';
+import { Icons } from 'common/components/Icon';
+import { IconEnum } from 'common/components/Icon';
 import { InputSize } from 'common/components/Input/Input.types';
 import { Option } from 'common/components/Select';
 import { Tab, Tabs } from 'common/components/Tabs';
@@ -23,7 +25,6 @@ import {
   TournamentList,
   Wrapper
 } from './TournamentListView.styles';
-import Icons from 'assets/icons/Icons';
 
 export default function TournamentListView() {
   return (
@@ -104,7 +105,7 @@ function Page() {
               onChange={(e) => setSearchQuery(e.target.value)}
               size={InputSize.SMALL}
             />
-            <FilterButton icon={Icons.Filter} onClick={() => setFilterModalOpen(true)}>
+            <FilterButton icon={IconEnum.Filter} onClick={() => setFilterModalOpen(true)}>
               Filter
             </FilterButton>
             <TournamentsFilters

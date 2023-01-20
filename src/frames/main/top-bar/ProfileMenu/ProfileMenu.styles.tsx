@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
+import { Icons } from 'common/components/Icon';
 import { UserStatusEnum } from '../../../../common/components/UserStatus';
 import UserStatus from '../../../../common/components/UserStatus/UserStatus';
-import Icons from 'assets/icons/Icons';
 
 export const MyUserStatus = styled(UserStatus)`
   position: absolute;
