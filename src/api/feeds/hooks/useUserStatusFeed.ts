@@ -1,14 +1,14 @@
+import { useFeed } from 'brawl-websocket';
 import { UserStatusEnum } from 'common/components/UserStatus';
-import useFeed from './useFeed';
 
 type Options = {
   userId: string;
 };
 
 const useUserStatusFeed = ({ userId }: Options) => {
-  const { isLoading, currentState } = useFeed<{ status: UserStatusEnum }>(`user.status.${userId}`);
+  const { data, loading } = useFeed<{ status: UserStatusEnum }>(`user.status.${userId}`);
 
-  return { status: UserStatusEnum[currentState.status], isLoading };
+  return { status: UserStatusEnum[data.status], isLoading: loading };
 };
 
 export default useUserStatusFeed;

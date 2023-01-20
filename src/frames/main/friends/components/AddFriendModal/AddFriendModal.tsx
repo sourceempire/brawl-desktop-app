@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useServerEvents } from 'api/events';
 import { PotentialFriend, potentialFriendsSearch } from 'api/requests/FriendRequests';
+import { useEvent } from 'brawl-websocket';
 import { Input } from 'common/components';
 import { Icons } from 'common/components/Icon';
 import { InputSize } from 'common/components/Input/Input.types';
@@ -19,7 +19,6 @@ const AddFriendModal = ({ isOpen, onClose }: Props) => {
   const [searchString, setSearchString] = useState('');
   const [potentialFriends, setPotentialFriends] = useState<PotentialFriend[]>([]);
   const [shouldUpdate, setShouldUpdate] = useState<boolean>(false);
-  const { addServerEventListener, removeServerEventListener } = useServerEvents();
 
   const debouncedSearchString = useDebounce(searchString, 250);
 
@@ -47,18 +46,13 @@ const AddFriendModal = ({ isOpen, onClose }: Props) => {
     }
   }, [shouldUpdate, searchString]);
 
-  useEffect(() => {
-    const requestDeclineListenerId = addServerEventListener('friend-request-declined', () => {
-      getPotentialFriends(searchString);
-    });
-    const requestAcceptListenerId = addServerEventListener('friend-request-accepted', () => {
-      getPotentialFriends(searchString);
-    });
-    return () => {
-      removeServerEventListener('friend-request-declined', requestDeclineListenerId);
-      removeServerEventListener('friend-request-accepted', requestAcceptListenerId);
-    };
-  }, [addServerEventListener, removeServerEventListener, searchString]);
+  useEvent('friend-request-declined', () => {
+    getPotentialFriends(searchString);
+  });
+
+  useEvent('friend-request-accepted', () => {
+    getPotentialFriends(searchString);
+  });
 
   return (
     <Modal isOpen={isOpen} title="Add Friend" width="350px" onRequestClose={onClose}>

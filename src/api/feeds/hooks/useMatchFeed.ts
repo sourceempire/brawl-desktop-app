@@ -1,13 +1,13 @@
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
+import { useFeed } from 'brawl-websocket';
 import { Match } from 'types/match/Match';
-import useFeed from './useFeed';
 
 const useMatchFeed = (matchId: string) => {
-  const { currentState, isLoading } = useFeed<{ match: Match }>(`match.${matchId}`);
+  const { data, loading } = useFeed<{ match: Match }>(`match.${matchId}`);
 
   const loggedInUser = useLoggedInUser();
 
-  const teams = Object.values(currentState.match?.teams ?? {});
+  const teams = Object.values(data.match?.teams ?? {});
 
   let team1 = teams[0];
   let team2 = teams[1];
@@ -18,10 +18,10 @@ const useMatchFeed = (matchId: string) => {
   }
 
   return {
-    match: currentState.match ?? {},
+    match: data.match ?? {},
     team1,
     team2,
-    isLoading
+    isLoading: loading
   };
 };
 

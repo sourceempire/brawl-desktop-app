@@ -1,6 +1,6 @@
 import { createContext } from 'react';
-import { useFeed } from 'api/feeds';
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
+import { useFeed } from 'brawl-websocket';
 import { PartyState } from 'types/Party';
 
 export const PartyContext = createContext<PartyState>({
@@ -13,7 +13,7 @@ type Props = {
 
 export const PartyContextProvider = ({ children }: Props) => {
   const user = useLoggedInUser();
-  const { currentState } = useFeed<PartyState>(`party.${user.id}`);
-  const { party, isInParty } = currentState;
+  const { data } = useFeed<PartyState>(`party.${user.id}`);
+  const { party, isInParty } = data;
   return <PartyContext.Provider value={{ isInParty, party }}>{children}</PartyContext.Provider>;
 };

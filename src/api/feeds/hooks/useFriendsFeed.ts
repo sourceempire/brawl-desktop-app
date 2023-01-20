@@ -1,15 +1,15 @@
+import { useFeed } from 'brawl-websocket';
 import { PublicUser } from 'types/user/User';
-import useFeed from './useFeed';
 
 type Options = {
   userId: string;
 };
 
 const useFriendsFeed = ({ userId }: Options) => {
-  const { currentState, isLoading } = useFeed<{ friends: PublicUser[] }>(`friends.${userId}`);
+  const { data, loading } = useFeed<{ friends: PublicUser[] }>(`friends.${userId}`);
   return {
-    friends: currentState?.friends ?? [],
-    isLoading
+    friends: data?.friends ?? [],
+    isLoading: loading
   };
 };
 

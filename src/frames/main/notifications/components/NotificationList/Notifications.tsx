@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import usePushNotifications from 'api/events/hooks/usePushNotifications';
+import { usePushNotifications } from 'api/events';
 import useNotificationFeed from 'api/feeds/hooks/useNotificationsFeed';
 import { ActionButton, ContextMenu } from 'common/components';
 import { Title } from 'common/components/ContextMenu/ContextMenu.styles';
