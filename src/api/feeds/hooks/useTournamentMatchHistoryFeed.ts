@@ -1,13 +1,13 @@
 import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
+import { useFeed } from 'brawl-websocket';
 import { TournamentMatchHistory } from 'types/tournaments/TournamentInfo';
-import useFeed from './useFeed';
 
 function useTournamentMatchHistoryFeed(tournamentId: string) {
   const user = useLoggedInUser();
   const feedString = `tournament.match.history.${tournamentId}.${user.id}`;
-  const { currentState, isLoading } = useFeed<{ matchHistory: TournamentMatchHistory }>(feedString);
+  const { data, loading } = useFeed<{ matchHistory: TournamentMatchHistory }>(feedString);
 
-  return { matchHistoryList: currentState.matchHistory?.matchList ?? [], isLoading };
+  return { matchHistoryList: data.matchHistory?.matchList ?? [], isLoading: loading };
 }
 
 export default useTournamentMatchHistoryFeed;

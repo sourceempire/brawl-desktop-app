@@ -5,10 +5,10 @@ import {
   sendFriendRequest
 } from 'api/requests/FriendRequests';
 import ActionButton from 'common/components/ActionButton';
+import { Icons } from 'common/components/Icon';
 import popup from 'common/popup';
 import { ProfileImage, SimpleLoading, UserCard } from '../Shared.styles';
 import { RemoveRequestIcon, RequestSentText, UserTag } from './AddFriendCard.styles';
-import Icons from 'assets/icons/Icons';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
 
 type Props = {

@@ -1,1 +1,1 @@
-export { useServerEvents } from './hooks/useServerEvents';
+export { default as usePushNotifications } from './hooks/usePushNotifications';

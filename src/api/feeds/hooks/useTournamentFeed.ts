@@ -1,14 +1,12 @@
+import { useFeed } from 'brawl-websocket';
 import { Tournament } from 'types/tournaments/TournamentInfo';
-import useFeed from './useFeed';
 
 const useTournamentFeed = (tournamentId: string) => {
-  const { currentState, isLoading } = useFeed<{ tournament: Tournament }>(
-    `tournament.${tournamentId}`
-  );
+  const { data, loading } = useFeed<{ tournament: Tournament }>(`tournament.${tournamentId}`);
 
   return {
-    tournament: currentState.tournament ?? {},
-    isLoading
+    tournament: data.tournament ?? {},
+    isLoading: loading
   };
 };
 

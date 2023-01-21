@@ -1,17 +1,17 @@
+import { useFeed } from 'brawl-websocket';
 import { MatchStats, RoundWin } from 'types/match/Match';
-import useFeed from './useFeed';
 
 export const useMatchStatsFeed = (matchId: string) => {
-  const { currentState, isLoading } = useFeed<{
+  const { data, loading } = useFeed<{
     matchStats: MatchStats;
     roundWins: RoundWin[];
     hasMatchStats: boolean;
   }>(`match.stats.${matchId}`);
 
   return {
-    matchStats: currentState.matchStats ?? {},
-    roundWins: currentState.roundWins ?? [],
-    hasMatchStats: currentState.hasMatchStats,
-    isLoading
+    matchStats: data.matchStats ?? {},
+    roundWins: data.roundWins ?? [],
+    hasMatchStats: data.hasMatchStats,
+    isLoading: loading
   };
 };

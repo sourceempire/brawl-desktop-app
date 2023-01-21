@@ -3,6 +3,7 @@ import { usePartyFeed } from 'api/feeds';
 import * as PartyRequests from 'api/requests/PartyRequests';
 import { ContextMenu } from 'common/components';
 import { Title as ContextMenuTitle } from 'common/components/ContextMenu/ContextMenu.styles';
+import { Icons } from 'common/components/Icon';
 import { InputSize } from 'common/components/Input/Input.types';
 import { useContextMenuPosition } from 'common/hooks';
 import popup from 'common/popup';
@@ -19,7 +20,6 @@ import {
   UserTag,
   Wrapper
 } from './PartyInvite.styles';
-import Icons from 'assets/icons/Icons';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
 
 const PartyInvite = () => {

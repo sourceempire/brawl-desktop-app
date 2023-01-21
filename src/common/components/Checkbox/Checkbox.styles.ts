@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import Icons from 'assets/icons/Icons';
+import { Icons } from '../Icon';
 
 export const Wrapper = styled.div`
   display: inline-flex;

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Icons } from 'common/components/Icon';
 import { InputSize } from 'common/components/Input/Input.types';
 import AddFriendModal from '../AddFriendModal';
 import FriendList from '../FriendList';
@@ -10,7 +11,6 @@ import {
   SearchFriendsInput,
   Wrapper
 } from './FriendBar.styles';
-import Icons from 'assets/icons/Icons';
 
 type Props = {
   visible: boolean;

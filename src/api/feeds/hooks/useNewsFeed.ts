@@ -1,4 +1,4 @@
-import useFeed from './useFeed';
+import { useFeed } from 'brawl-websocket';
 
 export type News = {
   id: string;
@@ -9,10 +9,10 @@ export type News = {
 };
 
 const useNewsFeed = () => {
-  const { currentState, isLoading } = useFeed<{ news: News[] }>('news');
+  const { data, loading } = useFeed<{ news: News[] }>('news');
   return {
-    news: (currentState.news ?? []) as News[],
-    isLoading
+    news: (data.news ?? []) as News[],
+    isLoading: loading
   };
 };
 

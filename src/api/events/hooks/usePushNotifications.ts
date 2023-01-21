@@ -1,12 +1,10 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
+import { useEvent } from 'brawl-websocket';
 import Window from 'electron-window';
 import { Notification } from 'types/notifications/Notifications';
 import { getPushNotificationMessage } from '../push-notifications';
-import { useServerEvents } from './useServerEvents';
 
 export const usePushNotifications = () => {
-  const { addServerEventListener, removeServerEventListener } = useServerEvents();
-
   const onPushNotification = useCallback(async (event: { notification: Notification }) => {
     const notification = event.notification;
 
@@ -18,13 +16,7 @@ export const usePushNotifications = () => {
     }
   }, []);
 
-  useEffect(() => {
-    const listenerId = addServerEventListener<{ notification: Notification }>(
-      'push-notification',
-      onPushNotification
-    );
-    return () => removeServerEventListener('push-notification', listenerId);
-  }, [onPushNotification, addServerEventListener, removeServerEventListener]);
+  useEvent('push-notification', onPushNotification);
 };
 
 export default usePushNotifications;

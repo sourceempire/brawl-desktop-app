@@ -1,24 +1,4 @@
 import styled, { css } from 'styled-components';
-import { hsla } from 'utils/styledUtils';
-
-export const Wrapper = styled.div`
-  width: 100%;
-`;
-
-export const VisibilityToggle = styled.div`
-  ${(props) => props.theme.textStyles.menu}
-  margin: 18px 0;
-  display: inline-block;
-
-  &:after {
-    content: '▾';
-    margin-left: 6px;
-  }
-`;
-
-export const HeroWrapper = styled.div`
-  overflow: hidden;
-`;
 
 export const Hero = styled.div<{ visible: boolean; image: string }>`
   ${({ visible, image, theme }) => css`
@@ -31,14 +11,50 @@ export const Hero = styled.div<{ visible: boolean; image: string }>`
     background-size: cover;
     text-align: center;
     border-radius: ${theme.borderRadius.default};
+    position: relative;
+    :before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.3);
+    }
   `}
 `;
 
+export const Wrapper = styled.div`
+  width: 100%;
+  :hover {
+    ${Hero} {
+      :before {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+`;
+
+export const VisibilityToggle = styled.div`
+  ${(props) => props.theme.textStyles.menu}
+  margin: 18px 0;
+  display: inline-block;
+
+  :after {
+    content: '▾';
+    margin-left: 6px;
+  }
+`;
+
+export const HeroWrapper = styled.div`
+  overflow: hidden;
+`;
+
 export const Info = styled.div`
+  width: 100%;
+  position: absolute;
+  bottom: 18px;
+  padding: 0px 18px;
   display: flex;
-  height: 100%;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 export const Countdown = styled.div`
@@ -52,41 +68,29 @@ export const Countdown = styled.div`
   text-transform: uppercase;
 `;
 
+export const Column1 = styled.div`
+  text-align: left;
+`;
+export const Column2 = styled.div`
+  text-align: right;
+`;
+
 export const Name = styled.div`
   font-size: 20px;
-  font-weight: normal;
+  font-weight: bold;
+  text-transform: uppercase;
   font-family: ${({ theme }) => theme.fonts.stylized};
-  margin-bottom: 18px;
 `;
 
-export const Bullets = styled.div`
-  display: flex;
-  justify-content: center;
+export const TournamentInfo = styled.div``;
+
+export const PrizePoolAmount = styled.div`
+  font-size: 20px;
+  font-weight: bold;
 `;
 
-export const Bullet = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 166px;
-  height: 42px;
-  border-radius: 21px;
-  background-color: ${({ theme }) => hsla(theme.colors.secondary.base, 0.6)};
-  margin: 0 9px; // becomes 18 in space between
-`;
-
-export const BulletIcon = styled.img`
-  height: 42px;
-  width: 42px;
-  padding: 10px;
-  overflow: hidden;
-  flex: 0 0 42px;
-`;
-
-export const BulletText = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  justify-content: center;
+export const PrizePool = styled.div`
+  text-transform: uppercase;
 `;
 
 export const Title = styled.div`

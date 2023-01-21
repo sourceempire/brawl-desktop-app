@@ -10,7 +10,7 @@ export const Radio = styled.input`
   border-radius: 50%;
   position: relative;
 
-  &:before {
+  :before {
     content: '';
     position: absolute;
     inset: 2px;
@@ -22,7 +22,7 @@ export const Radio = styled.input`
     transition: 120ms transform ease-in-out;
   }
 
-  &:checked::before {
+  :checked::before {
     transform: scale(1);
   }
 `;

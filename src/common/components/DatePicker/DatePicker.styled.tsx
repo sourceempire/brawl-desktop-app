@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components/macro';
 import { Wrapper as Button } from '../Button/Button.styles';
 import { ReactComponent as Arrow } from 'assets/icons/DatePickerArrow.svg';
-import SelectArrow from 'assets/icons/SelectArrow.svg';
+import { Icons } from '../Icon';
 
 export const Wrapper = styled.div`
   position: relative;
@@ -75,7 +75,7 @@ export const Day = styled.span<{ active: boolean; picked: boolean; today: boolea
       line-height: 20px;
     `}
 
-    &:hover {
+    :hover {
       background-color: ${() => {
         if (picked) {
           return theme.colors.primary.hover;
@@ -95,7 +95,7 @@ export const Header = styled.div`
   margin-bottom: 6px;
 `;
 
-export const PrevArrow = styled(Arrow)`
+export const PrevArrow = styled(Icons.DatePickerArrow)`
   ${({ theme }) => css`
     width: 18px;
     height: 18px;
@@ -126,7 +126,7 @@ export const DateInput = styled.span<{ isEmpty: boolean }>`
     display: inline-flex;
     width: 100%;
     height: 30px;
-    background-color: ${theme.colors.surface.base};
+    background-color: ${theme.colors.surfaceElement.base};
     border-radius: ${theme.borderRadius.default};
     align-items: center;
     padding: 6px;
@@ -136,23 +136,25 @@ export const DateInput = styled.span<{ isEmpty: boolean }>`
       letter-spacing: 0.7px;
     `}
 
-    &:hover {
-      background-color: ${theme.colors.surface.hover};
+    :hover {
+      background-color: ${theme.colors.surfaceElement.hover};
     }
-    &:active {
+    :active {
       background-color: ${theme.colors.surface.active};
     }
-
-    &::after {
-      content: '';
-      position: absolute;
-      background-image: url(${SelectArrow});
-      background-repeat: no-repeat;
-      background-position: center;
-      top: 9px;
-      right: 9px;
-      width: 12px;
-      height: 12px;
-    }
   `}
+`;
+
+export const DateInputArrow = styled(Icons.SelectArrow)`
+  fill: white;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+`;
+
+export const DateInputWrapper = styled.div`
+  position: relative;
 `;
