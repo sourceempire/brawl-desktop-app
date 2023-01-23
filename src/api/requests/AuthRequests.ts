@@ -1,4 +1,4 @@
-import { Fetcher } from 'api';
+import brawlFetch from 'brawl-fetch';
 
 export type AuthType = 'password' | 'openid';
 
@@ -14,30 +14,33 @@ export type LoginResult = {
 };
 
 export type RegisterForm = {
-  username: string;
+  username: string; // email
   usertag: string;
 };
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
+const endpoints = {
+  LOGIN_CREDENTIALS: SERVER_URL + '/api/public/auth/login',
+  OPEN_ID_AUTH_TYPE: SERVER_URL + '/api/public/auth/type',
+  OPEN_ID_AUTH_URL: SERVER_URL + '/api/public/auth',
+  LOGIN_VALIDATE: SERVER_URL + '/api/public/auth/login/validate',
+  LOGOUT: SERVER_URL + '/api/auth/logout',
+  REGISTER: SERVER_URL + '/api/public/auth/register'
+};
+
 export const loginWithUsernameAndPassword = (username: string, password: string) =>
-  Fetcher.post(SERVER_URL + '/api/public/auth/login', { username, password });
+  brawlFetch(endpoints.LOGIN_CREDENTIALS, {
+    method: 'POST',
+    body: { username, password }
+  });
 
 /**
  * Will return auth url for user to auhenicate through
  */
-export const getOpenIdAuthUrl = () =>
-  Fetcher.get<{ authUrl: string }>(SERVER_URL + '/api/public/auth', {});
-
-export const COMPLETE_URL = SERVER_URL + '/api/public/auth/complete';
-export const FAILED_URL = SERVER_URL + '/api/public/auth/failed';
-
-export const getAuthType = () =>
-  Fetcher.get<{ type: AuthType }>(SERVER_URL + '/api/public/auth/type', {});
-
-export const loginValidate = () => Fetcher.get(SERVER_URL + '/api/public/auth/login/validate', {});
-
-export const logout = () => Fetcher.post(SERVER_URL + '/api/auth/logout', {});
-
+export const getOpenIdAuthUrl = () => brawlFetch<{ authUrl: string }>(endpoints.OPEN_ID_AUTH_URL);
+export const getAuthType = () => brawlFetch<{ type: AuthType }>(endpoints.OPEN_ID_AUTH_TYPE);
+export const loginValidate = () => brawlFetch(endpoints.LOGIN_VALIDATE);
+export const logout = () => brawlFetch(endpoints.LOGOUT, { method: 'POST' });
 export const register = (form: RegisterForm) =>
-  Fetcher.post(SERVER_URL + '/api/public/auth/register', form);
+  brawlFetch(endpoints.REGISTER, { method: 'POST', body: form });
