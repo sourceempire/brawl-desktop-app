@@ -39,7 +39,8 @@ async function createWindow(appPath, options = {}) {
     await window.loadURL(appPath);
   } else {
     if (isDev) {
-      await window.loadURL(`http://localhost:3000/#/${appPath}`);
+      const port = process.env.APP_PORT || 3000;
+      await window.loadURL(`http://localhost:${port}/#/${appPath}`);
     } else {
       await window.loadFile(path.join(__dirname, `../build/index.html`), { hash: `/${appPath}` });
     }
