@@ -40,7 +40,7 @@ export const Header = styled.div`
 export const CrossButton = styled(Icons.Cross)`
   height: 14px;
   width: 14px;
-  fill: white;
+  fill: ${({ theme }) => theme.colors.icon.base};
   opacity: 0.5;
   position: absolute;
   left: -12px;

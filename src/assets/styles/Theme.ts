@@ -105,6 +105,9 @@ export const theme: DefaultTheme = {
       hover: 'hsl(240, 19%, 39%)',
       active: 'hsl(240, 19%, 49%)'
     },
+    icon: {
+      base: 'hsl(0, 100%, 100%)'
+    },
     textPrimaryLight: 'rgba(255, 255, 255, 1)',
     textSecondaryLight: 'rgba(218, 218, 218, .67)',
     textDisabledLight: 'rgba(218, 218, 218, .50)',

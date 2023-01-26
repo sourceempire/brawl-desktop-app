@@ -19,9 +19,11 @@ const ReadyMarkWrapper = styled.div`
 `;
 
 const CheckIcon = styled(Icons.Check)`
-  fill: white;
   height: 60%;
   width: 60%;
+  ${({ theme }) => css`
+    fill: ${theme.colors.icon.base};
+  `}
 `;
 
 export const ReadyMark = () => {

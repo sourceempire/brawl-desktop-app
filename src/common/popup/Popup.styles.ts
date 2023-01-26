@@ -7,7 +7,7 @@ export const CloseIcon = styled(Icons.Cross)`
   position: absolute;
   height: 14px;
   width: 14px;
-  fill: white;
+  fill: ${theme.colors.icon.base};
   border-radius: 50%;
   top: 50%;
   transform: translateY(-50%);

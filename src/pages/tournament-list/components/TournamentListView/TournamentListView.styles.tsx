@@ -50,7 +50,7 @@ export const FilterBullet = styled.div<FilterBulletProps>`
   }
 
   :before {
-    content: url(${Icons.SmallCross.url});
+    content: url(${Icons.Cross.url});
     padding: 12px;
   }
 `;
@@ -66,7 +66,7 @@ export const SearchInput = styled(Input)`
 `;
 
 export const FilterButton = styled(Button)`
-  fill: white;
+  fill: ${({ theme }) => theme.colors.icon.base};
   margin: 0 3px;
 `;
 

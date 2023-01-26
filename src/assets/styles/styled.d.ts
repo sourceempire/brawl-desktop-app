@@ -38,6 +38,9 @@ declare module 'styled-components' {
         hover: string;
         active: string;
       };
+      icon: {
+        base: string;
+      };
 
       textPrimaryLight: string;
       textSecondaryLight: string;

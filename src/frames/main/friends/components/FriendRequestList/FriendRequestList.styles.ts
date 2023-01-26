@@ -4,9 +4,9 @@ import { Icons } from 'common/components/Icon';
 export const ArrowDown = styled(Icons.SelectArrow)`
   width: 12px;
   height: 12px;
-  fill: white;
   ${({ theme }) => css`
     margin-left: ${theme.spacing.base}px;
+    fill: ${theme.colors.icon.base};
   `}
 `;
 
