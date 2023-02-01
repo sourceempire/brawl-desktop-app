@@ -49,8 +49,8 @@ export const FilterBullet = styled.div<FilterBulletProps>`
     background-color: ${({ theme }) => theme.colors.secondary.hover};
   }
 
-  &:before {
-    content: url(${Icons.SmallCross.url});
+  :before {
+    content: url(${Icons.Cross.url});
     padding: 12px;
   }
 `;
@@ -66,6 +66,7 @@ export const SearchInput = styled(Input)`
 `;
 
 export const FilterButton = styled(Button)`
+  fill: ${({ theme }) => theme.colors.white};
   margin: 0 3px;
 `;
 

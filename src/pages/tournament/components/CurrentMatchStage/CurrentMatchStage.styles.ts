@@ -79,8 +79,10 @@ export const StageDot = styled.div<{ status: StageStatus }>`
 export const CheckIcon = styled(Icons.Check)`
   height: 4px;
   width: 6px;
-  fill: white;
   animation: ${bounceAnimation(0, 1.3, 1)} ${animationTime}s forwards;
+  ${({ theme }) => css`
+    fill: ${theme.colors.white};
+  `}
 `;
 
 export const Edge = styled.div<{ fadeIn: boolean; fadeOut: boolean; preventAnimations: boolean }>`

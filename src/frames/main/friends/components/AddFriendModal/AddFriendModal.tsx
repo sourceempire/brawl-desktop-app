@@ -9,6 +9,7 @@ import popup from 'common/popup';
 import { useDebounce } from 'utils/hooks';
 import AddFriendCard from '../AddFriendCard';
 import { Players, maxNumberOfUsers } from './AddFriendModal.styles';
+import { theme } from 'assets/styles/Theme';
 
 type Props = {
   isOpen: boolean;
@@ -57,7 +58,7 @@ const AddFriendModal = ({ isOpen, onClose }: Props) => {
   return (
     <Modal isOpen={isOpen} title="Add Friend" width="350px" onRequestClose={onClose}>
       <Input
-        icon={<Icons.Search />}
+        icon={<Icons.Search fill={theme.colors.white} height={14} />}
         onChange={search}
         value={searchString}
         size={InputSize.SMALL}

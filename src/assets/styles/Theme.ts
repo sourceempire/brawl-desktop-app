@@ -105,6 +105,7 @@ export const theme: DefaultTheme = {
       hover: 'hsl(240, 19%, 39%)',
       active: 'hsl(240, 19%, 49%)'
     },
+
     textPrimaryLight: 'rgba(255, 255, 255, 1)',
     textSecondaryLight: 'rgba(218, 218, 218, .67)',
     textDisabledLight: 'rgba(218, 218, 218, .50)',
@@ -115,6 +116,8 @@ export const theme: DefaultTheme = {
     statusError: '#DD3A3A',
     statusSuccess: '#65CA57',
     statusWarning: '#F4A52F',
+
+    white: 'hsl(0, 100%, 100%)',
 
     notificationRed: 'hsl(0, 95%, 61%)',
     depositGreen: {

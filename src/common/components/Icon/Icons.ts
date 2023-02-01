@@ -23,7 +23,6 @@ import * as RemoveFriend from './icons/RemoveFriend.svg';
 import * as Search from './icons/Search.svg';
 import * as SelectArrow from './icons/SelectArrow.svg';
 import * as Skull from './icons/Skull.svg';
-import * as SmallCross from './icons/SmallCross.svg';
 import * as Star from './icons/Star.svg';
 import * as Sword from './icons/Sword.svg';
 import * as Ticket from './icons/Ticket.svg';
@@ -54,7 +53,6 @@ const Icons: { [key in IconEnum]: SVGComponent } = {
   [IconEnum.Search]: createSVGIcon(Search),
   [IconEnum.SelectArrow]: createSVGIcon(SelectArrow),
   [IconEnum.Skull]: createSVGIcon(Skull),
-  [IconEnum.SmallCross]: createSVGIcon(SmallCross),
   [IconEnum.Star]: createSVGIcon(Star),
   [IconEnum.Sword]: createSVGIcon(Sword),
   [IconEnum.Ticket]: createSVGIcon(Ticket),
