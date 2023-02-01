@@ -66,7 +66,7 @@ export const SearchInput = styled(Input)`
 `;
 
 export const FilterButton = styled(Button)`
-  fill: ${({ theme }) => theme.colors.icon.base};
+  fill: ${({ theme }) => theme.colors.white};
   margin: 0 3px;
 `;
 

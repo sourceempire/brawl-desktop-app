@@ -99,7 +99,7 @@ const PartyInvite = () => {
 
                     {hasInvite && (
                       <CancelInviteAction
-                        icon={<Icons.Cross fill={theme.colors.icon.base} height={14} />}
+                        icon={<Icons.Cross fill={theme.colors.white} height={14} />}
                         onClick={() => handleRevokeInvite(friend.id)}
                         hint="Revoke Invite"
                       />

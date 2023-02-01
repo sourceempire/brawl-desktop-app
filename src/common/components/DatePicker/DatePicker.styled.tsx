@@ -98,7 +98,7 @@ export const PrevArrow = styled(Icons.DatePickerArrow)`
   ${({ theme }) => css`
     width: 18px;
     height: 18px;
-    fill: ${theme.colors.icon.base};
+    fill: ${theme.colors.white};
     padding: 6px;
     box-sizing: border-box;
     background-color: ${theme.colors.surface.base};
@@ -145,7 +145,7 @@ export const DateInput = styled.span<{ isEmpty: boolean }>`
 `;
 
 export const DateInputArrow = styled(Icons.SelectArrow)`
-  fill: ${({ theme }) => theme.colors.icon.base};
+  fill: ${({ theme }) => theme.colors.white};
   position: absolute;
   top: 10px;
   right: 10px;

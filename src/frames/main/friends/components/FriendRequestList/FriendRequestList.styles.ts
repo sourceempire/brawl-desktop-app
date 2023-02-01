@@ -6,7 +6,7 @@ export const ArrowDown = styled(Icons.SelectArrow)`
   height: 12px;
   ${({ theme }) => css`
     margin-left: ${theme.spacing.base}px;
-    fill: ${theme.colors.icon.base};
+    fill: ${theme.colors.white};
   `}
 `;
 

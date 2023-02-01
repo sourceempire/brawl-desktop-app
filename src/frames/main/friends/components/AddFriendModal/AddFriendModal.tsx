@@ -58,7 +58,7 @@ const AddFriendModal = ({ isOpen, onClose }: Props) => {
   return (
     <Modal isOpen={isOpen} title="Add Friend" width="350px" onRequestClose={onClose}>
       <Input
-        icon={<Icons.Search fill={theme.colors.icon.base} height={14} />}
+        icon={<Icons.Search fill={theme.colors.white} height={14} />}
         onChange={search}
         value={searchString}
         size={InputSize.SMALL}

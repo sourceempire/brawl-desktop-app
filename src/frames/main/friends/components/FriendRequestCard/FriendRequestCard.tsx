@@ -42,7 +42,7 @@ const FriendRequestCard = ({ user }: Props) => {
           />
           <DeclineAction
             onClick={() => makeRequest(declineFriendRequest)}
-            icon={<Icons.Cross fill={theme.colors.icon.base} height={14} />}
+            icon={<Icons.Cross fill={theme.colors.white} height={14} />}
             isCircle
           />
         </RequestActions>

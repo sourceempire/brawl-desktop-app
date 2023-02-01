@@ -31,13 +31,13 @@ type Props = {
 const RoundWinnerIcon = ({ reason }: { reason: CSGORoundEndReason }) => {
   switch (reason) {
     case ELIMINATION:
-      return <Icons.Skull fill={theme.colors.icon.base} height={15} />;
+      return <Icons.Skull fill={theme.colors.white} height={15} />;
     case EXPLODE:
-      return <Icons.Explosion fill={theme.colors.icon.base} height={15} />;
+      return <Icons.Explosion fill={theme.colors.white} height={15} />;
     case DEFUSE:
-      return <Icons.DefuseKit fill={theme.colors.icon.base} height={15} />;
+      return <Icons.DefuseKit fill={theme.colors.white} height={15} />;
     case TIME:
-      return <Icons.Clock fill={theme.colors.icon.base} height={15} />;
+      return <Icons.Clock fill={theme.colors.white} height={15} />;
   }
 };
 

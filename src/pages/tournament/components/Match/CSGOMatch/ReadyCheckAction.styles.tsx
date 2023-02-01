@@ -22,7 +22,7 @@ const CheckIcon = styled(Icons.Check)`
   height: 60%;
   width: 60%;
   ${({ theme }) => css`
-    fill: ${theme.colors.icon.base};
+    fill: ${theme.colors.white};
   `}
 `;
 

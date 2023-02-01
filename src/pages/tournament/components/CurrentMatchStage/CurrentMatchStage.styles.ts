@@ -81,7 +81,7 @@ export const CheckIcon = styled(Icons.Check)`
   width: 6px;
   animation: ${bounceAnimation(0, 1.3, 1)} ${animationTime}s forwards;
   ${({ theme }) => css`
-    fill: ${theme.colors.icon.base};
+    fill: ${theme.colors.white};
   `}
 `;
 

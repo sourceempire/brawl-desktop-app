@@ -38,9 +38,6 @@ declare module 'styled-components' {
         hover: string;
         active: string;
       };
-      icon: {
-        base: string;
-      };
 
       textPrimaryLight: string;
       textSecondaryLight: string;
@@ -52,6 +49,8 @@ declare module 'styled-components' {
       statusError: string;
       statusSuccess: string;
       statusWarning: string;
+
+      white: string;
 
       depositGreen: {
         base: string;
