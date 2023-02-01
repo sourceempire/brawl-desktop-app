@@ -10,6 +10,7 @@ import {
   SideSwapIndicator,
   Wrapper
 } from './RoundWinnerIndicatorList.styles';
+import { theme } from 'assets/styles/Theme';
 
 const { COMPETITIVE, WINGMAN, ONE_VS_ONE } = CSGOGameModes;
 const { ELIMINATION, EXPLODE, DEFUSE, TIME } = CSGORoundEndReason;
@@ -30,13 +31,13 @@ type Props = {
 const RoundWinnerIcon = ({ reason }: { reason: CSGORoundEndReason }) => {
   switch (reason) {
     case ELIMINATION:
-      return <Icons.Skull fill="white" height={15} />;
+      return <Icons.Skull fill={theme.colors.white} height={15} />;
     case EXPLODE:
-      return <Icons.Explosion fill="white" height={15} />;
+      return <Icons.Explosion fill={theme.colors.white} height={15} />;
     case DEFUSE:
-      return <Icons.DefuseKit fill="white" height={15} />;
+      return <Icons.DefuseKit fill={theme.colors.white} height={15} />;
     case TIME:
-      return <Icons.Clock fill="white" height={15} />;
+      return <Icons.Clock fill={theme.colors.white} height={15} />;
   }
 };
 

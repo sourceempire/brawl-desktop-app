@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components/macro';
+import { Icons } from 'common/components/Icon';
 
 type ContentProps = {
   width?: string;
@@ -36,7 +37,10 @@ export const Header = styled.div`
   ${({ theme }) => theme.textStyles.title}
 `;
 
-export const CrossButton = styled.img`
+export const CrossButton = styled(Icons.Cross)`
+  height: 14px;
+  width: 14px;
+  fill: ${({ theme }) => theme.colors.white};
   opacity: 0.5;
   position: absolute;
   left: -12px;

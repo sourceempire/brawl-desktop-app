@@ -23,7 +23,6 @@ export enum IconEnum {
   Search = 'Search',
   SelectArrow = 'SelectArrow',
   Skull = 'Skull',
-  SmallCross = 'SmallCross',
   Star = 'Star',
   Sword = 'Sword',
   Ticket = 'Ticket',

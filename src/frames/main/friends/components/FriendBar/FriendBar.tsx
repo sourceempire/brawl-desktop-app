@@ -11,6 +11,7 @@ import {
   SearchFriendsInput,
   Wrapper
 } from './FriendBar.styles';
+import { theme } from 'assets/styles/Theme';
 
 type Props = {
   visible: boolean;
@@ -39,7 +40,7 @@ const FriendBar = ({ visible }: Props) => {
       <Wrapper onPointerDown={(e) => e.stopPropagation}>
         <FriendActions>
           <SearchFriendsInput
-            icon={<Icons.Search />}
+            icon={<Icons.Search fill={theme.colors.white} height={14} />}
             value={searchString}
             onChange={handleSearch}
             size={InputSize.SMALL}

@@ -21,6 +21,7 @@ import {
   Wrapper
 } from './PartyInvite.styles';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
+import { theme } from 'assets/styles/Theme';
 
 const PartyInvite = () => {
   const { party } = usePartyFeed();
@@ -98,7 +99,7 @@ const PartyInvite = () => {
 
                     {hasInvite && (
                       <CancelInviteAction
-                        icon={<Icons.Cross />}
+                        icon={<Icons.Cross fill={theme.colors.white} height={14} />}
                         onClick={() => handleRevokeInvite(friend.id)}
                         hint="Revoke Invite"
                       />
