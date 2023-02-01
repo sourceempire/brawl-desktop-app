@@ -13,6 +13,11 @@ export const PasswordLogin = () => {
   if (error) {
     console.error(error);
   }
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      loginWithUsernameAndPassword(username, password);
+    }
+  };
 
   return (
     <Wrapper>
@@ -23,6 +28,7 @@ export const PasswordLogin = () => {
         label="Email"
         size={InputSize.SMALL}
         icon={<Icons.Profile />}
+        onKeyPress={handleKeyPress}
       />
 
       <LoginInput
@@ -33,6 +39,7 @@ export const PasswordLogin = () => {
         placeholder="Enter Password"
         size={InputSize.SMALL}
         icon={<Icons.Key />}
+        onKeyPress={handleKeyPress}
       />
 
       <LoginButton onClick={() => loginWithUsernameAndPassword(username, password)} primary>

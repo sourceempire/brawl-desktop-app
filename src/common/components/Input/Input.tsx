@@ -1,3 +1,4 @@
+import React from 'react';
 import { InputSize } from 'common/components/Input/Input.types';
 import { IconWrapper, InputElement, InputWrapper, Label, Wrapper } from './Input.styles';
 
@@ -14,6 +15,7 @@ type Props = {
   tabIndex?: number;
   maxLength?: number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 };
 
 const Input = ({
@@ -28,7 +30,8 @@ const Input = ({
   placeholder,
   tabIndex = 0,
   maxLength,
-  onChange
+  onChange,
+  onKeyPress
 }: Props) => {
   const hasIcon = Boolean(icon);
 
@@ -43,6 +46,7 @@ const Input = ({
           name={name}
           type={type}
           onChange={onChange}
+          onKeyPress={onKeyPress}
           withBorder={withBorder}
           inputSize={size}
           hasIcon={hasIcon}
