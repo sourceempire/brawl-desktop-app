@@ -20,20 +20,17 @@ const useAuth = () => {
 
   const navigate = useNavigate();
 
-  const [loginValidate, { loading: loadingValidate, error: validateError }] = useGet(
-    endpoints.LOGIN_VALIDATE,
-    {
-      onComplete: () => closeLoginWindowAndOpenMain(),
-      onError: (err: any) => {
-        if (err.status === 200) {
-          closeMainWindowAndOpenLogin();
-          return;
-        }
-        // handle errors that are not expected
-        console.error(err);
+  const [loginValidate, { loading: loadingValidate }] = useGet(endpoints.LOGIN_VALIDATE, {
+    onComplete: () => closeLoginWindowAndOpenMain(),
+    onError: (err: any) => {
+      if (err.status === 200) {
+        closeMainWindowAndOpenLogin();
+        return;
       }
+      // handle errors that are not expected
+      console.error(err);
     }
-  );
+  });
 
   const { current: getAuthType } = useRef(async () => {
     setLoading(true);
