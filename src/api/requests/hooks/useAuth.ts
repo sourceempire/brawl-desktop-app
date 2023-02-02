@@ -20,8 +20,9 @@ const useAuth = () => {
 
   const navigate = useNavigate();
 
-  const loginValidateOptions = useMemo(
-    () => ({
+  const [loginValidate, { loading: loadingValidate, error: validateError }] = useGet(
+    endpoints.LOGIN_VALIDATE,
+    {
       onComplete: () => {
         closeLoginWindowAndOpenMain();
       },
@@ -32,13 +33,7 @@ const useAuth = () => {
         console.log(err);
         closeMainWindowAndOpenLogin();
       }
-    }),
-    []
-  );
-
-  const [loginValidate, { loading: loadingValidate, error: validateError }] = useGet(
-    endpoints.LOGIN_VALIDATE,
-    loginValidateOptions
+    }
   );
 
   const { current: getAuthType } = useRef(async () => {
