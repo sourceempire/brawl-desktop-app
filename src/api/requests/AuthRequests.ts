@@ -20,7 +20,7 @@ export type RegisterForm = {
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-const endpoints = {
+export const endpoints = {
   LOGIN_CREDENTIALS: SERVER_URL + '/api/public/auth/login',
   OPEN_ID_AUTH_TYPE: SERVER_URL + '/api/public/auth/type',
   OPEN_ID_AUTH_URL: SERVER_URL + '/api/public/auth',

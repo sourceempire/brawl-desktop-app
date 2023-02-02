@@ -1,37 +1,45 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { AuthRequests } from 'api/requests';
 import {
   type AuthType,
   type LoginResult,
   LoginResultStatus,
-  type RegisterForm
+  type RegisterForm,
+  endpoints
 } from 'api/requests/AuthRequests';
+import { useGet, usePost } from 'brawl-fetch';
 import Window from 'electron-window';
 import { useNavigate } from 'react-router-dom';
 
 const useAuth = () => {
-  // TODO -> Fix typesafe way of doing this
   const [authType, setAuthType] = useState<AuthType>('openid');
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<any>();
 
   const navigate = useNavigate();
 
-  const { current: loginValidate } = useRef(async () => {
-    setLoading(true);
-    try {
-      await AuthRequests.loginValidate();
-      closeLoginWindowAndOpenMain();
-    } catch (err: any) {
-      if (err.status !== 200) {
-        setError(err);
+  const loginValidateOptions = useMemo(
+    () => ({
+      onComplete: () => {
+        closeLoginWindowAndOpenMain();
+      },
+      onError: (err: any) => {
+        if (err.status !== 200) {
+          console.log('');
+        }
+        console.log(err);
+        closeMainWindowAndOpenLogin();
       }
-      closeMainWindowAndOpenLogin();
-    }
-    setLoading(false);
-  });
+    }),
+    []
+  );
+
+  const [loginValidate, { loading: loadingValidate, error: validateError }] = useGet(
+    endpoints.LOGIN_VALIDATE,
+    loginValidateOptions
+  );
 
   const { current: getAuthType } = useRef(async () => {
     setLoading(true);
@@ -106,7 +114,7 @@ const useAuth = () => {
     loginWithOpenId,
     register,
     logout,
-    isLoading,
+    isLoading: isLoading || loadingValidate,
     error
   };
 };
