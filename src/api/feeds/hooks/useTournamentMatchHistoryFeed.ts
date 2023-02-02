@@ -1,5 +1,5 @@
-import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import { useFeed } from 'brawl-websocket';
+import { useLoggedInUser } from 'hooks';
 import { TournamentMatchHistory } from 'types/tournaments/TournamentInfo';
 
 function useTournamentMatchHistoryFeed(tournamentId: string) {

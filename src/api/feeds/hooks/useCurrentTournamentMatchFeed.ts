@@ -1,5 +1,5 @@
-import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import { useFeed } from 'brawl-websocket';
+import { useLoggedInUser } from 'hooks';
 
 const useCurrentTournamentMatchFeed = (touramentId: string) => {
   const user = useLoggedInUser();

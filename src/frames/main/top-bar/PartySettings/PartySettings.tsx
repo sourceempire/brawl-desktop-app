@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { usePartyFeed } from 'api/feeds';
-import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import * as PartyRequests from 'api/requests/PartyRequests';
+import { useLoggedInUser } from 'hooks';
 import { ActionButton, ContextMenu } from 'common/components';
 import { Icons } from 'common/components/Icon';
 import { InputSize } from 'common/components/Input/Input.types';

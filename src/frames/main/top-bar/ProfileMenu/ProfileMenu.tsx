@@ -1,7 +1,7 @@
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { useUserStatusFeed } from 'api/feeds';
 import { UserRequests, useAuth } from 'api/requests';
-import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
+import { useLoggedInUser } from 'hooks';
 import ContextMenu from 'common/components/ContextMenu';
 import UserStatus, { UserStatusEnum } from 'common/components/UserStatus';
 import { statusTexts } from 'common/components/UserStatus/UserStatus';
