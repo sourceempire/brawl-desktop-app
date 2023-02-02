@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useUserAvatarsFeed from 'api/feeds/hooks/useUserAvatarsFeed';
-import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import * as UserRequests from 'api/requests/UserRequests';
+import { useLoggedInUser } from 'hooks/useLoggedInUser';
 import { Modal } from 'common/components';
 import popup from 'common/popup';
 import AvatarChoice from './AvatarChoice';

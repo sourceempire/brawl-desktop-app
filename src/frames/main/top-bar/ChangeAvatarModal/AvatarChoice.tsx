@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { UserRequests } from 'api/requests';
-import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
+import { useLoggedInUser } from 'hooks/useLoggedInUser';
 import { ContextMenu } from 'common/components';
 import { Position } from 'common/components/ContextMenu/ContextMenu.types';
 import popup from 'common/popup';

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useMemo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { AuthRequests } from 'api/requests';
 import {
   type AuthType,
@@ -9,7 +9,7 @@ import {
   type RegisterForm,
   endpoints
 } from 'api/requests/AuthRequests';
-import { useGet, usePost } from 'brawl-fetch';
+import { useGet } from 'brawl-fetch';
 import Window from 'electron-window';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,16 +23,14 @@ const useAuth = () => {
   const [loginValidate, { loading: loadingValidate, error: validateError }] = useGet(
     endpoints.LOGIN_VALIDATE,
     {
-      onComplete: () => {
-        closeLoginWindowAndOpenMain();
-      },
+      onComplete: () => closeLoginWindowAndOpenMain(),
       onError: (err: any) => {
-        // TODO -> fix this, no idea why the 200 status code is checked bit not returning anything
-        if (err.status !== 200) {
-          console.log('');
+        if (err.status === 200) {
+          closeMainWindowAndOpenLogin();
+          return;
         }
-        console.log(err);
-        closeMainWindowAndOpenLogin();
+        // handle errors that are not expected
+        console.error(err);
       }
     }
   );
@@ -118,18 +116,18 @@ const useAuth = () => {
 // The timer set on these functions is a fix for multipe windows opening
 // in development if trying to reload many times in a row. Feel free to
 // find a better solution.
-const closeMainWindowAndOpenLogin = () => {
+function closeMainWindowAndOpenLogin() {
   setTimeout(() => {
     Window.closeMainWindow();
     Window.openLoginWindow();
   }, 20);
-};
+}
 
-const closeLoginWindowAndOpenMain = () => {
+function closeLoginWindowAndOpenMain() {
   setTimeout(() => {
     Window.openMainWindow();
     Window.closeLoginWindow();
   }, 20);
-};
+}
 
 export default useAuth;

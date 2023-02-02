@@ -1,6 +1,6 @@
 import React from 'react';
 import { useUserFeed } from 'api/feeds';
-import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
+import { useLoggedInUser } from 'hooks/useLoggedInUser';
 import EllipsisText from 'common/components/EllipsisText';
 import { Icons } from 'common/components/Icon';
 import { TeamStats } from 'types/match/Match';

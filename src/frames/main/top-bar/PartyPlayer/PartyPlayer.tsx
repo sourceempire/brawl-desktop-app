@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 import { usePartyFeed } from 'api/feeds';
 import useUserFeed from 'api/feeds/hooks/useUserFeed';
-import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import * as PartyRequests from 'api/requests/PartyRequests';
+import { useLoggedInUser } from 'hooks/useLoggedInUser';
 import { ContextMenu } from 'common/components';
 import { useContextMenuPosition, useHint } from 'common/hooks';
 import popup from 'common/popup';

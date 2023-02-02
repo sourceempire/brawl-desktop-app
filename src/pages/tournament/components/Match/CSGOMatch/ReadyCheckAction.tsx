@@ -1,5 +1,5 @@
-import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import CSGOMatchRequests from 'api/requests/match/CSGOMatchRequests';
+import { useLoggedInUser } from 'hooks/useLoggedInUser';
 import { Button } from 'common/components';
 import { useMatchContext } from 'context/MatchContext';
 import { CSGOMatch } from 'types/match/Match';
