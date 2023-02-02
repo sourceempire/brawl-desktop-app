@@ -27,6 +27,7 @@ const useAuth = () => {
         closeLoginWindowAndOpenMain();
       },
       onError: (err: any) => {
+        // TODO -> fix this, no idea why the 200 status code is checked bit not returning anything
         if (err.status !== 200) {
           console.log('');
         }
