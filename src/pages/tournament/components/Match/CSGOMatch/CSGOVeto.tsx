@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import CSGOMatchRequests from 'api/requests/match/CSGOMatchRequests';
-import { useLoggedInUser } from 'hooks';
+import { useLoggedInUser } from 'common/hooks';
 import popup from 'common/popup';
 import { useMatchContext } from 'context/MatchContext';
 import { csgoMaps } from 'types/csgo/maps';

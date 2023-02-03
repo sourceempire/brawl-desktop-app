@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useFeed } from 'brawl-websocket';
-import { useLoggedInUser } from 'hooks';
+import { useDebounce, useLoggedInUser } from 'common/hooks';
 import type { Notification, NotificationFeed } from 'types/notifications/Notifications';
-import { useDebounce } from 'utils/hooks';
 
 const useNotificationFeed = () => {
   const user = useLoggedInUser();

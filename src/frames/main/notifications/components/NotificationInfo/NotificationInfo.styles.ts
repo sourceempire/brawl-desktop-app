@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Button } from 'common/components';
+import { Button } from 'common/ui';
 
 export const Wrapper = styled.div`
   display: grid;

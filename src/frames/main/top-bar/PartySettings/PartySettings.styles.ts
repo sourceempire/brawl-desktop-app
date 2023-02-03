@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Button, Input } from 'common/components';
+import { Input } from 'common/ui';
 
 export const Settings = styled.div`
   width: 170px;
@@ -27,15 +27,6 @@ export const PartySettingsInput = styled(Input)`
         font-weight: normal;
       }
       background-color: ${theme.colors.surfaceSecondary.base};
-    }
-  `}
-`;
-
-export const AddTeamImageBtn = styled(Button)`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.surfaceSecondary.base};
-    :hover {
-      background-color: ${theme.colors.surfaceSecondary.hover};
     }
   `}
 `;

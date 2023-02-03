@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Icons } from 'common/components/Icon';
+import { Icons } from 'common/ui';
 import { PopupBackgroundColors, PopupColors, PopupLevel } from 'types/Popup';
 import { theme } from 'assets/styles/Theme';
 

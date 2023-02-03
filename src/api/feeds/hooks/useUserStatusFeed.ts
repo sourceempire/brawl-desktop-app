@@ -1,5 +1,5 @@
 import { useFeed } from 'brawl-websocket';
-import { UserStatusEnum } from 'common/components/UserStatus';
+import { UserStatusEnum } from 'common/ui';
 
 type Options = {
   userId: string;

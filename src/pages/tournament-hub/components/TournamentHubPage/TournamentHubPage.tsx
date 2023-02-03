@@ -2,8 +2,8 @@ import { useCallback, useEffect, useState } from 'react';
 import { useTournamentHubFeed } from 'api/feeds';
 import * as TournamentRequests from 'api/requests/TournamentRequests';
 import { Link, useParams } from 'react-router-dom';
-import { Button } from 'common/components';
 import popup from 'common/popup';
+import { Button } from 'common/ui';
 import { Tournament } from 'types/tournaments/TournamentInfo';
 import { Hero, Wrapper } from './TournamentHubPage.styles';
 import temporaryHeroImage from 'assets/images/temporary-tournament-hub-hero.png';
@@ -11,7 +11,7 @@ import temporaryHeroImage from 'assets/images/temporary-tournament-hub-hero.png'
 const TournamentHubPage = () => {
   const { hubId } = useParams() as { hubId: string };
 
-  const { tournamentHub, tournamentIds } = useTournamentHubFeed(hubId);
+  const { tournamentHub } = useTournamentHubFeed(hubId);
 
   const [loggedInUserTournament, setLoggedInUserTournament] = useState<Tournament>();
 

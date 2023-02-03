@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from 'api/requests';
-import { Icons } from 'common/components/Icon';
-import { InputSize } from 'common/components/Input/Input.types';
+import { Icons } from 'common/ui';
+import { InputSize } from 'common/ui/Input/Input.types';
 import { LoginButton, LoginInput, Wrapper } from './PasswordLogin.styles';
 import { theme } from 'assets/styles/Theme';
 

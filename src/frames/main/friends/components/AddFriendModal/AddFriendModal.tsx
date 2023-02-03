@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 import { PotentialFriend, potentialFriendsSearch } from 'api/requests/FriendRequests';
 import { useEvent } from 'brawl-websocket';
-import { Input } from 'common/components';
-import { Icons } from 'common/components/Icon';
-import { InputSize } from 'common/components/Input/Input.types';
-import Modal from 'common/components/Modal/Modal';
+import { useDebounce } from 'common/hooks';
 import popup from 'common/popup';
-import { useDebounce } from 'utils/hooks';
+import { Icons, Input, Modal } from 'common/ui';
+import { InputSize } from 'common/ui/Input/Input.types';
 import AddFriendCard from '../AddFriendCard';
 import { Players, maxNumberOfUsers } from './AddFriendModal.styles';
 import { theme } from 'assets/styles/Theme';

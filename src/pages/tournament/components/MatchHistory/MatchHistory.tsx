@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { Button } from 'common/components';
-import MatchResult from 'pages/shared/components/MatchResult';
+import MatchResult from 'common/components/MatchResult';
+import { Button } from 'common/ui';
 import { TournamentMatchInfo } from 'types/tournaments/TournamentInfo';
 import { MatchResultWrapper, MatchRoundLink, Matches, Wrapper } from './MatchHistory.styles';
 

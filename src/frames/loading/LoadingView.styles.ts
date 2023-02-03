@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Animation } from 'common/components';
+import { Animation } from 'common/ui';
 
 export const Wrapper = styled.div`
   display: flex;

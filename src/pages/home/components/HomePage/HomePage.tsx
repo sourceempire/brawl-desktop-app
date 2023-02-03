@@ -1,10 +1,10 @@
-import useNewsFeed, { News as NewsType } from 'api/feeds/hooks/useNewsFeed';
+// import useNewsFeed, { News as NewsType } from 'api/feeds/hooks/useNewsFeed';
 import Game, { GameName } from 'types/Game';
 import { CSGOMatchSettings } from 'types/MatchSettings';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import Hero from '../Hero/Hero';
 import LatestWinners from '../LatestWinners/LatestWinners';
-import News from '../News/News';
+// import News from '../News/News';
 import { PromotedTournament, Wrapper } from './HomePage.styles';
 
 const HomePage = () => {

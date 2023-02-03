@@ -1,4 +1,4 @@
-import { Button } from 'common/components';
+import { Button } from 'common/ui';
 import { useFriendList } from 'frames/main/friends/hooks/useFriendList';
 import { Title } from '../FriendBar/FriendBar.styles';
 import FriendCard from '../FriendCard';

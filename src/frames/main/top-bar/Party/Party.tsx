@@ -1,8 +1,7 @@
 import { usePartyFeed } from 'api/feeds';
 import { createParty } from 'api/requests/PartyRequests';
-import { ActionButton } from 'common/components';
-import { Icons } from 'common/components/Icon';
 import popup from 'common/popup';
+import { ActionButton, Icons } from 'common/ui';
 import PartyInvite from '../PartyInvite/PartyInvite';
 import PartyPlayer from '../PartyPlayer';
 import PartySettings from '../PartySettings';
