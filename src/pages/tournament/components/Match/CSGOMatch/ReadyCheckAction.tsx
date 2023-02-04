@@ -1,6 +1,6 @@
-import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import CSGOMatchRequests from 'api/requests/match/CSGOMatchRequests';
-import { Button } from 'common/components';
+import { useLoggedInUser } from 'common/hooks';
+import { Button } from 'common/ui';
 import { useMatchContext } from 'context/MatchContext';
 import { CSGOMatch } from 'types/match/Match';
 import { ReadyMark, WaitingAnimation, Wrapper } from './ReadyCheckAction.styles';

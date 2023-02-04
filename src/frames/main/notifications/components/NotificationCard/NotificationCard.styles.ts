@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
-import EllipsisText from 'common/components/EllipsisText';
-import { skeletonLoadingStyle } from 'common/components/SkeletonLoading/SkeletionLoading.styles';
+import { EllipsisText, skeletonLoadingStyle } from 'common/ui';
 
 export const Text = styled(EllipsisText)`
   ${({ theme }) => css`

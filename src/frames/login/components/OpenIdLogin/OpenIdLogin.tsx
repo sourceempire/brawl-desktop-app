@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from 'api/requests';
-import { Checkbox, Text } from 'common/components';
+import { Checkbox, Text } from 'common/ui';
 import { AppVersion, LoginWrapper, OpenIdButton, SignUpText } from './OpenIdLogin.styles';
 import BankIDLogo from 'assets/icons/BankID_logo_white.svg';
 import YotiLogo from 'assets/icons/Yoti_logo.svg';

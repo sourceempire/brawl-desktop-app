@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import useFriendRequestFeed from 'api/feeds/hooks/useFriendRequestsFeed';
-import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
+import { useLoggedInUser } from 'common/hooks';
 import { Title } from '../FriendBar/FriendBar.styles';
 import FriendRequestCard from '../FriendRequestCard';
 import { ArrowDown, Wrapper } from './FriendRequestList.styles';

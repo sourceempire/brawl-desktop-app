@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Button, Checkbox, DatePicker, Modal, RadioButton } from 'common/components';
-import { RangedSlider } from 'common/components/Slider';
+import { Button, Checkbox, DatePicker, Modal, RadioButton, RangedSlider } from 'common/ui';
 import {
   Filter,
   FilterTypes
@@ -151,7 +150,7 @@ export default function TournamentsFilters({
         value: game
       });
     }
-    for (const [id, filter] of Object.entries(checkboxes)) {
+    for (const filter of Object.values(checkboxes)) {
       if (filter.active) {
         activeFilters.push({
           name: filter.name,

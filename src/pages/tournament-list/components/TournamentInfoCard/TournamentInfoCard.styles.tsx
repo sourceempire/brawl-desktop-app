@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components/macro';
-import { Card } from 'common/components';
-import { Icons } from 'common/components/Icon';
+import { Card, Icons } from 'common/ui';
 
 export const Header = styled.div<{ image: string }>`
   ${({ image, theme }) => css`

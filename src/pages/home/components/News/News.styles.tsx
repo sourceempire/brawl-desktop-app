@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components/macro';
-import { Card } from 'common/components';
-import Markdown from 'common/components/Markdown/Markdown';
+import { Card, Markdown } from 'common/ui';
 
 export const Wrapper = styled(Card).attrs({ padding: false })`
   overflow: hidden;

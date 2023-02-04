@@ -1,10 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { usePushNotifications } from 'api/events';
 import useNotificationFeed from 'api/feeds/hooks/useNotificationsFeed';
-import { ActionButton, ContextMenu } from 'common/components';
-import { Title } from 'common/components/ContextMenu/ContextMenu.styles';
-import { Icons } from 'common/components/Icon';
 import { useContextMenuPosition } from 'common/hooks';
+import { ActionButton, ContextMenu, ContextMenuTitle, Icons } from 'common/ui';
 import NoNotifications from '../NoNotifications/NoNotifications';
 import NotificationCard from '../NotificationCard';
 import { NotificationCardSkeletion } from '../NotificationCard/NotificationCard.skeletion';
@@ -64,7 +62,7 @@ const Notifications = () => {
           arrowPosition={arrowPosition}
           ignoredElementOnClickOutside={actionButtonRef.current}
           onClickOutside={() => setMenuVisible(false)}>
-          <Title>NOTIFICATIONS</Title>
+          <ContextMenuTitle>NOTIFICATIONS</ContextMenuTitle>
           <NotificationList onScroll={handleScroll}>
             {notifications.length === 0 && <NoNotifications />}
 

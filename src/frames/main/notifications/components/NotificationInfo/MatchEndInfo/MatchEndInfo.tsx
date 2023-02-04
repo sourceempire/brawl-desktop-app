@@ -1,5 +1,5 @@
+import { useTimeSince } from 'common/hooks';
 import { MatchEndNotificationInfo } from 'types/notifications/Notifications';
-import { useTimeSince } from 'utils/hooks';
 import { Image, Text, TimeAgo } from '../../NotificationCard/NotificationCard.styles';
 import { Info, Wrapper } from '../NotificationInfo.styles';
 import csgoLogo from 'assets/images/csgo-logo.svg';

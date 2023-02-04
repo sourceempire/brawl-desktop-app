@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from 'styled-components/macro';
-import { Icons } from 'common/components/Icon';
+import { Icons } from 'common/ui';
 import { bounceAnimation, hsla } from 'utils/styledUtils';
 import { StageStatus } from './CurrentMatchStage.types';
 

@@ -1,7 +1,5 @@
 import styled, { css } from 'styled-components/macro';
-import { Button, Input } from 'common/components';
-import { Icons } from 'common/components/Icon';
-import { Select } from 'common/components/Select';
+import { Button, Icons, Input, Select } from 'common/ui';
 
 export const Wrapper = styled.div`
   padding: 0 24px;

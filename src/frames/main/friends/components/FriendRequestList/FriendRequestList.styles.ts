@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Icons } from 'common/components/Icon';
+import { Icons } from 'common/ui';
 
 export const ArrowDown = styled(Icons.SelectArrow)`
   width: 12px;

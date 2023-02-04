@@ -1,12 +1,10 @@
 import React, { useMemo, useRef, useState } from 'react';
 import { usePartyFeed } from 'api/feeds';
 import * as PartyRequests from 'api/requests/PartyRequests';
-import { ContextMenu } from 'common/components';
-import { Title as ContextMenuTitle } from 'common/components/ContextMenu/ContextMenu.styles';
-import { Icons } from 'common/components/Icon';
-import { InputSize } from 'common/components/Input/Input.types';
 import { useContextMenuPosition } from 'common/hooks';
 import popup from 'common/popup';
+import { ContextMenu, ContextMenuTitle, Icons } from 'common/ui';
+import { InputSize } from 'common/ui/Input/Input.types';
 import { ProfileImage } from 'frames/main/friends/components/Shared.styles';
 import { useFriendList } from 'frames/main/friends/hooks/useFriendList';
 import {

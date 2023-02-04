@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button, Input } from 'common/components';
+import { Button, Input } from 'common/ui';
 
 export const Wrapper = styled.div`
   width: 100%;

@@ -1,10 +1,8 @@
 import { useDeferredValue, useState } from 'react';
 import useTournamentHubsFeed from 'api/feeds/hooks/useTournamentHubsFeed';
 import { useNavigate } from 'react-router-dom';
-import { IconEnum, Icons } from 'common/components/Icon';
-import { InputSize } from 'common/components/Input/Input.types';
-import { Option } from 'common/components/Select';
-import { Tab, Tabs } from 'common/components/Tabs';
+import { IconEnum, Icons, Option, Tab, Tabs } from 'common/ui';
+import { InputSize } from 'common/ui/Input/Input.types';
 import Game, { GameName } from 'types/Game';
 import { CSGOMatchSettings } from 'types/MatchSettings';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';

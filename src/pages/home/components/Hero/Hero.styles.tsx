@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components/macro';
-import { Card } from 'common/components';
+import { Card } from 'common/ui';
 import heroBackground from 'assets/images/hero-background.png';
 import heroForeground from 'assets/images/hero-foreground.png';
 

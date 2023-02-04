@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components/macro';
-import EllipsisText from 'common/components/EllipsisText';
-import { InnerWrapper } from 'common/components/EllipsisText/EllipsisText.styles';
-import { Icons } from 'common/components/Icon';
+import { EllipsisText, Icons } from 'common/ui';
+import { InnerWrapper } from 'common/ui/EllipsisText/EllipsisText.styles';
 import { ProfileImage } from 'frames/main/friends/components/Shared.styles';
 
 export const ProfileImageWrapper = styled.div`

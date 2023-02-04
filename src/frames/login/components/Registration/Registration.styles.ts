@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Button as Btn } from 'common/components';
+import { Button as Btn } from 'common/ui';
 
 export const Wrapper = styled.div<{ active: boolean }>`
   transition: opacity 1s;

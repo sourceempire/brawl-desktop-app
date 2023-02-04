@@ -1,11 +1,16 @@
 import React, { useCallback, useState } from 'react';
 import { useEvent } from 'brawl-websocket';
-import { Modal } from 'common/components';
+import { Modal } from 'common/ui';
 import MatchResultModalContent from 'frames/main/modals/MatchResultModal/MatchResultModalContent';
 
-export const MatchResultModalContext = React.createContext({
-  setMatchResultId: (matchId: string) => {},
-  hideModal: () => {}
+type ContextValue = {
+  setMatchResultId: (matchId: string) => void;
+  hideModal: () => void;
+};
+
+export const MatchResultModalContext = React.createContext<ContextValue>({
+  setMatchResultId: () => undefined,
+  hideModal: () => undefined
 });
 
 type Props = {

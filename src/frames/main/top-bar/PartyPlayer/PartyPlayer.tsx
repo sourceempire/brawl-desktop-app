@@ -1,11 +1,10 @@
 import { useRef, useState } from 'react';
 import { usePartyFeed } from 'api/feeds';
 import useUserFeed from 'api/feeds/hooks/useUserFeed';
-import useLoggedInUser from 'api/requests/hooks/useLoggedInUser';
 import * as PartyRequests from 'api/requests/PartyRequests';
-import { ContextMenu } from 'common/components';
-import { useContextMenuPosition, useHint } from 'common/hooks';
+import { useContextMenuPosition, useHint, useLoggedInUser } from 'common/hooks';
 import popup from 'common/popup';
+import { ContextMenu } from 'common/ui';
 import { LeaderStar, MenuWrapper, PlayerAction, PlayerImage, Wrapper } from './PartyPlayer.styles';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
 
