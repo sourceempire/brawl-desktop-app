@@ -6,31 +6,30 @@ import {
   type AuthType,
   type LoginResult,
   LoginResultStatus,
-  type RegisterForm
+  type RegisterForm,
+  endpoints
 } from 'api/requests/AuthRequests';
+import { useGet } from 'brawl-fetch';
 import Window from 'electron-window';
 import { useNavigate } from 'react-router-dom';
 
 const useAuth = () => {
-  // TODO -> Fix typesafe way of doing this
   const [authType, setAuthType] = useState<AuthType>('openid');
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<any>();
 
   const navigate = useNavigate();
 
-  const { current: loginValidate } = useRef(async () => {
-    setLoading(true);
-    try {
-      await AuthRequests.loginValidate();
-      closeLoginWindowAndOpenMain();
-    } catch (err: any) {
-      if (err.status !== 200) {
-        setError(err);
+  const [loginValidate, { loading: loadingValidate }] = useGet(endpoints.LOGIN_VALIDATE, {
+    onComplete: () => closeLoginWindowAndOpenMain(),
+    onError: (err: any) => {
+      if (err.status === 200) {
+        closeMainWindowAndOpenLogin();
+        return;
       }
-      closeMainWindowAndOpenLogin();
+      // handle errors that are not expected
+      console.error(err);
     }
-    setLoading(false);
   });
 
   const { current: getAuthType } = useRef(async () => {
@@ -106,7 +105,7 @@ const useAuth = () => {
     loginWithOpenId,
     register,
     logout,
-    isLoading,
+    isLoading: isLoading || loadingValidate,
     error
   };
 };
@@ -114,18 +113,18 @@ const useAuth = () => {
 // The timer set on these functions is a fix for multipe windows opening
 // in development if trying to reload many times in a row. Feel free to
 // find a better solution.
-const closeMainWindowAndOpenLogin = () => {
+function closeMainWindowAndOpenLogin() {
   setTimeout(() => {
     Window.closeMainWindow();
     Window.openLoginWindow();
   }, 20);
-};
+}
 
-const closeLoginWindowAndOpenMain = () => {
+function closeLoginWindowAndOpenMain() {
   setTimeout(() => {
     Window.openMainWindow();
     Window.closeLoginWindow();
   }, 20);
-};
+}
 
 export default useAuth;

@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import useFriendsFeed from 'api/feeds/hooks/useFriendsFeed';
 import { useLoggedInUser, useUpdateEffect } from 'common/hooks';
-import { UserStatusEnum } from 'common/ui/UserStatus';
+import { UserStatusEnum } from 'common/ui';
 import { PublicUser } from 'types/user/User';
 import { FriendRef, statusSortOrder } from '../components/FriendList/FriendList.types';
 
