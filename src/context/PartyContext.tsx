@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 import { useFeed } from 'brawl-websocket';
-import { useLoggedInUser } from 'hooks/useLoggedInUser';
+import { useLoggedInUser } from 'common/hooks';
 import { PartyState } from 'types/Party';
 
 export const PartyContext = createContext<PartyState>({

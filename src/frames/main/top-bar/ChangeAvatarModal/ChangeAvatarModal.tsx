@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import useUserAvatarsFeed from 'api/feeds/hooks/useUserAvatarsFeed';
 import * as UserRequests from 'api/requests/UserRequests';
-import { useLoggedInUser } from 'hooks/useLoggedInUser';
-import { Modal } from 'common/components';
+import { useLoggedInUser } from 'common/hooks';
 import popup from 'common/popup';
+import { Modal } from 'common/ui';
 import AvatarChoice from './AvatarChoice';
 import { Wrapper as AvatarChoiceWrapper, ImageContainer } from './AvatarChoice.styles';
 import AvatarCropper from './AvatarCropper';
@@ -27,12 +27,12 @@ const ChangeAvatarModal = ({ isOpen, onClose }: Props) => {
   };
 
   const chooseAvatar = (avatarId: string) => {
-    UserRequests.chooseAvatar(avatarId).catch((error: any) => popup.error(error.error));
+    UserRequests.chooseAvatar(avatarId).catch((error) => popup.error(error.error));
     onClose();
   };
 
   const removeAvatar = () => {
-    UserRequests.removeAvatar().catch((error: any) => popup.error(error.error));
+    UserRequests.removeAvatar().catch((error) => popup.error(error.error));
     onClose();
   };
 

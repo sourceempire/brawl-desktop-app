@@ -1,10 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import {
-  ArrowPosition,
-  ContextMenuRef,
-  Position
-} from 'common/components/ContextMenu/ContextMenu.types';
-import { Hint } from 'common/components/Hint/Hint';
+import { Hint } from 'common/ui';
+import { ArrowPosition, ContextMenuRef, Position } from 'common/ui/ContextMenu/ContextMenu.types';
 import { theme } from 'assets/styles/Theme';
 
 type Options = {

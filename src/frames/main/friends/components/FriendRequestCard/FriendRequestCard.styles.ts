@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import ActionButton from 'common/components/ActionButton';
+import { ActionButton } from 'common/ui';
 
 export const RequestActions = styled.div`
   display: grid;

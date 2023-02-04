@@ -1,5 +1,5 @@
 import Fetcher from 'api/Fetcher';
-import { UserStatusEnum } from 'common/components/UserStatus';
+import { UserStatusEnum } from 'common/ui';
 import { PublicUser, User } from 'types/user/User';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;

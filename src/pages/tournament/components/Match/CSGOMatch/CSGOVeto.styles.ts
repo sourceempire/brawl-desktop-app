@@ -1,6 +1,5 @@
 import styled, { css, keyframes } from 'styled-components';
-import { Button } from 'common/components';
-import EllipsisText from 'common/components/EllipsisText';
+import { Button, EllipsisText } from 'common/ui';
 
 const banAnimaton = keyframes`
   0% {

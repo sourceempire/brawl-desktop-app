@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Wrapper as MatchResultWrapper } from 'pages/shared/components/MatchResult/MatchResult.styles';
+import { Wrapper as MatchResultWrapper } from 'common/components/MatchResult/MatchResult.styles';
 
 export const Wrapper = styled.div`
   width: 1100px;

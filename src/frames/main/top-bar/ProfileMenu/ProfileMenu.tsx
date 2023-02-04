@@ -1,13 +1,11 @@
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { useUserStatusFeed } from 'api/feeds';
 import { UserRequests, useAuth } from 'api/requests';
-import { useLoggedInUser } from 'hooks/useLoggedInUser';
-import ContextMenu from 'common/components/ContextMenu';
-import UserStatus, { UserStatusEnum } from 'common/components/UserStatus';
-import { statusTexts } from 'common/components/UserStatus/UserStatus';
-import { StatusText } from 'common/components/UserStatus/UserStatus.styles';
-import { useContextMenuPosition } from 'common/hooks';
+import { useContextMenuPosition, useLoggedInUser } from 'common/hooks';
 import popup from 'common/popup';
+import { ContextMenu, UserStatus, UserStatusEnum } from 'common/ui';
+import { statusTexts } from 'common/ui/UserStatus/UserStatus';
+import { StatusText } from 'common/ui/UserStatus/UserStatus.styles';
 import ChangeAvatarModal from '../ChangeAvatarModal/ChangeAvatarModal';
 import {
   HorizontalRule,

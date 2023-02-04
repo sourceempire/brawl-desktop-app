@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useAuth } from 'api/requests';
-import DragableArea from 'common/components/DragableArea';
+import { DragableArea } from 'common/ui';
 import OpenIdRoutes from './components/OpenIdRoutes';
 import PasswordLogin from './components/PasswordLogin';
 import { Wrapper } from './LoginFrame.styles';

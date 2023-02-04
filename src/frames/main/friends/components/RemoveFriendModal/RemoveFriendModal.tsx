@@ -1,5 +1,4 @@
-import { Button } from 'common/components';
-import Modal from 'common/components/Modal/Modal';
+import { Button, Modal } from 'common/ui';
 import { Buttons, ConfirmationText, FriendToRemove, Wrapper } from './RemoveFriendModal.styles';
 
 type Props = {

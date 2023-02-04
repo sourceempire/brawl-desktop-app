@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Icons } from 'common/components/Icon';
+import { Icons } from 'common/ui';
 import { UserCardSkeleton } from '../Shared.styles';
 
 export const Wrapper = styled.div`

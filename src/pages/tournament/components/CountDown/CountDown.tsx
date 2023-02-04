@@ -1,4 +1,4 @@
-import { useCountdown } from 'utils/hooks/useCountdown';
+import { useCountdown } from 'common/hooks/useCountdown';
 import { Days, Hours, Minutes, Number, Seconds, Unit, Wrapper } from './CountDown.styles';
 
 type Props = {
@@ -6,7 +6,7 @@ type Props = {
 };
 
 const CountDown = ({ startTime }: Props) => {
-  const { days, hasDays, hours, hasHours, minutes, hasMinutes, seconds, hasSeconds, finished } =
+  const { days, hasDays, hours, hasHours, minutes, hasMinutes, seconds, finished } =
     useCountdown(startTime);
 
   function filterDayNumbersPredicate(dayNumber: string, index: number) {

@@ -50,6 +50,8 @@ declare module 'styled-components' {
       statusSuccess: string;
       statusWarning: string;
 
+      white: string;
+
       depositGreen: {
         base: string;
         hover: string;

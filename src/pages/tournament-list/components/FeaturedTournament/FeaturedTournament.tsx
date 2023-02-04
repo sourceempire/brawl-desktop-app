@@ -43,7 +43,7 @@ export default function FeaturedTournament({
               <TournamentInfo>
                 Starts {formatDateAndTime(tournamentInfo.startTime)} | Registration closes{' - '}
                 {formatTournamentLockTime(tournamentInfo.startTime, tournamentInfo.lockTime)} |
-                Entry fee €{tournamentInfo.entranceFee} /person |{' '}
+                Entry fee €{tournamentInfo.entranceFee} / person |{' '}
                 {getTournamentModeShort(tournamentInfo)}
               </TournamentInfo>
             </Column1>

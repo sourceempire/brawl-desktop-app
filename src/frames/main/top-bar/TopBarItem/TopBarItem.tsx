@@ -1,10 +1,10 @@
 import { useLayoutEffect, useRef, useState } from 'react';
-import ContextMenu from 'common/components/ContextMenu';
+import { ContextMenu } from 'common/ui';
 import type {
   ArrowPosition,
   ContextMenuRef,
   Position
-} from 'common/components/ContextMenu/ContextMenu.types';
+} from 'common/ui/ContextMenu/ContextMenu.types';
 import { Hint, Wrapper } from './TopBarItem.styles';
 import { theme } from 'assets/styles/Theme';
 

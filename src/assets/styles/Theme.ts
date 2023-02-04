@@ -76,14 +76,14 @@ export const theme: DefaultTheme = {
       active: 'hsl(39, 100%, 67%)'
     },
     accent: {
-      base: 'hsl(143, 65%, 75%)',
-      hover: 'hsl(143, 65%, 85%)',
-      active: 'hsl(143, 65%, 95%)'
+      base: 'hsl(143, 65%, 65%)',
+      hover: 'hsl(143, 65%, 75%)',
+      active: 'hsl(143, 65%, 85%)'
     },
     background: {
-      base: 'hsl(240, 19%, 17%)',
+      base: 'hsl(240, 20%, 17%)',
       hover: 'hsl(240, 19%, 27%)',
-      active: 'hsl(240, 19%, 17%)'
+      active: 'hsl(240, 19%, 37%)'
     },
     secondary: {
       base: 'hsl(238, 19%, 26%)',
@@ -105,6 +105,7 @@ export const theme: DefaultTheme = {
       hover: 'hsl(240, 19%, 39%)',
       active: 'hsl(240, 19%, 49%)'
     },
+
     textPrimaryLight: 'rgba(255, 255, 255, 1)',
     textSecondaryLight: 'rgba(218, 218, 218, .67)',
     textDisabledLight: 'rgba(218, 218, 218, .50)',
@@ -115,6 +116,8 @@ export const theme: DefaultTheme = {
     statusError: '#DD3A3A',
     statusSuccess: '#65CA57',
     statusWarning: '#F4A52F',
+
+    white: 'hsl(0, 100%, 100%)',
 
     notificationRed: 'hsl(0, 95%, 61%)',
     depositGreen: {

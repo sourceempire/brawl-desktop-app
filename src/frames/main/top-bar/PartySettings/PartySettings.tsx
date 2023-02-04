@@ -1,15 +1,18 @@
 import React, { useRef, useState } from 'react';
 import { usePartyFeed } from 'api/feeds';
 import * as PartyRequests from 'api/requests/PartyRequests';
-import { useLoggedInUser } from 'hooks/useLoggedInUser';
-import { ActionButton, ContextMenu } from 'common/components';
-import { Icons } from 'common/components/Icon';
-import { InputSize } from 'common/components/Input/Input.types';
-import { useContextMenuPosition } from 'common/hooks';
-import popup from 'common/popup';
-import { useDebounce, usePrevious, useUpdateEffect } from 'utils/hooks';
 import {
-  AddTeamImageBtn,
+  useContextMenuPosition,
+  useDebounce,
+  useLoggedInUser,
+  usePrevious,
+  useUpdateEffect
+} from 'common/hooks';
+import popup from 'common/popup';
+import { ActionButton, ContextMenu } from 'common/ui';
+import { Icons } from 'common/ui/Icon';
+import { InputSize } from 'common/ui/Input/Input.types';
+import {
   Label,
   PartySettingsInput,
   PartySizes,
@@ -25,9 +28,6 @@ const PartySettings = () => {
   const { party } = usePartyFeed();
   const { current: initialTeamName } = useRef(party.teamName);
   const { current: initialPartySize } = useRef(party.partySize);
-
-  const fileInputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
-  const [teamImageFile, setTeamImageFile] = useState<File>(); // TODO -> We need to set a flow and have a design for this
 
   const [isMenuVisible, setMenuVisible] = useState(false);
   const [teamName, setTeamName] = useState<string | null>(initialTeamName);
@@ -56,17 +56,6 @@ const PartySettings = () => {
       popup.error(error.error);
       setPartySize(party.partySize);
     });
-  };
-
-  const handleFileInputButtonClick = () => {
-    fileInputRef.current.click();
-  };
-
-  const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files) return;
-    if (event.target.files.length !== 1) return;
-
-    setTeamImageFile(event.target.files[0]);
   };
 
   useUpdateEffect(() => {
@@ -135,11 +124,6 @@ const PartySettings = () => {
             ) : (
               <SettingsDisplay>{party.partySize}</SettingsDisplay>
             )}
-
-            <Label>Team Image</Label>
-
-            <AddTeamImageBtn onClick={handleFileInputButtonClick}>Add Team Image</AddTeamImageBtn>
-            <input ref={fileInputRef} onChange={handleFileInputChange} type="file" hidden></input>
           </Settings>
         </ContextMenu>
       )}

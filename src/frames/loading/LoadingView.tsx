@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useAuth } from 'api/requests';
 import Window from 'electron-window';
-import { ProgressBar } from 'common/components';
 import { useAppUpdater } from 'common/hooks';
+import { ProgressBar } from 'common/ui';
 import { LoadingAnimation, LoadingStatusText, Wrapper } from './LoadingView.styles';
 import { UpdateStatus } from './types';
 import loadingExample from 'assets/animations/loading-example.json';
@@ -10,6 +10,8 @@ import loadingExample from 'assets/animations/loading-example.json';
 const LoadingView = () => {
   const { checkForUpdates, updateStatus, hasProgressInfo, progressInfo } = useAppUpdater();
   const { loginValidate, isLoading: tryingToLogIn, error } = useAuth();
+
+  console.log(tryingToLogIn);
 
   useEffect(() => {
     checkForUpdates();

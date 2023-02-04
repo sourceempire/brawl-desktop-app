@@ -1,4 +1,4 @@
-import { UserStatusEnum } from 'common/components/UserStatus';
+import { UserStatusEnum } from 'common/ui';
 
 export const statusSortOrder = {
   [UserStatusEnum.ONLINE]: 0,

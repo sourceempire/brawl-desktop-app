@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Icons } from 'common/components/Icon';
-import { InputSize } from 'common/components/Input/Input.types';
+import { Icons } from 'common/ui';
+import { InputSize } from 'common/ui/Input/Input.types';
 import AddFriendModal from '../AddFriendModal';
 import FriendList from '../FriendList';
 import FriendRequestList from '../FriendRequestList';
@@ -11,6 +11,7 @@ import {
   SearchFriendsInput,
   Wrapper
 } from './FriendBar.styles';
+import { theme } from 'assets/styles/Theme';
 
 type Props = {
   visible: boolean;
@@ -39,7 +40,7 @@ const FriendBar = ({ visible }: Props) => {
       <Wrapper onPointerDown={(e) => e.stopPropagation}>
         <FriendActions>
           <SearchFriendsInput
-            icon={<Icons.Search />}
+            icon={<Icons.Search fill={theme.colors.white} height={14} />}
             value={searchString}
             onChange={handleSearch}
             size={InputSize.SMALL}

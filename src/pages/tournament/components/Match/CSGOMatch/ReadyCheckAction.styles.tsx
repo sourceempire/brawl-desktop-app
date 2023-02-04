@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components/macro';
-import { Animation } from 'common/components';
-import { Icons } from 'common/components/Icon';
+import { Animation, Icons } from 'common/ui';
 import simpleLoading from 'assets/animations/simple-loading.json';
 
 export const Wrapper = styled.div``;
@@ -19,9 +18,11 @@ const ReadyMarkWrapper = styled.div`
 `;
 
 const CheckIcon = styled(Icons.Check)`
-  fill: white;
   height: 60%;
   width: 60%;
+  ${({ theme }) => css`
+    fill: ${theme.colors.white};
+  `}
 `;
 
 export const ReadyMark = () => {

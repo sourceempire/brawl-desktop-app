@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useAuth } from 'api/requests';
-import { Icons } from 'common/components/Icon';
-import { InputSize } from 'common/components/Input/Input.types';
+import { Icons } from 'common/ui';
+import { InputSize } from 'common/ui/Input/Input.types';
 import { LoginButton, LoginInput, Wrapper } from './PasswordLogin.styles';
+import { theme } from 'assets/styles/Theme';
 
 export const PasswordLogin = () => {
   const { loginWithUsernameAndPassword, error } = useAuth();
@@ -22,7 +23,7 @@ export const PasswordLogin = () => {
         placeholder="Enter Email Address"
         label="Email"
         size={InputSize.SMALL}
-        icon={<Icons.Profile />}
+        icon={<Icons.Profile fill={theme.colors.white} />}
       />
 
       <LoginInput
@@ -32,7 +33,7 @@ export const PasswordLogin = () => {
         label="Password"
         placeholder="Enter Password"
         size={InputSize.SMALL}
-        icon={<Icons.Key />}
+        icon={<Icons.Key fill={theme.colors.white} />}
       />
 
       <LoginButton onClick={() => loginWithUsernameAndPassword(username, password)} primary>

@@ -1,7 +1,5 @@
 import styled, { css } from 'styled-components/macro';
-import { Button, Input } from 'common/components';
-import { Icons } from 'common/components/Icon';
-import { Select } from 'common/components/Select';
+import { Button, Icons, Input, Select } from 'common/ui';
 
 export const Wrapper = styled.div`
   padding: 0 24px;
@@ -21,57 +19,59 @@ export const FilterBar = styled.div`
   justify-content: space-between;
 `;
 
-export const FilterBullets = styled.div<{ noChildren: boolean }>`
-  ${({ noChildren }) =>
-    noChildren &&
-    css`
-      height: 30px;
-      margin-bottom: 6px;
-    `}
+export const FilterBullets = styled.div`
+  min-height: 30px;
+  max-width: 750px;
+  margin-bottom: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 `;
 
-type FilterBulletProps = {
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
-};
-
-export const FilterBullet = styled.div<FilterBulletProps>`
-  display: inline-block;
-  margin-right: 6px;
-  background-color: ${({ theme }) => theme.colors.secondary.base};
+export const FilterBullet = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
   height: 30px;
   border-radius: 15px;
-  min-width: 30px;
-  line-height: 30px;
+  padding-left: 32px;
   padding-right: 18px;
-  margin-bottom: 6px;
 
-  :hover {
-    background-color: ${({ theme }) => theme.colors.secondary.hover};
-  }
+  ${({ theme }) => css`
+    background-color: ${theme.colors.secondary.base};
 
-  &:before {
-    content: url(${Icons.SmallCross.url});
-    padding: 12px;
-  }
+    :hover {
+      background-color: ${theme.colors.secondary.hover};
+    }
+  `}
+`;
+
+export const CrossIcon = styled(Icons.Cross)`
+  position: absolute;
+  height: 8px;
+  width: 8px;
+  left: 12px;
+
+  ${({ theme }) => css`
+    fill: ${theme.colors.textSecondaryLight};
+  `}
 `;
 
 export const FilterControls = styled.div`
   display: flex;
+  gap: 6px;
 `;
 
 export const SearchInput = styled(Input)`
   display: inline-block;
   width: 166px;
-  margin: 0 3px;
 `;
 
 export const FilterButton = styled(Button)`
-  margin: 0 3px;
+  fill: ${({ theme }) => theme.colors.white};
 `;
 
-export const FilterSort = styled(Select)`
-  margin-left: 3px;
-`;
+export const FilterSort = styled(Select)``;
 
 export const TournamentList = styled.ul`
   display: grid;

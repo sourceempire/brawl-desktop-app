@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ActionButton } from 'common/components';
-import { Icons } from 'common/components/Icon';
+import { ActionButton, Icons } from 'common/ui';
 import Notifications from '../../notifications/components/NotificationList';
 import MainNavLink from '../MainNavLink';
 import Party from '../Party';

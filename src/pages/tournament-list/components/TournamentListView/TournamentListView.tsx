@@ -1,11 +1,8 @@
 import { useDeferredValue, useState } from 'react';
 import useTournamentHubsFeed from 'api/feeds/hooks/useTournamentHubsFeed';
 import { useNavigate } from 'react-router-dom';
-import { Icons } from 'common/components/Icon';
-import { IconEnum } from 'common/components/Icon';
-import { InputSize } from 'common/components/Input/Input.types';
-import { Option } from 'common/components/Select';
-import { Tab, Tabs } from 'common/components/Tabs';
+import { IconEnum, Icons, Option, Tab, Tabs } from 'common/ui';
+import { InputSize } from 'common/ui/Input/Input.types';
 import Game, { GameName } from 'types/Game';
 import { CSGOMatchSettings } from 'types/MatchSettings';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
@@ -14,6 +11,7 @@ import TournamentInfoCard from '../TournamentInfoCard/TournamentInfoCard';
 import TournamentsFilters from '../TournamentsFiltersModal/TournamentsFiltersModal';
 import { Filter, filter, search } from './TournamentListView.model';
 import {
+  CrossIcon,
   FilterBar,
   FilterBullet,
   FilterBullets,
@@ -25,18 +23,13 @@ import {
   TournamentList,
   Wrapper
 } from './TournamentListView.styles';
+import { theme } from 'assets/styles/Theme';
 
 export default function TournamentListView() {
   return (
     <Wrapper>
       <Tabs underlined={true}>
-        <Tab name="Upcomming">
-          <Page />
-        </Tab>
-        <Tab name="Started">
-          <Page />
-        </Tab>
-        <Tab name="Past">
+        <Tab name="All Tournaments">
           <Page />
         </Tab>
         <Tab name="My Tournmanents">
@@ -90,16 +83,17 @@ function Page() {
       />
       <TournamentGallery featuredExpanded={featuredExpanded}>
         <FilterBar>
-          <FilterBullets noChildren={activeFilters.length === 0}>
+          <FilterBullets>
             {activeFilters.map((filter) => (
               <FilterBullet key={filter.type + filter.value} onClick={() => removeFilter(filter)}>
+                <CrossIcon />
                 {filter.name}
               </FilterBullet>
             ))}
           </FilterBullets>
           <FilterControls>
             <SearchInput
-              icon={<Icons.Search />}
+              icon={<Icons.Search fill={theme.colors.white} height={14} />}
               placeholder="Search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -116,7 +110,7 @@ function Page() {
             />
             <FilterSort onSelect={console.debug}>
               <Option value="1">Sort</Option>
-              <Option value="2">b</Option>
+              <Option value="2">Price</Option>
               <Option value="3">c</Option>
             </FilterSort>
           </FilterControls>

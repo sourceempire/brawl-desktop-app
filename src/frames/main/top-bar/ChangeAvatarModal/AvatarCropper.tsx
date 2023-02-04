@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import * as UserRequests from 'api/requests/UserRequests';
-import Cropper, { ReactCropperElement } from 'react-cropper';
-import { Button } from 'common/components';
+import { Cropper, ReactCropperElement } from 'react-cropper';
 import popup from 'common/popup';
+import { Button } from 'common/ui';
 import { ImageContainer, Wrapper } from './AvatarCropper.styles';
 
 import 'cropperjs/dist/cropper.css';

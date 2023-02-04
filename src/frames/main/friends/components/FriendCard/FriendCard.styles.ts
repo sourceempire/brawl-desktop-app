@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components/macro';
-import EllipsisText from 'common/components/EllipsisText';
-import UserStatus, { UserStatusEnum } from 'common/components/UserStatus';
+import { EllipsisText, UserStatus, UserStatusEnum } from 'common/ui';
 import { UserCard } from '../Shared.styles';
 
 export const FriendUserCard = styled(UserCard)<{ isHidden: boolean }>`

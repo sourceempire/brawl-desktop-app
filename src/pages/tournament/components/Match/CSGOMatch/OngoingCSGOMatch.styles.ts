@@ -1,7 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Button } from 'common/components';
-import EllipsisText from 'common/components/EllipsisText';
-import { Icons } from 'common/components/Icon';
+import { Button, EllipsisText, Icons } from 'common/ui';
 import { hsla } from 'utils/styledUtils';
 
 export const Wrapper = styled.div`

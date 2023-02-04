@@ -1,8 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components/macro';
-import { ActionButton, Input } from 'common/components';
+import { ActionButton, Input } from 'common/ui';
 import { hsla } from 'utils/styledUtils';
-import { lightenColor } from 'assets/styles/colorBrightness';
 
 export const Wrapper = styled.div`
   position: fixed;

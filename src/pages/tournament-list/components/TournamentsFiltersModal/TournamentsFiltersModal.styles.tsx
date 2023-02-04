@@ -1,5 +1,5 @@
 import styled from 'styled-components/macro';
-import { Button } from 'common/components';
+import { Button } from 'common/ui';
 
 export const Section1 = styled.div`
   display: grid;
