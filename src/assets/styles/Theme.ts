@@ -76,14 +76,14 @@ export const theme: DefaultTheme = {
       active: 'hsl(39, 100%, 67%)'
     },
     accent: {
-      base: 'hsl(143, 65%, 75%)',
-      hover: 'hsl(143, 65%, 85%)',
-      active: 'hsl(143, 65%, 95%)'
+      base: 'hsl(143, 65%, 65%)',
+      hover: 'hsl(143, 65%, 75%)',
+      active: 'hsl(143, 65%, 85%)'
     },
     background: {
-      base: 'hsl(240, 19%, 17%)',
+      base: 'hsl(240, 20%, 17%)',
       hover: 'hsl(240, 19%, 27%)',
-      active: 'hsl(240, 19%, 17%)'
+      active: 'hsl(240, 19%, 37%)'
     },
     secondary: {
       base: 'hsl(238, 19%, 26%)',

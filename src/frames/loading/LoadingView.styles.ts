@@ -6,7 +6,6 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: ${(props) => props.theme.colors.secondary.base};
   height: 100%;
 `;
 

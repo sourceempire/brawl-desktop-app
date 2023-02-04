@@ -9,7 +9,7 @@ let loadingWindow;
 let loginWindow;
 let authWindow;
 
-const backgroundColor = '#232333';
+const backgroundColor = '#232334';
 
 async function createWindow(appPath, options = {}) {
   const isExternal = appPath.startsWith('http');
@@ -94,7 +94,7 @@ async function createLoadingWindow() {
       width: 300,
       height: 300,
       resizable: false,
-      backgroundColor: '#363750'
+      backgroundColor
     });
 
     if (!isDev) {
