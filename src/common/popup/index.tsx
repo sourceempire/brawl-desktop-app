@@ -8,7 +8,12 @@ type PopupOptions = {
 };
 
 const setPopupMessage = (message: string, level: PopupLevel, options?: PopupOptions) => {
+  const existingPopup = document.querySelector('.popup');
+  if (existingPopup) {
+    document.body.removeChild(existingPopup);
+  }
   const element = document.createElement('div');
+  element.classList.add('popup');
   document.body.appendChild(element);
   const root = ReactDOM.createRoot(element as HTMLDivElement);
 
