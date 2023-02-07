@@ -1,38 +1,51 @@
 import ReactDOM from 'react-dom/client';
-import { PopupLevel } from 'types/Popup';
 import { Popup } from './Popup';
+import { PopupListHandler } from './PopupListHandler';
+import { PopupLevel, PopupOptions } from './types';
 
-type PopupOptions = {
-  timer?: number;
-  onClose?: () => void;
-};
+const handler = new PopupListHandler();
 
-const setPopupMessage = (message: string, level: PopupLevel, options?: PopupOptions) => {
+const createPopupMessage = (message: string, level: PopupLevel, options?: PopupOptions) => {
   const element = document.createElement('div');
-  document.body.appendChild(element);
-  const root = ReactDOM.createRoot(element as HTMLDivElement);
+  const root = ReactDOM.createRoot(document.body.appendChild(element));
 
-  root.render(
-    <Popup
-      text={message}
-      level={level}
-      timer={options?.timer}
-      onClose={() => {
-        options?.onClose?.();
-        root.unmount();
-        document.body.removeChild(element);
-      }}
-    />
-  );
+  const onChange = (updatedPopups: HTMLDivElement[]) => {
+    if (!updatedPopups.includes(element)) return;
+
+    const index = updatedPopups.indexOf(element);
+
+    // Popups positioned by index, top 200px from top, each 60px further down, with the list moving 10px closer to the top for each element to make room for more.
+    const top = 200 + index * 60 - (updatedPopups.length - 1 * 10);
+
+    root.render(
+      <Popup
+        text={message}
+        level={level}
+        top={top}
+        timer={options?.timer}
+        onRequestClose={() => {
+          handler.deletePopup(element);
+          handler.removeChangeListener(onChange);
+        }}
+        onClose={() => {
+          document.body.removeChild(element);
+          root.unmount();
+        }}
+      />
+    );
+  };
+
+  handler.addChangeListener(onChange);
+  handler.addPopup(element);
 };
 
 const popup = {
   info: (message: string, options?: PopupOptions) =>
-    setPopupMessage(message, PopupLevel.INFO, options),
+    createPopupMessage(message, PopupLevel.INFO, options),
   warning: (message: string, options?: PopupOptions) =>
-    setPopupMessage(message, PopupLevel.WARNING, options),
+    createPopupMessage(message, PopupLevel.WARNING, options),
   error: (message: string, options?: PopupOptions) =>
-    setPopupMessage(message, PopupLevel.ERROR, options)
+    createPopupMessage(message, PopupLevel.ERROR, options)
 };
 
 export default popup;

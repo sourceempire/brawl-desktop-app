@@ -1,5 +1,12 @@
 import { theme } from 'assets/styles/Theme';
 
+export type PopupOptions = {
+  timer?: number;
+  onClose?: () => void;
+};
+
+export type PopupListChangeListener = (updatedPopupList: HTMLDivElement[]) => void;
+
 export enum PopupLevel {
   INFO,
   WARNING,

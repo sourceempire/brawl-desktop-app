@@ -1,19 +1,22 @@
 import { useEffect, useRef, useState } from 'react';
-import { PopupLevel } from 'types/Popup';
 import { CloseIcon, PopupText, Wrapper } from './Popup.styles';
+import { PopupLevel } from './types';
 
 type Props = {
   text: string;
   level: PopupLevel;
+  top: number;
   timer?: number;
+  onRequestClose: () => void;
   onClose: () => void;
 };
 
-export const Popup = ({ text, level, onClose, timer }: Props) => {
+export const Popup = ({ text, level, onClose, onRequestClose, timer, top }: Props) => {
   const timeout = useRef<NodeJS.Timeout>();
   const [isClosing, setIsClosing] = useState(false);
 
   const handleClose = () => {
+    onRequestClose();
     setIsClosing(true);
   };
 
@@ -38,7 +41,7 @@ export const Popup = ({ text, level, onClose, timer }: Props) => {
   }, [timer]);
 
   return (
-    <Wrapper level={level} onClick={handleClose} isClosing={isClosing}>
+    <Wrapper level={level} onClick={handleClose} isClosing={isClosing} top={top}>
       <PopupText>{text}</PopupText>
       <CloseIcon />
     </Wrapper>
