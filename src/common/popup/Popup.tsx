@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
-import { CloseIcon, PopupText, Wrapper } from './Popup.styles';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { CloseIcon, PopupText, TimerAnimation, Wrapper } from './Popup.styles';
 import { PopupLevel } from './types';
+import countdownCircle from 'assets/animations/countdown-circle.json';
 
 type Props = {
   text: string;
@@ -15,35 +16,40 @@ export const Popup = ({ text, level, onClose, onRequestClose, timer, top }: Prop
   const timeout = useRef<NodeJS.Timeout>();
   const [isClosing, setIsClosing] = useState(false);
 
-  const handleClose = () => {
-    onRequestClose();
+  // Refs to prevent re-renders, this makes it unsafe to use state in
+  // onClose and onRequestClose when callbacks are fired in parent components
+  const requestClose = useRef(onRequestClose);
+  const close = useRef(onClose);
+
+  const handleClose = useCallback(() => {
+    requestClose.current();
     setIsClosing(true);
-  };
+  }, []);
 
   // the delay is for animation purposes
   useEffect(() => {
     if (!isClosing) return;
-    setTimeout(onClose, 400);
-  }, [isClosing, onClose]);
+    setTimeout(close.current, 400);
+  }, [isClosing]);
 
   useEffect(() => {
-    if (!timer) {
-      return;
-    }
-
+    if (!timer) return;
     if (timeout.current) clearTimeout(timeout.current);
 
-    timeout.current = setTimeout(() => setIsClosing(true), timer);
+    timeout.current = setTimeout(handleClose, timer);
 
     return () => {
       if (timeout.current) clearTimeout(timeout.current);
     };
-  }, [timer]);
+  }, [handleClose, timer]);
 
   return (
     <Wrapper level={level} onClick={handleClose} isClosing={isClosing} top={top}>
       <PopupText>{text}</PopupText>
       <CloseIcon />
+      {timer && (
+        <TimerAnimation src={countdownCircle} level={level} speed={10000 / timer} loop={false} />
+      )}
     </Wrapper>
   );
 };

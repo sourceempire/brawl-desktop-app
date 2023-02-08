@@ -11,7 +11,6 @@ const createPopupMessage = (message: string, level: PopupLevel, options?: PopupO
 
   const onChange = (updatedPopups: HTMLDivElement[]) => {
     if (!updatedPopups.includes(element)) return;
-
     const index = updatedPopups.indexOf(element);
 
     // Popups positioned by index, top 200px from top, each 60px further down, with the list moving 10px closer to the top for each element to make room for more.

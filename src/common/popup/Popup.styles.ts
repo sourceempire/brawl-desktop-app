@@ -1,12 +1,13 @@
 import styled, { css } from 'styled-components';
-import { Icons } from 'common/ui';
+import { Animation, Icons } from 'common/ui';
 import { PopupBackgroundColors, PopupColors, PopupLevel } from './types';
 import { theme } from 'assets/styles/Theme';
 
 export const CloseIcon = styled(Icons.Cross)`
   position: absolute;
-  height: 14px;
-  width: 14px;
+  height: 26px;
+  width: 26px;
+  box-sizing: border-box;
   fill: ${theme.colors.white};
   border-radius: 50%;
   top: 50%;
@@ -20,6 +21,7 @@ export const CloseIcon = styled(Icons.Cross)`
 
 export const Wrapper = styled.div<{ level: PopupLevel; isClosing: boolean; top: number }>`
   position: fixed;
+  height: 43px;
   left: 50%;
   top: 200px;
   transform: translateX(-50%);
@@ -79,4 +81,12 @@ export const PopupText = styled.div`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+`;
+
+export const TimerAnimation = styled(Animation)<{ level: PopupLevel }>`
+  height: 28px;
+  top: 50%;
+  position: absolute;
+  right: calc(${theme.spacing.base}px - 1px);
+  transform: translateY(-50%);
 `;

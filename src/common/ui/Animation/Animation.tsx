@@ -8,9 +8,18 @@ import { Wrapper } from './Animation.styles';
 type AnimationProps = {
   src: unknown;
   className?: string;
+  loop?: boolean;
+  autoplay?: boolean;
+  speed?: number;
 };
 
-export const Animation = ({ src, className }: AnimationProps) => {
+export const Animation = ({
+  src,
+  className,
+  loop = true,
+  autoplay = true,
+  speed = 1
+}: AnimationProps) => {
   const container = useRef<HTMLDivElement>(null);
   const loadingAnimationItem = useRef() as MutableRefObject<AnimationItem>;
 
@@ -18,13 +27,17 @@ export const Animation = ({ src, className }: AnimationProps) => {
     loadingAnimationItem.current = Lottie.loadAnimation({
       container: container.current as HTMLDivElement,
       animationData: src,
-      renderer: 'svg'
+      renderer: 'svg',
+      loop,
+      autoplay
     });
+
+    loadingAnimationItem.current.setSpeed(speed);
 
     return () => {
       loadingAnimationItem.current.destroy();
     };
-  }, [src]);
+  }, [src, loop, autoplay, speed]);
 
   return <Wrapper ref={container} className={className} />;
 };

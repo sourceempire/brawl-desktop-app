@@ -24,3 +24,9 @@ export const PopupColors = {
   [PopupLevel.WARNING]: theme.colors.textPrimaryLight,
   [PopupLevel.ERROR]: theme.colors.textPrimaryLight
 };
+
+export const TimingAnimationFilters = {
+  [PopupLevel.INFO]: theme.colors.textPrimaryDark,
+  [PopupLevel.WARNING]: theme.colors.textPrimaryLight,
+  [PopupLevel.ERROR]: theme.colors.textPrimaryLight
+};
