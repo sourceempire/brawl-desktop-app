@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Animation, Icons } from 'common/ui';
-import { PopupBackgroundColors, PopupColors, PopupLevel } from './types';
+import { PopupBackgroundColors, PopupColors, PopupLevel } from './Popup.types';
 import { theme } from 'assets/styles/Theme';
 
 export const CloseIcon = styled(Icons.Cross)`

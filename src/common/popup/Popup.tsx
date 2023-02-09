@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { CloseIcon, PopupText, TimerAnimation, Wrapper } from './Popup.styles';
-import { PopupLevel } from './types';
+import { PopupLevel } from './Popup.types';
 import countdownCircle from 'assets/animations/countdown-circle.json';
 
 type Props = {
