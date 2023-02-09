@@ -48,6 +48,8 @@ export const Popup = ({ text, level, onClose, onRequestClose, timer, top }: Prop
       <PopupText>{text}</PopupText>
       <CloseIcon />
       {timer && (
+        // The default duration of this animation is 10 seconds (10000 miliseconds),
+        // therefore, timer in this case will be the new duration of the animation
         <TimerAnimation src={countdownCircle} level={level} speed={10000 / timer} loop={false} />
       )}
     </Wrapper>
