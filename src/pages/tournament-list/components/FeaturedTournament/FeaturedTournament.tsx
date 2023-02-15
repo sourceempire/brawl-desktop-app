@@ -1,5 +1,5 @@
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
-import { formatDateAndTime, formatTournamentLockTime } from 'utils/dateUtils';
+import { formatDateAndTime } from 'utils/dateUtils';
 import { getTournamentModeShort } from 'utils/tournamentUtils';
 import {
   Column1,
@@ -42,9 +42,8 @@ export default function FeaturedTournament({
               <Name>{tournamentInfo.name}</Name>
               <TournamentInfo>
                 Starts {formatDateAndTime(tournamentInfo.startTime)} | Registration closes{' - '}
-                {formatTournamentLockTime(tournamentInfo.startTime, tournamentInfo.lockTime)} |
-                Entry fee €{tournamentInfo.entranceFee} / person |{' '}
-                {getTournamentModeShort(tournamentInfo)}
+                {formatDateAndTime(tournamentInfo.registrationCloseTime)} | Entry fee €
+                {tournamentInfo.entranceFee} / person | {getTournamentModeShort(tournamentInfo)}
               </TournamentInfo>
             </Column1>
             <Column2>
