@@ -36,15 +36,3 @@ export const formatDateAndTime = (startTime: string) => {
   });
   return formattedDate + ' ' + formattedTime;
 };
-
-export const formatTournamentLockTime = (startTime: string, lockTime: number) => {
-  const dateString = new Date(startTime).toISOString();
-  const dateObject = new Date(dateString);
-  const lockTimeDate = new Date(dateObject.getTime() - lockTime);
-  const formattedDate = lockTimeDate.toLocaleString('default', { month: 'short', day: 'numeric' });
-  const formattedTime = lockTimeDate.toLocaleTimeString('default', {
-    hour: 'numeric',
-    minute: 'numeric'
-  });
-  return formattedDate + ' ' + formattedTime;
-};

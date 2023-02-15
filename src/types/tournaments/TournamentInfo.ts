@@ -12,9 +12,9 @@ export interface TournamentHub {
   region: string;
   teamSize: number;
   teamsAllowed: number;
-  lockTime: number;
   registrationClosed: boolean;
   image: string;
+  registrationCloseTime: string;
 }
 
 export type Tournament = {
