@@ -1,5 +1,12 @@
 import { theme } from 'assets/styles/Theme';
 
+export type PopupOptions = {
+  timer?: number;
+  onClose?: () => void;
+};
+
+export type PopupListChangeListener = (updatedPopupList: HTMLDivElement[]) => void;
+
 export enum PopupLevel {
   INFO,
   WARNING,
@@ -13,6 +20,12 @@ export const PopupBackgroundColors = {
 };
 
 export const PopupColors = {
+  [PopupLevel.INFO]: theme.colors.textPrimaryDark,
+  [PopupLevel.WARNING]: theme.colors.textPrimaryLight,
+  [PopupLevel.ERROR]: theme.colors.textPrimaryLight
+};
+
+export const TimingAnimationFilters = {
   [PopupLevel.INFO]: theme.colors.textPrimaryDark,
   [PopupLevel.WARNING]: theme.colors.textPrimaryLight,
   [PopupLevel.ERROR]: theme.colors.textPrimaryLight

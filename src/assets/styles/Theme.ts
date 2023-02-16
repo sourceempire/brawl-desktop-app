@@ -109,7 +109,7 @@ export const theme: DefaultTheme = {
     textPrimaryLight: 'rgba(255, 255, 255, 1)',
     textSecondaryLight: 'rgba(218, 218, 218, .67)',
     textDisabledLight: 'rgba(218, 218, 218, .50)',
-    textPrimaryDark: 'rgba(0, 0, 0, .87)',
+    textPrimaryDark: 'rgba(0, 0, 0, 0.871)',
     textSecondaryDark: 'rgba(0, 0, 0, .54)',
     textDisabledDark: 'rgba(0, 0, 0, .38)',
 
