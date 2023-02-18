@@ -1,22 +1,11 @@
 import { useEffect, useState } from 'react';
+import { IconEnum } from 'common/ui';
 import Game, { GameName } from 'types/Game';
 import { MatchSettingsTypes } from 'types/MatchSettings';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
 import { getTournamentModeShort, getTournamentSeriesTypeLong } from 'utils/tournamentUtils';
-import {
-  EntryFeeIcon,
-  GameModeIcon,
-  GameNameIcon,
-  InfoCard,
-  InfoHeader,
-  InfoText,
-  MatchTypeIcon,
-  PrizePoolIcon,
-  RegistrationCloseIcon,
-  TournamentSizeIcon,
-  TournamentStartIcon
-} from './InfoCards.styles';
+import { InfoCard, InfoHeader, InfoText, StyledIcon } from './InfoCards.styles';
 
 type Props = {
   tournamentHub: TournamentHub;
@@ -27,6 +16,7 @@ const InfoCards = ({ tournamentHub }: Props) => {
   const [gameMode, setGameMode] = useState('');
   const [gameType, setGameType] = useState('');
 
+  //TODO -> Replace type with gameId from matchSettings
   const setInfoSettings = (tournamentHub: TournamentHub) => {
     if (tournamentHub.gameId === Game.CSGO) {
       setGameName(GameName[Game.CSGO]);
@@ -43,37 +33,37 @@ const InfoCards = ({ tournamentHub }: Props) => {
     <>
       <InfoCard>
         <InfoHeader>
-          <GameNameIcon />
+          <StyledIcon icon={IconEnum.Controller} />
           Game
         </InfoHeader>
         <InfoText>{gameName}</InfoText>
       </InfoCard>
       <InfoCard>
         <InfoHeader>
-          <GameModeIcon />
+          <StyledIcon icon={IconEnum.Sword} />
           Game Mode
         </InfoHeader>
         <InfoText>{gameMode}</InfoText>
       </InfoCard>
       <InfoCard>
         <InfoHeader>
-          <MatchTypeIcon />
+          <StyledIcon icon={IconEnum.CrossedSwords} />
           Match Type
         </InfoHeader>
         <InfoText>{gameType}</InfoText>
       </InfoCard>
-      {/* //TODO Add Tournament Format */}
-      {/* //TODO Add Side Decider */}
+      {/* //TODO -> Add Tournament Format */}
+      {/* //TODO -> Add Side Decider */}
       <InfoCard>
         <InfoHeader>
-          <TournamentSizeIcon />
+          <StyledIcon icon={IconEnum.Friends} />
           Size of Tournament
         </InfoHeader>
         <InfoText>{tournamentHub.teamsAllowed}</InfoText>
       </InfoCard>
       <InfoCard>
         <InfoHeader>
-          <RegistrationCloseIcon />
+          <StyledIcon icon={IconEnum.LockClosed} />
           Registration Closes
         </InfoHeader>
         <InfoText>
@@ -83,21 +73,21 @@ const InfoCards = ({ tournamentHub }: Props) => {
       </InfoCard>
       <InfoCard>
         <InfoHeader>
-          <TournamentStartIcon />
+          <StyledIcon icon={IconEnum.Calendar} />
           Tournament Start
         </InfoHeader>
         <InfoText>{tournamentHub.startTime && formatDateAndTime(tournamentHub.startTime)}</InfoText>
       </InfoCard>
       <InfoCard>
         <InfoHeader>
-          <PrizePoolIcon />
+          <StyledIcon icon={IconEnum.Trophy} />
           Prize Pool
         </InfoHeader>
         <InfoText>{tournamentHub.currentPrizePool}</InfoText>
       </InfoCard>
       <InfoCard>
         <InfoHeader>
-          <EntryFeeIcon />
+          <StyledIcon icon={IconEnum.Ticket} />
           Entry Fee
         </InfoHeader>
         <InfoText>€{tournamentHub.entranceFee} / person</InfoText>

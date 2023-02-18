@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Icons } from 'common/ui';
-
+import { Icon } from 'common/ui/Icon';
 export const InfoCard = styled.div`
   display: flex;
   flex-direction: column;
@@ -27,70 +26,7 @@ export const InfoText = styled.h2`
   `}
 `;
 
-export const GameNameIcon = styled(Icons.Controller)`
-  height: 14px;
-  width: 14px;
-  ${({ theme }) => css`
-    fill: ${theme.colors.textSecondaryLight};
-    margin-right: ${theme.spacing.base}px;
-  `}
-`;
-
-export const GameModeIcon = styled(Icons.Sword)`
-  height: 14px;
-  width: 14px;
-  ${({ theme }) => css`
-    fill: ${theme.colors.textSecondaryLight};
-    margin-right: ${theme.spacing.base}px;
-  `}
-`;
-
-export const MatchTypeIcon = styled(Icons.CrossedSwords)`
-  height: 14px;
-  width: 14px;
-  ${({ theme }) => css`
-    fill: ${theme.colors.textSecondaryLight};
-    margin-right: ${theme.spacing.base}px;
-  `}
-`;
-
-export const TournamentSizeIcon = styled(Icons.Friends)`
-  height: 14px;
-  width: 14px;
-  ${({ theme }) => css`
-    fill: ${theme.colors.textSecondaryLight};
-    margin-right: ${theme.spacing.base}px;
-  `}
-`;
-
-export const RegistrationCloseIcon = styled(Icons.LockClosed)`
-  height: 14px;
-  width: 14px;
-  ${({ theme }) => css`
-    fill: ${theme.colors.textSecondaryLight};
-    margin-right: ${theme.spacing.base}px;
-  `}
-`;
-
-export const TournamentStartIcon = styled(Icons.Calendar)`
-  height: 14px;
-  width: 14px;
-  ${({ theme }) => css`
-    fill: ${theme.colors.textSecondaryLight};
-    margin-right: ${theme.spacing.base}px;
-  `}
-`;
-
-export const PrizePoolIcon = styled(Icons.Trophy)`
-  height: 14px;
-  width: 14px;
-  ${({ theme }) => css`
-    fill: ${theme.colors.textSecondaryLight};
-    margin-right: ${theme.spacing.base}px;
-  `}
-`;
-
-export const EntryFeeIcon = styled(Icons.Ticket)`
+export const StyledIcon = styled(Icon)`
   height: 14px;
   width: 14px;
   ${({ theme }) => css`

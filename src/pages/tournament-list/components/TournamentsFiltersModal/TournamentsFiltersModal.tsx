@@ -5,8 +5,9 @@ import {
   FilterTypes
 } from 'pages/tournament-list/components/TournamentListView/TournamentListView.model';
 import Game, { GameName } from 'types/Game';
-import { CSGOGameModes, csgoMatchSettingsModeShortForm } from 'types/MatchSettings';
+import { CSGOGameModes } from 'types/MatchSettings';
 import { SimpleDate, SimpleDateString } from 'types/SimpleDate';
+import { csgoMatchSettingsModeShortForm } from 'utils/tournamentUtils';
 import {
   ApplyFilterButton,
   CategoryTitle,

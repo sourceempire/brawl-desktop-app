@@ -28,32 +28,6 @@ export enum CSGOSeriesType {
   BO3 = 'bo3'
 }
 
-export function csgoMatchSettingsModeShortForm(mode: CSGOGameModes) {
-  switch (mode) {
-    case CSGOGameModes.COMPETITIVE:
-      return '5v5';
-    case CSGOGameModes.WINGMAN:
-      return '2v2';
-    case CSGOGameModes.ONE_VS_ONE:
-      return '1v1';
-    default:
-      return mode;
-  }
-}
-
-export function csgoMatchSettingsSeriesTypeLongForm(type: CSGOSeriesType) {
-  switch (type) {
-    case CSGOSeriesType.BO1:
-      return 'Best of 1';
-    case CSGOSeriesType.BO2:
-      return 'Best of 2';
-    case CSGOSeriesType.BO3:
-      return 'Best of 3';
-    default:
-      return type;
-  }
-}
-
 /**
  * Type Guard for CSGOMatchSettings
  */
