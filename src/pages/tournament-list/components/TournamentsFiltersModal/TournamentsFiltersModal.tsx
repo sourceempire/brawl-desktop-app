@@ -7,7 +7,7 @@ import {
 import Game, { GameName } from 'types/Game';
 import { CSGOGameModes } from 'types/MatchSettings';
 import { SimpleDate, SimpleDateString } from 'types/SimpleDate';
-import { csgoMatchSettingsModeShortForm } from 'utils/tournamentUtils';
+import { csgoMatchSettingsModeShortForm } from 'utils/matchUtils';
 import {
   ApplyFilterButton,
   CategoryTitle,
