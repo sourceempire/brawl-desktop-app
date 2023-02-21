@@ -2,11 +2,15 @@ import { IconEnum, SVGComponent } from './Icon.types';
 import * as Abort from './icons/Abort.svg';
 import * as AddFriend from './icons/AddFriend.svg';
 import * as ArrowDown from './icons/ArrowDown.svg';
+import * as Calendar from './icons/Calendar.svg';
 import * as Check from './icons/Check.svg';
 import * as Clock from './icons/Clock.svg';
 import * as Cog from './icons/Cog.svg';
+import * as Controller from './icons/Controller.svg';
 import * as Copy from './icons/Copy.svg';
 import * as Cross from './icons/Cross.svg';
+import * as CrossedSwords from './icons/CrossedSwords.svg';
+import * as CrossHair from './icons/CrossHair.svg';
 import * as DatePickerArrow from './icons/DatePickerArrow.svg';
 import * as DefuseKit from './icons/DefuseKit.svg';
 import * as Explosion from './icons/Explosion.svg';
@@ -22,6 +26,7 @@ import * as Profile from './icons/Profile.svg';
 import * as RemoveFriend from './icons/RemoveFriend.svg';
 import * as Search from './icons/Search.svg';
 import * as SelectArrow from './icons/SelectArrow.svg';
+import * as SideDecider from './icons/SideDecider.svg';
 import * as Skull from './icons/Skull.svg';
 import * as Star from './icons/Star.svg';
 import * as Sword from './icons/Sword.svg';
@@ -32,11 +37,15 @@ const Icons: { [key in IconEnum]: SVGComponent } = {
   [IconEnum.Abort]: createSVGIcon(Abort),
   [IconEnum.AddFriend]: createSVGIcon(AddFriend),
   [IconEnum.ArrowDown]: createSVGIcon(ArrowDown),
+  [IconEnum.Calendar]: createSVGIcon(Calendar),
   [IconEnum.Check]: createSVGIcon(Check),
   [IconEnum.Clock]: createSVGIcon(Clock),
   [IconEnum.Cog]: createSVGIcon(Cog),
+  [IconEnum.Controller]: createSVGIcon(Controller),
   [IconEnum.Copy]: createSVGIcon(Copy),
   [IconEnum.Cross]: createSVGIcon(Cross),
+  [IconEnum.CrossedSwords]: createSVGIcon(CrossedSwords),
+  [IconEnum.CrossHair]: createSVGIcon(CrossHair),
   [IconEnum.DatePickerArrow]: createSVGIcon(DatePickerArrow),
   [IconEnum.DefuseKit]: createSVGIcon(DefuseKit),
   [IconEnum.Explosion]: createSVGIcon(Explosion),
@@ -52,6 +61,7 @@ const Icons: { [key in IconEnum]: SVGComponent } = {
   [IconEnum.RemoveFriend]: createSVGIcon(RemoveFriend),
   [IconEnum.Search]: createSVGIcon(Search),
   [IconEnum.SelectArrow]: createSVGIcon(SelectArrow),
+  [IconEnum.SideDecider]: createSVGIcon(SideDecider),
   [IconEnum.Skull]: createSVGIcon(Skull),
   [IconEnum.Star]: createSVGIcon(Star),
   [IconEnum.Sword]: createSVGIcon(Sword),

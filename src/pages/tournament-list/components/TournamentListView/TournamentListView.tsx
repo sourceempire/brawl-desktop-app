@@ -61,9 +61,9 @@ function Page() {
     region: 'Europe',
     teamsAllowed: 4,
     teamSize: 5,
-    lockTime: 10 * 60,
     registrationClosed: false,
-    image: 'https://picsum.photos/600/200?random=' + n
+    image: 'https://picsum.photos/600/200?random=' + n,
+    registrationCloseTime: '2022-09-29 14:30:00'
   });
 
   function removeFilter(filter: Filter) {

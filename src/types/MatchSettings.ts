@@ -12,7 +12,7 @@ export enum MatchSettingsTypes {
 export interface CSGOMatchSettings extends MatchSettings {
   __type: MatchSettingsTypes.CSGO;
   mode: CSGOGameModes;
-  seriesType: string;
+  seriesType: CSGOSeriesType;
   maps?: string[];
 }
 
@@ -22,17 +22,10 @@ export enum CSGOGameModes {
   ONE_VS_ONE = 'one_vs_one'
 }
 
-export function csgoMatchSettingsModeShortForm(mode: CSGOGameModes) {
-  switch (mode) {
-    case CSGOGameModes.COMPETITIVE:
-      return '5v5';
-    case CSGOGameModes.WINGMAN:
-      return '2v2';
-    case CSGOGameModes.ONE_VS_ONE:
-      return '1v1';
-    default:
-      return mode;
-  }
+export enum CSGOSeriesType {
+  BO1 = 'bo1',
+  BO2 = 'bo2',
+  BO3 = 'bo3'
 }
 
 /**

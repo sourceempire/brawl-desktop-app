@@ -3,10 +3,14 @@ import { useTournamentHubFeed } from 'api/feeds';
 import * as TournamentRequests from 'api/requests/TournamentRequests';
 import { Link, useParams } from 'react-router-dom';
 import popup from 'common/popup';
-import { Button } from 'common/ui';
+import { Backdrop, Button } from 'common/ui';
+import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
 import { Tournament } from 'types/tournaments/TournamentInfo';
-import { Hero, Wrapper } from './TournamentHubPage.styles';
-import temporaryHeroImage from 'assets/images/temporary-tournament-hub-hero.png';
+import {
+  TournamentHubInfoHeader,
+  TournamentHubInfoWrapper,
+  Wrapper
+} from './TournamentHubPage.styles';
 
 const TournamentHubPage = () => {
   const { hubId } = useParams() as { hubId: string };
@@ -38,7 +42,7 @@ const TournamentHubPage = () => {
 
   return (
     <Wrapper>
-      <Hero image={temporaryHeroImage} />
+      <Backdrop />
       {!tournamentHub.registrationClosed && (
         <Button primary onClick={signup}>
           Sign up
@@ -48,6 +52,10 @@ const TournamentHubPage = () => {
       {loggedInUserTournament && (
         <Link to={`/main/tournaments/${loggedInUserTournament.id}`}>Go to your tournament</Link>
       )}
+      <TournamentHubInfoHeader>Tournament Information</TournamentHubInfoHeader>
+      <TournamentHubInfoWrapper>
+        <InfoCards tournamentHub={tournamentHub} />
+      </TournamentHubInfoWrapper>
     </Wrapper>
   );
 };

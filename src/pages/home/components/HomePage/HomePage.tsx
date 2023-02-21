@@ -38,9 +38,9 @@ const exampleTournamentInfo = (): TournamentHub => ({
   region: 'Europe',
   teamsAllowed: 4,
   teamSize: 5,
-  lockTime: 10 * 60,
   registrationClosed: false,
-  image: 'https://picsum.photos/600/200?random=9'
+  image: 'https://picsum.photos/600/200?random=9',
+  registrationCloseTime: '2022-09-29 14:30:00'
 });
 
 export default HomePage;

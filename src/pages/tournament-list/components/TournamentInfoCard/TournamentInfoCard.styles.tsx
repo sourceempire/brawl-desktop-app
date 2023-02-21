@@ -157,4 +157,5 @@ export const StartTime = styled.div`
 export const TwoColHeader = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
 `;

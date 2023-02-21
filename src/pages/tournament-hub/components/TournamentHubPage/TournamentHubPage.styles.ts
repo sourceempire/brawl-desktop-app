@@ -4,16 +4,20 @@ export const Wrapper = styled.div`
   width: 100%;
 `;
 
-type HeroProps = {
-  image: string;
-};
-
-export const Hero = styled.div<HeroProps>`
-  height: 166px;
+export const TournamentHubInfoWrapper = styled.div`
   width: 100%;
-  background-size: cover;
-  ${({ theme, image }) => css`
-    background-image: url(${image});
-    border-radius: ${theme.borderRadius.default};
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  ${({ theme }) => css`
+    column-gap: ${theme.spacing.base}px;
+    row-gap: ${theme.spacing.base}px;
+  `}
+`;
+
+export const TournamentHubInfoHeader = styled.h2`
+  display: block;
+  ${({ theme }) => css`
+    ${theme.textStyles.title}
+    margin-bottom: ${theme.spacing.baseX2}px;
   `}
 `;
