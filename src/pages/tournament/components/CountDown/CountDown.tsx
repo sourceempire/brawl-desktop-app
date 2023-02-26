@@ -22,8 +22,6 @@ const CountDown = ({ startTime }: Props) => {
     }
   }
 
-  console.log(finished);
-
   return (
     <Wrapper>
       {finished ? (
