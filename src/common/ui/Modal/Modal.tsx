@@ -21,6 +21,7 @@ type Props = {
   hideOverLay?: boolean;
   width?: string;
   height?: string;
+  margin?: string;
   noPadding?: boolean;
   className?: string;
 };
@@ -41,6 +42,7 @@ export function Modal({
   hideOverLay = false,
   width,
   height,
+  margin,
   noPadding = false
 }: Props) {
   const element = useRef(document.createElement('div'));
@@ -72,6 +74,7 @@ export function Modal({
           timeout={closeTimeoutMS}
           width={width}
           height={height}
+          margin={margin}
           noPadding={noPadding}>
           {header && (
             <Header>
