@@ -7,8 +7,8 @@ import { Backdrop, Button } from 'common/ui';
 import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
 import { Tournament } from 'types/tournaments/TournamentInfo';
 import {
-  GridHeader,
-  GridWithHeader,
+  Header,
+  HeaderWrapper,
   PredictedPrize,
   PrizeElement,
   PrizePosition,
@@ -60,13 +60,13 @@ const TournamentHubPage = () => {
       )}
 
       <TournamentHubInfoWrapper isRegistrationClosed={tournamentHub.registrationClosed}>
-        <GridWithHeader>
-          <GridHeader>Tournament Information</GridHeader>
+        <HeaderWrapper>
+          <Header>Tournament Information</Header>
           <InfoCards tournamentHub={tournamentHub} />
-        </GridWithHeader>
+        </HeaderWrapper>
         {!tournamentHub.registrationClosed && (
-          <GridWithHeader>
-            <GridHeader>Predicted Prize Pool</GridHeader>
+          <HeaderWrapper>
+            <Header>Predicted Prize Pool</Header>
             <PredictedPrize>
               {prizePool.map((prize, index) => {
                 const prizePosition = index + 1;
@@ -77,7 +77,7 @@ const TournamentHubPage = () => {
                 );
               })}
             </PredictedPrize>
-          </GridWithHeader>
+          </HeaderWrapper>
         )}
       </TournamentHubInfoWrapper>
     </Wrapper>

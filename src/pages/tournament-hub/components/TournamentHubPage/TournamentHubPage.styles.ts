@@ -21,7 +21,7 @@ export const TournamentHubInfoWrapper = styled.div<{
     `}
 `;
 
-export const GridWithHeader = styled.div`
+export const HeaderWrapper = styled.div`
   display: grid;
   grid-template-areas:
     'header'
@@ -29,16 +29,15 @@ export const GridWithHeader = styled.div`
   grid-auto-rows: 20px 1fr;
 `;
 
-export const GridHeader = styled.h2`
+export const Header = styled.h2`
   display: block;
   grid-area: header;
 `;
 
 export const PredictedPrize = styled.div`
   height: 100%;
-  display: grid;
-  grid-auto-rows: 1fr;
-  grid-area: main;
+  display: flex;
+  flex-direction: column;
   ${({ theme }) => css`
     row-gap: ${theme.spacing.base}px;
   `};

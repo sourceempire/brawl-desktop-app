@@ -7,8 +7,7 @@ export const InfoCardWrapper = styled.div<{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   ${({ theme }) => css`
-    column-gap: ${theme.spacing.base}px;
-    row-gap: ${theme.spacing.base}px;
+    gap: ${theme.spacing.base}px;
   `}
   ${({ isRegistrationClosed }) =>
     isRegistrationClosed &&
