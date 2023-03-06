@@ -6,14 +6,19 @@ import popup from 'common/popup';
 import { Backdrop, Button } from 'common/ui';
 import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
 import { Tournament } from 'types/tournaments/TournamentInfo';
-import TorunamentHubButtons from '../TournamentHubButtons/TournamentHubButtons';
 import BracketsModal from './TournamentHubModals/BracketsModal/BracketsModal';
 import HowItWorksModal from './TournamentHubModals/HowItWorksModal/HowItWorksModal';
 import MapPoolModal from './TournamentHubModals/MapPoolModal/MapPoolModal';
 import RulesModal from './TournamentHubModals/RulesModal/RulesModal';
 import {
   ButtonsWrapper,
-  TournamentHubInfoHeader,
+  Header,
+  HeaderWrapper,
+  LeftButtons,
+  PredictedPrize,
+  PrizeElement,
+  PrizePosition,
+  RightButtons,
   TournamentHubInfoWrapper,
   Wrapper
 } from './TournamentHubPage.styles';
@@ -41,6 +46,8 @@ const TournamentHubPage = () => {
   const handleOpenModal = (name: string) => {
     setShownModal({ ...shownModal, [name]: true });
   };
+  //TODO -> Fetch correct prizepool data
+  const prizePool = [100, 200, 300, 400];
 
   const signup = () => {
     TournamentRequests.joinTournament(hubId)
@@ -68,19 +75,23 @@ const TournamentHubPage = () => {
     <Wrapper>
       <Backdrop />
       <ButtonsWrapper>
-        {buttons.map((button) => (
-          <Button key={button.name} onClick={() => handleOpenModal(button.name)}>
-            {button.text}
-          </Button>
-        ))}
-        {!tournamentHub.registrationClosed && (
-          <Button primary onClick={signup}>
-            Join tournament
-          </Button>
-        )}
-        {loggedInUserTournament && (
-          <Link to={`/main/tournaments/${loggedInUserTournament.id}`}>Go to your tournament</Link>
-        )}
+        <LeftButtons>
+          {buttons.map((button) => (
+            <Button key={button.name} onClick={() => handleOpenModal(button.name)}>
+              {button.text}
+            </Button>
+          ))}
+        </LeftButtons>
+        <RightButtons>
+          {!tournamentHub.registrationClosed && (
+            <Button primary onClick={signup}>
+              Join tournament
+            </Button>
+          )}
+          {loggedInUserTournament && (
+            <Link to={`/main/tournaments/${loggedInUserTournament.id}`}>Go to your tournament</Link>
+          )}
+        </RightButtons>
       </ButtonsWrapper>
       <BracketsModal
         isOpen={shownModal.brackets}
@@ -98,9 +109,26 @@ const TournamentHubPage = () => {
         isOpen={shownModal.howItWorks}
         onRequestClose={() => setShownModal({ ...shownModal, howItWorks: false })}
       />
-      <TournamentHubInfoHeader>Tournament Information</TournamentHubInfoHeader>
-      <TournamentHubInfoWrapper>
-        <InfoCards tournamentHub={tournamentHub} />
+      <TournamentHubInfoWrapper isRegistrationClosed={tournamentHub.registrationClosed}>
+        <HeaderWrapper>
+          <Header>Tournament Information</Header>
+          <InfoCards tournamentHub={tournamentHub} />
+        </HeaderWrapper>
+        {!tournamentHub.registrationClosed && (
+          <HeaderWrapper>
+            <Header>Predicted Prize Pool</Header>
+            <PredictedPrize>
+              {prizePool.map((prize, index) => {
+                const prizePosition = index + 1;
+                return (
+                  <PrizeElement key={index}>
+                    <PrizePosition>{prizePosition}</PrizePosition>€{prize}
+                  </PrizeElement>
+                );
+              })}
+            </PredictedPrize>
+          </HeaderWrapper>
+        )}
       </TournamentHubInfoWrapper>
     </Wrapper>
   );
