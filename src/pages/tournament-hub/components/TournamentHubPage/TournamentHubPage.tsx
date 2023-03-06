@@ -7,7 +7,11 @@ import { Backdrop, Button } from 'common/ui';
 import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
 import { Tournament } from 'types/tournaments/TournamentInfo';
 import {
-  TournamentHubInfoHeader,
+  Header,
+  HeaderWrapper,
+  PredictedPrize,
+  PrizeElement,
+  PrizePosition,
   TournamentHubInfoWrapper,
   Wrapper
 } from './TournamentHubPage.styles';
@@ -18,6 +22,9 @@ const TournamentHubPage = () => {
   const { tournamentHub } = useTournamentHubFeed(hubId);
 
   const [loggedInUserTournament, setLoggedInUserTournament] = useState<Tournament>();
+
+  //TODO -> Fetch correct prizepool data
+  const prizePool = [100, 200, 300, 400];
 
   const signup = () => {
     TournamentRequests.joinTournament(hubId)
@@ -48,13 +55,30 @@ const TournamentHubPage = () => {
           Sign up
         </Button>
       )}
-
       {loggedInUserTournament && (
         <Link to={`/main/tournaments/${loggedInUserTournament.id}`}>Go to your tournament</Link>
       )}
-      <TournamentHubInfoHeader>Tournament Information</TournamentHubInfoHeader>
-      <TournamentHubInfoWrapper>
-        <InfoCards tournamentHub={tournamentHub} />
+
+      <TournamentHubInfoWrapper isRegistrationClosed={tournamentHub.registrationClosed}>
+        <HeaderWrapper>
+          <Header>Tournament Information</Header>
+          <InfoCards tournamentHub={tournamentHub} />
+        </HeaderWrapper>
+        {!tournamentHub.registrationClosed && (
+          <HeaderWrapper>
+            <Header>Predicted Prize Pool</Header>
+            <PredictedPrize>
+              {prizePool.map((prize, index) => {
+                const prizePosition = index + 1;
+                return (
+                  <PrizeElement key={index}>
+                    <PrizePosition>{prizePosition}</PrizePosition>€{prize}
+                  </PrizeElement>
+                );
+              })}
+            </PredictedPrize>
+          </HeaderWrapper>
+        )}
       </TournamentHubInfoWrapper>
     </Wrapper>
   );

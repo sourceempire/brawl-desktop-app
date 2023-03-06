@@ -48,7 +48,7 @@ export default function FeaturedTournament({
             </Column1>
             <Column2>
               <PrizePoolAmount>€{tournamentInfo.entranceFee}</PrizePoolAmount>
-              <PrizePool>Prize Pool*</PrizePool>
+              <PrizePool>Prize Pool</PrizePool>
             </Column2>
           </Info>
         </Hero>
