@@ -1,5 +1,25 @@
 import styled, { css } from 'styled-components';
 
+export const HeaderInfo = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  ${({ theme }) => css`
+    margin-top: ${theme.spacing.base}px;
+    margin-bottom: ${theme.spacing.baseX4}px;
+  `}
+`;
+
+export const HeaderHub = styled.h2`
+  display: block;
+  width: 100%;
+  text-align: center;
+  ${({ theme }) => css`
+    ${theme.textStyles.stylizedHeader}
+  `};
+`;
+
 export const ButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
