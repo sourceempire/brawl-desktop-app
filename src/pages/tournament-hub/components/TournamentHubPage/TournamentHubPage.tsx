@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useTournamentHubFeed, useTournamentTeamFeed } from 'api/feeds';
+import { isFeedWithTeam } from 'api/feeds/hooks/useTournamentTeamFeed';
 import * as TournamentRequests from 'api/requests/TournamentRequests';
 import { Link, useParams } from 'react-router-dom';
 import { useLoggedInUser } from 'common/hooks/useLoggedInUser';
@@ -30,17 +31,20 @@ import {
 const TournamentHubPage = () => {
   const { hubId } = useParams() as { hubId: string };
   const user = useLoggedInUser();
-  const { isInTournamentTeam, tournamentTeam, isLoading } = useTournamentTeamFeed(hubId, user.id);
+  const tournamentTeamFeed = useTournamentTeamFeed(hubId, user.id);
   const { tournamentHub } = useTournamentHubFeed(hubId);
 
-  console.log(tournamentHub);
-  console.log(user.id);
-  console.log(isInTournamentTeam);
-  console.log(tournamentTeam);
+  // this knows that tournamentTeam exists (can be used instead of checking if it exists with falsy conditionals). Use if you want or remove it
+  if (isFeedWithTeam(tournamentTeamFeed)) {
+    tournamentTeamFeed.tournamentTeam;
+  }
+
+  console.log({ tournamentHub, userId: user.id, ...tournamentTeamFeed });
 
   const [loggedInUserTournament, setLoggedInUserTournament] = useState<Tournament>();
   console.log(loggedInUserTournament);
 
+  // TODO -> This is static, should not be recreated on every render, put above the component.
   const buttons = [
     { name: 'brackets', text: 'Brackets' },
     { name: 'mapPool', text: 'Map pool' },
@@ -111,7 +115,7 @@ const TournamentHubPage = () => {
         </LeftButtons>
         <RightButtons>
           {!tournamentHub.registrationClosed &&
-            (!isInTournamentTeam ? (
+            (!isFeedWithTeam(tournamentTeamFeed) ? (
               <Button primary onClick={signup}>
                 Join tournament
               </Button>
