@@ -4,25 +4,32 @@ import * as TournamentRequests from 'api/requests/TournamentRequests';
 import { Link, useParams } from 'react-router-dom';
 import { useLoggedInUser } from 'common/hooks/useLoggedInUser';
 import popup from 'common/popup';
-import { Backdrop, Button } from 'common/ui';
+import { Backdrop, Button, Icons } from 'common/ui';
 import CountDown from 'pages/tournament/components/CountDown';
 import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
 import { Tournament } from 'types/tournaments/TournamentInfo';
+import { formatDateAndTime } from 'utils/dateUtils';
 import BracketsModal from './TournamentHubModals/BracketsModal/BracketsModal';
 import HowItWorksModal from './TournamentHubModals/HowItWorksModal/HowItWorksModal';
 import MapPoolModal from './TournamentHubModals/MapPoolModal/MapPoolModal';
 import RulesModal from './TournamentHubModals/RulesModal/RulesModal';
 import {
   ButtonsWrapper,
+  Content,
   Header,
   HeaderHub,
   HeaderInfo,
   HeaderWrapper,
   LeftButtons,
+  Pill,
+  PillHeader,
+  PillSection,
+  PillSubText,
   PredictedPrize,
   PrizeElement,
   PrizePosition,
   RightButtons,
+  StyledIcon,
   TournamentHubInfoWrapper,
   Wrapper
 } from './TournamentHubPage.styles';
@@ -30,16 +37,10 @@ import {
 const TournamentHubPage = () => {
   const { hubId } = useParams() as { hubId: string };
   const user = useLoggedInUser();
-  const { isInTournamentTeam, tournamentTeam, isLoading } = useTournamentTeamFeed(hubId, user.id);
+  const { isInTournamentTeam } = useTournamentTeamFeed(hubId, user.id);
   const { tournamentHub } = useTournamentHubFeed(hubId);
 
-  console.log(tournamentHub);
-  console.log(user.id);
-  console.log(isInTournamentTeam);
-  console.log(tournamentTeam);
-
   const [loggedInUserTournament, setLoggedInUserTournament] = useState<Tournament>();
-  console.log(loggedInUserTournament);
 
   const buttons = [
     { name: 'brackets', text: 'Brackets' },
@@ -47,6 +48,31 @@ const TournamentHubPage = () => {
     { name: 'rules', text: 'Rules' },
     { name: 'howItWorks', text: 'How it works' }
   ];
+
+  //TODO -> Fetch correct prizepool data
+  const prizePool = [100, 200, 300, 400];
+
+  const pills = [
+    {
+      name: 'prizePool',
+      header: `€${tournamentHub.currentPrizePool}`,
+      subtext: 'Predicted Prize Pool',
+      icon: Icons.Trophy
+    },
+    {
+      name: 'entryFee',
+      header: `€${tournamentHub.entranceFee} /person`,
+      subtext: 'Entry Fee',
+      icon: Icons.Ticket
+    },
+    {
+      name: 'startTime',
+      header: tournamentHub.startTime && formatDateAndTime(tournamentHub.startTime),
+      subtext: 'Tournament Start',
+      icon: Icons.Clock
+    }
+  ];
+
   const [shownModal, setShownModal] = useState({
     brackets: false,
     mapPool: false,
@@ -57,8 +83,6 @@ const TournamentHubPage = () => {
   const handleOpenModal = (name: string) => {
     setShownModal({ ...shownModal, [name]: true });
   };
-  //TODO -> Fetch correct prizepool data
-  const prizePool = [100, 200, 300, 400];
 
   const signup = () => {
     TournamentRequests.joinTournament(hubId)
@@ -96,9 +120,17 @@ const TournamentHubPage = () => {
         <HeaderInfo>
           <HeaderHub>{tournamentHub.name}</HeaderHub>
           <CountDown startTime={Number(tournamentHub.startTime)} />
-          <div>
-            <div></div>
-          </div>
+          <PillSection>
+            {pills.map((pill) => (
+              <Pill key={pill.name}>
+                <StyledIcon icon={pill.icon} />
+                <Content>
+                  <PillHeader>{pill.header}</PillHeader>
+                  <PillSubText>{pill.subtext}</PillSubText>
+                </Content>
+              </Pill>
+            ))}
+          </PillSection>
         </HeaderInfo>
       )}
       <ButtonsWrapper>
@@ -116,7 +148,7 @@ const TournamentHubPage = () => {
                 Join tournament
               </Button>
             ) : (
-              <Button primary onClick={leave}>
+              <Button alert onClick={leave}>
                 Leave Tournament
               </Button>
             ))}
