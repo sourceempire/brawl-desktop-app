@@ -4,6 +4,7 @@ import { Icons } from '../Icon';
 type ContentProps = {
   width?: string;
   height?: string;
+  margin?: string;
   timeout: number;
   noPadding: boolean;
 };
@@ -11,13 +12,13 @@ type ContentProps = {
 export const Content = styled.div<ContentProps>`
   position: relative;
   inset: 0;
-  margin: auto;
 
   max-width: 100%;
 
-  ${({ width, height, noPadding, theme }) => css`
+  ${({ width, height, margin, noPadding, theme }) => css`
     height: ${height ? height : 'auto'};
     width: ${width ? width : 'auto'};
+    margin: ${margin ? margin : 'auto'};
     background-color: ${theme.colors.surface.base};
     border: 1px solid ${theme.colors.secondary.base};
     border-radius: ${theme.borderRadius.default};

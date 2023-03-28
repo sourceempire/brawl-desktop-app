@@ -1,27 +1,98 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useTournamentHubFeed } from 'api/feeds';
+import { useTournamentHubFeed, useTournamentTeamFeed } from 'api/feeds';
 import * as TournamentRequests from 'api/requests/TournamentRequests';
 import { Link, useParams } from 'react-router-dom';
+import { useLoggedInUser } from 'common/hooks/useLoggedInUser';
 import popup from 'common/popup';
-import { Backdrop, Button } from 'common/ui';
+import { Backdrop, Button, Icons } from 'common/ui';
+import CountDown from 'pages/tournament/components/CountDown';
 import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
 import { Tournament } from 'types/tournaments/TournamentInfo';
+import { formatDateAndTime } from 'utils/dateUtils';
+import BracketsModal from './TournamentHubModals/BracketsModal/BracketsModal';
+import HowItWorksModal from './TournamentHubModals/HowItWorksModal/HowItWorksModal';
+import MapPoolModal from './TournamentHubModals/MapPoolModal/MapPoolModal';
+import RulesModal from './TournamentHubModals/RulesModal/RulesModal';
 import {
-  TournamentHubInfoHeader,
+  ButtonsWrapper,
+  Content,
+  Header,
+  HeaderHub,
+  HeaderInfo,
+  HeaderWrapper,
+  LeftButtons,
+  Pill,
+  PillHeader,
+  PillSection,
+  PillSubText,
+  PredictedPrize,
+  PrizeElement,
+  PrizePosition,
+  RightButtons,
+  StyledIcon,
   TournamentHubInfoWrapper,
   Wrapper
 } from './TournamentHubPage.styles';
 
 const TournamentHubPage = () => {
   const { hubId } = useParams() as { hubId: string };
-
+  const user = useLoggedInUser();
+  const { isInTournamentTeam } = useTournamentTeamFeed(hubId, user.id);
   const { tournamentHub } = useTournamentHubFeed(hubId);
 
   const [loggedInUserTournament, setLoggedInUserTournament] = useState<Tournament>();
 
+  const buttons = [
+    { name: 'brackets', text: 'Brackets' },
+    { name: 'mapPool', text: 'Map pool' },
+    { name: 'rules', text: 'Rules' },
+    { name: 'howItWorks', text: 'How it works' }
+  ];
+
+  //TODO -> Fetch correct prizepool data
+  const prizePool = [100, 200, 300, 400];
+
+  const pills = [
+    {
+      name: 'prizePool',
+      header: `€${tournamentHub.currentPrizePool}`,
+      subtext: 'Predicted Prize Pool',
+      icon: Icons.Trophy
+    },
+    {
+      name: 'entryFee',
+      header: `€${tournamentHub.entranceFee} /person`,
+      subtext: 'Entry Fee',
+      icon: Icons.Ticket
+    },
+    {
+      name: 'startTime',
+      header: tournamentHub.startTime && formatDateAndTime(tournamentHub.startTime),
+      subtext: 'Tournament Start',
+      icon: Icons.Clock
+    }
+  ];
+
+  const [shownModal, setShownModal] = useState({
+    brackets: false,
+    mapPool: false,
+    rules: false,
+    howItWorks: false
+  });
+
+  const handleOpenModal = (name: string) => {
+    setShownModal({ ...shownModal, [name]: true });
+  };
+
   const signup = () => {
     TournamentRequests.joinTournament(hubId)
       .then(() => popup.info('Tournament joined'))
+      .catch((error) => popup.error(error.error));
+  };
+
+  const leave = () => {
+    TournamentRequests.leaveTournament(hubId)
+      .then(() => popup.info('Tournament leaved'))
       .catch((error) => popup.error(error.error));
   };
 
@@ -43,18 +114,82 @@ const TournamentHubPage = () => {
   return (
     <Wrapper>
       <Backdrop />
-      {!tournamentHub.registrationClosed && (
-        <Button primary onClick={signup}>
-          Sign up
-        </Button>
-      )}
-
-      {loggedInUserTournament && (
+      {loggedInUserTournament ? (
         <Link to={`/main/tournaments/${loggedInUserTournament.id}`}>Go to your tournament</Link>
+      ) : (
+        <HeaderInfo>
+          <HeaderHub>{tournamentHub.name}</HeaderHub>
+          <CountDown startTime={Number(tournamentHub.startTime)} />
+          <PillSection>
+            {pills.map((pill) => (
+              <Pill key={pill.name}>
+                <StyledIcon icon={pill.icon} />
+                <Content>
+                  <PillHeader>{pill.header}</PillHeader>
+                  <PillSubText>{pill.subtext}</PillSubText>
+                </Content>
+              </Pill>
+            ))}
+          </PillSection>
+        </HeaderInfo>
       )}
-      <TournamentHubInfoHeader>Tournament Information</TournamentHubInfoHeader>
-      <TournamentHubInfoWrapper>
-        <InfoCards tournamentHub={tournamentHub} />
+      <ButtonsWrapper>
+        <LeftButtons>
+          {buttons.map((button) => (
+            <Button key={button.name} onClick={() => handleOpenModal(button.name)}>
+              {button.text}
+            </Button>
+          ))}
+        </LeftButtons>
+        <RightButtons>
+          {!tournamentHub.registrationClosed &&
+            (!isInTournamentTeam ? (
+              <Button primary onClick={signup}>
+                Join tournament
+              </Button>
+            ) : (
+              <Button alert onClick={leave}>
+                Leave Tournament
+              </Button>
+            ))}
+        </RightButtons>
+      </ButtonsWrapper>
+      <BracketsModal
+        isOpen={shownModal.brackets}
+        onRequestClose={() => setShownModal({ ...shownModal, brackets: false })}
+      />
+      <MapPoolModal
+        isOpen={shownModal.mapPool}
+        onRequestClose={() => setShownModal({ ...shownModal, mapPool: false })}
+      />
+      <RulesModal
+        isOpen={shownModal.rules}
+        onRequestClose={() => setShownModal({ ...shownModal, rules: false })}
+      />
+      <HowItWorksModal
+        isOpen={shownModal.howItWorks}
+        onRequestClose={() => setShownModal({ ...shownModal, howItWorks: false })}
+      />
+      <TournamentHubInfoWrapper isRegistrationClosed={tournamentHub.registrationClosed}>
+        <HeaderWrapper>
+          <Header>Tournament Information</Header>
+          <InfoCards tournamentHub={tournamentHub} />
+        </HeaderWrapper>
+        {!tournamentHub.registrationClosed && (
+          <HeaderWrapper>
+            <Header>Predicted Prize Pool</Header>
+            <PredictedPrize>
+              {prizePool.map((prize, index) => {
+                const prizePosition = index + 1;
+                return (
+                  <PrizeElement key={index}>
+                    <PrizePosition>{prizePosition}</PrizePosition>€{prize}
+                  </PrizeElement>
+                );
+              })}
+            </PredictedPrize>
+          </HeaderWrapper>
+        )}
       </TournamentHubInfoWrapper>
     </Wrapper>
   );
