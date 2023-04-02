@@ -9,6 +9,7 @@ import CountDown from 'pages/tournament/components/CountDown';
 import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
 import { Tournament } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
+import TorunamentHubButtons from '../TournamentHubButtons/TournamentHubButtons';
 import BracketsModal from './TournamentHubModals/BracketsModal/BracketsModal';
 import HowItWorksModal from './TournamentHubModals/HowItWorksModal/HowItWorksModal';
 import MapPoolModal from './TournamentHubModals/MapPoolModal/MapPoolModal';
@@ -108,8 +109,9 @@ const TournamentHubPage = () => {
 
   useEffect(() => {
     // Replace with a feed
+    console.log(shownModal);
     getLoggedInUserTournament();
-  }, [getLoggedInUserTournament]);
+  }, [getLoggedInUserTournament, shownModal]);
 
   return (
     <Wrapper>

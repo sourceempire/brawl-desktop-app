@@ -68,16 +68,6 @@ export const HeaderHub = styled.h2`
   `};
 `;
 
-export const ButtonsWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  ${({ theme }) => css`
-    margin-bottom: ${theme.spacing.baseX2}px;
-  `}
-`;
-
 export const LeftButtons = styled.div`
   display: flex;
   align-items: center;
@@ -87,6 +77,16 @@ export const LeftButtons = styled.div`
 `;
 
 export const RightButtons = styled.div``;
+
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  ${({ theme }) => css`
+    margin-bottom: ${theme.spacing.baseX2}px;
+  `}
+`;
 
 export const Wrapper = styled.div`
   width: 100%;
