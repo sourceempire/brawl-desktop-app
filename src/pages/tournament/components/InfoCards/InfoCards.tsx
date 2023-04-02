@@ -5,7 +5,7 @@ import { MatchSettingsTypes } from 'types/MatchSettings';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
 import { getTournamentModeShort, getTournamentSeriesTypeLong } from 'utils/tournamentUtils';
-import { InfoCard, InfoCardWrapper, InfoHeader, InfoText, StyledIcon } from './InfoCards.styles';
+import { InfoCard, InfoHeader, InfoText, StyledIcon } from './InfoCards.styles';
 
 type Props = {
   tournamentHub: TournamentHub;
@@ -30,7 +30,7 @@ const InfoCards = ({ tournamentHub }: Props) => {
   });
 
   return (
-    <InfoCardWrapper isRegistrationClosed={tournamentHub.registrationClosed}>
+    <>
       <InfoCard>
         <InfoHeader>
           <StyledIcon icon={IconEnum.Controller} />
@@ -81,7 +81,7 @@ const InfoCards = ({ tournamentHub }: Props) => {
       <InfoCard>
         <InfoHeader>
           <StyledIcon icon={IconEnum.Trophy} />
-          {tournamentHub.registrationClosed ? 'Prize Pool' : 'Predicted Prize Pool'}
+          Prize Pool
         </InfoHeader>
         <InfoText>{tournamentHub.currentPrizePool}</InfoText>
       </InfoCard>
@@ -92,7 +92,7 @@ const InfoCards = ({ tournamentHub }: Props) => {
         </InfoHeader>
         <InfoText>€{tournamentHub.entranceFee} / person</InfoText>
       </InfoCard>
-    </InfoCardWrapper>
+    </>
   );
 };
 

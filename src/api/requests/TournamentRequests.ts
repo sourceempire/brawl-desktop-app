@@ -26,9 +26,6 @@ export const getTournament = (params: {
 export const joinTournament = (tournamentHubId: string) =>
   Fetcher.post(`${SERVER_URL}/api/tournament/join`, { tournamentHubId });
 
-export const leaveTournament = (tournamentHubId: string) =>
-  Fetcher.post(`${SERVER_URL}/api/tournament/leave`, { tournamentHubId });
-
 export const getBracket = (tournamentId: string) =>
   Fetcher.get<{ bracket: Bracket }>(`${SERVER_URL}/api/tournament/bracket`, { tournamentId });
 

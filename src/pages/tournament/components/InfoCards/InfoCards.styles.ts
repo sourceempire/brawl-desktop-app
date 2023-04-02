@@ -1,28 +1,12 @@
 import styled, { css } from 'styled-components';
 import { Icon } from 'common/ui/Icon';
-
-export const InfoCardWrapper = styled.div<{
-  isRegistrationClosed: boolean;
-}>`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  ${({ theme }) => css`
-    gap: ${theme.spacing.base}px;
-  `}
-  ${({ isRegistrationClosed }) =>
-    isRegistrationClosed &&
-    css`
-      grid-template-columns: repeat(4, 1fr);
-    `}
-`;
-
 export const InfoCard = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 70px;
   ${({ theme }) => css`
-    background: ${theme.colors.surface.base};
+    background: ${theme.colors.surfaceElement.base};
     border-radius: ${theme.borderRadius.default};
     padding: ${theme.spacing.baseX2}px;
   `};
