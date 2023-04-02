@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useTournamentHubFeed, useTournamentTeamFeed } from 'api/feeds';
+import { isFeedWithTeam } from 'api/feeds/hooks/useTournamentTeamFeed';
 import * as TournamentRequests from 'api/requests/TournamentRequests';
 import { Link, useParams } from 'react-router-dom';
 import { useLoggedInUser } from 'common/hooks/useLoggedInUser';
@@ -9,7 +10,6 @@ import CountDown from 'pages/tournament/components/CountDown';
 import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
 import { Tournament } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
-import TorunamentHubButtons from '../TournamentHubButtons/TournamentHubButtons';
 import BracketsModal from './TournamentHubModals/BracketsModal/BracketsModal';
 import HowItWorksModal from './TournamentHubModals/HowItWorksModal/HowItWorksModal';
 import MapPoolModal from './TournamentHubModals/MapPoolModal/MapPoolModal';
@@ -38,11 +38,17 @@ import {
 const TournamentHubPage = () => {
   const { hubId } = useParams() as { hubId: string };
   const user = useLoggedInUser();
-  const { isInTournamentTeam } = useTournamentTeamFeed(hubId, user.id);
+  const tournamentTeamFeed = useTournamentTeamFeed(hubId, user.id);
   const { tournamentHub } = useTournamentHubFeed(hubId);
+
+  // this knows that tournamentTeam exists (can be used instead of checking if it exists with falsy conditionals). Use if you want or remove it
+  if (isFeedWithTeam(tournamentTeamFeed)) {
+    tournamentTeamFeed.tournamentTeam;
+  }
 
   const [loggedInUserTournament, setLoggedInUserTournament] = useState<Tournament>();
 
+  // TODO -> This is static, should not be recreated on every render, put above the component.
   const buttons = [
     { name: 'brackets', text: 'Brackets' },
     { name: 'mapPool', text: 'Map pool' },
@@ -145,7 +151,7 @@ const TournamentHubPage = () => {
         </LeftButtons>
         <RightButtons>
           {!tournamentHub.registrationClosed &&
-            (!isInTournamentTeam ? (
+            (!isFeedWithTeam(tournamentTeamFeed) ? (
               <Button primary onClick={signup}>
                 Join tournament
               </Button>
