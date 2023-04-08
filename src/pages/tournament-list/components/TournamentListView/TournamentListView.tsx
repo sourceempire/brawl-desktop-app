@@ -20,23 +20,20 @@ import {
   FilterSort,
   SearchInput,
   TournamentGallery,
-  TournamentList,
-  Wrapper
+  TournamentList
 } from './TournamentListView.styles';
 import { theme } from 'assets/styles/Theme';
 
 export default function TournamentListView() {
   return (
-    <Wrapper>
-      <Tabs underlined={true}>
-        <Tab name="All Tournaments">
-          <Page />
-        </Tab>
-        <Tab name="My Tournmanents">
-          <Page />
-        </Tab>
-      </Tabs>
-    </Wrapper>
+    <Tabs underlined={true}>
+      <Tab name="All Tournaments">
+        <Page />
+      </Tab>
+      <Tab name="My Tournaments">
+        <Page />
+      </Tab>
+    </Tabs>
   );
 }
 

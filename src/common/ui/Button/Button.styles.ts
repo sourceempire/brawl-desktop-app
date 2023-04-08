@@ -43,7 +43,7 @@ export const Wrapper = styled.button<Props>`
   ${({ theme }) => theme.textStyles.button}
 
   :focus-visible {
-    outline: 2px solid white;
+    outline: 2px solid ${(props) => props.theme.colors.accent.base};
     outline-offset: 2px;
     transition: outline-color 0.3s;
   }
