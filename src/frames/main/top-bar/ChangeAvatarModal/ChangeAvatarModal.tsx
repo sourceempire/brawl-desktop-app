@@ -41,7 +41,7 @@ const ChangeAvatarModal = ({ isOpen, onClose }: Props) => {
   }, [fileToUpload]);
 
   return (
-    <Modal isOpen={isOpen} title="Select an avatarr" onRequestClose={onClose}>
+    <Modal isOpen={isOpen} title="Select an avatar" onRequestClose={onClose}>
       {fileToUpload && (
         <AvatarCropper file={fileToUpload} clearFile={() => setFileToUpload(undefined)} />
       )}

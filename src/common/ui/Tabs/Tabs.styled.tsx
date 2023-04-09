@@ -72,7 +72,6 @@ export const TabsBarTab = styled.div<{ active?: boolean }>`
   ${({ active, theme }) => css`
     padding: 9px 0px;
     position: relative;
-    cursor: pointer;
     margin: 0px 9px;
 
     :first-child {

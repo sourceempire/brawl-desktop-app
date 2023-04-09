@@ -8,7 +8,6 @@ export const SelectWrapper = styled.select`
   padding: 0 1em 0 0;
   margin: 0;
   line-height: inherit;
-  cursor: pointer;
   // -----
 
   color: ${(props) => props.theme.colors.textPrimaryLight};
@@ -20,6 +19,10 @@ export const SelectWrapper = styled.select`
 
   :focus-visible {
     outline: none;
+  }
+
+  :hover {
+    background-color: ${(props) => props.theme.colors.secondary.hover};
   }
 `;
 

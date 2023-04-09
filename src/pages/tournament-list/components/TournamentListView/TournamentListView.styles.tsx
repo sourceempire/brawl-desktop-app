@@ -1,10 +1,6 @@
 import styled, { css } from 'styled-components/macro';
 import { Button, Icons, Input, Select } from 'common/ui';
 
-export const Wrapper = styled.div`
-  padding: 0 24px;
-`;
-
 export const TournamentGallery = styled.div<{ featuredExpanded: boolean }>`
   transition: transform 0.3s;
   transform: ${({ featuredExpanded }) =>

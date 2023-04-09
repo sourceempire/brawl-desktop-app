@@ -18,18 +18,17 @@ export const Hero = styled.div<{ visible: boolean; image: string }>`
       inset: 0;
       background-color: rgba(0, 0, 0, 0.3);
     }
+
+    :hover {
+      :before {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+    }
   `}
 `;
 
 export const Wrapper = styled.div`
   width: 100%;
-  :hover {
-    ${Hero} {
-      :before {
-        background-color: rgba(0, 0, 0, 0.2);
-      }
-    }
-  }
 `;
 
 export const VisibilityToggle = styled.div`
