@@ -5,7 +5,7 @@ import { Header as TournamentInfoCardHeader } from 'pages/tournament-list/compon
 export const Wrapper = styled.div`
   display: grid;
   padding: 12px 0;
-  grid-template-columns: 320px 1fr 1fr;
+  grid-template-columns: 350px 1fr 1fr;
   grid-template-rows: 280px;
   grid-auto-rows: 260px;
   grid-gap: 24px;
