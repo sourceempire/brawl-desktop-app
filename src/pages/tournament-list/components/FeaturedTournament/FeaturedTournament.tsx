@@ -11,6 +11,7 @@ import {
   Name,
   PrizePool,
   PrizePoolAmount,
+  SelectArrow,
   TournamentInfo,
   VisibilityToggle,
   Wrapper
@@ -33,6 +34,7 @@ export default function FeaturedTournament({
     <Wrapper>
       <VisibilityToggle onClick={() => setExpanded((e) => !e)}>
         Featured Tournament
+        <SelectArrow expanded={expanded} />
       </VisibilityToggle>
       <HeroWrapper>
         <Hero onClick={onClick} visible={expanded} image={tournamentInfo.image}>

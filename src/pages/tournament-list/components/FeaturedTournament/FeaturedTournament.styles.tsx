@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Icons } from 'common/ui';
 
 export const Hero = styled.div<{ visible: boolean; image: string }>`
   ${({ visible, image, theme }) => css`
@@ -34,12 +35,18 @@ export const Wrapper = styled.div`
 export const VisibilityToggle = styled.div`
   ${(props) => props.theme.textStyles.menu}
   margin: 18px 0;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+`;
 
-  :after {
-    content: '▾';
-    margin-left: 6px;
-  }
+export const SelectArrow = styled(Icons.SelectArrow)<{ expanded: boolean }>`
+  height: 8px;
+  width: 8px;
+  transform: ${({ expanded }) => (expanded ? 'rotate(0)' : 'rotate(-180deg)')};
+  ${({ theme }) => css`
+    fill: ${theme.colors.white};
+    margin-left: ${theme.spacing.base}px;
+  `}
 `;
 
 export const HeroWrapper = styled.div`
