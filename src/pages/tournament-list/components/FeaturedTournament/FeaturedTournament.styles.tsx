@@ -42,7 +42,6 @@ export const VisibilityToggle = styled.div`
 export const SelectArrow = styled(Icons.SelectArrow)<{ expanded: boolean }>`
   height: 8px;
   width: 8px;
-  transition: transform 0.3s;
   transform: ${({ expanded }) => (expanded ? 'rotate(0)' : 'rotate(-180deg)')};
   ${({ theme }) => css`
     fill: ${theme.colors.white};
