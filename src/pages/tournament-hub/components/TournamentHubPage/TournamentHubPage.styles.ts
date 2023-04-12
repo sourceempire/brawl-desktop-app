@@ -57,10 +57,9 @@ export const PillSection = styled.div`
 `;
 export const HeaderInfo = styled.div`
   display: flex;
-  flex-flow: column;
+  flex-flow: column wrap;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
   ${({ theme }) => css`
     margin-top: ${theme.spacing.base}px;
     margin-bottom: ${theme.spacing.baseX4}px;
