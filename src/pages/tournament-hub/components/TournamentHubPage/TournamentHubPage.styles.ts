@@ -19,6 +19,13 @@ export const PillHeader = styled.div`
 
 export const Content = styled.div``;
 
+export const CountDownInfo = styled.div`
+  ${({ theme }) => css`
+    margin-bottom: ${theme.spacing.baseX2}px;
+    color: ${theme.colors.textSecondaryLight};
+  `}
+`;
+
 export const StyledIcon = styled(Icon)`
   ${({ theme }) => css`
     height: ${theme.spacing.baseX3}px;
@@ -50,9 +57,9 @@ export const PillSection = styled.div`
 `;
 export const HeaderInfo = styled.div`
   display: flex;
+  flex-flow: column wrap;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
   ${({ theme }) => css`
     margin-top: ${theme.spacing.base}px;
     margin-bottom: ${theme.spacing.baseX4}px;
@@ -65,6 +72,7 @@ export const HeaderHub = styled.h2`
   text-align: center;
   ${({ theme }) => css`
     ${theme.textStyles.stylizedHeader}
+    margin-bottom: ${theme.spacing.baseX2}px;
   `};
 `;
 
@@ -90,7 +98,12 @@ export const ButtonsWrapper = styled.div`
 
 export const Wrapper = styled.div`
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 `;
+
+export const SecondWrapper = styled.div``;
 
 export const TournamentHubInfoWrapper = styled.div<{
   isRegistrationClosed: boolean;
@@ -109,12 +122,19 @@ export const TournamentHubInfoWrapper = styled.div<{
     `}
 `;
 
-export const HeaderWrapper = styled.div`
+export const InfoHeaderWrapper = styled.div`
   display: grid;
   grid-template-areas:
     'header'
     'main';
   grid-auto-rows: 20px 1fr;
+`;
+
+export const HubHeaderWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
 `;
 
 export const Header = styled.h2`

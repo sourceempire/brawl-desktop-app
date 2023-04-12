@@ -50,7 +50,9 @@ export const Info = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: 6px;
+  ${({ theme }) => css`
+    padding: ${theme.spacing.baseX2}px;
+  `}
   ${({ theme }) => theme.textStyles.body}
   line-height: 1.6em;
 `;
