@@ -100,7 +100,7 @@ export const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  flex-flow: column;
+  flex-direction: column;
 `;
 
 export const SecondWrapper = styled.div``;
@@ -132,7 +132,7 @@ export const InfoHeaderWrapper = styled.div`
 
 export const HubHeaderWrapper = styled.div`
   display: flex;
-  flex-flow: column;
+  flex-direction: column;
   justify-content: center;
   flex: 1;
 `;
