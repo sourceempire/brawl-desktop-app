@@ -1,6 +1,6 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Content, Wrapper } from './TournamentCard.styles';
+import { Content, Name, Overlay, Wrapper } from './TournamentCard.styles';
 import temporaryBackdrop from 'assets/images/temporary-csgo-backdrop.jpg';
 
 type Props = {
@@ -13,11 +13,12 @@ type Props = {
 const TournamentCard = ({ name, status, round, onClick }: Props) => {
   return (
     <Wrapper onClick={onClick}>
+      {status}
       <Content>
-        {name}
-        {status}
+        <Name>{name}</Name>
         {round}
       </Content>
+      <Overlay />
     </Wrapper>
   );
 };
