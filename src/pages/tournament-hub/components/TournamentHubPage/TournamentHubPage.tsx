@@ -2,12 +2,13 @@ import { useCallback, useEffect, useState } from 'react';
 import { useTournamentHubFeed, useTournamentTeamFeed } from 'api/feeds';
 import { isFeedWithTeam } from 'api/feeds/hooks/useTournamentTeamFeed';
 import * as TournamentRequests from 'api/requests/TournamentRequests';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useLoggedInUser } from 'common/hooks/useLoggedInUser';
 import popup from 'common/popup';
 import { Backdrop, Button, Icons } from 'common/ui';
 import CountDown from 'pages/tournament/components/CountDown';
 import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
+import TournamentCard from 'pages/tournament/components/TournamentCard/TournamentCard';
 import { Tournament } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
 import BracketsModal from './TournamentHubModals/BracketsModal/BracketsModal';
@@ -16,6 +17,7 @@ import MapPoolModal from './TournamentHubModals/MapPoolModal/MapPoolModal';
 import RulesModal from './TournamentHubModals/RulesModal/RulesModal';
 import {
   ButtonsWrapper,
+  Container,
   Content,
   CountDownInfo,
   Header,
@@ -83,6 +85,27 @@ const TournamentHubPage = () => {
     }
   ];
 
+  const tournaments = [
+    {
+      name: 'Tournament 1',
+      status: 'OPEN',
+      link: tournamentHub.id,
+      round: 'Round 1 of 4'
+    },
+    {
+      name: 'Tournament 2',
+      status: 'OPEN',
+      link: tournamentHub.id,
+      round: 'Round 1 of 4'
+    },
+    {
+      name: 'Tournament 3',
+      status: 'OPEN',
+      link: tournamentHub.id,
+      round: 'Round 1 of 4'
+    }
+  ];
+
   const [shownModal, setShownModal] = useState({
     brackets: false,
     mapPool: false,
@@ -118,15 +141,28 @@ const TournamentHubPage = () => {
 
   useEffect(() => {
     // Replace with a feed
-    console.log(shownModal);
     getLoggedInUserTournament();
+    console.log(tournamentHub);
   }, [getLoggedInUserTournament, shownModal]);
+
+  const navigate = useNavigate();
 
   return (
     <Wrapper>
       <Backdrop />
       {loggedInUserTournament ? (
-        <Link to={`/main/tournaments/${loggedInUserTournament.id}`}>Go to your tournament</Link>
+        <Container>
+          {tournaments.map((tournament) => (
+            <TournamentCard
+              key={tournament.name}
+              name={tournament.name}
+              status={tournament.status}
+              round={tournament.round}
+              onClick={() =>
+                navigate(`/main/tournaments/${loggedInUserTournament.id}`)
+              }></TournamentCard>
+          ))}
+        </Container>
       ) : (
         <HubHeaderWrapper>
           <HeaderInfo>

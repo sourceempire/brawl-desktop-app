@@ -1,6 +1,16 @@
 import styled, { css } from 'styled-components';
 import { Icon } from 'common/ui/Icon';
 
+export const Container = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  ${({ theme }) => css`
+    column-gap: ${theme.spacing.baseX3}px;
+  `}
+`;
+
 export const PillSubText = styled.div`
   display: block;
   border-radius: 20px;
