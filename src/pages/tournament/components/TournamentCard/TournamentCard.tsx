@@ -33,6 +33,11 @@ const TournamentCard = ({
       image={tournamentHubImage}
       isUserInTournament={isUserInTournament}
       onClick={onClick}>
+      {isUserInTournament ? (
+        <fieldset>
+          <legend>Your tournament</legend>
+        </fieldset>
+      ) : null}
       <InfoWrapper>
         <TournamentName>
           {tournament.name} {tournament.tournamentNumber}

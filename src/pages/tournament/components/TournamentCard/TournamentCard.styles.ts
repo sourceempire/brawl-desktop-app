@@ -18,9 +18,24 @@ export const Tournament = styled.div<{ image: string; isUserInTournament: boolea
 
     ${isUserInTournament &&
     `
-    outline: 2px solid;
-    outline-offset: 2px; /* Push outline outside the border */
-    outline-color: ${theme.colors.accent.base};
+    border-color: ${theme.colors.accent.base};
+
+    fieldset {
+      position: absolute;
+      height: calc(100% + 16px);
+      width: calc(100% + 8px);
+      top: -4px;
+      left: -4px;
+      border: 2px solid;
+      border-radius: ${theme.borderRadius.default};
+      border-color: ${theme.colors.accent.base};
+      text-align: center;
+      transform: rotate(180deg);
+    }
+
+    legend {
+      transform: scale(-1, -1);
+    }
   `}
   `}
 
