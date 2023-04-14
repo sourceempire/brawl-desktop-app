@@ -1,25 +1,49 @@
-import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { Content, Name, Overlay, Wrapper } from './TournamentCard.styles';
-import temporaryBackdrop from 'assets/images/temporary-csgo-backdrop.jpg';
+import { useEffect, useState } from 'react';
+import useTournamentFeed from 'api/feeds/hooks/useTournamentFeed';
+import { getBracket } from 'api/requests/TournamentRequests';
+import { Bracket as BracketType, isSingleElimination } from 'types/tournaments/Bracket';
+import { InfoWrapper, RoundInfo, Tournament, TournamentName } from './TournamentCard.styles';
 
 type Props = {
-  name: string;
-  status: string;
-  round: string;
+  tournamentId: string;
+  tournamentHubImage: string;
+  isUserInTournament: boolean;
   onClick?: ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void) | undefined;
 };
 
-const TournamentCard = ({ name, status, round, onClick }: Props) => {
+const TournamentCard = ({
+  tournamentId,
+  tournamentHubImage,
+  isUserInTournament,
+  onClick
+}: Props) => {
+  const { tournament } = useTournamentFeed(tournamentId);
+  const [bracket, setBracket] = useState<BracketType>();
+
+  useEffect(() => {
+    getBracket(tournamentId)
+      .then((result) => {
+        setBracket(result.bracket);
+      })
+      .catch(console.error);
+  }, [tournamentId]);
+
   return (
-    <Wrapper onClick={onClick}>
-      {status}
-      <Content>
-        <Name>{name}</Name>
-        {round}
-      </Content>
-      <Overlay />
-    </Wrapper>
+    <Tournament
+      image={tournamentHubImage}
+      isUserInTournament={isUserInTournament}
+      onClick={onClick}>
+      <InfoWrapper>
+        <TournamentName>
+          {tournament.name} {tournament.tournamentNumber}
+        </TournamentName>
+        {bracket && isSingleElimination(bracket) ? (
+          <RoundInfo>
+            Round {bracket.currentRoundIndex + 1} of {bracket.numberOfRounds}
+          </RoundInfo>
+        ) : null}
+      </InfoWrapper>
+    </Tournament>
   );
 };
 

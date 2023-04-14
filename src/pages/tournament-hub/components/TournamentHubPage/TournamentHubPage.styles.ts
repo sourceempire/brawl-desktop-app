@@ -1,13 +1,13 @@
 import styled, { css } from 'styled-components';
 import { Icon } from 'common/ui/Icon';
 
-export const Container = styled.div`
+export const TournamentsWrapper = styled.div<{ isUserInTournament: boolean }>`
   display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  ${({ theme }) => css`
-    column-gap: ${theme.spacing.baseX3}px;
+  flex-wrap: nowrap;
+  flex: 1;
+  ${({ theme, isUserInTournament }) => css`
+    margin-bottom: ${theme.spacing.baseX2}px;
+    margin-top: ${isUserInTournament ? '4px' : '0'};
   `}
 `;
 
@@ -113,7 +113,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-export const SecondWrapper = styled.div``;
+export const InfoWrapper = styled.div``;
 
 export const TournamentHubInfoWrapper = styled.div<{
   isRegistrationClosed: boolean;

@@ -17,7 +17,6 @@ import MapPoolModal from './TournamentHubModals/MapPoolModal/MapPoolModal';
 import RulesModal from './TournamentHubModals/RulesModal/RulesModal';
 import {
   ButtonsWrapper,
-  Container,
   Content,
   CountDownInfo,
   Header,
@@ -25,6 +24,7 @@ import {
   HeaderInfo,
   HubHeaderWrapper,
   InfoHeaderWrapper,
+  InfoWrapper,
   LeftButtons,
   Pill,
   PillHeader,
@@ -34,9 +34,9 @@ import {
   PrizeElement,
   PrizePosition,
   RightButtons,
-  SecondWrapper,
   StyledIcon,
   TournamentHubInfoWrapper,
+  TournamentsWrapper,
   Wrapper
 } from './TournamentHubPage.styles';
 
@@ -44,7 +44,7 @@ const TournamentHubPage = () => {
   const { hubId } = useParams() as { hubId: string };
   const user = useLoggedInUser();
   const tournamentTeamFeed = useTournamentTeamFeed(hubId, user.id);
-  const { tournamentHub } = useTournamentHubFeed(hubId);
+  const { tournamentHub, tournamentIds } = useTournamentHubFeed(hubId);
 
   // this knows that tournamentTeam exists (can be used instead of checking if it exists with falsy conditionals). Use if you want or remove it
   if (isFeedWithTeam(tournamentTeamFeed)) {
@@ -85,27 +85,6 @@ const TournamentHubPage = () => {
     }
   ];
 
-  const tournaments = [
-    {
-      name: 'Tournament 1',
-      status: 'OPEN',
-      link: tournamentHub.id,
-      round: 'Round 1 of 4'
-    },
-    {
-      name: 'Tournament 2',
-      status: 'OPEN',
-      link: tournamentHub.id,
-      round: 'Round 1 of 4'
-    },
-    {
-      name: 'Tournament 3',
-      status: 'OPEN',
-      link: tournamentHub.id,
-      round: 'Round 1 of 4'
-    }
-  ];
-
   const [shownModal, setShownModal] = useState({
     brackets: false,
     mapPool: false,
@@ -142,7 +121,6 @@ const TournamentHubPage = () => {
   useEffect(() => {
     // Replace with a feed
     getLoggedInUserTournament();
-    console.log(tournamentHub);
   }, [getLoggedInUserTournament, shownModal]);
 
   const navigate = useNavigate();
@@ -150,19 +128,21 @@ const TournamentHubPage = () => {
   return (
     <Wrapper>
       <Backdrop />
-      {loggedInUserTournament ? (
-        <Container>
-          {tournaments.map((tournament) => (
+      {tournamentHub.registrationClosed && tournamentIds ? (
+        <TournamentsWrapper isUserInTournament={loggedInUserTournament ? true : false}>
+          {tournamentIds.map((tournamentId) => (
             <TournamentCard
-              key={tournament.name}
-              name={tournament.name}
-              status={tournament.status}
-              round={tournament.round}
+              key={tournamentId}
+              tournamentId={tournamentId}
+              tournamentHubImage={tournamentHub.image}
+              isUserInTournament={loggedInUserTournament?.id === tournamentId ? true : false}
               onClick={() =>
-                navigate(`/main/tournaments/${loggedInUserTournament.id}`)
+                loggedInUserTournament?.id === tournamentId
+                  ? navigate(`/main/tournaments/${tournamentId}`)
+                  : null
               }></TournamentCard>
           ))}
-        </Container>
+        </TournamentsWrapper>
       ) : (
         <HubHeaderWrapper>
           <HeaderInfo>
@@ -183,7 +163,7 @@ const TournamentHubPage = () => {
           </HeaderInfo>
         </HubHeaderWrapper>
       )}
-      <SecondWrapper>
+      <InfoWrapper>
         <ButtonsWrapper>
           <LeftButtons>
             {buttons.map((button) => (
@@ -242,7 +222,7 @@ const TournamentHubPage = () => {
             </InfoHeaderWrapper>
           )}
         </TournamentHubInfoWrapper>
-      </SecondWrapper>
+      </InfoWrapper>
     </Wrapper>
   );
 };
