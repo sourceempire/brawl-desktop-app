@@ -22,7 +22,7 @@ export const Tournament = styled.div<{ image: string; isUserInTournament: boolea
 
     fieldset {
       position: absolute;
-      height: calc(100% + 23px);
+      height: calc(100% + 24px);
       width: calc(100% + 8px);
       top: -4px;
       left: -4px;
@@ -37,29 +37,9 @@ export const Tournament = styled.div<{ image: string; isUserInTournament: boolea
       position: relative;
       transform: scale(-1, -1);
       padding: ${theme.spacing.base}px ${theme.spacing.baseX2}px;
-      background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, transparent 50%);
-      border-top: 2px solid ${theme.colors.accent.base};
+      background: ${theme.colors.background.base};
+      border: 2px solid ${theme.colors.accent.base};
       border-radius: ${theme.borderRadius.default};
-    }
-
-    legend.left:before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: -2px;
-      height: calc(50% + 3px);
-      border-left: 3px solid ${theme.colors.accent.base};
-      border-radius: ${theme.borderRadius.default} ${theme.borderRadius.default} 0px 0px !important;
-      // THIS BORDER RADIUS SETS THE RADIUS FOr BOTH LEFT AND RIGHT CLASS
-    }
-
-    legend.right:before {
-      content: "";
-      position: absolute;
-      right: 0;
-      top: -2px;
-      height: calc(50% + 3px);
-      border-right: 3px solid ${theme.colors.accent.base};
     }
   `}
   `}

@@ -43,7 +43,7 @@ const TournamentCard = ({
       onClick={onClick}>
       {isUserInTournament ? (
         <fieldset>
-          <legend className="left right">Your tournament</legend>
+          <legend>Your tournament</legend>
         </fieldset>
       ) : null}
       {bracket && isSingleElimination(bracket) ? (

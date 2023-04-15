@@ -7,7 +7,7 @@ export const TournamentsWrapper = styled.div<{ isUserInTournament: boolean }>`
   flex: 1;
   margin-top: 4px;
   ${({ theme }) => css`
-    margin-bottom: ${theme.spacing.baseX4}px;
+    margin-bottom: ${theme.spacing.baseX8}px;
   `}
 `;
 
