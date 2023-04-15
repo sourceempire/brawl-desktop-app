@@ -1,13 +1,19 @@
 import styled, { css } from 'styled-components';
 import { Icon } from 'common/ui/Icon';
 
-export const TournamentsWrapper = styled.div<{ isUserInTournament: boolean }>`
-  display: flex;
-  flex-wrap: nowrap;
+export const TournamentsWrapper = styled.div<{ isUserInTournament: boolean; listLength: number }>`
   flex: 1;
+  display: grid;
   margin-top: 4px;
+  ${({ listLength }) =>
+    listLength === 1
+      ? 'grid-template-columns: repeat(1, 1fr);'
+      : listLength === 2
+      ? 'grid-template-columns: repeat(2, 1fr);'
+      : 'grid-template-columns: repeat(3, 1fr);'}
   ${({ theme }) => css`
-    margin-bottom: ${theme.spacing.baseX8}px;
+    grid-gap: ${theme.spacing.baseX4}px;
+    margin-bottom: ${theme.spacing.baseX6}px;
   `}
 `;
 

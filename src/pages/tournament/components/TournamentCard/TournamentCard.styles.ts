@@ -10,10 +10,7 @@ export const Tournament = styled.div<{ image: string; isUserInTournament: boolea
     background-image: url('${temporaryBackdrop}');
     background-size: cover;
     background-position: center;
-    flex-grow: 1;
-    width: calc((100% - (n - 1) * 1rem) / n);
     position: relative;
-    margin-right: ${theme.spacing.baseX2}px;
     border-radius: ${theme.borderRadius.default};
 
     ${isUserInTournament &&
@@ -22,10 +19,8 @@ export const Tournament = styled.div<{ image: string; isUserInTournament: boolea
 
     fieldset {
       position: absolute;
-      height: calc(100% + 24px);
-      width: calc(100% + 8px);
-      top: -4px;
-      left: -4px;
+      height: calc(100% + 16px);
+      width: 100%;
       border: 2px solid;
       border-radius: ${theme.borderRadius.default};
       border-color: ${theme.colors.accent.base};

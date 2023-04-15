@@ -129,7 +129,9 @@ const TournamentHubPage = () => {
     <Wrapper>
       <Backdrop />
       {tournamentHub.registrationClosed && tournamentIds ? (
-        <TournamentsWrapper isUserInTournament={loggedInUserTournament ? true : false}>
+        <TournamentsWrapper
+          isUserInTournament={loggedInUserTournament ? true : false}
+          listLength={tournamentIds.length}>
           {tournamentIds.map((tournamentId) => (
             <TournamentCard
               key={tournamentId}
