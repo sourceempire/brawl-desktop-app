@@ -6,13 +6,11 @@ type Options = {
 };
 
 const useTeamScore = ({ matchStats, teamId }: Options) => {
-  if (!teamId || !matchStats) return null;
+  if (!teamId || !matchStats || !matchStats.maps) return null;
 
   if (!matchStats.maps[0].teams[teamId]) return null;
 
   return matchStats.maps[0].teams[teamId] && matchStats.maps[0].teams[teamId].score;
-
-  return null;
 };
 
 export default useTeamScore;
