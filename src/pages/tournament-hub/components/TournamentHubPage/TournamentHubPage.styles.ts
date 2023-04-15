@@ -8,7 +8,7 @@ export const TournamentsWrapper = styled.div<{ isUserInTournament: boolean; list
   ${({ listLength }) =>
     listLength === 1
       ? 'grid-template-columns: repeat(1, 1fr);'
-      : listLength === 2
+      : listLength % 2 === 0 && listLength % 3 !== 0
       ? 'grid-template-columns: repeat(2, 1fr);'
       : 'grid-template-columns: repeat(3, 1fr);'}
   ${({ theme }) => css`
