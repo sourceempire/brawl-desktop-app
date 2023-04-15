@@ -2,7 +2,15 @@ import { useEffect, useState } from 'react';
 import useTournamentFeed from 'api/feeds/hooks/useTournamentFeed';
 import { getBracket } from 'api/requests/TournamentRequests';
 import { Bracket as BracketType, isSingleElimination } from 'types/tournaments/Bracket';
-import { InfoWrapper, RoundInfo, Tournament, TournamentName } from './TournamentCard.styles';
+import {
+  InfoWrapper,
+  RoundInfo,
+  StatusIcon,
+  StatusText,
+  Tournament,
+  TournamentName,
+  TournamentStatus
+} from './TournamentCard.styles';
 
 type Props = {
   tournamentId: string;
@@ -35,8 +43,14 @@ const TournamentCard = ({
       onClick={onClick}>
       {isUserInTournament ? (
         <fieldset>
-          <legend>Your tournament</legend>
+          <legend className="left right">Your tournament</legend>
         </fieldset>
+      ) : null}
+      {bracket && isSingleElimination(bracket) ? (
+        <TournamentStatus>
+          <StatusIcon isFinished={bracket.isFinished} />
+          <StatusText>{bracket.isFinished ? 'Ended' : 'Ongoing'}</StatusText>
+        </TournamentStatus>
       ) : null}
       <InfoWrapper>
         <TournamentName>

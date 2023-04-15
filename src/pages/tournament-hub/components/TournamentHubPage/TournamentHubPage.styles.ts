@@ -5,9 +5,9 @@ export const TournamentsWrapper = styled.div<{ isUserInTournament: boolean }>`
   display: flex;
   flex-wrap: nowrap;
   flex: 1;
-  ${({ theme, isUserInTournament }) => css`
-    margin-bottom: ${theme.spacing.baseX2}px;
-    margin-top: ${isUserInTournament ? '4px' : '0'};
+  margin-top: 4px;
+  ${({ theme }) => css`
+    margin-bottom: ${theme.spacing.baseX4}px;
   `}
 `;
 
