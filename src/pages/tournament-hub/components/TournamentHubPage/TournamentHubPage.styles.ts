@@ -4,7 +4,7 @@ import { Icon } from 'common/ui/Icon';
 export const TournamentsWrapper = styled.div<{ isUserInTournament: boolean; listLength: number }>`
   flex: 1;
   display: grid;
-  margin-top: 4px;
+  overflow: scroll;
   ${({ listLength }) =>
     listLength === 1
       ? 'grid-template-columns: repeat(1, 1fr);'
@@ -14,6 +14,7 @@ export const TournamentsWrapper = styled.div<{ isUserInTournament: boolean; list
   ${({ theme }) => css`
     grid-gap: ${theme.spacing.baseX4}px;
     margin-bottom: ${theme.spacing.baseX6}px;
+    padding-bottom: ${theme.spacing.baseX3}px;
   `}
 `;
 

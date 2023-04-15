@@ -12,6 +12,7 @@ export const Tournament = styled.div<{ image: string; isUserInTournament: boolea
     background-position: center;
     position: relative;
     border-radius: ${theme.borderRadius.default};
+    min-height: 140px;
 
     ${isUserInTournament &&
     `
