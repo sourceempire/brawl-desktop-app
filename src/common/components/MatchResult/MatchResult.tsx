@@ -15,8 +15,6 @@ const MatchResult = () => {
     isLoading: isLoadngMatchStats
   } = useMatchStatsFeed(matchId);
 
-  console.log({ match, matchStats });
-
   if (isLoadingMatch || isLoadngMatchStats) return null;
 
   if (!hasMatchStats) {
