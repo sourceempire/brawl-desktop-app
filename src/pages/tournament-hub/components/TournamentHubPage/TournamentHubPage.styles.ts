@@ -12,7 +12,7 @@ export const TournamentsWrapper = styled.div<{ isUserInTournament: boolean; list
       `;
     }
 
-    if (listLength % 2 === 0 && listLength % 3 !== 0) {
+    if (!(listLength % 2) && listLength % 3) {
       return css`
         grid-template-columns: repeat(2, 1fr);
       `;

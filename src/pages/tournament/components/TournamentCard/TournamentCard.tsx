@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useBracketFeed } from 'api/feeds';
 import useTournamentFeed from 'api/feeds/hooks/useTournamentFeed';
-import { getBracket } from 'api/requests/TournamentRequests';
-import { Bracket as BracketType, isSingleElimination } from 'types/tournaments/Bracket';
+import { isSingleElimination } from 'types/tournaments/Bracket';
 import {
   BorderText,
   InfoWrapper,
@@ -26,15 +25,7 @@ const TournamentCard = ({
   onClick
 }: Props) => {
   const { tournament } = useTournamentFeed(tournamentId);
-  const [bracket, setBracket] = useState<BracketType>();
-
-  useEffect(() => {
-    getBracket(tournamentId)
-      .then((result) => {
-        setBracket(result.bracket);
-      })
-      .catch(console.error);
-  }, [tournamentId]);
+  const { brackets } = useBracketFeed(tournamentId);
 
   return (
     <Tournament
@@ -42,19 +33,19 @@ const TournamentCard = ({
       isUserInTournament={isUserInTournament}
       onClick={onClick}>
       {isUserInTournament ? <BorderText>Your tournament</BorderText> : null}
-      {bracket && isSingleElimination(bracket) ? (
+      {brackets && isSingleElimination(brackets) ? (
         <TournamentStatus>
-          <StatusIcon isFinished={bracket.isFinished} />
-          {bracket.isFinished ? 'Ended' : 'Ongoing'}
+          <StatusIcon isFinished={brackets.isFinished} />
+          {brackets.isFinished ? 'Ended' : 'Ongoing'}
         </TournamentStatus>
       ) : null}
       <InfoWrapper>
         <TournamentName>
           {tournament.name} {tournament.tournamentNumber}
         </TournamentName>
-        {bracket && isSingleElimination(bracket) ? (
+        {brackets && isSingleElimination(brackets) ? (
           <RoundInfo>
-            Round {bracket.currentRoundIndex + 1} of {bracket.numberOfRounds}
+            Round {brackets.currentRoundIndex + 1} of {brackets.numberOfRounds}
           </RoundInfo>
         ) : null}
       </InfoWrapper>
