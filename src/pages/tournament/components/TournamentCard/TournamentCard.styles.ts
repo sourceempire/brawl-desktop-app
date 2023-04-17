@@ -13,26 +13,8 @@ export const Tournament = styled.div<{ image: string; isUserInTournament: boolea
     ${isUserInTournament &&
     `
     border-color: ${theme.colors.accent.base};
-
-    fieldset {
-      position: absolute;
-      height: calc(100% + 16px);
-      width: 100%;
-      border: 2px solid;
-      border-radius: ${theme.borderRadius.default};
-      border-color: ${theme.colors.accent.base};
-      text-align: center;
-      transform: rotate(180deg);
-    }
-
-    legend {
-      position: relative;
-      transform: scale(-1, -1);
-      padding: ${theme.spacing.base}px ${theme.spacing.baseX2}px;
-      background: ${theme.colors.background.base};
-      border: 2px solid ${theme.colors.accent.base};
-      border-radius: ${theme.borderRadius.default};
-    }
+    border: 2px solid ${theme.colors.accent.base};
+    border-radius: ${theme.borderRadius.default};
   `}
   `}
 
@@ -53,6 +35,19 @@ export const Tournament = styled.div<{ image: string; isUserInTournament: boolea
       background-color: rgba(0, 0, 0, 0.2);
     }
   }
+`;
+
+export const BorderText = styled.div`
+  ${({ theme }) => css`
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, calc(100% - ${theme.spacing.baseX4}px));
+    background: ${theme.colors.background.base};
+    border: 2px solid ${theme.colors.accent.base};
+    border-radius: ${theme.borderRadius.default};
+    padding: ${theme.spacing.baseX2}px;
+  `}
 `;
 
 export const TournamentStatus = styled.div`

@@ -3,6 +3,7 @@ import useTournamentFeed from 'api/feeds/hooks/useTournamentFeed';
 import { getBracket } from 'api/requests/TournamentRequests';
 import { Bracket as BracketType, isSingleElimination } from 'types/tournaments/Bracket';
 import {
+  BorderText,
   InfoWrapper,
   RoundInfo,
   StatusIcon,
@@ -41,11 +42,7 @@ const TournamentCard = ({
       image={tournamentHubImage}
       isUserInTournament={isUserInTournament}
       onClick={onClick}>
-      {isUserInTournament ? (
-        <fieldset>
-          <legend>Your tournament</legend>
-        </fieldset>
-      ) : null}
+      {isUserInTournament ? <BorderText>Your tournament</BorderText> : null}
       {bracket && isSingleElimination(bracket) ? (
         <TournamentStatus>
           <StatusIcon isFinished={bracket.isFinished} />

@@ -25,8 +25,8 @@ export const TournamentsWrapper = styled.div<{ isUserInTournament: boolean; list
 
   ${({ theme }) => css`
     grid-gap: ${theme.spacing.baseX4}px;
-    margin-bottom: ${theme.spacing.baseX6}px;
-    padding-bottom: ${theme.spacing.baseX3}px;
+    margin-bottom: ${theme.spacing.baseX2}px;
+    padding-bottom: ${theme.spacing.baseX4}px;
   `}
 `;
 
