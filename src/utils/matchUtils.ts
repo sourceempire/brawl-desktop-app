@@ -1,4 +1,10 @@
+import { MatchStats } from 'types/match/Match';
 import { CSGOGameModes, CSGOSeriesType } from 'types/MatchSettings';
+
+type Options = {
+  matchStats?: MatchStats;
+  teamId?: string;
+};
 
 export const csgoMatchSettingsModeShortForm = (mode: CSGOGameModes) => {
   return {
@@ -14,4 +20,12 @@ export const csgoMatchSettingsSeriesTypeLongForm = (type: CSGOSeriesType) => {
     [CSGOSeriesType.BO2]: 'Best of 2',
     [CSGOSeriesType.BO3]: 'Best of 3'
   }[type];
+};
+
+export const getTeamScore = ({ matchStats, teamId }: Options) => {
+  if (!teamId || !matchStats) return null;
+
+  if (!matchStats.maps[0].teams[teamId]) return null;
+
+  return matchStats.maps[0].teams[teamId].score;
 };
