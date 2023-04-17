@@ -138,12 +138,7 @@ const TournamentHubPage = () => {
               tournamentId={tournamentId}
               tournamentHubImage={tournamentHub.image}
               isUserInTournament={loggedInUserTournament?.id === tournamentId ? true : false}
-              onClick={
-                () =>
-                  loggedInUserTournament?.id === tournamentId
-                    ? navigate(`/main/tournaments/${tournamentId}`)
-                    : null // ADD NAVIGATE TO SPECTATOR VIEW (THIS SHOULD ALSO BE EXECUTED WHEN A USER HAS BEEN IN TOURNAMENT BUT HAVE BEEN ELIMINATED)
-              }></TournamentCard>
+              onClick={() => navigate(`/main/tournaments/${tournamentId}`)}></TournamentCard>
           ))}
         </TournamentsWrapper>
       ) : (
