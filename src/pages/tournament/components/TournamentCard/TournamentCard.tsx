@@ -7,7 +7,6 @@ import {
   InfoWrapper,
   RoundInfo,
   StatusIcon,
-  StatusText,
   Tournament,
   TournamentName,
   TournamentStatus
@@ -46,7 +45,7 @@ const TournamentCard = ({
       {bracket && isSingleElimination(bracket) ? (
         <TournamentStatus>
           <StatusIcon isFinished={bracket.isFinished} />
-          <StatusText>{bracket.isFinished ? 'Ended' : 'Ongoing'}</StatusText>
+          {bracket.isFinished ? 'Ended' : 'Ongoing'}
         </TournamentStatus>
       ) : null}
       <InfoWrapper>

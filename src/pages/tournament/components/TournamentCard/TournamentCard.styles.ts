@@ -25,10 +25,6 @@ export const Tournament = styled.div<{ image: string; isUserInTournament: boolea
     background-color: rgba(0, 0, 0, 0.3);
   }
 
-  :last-child {
-    margin-right: 0px;
-  }
-
   :hover {
     background-color: ${({ theme }) => theme.colors.surfaceElement.base};
     :before {
@@ -57,6 +53,7 @@ export const TournamentStatus = styled.div`
     left: 0;
     display: flex;
     align-items: center;
+    gap: ${theme.spacing.base}px;
     margin: ${theme.spacing.baseX2}px;
   `}
 `;
@@ -70,12 +67,6 @@ export const StatusIcon = styled.div<{ isFinished: boolean }>`
   `}
 `;
 
-export const StatusText = styled.div`
-  ${({ theme }) => css`
-    margin-left: ${theme.spacing.base}px;
-  `}
-`;
-
 export const InfoWrapper = styled.div`
   ${({ theme }) => css`
     height: 100%;
@@ -84,7 +75,7 @@ export const InfoWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-flow: column;
+    flex-direction: column;
     position: absolute;
   `}
 `;
