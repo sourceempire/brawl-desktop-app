@@ -5,12 +5,24 @@ export const TournamentsWrapper = styled.div<{ isUserInTournament: boolean; list
   flex: 1;
   display: grid;
   overflow: scroll;
-  ${({ listLength }) =>
-    listLength === 1
-      ? 'grid-template-columns: repeat(1, 1fr);'
-      : listLength % 2 === 0 && listLength % 3 !== 0
-      ? 'grid-template-columns: repeat(2, 1fr);'
-      : 'grid-template-columns: repeat(3, 1fr);'}
+  ${({ listLength }) => {
+    if (listLength === 1) {
+      return css`
+        grid-template-columns: repeat(1, 1fr);
+      `;
+    }
+
+    if (listLength % 2 === 0 && listLength % 3 !== 0) {
+      return css`
+        grid-template-columns: repeat(2, 1fr);
+      `;
+    }
+
+    return css`
+      grid-template-columns: repeat(3, 1fr);
+    `;
+  }}
+
   ${({ theme }) => css`
     grid-gap: ${theme.spacing.baseX4}px;
     margin-bottom: ${theme.spacing.baseX6}px;
