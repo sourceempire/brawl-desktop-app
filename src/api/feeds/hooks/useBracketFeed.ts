@@ -5,7 +5,7 @@ const useBracketFeed = (tournamentId: string) => {
   const { data, loading } = useFeed<BracketType>(`bracket.${tournamentId}`);
 
   return {
-    brackets: data ?? {},
+    bracket: data ?? {},
     isLoading: loading
   };
 };

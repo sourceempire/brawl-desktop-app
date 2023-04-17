@@ -25,7 +25,7 @@ const TournamentCard = ({
   onClick
 }: Props) => {
   const { tournament } = useTournamentFeed(tournamentId);
-  const { brackets } = useBracketFeed(tournamentId);
+  const { bracket } = useBracketFeed(tournamentId);
 
   return (
     <Tournament
@@ -33,19 +33,19 @@ const TournamentCard = ({
       isUserInTournament={isUserInTournament}
       onClick={onClick}>
       {isUserInTournament ? <BorderText>Your tournament</BorderText> : null}
-      {brackets && isSingleElimination(brackets) ? (
+      {bracket && isSingleElimination(bracket) ? (
         <TournamentStatus>
-          <StatusIcon isFinished={brackets.isFinished} />
-          {brackets.isFinished ? 'Ended' : 'Ongoing'}
+          <StatusIcon isFinished={bracket.isFinished} />
+          {bracket.isFinished ? 'Ended' : 'Ongoing'}
         </TournamentStatus>
       ) : null}
       <InfoWrapper>
         <TournamentName>
           {tournament.name} {tournament.tournamentNumber}
         </TournamentName>
-        {brackets && isSingleElimination(brackets) ? (
+        {bracket && isSingleElimination(bracket) ? (
           <RoundInfo>
-            Round {brackets.currentRoundIndex + 1} of {brackets.numberOfRounds}
+            Round {bracket.currentRoundIndex + 1} of {bracket.numberOfRounds}
           </RoundInfo>
         ) : null}
       </InfoWrapper>
