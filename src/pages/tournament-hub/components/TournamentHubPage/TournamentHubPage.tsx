@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useLoggedInUser } from 'common/hooks/useLoggedInUser';
 import popup from 'common/popup';
 import { Backdrop, Button, Icons } from 'common/ui';
+import { InfoChip } from 'common/ui/InfoChip';
 import CountDown from 'pages/tournament/components/CountDown';
 import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
 import TournamentCard from 'pages/tournament/components/TournamentCard/TournamentCard';
@@ -17,7 +18,6 @@ import MapPoolModal from './TournamentHubModals/MapPoolModal/MapPoolModal';
 import RulesModal from './TournamentHubModals/RulesModal/RulesModal';
 import {
   ButtonsWrapper,
-  Content,
   CountDownInfo,
   Header,
   HeaderHub,
@@ -26,19 +26,16 @@ import {
   InfoHeaderWrapper,
   InfoWrapper,
   LeftButtons,
-  Pill,
-  PillHeader,
-  PillSection,
-  PillSubText,
   PredictedPrize,
   PrizeElement,
   PrizePosition,
   RightButtons,
-  StyledIcon,
+  TournamentChips,
   TournamentHubInfoWrapper,
   TournamentsWrapper,
   Wrapper
 } from './TournamentHubPage.styles';
+import { theme } from 'assets/styles/Theme';
 
 const TournamentHubPage = () => {
   const { hubId } = useParams() as { hubId: string };
@@ -64,24 +61,30 @@ const TournamentHubPage = () => {
   //TODO -> Fetch correct prizepool data
   const prizePool = [100, 200, 300, 400];
 
-  const pills = [
+  const tournamentChips = [
     {
-      name: 'prizePool',
+      key: 'prizePool',
       header: `€${tournamentHub.currentPrizePool}`,
       subtext: 'Predicted Prize Pool',
-      icon: Icons.Trophy
+      icon: Icons.Trophy,
+      iconSize: '20',
+      chipBackground: theme.colors.surface.base
     },
     {
-      name: 'entryFee',
+      key: 'entryFee',
       header: `€${tournamentHub.entranceFee} /person`,
       subtext: 'Entry Fee',
-      icon: Icons.Ticket
+      icon: Icons.Ticket,
+      iconSize: '20',
+      chipBackground: theme.colors.surface.base
     },
     {
-      name: 'startTime',
+      key: 'startTime',
       header: tournamentHub.startTime && formatDateAndTime(tournamentHub.startTime),
       subtext: 'Tournament Start',
-      icon: Icons.Clock
+      icon: Icons.Clock,
+      iconSize: '20',
+      chipBackground: theme.colors.surface.base
     }
   ];
 
@@ -147,17 +150,18 @@ const TournamentHubPage = () => {
             <HeaderHub>{tournamentHub.name}</HeaderHub>
             <CountDownInfo>Registration closes in</CountDownInfo>
             <CountDown startTime={Number(tournamentHub.registrationCloseTime)} />
-            <PillSection>
-              {pills.map((pill) => (
-                <Pill key={pill.name}>
-                  <StyledIcon icon={pill.icon} />
-                  <Content>
-                    <PillHeader>{pill.header}</PillHeader>
-                    <PillSubText>{pill.subtext}</PillSubText>
-                  </Content>
-                </Pill>
+            <TournamentChips>
+              {tournamentChips.map((chip) => (
+                <InfoChip
+                  key={chip.key}
+                  header={chip.header}
+                  subtext={chip.subtext}
+                  icon={chip.icon}
+                  iconSize={chip.iconSize}
+                  chipBackground={chip.chipBackground}
+                />
               ))}
-            </PillSection>
+            </TournamentChips>
           </HeaderInfo>
         </HubHeaderWrapper>
       )}

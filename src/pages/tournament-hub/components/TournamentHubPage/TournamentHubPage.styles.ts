@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { Icon } from 'common/ui/Icon';
 
 export const TournamentsWrapper = styled.div<{ isUserInTournament: boolean; listLength: number }>`
   flex: 1;
@@ -29,25 +28,6 @@ export const TournamentsWrapper = styled.div<{ isUserInTournament: boolean; list
     padding-bottom: ${theme.spacing.baseX4}px;
   `}
 `;
-
-export const PillSubText = styled.div`
-  display: block;
-  border-radius: 20px;
-  ${({ theme }) => css`
-    color: ${theme.colors.textSecondaryLight};
-  `}
-`;
-
-export const PillHeader = styled.div`
-  display: block;
-  margin-bottom: 3px;
-  ${({ theme }) => css`
-    ${theme.textStyles.title}
-  `}
-`;
-
-export const Content = styled.div``;
-
 export const CountDownInfo = styled.div`
   ${({ theme }) => css`
     margin-bottom: ${theme.spacing.baseX2}px;
@@ -55,32 +35,14 @@ export const CountDownInfo = styled.div`
   `}
 `;
 
-export const StyledIcon = styled(Icon)`
-  ${({ theme }) => css`
-    height: ${theme.spacing.baseX3}px;
-    width: ${theme.spacing.baseX3}px;
-    fill: ${theme.colors.accent.base};
-    margin-right: ${theme.spacing.base}px;
-  `}
-`;
-
-export const Pill = styled.div`
-  display: flex;
-  align-items: center;
-  border-radius: 30px;
-  ${({ theme }) => css`
-    padding: ${theme.spacing.baseX2}px ${theme.spacing.baseX3}px;
-    background-color: ${theme.colors.surface.base};
-  `}
-`;
-
-export const PillSection = styled.div`
+export const TournamentChips = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   ${({ theme }) => css`
-    column-gap: ${theme.spacing.baseX3}px;
+    gap: ${theme.spacing.baseX3}px;
     margin-top: ${theme.spacing.baseX2}px;
   `}
 `;
