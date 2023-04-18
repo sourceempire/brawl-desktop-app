@@ -12,10 +12,6 @@ export const PasswordLogin = () => {
   const [password, setPassword] = useState('');
   const [userError, setUserError] = useState('');
 
-  if (error) {
-    console.error(error);
-  }
-
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       loginWithUsernameAndPassword(username, password);
