@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from 'api/requests';
 import { Icons } from 'common/ui';
 import { InputSize } from 'common/ui/Input/Input.types';
-import { LoginButton, LoginInput, Wrapper } from './PasswordLogin.styles';
+import { ErrorMessage, LoginButton, LoginInput, Wrapper } from './PasswordLogin.styles';
 import { theme } from 'assets/styles/Theme';
 
 export const PasswordLogin = () => {
@@ -10,10 +10,23 @@ export const PasswordLogin = () => {
 
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
+  const [userError, setUserError] = useState('');
 
   if (error) {
     console.error(error);
   }
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      loginWithUsernameAndPassword(username, password);
+    }
+  };
+
+  useEffect(() => {
+    if (error && error.statusText === 'Unauthorized') {
+      setUserError('Invalid username or password');
+    }
+  }, [error]);
 
   return (
     <Wrapper>
@@ -34,7 +47,10 @@ export const PasswordLogin = () => {
         placeholder="Enter Password"
         size={InputSize.SMALL}
         icon={<Icons.Key fill={theme.colors.white} />}
+        onKeyDown={handleKeyDown}
       />
+
+      {error ? <ErrorMessage>{userError}</ErrorMessage> : null}
 
       <LoginButton onClick={() => loginWithUsernameAndPassword(username, password)} primary>
         Login

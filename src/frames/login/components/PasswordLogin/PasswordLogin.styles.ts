@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Button, Input } from 'common/ui';
 
 export const Wrapper = styled.div`
@@ -12,6 +12,13 @@ export const Wrapper = styled.div`
 
 export const LoginInput = styled(Input)`
   margin: 6px 0;
+`;
+
+export const ErrorMessage = styled.div`
+  margin: 6px 0;
+  ${({ theme }) => css`
+    color: ${theme.colors.statusError};
+  `}
 `;
 
 export const LoginButton = styled(Button)`

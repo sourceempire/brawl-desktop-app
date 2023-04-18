@@ -14,6 +14,7 @@ type Props = {
   tabIndex?: number;
   maxLength?: number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 };
 
 export const Input = ({
@@ -28,7 +29,8 @@ export const Input = ({
   placeholder,
   tabIndex = 0,
   maxLength,
-  onChange
+  onChange,
+  onKeyDown
 }: Props) => {
   const hasIcon = Boolean(icon);
 
@@ -43,6 +45,7 @@ export const Input = ({
           name={name}
           type={type}
           onChange={onChange}
+          onKeyDown={onKeyDown}
           withBorder={withBorder}
           inputSize={size}
           hasIcon={hasIcon}
