@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
-import { getBracket } from 'api/requests/TournamentRequests';
-import { Bracket as BracketType, isSingleElimination } from 'types/tournaments/Bracket';
+import useBracketFeed from 'api/feeds/hooks/useBracketFeed';
+import { isSingleElimination } from 'types/tournaments/Bracket';
 import SingleEliminationBracket from './SingleEliminationBracket';
 
 type Props = {
@@ -8,17 +7,9 @@ type Props = {
 };
 
 const Bracket = ({ tournamentId }: Props) => {
-  const [bracket, setBracket] = useState<BracketType>();
+  const { bracket, isLoading } = useBracketFeed(tournamentId);
 
-  useEffect(() => {
-    getBracket(tournamentId)
-      .then((result) => {
-        setBracket(result.bracket);
-      })
-      .catch(console.error);
-  }, [tournamentId]);
-
-  if (!bracket) return null; // TODO -> Make a skeleton
+  if (isLoading) return null; // TODO -> Make a skeleton
 
   if (isSingleElimination(bracket)) {
     return <SingleEliminationBracket bracket={bracket} />;
