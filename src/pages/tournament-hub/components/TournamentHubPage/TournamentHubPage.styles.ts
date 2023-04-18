@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Icon } from 'common/ui/Icon';
 
 export const TournamentsWrapper = styled.div<{ isUserInTournament: boolean; listLength: number }>`
   flex: 1;
@@ -35,7 +36,7 @@ export const CountDownInfo = styled.div`
   `}
 `;
 
-export const TournamentChips = styled.div`
+export const TournamentInfo = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -46,6 +47,42 @@ export const TournamentChips = styled.div`
     margin-top: ${theme.spacing.baseX2}px;
   `}
 `;
+
+export const InfoContainer = styled.div<{ chipBackground: string }>`
+  display: flex;
+  align-items: center;
+  border-radius: 50px;
+  gap: 20px;
+  ${({ theme, chipBackground }) => css`
+    padding: ${theme.spacing.baseX3}px ${theme.spacing.baseX5}px;
+    background-color: ${chipBackground};
+  `}
+`;
+
+export const InfoIcon = styled(Icon)<{ iconSize: string }>`
+  ${({ theme, iconSize }) => css`
+    height: ${iconSize}px;
+    width: ${iconSize}px;
+    fill: ${theme.colors.accent.base};
+    margin-right: ${theme.spacing.base}px;
+  `}
+`;
+
+export const InfoText = styled.div``;
+
+export const InfoSubText = styled.div`
+  border-radius: 20px;
+  ${({ theme }) => css`
+    color: ${theme.colors.textSecondaryLight};
+  `}
+`;
+
+export const InfoHeader = styled.div`
+  ${({ theme }) => css`
+    ${theme.textStyles.title}
+  `}
+`;
+
 export const HeaderInfo = styled.div`
   display: flex;
   flex-flow: column wrap;

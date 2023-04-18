@@ -6,7 +6,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useLoggedInUser } from 'common/hooks/useLoggedInUser';
 import popup from 'common/popup';
 import { Backdrop, Button, Icons } from 'common/ui';
-import { InfoChip } from 'common/ui/InfoChip';
 import CountDown from 'pages/tournament/components/CountDown';
 import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
 import TournamentCard from 'pages/tournament/components/TournamentCard/TournamentCard';
@@ -23,15 +22,20 @@ import {
   HeaderHub,
   HeaderInfo,
   HubHeaderWrapper,
+  InfoContainer,
+  InfoHeader,
   InfoHeaderWrapper,
+  InfoIcon,
+  InfoSubText,
+  InfoText,
   InfoWrapper,
   LeftButtons,
   PredictedPrize,
   PrizeElement,
   PrizePosition,
   RightButtons,
-  TournamentChips,
   TournamentHubInfoWrapper,
+  TournamentInfo,
   TournamentsWrapper,
   Wrapper
 } from './TournamentHubPage.styles';
@@ -61,7 +65,7 @@ const TournamentHubPage = () => {
   //TODO -> Fetch correct prizepool data
   const prizePool = [100, 200, 300, 400];
 
-  const tournamentChips = [
+  const TournamentInfoArray = [
     {
       key: 'prizePool',
       header: `€${tournamentHub.currentPrizePool}`,
@@ -150,18 +154,17 @@ const TournamentHubPage = () => {
             <HeaderHub>{tournamentHub.name}</HeaderHub>
             <CountDownInfo>Registration closes in</CountDownInfo>
             <CountDown startTime={Number(tournamentHub.registrationCloseTime)} />
-            <TournamentChips>
-              {tournamentChips.map((chip) => (
-                <InfoChip
-                  key={chip.key}
-                  header={chip.header}
-                  subtext={chip.subtext}
-                  icon={chip.icon}
-                  iconSize={chip.iconSize}
-                  chipBackground={chip.chipBackground}
-                />
+            <TournamentInfo>
+              {TournamentInfoArray.map((info) => (
+                <InfoContainer chipBackground={info.chipBackground} key={info.key}>
+                  <InfoIcon icon={info.icon} iconSize={info.iconSize} />
+                  <InfoText>
+                    <InfoHeader>{info.header}</InfoHeader>
+                    <InfoSubText>{info.subtext}</InfoSubText>
+                  </InfoText>
+                </InfoContainer>
               ))}
-            </TournamentChips>
+            </TournamentInfo>
           </HeaderInfo>
         </HubHeaderWrapper>
       )}
