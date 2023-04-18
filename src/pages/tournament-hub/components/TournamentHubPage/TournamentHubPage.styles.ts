@@ -48,21 +48,20 @@ export const TournamentInfo = styled.div`
   `}
 `;
 
-export const InfoContainer = styled.div<{ chipBackground: string }>`
+export const InfoContainer = styled.div`
   display: flex;
   align-items: center;
   border-radius: 50px;
   gap: 20px;
-  ${({ theme, chipBackground }) => css`
+  ${({ theme }) => css`
     padding: ${theme.spacing.baseX3}px ${theme.spacing.baseX5}px;
-    background-color: ${chipBackground};
+    background-color: ${theme.colors.surface.base};
   `}
 `;
 
-export const InfoIcon = styled(Icon)<{ iconSize: string }>`
-  ${({ theme, iconSize }) => css`
-    height: ${iconSize}px;
-    width: ${iconSize}px;
+export const InfoIcon = styled(Icon)`
+  ${({ theme }) => css`
+    width: 20px;
     fill: ${theme.colors.accent.base};
     margin-right: ${theme.spacing.base}px;
   `}

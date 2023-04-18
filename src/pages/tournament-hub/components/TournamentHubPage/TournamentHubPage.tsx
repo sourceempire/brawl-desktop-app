@@ -39,7 +39,6 @@ import {
   TournamentsWrapper,
   Wrapper
 } from './TournamentHubPage.styles';
-import { theme } from 'assets/styles/Theme';
 
 const TournamentHubPage = () => {
   const { hubId } = useParams() as { hubId: string };
@@ -70,25 +69,19 @@ const TournamentHubPage = () => {
       key: 'prizePool',
       header: `€${tournamentHub.currentPrizePool}`,
       subtext: 'Predicted Prize Pool',
-      icon: Icons.Trophy,
-      iconSize: '20',
-      chipBackground: theme.colors.surface.base
+      icon: Icons.Trophy
     },
     {
       key: 'entryFee',
       header: `€${tournamentHub.entranceFee} /person`,
       subtext: 'Entry Fee',
-      icon: Icons.Ticket,
-      iconSize: '20',
-      chipBackground: theme.colors.surface.base
+      icon: Icons.Ticket
     },
     {
       key: 'startTime',
       header: tournamentHub.startTime && formatDateAndTime(tournamentHub.startTime),
       subtext: 'Tournament Start',
-      icon: Icons.Clock,
-      iconSize: '20',
-      chipBackground: theme.colors.surface.base
+      icon: Icons.Clock
     }
   ];
 
@@ -156,8 +149,8 @@ const TournamentHubPage = () => {
             <CountDown startTime={Number(tournamentHub.registrationCloseTime)} />
             <TournamentInfo>
               {TournamentInfoArray.map((info) => (
-                <InfoContainer chipBackground={info.chipBackground} key={info.key}>
-                  <InfoIcon icon={info.icon} iconSize={info.iconSize} />
+                <InfoContainer key={info.key}>
+                  <InfoIcon icon={info.icon} />
                   <InfoText>
                     <InfoHeader>{info.header}</InfoHeader>
                     <InfoSubText>{info.subtext}</InfoSubText>
