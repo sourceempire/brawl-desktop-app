@@ -1,3 +1,4 @@
+export { default as useBracketFeed } from './hooks/useBracketFeed';
 export { default as useFriendRequestFeed } from './hooks/useFriendRequestsFeed';
 export { default as useFriendsFeed } from './hooks/useFriendsFeed';
 export { default as useNotificationFeed } from './hooks/useFriendRequestsFeed';

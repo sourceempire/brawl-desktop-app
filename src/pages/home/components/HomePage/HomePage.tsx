@@ -1,6 +1,4 @@
 // import useNewsFeed, { News as NewsType } from 'api/feeds/hooks/useNewsFeed';
-import popup from 'common/popup';
-import { Button } from 'common/ui';
 import Game, { GameName } from 'types/Game';
 import { CSGOMatchSettings } from 'types/MatchSettings';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
@@ -17,7 +15,6 @@ const HomePage = () => {
       <PromotedTournament tournamentInfo={exampleTournamentInfo()}></PromotedTournament>
       <Hero></Hero>
       <LatestWinners></LatestWinners>
-      <Button onClick={() => popup.info('JA', { timer: 5000 })}>POPUP</Button>
 
       {/* {newsList.map((news) => (
         <News key={news.id} news={news as NewsType}></News>
