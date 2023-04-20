@@ -11,11 +11,11 @@ export const Tournament = styled.div<{ image: string; isUserInTournament: boolea
     min-height: 140px;
 
     ${isUserInTournament &&
-    `
-    border-color: ${theme.colors.accent.base};
-    border: 2px solid ${theme.colors.accent.base};
-    border-radius: ${theme.borderRadius.default};
-  `}
+    css`
+      border-color: ${theme.colors.accent.base};
+      border: 2px solid ${theme.colors.accent.base};
+      border-radius: ${theme.borderRadius.default};
+    `}
   `}
 
   :before {
