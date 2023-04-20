@@ -8,7 +8,6 @@ export const Wrapper = styled.div`
 
   ${({ theme }) => css`
     gap: ${theme.spacing.baseX3}px;
-    padding-bottom: ${theme.spacing.baseX4}px;
   `}
 `;
 
