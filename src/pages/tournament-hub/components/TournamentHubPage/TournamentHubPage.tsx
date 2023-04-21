@@ -138,7 +138,8 @@ const TournamentHubPage = () => {
               tournamentId={tournamentId}
               tournamentHubImage={tournamentHub.image}
               isUserInTournament={loggedInUserTournament?.id === tournamentId}
-              onClick={() => navigate(`/main/tournaments/${tournamentId}`)}></TournamentCard>
+              onClick={() => navigate(`/main/tournaments/${tournamentId}`)}
+            />
           ))}
         </TournamentsWrapper>
       ) : (
