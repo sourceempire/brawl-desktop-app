@@ -2,9 +2,9 @@ import { useTournamentMatchHistoryFeed } from 'api/feeds';
 import useCurrentTournamentMatchFeed from 'api/feeds/hooks/useCurrentTournamentMatchFeed';
 import useTournamentFeed from 'api/feeds/hooks/useTournamentFeed';
 import { Link, Navigate, Route, Routes, useParams } from 'react-router-dom';
+import PageContainer from 'common/components/PageContainer';
 import { Backdrop, Button } from 'common/ui';
 import { MatchContextProvider } from 'context/MatchContext';
-import PageFrame from 'frames/page';
 import Bracket from '../Bracket';
 import CurrentMatchStage from '../CurrentMatchStage';
 import Match from '../Match';
@@ -30,7 +30,7 @@ const TournamentPage = () => {
   if (isLoadingMatchId || isLoadingTournament) return null;
 
   return (
-    <PageFrame>
+    <PageContainer>
       <Wrapper>
         <Backdrop />
         <TournamentInfo tournament={tournament} currentMatchId={matchId} />
@@ -71,7 +71,7 @@ const TournamentPage = () => {
           </TournamentRoutesWrapper>
         </TournamentContent>
       </Wrapper>
-    </PageFrame>
+    </PageContainer>
   );
 };
 

@@ -3,10 +3,10 @@ import { useTournamentHubFeed, useTournamentTeamFeed } from 'api/feeds';
 import { isFeedWithTeam } from 'api/feeds/hooks/useTournamentTeamFeed';
 import * as TournamentRequests from 'api/requests/TournamentRequests';
 import { useNavigate, useParams } from 'react-router-dom';
+import PageContainer from 'common/components/PageContainer';
 import { useLoggedInUser } from 'common/hooks/useLoggedInUser';
 import popup from 'common/popup';
 import { Backdrop, Button, Icons } from 'common/ui';
-import PageFrame from 'frames/page';
 import CountDown from 'pages/tournament/components/CountDown';
 import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
 import TournamentCard from 'pages/tournament/components/TournamentCard/TournamentCard';
@@ -127,7 +127,7 @@ const TournamentHubPage = () => {
   const navigate = useNavigate();
 
   return (
-    <PageFrame>
+    <PageContainer>
       <Wrapper>
         <Backdrop />
         {tournamentHub.registrationClosed && tournamentIds ? (
@@ -224,7 +224,7 @@ const TournamentHubPage = () => {
           </TournamentHubInfoWrapper>
         </InfoWrapper>
       </Wrapper>
-    </PageFrame>
+    </PageContainer>
   );
 };
 

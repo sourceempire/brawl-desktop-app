@@ -1,9 +1,9 @@
 import { useDeferredValue, useState } from 'react';
 import useTournamentHubsFeed from 'api/feeds/hooks/useTournamentHubsFeed';
 import { useNavigate } from 'react-router-dom';
+import PageContainer from 'common/components/PageContainer';
 import { IconEnum, Icons, Option, Tab, Tabs } from 'common/ui';
 import { InputSize } from 'common/ui/Input/Input.types';
-import PageFrame from 'frames/page';
 import Game, { GameName } from 'types/Game';
 import { CSGOMatchSettings } from 'types/MatchSettings';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
@@ -27,14 +27,16 @@ import { theme } from 'assets/styles/Theme';
 
 export default function TournamentListView() {
   return (
-    <Tabs underlined={true}>
-      <Tab name="All Tournaments">
-        <Page />
-      </Tab>
-      <Tab name="My Tournaments">
-        <Page />
-      </Tab>
-    </Tabs>
+    <PageContainer>
+      <Tabs underlined={true}>
+        <Tab name="All Tournaments">
+          <Page />
+        </Tab>
+        <Tab name="My Tournaments">
+          <Page />
+        </Tab>
+      </Tabs>
+    </PageContainer>
   );
 }
 
@@ -73,7 +75,7 @@ function Page() {
   const navigate = useNavigate();
 
   return (
-    <PageFrame>
+    <PageContainer>
       <FeaturedTournament
         tournamentInfo={exampleTournamentInfo(0)}
         expanded={featuredExpanded}
@@ -125,6 +127,6 @@ function Page() {
           )}
         </TournamentList>
       </TournamentGallery>
-    </PageFrame>
+    </PageContainer>
   );
 }
