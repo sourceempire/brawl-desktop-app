@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import { useUpdateEffect } from 'common/hooks';
 import { DragableArea } from 'common/ui';
 import { FriendBar } from 'frames/main/friends';
+import PageFrame from 'frames/page';
 import HomePage from 'pages/home';
 import TournamentPage from 'pages/tournament';
 import TournamentHubPage from 'pages/tournament-hub';
@@ -40,16 +41,18 @@ const MainView = () => {
       <RootContextProvider>
         <TopBar toggleFriends={toggleFriends} isFriendBarVisible={isFriendBarVisible} />
         <RoutesContainer isFriendBarVisible={isFriendBarVisible}>
-          <Routes>
-            <Route path="/">
-              <Route index element={<HomePage />} />
-              <Route path="tournaments">
-                <Route index element={<TournamentListView />} />
-                <Route path="hub/:hubId" element={<TournamentHubPage />} />
-                <Route path=":tournamentId/*" element={<TournamentPage />} />
+          <PageFrame>
+            <Routes>
+              <Route path="/">
+                <Route index element={<HomePage />} />
+                <Route path="tournaments">
+                  <Route index element={<TournamentListView />} />
+                  <Route path="hub/:hubId" element={<TournamentHubPage />} />
+                  <Route path=":tournamentId/*" element={<TournamentPage />} />
+                </Route>
               </Route>
-            </Route>
-          </Routes>
+            </Routes>
+          </PageFrame>
         </RoutesContainer>
         <FriendBar visible={isFriendBarVisible} />
       </RootContextProvider>

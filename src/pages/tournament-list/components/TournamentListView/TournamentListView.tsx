@@ -3,6 +3,7 @@ import useTournamentHubsFeed from 'api/feeds/hooks/useTournamentHubsFeed';
 import { useNavigate } from 'react-router-dom';
 import { IconEnum, Icons, Option, Tab, Tabs } from 'common/ui';
 import { InputSize } from 'common/ui/Input/Input.types';
+import PageFrame from 'frames/page';
 import Game, { GameName } from 'types/Game';
 import { CSGOMatchSettings } from 'types/MatchSettings';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
@@ -72,7 +73,7 @@ function Page() {
   const navigate = useNavigate();
 
   return (
-    <>
+    <PageFrame>
       <FeaturedTournament
         tournamentInfo={exampleTournamentInfo(0)}
         expanded={featuredExpanded}
@@ -124,6 +125,6 @@ function Page() {
           )}
         </TournamentList>
       </TournamentGallery>
-    </>
+    </PageFrame>
   );
 }

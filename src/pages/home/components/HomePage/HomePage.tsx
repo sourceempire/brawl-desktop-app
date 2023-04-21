@@ -1,4 +1,5 @@
 // import useNewsFeed, { News as NewsType } from 'api/feeds/hooks/useNewsFeed';
+import PageFrame from 'frames/page';
 import Game, { GameName } from 'types/Game';
 import { CSGOMatchSettings } from 'types/MatchSettings';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
@@ -11,15 +12,17 @@ const HomePage = () => {
   // const { news: newsList } = useNewsFeed();
 
   return (
-    <Wrapper>
-      <PromotedTournament tournamentInfo={exampleTournamentInfo()}></PromotedTournament>
-      <Hero></Hero>
-      <LatestWinners></LatestWinners>
+    <PageFrame>
+      <Wrapper>
+        <PromotedTournament tournamentInfo={exampleTournamentInfo()}></PromotedTournament>
+        <Hero></Hero>
+        <LatestWinners></LatestWinners>
 
-      {/* {newsList.map((news) => (
+        {/* {newsList.map((news) => (
         <News key={news.id} news={news as NewsType}></News>
       ))} */}
-    </Wrapper>
+      </Wrapper>
+    </PageFrame>
   );
 };
 
