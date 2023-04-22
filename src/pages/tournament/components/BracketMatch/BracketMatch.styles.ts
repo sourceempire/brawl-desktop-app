@@ -11,6 +11,7 @@ type WrapperProps = {
   roundIndex: number;
   isFinal: boolean;
   isFirstMatch: boolean;
+  isBorder: boolean;
 };
 
 const lineColor = theme.colors.secondary.hover;
@@ -19,8 +20,8 @@ export const Wrapper = styled.div<WrapperProps>`
   position: relative;
   display: flex;
   flex-direction: column;
-  ${({ theme }) => css`
-    gap: ${theme.spacing.base / 2}px;
+  ${({ theme, isBorder }) => css`
+    gap: ${isBorder ? '7px' : `${theme.spacing.base / 2}px`};
   `}
 
   :before, :after {
@@ -127,24 +128,56 @@ export const TeamName = styled.div`
   `}
 `;
 
-export const Team1 = styled(Team)`
-  ${({ theme }) => css`
+export const Team1 = styled(Team)<{ borderStatus?: string }>`
+  ${({ theme, borderStatus }) => css`
     ${TeamLogo} {
       border-top-left-radius: ${theme.borderRadius.default};
     }
     ${TeamScore} {
       border-top-right-radius: ${theme.borderRadius.default};
     }
+
+    ${borderStatus &&
+    css`
+      outline: 1px solid
+        ${(() => {
+          switch (borderStatus) {
+            case 'win':
+              return theme.colors.statusSuccess;
+            case 'loss':
+              return theme.colors.statusError;
+            default:
+              return 'transparent';
+          }
+        })()};
+      outline-offset: 3px;
+    `}
   `}
 `;
 
-export const Team2 = styled(Team)`
-  ${({ theme }) => css`
+export const Team2 = styled(Team)<{ borderStatus?: string }>`
+  ${({ theme, borderStatus }) => css`
     ${TeamLogo} {
       border-bottom-left-radius: ${theme.borderRadius.default};
     }
     ${TeamScore} {
       border-bottom-right-radius: ${theme.borderRadius.default};
     }
+
+    ${borderStatus &&
+    css`
+      outline: 1px solid
+        ${(() => {
+          switch (borderStatus) {
+            case 'win':
+              return theme.colors.statusSuccess;
+            case 'loss':
+              return theme.colors.statusError;
+            default:
+              return 'green';
+          }
+        })()};
+      outline-offset: 3px;
+    `}
   `}
 `;
