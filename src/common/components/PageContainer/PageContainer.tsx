@@ -1,11 +1,10 @@
-import { Wrapper } from './PageContainer.styles';
+import styled from 'styled-components';
 
-type PageContainerProps = {
-  children?: React.ReactNode;
-};
-
-const PageContainer = ({ children }: PageContainerProps) => {
-  return <Wrapper>{children}</Wrapper>;
-};
+const PageContainer = styled.div`
+  max-width: 1440px;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+`;
 
 export default PageContainer;
