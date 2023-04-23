@@ -1,24 +1,34 @@
 import styled, { css } from 'styled-components';
 import { Icon } from 'common/ui/Icon';
 
-export const PillSubText = styled.div`
-  display: block;
-  border-radius: 20px;
+export const TournamentsWrapper = styled.div<{ isUserInTournament: boolean; listLength: number }>`
+  flex: 1;
+  display: grid;
+  overflow: scroll;
+  ${({ listLength }) => {
+    if (listLength === 1) {
+      return css`
+        grid-template-columns: repeat(1, 1fr);
+      `;
+    }
+
+    if (!(listLength % 2) && listLength % 3) {
+      return css`
+        grid-template-columns: repeat(2, 1fr);
+      `;
+    }
+
+    return css`
+      grid-template-columns: repeat(3, 1fr);
+    `;
+  }}
+
   ${({ theme }) => css`
-    color: ${theme.colors.textSecondaryLight};
+    grid-gap: ${theme.spacing.baseX4}px;
+    margin-bottom: ${theme.spacing.baseX2}px;
+    padding-bottom: ${theme.spacing.baseX4}px;
   `}
 `;
-
-export const PillHeader = styled.div`
-  display: block;
-  margin-bottom: 3px;
-  ${({ theme }) => css`
-    ${theme.textStyles.title}
-  `}
-`;
-
-export const Content = styled.div``;
-
 export const CountDownInfo = styled.div`
   ${({ theme }) => css`
     margin-bottom: ${theme.spacing.baseX2}px;
@@ -26,35 +36,52 @@ export const CountDownInfo = styled.div`
   `}
 `;
 
-export const StyledIcon = styled(Icon)`
+export const TournamentInfo = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
   ${({ theme }) => css`
-    height: ${theme.spacing.baseX3}px;
-    width: ${theme.spacing.baseX3}px;
+    gap: ${theme.spacing.baseX3}px;
+    margin-top: ${theme.spacing.baseX2}px;
+  `}
+`;
+
+export const InfoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  border-radius: 50px;
+  gap: 20px;
+  ${({ theme }) => css`
+    padding: ${theme.spacing.baseX3}px ${theme.spacing.baseX5}px;
+    background-color: ${theme.colors.surface.base};
+  `}
+`;
+
+export const InfoIcon = styled(Icon)`
+  ${({ theme }) => css`
+    width: 20px;
     fill: ${theme.colors.accent.base};
     margin-right: ${theme.spacing.base}px;
   `}
 `;
 
-export const Pill = styled.div`
-  display: flex;
-  align-items: center;
-  border-radius: 30px;
+export const InfoText = styled.div``;
+
+export const InfoSubText = styled.div`
+  border-radius: 20px;
   ${({ theme }) => css`
-    padding: ${theme.spacing.baseX2}px ${theme.spacing.baseX3}px;
-    background-color: ${theme.colors.surface.base};
+    color: ${theme.colors.textSecondaryLight};
   `}
 `;
 
-export const PillSection = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+export const InfoHeader = styled.div`
   ${({ theme }) => css`
-    column-gap: ${theme.spacing.baseX3}px;
-    margin-top: ${theme.spacing.baseX2}px;
+    ${theme.textStyles.title}
   `}
 `;
+
 export const HeaderInfo = styled.div`
   display: flex;
   flex-flow: column wrap;
@@ -103,7 +130,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-export const SecondWrapper = styled.div``;
+export const InfoWrapper = styled.div``;
 
 export const TournamentHubInfoWrapper = styled.div<{
   isRegistrationClosed: boolean;

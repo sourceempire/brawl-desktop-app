@@ -1,6 +1,6 @@
 import useMatchFeed from 'api/feeds/hooks/useMatchFeed';
 import { useMatchStatsFeed } from 'api/feeds/hooks/useMatchStatsFeed';
-import useTeamScore from 'pages/tournament/hooks/useTeamScore';
+import { getTeamScore } from 'utils/matchUtils';
 import {
   Team1,
   Team2,
@@ -22,10 +22,14 @@ type Props = {
 
 const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }: Props) => {
   const { match, isLoading } = useMatchFeed(matchId);
-  const { matchStats, isLoading: isLoadingMatchStats } = useMatchStatsFeed(matchId);
+  const { hasMatchStats, matchStats, isLoading: isLoadingMatchStats } = useMatchStatsFeed(matchId);
 
-  const team1Score = useTeamScore({ matchStats, teamId: match.teams?.[0].id });
-  const team2Score = useTeamScore({ matchStats, teamId: match.teams?.[1].id });
+  const team1Score = hasMatchStats
+    ? getTeamScore({ matchStats, teamId: match.teams?.[0].id })
+    : null;
+  const team2Score = hasMatchStats
+    ? getTeamScore({ matchStats, teamId: match.teams?.[1].id })
+    : null;
 
   if (isLoading || isLoadingMatchStats) return null;
 

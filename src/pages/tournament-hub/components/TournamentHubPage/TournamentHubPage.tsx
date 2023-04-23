@@ -2,12 +2,13 @@ import { useCallback, useEffect, useState } from 'react';
 import { useTournamentHubFeed, useTournamentTeamFeed } from 'api/feeds';
 import { isFeedWithTeam } from 'api/feeds/hooks/useTournamentTeamFeed';
 import * as TournamentRequests from 'api/requests/TournamentRequests';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useLoggedInUser } from 'common/hooks/useLoggedInUser';
 import popup from 'common/popup';
 import { Backdrop, Button, Icons } from 'common/ui';
 import CountDown from 'pages/tournament/components/CountDown';
 import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
+import TournamentCard from 'pages/tournament/components/TournamentCard/TournamentCard';
 import { Tournament } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
 import BracketsModal from './TournamentHubModals/BracketsModal/BracketsModal';
@@ -16,25 +17,26 @@ import MapPoolModal from './TournamentHubModals/MapPoolModal/MapPoolModal';
 import RulesModal from './TournamentHubModals/RulesModal/RulesModal';
 import {
   ButtonsWrapper,
-  Content,
   CountDownInfo,
   Header,
   HeaderHub,
   HeaderInfo,
   HubHeaderWrapper,
+  InfoContainer,
+  InfoHeader,
   InfoHeaderWrapper,
+  InfoIcon,
+  InfoSubText,
+  InfoText,
+  InfoWrapper,
   LeftButtons,
-  Pill,
-  PillHeader,
-  PillSection,
-  PillSubText,
   PredictedPrize,
   PrizeElement,
   PrizePosition,
   RightButtons,
-  SecondWrapper,
-  StyledIcon,
   TournamentHubInfoWrapper,
+  TournamentInfo,
+  TournamentsWrapper,
   Wrapper
 } from './TournamentHubPage.styles';
 
@@ -42,7 +44,7 @@ const TournamentHubPage = () => {
   const { hubId } = useParams() as { hubId: string };
   const user = useLoggedInUser();
   const tournamentTeamFeed = useTournamentTeamFeed(hubId, user.id);
-  const { tournamentHub } = useTournamentHubFeed(hubId);
+  const { tournamentHub, tournamentIds } = useTournamentHubFeed(hubId);
 
   // this knows that tournamentTeam exists (can be used instead of checking if it exists with falsy conditionals). Use if you want or remove it
   if (isFeedWithTeam(tournamentTeamFeed)) {
@@ -62,21 +64,21 @@ const TournamentHubPage = () => {
   //TODO -> Fetch correct prizepool data
   const prizePool = [100, 200, 300, 400];
 
-  const pills = [
+  const TournamentInfoArray = [
     {
-      name: 'prizePool',
+      key: 'prizePool',
       header: `€${tournamentHub.currentPrizePool}`,
       subtext: 'Predicted Prize Pool',
       icon: Icons.Trophy
     },
     {
-      name: 'entryFee',
+      key: 'entryFee',
       header: `€${tournamentHub.entranceFee} /person`,
       subtext: 'Entry Fee',
       icon: Icons.Ticket
     },
     {
-      name: 'startTime',
+      key: 'startTime',
       header: tournamentHub.startTime && formatDateAndTime(tournamentHub.startTime),
       subtext: 'Tournament Start',
       icon: Icons.Clock
@@ -118,36 +120,48 @@ const TournamentHubPage = () => {
 
   useEffect(() => {
     // Replace with a feed
-    console.log(shownModal);
     getLoggedInUserTournament();
   }, [getLoggedInUserTournament, shownModal]);
+
+  const navigate = useNavigate();
 
   return (
     <Wrapper>
       <Backdrop />
-      {loggedInUserTournament ? (
-        <Link to={`/main/tournaments/${loggedInUserTournament.id}`}>Go to your tournament</Link>
+      {tournamentHub.registrationClosed && tournamentIds ? (
+        <TournamentsWrapper
+          isUserInTournament={loggedInUserTournament ? true : false}
+          listLength={tournamentIds.length}>
+          {tournamentIds.map((tournamentId) => (
+            <TournamentCard
+              key={tournamentId}
+              tournamentId={tournamentId}
+              tournamentHubImage={tournamentHub.image}
+              isUserInTournament={loggedInUserTournament?.id === tournamentId}
+              onClick={() => navigate(`/main/tournaments/${tournamentId}`)}></TournamentCard>
+          ))}
+        </TournamentsWrapper>
       ) : (
         <HubHeaderWrapper>
           <HeaderInfo>
             <HeaderHub>{tournamentHub.name}</HeaderHub>
             <CountDownInfo>Registration closes in</CountDownInfo>
             <CountDown startTime={Number(tournamentHub.registrationCloseTime)} />
-            <PillSection>
-              {pills.map((pill) => (
-                <Pill key={pill.name}>
-                  <StyledIcon icon={pill.icon} />
-                  <Content>
-                    <PillHeader>{pill.header}</PillHeader>
-                    <PillSubText>{pill.subtext}</PillSubText>
-                  </Content>
-                </Pill>
+            <TournamentInfo>
+              {TournamentInfoArray.map((info) => (
+                <InfoContainer key={info.key}>
+                  <InfoIcon icon={info.icon} />
+                  <InfoText>
+                    <InfoHeader>{info.header}</InfoHeader>
+                    <InfoSubText>{info.subtext}</InfoSubText>
+                  </InfoText>
+                </InfoContainer>
               ))}
-            </PillSection>
+            </TournamentInfo>
           </HeaderInfo>
         </HubHeaderWrapper>
       )}
-      <SecondWrapper>
+      <InfoWrapper>
         <ButtonsWrapper>
           <LeftButtons>
             {buttons.map((button) => (
@@ -206,7 +220,7 @@ const TournamentHubPage = () => {
             </InfoHeaderWrapper>
           )}
         </TournamentHubInfoWrapper>
-      </SecondWrapper>
+      </InfoWrapper>
     </Wrapper>
   );
 };
