@@ -27,13 +27,14 @@ const TournamentPage = () => {
   const { tournament, isLoading: isLoadingTournament } = useTournamentFeed(tournamentId);
   const { matchId, isLoading: isLoadingMatchId } = useCurrentTournamentMatchFeed(tournamentId);
   const { matchHistoryList } = useTournamentMatchHistoryFeed(tournamentId);
+  const isUserInTournament = matchId !== null;
 
   if (isLoadingMatchId || isLoadingTournament) return null;
 
   return (
     <Wrapper>
       <Backdrop />
-      {matchId ? (
+      {isUserInTournament ? (
         <>
           <TournamentInfo tournament={tournament} currentMatchId={matchId} />
 
