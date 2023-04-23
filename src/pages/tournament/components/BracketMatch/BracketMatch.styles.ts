@@ -1,17 +1,16 @@
 import styled, { css } from 'styled-components';
 import { roundGap } from '../Bracket/Bracket.styles';
 import { firstRoundMatchGap } from '../Bracket/SingleEliminationBracket.styles';
+import { MatchOutcome, WrapperProps } from './BracketMatch.types';
 import { theme } from 'assets/styles/Theme';
 
 export const teamHeight = 30;
 export const teamGap = 3;
 
-type WrapperProps = {
-  matchIndex: number;
-  roundIndex: number;
-  isFinal: boolean;
-  isFirstMatch: boolean;
-  isBorder: boolean;
+const outline = {
+  [MatchOutcome.WIN]: '1px solid' + theme.colors.statusSuccess,
+  [MatchOutcome.LOSS]: '1px solid' + theme.colors.statusError,
+  [MatchOutcome.DEFAULT]: 'none'
 };
 
 const lineColor = theme.colors.secondary.hover;
@@ -20,8 +19,8 @@ export const Wrapper = styled.div<WrapperProps>`
   position: relative;
   display: flex;
   flex-direction: column;
-  ${({ theme, isBorder }) => css`
-    gap: ${isBorder ? '7px' : `${theme.spacing.base / 2}px`};
+  ${({ theme, isMatchOver, isUserInMatch }) => css`
+    gap: ${isMatchOver && isUserInMatch ? '7px' : `${theme.spacing.base / 2}px`};
   `}
 
   :before, :after {
@@ -128,8 +127,8 @@ export const TeamName = styled.div`
   `}
 `;
 
-export const Team1 = styled(Team)<{ borderStatus?: string }>`
-  ${({ theme, borderStatus }) => css`
+export const Team1 = styled(Team)<{ matchOutcome?: MatchOutcome }>`
+  ${({ theme, matchOutcome }) => css`
     ${TeamLogo} {
       border-top-left-radius: ${theme.borderRadius.default};
     }
@@ -137,26 +136,16 @@ export const Team1 = styled(Team)<{ borderStatus?: string }>`
       border-top-right-radius: ${theme.borderRadius.default};
     }
 
-    ${borderStatus &&
+    ${matchOutcome &&
     css`
-      outline: 1px solid
-        ${(() => {
-          switch (borderStatus) {
-            case 'win':
-              return theme.colors.statusSuccess;
-            case 'loss':
-              return theme.colors.statusError;
-            default:
-              return 'transparent';
-          }
-        })()};
+      outline: ${outline[matchOutcome]};
       outline-offset: 3px;
     `}
   `}
 `;
 
-export const Team2 = styled(Team)<{ borderStatus?: string }>`
-  ${({ theme, borderStatus }) => css`
+export const Team2 = styled(Team)<{ matchOutcome?: MatchOutcome }>`
+  ${({ theme, matchOutcome }) => css`
     ${TeamLogo} {
       border-bottom-left-radius: ${theme.borderRadius.default};
     }
@@ -164,19 +153,9 @@ export const Team2 = styled(Team)<{ borderStatus?: string }>`
       border-bottom-right-radius: ${theme.borderRadius.default};
     }
 
-    ${borderStatus &&
+    ${matchOutcome &&
     css`
-      outline: 1px solid
-        ${(() => {
-          switch (borderStatus) {
-            case 'win':
-              return theme.colors.statusSuccess;
-            case 'loss':
-              return theme.colors.statusError;
-            default:
-              return 'green';
-          }
-        })()};
+      outline: ${outline[matchOutcome]};
       outline-offset: 3px;
     `}
   `}

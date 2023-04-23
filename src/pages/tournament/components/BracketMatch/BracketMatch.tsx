@@ -12,6 +12,7 @@ import {
   TeamScore,
   Wrapper
 } from './BracketMatch.styles';
+import { MatchOutcome } from './BracketMatch.types';
 import placeholderTeamLogo from 'assets/images/placeholder-team-logo.png';
 
 type Props = {
@@ -23,8 +24,8 @@ type Props = {
 };
 
 const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }: Props) => {
-  const [borderStatus, setBorderStatus] = useState<string>('');
-  const [isBorder, setIsBorder] = useState(false);
+  const [matchOutcome, setMatchOutcome] = useState<MatchOutcome>(MatchOutcome.DEFAULT);
+  const [isUserInMatch, setIsUserInMatch] = useState(false);
   const user = useLoggedInUser();
   const { match, isLoading } = useMatchFeed(matchId);
   const { hasMatchStats, matchStats, isLoading: isLoadingMatchStats } = useMatchStatsFeed(matchId);
@@ -43,11 +44,11 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
 
   if (hasMatchStats && userIsInMatchTeamId) {
     if (matchStats.winner === userIsInMatchTeamId) {
-      setBorderStatus('win');
-      setIsBorder(true);
+      setMatchOutcome(MatchOutcome.WIN);
+      setIsUserInMatch(true);
     } else {
-      setBorderStatus('loss');
-      setIsBorder(true);
+      setMatchOutcome(MatchOutcome.LOSS);
+      setIsUserInMatch(true);
     }
   }
 
@@ -59,15 +60,16 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
       roundIndex={roundIndex}
       isFinal={isFinal}
       isFirstMatch={isFirstMatch}
-      isBorder={isBorder}>
-      <Team1 borderStatus={userIsInMatchTeamId && teamIndex === 0 ? borderStatus : undefined}>
+      isMatchOver={hasMatchStats}
+      isUserInMatch={isUserInMatch}>
+      <Team1 matchOutcome={userIsInMatchTeamId && teamIndex === 0 ? matchOutcome : undefined}>
         <TeamLogo>
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
         <TeamName>{match.teams?.[0].teamName}</TeamName>
         <TeamScore winner={matchStats.winner === match.teams?.[0].id}>{team1Score}</TeamScore>
       </Team1>
-      <Team2 borderStatus={userIsInMatchTeamId && teamIndex === 1 ? borderStatus : undefined}>
+      <Team2 matchOutcome={userIsInMatchTeamId && teamIndex === 1 ? matchOutcome : undefined}>
         <TeamLogo>
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
