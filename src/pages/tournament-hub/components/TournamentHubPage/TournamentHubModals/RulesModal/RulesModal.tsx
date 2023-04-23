@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Link, Navigate, Route, Routes, useParams } from 'react-router-dom';
 import { Button, Modal } from 'common/ui';
 import Rules from 'pages/tournament/components/Rules';
+import { ModalButton } from '/Users/martinwillman/Documents/desktop-app/src/pages/tournament-hub/components/TournamentHubPage/TournamentHubModals/ModalButton/ModalButton';
 import { ButtonsWrapper, Content, Wrapper } from './RulesModal.styles';
-import Cheating from './Views/Cheating';
-import Participation from './Views/Participation';
+import Cheating from './Views/Cheating/Cheating';
+import Participation from './Views/Participation/Participation';
 type Props = {
   isOpen: boolean;
   onRequestClose: () => void;
@@ -13,7 +13,9 @@ type Props = {
 const RulesModal = ({ isOpen, onRequestClose }: Props) => {
   //TODO -> Replace type with gameId from matchSettings
   const [visibleText, setVisibleText] = useState('general');
-
+  const isGeneralActive = visibleText === 'general';
+  const isParActive = visibleText === 'participation';
+  const isCheatingActive = visibleText === 'cheating';
   return (
     <Modal
       title="Rules"
@@ -25,14 +27,26 @@ const RulesModal = ({ isOpen, onRequestClose }: Props) => {
       margin="50px">
       <Wrapper>
         <ButtonsWrapper>
-          <Button onClick={() => setVisibleText('general')}>General</Button>
-          <Button onClick={() => setVisibleText('participation')}>Participation</Button>
-          <Button onClick={() => setVisibleText('cheating')}>Cheating</Button>
+          <ModalButton
+            active={isGeneralActive}
+            onClick={() => setVisibleText('general')}
+            text={'General'}
+          />
+          <ModalButton
+            active={isParActive}
+            onClick={() => setVisibleText('participation')}
+            text={'Participation'}
+          />
+          <ModalButton
+            active={isCheatingActive}
+            onClick={() => setVisibleText('cheating')}
+            text={'Cheating'}
+          />
         </ButtonsWrapper>
         <Content>
-          {visibleText === 'general' && <Rules />}
-          {visibleText === 'participation' && <Participation />}
-          {visibleText === 'cheating' && <Cheating />}
+          {isGeneralActive && <Rules />}
+          {isParActive && <Participation />}
+          {isCheatingActive && <Cheating />}
         </Content>
       </Wrapper>
     </Modal>
