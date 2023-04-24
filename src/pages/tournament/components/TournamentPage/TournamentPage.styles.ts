@@ -4,11 +4,9 @@ export const Wrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
 
   ${({ theme }) => css`
     gap: ${theme.spacing.baseX3}px;
-    padding-bottom: ${theme.spacing.baseX4}px;
   `}
 `;
 
@@ -55,4 +53,20 @@ export const TournamentRoutesWrapper = styled.div`
     padding: ${theme.spacing.baseX3}px ${theme.spacing.baseX3}px 0;
     margin: 0 -${theme.spacing.baseX3}px;
   `}
+`;
+
+export const SpectatorWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const TournamentName = styled.h2`
+  display: block;
+  width: 100%;
+  text-align: center;
+  ${({ theme }) => css`
+    ${theme.textStyles.stylizedHeader}
+    margin-bottom: ${theme.spacing.baseX4}px;
+    font-size: 24px;
+  `};
 `;
