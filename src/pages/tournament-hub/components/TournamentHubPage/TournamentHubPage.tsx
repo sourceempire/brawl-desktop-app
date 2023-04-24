@@ -3,6 +3,7 @@ import { useTournamentHubFeed, useTournamentTeamFeed } from 'api/feeds';
 import { isFeedWithTeam } from 'api/feeds/hooks/useTournamentTeamFeed';
 import * as TournamentRequests from 'api/requests/TournamentRequests';
 import { useNavigate, useParams } from 'react-router-dom';
+import PageContainer from 'common/components/PageContainer';
 import { useLoggedInUser } from 'common/hooks/useLoggedInUser';
 import popup from 'common/popup';
 import { Backdrop, Button, Icons } from 'common/ui';
@@ -126,103 +127,104 @@ const TournamentHubPage = () => {
   const navigate = useNavigate();
 
   return (
-    <Wrapper>
-      <Backdrop />
-      {tournamentHub.registrationClosed && tournamentIds ? (
-        <TournamentsWrapper
-          isUserInTournament={loggedInUserTournament ? true : false}
-          listLength={tournamentIds.length}>
-          {tournamentIds.map((tournamentId) => (
-            <TournamentCard
-              key={tournamentId}
-              tournamentId={tournamentId}
-              tournamentHubImage={tournamentHub.image}
-              isUserInTournament={loggedInUserTournament?.id === tournamentId}
-              onClick={() => navigate(`/main/tournaments/${tournamentId}`)}
-            />
-          ))}
-        </TournamentsWrapper>
-      ) : (
-        <HubHeaderWrapper>
-          <HeaderInfo>
-            <HeaderHub>{tournamentHub.name}</HeaderHub>
-            <CountDownInfo>Registration closes in</CountDownInfo>
-            <CountDown startTime={Number(tournamentHub.registrationCloseTime)} />
-            <TournamentInfo>
-              {TournamentInfoArray.map((info) => (
-                <InfoContainer key={info.key}>
-                  <InfoIcon icon={info.icon} />
-                  <InfoText>
-                    <InfoHeader>{info.header}</InfoHeader>
-                    <InfoSubText>{info.subtext}</InfoSubText>
-                  </InfoText>
-                </InfoContainer>
-              ))}
-            </TournamentInfo>
-          </HeaderInfo>
-        </HubHeaderWrapper>
-      )}
-      <InfoWrapper>
-        <ButtonsWrapper>
-          <LeftButtons>
-            {buttons.map((button) => (
-              <Button key={button.name} onClick={() => handleOpenModal(button.name)}>
-                {button.text}
-              </Button>
+    <PageContainer>
+      <Wrapper>
+        <Backdrop />
+        {tournamentHub.registrationClosed && tournamentIds ? (
+          <TournamentsWrapper
+            isUserInTournament={loggedInUserTournament ? true : false}
+            listLength={tournamentIds.length}>
+            {tournamentIds.map((tournamentId) => (
+              <TournamentCard
+                key={tournamentId}
+                tournamentId={tournamentId}
+                tournamentHubImage={tournamentHub.image}
+                isUserInTournament={loggedInUserTournament?.id === tournamentId}
+                onClick={() => navigate(`/main/tournaments/${tournamentId}`)}></TournamentCard>
             ))}
-          </LeftButtons>
-          <RightButtons>
-            {!tournamentHub.registrationClosed &&
-              (!isFeedWithTeam(tournamentTeamFeed) ? (
-                <Button primary onClick={signup}>
-                  Join tournament
-                </Button>
-              ) : (
-                <Button alert onClick={leave}>
-                  Leave Tournament
+          </TournamentsWrapper>
+        ) : (
+          <HubHeaderWrapper>
+            <HeaderInfo>
+              <HeaderHub>{tournamentHub.name}</HeaderHub>
+              <CountDownInfo>Registration closes in</CountDownInfo>
+              <CountDown startTime={Number(tournamentHub.registrationCloseTime)} />
+              <TournamentInfo>
+                {TournamentInfoArray.map((info) => (
+                  <InfoContainer key={info.key}>
+                    <InfoIcon icon={info.icon} />
+                    <InfoText>
+                      <InfoHeader>{info.header}</InfoHeader>
+                      <InfoSubText>{info.subtext}</InfoSubText>
+                    </InfoText>
+                  </InfoContainer>
+                ))}
+              </TournamentInfo>
+            </HeaderInfo>
+          </HubHeaderWrapper>
+        )}
+        <InfoWrapper>
+          <ButtonsWrapper>
+            <LeftButtons>
+              {buttons.map((button) => (
+                <Button key={button.name} onClick={() => handleOpenModal(button.name)}>
+                  {button.text}
                 </Button>
               ))}
-          </RightButtons>
-        </ButtonsWrapper>
-        <BracketsModal
-          isOpen={shownModal.brackets}
-          onRequestClose={() => setShownModal({ ...shownModal, brackets: false })}
-        />
-        <MapPoolModal
-          isOpen={shownModal.mapPool}
-          onRequestClose={() => setShownModal({ ...shownModal, mapPool: false })}
-        />
-        <RulesModal
-          isOpen={shownModal.rules}
-          onRequestClose={() => setShownModal({ ...shownModal, rules: false })}
-        />
-        <HowItWorksModal
-          isOpen={shownModal.howItWorks}
-          onRequestClose={() => setShownModal({ ...shownModal, howItWorks: false })}
-        />
-        <TournamentHubInfoWrapper isRegistrationClosed={tournamentHub.registrationClosed}>
-          <InfoHeaderWrapper>
-            <Header>Tournament Information</Header>
-            <InfoCards tournamentHub={tournamentHub} />
-          </InfoHeaderWrapper>
-          {!tournamentHub.registrationClosed && (
+            </LeftButtons>
+            <RightButtons>
+              {!tournamentHub.registrationClosed &&
+                (!isFeedWithTeam(tournamentTeamFeed) ? (
+                  <Button primary onClick={signup}>
+                    Join tournament
+                  </Button>
+                ) : (
+                  <Button alert onClick={leave}>
+                    Leave Tournament
+                  </Button>
+                ))}
+            </RightButtons>
+          </ButtonsWrapper>
+          <BracketsModal
+            isOpen={shownModal.brackets}
+            onRequestClose={() => setShownModal({ ...shownModal, brackets: false })}
+          />
+          <MapPoolModal
+            isOpen={shownModal.mapPool}
+            onRequestClose={() => setShownModal({ ...shownModal, mapPool: false })}
+          />
+          <RulesModal
+            isOpen={shownModal.rules}
+            onRequestClose={() => setShownModal({ ...shownModal, rules: false })}
+          />
+          <HowItWorksModal
+            isOpen={shownModal.howItWorks}
+            onRequestClose={() => setShownModal({ ...shownModal, howItWorks: false })}
+          />
+          <TournamentHubInfoWrapper isRegistrationClosed={tournamentHub.registrationClosed}>
             <InfoHeaderWrapper>
-              <Header>Predicted Prize Pool</Header>
-              <PredictedPrize>
-                {prizePool.map((prize, index) => {
-                  const prizePosition = index + 1;
-                  return (
-                    <PrizeElement key={index}>
-                      <PrizePosition>{prizePosition}</PrizePosition>€{prize}
-                    </PrizeElement>
-                  );
-                })}
-              </PredictedPrize>
+              <Header>Tournament Information</Header>
+              <InfoCards tournamentHub={tournamentHub} />
             </InfoHeaderWrapper>
-          )}
-        </TournamentHubInfoWrapper>
-      </InfoWrapper>
-    </Wrapper>
+            {!tournamentHub.registrationClosed && (
+              <InfoHeaderWrapper>
+                <Header>Predicted Prize Pool</Header>
+                <PredictedPrize>
+                  {prizePool.map((prize, index) => {
+                    const prizePosition = index + 1;
+                    return (
+                      <PrizeElement key={index}>
+                        <PrizePosition>{prizePosition}</PrizePosition>€{prize}
+                      </PrizeElement>
+                    );
+                  })}
+                </PredictedPrize>
+              </InfoHeaderWrapper>
+            )}
+          </TournamentHubInfoWrapper>
+        </InfoWrapper>
+      </Wrapper>
+    </PageContainer>
   );
 };
 
