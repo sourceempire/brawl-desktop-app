@@ -18,9 +18,14 @@ export const MiddleInfo = styled.div`
 
 export const TournamentName = styled.div`
   width: 120%;
-  font-size: 24px;
-  font-family: 'Orbitron';
+  display: block;
+  width: 100%;
   text-align: center;
+  ${({ theme }) => css`
+    ${theme.textStyles.stylizedHeader}
+    margin-bottom: ${theme.spacing.baseX2}px;
+    font-size: 24px;
+  `};
 `;
 
 export const TeamContainer = styled.div`
