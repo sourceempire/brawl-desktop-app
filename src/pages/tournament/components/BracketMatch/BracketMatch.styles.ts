@@ -8,9 +8,8 @@ export const teamHeight = 30;
 export const teamGap = 3;
 
 const outline = {
-  [MatchOutcome.WIN]: '1px solid' + theme.colors.statusSuccess,
-  [MatchOutcome.LOSS]: '1px solid' + theme.colors.statusError,
-  [MatchOutcome.DEFAULT]: 'none'
+  [MatchOutcome.Win]: `2px solid ${theme.colors.statusSuccess}`,
+  [MatchOutcome.Loss]: `2px solid ${theme.colors.statusError}`
 };
 
 const lineColor = theme.colors.secondary.hover;
@@ -19,11 +18,10 @@ export const Wrapper = styled.div<WrapperProps>`
   position: relative;
   display: flex;
   flex-direction: column;
-  ${({ theme, isMatchOver, isUserInMatch }) => css`
-    gap: ${isMatchOver && isUserInMatch ? '7px' : `${theme.spacing.base / 2}px`};
-  `}
+  gap: ${theme.spacing.base / 2}px;
 
-  :before, :after {
+  :before,
+  :after {
     content: '';
     position: absolute;
     width: ${roundGap / 2 - 3}px;
@@ -140,6 +138,9 @@ export const Team1 = styled(Team)<{ matchOutcome?: MatchOutcome }>`
     css`
       outline: ${outline[matchOutcome]};
       outline-offset: 3px;
+      border-top-left-radius: ${theme.borderRadius.default};
+      border-top-right-radius: ${theme.borderRadius.default};
+      margin-bottom: 5px;
     `}
   `}
 `;
@@ -157,6 +158,9 @@ export const Team2 = styled(Team)<{ matchOutcome?: MatchOutcome }>`
     css`
       outline: ${outline[matchOutcome]};
       outline-offset: 3px;
+      border-bottom-left-radius: ${theme.borderRadius.default};
+      border-bottom-right-radius: ${theme.borderRadius.default};
+      margin-top: 5px;
     `}
   `}
 `;

@@ -1,8 +1,7 @@
-import { useState } from 'react';
 import useMatchFeed from 'api/feeds/hooks/useMatchFeed';
 import { useMatchStatsFeed } from 'api/feeds/hooks/useMatchStatsFeed';
 import { useLoggedInUser } from 'common/hooks';
-import { getTeamScore } from 'utils/matchUtils';
+import { getIsUserInMatch, getMatchOutcome, getTeamScore } from 'utils/matchUtils';
 import {
   Team1,
   Team2,
@@ -12,7 +11,6 @@ import {
   TeamScore,
   Wrapper
 } from './BracketMatch.styles';
-import { MatchOutcome } from './BracketMatch.types';
 import placeholderTeamLogo from 'assets/images/placeholder-team-logo.png';
 
 type Props = {
@@ -24,8 +22,6 @@ type Props = {
 };
 
 const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }: Props) => {
-  const [matchOutcome, setMatchOutcome] = useState<MatchOutcome>(MatchOutcome.DEFAULT);
-  const [isUserInMatch, setIsUserInMatch] = useState(false);
   const user = useLoggedInUser();
   const { match, isLoading } = useMatchFeed(matchId);
   const { hasMatchStats, matchStats, isLoading: isLoadingMatchStats } = useMatchStatsFeed(matchId);
@@ -37,20 +33,19 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
     ? getTeamScore({ matchStats, teamId: match.teams?.[1].id })
     : null;
 
-  const userIsInMatchTeamId = match.teams?.find((team) => team.players.includes(user.id))?.id;
-  const teamIndex = userIsInMatchTeamId
-    ? match.teams?.findIndex((team) => team.id === userIsInMatchTeamId)
-    : -1;
+  const userMatchTeamId = match.teams?.find((team) => team.players.includes(user.id))?.id;
 
-  if (hasMatchStats && userIsInMatchTeamId) {
-    if (matchStats.winner === userIsInMatchTeamId) {
-      setMatchOutcome(MatchOutcome.WIN);
-      setIsUserInMatch(true);
-    } else {
-      setMatchOutcome(MatchOutcome.LOSS);
-      setIsUserInMatch(true);
-    }
-  }
+  const matchOutcome =
+    hasMatchStats && userMatchTeamId ? getMatchOutcome({ userMatchTeamId, matchStats }) : undefined;
+
+  const isUserInMatch =
+    hasMatchStats && userMatchTeamId
+      ? getIsUserInMatch({ userMatchTeamId, matchStats })
+      : undefined;
+
+  const teamIndex = userMatchTeamId
+    ? match.teams?.findIndex((team) => team.id === userMatchTeamId)
+    : -1;
 
   if (isLoading || isLoadingMatchStats) return null;
 
@@ -62,14 +57,14 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
       isFirstMatch={isFirstMatch}
       isMatchOver={hasMatchStats}
       isUserInMatch={isUserInMatch}>
-      <Team1 matchOutcome={userIsInMatchTeamId && teamIndex === 0 ? matchOutcome : undefined}>
+      <Team1 matchOutcome={userMatchTeamId && teamIndex === 0 ? matchOutcome : undefined}>
         <TeamLogo>
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
         <TeamName>{match.teams?.[0].teamName}</TeamName>
         <TeamScore winner={matchStats.winner === match.teams?.[0].id}>{team1Score}</TeamScore>
       </Team1>
-      <Team2 matchOutcome={userIsInMatchTeamId && teamIndex === 1 ? matchOutcome : undefined}>
+      <Team2 matchOutcome={userMatchTeamId && teamIndex === 1 ? matchOutcome : undefined}>
         <TeamLogo>
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
