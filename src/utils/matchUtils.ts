@@ -44,11 +44,3 @@ export const getMatchOutcome = ({ userMatchTeamId, matchStats }: MatchOutcomePro
     return MatchOutcome.Loss;
   }
 };
-
-export const getIsUserInMatch = ({ userMatchTeamId, matchStats }: MatchOutcomeProps) => {
-  if (matchStats.winner === userMatchTeamId) {
-    return true;
-  } else {
-    return false;
-  }
-};

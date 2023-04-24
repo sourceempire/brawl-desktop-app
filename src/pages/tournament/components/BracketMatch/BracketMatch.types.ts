@@ -4,10 +4,10 @@ export type WrapperProps = {
   isFinal: boolean;
   isFirstMatch: boolean;
   isMatchOver: boolean;
-  isUserInMatch?: boolean;
 };
 
 export enum MatchOutcome {
   Win = 'Win',
-  Loss = 'Loss'
+  Loss = 'Loss',
+  NotDecided = 'NotDecided'
 }

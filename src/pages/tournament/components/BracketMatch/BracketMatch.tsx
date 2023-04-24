@@ -1,7 +1,7 @@
 import useMatchFeed from 'api/feeds/hooks/useMatchFeed';
 import { useMatchStatsFeed } from 'api/feeds/hooks/useMatchStatsFeed';
 import { useLoggedInUser } from 'common/hooks';
-import { getIsUserInMatch, getMatchOutcome, getTeamScore } from 'utils/matchUtils';
+import { getMatchOutcome, getTeamScore } from 'utils/matchUtils';
 import {
   Team1,
   Team2,
@@ -11,6 +11,7 @@ import {
   TeamScore,
   Wrapper
 } from './BracketMatch.styles';
+import { MatchOutcome } from './BracketMatch.types';
 import placeholderTeamLogo from 'assets/images/placeholder-team-logo.png';
 
 type Props = {
@@ -35,17 +36,10 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
 
   const userMatchTeamId = match.teams?.find((team) => team.players.includes(user.id))?.id;
 
-  const matchOutcome =
-    hasMatchStats && userMatchTeamId ? getMatchOutcome({ userMatchTeamId, matchStats }) : undefined;
-
-  const isUserInMatch =
+  const loggedInUserMatchOutcome =
     hasMatchStats && userMatchTeamId
-      ? getIsUserInMatch({ userMatchTeamId, matchStats })
-      : undefined;
-
-  const teamIndex = userMatchTeamId
-    ? match.teams?.findIndex((team) => team.id === userMatchTeamId)
-    : -1;
+      ? getMatchOutcome({ userMatchTeamId, matchStats })
+      : MatchOutcome.NotDecided;
 
   if (isLoading || isLoadingMatchStats) return null;
 
@@ -55,16 +49,17 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
       roundIndex={roundIndex}
       isFinal={isFinal}
       isFirstMatch={isFirstMatch}
-      isMatchOver={hasMatchStats}
-      isUserInMatch={isUserInMatch}>
-      <Team1 matchOutcome={userMatchTeamId && teamIndex === 0 ? matchOutcome : undefined}>
+      isMatchOver={hasMatchStats}>
+      <Team1
+        matchOutcome={match.teams?.[0].id && userMatchTeamId ? loggedInUserMatchOutcome : null}>
         <TeamLogo>
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
         <TeamName>{match.teams?.[0].teamName}</TeamName>
         <TeamScore winner={matchStats.winner === match.teams?.[0].id}>{team1Score}</TeamScore>
       </Team1>
-      <Team2 matchOutcome={userMatchTeamId && teamIndex === 1 ? matchOutcome : undefined}>
+      <Team2
+        matchOutcome={match.teams?.[1].id && userMatchTeamId ? loggedInUserMatchOutcome : null}>
         <TeamLogo>
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
