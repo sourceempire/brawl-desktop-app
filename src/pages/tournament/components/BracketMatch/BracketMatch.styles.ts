@@ -1,16 +1,16 @@
 import styled, { css } from 'styled-components';
 import { roundGap } from '../Bracket/Bracket.styles';
 import { firstRoundMatchGap } from '../Bracket/SingleEliminationBracket.styles';
+import { MatchOutcome, WrapperProps } from './BracketMatch.types';
 import { theme } from 'assets/styles/Theme';
 
 export const teamHeight = 30;
 export const teamGap = 3;
 
-type WrapperProps = {
-  matchIndex: number;
-  roundIndex: number;
-  isFinal: boolean;
-  isFirstMatch: boolean;
+const outline = {
+  [MatchOutcome.Win]: `2px solid ${theme.colors.statusSuccess}`,
+  [MatchOutcome.Loss]: `2px solid ${theme.colors.statusError}`,
+  [MatchOutcome.NotDecided]: 'none'
 };
 
 const lineColor = theme.colors.secondary.hover;
@@ -19,11 +19,10 @@ export const Wrapper = styled.div<WrapperProps>`
   position: relative;
   display: flex;
   flex-direction: column;
-  ${({ theme }) => css`
-    gap: ${theme.spacing.base / 2}px;
-  `}
+  gap: ${theme.spacing.base / 2}px;
 
-  :before, :after {
+  :before,
+  :after {
     content: '';
     position: absolute;
     width: ${roundGap / 2 - 3}px;
@@ -127,24 +126,42 @@ export const TeamName = styled.div`
   `}
 `;
 
-export const Team1 = styled(Team)`
-  ${({ theme }) => css`
+export const Team1 = styled(Team)<{ matchOutcome: MatchOutcome | null }>`
+  ${({ theme, matchOutcome }) => css`
     ${TeamLogo} {
       border-top-left-radius: ${theme.borderRadius.default};
     }
     ${TeamScore} {
       border-top-right-radius: ${theme.borderRadius.default};
     }
+
+    ${matchOutcome &&
+    css`
+      outline: ${outline[matchOutcome]};
+      outline-offset: 3px;
+      border-top-left-radius: ${theme.borderRadius.default};
+      border-top-right-radius: ${theme.borderRadius.default};
+      margin-bottom: ${matchOutcome === MatchOutcome.NotDecided ? 0 : '5px'};
+    `}
   `}
 `;
 
-export const Team2 = styled(Team)`
-  ${({ theme }) => css`
+export const Team2 = styled(Team)<{ matchOutcome?: MatchOutcome | null }>`
+  ${({ theme, matchOutcome }) => css`
     ${TeamLogo} {
       border-bottom-left-radius: ${theme.borderRadius.default};
     }
     ${TeamScore} {
       border-bottom-right-radius: ${theme.borderRadius.default};
     }
+
+    ${matchOutcome &&
+    css`
+      outline: ${outline[matchOutcome]};
+      outline-offset: 3px;
+      border-bottom-left-radius: ${theme.borderRadius.default};
+      border-bottom-right-radius: ${theme.borderRadius.default};
+      margin-top: ${matchOutcome === MatchOutcome.NotDecided ? 0 : '5px'};
+    `}
   `}
 `;
