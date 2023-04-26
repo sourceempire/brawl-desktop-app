@@ -34,11 +34,11 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
     ? getTeamScore({ matchStats, teamId: match.teams?.[1].id })
     : null;
 
-  const userMatchTeamId = match.teams?.find((team) => team.players.includes(user.id))?.id;
+  const teamIdOfLoggedInUser = match.teams?.find((team) => team.players.includes(user.id))?.id;
 
   const loggedInUserMatchOutcome =
-    hasMatchStats && userMatchTeamId
-      ? getMatchOutcome({ userMatchTeamId, matchStats })
+    hasMatchStats && teamIdOfLoggedInUser
+      ? getMatchOutcome({ teamIdOfLoggedInUser, matchStats })
       : MatchOutcome.NotDecided;
 
   if (isLoading || isLoadingMatchStats) return null;
@@ -51,7 +51,9 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
       isFirstMatch={isFirstMatch}
       isMatchOver={hasMatchStats}>
       <Team1
-        matchOutcome={match.teams?.[0].id && userMatchTeamId ? loggedInUserMatchOutcome : null}>
+        matchOutcome={
+          match.teams?.[0].id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null
+        }>
         <TeamLogo>
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
@@ -59,7 +61,9 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
         <TeamScore winner={matchStats.winner === match.teams?.[0].id}>{team1Score}</TeamScore>
       </Team1>
       <Team2
-        matchOutcome={match.teams?.[1].id && userMatchTeamId ? loggedInUserMatchOutcome : null}>
+        matchOutcome={
+          match.teams?.[1].id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null
+        }>
         <TeamLogo>
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>

@@ -9,7 +9,7 @@ type Options = {
 
 type MatchOutcomeProps = {
   hasMatchStats?: boolean;
-  userMatchTeamId?: string;
+  teamIdOfLoggedInUser?: string;
   matchStats: MatchStats;
 };
 
@@ -37,8 +37,8 @@ export const getTeamScore = ({ matchStats, teamId }: Options) => {
   return matchStats.maps[0].teams[teamId].score;
 };
 
-export const getMatchOutcome = ({ userMatchTeamId, matchStats }: MatchOutcomeProps) => {
-  if (matchStats.winner === userMatchTeamId) {
+export const getMatchOutcome = ({ teamIdOfLoggedInUser, matchStats }: MatchOutcomeProps) => {
+  if (matchStats.winner === teamIdOfLoggedInUser) {
     return MatchOutcome.Win;
   } else {
     return MatchOutcome.Loss;
