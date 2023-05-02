@@ -1,3 +1,5 @@
+import { useBracketFeed } from 'api/feeds';
+import { isSingleElimination } from 'types/tournaments/Bracket';
 import { Tournament } from 'types/tournaments/TournamentInfo';
 import CountDown from '../CountDown';
 import { TeamContainer } from './TeamContainer';
@@ -9,6 +11,8 @@ type Props = {
 };
 
 const TournamentInfo = ({ tournament, currentMatchId }: Props) => {
+  const { bracket, isLoading } = useBracketFeed(tournament.id);
+
   return (
     <Wrapper>
       {currentMatchId ? <TeamContainer currentMatchId={currentMatchId} teamNumber={1} /> : <div />}
@@ -17,7 +21,11 @@ const TournamentInfo = ({ tournament, currentMatchId }: Props) => {
         <TournamentName>
           {tournament.name} {tournament.tournamentNumber}
         </TournamentName>
-        <SmallText>Round 1 of 4 starts in</SmallText>
+        {!isLoading && isSingleElimination(bracket) ? (
+          <SmallText>
+            Round {bracket.currentRoundIndex + 1} of {bracket.numberOfRounds} starts in
+          </SmallText>
+        ) : null}
         <CountDown startTime={tournament.startTime} />
       </MiddleInfo>
 

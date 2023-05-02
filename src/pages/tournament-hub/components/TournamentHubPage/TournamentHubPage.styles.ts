@@ -100,6 +100,7 @@ export const HeaderHub = styled.h2`
   ${({ theme }) => css`
     ${theme.textStyles.stylizedHeader}
     margin-bottom: ${theme.spacing.baseX2}px;
+    font-size: 24px;
   `};
 `;
 
