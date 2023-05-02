@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Markdown } from 'common/ui';
 
 export const ButtonsWrapper = styled.div`
   display: flex;
@@ -22,4 +23,52 @@ export const Wrapper = styled.div`
   align-items: flex-start;
   flex: 1 1 auto;
   column-gap: 15px;
+`;
+
+export const Participation = styled(Markdown)`
+  h1 {
+    font-size: 20px;
+    ${({ theme }) => css`
+      margin-bottom: ${theme.spacing.baseX2}px;
+    `}
+  }
+
+  h2 {
+    border: none;
+    font-size: 16px;
+    ${({ theme }) => css`
+      margin-bottom: ${theme.spacing.baseX2}px;
+    `}
+  }
+
+  p {
+    ${({ theme }) => css`
+      font-size: 16px;
+      margin-bottom: ${theme.spacing.baseX4}px;
+    `}
+  }
+`;
+
+export const Cheating = styled(Markdown)`
+  h1 {
+    font-size: 20px;
+    ${({ theme }) => css`
+      margin-bottom: ${theme.spacing.baseX2}px;
+    `}
+  }
+
+  h2 {
+    border: none;
+    font-size: 16px;
+    ${({ theme }) => css`
+      margin-bottom: ${theme.spacing.baseX2}px;
+    `}
+  }
+
+  p {
+    ${({ theme }) => css`
+      font-size: 16px;
+      margin-bottom: ${theme.spacing.baseX4}px;
+    `}
+  }
 `;
