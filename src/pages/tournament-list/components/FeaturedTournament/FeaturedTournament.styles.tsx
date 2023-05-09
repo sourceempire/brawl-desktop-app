@@ -1,63 +1,40 @@
 import styled, { css } from 'styled-components';
-import { Icons } from 'common/ui';
 
-export const Hero = styled.div<{ visible: boolean; image: string }>`
-  ${({ visible, image, theme }) => css`
+export const Hero = styled.div<{ image: string; visible?: boolean }>`
+  ${({ image, theme, visible }) => css`
     position: relative;
-    height: 166px;
-    transition: transform 0.3s;
-    transform: translateY(-${visible ? 0 : 100}%);
-    transform-origin: top;
+    height: 100%;
     background: url(${image});
     background-size: cover;
     text-align: center;
     border-radius: ${theme.borderRadius.default};
-    position: relative;
+    transition: transform 0.3s;
+    transform: translateY(-${visible ? 0 : 100}%);
+    transform-origin: top;
     :before {
       content: '';
       position: absolute;
       inset: 0;
       background-color: rgba(0, 0, 0, 0.3);
     }
-
-    :hover {
-      :before {
-        background-color: rgba(0, 0, 0, 0.2);
-      }
-    }
   `}
 `;
 
 export const Wrapper = styled.div`
   width: 100%;
-`;
-
-export const VisibilityToggle = styled.div`
-  ${(props) => props.theme.textStyles.menu}
-  margin: 18px 0;
-  display: flex;
-  align-items: center;
-`;
-
-export const SelectArrow = styled(Icons.SelectArrow)<{ expanded: boolean }>`
-  height: 8px;
-  width: 8px;
-  transform: ${({ expanded }) => (expanded ? 'rotate(0)' : 'rotate(-180deg)')};
-  ${({ theme }) => css`
-    fill: ${theme.colors.white};
-    margin-left: ${theme.spacing.base}px;
-  `}
+  height: 100%;
 `;
 
 export const HeroWrapper = styled.div`
+  height: 100%;
   overflow: hidden;
 `;
 
 export const Info = styled.div`
   width: 100%;
   position: absolute;
-  bottom: 18px;
-  padding: 0px 18px;
+  bottom: ${({ theme }) => theme.spacing.baseX8}px;
+  padding: 0px 56px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -68,8 +45,8 @@ export const Countdown = styled.div`
   background: rgba(0, 0, 0, 0.35);
   padding: 12px 24px;
   border-radius: ${({ theme }) => theme.borderRadius.default};
-  top: 18px;
-  left: 18px;
+  top: ${({ theme }) => theme.spacing.baseX8}px;
+  left: 56px;
   font-size: 14px;
   text-transform: uppercase;
 `;
