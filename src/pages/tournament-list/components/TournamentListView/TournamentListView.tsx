@@ -1,18 +1,17 @@
 import { useDeferredValue, useState } from 'react';
+import { useFeaturedTournamentFeed } from 'api/feeds';
 import useTournamentHubsFeed from 'api/feeds/hooks/useTournamentHubsFeed';
 import { useNavigate } from 'react-router-dom';
+import FeaturedTournamentSlider from 'common/components/FeaturedTournamentSlider';
 import PageContainer from 'common/components/PageContainer';
 import { IconEnum, Icons, Option, Tab, Tabs } from 'common/ui';
 import { InputSize } from 'common/ui/Input/Input.types';
-import Game, { GameName } from 'types/Game';
-import { CSGOMatchSettings } from 'types/MatchSettings';
-import { TournamentHub } from 'types/tournaments/TournamentInfo';
-import FeaturedTournament from '../FeaturedTournament/FeaturedTournament';
 import TournamentInfoCard from '../TournamentInfoCard/TournamentInfoCard';
 import TournamentsFilters from '../TournamentsFiltersModal/TournamentsFiltersModal';
 import { Filter, filter, search } from './TournamentListView.model';
 import {
   CrossIcon,
+  FeaturedTournamentToggle,
   FilterBar,
   FilterBullet,
   FilterBullets,
@@ -20,6 +19,7 @@ import {
   FilterControls,
   FilterSort,
   SearchInput,
+  SelectArrow,
   TournamentGallery,
   TournamentList
 } from './TournamentListView.styles';
@@ -48,23 +48,7 @@ function Page() {
   const [filterModalOpen, setFilterModalOpen] = useState(false);
 
   const { tournamentHubs } = useTournamentHubsFeed();
-
-  const exampleTournamentInfo = (n: number): TournamentHub => ({
-    id: 'eee18f6d-2a99-4176-b01d-271e1283692' + n,
-    name: 'Sweden Masters Invitational',
-    gameId: '4747a477-3445-4b0a-9db9-bf0e68238208',
-    gameName: GameName[Game.CSGO],
-    startTime: '2022-09-29 14:30:00',
-    entranceFee: '50.00',
-    matchSettings: { __type: 'csgo', mode: 'competitive', seriesType: 'bo1' } as CSGOMatchSettings,
-    currentPrizePool: '200.00',
-    region: 'Europe',
-    teamsAllowed: 4,
-    teamSize: 5,
-    registrationClosed: false,
-    image: 'https://picsum.photos/600/200?random=' + n,
-    registrationCloseTime: '2022-09-29 14:30:00'
-  });
+  const { featuredTournamentHubs, isLoading } = useFeaturedTournamentFeed();
 
   function removeFilter(filter: Filter) {
     setActiveFilters((filters) =>
@@ -76,12 +60,21 @@ function Page() {
 
   return (
     <PageContainer>
-      <FeaturedTournament
-        tournamentInfo={exampleTournamentInfo(0)}
-        expanded={featuredExpanded}
-        setExpanded={setFeaturedExpanded}
-      />
-      <TournamentGallery featuredExpanded={featuredExpanded}>
+      {featuredTournamentHubs && !isLoading && (
+        <>
+          <FeaturedTournamentToggle onClick={() => setFeaturedExpanded((e) => !e)}>
+            Featured Tournament
+            <SelectArrow expanded={featuredExpanded} />
+          </FeaturedTournamentToggle>
+          <FeaturedTournamentSlider
+            featuredTournamentHubs={featuredTournamentHubs}
+            expanded={featuredExpanded}
+          />
+        </>
+      )}
+      <TournamentGallery
+        featuredTournamentHubs={featuredTournamentHubs}
+        featuredExpanded={featuredExpanded}>
         <FilterBar>
           <FilterBullets>
             {activeFilters.map((filter) => (
