@@ -32,7 +32,7 @@ const exampleTournamentInfo = (): TournamentHub => ({
   gameId: '4747a477-3445-4b0a-9db9-bf0e68238208',
   gameName: GameName[Game.CSGO],
   startTime: '2022-09-29 14:30:00',
-  entranceFee: '50.00',
+  entryFee: '50.00',
   matchSettings: { __type: 'csgo', mode: 'competitive', seriesType: 'bo1' } as CSGOMatchSettings,
   currentPrizePool: '200.00',
   region: 'Europe',

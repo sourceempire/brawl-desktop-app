@@ -90,7 +90,7 @@ const InfoCards = ({ tournamentHub }: Props) => {
           <StyledIcon icon={IconEnum.Ticket} />
           Entry Fee
         </InfoHeader>
-        <InfoText>€{tournamentHub.entranceFee} / person</InfoText>
+        <InfoText>€{tournamentHub.entryFee} / person</InfoText>
       </InfoCard>
     </InfoCardWrapper>
   );
