@@ -1,6 +1,6 @@
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
-import { getTournamentModeShort } from 'utils/tournamentUtils';
+import { getTournamentModeShort, getTournamentStartDays } from 'utils/tournamentUtils';
 import {
   Column1,
   Column2,
@@ -22,11 +22,13 @@ type Props = {
 };
 
 export default function FeaturedTournament({ tournamentHub, onClick, visible }: Props) {
+  const tournamentStartDays = getTournamentStartDays(tournamentHub);
+
   return (
     <Wrapper>
       <HeroWrapper>
         <Hero onClick={onClick} image={tournamentHub.image} visible={visible}>
-          <Countdown>In 3 days</Countdown>
+          <Countdown>{tournamentStartDays}</Countdown>
           <Info>
             <Column1>
               <Name>{tournamentHub.name}</Name>
