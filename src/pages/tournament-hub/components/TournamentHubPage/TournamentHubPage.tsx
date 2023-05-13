@@ -188,6 +188,7 @@ const TournamentHubPage = () => {
           <BracketsModal
             isOpen={shownModal.brackets}
             onRequestClose={() => setShownModal({ ...shownModal, brackets: false })}
+            tournament={tournamentHub}
           />
           <MapPoolModal
             isOpen={shownModal.mapPool}
