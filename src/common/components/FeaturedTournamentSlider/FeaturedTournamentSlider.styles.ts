@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { PopupLevel } from 'common/popup/Popup.types';
 import { Animation, Icons } from 'common/ui';
 import { Hero } from 'pages/tournament-list/components/FeaturedTournament/FeaturedTournament.styles';
 
@@ -31,16 +30,16 @@ export const SliderButtonContainer = styled.div<{
   leftContainer?: boolean;
   rightContainer?: boolean;
 }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 20px;
+  transition: transform 0.3s;
   ${({ theme, visible, leftContainer, rightContainer }) => css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
     right: ${rightContainer ? 0 : 100};
-    height: 100%;
-    width: 20px;
-    transition: transform 0.3s;
     transform: translateY(-${visible ? 0 : 100}%);
     fill: ${theme.colors.white};
     margin-left: ${leftContainer ? theme.spacing.baseX3 : 0}px;
@@ -109,7 +108,7 @@ export const Dot = styled.div<{ active: boolean }>`
   `}
 `;
 
-export const TimerAnimation = styled(Animation)<{ level: PopupLevel }>`
+export const TimerAnimation = styled(Animation)`
   height: 20px;
   width: 20px;
   top: 50%;
