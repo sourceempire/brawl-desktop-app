@@ -1,6 +1,6 @@
 import { useFeed } from 'brawl-websocket';
 import Game, { GameName } from 'types/Game';
-import { MatchSettingsTypes } from 'types/MatchSettings';
+import { GameId } from 'types/MatchSettings';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 
 export default function useTournamentHubsFeed() {
@@ -25,7 +25,7 @@ export default function useTournamentHubsFeed() {
 function fixMatchSettingType(tournamentHubs: TournamentHub[]): TournamentHub[] {
   return tournamentHubs.map((tournamentHub) => {
     if (tournamentHub.gameId === Game.CSGO) {
-      tournamentHub.matchSettings.__type = MatchSettingsTypes.CSGO;
+      tournamentHub.matchSettings.gameId = GameId.CSGO;
       tournamentHub.gameName = GameName[Game.CSGO];
     }
     return tournamentHub;

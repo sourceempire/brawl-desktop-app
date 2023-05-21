@@ -1,16 +1,16 @@
 /**
- * To determine MatchSettings sub-type in runtime, a __type property is used
+ * To determine MatchSettings sub-type in runtime, a gameId property is used
  */
 export interface MatchSettings {
-  __type: string;
+  gameId: string;
 }
 
-export enum MatchSettingsTypes {
-  CSGO = 'csgo'
+export enum GameId {
+  CSGO = '4747a477-3445-4b0a-9db9-bf0e68238208'
 }
 
 export interface CSGOMatchSettings extends MatchSettings {
-  __type: MatchSettingsTypes.CSGO;
+  gameId: GameId.CSGO;
   mode: CSGOGameModes;
   seriesType: CSGOSeriesType;
   maps?: string[];
@@ -32,5 +32,5 @@ export enum CSGOSeriesType {
  * Type Guard for CSGOMatchSettings
  */
 export function isCSGOMatchSettings(settings: MatchSettings): settings is CSGOMatchSettings {
-  return settings.__type === MatchSettingsTypes.CSGO;
+  return settings.gameId === GameId.CSGO;
 }
