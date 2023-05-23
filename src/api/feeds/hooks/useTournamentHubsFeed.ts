@@ -5,7 +5,7 @@ export default function useTournamentHubsFeed() {
   const { data, loading } = useFeed<{ tournamentHubs: TournamentHub[] }>('tournament.hubs');
 
   return {
-    tournamentHubs: data.tournamentHubs || [],
+    tournamentHubs: data.tournamentHubs ?? [],
     isLoading: loading
   };
 }
