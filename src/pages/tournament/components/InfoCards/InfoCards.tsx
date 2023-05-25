@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { IconEnum } from 'common/ui';
 import Game, { GameName } from 'types/Game';
-import { MatchSettingsTypes } from 'types/MatchSettings';
+import { GameId } from 'types/MatchSettings';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
 import { getTournamentModeShort, getTournamentSeriesTypeLong } from 'utils/tournamentUtils';
@@ -20,7 +20,7 @@ const InfoCards = ({ tournamentHub }: Props) => {
   const setInfoSettings = (tournamentHub: TournamentHub) => {
     if (tournamentHub.gameId === Game.CSGO) {
       setGameName(GameName[Game.CSGO]);
-      tournamentHub.matchSettings.__type = MatchSettingsTypes.CSGO;
+      tournamentHub.matchSettings.gameId = GameId.CSGO;
       setGameType(getTournamentSeriesTypeLong(tournamentHub));
       setGameMode(getTournamentModeShort(tournamentHub));
     }

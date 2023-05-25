@@ -1,5 +1,5 @@
 import { useDeferredValue, useState } from 'react';
-import { useFeaturedTournamentFeed } from 'api/feeds';
+import { useFeaturedTourmanentsFeed } from 'api/feeds';
 import useTournamentHubsFeed from 'api/feeds/hooks/useTournamentHubsFeed';
 import { useNavigate } from 'react-router-dom';
 import FeaturedTournamentSlider from 'common/components/FeaturedTournamentSlider';
@@ -48,7 +48,7 @@ function Page() {
   const [filterModalOpen, setFilterModalOpen] = useState(false);
 
   const { tournamentHubs } = useTournamentHubsFeed();
-  const { featuredTournamentHubs, isLoading } = useFeaturedTournamentFeed();
+  const { featuredTournamentHubs, isLoading } = useFeaturedTourmanentsFeed();
 
   function removeFilter(filter: Filter) {
     setActiveFilters((filters) =>
@@ -66,10 +66,7 @@ function Page() {
             Featured Tournament
             <SelectArrow expanded={featuredExpanded} />
           </FeaturedTournamentToggle>
-          <FeaturedTournamentSlider
-            featuredTournamentHubs={featuredTournamentHubs}
-            expanded={featuredExpanded}
-          />
+          <FeaturedTournamentSlider expanded={featuredExpanded} />
         </>
       )}
       <TournamentGallery
