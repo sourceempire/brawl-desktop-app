@@ -193,10 +193,13 @@ const TournamentHubPage = () => {
             isOpen={shownModal.mapPool}
             onRequestClose={() => setShownModal({ ...shownModal, mapPool: false })}
           />
-          <RulesModal
-            isOpen={shownModal.rules}
-            onRequestClose={() => setShownModal({ ...shownModal, rules: false })}
-          />
+          {tournamentHub && (
+            <RulesModal
+              isOpen={shownModal.rules}
+              onRequestClose={() => setShownModal({ ...shownModal, rules: false })}
+              tournamentHubId={tournamentHub.id}
+            />
+          )}
           <HowItWorksModal
             isOpen={shownModal.howItWorks}
             onRequestClose={() => setShownModal({ ...shownModal, howItWorks: false })}

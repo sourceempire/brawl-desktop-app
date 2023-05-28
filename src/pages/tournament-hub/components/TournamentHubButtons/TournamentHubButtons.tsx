@@ -36,7 +36,11 @@ const TournamentHubButtons = ({ tournamentHub }: Props) => {
         onRequestClose={() => setBracketsModalOpen(false)}
       />
       <MapPoolModal isOpen={mapPoolModalOpen} onRequestClose={() => setMapPoolModalOpen(false)} />
-      <RulesModal isOpen={rulesModalOpen} onRequestClose={() => setRulesModalOpen(false)} />
+      <RulesModal
+        isOpen={rulesModalOpen}
+        onRequestClose={() => setRulesModalOpen(false)}
+        tournamentHubId={tournamentHub.id}
+      />
       <HowItWorksModal
         isOpen={howItWorksModalOpen}
         onRequestClose={() => setHowItWorksModalOpen(false)}
