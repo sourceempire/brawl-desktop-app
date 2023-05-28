@@ -1,10 +1,31 @@
 import styled, { css } from 'styled-components/macro';
 import { Button, Icons, Input, Select } from 'common/ui';
+import { TournamentHub } from 'types/tournaments/TournamentInfo';
 
-export const TournamentGallery = styled.div<{ featuredExpanded: boolean }>`
+export const FeaturedTournamentToggle = styled.div`
+  ${(props) => props.theme.textStyles.menu}
+  margin: 18px 0;
+  display: flex;
+  align-items: center;
+`;
+
+export const SelectArrow = styled(Icons.SelectArrow)<{ expanded: boolean }>`
+  height: 8px;
+  width: 8px;
+  transform: ${({ expanded }) => (expanded ? 'rotate(0)' : 'rotate(-180deg)')};
+  ${({ theme }) => css`
+    fill: ${theme.colors.white};
+    margin-left: ${theme.spacing.base}px;
+  `}
+`;
+
+export const TournamentGallery = styled.div<{
+  featuredTournamentHubs: TournamentHub[];
+  featuredExpanded: boolean;
+}>`
   transition: transform 0.3s;
-  transform: ${({ featuredExpanded }) =>
-    featuredExpanded ? 'translateY(0)' : 'translateY(-166px)'};
+  transform: ${({ featuredExpanded, featuredTournamentHubs }) =>
+    featuredExpanded && featuredTournamentHubs ? 'translateY(0)' : 'translateY(-250px)'};
   padding-bottom: 48px;
 `;
 

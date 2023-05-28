@@ -6,6 +6,7 @@ export { default as useNewsFeed } from './hooks/useNewsFeed';
 export { default as usePartyFeed } from './hooks/usePartyFeed';
 export { default as useTournamentHubFeed } from './hooks/useTournamentHubFeed';
 export { default as useTournamentHubsFeed } from './hooks/useTournamentHubsFeed';
+export { default as useFeaturedTourmanentsFeed } from './hooks/useFeaturedTourmanentsFeed';
 export { default as useUserFeed } from './hooks/useUserFeed';
 export { default as useUserStatusFeed } from './hooks/useUserStatusFeed';
 export { default as useTournamentMatchHistoryFeed } from './hooks/useTournamentMatchHistoryFeed';

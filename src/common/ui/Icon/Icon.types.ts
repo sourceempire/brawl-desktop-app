@@ -2,6 +2,8 @@ export enum IconEnum {
   Abort = 'Abort',
   AddFriend = 'AddFriend',
   ArrowDown = 'ArrowDown',
+  ArrowLeft = 'ArrowLeft',
+  ArrowRight = 'ArrowRight',
   Calendar = 'Calendar',
   Check = 'Check',
   Clock = 'Clock',

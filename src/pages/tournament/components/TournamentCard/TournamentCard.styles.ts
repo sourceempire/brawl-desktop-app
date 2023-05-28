@@ -1,9 +1,8 @@
 import styled, { css } from 'styled-components';
-import temporaryBackdrop from 'assets/images/temporary-csgo-backdrop.jpg';
 
 export const Tournament = styled.div<{ image: string; isUserInTournament: boolean }>`
-  ${({ theme, isUserInTournament }) => css`
-    background-image: url('${temporaryBackdrop}');
+  ${({ theme, isUserInTournament, image }) => css`
+    background-image: url('${image}');
     background-size: cover;
     background-position: center;
     position: relative;

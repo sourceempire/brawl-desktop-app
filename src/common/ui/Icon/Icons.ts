@@ -2,6 +2,8 @@ import { IconEnum, SVGComponent } from './Icon.types';
 import * as Abort from './icons/Abort.svg';
 import * as AddFriend from './icons/AddFriend.svg';
 import * as ArrowDown from './icons/ArrowDown.svg';
+import * as ArrowLeft from './icons/ArrowLeft.svg';
+import * as ArrowRight from './icons/ArrowRight.svg';
 import * as Calendar from './icons/Calendar.svg';
 import * as Check from './icons/Check.svg';
 import * as Clock from './icons/Clock.svg';
@@ -37,6 +39,8 @@ const Icons: { [key in IconEnum]: SVGComponent } = {
   [IconEnum.Abort]: createSVGIcon(Abort),
   [IconEnum.AddFriend]: createSVGIcon(AddFriend),
   [IconEnum.ArrowDown]: createSVGIcon(ArrowDown),
+  [IconEnum.ArrowLeft]: createSVGIcon(ArrowLeft),
+  [IconEnum.ArrowRight]: createSVGIcon(ArrowRight),
   [IconEnum.Calendar]: createSVGIcon(Calendar),
   [IconEnum.Check]: createSVGIcon(Check),
   [IconEnum.Clock]: createSVGIcon(Clock),
