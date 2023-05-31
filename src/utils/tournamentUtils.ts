@@ -27,28 +27,12 @@ export const getTournamentSeriesTypeLong = (tournamentInfo: TournamentHub) => {
   }
 };
 
-export const getFormattedRemainingTime = (tournamentInfo: TournamentHub) => {
-  const currentTimestamp = Date.now();
-  const startTime = new Date(tournamentInfo.startTime).getTime();
-  const startMonth = new Date(tournamentInfo.startTime).getMonth() + 1;
-  const startYear = new Date(tournamentInfo.startTime).getFullYear();
-  const differenceInMilliseconds = startTime - currentTimestamp;
-
-  if (currentTimestamp >= startTime) {
-    return 'Started';
-  }
-
-  // ADD RETURN FOR WHEN ALL TOURNAMENTS FOR THE HUB HAVE ENDED
-
-  return formatTimeDifference(differenceInMilliseconds, startMonth, startYear);
-};
-
-const formatTimeDifference = (
+export const formatTimeDifference = (
   differenceInMilliseconds: number,
   startMonth: number,
   startYear: number
 ): string => {
-  const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'always' });
+  const formatter = new Intl.RelativeTimeFormat('en', { numeric: 'always' });
 
   const currentMonth = new Date().getMonth() + 1;
   const currentYear = new Date().getFullYear();
@@ -74,18 +58,18 @@ const formatTimeDifference = (
       : 0;
 
   if (differenceInMilliseconds < MILLISECONDS_IN_MINUTE) {
-    return rtf.format(differenceInSeconds, 'second');
+    return formatter.format(differenceInSeconds, 'second');
   } else if (differenceInMilliseconds < MILLISECONDS_IN_HOUR) {
-    return rtf.format(differenceInMinutes, 'minute');
+    return formatter.format(differenceInMinutes, 'minute');
   } else if (differenceInMilliseconds < MILLISECONDS_IN_DAY) {
-    return rtf.format(differenceInHours, 'hour');
+    return formatter.format(differenceInHours, 'hour');
   } else if (differenceInMilliseconds < MILLISECONDS_IN_WEEK) {
-    return rtf.format(differenceInDays, 'day');
+    return formatter.format(differenceInDays, 'day');
   } else if (differenceInMilliseconds < MILLISECONDS_IN_WEEK * 4) {
-    return rtf.format(differenceInWeeks, 'week');
+    return formatter.format(differenceInWeeks, 'week');
   } else if (differenceInYears < 1) {
-    return rtf.format(differenceInMonths, 'month');
+    return formatter.format(differenceInMonths, 'month');
   } else {
-    return rtf.format(differenceInYears, 'year');
+    return formatter.format(differenceInYears, 'year');
   }
 };

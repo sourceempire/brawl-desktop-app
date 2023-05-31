@@ -1,3 +1,5 @@
+import { formatTimeDifference } from 'utils/tournamentUtils';
+
 export const MILLISECONDS_IN_MINUTE = 60000;
 export const MILLISECONDS_IN_HOUR = 3600000;
 export const MILLISECONDS_IN_DAY = 86400000;
@@ -40,3 +42,17 @@ export function getTimeToClosestTimeUnit(
       return nextDate.getTime() - now.getTime();
   }
 }
+
+export const getFormattedRemainingTime = (date: string) => {
+  const currentTimestamp = Date.now();
+  const startTime = new Date(date).getTime();
+  const startMonth = new Date(date).getMonth() + 1;
+  const startYear = new Date(date).getFullYear();
+  const differenceInMilliseconds = startTime - currentTimestamp;
+
+  if (currentTimestamp >= startTime) {
+    return 'Started';
+  }
+
+  return formatTimeDifference(differenceInMilliseconds, startMonth, startYear);
+};

@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
-import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import {
   MILLISECONDS_IN_DAY,
   MILLISECONDS_IN_HOUR,
   MILLISECONDS_IN_MINUTE,
   MILLISECONDS_IN_WEEK,
   MILLISECONDS_IN_YEAR,
+  getFormattedRemainingTime,
   getTimeToClosestTimeUnit
 } from 'utils/timeUtils';
-import { getFormattedRemainingTime } from 'utils/tournamentUtils';
 
 const getTimeUpdateInterval = (differenceInMilliseconds: number) => {
   if (differenceInMilliseconds < MILLISECONDS_IN_MINUTE) {
@@ -28,19 +27,19 @@ const getTimeUpdateInterval = (differenceInMilliseconds: number) => {
   }
 };
 
-export const useFormattedRemainingTime = (tournamentHub: TournamentHub) => {
+export const useFormattedRemainingTime = (date: string) => {
   const [formattedTournamentTime, setFormattedTournamentTime] = useState(() =>
-    getFormattedRemainingTime(tournamentHub)
+    getFormattedRemainingTime(date)
   );
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
 
     const updateFormattedRemainingTime = () => {
-      const currentFormattedTournamentTime = getFormattedRemainingTime(tournamentHub);
+      const currentFormattedTournamentTime = getFormattedRemainingTime(date);
       setFormattedTournamentTime(currentFormattedTournamentTime);
 
-      const differenceInMilliseconds = parseInt(tournamentHub.startTime, 10) - Date.now();
+      const differenceInMilliseconds = parseInt(date, 10) - Date.now();
       const updateInterval = getTimeUpdateInterval(differenceInMilliseconds);
 
       timeoutId = setTimeout(updateFormattedRemainingTime, updateInterval);
@@ -51,7 +50,7 @@ export const useFormattedRemainingTime = (tournamentHub: TournamentHub) => {
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [tournamentHub]);
+  }, [date]);
 
   return formattedTournamentTime;
 };

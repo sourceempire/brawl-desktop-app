@@ -23,7 +23,7 @@ type Props = {
 };
 
 export default function FeaturedTournament({ tournamentHub, onClick, visible }: Props) {
-  const formattedRemainingTime = useFormattedRemainingTime(tournamentHub);
+  const formattedRemainingTime = useFormattedRemainingTime(tournamentHub.startTime);
 
   return (
     <Wrapper>
