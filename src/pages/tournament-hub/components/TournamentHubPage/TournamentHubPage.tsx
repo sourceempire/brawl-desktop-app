@@ -127,8 +127,6 @@ const TournamentHubPage = () => {
 
   const navigate = useNavigate();
 
-  console.log('TOURNAMENTS IDS', tournamentIds);
-
   return (
     <PageContainer>
       <Wrapper>
