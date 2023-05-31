@@ -56,7 +56,7 @@ export const TournamentName = styled.div`
   text-transform: uppercase;
   ${({ theme }) => css`
     font-family: ${theme.fonts.stylized};
-    padding: ${theme.spacing.baseX4}px 0px ${theme.spacing.baseX2}px;
+    padding: ${theme.spacing.baseX4}px 0 ${theme.spacing.baseX2}px;
   `}
 `;
 
