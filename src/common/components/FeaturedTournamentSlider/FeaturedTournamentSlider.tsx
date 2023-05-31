@@ -82,46 +82,59 @@ export default function FeaturedTournamentSlider({ expanded }: Props) {
 
   return (
     <>
-      <Slider onMouseEnter={() => handleMouseEnter()} onMouseLeave={() => handleMouseLeave()}>
-        <SliderContainer
-          width={sliderWidth}
-          style={{
-            transform: `translateX(-${(currentSlide / featuredTournamentHubs.length) * 100}%)`
-          }}>
-          {featuredTournamentHubs.map((tournamentHub) => (
+      {featuredTournamentHubs.length === 1 ? (
+        <Slider>
+          <SliderContainer width={sliderWidth}>
             <FeaturedTournament
-              key={tournamentHub.id}
-              tournamentHub={tournamentHub}
+              key={featuredTournamentHubs[0].id}
+              tournamentHub={featuredTournamentHubs[0]}
               visible={expanded}
-              onClick={() => navigate(`hub/${tournamentHub.id}`)}
+              onClick={() => navigate(`hub/${featuredTournamentHubs[0].id}`)}
             />
-          ))}
-        </SliderContainer>
-        <SliderButtonContainer visible={expanded} leftContainer>
-          <SliderButtonPrev onClick={() => changeSlide(1)} />
-        </SliderButtonContainer>
-        <SliderButtonContainer visible={expanded} rightContainer>
-          <SliderButtonNext visible={expanded} onClick={() => changeSlide(-1)} />
-        </SliderButtonContainer>
-        <Dots visible={expanded}>
-          {featuredTournamentHubs.map((tournamentHub, index) => (
-            <DotContainer active={index === currentSlide} key={tournamentHub.id}>
-              <Dot
+          </SliderContainer>
+        </Slider>
+      ) : (
+        <Slider onMouseEnter={() => handleMouseEnter()} onMouseLeave={() => handleMouseLeave()}>
+          <SliderContainer
+            width={sliderWidth}
+            style={{
+              transform: `translateX(-${(currentSlide / featuredTournamentHubs.length) * 100}%)`
+            }}>
+            {featuredTournamentHubs.map((tournamentHub) => (
+              <FeaturedTournament
                 key={tournamentHub.id}
-                active={index === currentSlide}
-                onClick={() => handleDotClick(index)}
+                tournamentHub={tournamentHub}
+                visible={expanded}
+                onClick={() => navigate(`hub/${tournamentHub.id}`)}
               />
-              {index === currentSlide && (
-                <TimerAnimation
-                  src={countdownCircleSlider}
-                  speed={autoSlideActive ? 10000 / sliderTimer : 0}
-                  loop={false}
+            ))}
+          </SliderContainer>
+          <SliderButtonContainer visible={expanded} leftContainer>
+            <SliderButtonPrev onClick={() => changeSlide(1)} />
+          </SliderButtonContainer>
+          <SliderButtonContainer visible={expanded} rightContainer>
+            <SliderButtonNext visible={expanded} onClick={() => changeSlide(-1)} />
+          </SliderButtonContainer>
+          <Dots visible={expanded}>
+            {featuredTournamentHubs.map((tournamentHub, index) => (
+              <DotContainer active={index === currentSlide} key={tournamentHub.id}>
+                <Dot
+                  key={tournamentHub.id}
+                  active={index === currentSlide}
+                  onClick={() => handleDotClick(index)}
                 />
-              )}
-            </DotContainer>
-          ))}
-        </Dots>
-      </Slider>
+                {index === currentSlide && (
+                  <TimerAnimation
+                    src={countdownCircleSlider}
+                    speed={autoSlideActive ? 10000 / sliderTimer : 0}
+                    loop={false}
+                  />
+                )}
+              </DotContainer>
+            ))}
+          </Dots>
+        </Slider>
+      )}
     </>
   );
 }
