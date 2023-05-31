@@ -4,6 +4,12 @@ import {
   csgoMatchSettingsModeShortForm,
   csgoMatchSettingsSeriesTypeLongForm
 } from 'utils/matchUtils';
+import {
+  MILLISECONDS_IN_DAY,
+  MILLISECONDS_IN_HOUR,
+  MILLISECONDS_IN_MINUTE,
+  MILLISECONDS_IN_WEEK
+} from './timeUtils';
 
 export const getTournamentModeShort = (tournamentInfo: TournamentHub) => {
   if (isCSGOMatchSettings(tournamentInfo.matchSettings)) {
@@ -21,13 +27,12 @@ export const getTournamentSeriesTypeLong = (tournamentInfo: TournamentHub) => {
   }
 };
 
-export const getTournamentStartDays = (tournamentInfo: TournamentHub) => {
+export const getFormattedRemainingTime = (tournamentInfo: TournamentHub) => {
   const currentTimestamp = Date.now();
-  const startTime = parseInt(tournamentInfo.startTime, 10);
+  const startTime = new Date(tournamentInfo.startTime).getTime();
+  const startMonth = new Date(tournamentInfo.startTime).getMonth() + 1;
+  const startYear = new Date(tournamentInfo.startTime).getFullYear();
   const differenceInMilliseconds = startTime - currentTimestamp;
-  const differenceInDays = Math.floor(differenceInMilliseconds / 86400000); // Number indicates milliseconds of a day
-  const differenceInWeeks = Math.floor(differenceInMilliseconds / 604800000); // Number indicates milliseconds of a week
-  const differenceInHours = Math.floor(differenceInMilliseconds / 3600000); // Number indicates milliseconds of an hour
 
   if (currentTimestamp >= startTime) {
     return 'Started';
@@ -35,27 +40,52 @@ export const getTournamentStartDays = (tournamentInfo: TournamentHub) => {
 
   // ADD RETURN FOR WHEN ALL TOURNAMENTS FOR THE HUB HAVE ENDED
 
-  if (differenceInMilliseconds < 86400000) {
-    if (differenceInHours <= 0) {
-      return `In ${differenceInHours} minutes`;
-    } else if (differenceInHours === 1) {
-      return `In 1 hour`;
-    } else {
-      return `In ${differenceInHours} hours`;
-    }
-  } else if (differenceInMilliseconds < 604800000) {
-    if (differenceInDays === 0) {
-      return 'Today';
-    } else if (differenceInDays === 1) {
-      return 'In 1 day';
-    } else {
-      return `In ${differenceInDays} days`;
-    }
-  } else if (differenceInWeeks === 1) {
-    return 'In 1 week';
-  } else if (differenceInWeeks <= 52) {
-    return `In ${differenceInWeeks} weeks`;
+  return formatTimeDifference(differenceInMilliseconds, startMonth, startYear);
+};
+
+const formatTimeDifference = (
+  differenceInMilliseconds: number,
+  startMonth: number,
+  startYear: number
+): string => {
+  const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'always' });
+
+  const currentMonth = new Date().getMonth() + 1;
+  const currentYear = new Date().getFullYear();
+  const yearDifference = startYear - currentYear;
+
+  const differenceInSeconds = Math.ceil(differenceInMilliseconds / 1000);
+  const differenceInMinutes = Math.ceil(differenceInSeconds / 60);
+  const differenceInHours = Math.ceil(differenceInMinutes / 60);
+  const differenceInDays = Math.ceil(differenceInHours / 24);
+  const differenceInWeeks = Math.ceil(differenceInDays / 7);
+
+  let differenceInMonths;
+
+  if (startYear - currentYear === 0) {
+    differenceInMonths = startMonth - currentMonth;
   } else {
-    return `More than a year`;
+    differenceInMonths = 12 - currentMonth + 12 * (yearDifference - 1) + startMonth; // Adding 12 months for every full year that is in between current year and start month
+  }
+
+  const differenceInYears =
+    startYear - currentYear > 0 && differenceInMonths > 12
+      ? Math.floor(differenceInMonths / 12)
+      : 0;
+
+  if (differenceInMilliseconds < MILLISECONDS_IN_MINUTE) {
+    return rtf.format(differenceInSeconds, 'second');
+  } else if (differenceInMilliseconds < MILLISECONDS_IN_HOUR) {
+    return rtf.format(differenceInMinutes, 'minute');
+  } else if (differenceInMilliseconds < MILLISECONDS_IN_DAY) {
+    return rtf.format(differenceInHours, 'hour');
+  } else if (differenceInMilliseconds < MILLISECONDS_IN_WEEK) {
+    return rtf.format(differenceInDays, 'day');
+  } else if (differenceInMilliseconds < MILLISECONDS_IN_WEEK * 4) {
+    return rtf.format(differenceInWeeks, 'week');
+  } else if (differenceInYears < 1) {
+    return rtf.format(differenceInMonths, 'month');
+  } else {
+    return rtf.format(differenceInYears, 'year');
   }
 };
