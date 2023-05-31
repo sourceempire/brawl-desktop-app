@@ -1,3 +1,4 @@
+import { useFormattedRemainingTime } from 'common/hooks/useFormattedRemainingTime';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
 import { getTournamentModeShort } from 'utils/tournamentUtils';
@@ -22,11 +23,13 @@ type Props = {
 };
 
 export default function FeaturedTournament({ tournamentHub, onClick, visible }: Props) {
+  const formattedRemainingTime = useFormattedRemainingTime(tournamentHub.startTime);
+
   return (
     <Wrapper>
       <HeroWrapper>
         <Hero onClick={onClick} image={tournamentHub.image} visible={visible}>
-          <Countdown>In 3 days</Countdown>
+          <Countdown>{formattedRemainingTime}</Countdown>
           <Info>
             <Column1>
               <Name>{tournamentHub.name}</Name>
