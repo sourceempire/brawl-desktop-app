@@ -1,3 +1,4 @@
+import { useFormattedRemainingTime } from 'common/hooks/useFormattedRemainingTime';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
 import { getTournamentModeShort } from 'utils/tournamentUtils';
@@ -11,45 +12,35 @@ import {
   Name,
   PrizePool,
   PrizePoolAmount,
-  SelectArrow,
   TournamentInfo,
-  VisibilityToggle,
   Wrapper
 } from './FeaturedTournament.styles';
 
 type Props = {
-  tournamentInfo: TournamentHub;
+  tournamentHub: TournamentHub;
   onClick?: ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void) | undefined;
-  expanded: boolean;
-  setExpanded: React.Dispatch<React.SetStateAction<boolean>>;
+  visible?: boolean;
 };
 
-export default function FeaturedTournament({
-  tournamentInfo,
-  onClick,
-  expanded,
-  setExpanded
-}: Props) {
+export default function FeaturedTournament({ tournamentHub, onClick, visible }: Props) {
+  const formattedRemainingTime = useFormattedRemainingTime(tournamentHub.startTime);
+
   return (
     <Wrapper>
-      <VisibilityToggle onClick={() => setExpanded((e) => !e)}>
-        Featured Tournament
-        <SelectArrow expanded={expanded} />
-      </VisibilityToggle>
       <HeroWrapper>
-        <Hero onClick={onClick} visible={expanded} image={tournamentInfo.image}>
-          <Countdown>In 3 days</Countdown>
+        <Hero onClick={onClick} image={tournamentHub.image} visible={visible}>
+          <Countdown>{formattedRemainingTime}</Countdown>
           <Info>
             <Column1>
-              <Name>{tournamentInfo.name}</Name>
+              <Name>{tournamentHub.name}</Name>
               <TournamentInfo>
-                Starts {formatDateAndTime(tournamentInfo.startTime)} | Registration closes{' - '}
-                {formatDateAndTime(tournamentInfo.registrationCloseTime)} | Entry fee €
-                {tournamentInfo.entranceFee} / person | {getTournamentModeShort(tournamentInfo)}
+                Starts {formatDateAndTime(tournamentHub.startTime)} | Registration closes{' '}
+                {formatDateAndTime(tournamentHub.registrationCloseTime)} | Entry fee €
+                {tournamentHub.entryFee} / person | {getTournamentModeShort(tournamentHub)}
               </TournamentInfo>
             </Column1>
             <Column2>
-              <PrizePoolAmount>€{tournamentInfo.entranceFee}</PrizePoolAmount>
+              <PrizePoolAmount>€{tournamentHub.entryFee}</PrizePoolAmount>
               <PrizePool>Prize Pool</PrizePool>
             </Column2>
           </Info>
