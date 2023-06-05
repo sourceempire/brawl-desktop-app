@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import * as RulesRequests from 'api/requests/RulesRequests';
-import { Button, Modal } from 'common/ui';
-import Rules from 'pages/tournament/components/Rules';
-import { ModalButton } from '/Users/martinwillman/Documents/desktop-app/src/pages/tournament-hub/components/TournamentHubPage/TournamentHubModals/ModalButton/ModalButton';
-import { ButtonsWrapper, Cheating, Content, Participation, Wrapper } from './RulesModal.styles';
+import { Modal } from 'common/ui';
+import { ModalButton } from 'pages/tournament-hub/components/TournamentHubPage/TournamentHubModals/ModalButton/ModalButton';
+import { Rules } from 'types/rules/Rules';
+import { ButtonsWrapper, Content, RulesMarkdown, Wrapper } from './RulesModal.styles';
 
 type Props = {
   isOpen: boolean;
@@ -11,34 +11,67 @@ type Props = {
   tournamentHubId: string;
 };
 
+type ActiveText = {
+  [key: string]: string;
+};
+
 const RulesModal = ({ isOpen, onRequestClose, tournamentHubId }: Props) => {
   const [visibleText, setVisibleText] = useState('general');
-  const isGeneralActive = visibleText === 'general';
-  const isParActive = visibleText === 'participation';
-  const isCheatingActive = visibleText === 'cheating';
-
-  const [generalMD, setGeneralMD] = useState('');
-  const [participationMD, setParticipationMD] = useState('');
-  const [cheatingMD, setCheatingMD] = useState('');
+  const [rules, setRules] = useState<Rules>({
+    cheating: {
+      name: '',
+      content: ''
+    },
+    general: {
+      name: '',
+      content: ''
+    },
+    participation: {
+      name: '',
+      content: ''
+    }
+  });
 
   const fetchGameRules = async () => {
     try {
       const res = await RulesRequests.GetTournamentHubContent({
         tournamentHubId: tournamentHubId
       });
-      const data = res.content;
-      setCheatingMD(data.cheating.content);
-      setGeneralMD(data.general.content);
-      setParticipationMD(data.participation.content);
+      const { cheating, general, participation } = res.content;
+      setRules({
+        cheating: {
+          name: cheating.name,
+          content: cheating.content
+        },
+        general: {
+          name: general.name,
+          content: general.content
+        },
+        participation: {
+          name: participation.name,
+          content: participation.content
+        }
+      });
     } catch (error) {
       console.error(error); // Log any errors
     }
   };
 
   useEffect(() => {
-    console.log(tournamentHubId);
-    tournamentHubId && fetchGameRules();
-  });
+    if (tournamentHubId) {
+      fetchGameRules();
+    }
+  }, [tournamentHubId]);
+
+  const handleClick = (text: string) => {
+    setVisibleText(text);
+  };
+
+  const activeText: ActiveText = {
+    general: rules.general.content,
+    participation: rules.participation.content,
+    cheating: rules.cheating.content
+  };
 
   return (
     <Modal
@@ -52,25 +85,25 @@ const RulesModal = ({ isOpen, onRequestClose, tournamentHubId }: Props) => {
       <Wrapper>
         <ButtonsWrapper>
           <ModalButton
-            active={isGeneralActive}
-            onClick={() => setVisibleText('general')}
+            active={visibleText === 'general'}
+            onClick={() => handleClick('general')}
             text={'General'}
           />
           <ModalButton
-            active={isParActive}
-            onClick={() => setVisibleText('participation')}
+            active={visibleText === 'participation'}
+            onClick={() => handleClick('participation')}
             text={'Participation'}
           />
           <ModalButton
-            active={isCheatingActive}
-            onClick={() => setVisibleText('cheating')}
+            active={visibleText === 'cheating'}
+            onClick={() => handleClick('cheating')}
             text={'Cheating'}
           />
         </ButtonsWrapper>
         <Content>
-          {isGeneralActive && <Rules />}
-          {isParActive && <Participation className="">{participationMD}</Participation>}
-          {isCheatingActive && <Cheating className="">{cheatingMD}</Cheating>}
+          {activeText[visibleText] && (
+            <RulesMarkdown key={visibleText}>{activeText[visibleText]}</RulesMarkdown>
+          )}
         </Content>
       </Wrapper>
     </Modal>

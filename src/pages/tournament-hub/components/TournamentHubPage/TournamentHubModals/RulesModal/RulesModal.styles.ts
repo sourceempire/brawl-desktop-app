@@ -25,31 +25,7 @@ export const Wrapper = styled.div`
   column-gap: 15px;
 `;
 
-export const Participation = styled(Markdown)`
-  h1 {
-    font-size: 20px;
-    ${({ theme }) => css`
-      margin-bottom: ${theme.spacing.baseX2}px;
-    `}
-  }
-
-  h2 {
-    border: none;
-    font-size: 16px;
-    ${({ theme }) => css`
-      margin-bottom: ${theme.spacing.baseX2}px;
-    `}
-  }
-
-  p {
-    ${({ theme }) => css`
-      font-size: 16px;
-      margin-bottom: ${theme.spacing.baseX4}px;
-    `}
-  }
-`;
-
-export const Cheating = styled(Markdown)`
+export const RulesMarkdown = styled(Markdown)`
   h1 {
     font-size: 20px;
     ${({ theme }) => css`
