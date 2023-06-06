@@ -44,7 +44,8 @@ const exampleTournamentInfo = (): TournamentHub => ({
   teamSize: 5,
   registrationClosed: false,
   image: 'https://picsum.photos/600/200?random=9',
-  registrationCloseTime: '2022-09-29 14:30:00'
+  registrationCloseTime: '2022-09-29 14:30:00',
+  bracketType: 'single_elimination'
 });
 
 export default HomePage;

@@ -31,11 +31,14 @@ const TournamentHubButtons = ({ tournamentHub }: Props) => {
           <Button onClick={() => setPrizesModalOpen(true)}>Prizes</Button>
         )}
       </Buttons>
-      <BracketsModal
-        isOpen={bracketsModalOpen}
-        onRequestClose={() => setBracketsModalOpen(false)}
-        tournament={tournamentHub}
-      />
+      {tournamentHub && (
+        <BracketsModal
+          isOpen={bracketsModalOpen}
+          onRequestClose={() => setBracketsModalOpen(false)}
+          tournamentHub={tournamentHub}
+        />
+      )}
+
       <MapPoolModal isOpen={mapPoolModalOpen} onRequestClose={() => setMapPoolModalOpen(false)} />
       <RulesModal isOpen={rulesModalOpen} onRequestClose={() => setRulesModalOpen(false)} />
       <HowItWorksModal

@@ -1,16 +1,18 @@
+import { useEffect } from 'react';
 import { Modal } from 'common/ui';
+import Bracket from 'pages/tournament/components/Bracket';
 import { isSingleElimination } from 'types/tournaments/Bracket';
-import { TournamentHub } from 'types/tournaments/TournamentInfo';
+import { Tournament, TournamentHub } from 'types/tournaments/TournamentInfo';
 
 type Props = {
   isOpen: boolean;
   onRequestClose: () => void;
-  tournament: tou;
+  tournamentHub: TournamentHub;
 };
 
-const BracketsModal = ({ isOpen, onRequestClose, tournament }: Props) => {
+const BracketsModal = ({ isOpen, onRequestClose, tournamentHub }: Props) => {
   //TODO -> Replace type with gameId from matchSettings
-  console.log(tournament);
+
   return (
     <Modal
       title="Brackets"
@@ -20,7 +22,11 @@ const BracketsModal = ({ isOpen, onRequestClose, tournament }: Props) => {
       }}
       width="100%"
       margin="50px">
-      <>{isSingleElimination(tournament.bracketType)} </>
+      {/*INSERT CONTENT HERE*/}
+      <Bracket
+        tournamentId={tournamentHub.id}
+        type={tournamentHub.bracketType}
+        numberOfTeams={tournamentHub.teamsAllowed}></Bracket>
     </Modal>
   );
 };
