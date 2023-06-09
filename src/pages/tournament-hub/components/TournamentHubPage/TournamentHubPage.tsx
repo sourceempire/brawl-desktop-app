@@ -45,7 +45,7 @@ const TournamentHubPage = () => {
   const { hubId } = useParams() as { hubId: string };
   const user = useLoggedInUser();
   const tournamentTeamFeed = useTournamentTeamFeed(hubId, user.id);
-  const { tournamentHub, tournamentIds } = useTournamentHubFeed(hubId);
+  const { tournamentHub, tournamentIds, isLoading } = useTournamentHubFeed(hubId);
 
   // this knows that tournamentTeam exists (can be used instead of checking if it exists with falsy conditionals). Use if you want or remove it
   if (isFeedWithTeam(tournamentTeamFeed)) {
@@ -100,7 +100,14 @@ const TournamentHubPage = () => {
   const signup = () => {
     TournamentRequests.joinTournament(hubId)
       .then(() => popup.info('Tournament joined'))
-      .catch((error) => popup.error(error.error));
+      .catch((error) => {
+        switch (error.error) {
+          case 'invalidTeamSize':
+            return popup.error(`Your party needs ${tournamentHub.teamSize} players`);
+          default:
+            popup.error('Something went wrong');
+        }
+      });
   };
 
   const leave = () => {
@@ -125,6 +132,8 @@ const TournamentHubPage = () => {
   }, [getLoggedInUserTournament, shownModal]);
 
   const navigate = useNavigate();
+
+  if (isLoading) return null;
 
   return (
     <PageContainer>
