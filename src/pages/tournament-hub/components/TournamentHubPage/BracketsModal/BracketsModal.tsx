@@ -9,8 +9,6 @@ type Props = {
 };
 
 const BracketsModal = ({ isOpen, onRequestClose, tournamentHub }: Props) => {
-  //TODO -> Replace type with gameId from matchSettings
-
   return (
     <Modal
       title="Brackets"
