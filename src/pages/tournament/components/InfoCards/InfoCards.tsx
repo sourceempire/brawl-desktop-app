@@ -16,7 +16,6 @@ const InfoCards = ({ tournamentHub }: Props) => {
   const [gameMode, setGameMode] = useState('');
   const [gameType, setGameType] = useState('');
 
-  //TODO -> Replace type with gameId from matchSettings
   const setInfoSettings = (tournamentHub: TournamentHub) => {
     if (tournamentHub.gameId === Game.CSGO) {
       setGameName(GameName[Game.CSGO]);
@@ -26,8 +25,9 @@ const InfoCards = ({ tournamentHub }: Props) => {
     }
   };
   useEffect(() => {
+    if (!tournamentHub) return;
     setInfoSettings(tournamentHub);
-  });
+  }, [tournamentHub]);
 
   return (
     <InfoCardWrapper isRegistrationClosed={tournamentHub.registrationClosed}>

@@ -12,10 +12,10 @@ import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
 import TournamentCard from 'pages/tournament/components/TournamentCard/TournamentCard';
 import { Tournament } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
-import BracketsModal from './TournamentHubModals/BracketsModal/BracketsModal';
-import HowItWorksModal from './TournamentHubModals/HowItWorksModal/HowItWorksModal';
-import MapPoolModal from './TournamentHubModals/MapPoolModal/MapPoolModal';
-import RulesModal from './TournamentHubModals/RulesModal/RulesModal';
+import BracketsModal from './BracketsModal/BracketsModal';
+import HowItWorksModal from './HowItWorksModal/HowItWorksModal';
+import MapPoolModal from './MapPoolModal/MapPoolModal';
+import RulesModal from './RulesModal/RulesModal';
 import {
   ButtonsWrapper,
   CountDownInfo,
@@ -47,14 +47,12 @@ const TournamentHubPage = () => {
   const tournamentTeamFeed = useTournamentTeamFeed(hubId, user.id);
   const { tournamentHub, tournamentIds } = useTournamentHubFeed(hubId);
 
-  // this knows that tournamentTeam exists (can be used instead of checking if it exists with falsy conditionals). Use if you want or remove it
   if (isFeedWithTeam(tournamentTeamFeed)) {
     tournamentTeamFeed.tournamentTeam;
   }
 
   const [loggedInUserTournament, setLoggedInUserTournament] = useState<Tournament>();
 
-  // TODO -> This is static, should not be recreated on every render, put above the component.
   const buttons = [
     { name: 'brackets', text: 'Brackets' },
     { name: 'mapPool', text: 'Map pool' },
