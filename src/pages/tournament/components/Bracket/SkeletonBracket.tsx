@@ -31,7 +31,7 @@ const SkeletonBracket = ({ type, numberOfTeams }: Props) => {
     for (let i = 0; i < numberOfTeams / 2; i++) {
       const round = {
         roundName: listOfRounds.reverse()[i],
-        matches: [i] // Placeholder for matches, you should populate this array with actual match data
+        matches: [i]
       };
       rounds.push(round);
     }
@@ -41,12 +41,9 @@ const SkeletonBracket = ({ type, numberOfTeams }: Props) => {
     <Wrapper>
       {rounds.map((round, roundIndex) => (
         <Round key={round.roundName}>
-          <RoundName>{round.roundName}</RoundName>
+          <RoundName active={false}>{round.roundName}</RoundName>
           <Matches matchCount={round.matches.length} roundIndex={roundIndex}>
             {round.matches.map((match, matchIndex) => {
-              {
-                console.log('test');
-              }
               return (
                 <Wrapper key={matchIndex}>
                   <Team1 matchOutcome={null}>

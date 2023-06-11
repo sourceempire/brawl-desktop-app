@@ -26,14 +26,3 @@ export interface SingleEliminationBracket extends Bracket {
 export function isSingleElimination(bracket: Bracket): bracket is SingleEliminationBracket {
   return bracket.type === BracketType.SINGLE_ELIMINATION;
 }
-
-interface SingleEliminationBracketRound {
-  roundName: string;
-  matches: SingleEliminationBracketMatch[];
-}
-
-export interface SkeletonBracket extends Bracket {
-  tournamentId: string;
-  type: BracketType;
-  numberOfTeams: number;
-}

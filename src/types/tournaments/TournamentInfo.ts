@@ -16,7 +16,7 @@ export interface TournamentHub {
   registrationClosed: boolean;
   image: string;
   registrationCloseTime: string;
-  bracketType: string; // TODO -> use an enum
+  bracketType: string;
 }
 
 export type Tournament = {
