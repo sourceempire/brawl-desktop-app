@@ -1,6 +1,6 @@
 // import useNewsFeed, { News as NewsType } from 'api/feeds/hooks/useNewsFeed';
 import PageContainer from 'common/components/PageContainer';
-import Game, { GameName } from 'types/Game';
+import Game, { GameId, GameName } from 'types/Game';
 import { CSGOMatchSettings } from 'types/MatchSettings';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import Hero from '../Hero/Hero';
@@ -29,7 +29,7 @@ const HomePage = () => {
 const exampleTournamentInfo = (): TournamentHub => ({
   id: 'eee18f6d-2a99-4176-b01d-271e12836929',
   name: 'Sweden Masters Invitational',
-  gameId: '4747a477-3445-4b0a-9db9-bf0e68238208',
+  gameId: GameId.CSGO,
   gameName: GameName[Game.CSGO],
   startTime: '2022-09-29 14:30:00',
   entryFee: '50.00',

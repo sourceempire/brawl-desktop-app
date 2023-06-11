@@ -11,8 +11,6 @@ const LoadingView = () => {
   const { checkForUpdates, updateStatus, hasProgressInfo, progressInfo } = useAppUpdater();
   const { loginValidate, isLoading: tryingToLogIn, error } = useAuth();
 
-  console.log(tryingToLogIn);
-
   useEffect(() => {
     checkForUpdates();
   }, [checkForUpdates]);
