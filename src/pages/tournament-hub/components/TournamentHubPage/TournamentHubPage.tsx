@@ -12,7 +12,7 @@ import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
 import TournamentCard from 'pages/tournament/components/TournamentCard/TournamentCard';
 import { Tournament } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
-import BracketsModal from './TournamentHubModals/BracketsModal/BracketsModal';
+import BracketsModal from './BracketsModal/BracketsModal';
 import HowItWorksModal from './TournamentHubModals/HowItWorksModal/HowItWorksModal';
 import MapPoolModal from './TournamentHubModals/MapPoolModal/MapPoolModal';
 import RulesModal from './TournamentHubModals/RulesModal/RulesModal';

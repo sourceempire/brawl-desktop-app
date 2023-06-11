@@ -1,8 +1,6 @@
-import { useEffect } from 'react';
 import { Modal } from 'common/ui';
-import Bracket from 'pages/tournament/components/Bracket';
-import { isSingleElimination } from 'types/tournaments/Bracket';
-import { Tournament, TournamentHub } from 'types/tournaments/TournamentInfo';
+import SkeletonBracket from 'pages/tournament/components/Bracket/SkeletonBracket';
+import { TournamentHub } from 'types/tournaments/TournamentInfo';
 
 type Props = {
   isOpen: boolean;
@@ -22,11 +20,10 @@ const BracketsModal = ({ isOpen, onRequestClose, tournamentHub }: Props) => {
       }}
       width="100%"
       margin="50px">
-      {/*INSERT CONTENT HERE*/}
-      <Bracket
-        tournamentId={tournamentHub.id}
+      <SkeletonBracket
         type={tournamentHub.bracketType}
-        numberOfTeams={tournamentHub.teamsAllowed}></Bracket>
+        numberOfTeams={tournamentHub.teamsAllowed}
+      />
     </Modal>
   );
 };
