@@ -51,14 +51,14 @@ const SkeletonBracket = ({ type, numberOfTeams }: Props) => {
                       <TeamLogoImage src={placeholderTeamLogo} />
                     </TeamLogo>
                     <TeamName>-</TeamName>
-                    <TeamScore></TeamScore>
+                    <TeamScore winner={false}></TeamScore>
                   </Team1>
                   <Team2>
                     <TeamLogo>
                       <TeamLogoImage src={placeholderTeamLogo} />
                     </TeamLogo>
                     <TeamName>-</TeamName>
-                    <TeamScore></TeamScore>
+                    <TeamScore winner={false}></TeamScore>
                   </Team2>
                 </Wrapper>
               );

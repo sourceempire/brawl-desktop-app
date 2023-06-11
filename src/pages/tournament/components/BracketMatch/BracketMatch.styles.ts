@@ -93,7 +93,7 @@ export const Team = styled.div`
   gap: ${teamGap}px;
 `;
 
-export const TeamScore = styled.div<{ winner?: boolean }>`
+export const TeamScore = styled.div<{ winner: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
