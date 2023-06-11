@@ -1,9 +1,10 @@
+import GameId from 'types/Game';
 import { MatchSettings } from 'types/MatchSettings';
 
 export interface TournamentHub {
   id: string;
   name: string;
-  gameId: string;
+  gameId: GameId;
   gameName: string;
   startTime: string;
   entryFee: string;

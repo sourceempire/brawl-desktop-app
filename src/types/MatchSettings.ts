@@ -1,12 +1,10 @@
+import GameId from './Game';
+
 /**
  * To determine MatchSettings sub-type in runtime, a gameId property is used
  */
 export interface MatchSettings {
   gameId: string;
-}
-
-export enum GameId {
-  CSGO = '4747a477-3445-4b0a-9db9-bf0e68238208'
 }
 
 export interface CSGOMatchSettings extends MatchSettings {
