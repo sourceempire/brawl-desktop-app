@@ -8,7 +8,6 @@ export const Wrapper = styled.button<Props>`
   display: inline-flex;
   width: auto;
   border: none;
-  color: white;
   align-items: center;
   justify-content: center;
   outline-color: transparent;
@@ -26,6 +25,7 @@ export const Wrapper = styled.button<Props>`
     padding: ${theme.spacing.base}px ${theme.spacing.baseX4}px ${theme.spacing.base}px
       ${theme.spacing.baseX2}px;
     border-radius: ${theme.borderRadius.default};
+    color: ${theme.colors.white};
     :hover {
       background-color: ${theme.colors.secondary.hover};
     }
