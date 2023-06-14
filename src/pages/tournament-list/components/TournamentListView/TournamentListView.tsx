@@ -60,7 +60,7 @@ function Page() {
 
   return (
     <PageContainer>
-      {featuredTournamentHubs && !isLoading && (
+      {featuredTournamentHubs.length > 0 && !isLoading && (
         <>
           <FeaturedTournamentToggle onClick={() => setFeaturedExpanded((e) => !e)}>
             Featured Tournament
