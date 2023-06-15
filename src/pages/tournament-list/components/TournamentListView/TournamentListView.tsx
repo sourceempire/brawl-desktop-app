@@ -48,7 +48,7 @@ function Page() {
   const [filterModalOpen, setFilterModalOpen] = useState(false);
 
   const { tournamentHubs } = useTournamentHubsFeed();
-  const { featuredTournamentHubs, isLoading } = useFeaturedTourmanentsFeed();
+  const { featuredTournamentHubs, isLoadingFeaturedTournaments } = useFeaturedTourmanentsFeed();
 
   function removeFilter(filter: Filter) {
     setActiveFilters((filters) =>
@@ -58,9 +58,12 @@ function Page() {
 
   const navigate = useNavigate();
 
+  // ADD SKELETON
+  if (isLoadingFeaturedTournaments) return null;
+
   return (
     <PageContainer>
-      {featuredTournamentHubs.length > 0 && !isLoading && (
+      {featuredTournamentHubs.length > 0 && (
         <>
           <FeaturedTournamentToggle onClick={() => setFeaturedExpanded((e) => !e)}>
             Featured Tournament
