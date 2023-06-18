@@ -1,5 +1,5 @@
 import { Modal } from 'common/ui';
-import SkeletonBracket from 'pages/tournament/components/Bracket/SkeletonBracket';
+import Bracket from 'pages/tournament/components/Bracket';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 
 type Props = {
@@ -13,15 +13,10 @@ const BracketsModal = ({ isOpen, onRequestClose, tournamentHub }: Props) => {
     <Modal
       title="Brackets"
       isOpen={isOpen}
-      onRequestClose={() => {
-        onRequestClose();
-      }}
+      onRequestClose={onRequestClose}
       width="100%"
       margin="50px">
-      <SkeletonBracket
-        type={tournamentHub.bracketType}
-        numberOfTeams={tournamentHub.teamsAllowed}
-      />
+      <Bracket tournamentId={tournamentHub.id} numberOfTeams={tournamentHub.teamsAllowed} />
     </Modal>
   );
 };

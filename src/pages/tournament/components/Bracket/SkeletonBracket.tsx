@@ -11,11 +11,10 @@ import { Matches, Round, RoundName } from './SingleEliminationBracket.styles';
 import placeholderTeamLogo from 'assets/images/placeholder-team-logo.png';
 
 type Props = {
-  type?: string;
   numberOfTeams?: number;
 };
 
-const SkeletonBracket = ({ type, numberOfTeams }: Props) => {
+const SkeletonBracket = ({ numberOfTeams }: Props) => {
   const rounds = [];
   const listOfRounds = [
     'Round of 256',

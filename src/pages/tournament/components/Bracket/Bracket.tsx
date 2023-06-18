@@ -1,15 +1,19 @@
 import useBracketFeed from 'api/feeds/hooks/useBracketFeed';
-import { isSingleElimination } from 'types/tournaments/Bracket';
+import { isSingleElimination, isSkeletonBracket } from 'types/tournaments/Bracket';
 import SingleEliminationBracket from './SingleEliminationBracket';
+import SkeletonBracket from './SkeletonBracket';
 
 type Props = {
   tournamentId: string;
+  numberOfTeams?: number;
 };
 
-const Bracket = ({ tournamentId }: Props) => {
+const Bracket = ({ tournamentId, numberOfTeams }: Props) => {
   const { bracket, isLoading } = useBracketFeed(tournamentId);
 
-  if (isLoading) return null; // TODO -> Make a skeleton
+  if (isSkeletonBracket(bracket) || isLoading) {
+    return <SkeletonBracket numberOfTeams={numberOfTeams} />;
+  }
 
   if (isSingleElimination(bracket)) {
     return <SingleEliminationBracket bracket={bracket} />;
