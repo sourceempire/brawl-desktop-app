@@ -54,12 +54,12 @@ export const SliderButtonPrev = styled(Icons.ArrowLeft)<{ visible?: boolean }>`
   `}
 `;
 
-export const SliderButtonNext = styled(Icons.ArrowRight)<{ visible?: boolean }>`
-  ${({ theme }) => css`
-    width: 20px;
-    fill: ${theme.colors.white};
-  `}
-`;
+// export const SliderButtonNext = styled(Icons.ArrowRight)<{ visible?: boolean }>`
+//   ${({ theme }) => css`
+//     width: 20px;
+//     fill: ${theme.colors.white};
+//   `}
+// `;
 
 export const Dots = styled.div<{ visible?: boolean }>`
   ${({ theme, visible }) => css`

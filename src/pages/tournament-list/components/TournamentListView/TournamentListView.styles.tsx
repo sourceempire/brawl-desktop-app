@@ -9,15 +9,15 @@ export const FeaturedTournamentToggle = styled.div`
   align-items: center;
 `;
 
-export const SelectArrow = styled(Icons.SelectArrow)<{ expanded: boolean }>`
-  height: 8px;
-  width: 8px;
-  transform: ${({ expanded }) => (expanded ? 'rotate(0)' : 'rotate(-180deg)')};
-  ${({ theme }) => css`
-    fill: ${theme.colors.white};
-    margin-left: ${theme.spacing.base}px;
-  `}
-`;
+// export const SelectArrow = styled(Icons.SelectArrow)<{ expanded: boolean }>`
+//   height: 8px;
+//   width: 8px;
+//   transform: ${({ expanded }) => (expanded ? 'rotate(0)' : 'rotate(-180deg)')};
+//   ${({ theme }) => css`
+//     fill: ${theme.colors.white};
+//     margin-left: ${theme.spacing.base}px;
+//   `}
+// `;
 
 export const TournamentGallery = styled.div<{
   featuredTournamentHubs: TournamentHub[];

@@ -19,7 +19,6 @@ import {
   FilterControls,
   FilterSort,
   SearchInput,
-  SelectArrow,
   TournamentGallery,
   TournamentList
 } from './TournamentListView.styles';
@@ -57,14 +56,14 @@ function Page() {
   }
 
   const navigate = useNavigate();
-
+  console.log(tournamentHubs);
   return (
     <PageContainer>
       {featuredTournamentHubs && !isLoading && (
         <>
           <FeaturedTournamentToggle onClick={() => setFeaturedExpanded((e) => !e)}>
             Featured Tournament
-            <SelectArrow expanded={featuredExpanded} />
+            {/* <SelectArrow expanded={featuredExpanded} /> */}
           </FeaturedTournamentToggle>
           <FeaturedTournamentSlider expanded={featuredExpanded} />
         </>

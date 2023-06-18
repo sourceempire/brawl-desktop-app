@@ -8,7 +8,6 @@ import {
   Dots,
   Slider,
   SliderButtonContainer,
-  SliderButtonNext,
   SliderButtonPrev,
   SliderContainer,
   TimerAnimation
@@ -113,7 +112,7 @@ export default function FeaturedTournamentSlider({ expanded }: Props) {
             <SliderButtonPrev onClick={() => changeSlide(1)} />
           </SliderButtonContainer>
           <SliderButtonContainer visible={expanded} rightContainer>
-            <SliderButtonNext visible={expanded} onClick={() => changeSlide(-1)} />
+            {/* <SliderButtonNext visible={expanded} onClick={() => changeSlide(-1)} /> */}
           </SliderButtonContainer>
           <Dots visible={expanded}>
             {featuredTournamentHubs.map((tournamentHub, index) => (
