@@ -51,11 +51,9 @@ export const TournamentInfo = styled.div`
 export const TournamentName = styled.div`
   width: 100%;
   text-align: center;
-  font-size: 20px;
-  font-weight: bold;
   text-transform: uppercase;
   ${({ theme }) => css`
-    font-family: ${theme.fonts.stylized};
+    ${theme.textStyles.stylizedHeader}
     padding: ${theme.spacing.baseX4}px 0 ${theme.spacing.baseX2}px;
   `}
 `;
