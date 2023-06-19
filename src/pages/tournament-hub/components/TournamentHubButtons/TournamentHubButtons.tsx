@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button } from 'common/ui';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import BracketsModal from '../TournamentHubPage/TournamentHubModals/BracketsModal/BracketsModal';
-import HowItWorksModal from '../TournamentHubPage/TournamentHubModals/HowItWorksModal/HowItWorksModal';
+import HowItWorksModal from '../TournamentHubPage/HowItWorksModal/HowItWorksModal';
 import MapPoolModal from '../TournamentHubPage/TournamentHubModals/MapPoolModal/MapPoolModal';
 import PrizesModal from '../TournamentHubPage/TournamentHubModals/PrizesModal/PrizesModal';
 import RulesModal from '../TournamentHubPage/TournamentHubModals/RulesModal/RulesModal';
