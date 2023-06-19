@@ -47,7 +47,7 @@ function Page() {
   const searchQueryDeffered = useDeferredValue(searchQuery);
   const [filterModalOpen, setFilterModalOpen] = useState(false);
 
-  const { tournamentHubs } = useTournamentHubsFeed();
+  const { tournamentHubs, isLoadingTournamentHubs } = useTournamentHubsFeed();
   const { featuredTournamentHubs, isLoadingFeaturedTournaments } = useFeaturedTourmanentsFeed();
 
   function removeFilter(filter: Filter) {
@@ -59,7 +59,7 @@ function Page() {
   const navigate = useNavigate();
 
   // ADD SKELETON
-  if (isLoadingFeaturedTournaments) return null;
+  if (isLoadingFeaturedTournaments || isLoadingTournamentHubs) return null;
 
   return (
     <PageContainer>
