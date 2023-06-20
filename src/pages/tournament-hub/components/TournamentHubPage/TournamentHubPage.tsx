@@ -16,6 +16,7 @@ import BracketsModal from './TournamentHubModals/BracketsModal/BracketsModal';
 import HowItWorksModal from './TournamentHubModals/HowItWorksModal/HowItWorksModal';
 import MapPoolModal from './TournamentHubModals/MapPoolModal/MapPoolModal';
 import RulesModal from './TournamentHubModals/RulesModal/RulesModal';
+import TeamSettingsModal from './TournamentHubModals/TeamSettingsModal/TeamSettingsModal';
 import {
   ButtonsWrapper,
   CountDownInfo,
@@ -90,7 +91,8 @@ const TournamentHubPage = () => {
     brackets: false,
     mapPool: false,
     rules: false,
-    howItWorks: false
+    howItWorks: false,
+    teamSettings: false
   });
 
   const handleOpenModal = (name: string) => {
@@ -175,7 +177,7 @@ const TournamentHubPage = () => {
             <RightButtons>
               {!tournamentHub.registrationClosed &&
                 (!isFeedWithTeam(tournamentTeamFeed) ? (
-                  <Button primary onClick={signup}>
+                  <Button primary onClick={() => handleOpenModal('teamSettings')}>
                     Join tournament
                   </Button>
                 ) : (
@@ -200,6 +202,10 @@ const TournamentHubPage = () => {
           <HowItWorksModal
             isOpen={shownModal.howItWorks}
             onRequestClose={() => setShownModal({ ...shownModal, howItWorks: false })}
+          />
+          <TeamSettingsModal
+            isOpen={shownModal.teamSettings}
+            onRequestClose={() => setShownModal({ ...shownModal, teamSettings: false })}
           />
           <TournamentHubInfoWrapper isRegistrationClosed={tournamentHub.registrationClosed}>
             <InfoHeaderWrapper>
