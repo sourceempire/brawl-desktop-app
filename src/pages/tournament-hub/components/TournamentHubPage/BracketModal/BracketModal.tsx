@@ -11,11 +11,12 @@ type Props = {
 const BracketsModal = ({ isOpen, onRequestClose, tournamentHub }: Props) => {
   return (
     <Modal
-      title="Brackets"
+      title="Bracket structure"
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       width="100%"
-      margin="50px">
+      margin="50px"
+      scrollable={true}>
       <Bracket tournamentId={tournamentHub.id} numberOfTeams={tournamentHub.teamsAllowed} />
     </Modal>
   );

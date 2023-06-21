@@ -12,7 +12,7 @@ import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
 import TournamentCard from 'pages/tournament/components/TournamentCard/TournamentCard';
 import { Tournament } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
-import BracketsModal from './BracketsModal/BracketsModal';
+import BracketModal from './BracketModal/BracketModal';
 import HowItWorksModal from './TournamentHubModals/HowItWorksModal/HowItWorksModal';
 import MapPoolModal from './TournamentHubModals/MapPoolModal/MapPoolModal';
 import RulesModal from './TournamentHubModals/RulesModal/RulesModal';
@@ -194,7 +194,7 @@ const TournamentHubPage = () => {
                 ))}
             </RightButtons>
           </ButtonsWrapper>
-          <BracketsModal
+          <BracketModal
             isOpen={shownModal.brackets}
             onRequestClose={() => setShownModal({ ...shownModal, brackets: false })}
             tournamentHub={tournamentHub}
