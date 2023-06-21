@@ -37,6 +37,7 @@ import {
   RightButtons,
   TournamentHubInfoWrapper,
   TournamentInfo,
+  TournamentName,
   TournamentsWrapper,
   Wrapper
 } from './TournamentHubPage.styles';
@@ -140,18 +141,20 @@ const TournamentHubPage = () => {
       <Wrapper>
         <Backdrop />
         {tournamentHub.registrationClosed && tournamentIds ? (
-          <TournamentsWrapper
-            isUserInTournament={loggedInUserTournament ? true : false}
-            listLength={tournamentIds.length}>
-            {tournamentIds.map((tournamentId) => (
-              <TournamentCard
-                key={tournamentId}
-                tournamentId={tournamentId}
-                tournamentHubImage={tournamentHub.image}
-                isUserInTournament={loggedInUserTournament?.id === tournamentId}
-                onClick={() => navigate(`/main/tournaments/${tournamentId}`)}></TournamentCard>
-            ))}
-          </TournamentsWrapper>
+          <>
+            <TournamentName>{tournamentHub.name}</TournamentName>
+            <TournamentsWrapper listLength={tournamentIds.length}>
+              {tournamentIds.map((tournamentId) => (
+                <TournamentCard
+                  key={tournamentId}
+                  tournamentId={tournamentId}
+                  tournamentHubImage={tournamentHub.image}
+                  isUserInTournament={loggedInUserTournament?.id === tournamentId}
+                  onClick={() => navigate(`/main/tournaments/${tournamentId}`)}
+                />
+              ))}
+            </TournamentsWrapper>
+          </>
         ) : (
           <HubHeaderWrapper>
             <HeaderInfo>
