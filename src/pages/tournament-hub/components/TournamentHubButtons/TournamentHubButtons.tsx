@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button } from 'common/ui';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
-import BracketsModal from '../TournamentHubPage/TournamentHubModals/BracketsModal/BracketsModal';
+import BracketModal from '../TournamentHubPage/BracketModal/BracketModal';
 import HowItWorksModal from '../TournamentHubPage/TournamentHubModals/HowItWorksModal/HowItWorksModal';
 import MapPoolModal from '../TournamentHubPage/TournamentHubModals/MapPoolModal/MapPoolModal';
 import PrizesModal from '../TournamentHubPage/TournamentHubModals/PrizesModal/PrizesModal';
@@ -14,7 +14,7 @@ type Props = {
 
 const TournamentHubButtons = ({ tournamentHub }: Props) => {
   //TODO -> Replace type with gameId from matchSettings
-  const [bracketsModalOpen, setBracketsModalOpen] = useState(false);
+  const [bracketModalOpen, setBracketModalOpen] = useState(false);
   const [mapPoolModalOpen, setMapPoolModalOpen] = useState(false);
   const [rulesModalOpen, setRulesModalOpen] = useState(false);
   const [howItWorksModalOpen, setHowItWorksModalOpen] = useState(false);
@@ -23,7 +23,7 @@ const TournamentHubButtons = ({ tournamentHub }: Props) => {
   return (
     <>
       <Buttons>
-        <Button onClick={() => setBracketsModalOpen(true)}>Brackets</Button>
+        <Button onClick={() => setBracketModalOpen(true)}>Brackets</Button>
         <Button onClick={() => setMapPoolModalOpen(true)}>Map pool</Button>
         <Button onClick={() => setRulesModalOpen(true)}>Rules</Button>
         <Button onClick={() => setHowItWorksModalOpen(true)}>How it works</Button>
@@ -31,10 +31,14 @@ const TournamentHubButtons = ({ tournamentHub }: Props) => {
           <Button onClick={() => setPrizesModalOpen(true)}>Prizes</Button>
         )}
       </Buttons>
-      <BracketsModal
-        isOpen={bracketsModalOpen}
-        onRequestClose={() => setBracketsModalOpen(false)}
-      />
+      {tournamentHub && (
+        <BracketModal
+          isOpen={bracketModalOpen}
+          onRequestClose={() => setBracketModalOpen(false)}
+          tournamentHub={tournamentHub}
+        />
+      )}
+
       <MapPoolModal isOpen={mapPoolModalOpen} onRequestClose={() => setMapPoolModalOpen(false)} />
       <RulesModal isOpen={rulesModalOpen} onRequestClose={() => setRulesModalOpen(false)} />
       <HowItWorksModal

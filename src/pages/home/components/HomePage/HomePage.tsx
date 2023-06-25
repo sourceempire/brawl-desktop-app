@@ -2,6 +2,7 @@
 import PageContainer from 'common/components/PageContainer';
 import Game, { GameId, GameName } from 'types/Game';
 import { CSGOMatchSettings } from 'types/MatchSettings';
+import { BracketType } from 'types/tournaments/Bracket';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import Hero from '../Hero/Hero';
 import LatestWinners from '../LatestWinners/LatestWinners';
@@ -44,7 +45,8 @@ const exampleTournamentInfo = (): TournamentHub => ({
   teamSize: 5,
   registrationClosed: false,
   image: 'https://picsum.photos/600/200?random=9',
-  registrationCloseTime: '2022-09-29 14:30:00'
+  registrationCloseTime: '2022-09-29 14:30:00',
+  bracketType: BracketType.SINGLE_ELIMINATION
 });
 
 export default HomePage;
