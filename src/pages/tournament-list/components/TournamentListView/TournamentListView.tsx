@@ -47,8 +47,9 @@ function Page() {
   const searchQueryDeffered = useDeferredValue(searchQuery);
   const [filterModalOpen, setFilterModalOpen] = useState(false);
 
-  const { tournamentHubs, isLoadingTournamentHubs } = useTournamentHubsFeed();
-  const { featuredTournamentHubs, isLoadingFeaturedTournaments } = useFeaturedTourmanentsFeed();
+  const { tournamentHubs, isLoading: isLoadingTournamentHubs } = useTournamentHubsFeed();
+  const { featuredTournamentHubs, isLoading: isLoadingFeaturedTournaments } =
+    useFeaturedTourmanentsFeed();
 
   function removeFilter(filter: Filter) {
     setActiveFilters((filters) =>

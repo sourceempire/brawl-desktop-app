@@ -10,7 +10,7 @@ const useFeaturedTourmanentsFeed = () => {
 
   return {
     featuredTournamentHubs: data.featuredTournamentHubs ?? [],
-    isLoadingFeaturedTournaments: loading
+    isLoading: loading
   };
 };
 

@@ -6,6 +6,6 @@ export default function useTournamentHubsFeed() {
 
   return {
     tournamentHubs: data.tournamentHubs ?? [],
-    isLoadingTournamentHubs: loading
+    isLoading: loading
   };
 }
