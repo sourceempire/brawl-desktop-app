@@ -7,6 +7,7 @@ type ContentProps = {
   margin?: string;
   timeout: number;
   noPadding: boolean;
+  scrollable: boolean;
 };
 
 export const Content = styled.div<ContentProps>`
@@ -15,13 +16,14 @@ export const Content = styled.div<ContentProps>`
 
   max-width: 100%;
 
-  ${({ width, height, margin, noPadding, theme }) => css`
+  ${({ width, height, margin, noPadding, theme, scrollable }) => css`
     height: ${height ? height : 'auto'};
     width: ${width ? width : 'auto'};
     margin: ${margin ? margin : 'auto'};
     background-color: ${theme.colors.surface.base};
     border: 1px solid ${theme.colors.secondary.base};
     border-radius: ${theme.borderRadius.default};
+    overflow: ${scrollable ? 'scroll' : 'visible'};
 
     ${!noPadding &&
     css`

@@ -13,7 +13,7 @@ import TournamentCard from 'pages/tournament/components/TournamentCard/Tournamen
 import { Tournament } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
 import HowItWorksModal from './HowItWorksModal/HowItWorksModal';
-import BracketsModal from './TournamentHubModals/BracketsModal/BracketsModal';
+import BracketModal from './BracketModal/BracketModal';
 import MapPoolModal from './TournamentHubModals/MapPoolModal/MapPoolModal';
 import RulesModal from './TournamentHubModals/RulesModal/RulesModal';
 import {
@@ -37,6 +37,7 @@ import {
   RightButtons,
   TournamentHubInfoWrapper,
   TournamentInfo,
+  TournamentName,
   TournamentsWrapper,
   Wrapper
 } from './TournamentHubPage.styles';
@@ -45,7 +46,7 @@ const TournamentHubPage = () => {
   const { hubId } = useParams() as { hubId: string };
   const user = useLoggedInUser();
   const tournamentTeamFeed = useTournamentTeamFeed(hubId, user.id);
-  const { tournamentHub, tournamentIds } = useTournamentHubFeed(hubId);
+  const { tournamentHub, tournamentIds, isLoading } = useTournamentHubFeed(hubId);
 
   // this knows that tournamentTeam exists (can be used instead of checking if it exists with falsy conditionals). Use if you want or remove it
   if (isFeedWithTeam(tournamentTeamFeed)) {
@@ -100,7 +101,14 @@ const TournamentHubPage = () => {
   const signup = () => {
     TournamentRequests.joinTournament(hubId)
       .then(() => popup.info('Tournament joined'))
-      .catch((error) => popup.error(error.error));
+      .catch((error) => {
+        switch (error.error) {
+          case 'invalidTeamSize':
+            return popup.error(`Your party needs ${tournamentHub.teamSize} players`);
+          default:
+            popup.error('Something went wrong');
+        }
+      });
   };
 
   const leave = () => {
@@ -126,23 +134,27 @@ const TournamentHubPage = () => {
 
   const navigate = useNavigate();
 
+  if (isLoading) return null;
+
   return (
     <PageContainer>
       <Wrapper>
         <Backdrop />
         {tournamentHub.registrationClosed && tournamentIds ? (
-          <TournamentsWrapper
-            isUserInTournament={loggedInUserTournament ? true : false}
-            listLength={tournamentIds.length}>
-            {tournamentIds.map((tournamentId) => (
-              <TournamentCard
-                key={tournamentId}
-                tournamentId={tournamentId}
-                tournamentHubImage={tournamentHub.image}
-                isUserInTournament={loggedInUserTournament?.id === tournamentId}
-                onClick={() => navigate(`/main/tournaments/${tournamentId}`)}></TournamentCard>
-            ))}
-          </TournamentsWrapper>
+          <>
+            <TournamentName>{tournamentHub.name}</TournamentName>
+            <TournamentsWrapper listLength={tournamentIds.length}>
+              {tournamentIds.map((tournamentId) => (
+                <TournamentCard
+                  key={tournamentId}
+                  tournamentId={tournamentId}
+                  tournamentHubImage={tournamentHub.image}
+                  isUserInTournament={loggedInUserTournament?.id === tournamentId}
+                  onClick={() => navigate(`/main/tournaments/${tournamentId}`)}
+                />
+              ))}
+            </TournamentsWrapper>
+          </>
         ) : (
           <HubHeaderWrapper>
             <HeaderInfo>
@@ -185,9 +197,10 @@ const TournamentHubPage = () => {
                 ))}
             </RightButtons>
           </ButtonsWrapper>
-          <BracketsModal
+          <BracketModal
             isOpen={shownModal.brackets}
             onRequestClose={() => setShownModal({ ...shownModal, brackets: false })}
+            tournamentHub={tournamentHub}
           />
           <MapPoolModal
             isOpen={shownModal.mapPool}
