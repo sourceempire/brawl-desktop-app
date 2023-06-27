@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Button } from 'common/ui';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
+import HowItWorksModal from '../TournamentHubPage/HowItWorksModal/HowItWorksModal';
 import BracketModal from '../TournamentHubPage/BracketModal/BracketModal';
-import HowItWorksModal from '../TournamentHubPage/TournamentHubModals/HowItWorksModal/HowItWorksModal';
 import MapPoolModal from '../TournamentHubPage/TournamentHubModals/MapPoolModal/MapPoolModal';
 import PrizesModal from '../TournamentHubPage/TournamentHubModals/PrizesModal/PrizesModal';
 import RulesModal from '../TournamentHubPage/TournamentHubModals/RulesModal/RulesModal';
@@ -13,7 +13,6 @@ type Props = {
 };
 
 const TournamentHubButtons = ({ tournamentHub }: Props) => {
-  //TODO -> Replace type with gameId from matchSettings
   const [bracketModalOpen, setBracketModalOpen] = useState(false);
   const [mapPoolModalOpen, setMapPoolModalOpen] = useState(false);
   const [rulesModalOpen, setRulesModalOpen] = useState(false);
