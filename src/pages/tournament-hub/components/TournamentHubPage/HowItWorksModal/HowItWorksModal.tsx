@@ -1,4 +1,4 @@
-import { Icons, Modal } from 'common/ui';
+import { Button, Icons, Modal } from 'common/ui';
 import {
   HighLight,
   Row,
@@ -25,7 +25,7 @@ const HowItWorksModal = ({ isOpen, onRequestClose }: Props) => {
         },
         {
           icon: Icons.Trophy,
-          text: 'The <HighLights>prize pool<HighLights> is determined based on how many teams have joined the tournament.'
+          text: 'The <HighLights>prize pool</HighLights> is determined based on how many teams have joined the tournament.'
         }
       ]
     },
@@ -57,8 +57,10 @@ const HowItWorksModal = ({ isOpen, onRequestClose }: Props) => {
             <div key={index}>
               <Title>{section.title}</Title>
               {section.items.map((item, itemIndex) => (
-                <Row key={itemIndex} reversed={index % 2 === 1}>
-                  <StyledIcon icon={item.icon} />
+                <Row key={itemIndex}>
+                  {item.icon !== '' && (
+                    <StyledIcon icon={item.icon} reversed={itemIndex % 2 === 0} />
+                  )}
                   <Text>
                     {item.text.split(/<HighLights>(.*?)<\/HighLights>/g).map((part, partIndex) => {
                       if (partIndex % 2 === 1) {
@@ -68,10 +70,14 @@ const HowItWorksModal = ({ isOpen, onRequestClose }: Props) => {
                       }
                     })}
                   </Text>
+                  {item.icon !== '' && (
+                    <StyledIcon icon={item.icon} reversed={itemIndex % 2 === 1} />
+                  )}
                 </Row>
               ))}
             </div>
           ))}
+          <Button onClick={onRequestClose}>I understand</Button>
         </Section>
       </Wrapper>
     </Modal>
