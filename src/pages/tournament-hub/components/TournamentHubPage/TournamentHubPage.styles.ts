@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { Icon } from 'common/ui/Icon';
 
-export const TournamentsWrapper = styled.div<{ isUserInTournament: boolean; listLength: number }>`
+export const TournamentsWrapper = styled.div<{ listLength: number }>`
   flex: 1;
   display: grid;
   overflow: scroll;
@@ -45,6 +45,16 @@ export const TournamentInfo = styled.div`
   ${({ theme }) => css`
     gap: ${theme.spacing.baseX3}px;
     margin-top: ${theme.spacing.baseX2}px;
+  `}
+`;
+
+export const TournamentName = styled.div`
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  ${({ theme }) => css`
+    ${theme.textStyles.stylizedHeader}
+    padding: ${theme.spacing.baseX4}px 0 ${theme.spacing.baseX2}px;
   `}
 `;
 

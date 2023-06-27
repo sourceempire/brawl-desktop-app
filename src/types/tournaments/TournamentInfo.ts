@@ -16,6 +16,7 @@ export interface TournamentHub {
   registrationClosed: boolean;
   image: string;
   registrationCloseTime: string;
+  bracketType: string;
 }
 
 export type Tournament = {

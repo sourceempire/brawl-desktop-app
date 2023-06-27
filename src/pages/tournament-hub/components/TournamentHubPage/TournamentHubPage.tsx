@@ -12,7 +12,7 @@ import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
 import TournamentCard from 'pages/tournament/components/TournamentCard/TournamentCard';
 import { Tournament } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
-import BracketsModal from './BracketsModal/BracketsModal';
+import BracketModal from './BracketModal/BracketModal';
 import HowItWorksModal from './HowItWorksModal/HowItWorksModal';
 import MapPoolModal from './MapPoolModal/MapPoolModal';
 import RulesModal from './RulesModal/RulesModal';
@@ -37,6 +37,7 @@ import {
   RightButtons,
   TournamentHubInfoWrapper,
   TournamentInfo,
+  TournamentName,
   TournamentsWrapper,
   Wrapper
 } from './TournamentHubPage.styles';
@@ -138,18 +139,20 @@ const TournamentHubPage = () => {
       <Wrapper>
         <Backdrop />
         {tournamentHub.registrationClosed && tournamentIds ? (
-          <TournamentsWrapper
-            isUserInTournament={loggedInUserTournament ? true : false}
-            listLength={tournamentIds.length}>
-            {tournamentIds.map((tournamentId) => (
-              <TournamentCard
-                key={tournamentId}
-                tournamentId={tournamentId}
-                tournamentHubImage={tournamentHub.image}
-                isUserInTournament={loggedInUserTournament?.id === tournamentId}
-                onClick={() => navigate(`/main/tournaments/${tournamentId}`)}></TournamentCard>
-            ))}
-          </TournamentsWrapper>
+          <>
+            <TournamentName>{tournamentHub.name}</TournamentName>
+            <TournamentsWrapper listLength={tournamentIds.length}>
+              {tournamentIds.map((tournamentId) => (
+                <TournamentCard
+                  key={tournamentId}
+                  tournamentId={tournamentId}
+                  tournamentHubImage={tournamentHub.image}
+                  isUserInTournament={loggedInUserTournament?.id === tournamentId}
+                  onClick={() => navigate(`/main/tournaments/${tournamentId}`)}
+                />
+              ))}
+            </TournamentsWrapper>
+          </>
         ) : (
           <HubHeaderWrapper>
             <HeaderInfo>
@@ -192,9 +195,10 @@ const TournamentHubPage = () => {
                 ))}
             </RightButtons>
           </ButtonsWrapper>
-          <BracketsModal
+          <BracketModal
             isOpen={shownModal.brackets}
             onRequestClose={() => setShownModal({ ...shownModal, brackets: false })}
+            tournamentHub={tournamentHub}
           />
           <MapPoolModal
             isOpen={shownModal.mapPool}
