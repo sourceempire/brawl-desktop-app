@@ -1,19 +1,21 @@
+import { Image } from 'brawl-image';
 import styled, { css } from 'styled-components/macro';
 import { Card, Icons } from 'common/ui';
 
-export const Header = styled.div<{ image: string }>`
-  ${({ image, theme }) => css`
-    background-image: url(${image});
-    background-size: cover;
-    height: 90px;
+export const TournamentImage = styled(Image)`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+`;
+
+export const Header = styled.div`
+  position: relative;
+  background-size: cover;
+  height: 90px;
+
+  ${({ theme }) => css`
     border-radius: ${theme.borderRadius.default} ${theme.borderRadius.default} 0 0;
-    position: relative;
-    :before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-color: rgba(0, 0, 0, 0.3);
-    }
   `}
 `;
 
@@ -22,11 +24,6 @@ export const Wrapper = styled(Card)`
   height: 214px;
   :hover {
     background-color: ${({ theme }) => theme.colors.surfaceElement.base};
-    ${Header} {
-      :before {
-        background-color: rgba(0, 0, 0, 0.2);
-      }
-    }
   }
 `;
 

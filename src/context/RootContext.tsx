@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { UserRequests } from 'api/requests';
+import { ImageCacheProvider } from 'brawl-image';
+import { ImageCacheContext } from 'brawl-image/src/declarations/context/ImageCacheContext';
 import ServerSubscriptionProvider from 'brawl-websocket';
 import { MatchResultModalContextProvider } from './MatchResultModalContext';
 import { PartyContextProvider } from './PartyContext';
@@ -28,7 +30,9 @@ const RootContextProvider = ({ children }: Props) => {
     <ServerSubscriptionProvider serverUrl={serverUrl}>
       <UserContextProvider userId={loggedInUserId}>
         <PartyContextProvider>
-          <MatchResultModalContextProvider>{children}</MatchResultModalContextProvider>
+          <ImageCacheProvider serverUrl={serverUrl}>
+            <MatchResultModalContextProvider>{children}</MatchResultModalContextProvider>
+          </ImageCacheProvider>
         </PartyContextProvider>
       </UserContextProvider>
     </ServerSubscriptionProvider>

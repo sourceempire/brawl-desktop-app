@@ -12,8 +12,8 @@ import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
 import TournamentCard from 'pages/tournament/components/TournamentCard/TournamentCard';
 import { Tournament } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
-import HowItWorksModal from './HowItWorksModal/HowItWorksModal';
 import BracketModal from './BracketModal/BracketModal';
+import HowItWorksModal from './HowItWorksModal/HowItWorksModal';
 import MapPoolModal from './TournamentHubModals/MapPoolModal/MapPoolModal';
 import RulesModal from './TournamentHubModals/RulesModal/RulesModal';
 import {
@@ -148,7 +148,7 @@ const TournamentHubPage = () => {
                 <TournamentCard
                   key={tournamentId}
                   tournamentId={tournamentId}
-                  tournamentHubImage={tournamentHub.image}
+                  tournamentHubImage={tournamentHub.imageId}
                   isUserInTournament={loggedInUserTournament?.id === tournamentId}
                   onClick={() => navigate(`/main/tournaments/${tournamentId}`)}
                 />

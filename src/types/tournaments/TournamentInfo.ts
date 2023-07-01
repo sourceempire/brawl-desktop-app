@@ -14,7 +14,7 @@ export interface TournamentHub {
   teamSize: number;
   teamsAllowed: number;
   registrationClosed: boolean;
-  image: string;
+  imageId: string; // UUID
   registrationCloseTime: string;
   bracketType: string;
 }

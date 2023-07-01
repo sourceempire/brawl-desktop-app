@@ -21,6 +21,7 @@ import {
   StatusIconLocked,
   StatusIconOpen,
   StatusText,
+  TournamentImage,
   TournamentName,
   TournamentStatus,
   TwoColHeader,
@@ -36,7 +37,8 @@ type Props = {
 export default function TournamentInfoCard({ tournamentInfo, onClick, className }: Props) {
   return (
     <Wrapper padding={false} onClick={onClick} className={className}>
-      <Header image={tournamentInfo.image}>
+      <Header>
+        <TournamentImage imageId={tournamentInfo.imageId} />
         <TournamentName>{tournamentInfo.name}</TournamentName>
       </Header>
       <Line />
