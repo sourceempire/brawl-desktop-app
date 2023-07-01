@@ -12,6 +12,7 @@ import {
   Name,
   PrizePool,
   PrizePoolAmount,
+  TournamentImage,
   TournamentInfo,
   Wrapper
 } from './FeaturedTournament.styles';
@@ -28,7 +29,8 @@ export default function FeaturedTournament({ tournamentHub, onClick, visible }: 
   return (
     <Wrapper>
       <HeroWrapper>
-        <Hero onClick={onClick} image={tournamentHub.image} visible={visible}>
+        <Hero onClick={onClick} visible={visible}>
+          <TournamentImage imageId={tournamentHub.imageId} />
           <Countdown>{formattedRemainingTime}</Countdown>
           <Info>
             <Column1>
