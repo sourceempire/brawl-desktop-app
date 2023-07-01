@@ -139,7 +139,7 @@ const TournamentHubPage = () => {
   return (
     <PageContainer>
       <Wrapper>
-        <Backdrop />
+        <Backdrop imageId={tournamentHub.imageId} />
         {tournamentHub.registrationClosed && tournamentIds ? (
           <>
             <TournamentName>{tournamentHub.name}</TournamentName>
