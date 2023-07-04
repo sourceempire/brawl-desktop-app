@@ -18,8 +18,6 @@ export const Label = styled.div`
 
 export const PartySettingsInput = styled(Input)`
   ${({ theme }) => css`
-    margin-left: -${theme.spacing.base}px;
-    margin-right: -${theme.spacing.base}px;
     input {
       font-weight: bold;
       padding-left: 4px;
