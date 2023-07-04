@@ -10,6 +10,7 @@ type Props = {
   small?: boolean;
   icon?: IconEnum | SVGComponent | string;
   tabIndex?: number;
+  disabled?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
@@ -22,7 +23,8 @@ export const Button = ({
   small,
   icon,
   onClick,
-  tabIndex = 0
+  tabIndex = 0,
+  disabled
 }: Props) => {
   return (
     <Wrapper
@@ -33,7 +35,8 @@ export const Button = ({
       alert={alert}
       small={small}
       hasIcon={icon !== undefined}
-      tabIndex={tabIndex}>
+      tabIndex={tabIndex}
+      disabled={disabled}>
       {icon && <ButtonIcon icon={icon} />}
       {children}
     </Wrapper>
