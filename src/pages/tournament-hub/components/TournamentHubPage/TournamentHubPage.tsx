@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useTournamentHubFeed, useTournamentTeamFeed } from 'api/feeds';
+import { usePartyFeed, useTournamentHubFeed, useTournamentTeamFeed } from 'api/feeds';
 import { isFeedWithTeam } from 'api/feeds/hooks/useTournamentTeamFeed';
 import * as TournamentRequests from 'api/requests/TournamentRequests';
 import { useNavigate, useParams } from 'react-router-dom';
 import PageContainer from 'common/components/PageContainer';
 import { useLoggedInUser } from 'common/hooks/useLoggedInUser';
-import popup from 'common/popup';
 import { Backdrop, Button, Icons } from 'common/ui';
 import CountDown from 'pages/tournament/components/CountDown';
 import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
@@ -20,6 +19,7 @@ import TeamSettingsModal from './TournamentHubModals/TeamSettingsModal/TeamSetti
 import {
   ButtonsWrapper,
   CountDownInfo,
+  ErrorMessage,
   Header,
   HeaderHub,
   HeaderInfo,
@@ -43,6 +43,7 @@ import {
 } from './TournamentHubPage.styles';
 
 const TournamentHubPage = () => {
+  const { party } = usePartyFeed();
   const { hubId } = useParams() as { hubId: string };
   const user = useLoggedInUser();
   const tournamentTeamFeed = useTournamentTeamFeed(hubId, user.id);
@@ -97,18 +98,6 @@ const TournamentHubPage = () => {
 
   const handleOpenModal = (name: string) => {
     setShownModal({ ...shownModal, [name]: true });
-  };
-
-  const signup = () => {
-    TournamentRequests.joinTournament(hubId)
-      .then(() => popup.info('Tournament joined'))
-      .catch((error) => popup.error(error.error));
-  };
-
-  const leave = () => {
-    TournamentRequests.leaveTournament(hubId)
-      .then(() => popup.info('Tournament leaved'))
-      .catch((error) => popup.error(error.error));
   };
 
   const getLoggedInUserTournament = useCallback(async () => {
@@ -175,13 +164,18 @@ const TournamentHubPage = () => {
               ))}
             </LeftButtons>
             <RightButtons>
+              {!party && <ErrorMessage>You need a party</ErrorMessage>}
               {!tournamentHub.registrationClosed &&
                 (!isFeedWithTeam(tournamentTeamFeed) ? (
-                  <Button primary onClick={() => handleOpenModal('teamSettings')}>
+                  // MAKE THIS TO WORK WITHOUT PARTY OR MAKE A POPUP SAYING YOU NEED PARTY
+                  <Button
+                    disabled={!party ? true : false}
+                    primary
+                    onClick={() => handleOpenModal('teamSettings')}>
                     Join tournament
                   </Button>
                 ) : (
-                  <Button alert onClick={leave}>
+                  <Button alert onClick={() => handleOpenModal('teamSettings')}>
                     Leave Tournament
                   </Button>
                 ))}
@@ -203,10 +197,14 @@ const TournamentHubPage = () => {
             isOpen={shownModal.howItWorks}
             onRequestClose={() => setShownModal({ ...shownModal, howItWorks: false })}
           />
-          <TeamSettingsModal
-            isOpen={shownModal.teamSettings}
-            onRequestClose={() => setShownModal({ ...shownModal, teamSettings: false })}
-          />
+          {party && (
+            <TeamSettingsModal
+              isOpen={shownModal.teamSettings}
+              party={party}
+              hubId={hubId}
+              onRequestClose={() => setShownModal({ ...shownModal, teamSettings: false })}
+            />
+          )}
           <TournamentHubInfoWrapper isRegistrationClosed={tournamentHub.registrationClosed}>
             <InfoHeaderWrapper>
               <Header>Tournament Information</Header>

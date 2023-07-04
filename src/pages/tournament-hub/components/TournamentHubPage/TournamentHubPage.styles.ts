@@ -112,7 +112,10 @@ export const LeftButtons = styled.div`
   `}
 `;
 
-export const RightButtons = styled.div``;
+export const RightButtons = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 export const ButtonsWrapper = styled.div`
   display: flex;
@@ -203,4 +206,11 @@ export const PrizePosition = styled.div`
     ${theme.textStyles.title}
   `}
   font-size: 16px;
+`;
+
+export const ErrorMessage = styled.div`
+  ${({ theme }) => css`
+    margin-right: ${theme.spacing.base}px;
+    color: ${theme.colors.statusError};
+  `}
 `;
