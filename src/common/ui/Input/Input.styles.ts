@@ -73,7 +73,7 @@ export const InputElement = styled.input<{
     color: white;
     opacity: 0.4;
   }
-  ${({ theme, inputSize, hasIcon, withBorder }) => css`
+  ${({ theme, inputSize, hasIcon, withBorder, disabled }) => css`
     padding: 0 ${getInputPadding(inputSize)};
     height: 100%;
     font-size: ${getInputFontSize(inputSize)};
@@ -98,6 +98,12 @@ export const InputElement = styled.input<{
         outline: none;
         border-color: ${theme.colors.accent.base};
       }
+    `}
+
+    ${disabled &&
+    css`
+      pointer-events: none;
+      opacity: 0.2;
     `}
   `}
 `;
