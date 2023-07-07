@@ -1,14 +1,14 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import svgr from 'vite-plugin-svgr'
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
+import svgr from 'vite-plugin-svgr';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    react({ 
-      babel: { 
-        plugins: ['babel-plugin-styled-components'] 
-      } 
+    react({
+      babel: {
+        plugins: ['babel-plugin-styled-components']
+      }
     }),
     svgr()
   ],
@@ -23,7 +23,7 @@ export default defineConfig({
       hooks: '/src/hooks',
       pages: '/src/pages',
       types: '/src/types',
-      utils: '/src/utils',
-    },
-  },
-})
+      utils: '/src/utils'
+    }
+  }
+});
