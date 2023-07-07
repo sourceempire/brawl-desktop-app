@@ -1,5 +1,5 @@
 import { NavLink as ReactRouterNavLink } from 'react-router-dom';
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
   display: flex;

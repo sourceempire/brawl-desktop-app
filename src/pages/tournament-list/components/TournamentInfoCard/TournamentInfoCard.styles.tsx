@@ -1,5 +1,5 @@
 import { Image } from 'brawl-image';
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from 'styled-components';
 import { Card, Icons } from 'common/ui';
 
 export const TournamentImage = styled(Image)`

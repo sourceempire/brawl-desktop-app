@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from 'styled-components';
 import { Card, Markdown } from 'common/ui';
 
 export const Wrapper = styled(Card).attrs({ padding: false })`

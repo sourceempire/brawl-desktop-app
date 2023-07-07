@@ -18,7 +18,7 @@ export type RegisterForm = {
   usertag: string;
 };
 
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 export const endpoints = {
   LOGIN_CREDENTIALS: SERVER_URL + '/api/public/auth/login',

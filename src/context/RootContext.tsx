@@ -20,7 +20,7 @@ const RootContextProvider = ({ children }: Props) => {
       .catch(console.error);
   }, []);
 
-  const serverUrl = process.env.REACT_APP_SERVER_URL;
+  const serverUrl = import.meta.env.VITE_SERVER_URL;
 
   if (serverUrl === undefined) throw Error('no server url was provided');
 

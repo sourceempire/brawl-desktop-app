@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from 'styled-components';
 import { EllipsisText, Icons } from 'common/ui';
 
 export const RequestSentText = styled.div`
