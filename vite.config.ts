@@ -7,7 +7,7 @@ import mkcert from 'vite-plugin-mkcert'
 export default defineConfig({
   server: { https: true },
   plugins: [
-    mkcert(),
+    mkcert({ savePath: './cert', certFileName: 'vite-cert.pem' }),
     react({
       babel: {
         plugins: ['babel-plugin-styled-components']

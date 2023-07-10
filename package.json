@@ -8,8 +8,8 @@
   "main": "public/electron.js",
   "homepage": "./",
   "scripts": {
-    "dev2": "npm run start-react & npm run start-electron",
-    "dev": "node start-script",
+    "dev": "concurrently \"wait-on npm run start-react\" \"npm run start-electron\"",
+    "dev2": "npm run start-react && npm run start-electron",
     "start-react": "vite",
     "start-electron": "electron .",
     "react-build": "react-scripts build",
