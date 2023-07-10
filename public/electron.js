@@ -35,15 +35,20 @@ async function createWindow(appPath, options = {}) {
     }
   });
 
-  if (isExternal) {
-    await window.loadURL(appPath);
-  } else {
-    if (isDev) {
-      const port = process.env.APP_PORT || 5173;
-      await window.loadURL(`http://localhost:${port}/#/${appPath}`);
+  try {
+    if (isExternal) {
+      await window.loadURL(appPath);
     } else {
-      await window.loadFile(path.join(__dirname, `../build/index.html`), { hash: `/${appPath}` });
+      if (isDev) {
+        const port = process.env.APP_PORT || 5173;
+
+        await window.loadURL(`http://localhost:${port}/#/${appPath}`);
+      } else {
+        await window.loadFile(path.join(__dirname, `../build/index.html`), { hash: `/${appPath}` });
+      }
     }
+  } catch (error) {
+    console.log(error);
   }
 
   return window;
@@ -204,13 +209,6 @@ app.on('window-all-closed', () => {
   }
 });
 
-// TODO -> This is not evaluated, should probably be implemented in a different way to prevent unwanted behaviour
-app.on('activate', () => {
-  if (loadingWindow === null) {
-    createLoadingWindow();
-  }
-});
-
 ipcMain.on('notification', (_, { title, subtitle, body, silent, icon }) => {
   new Notification({ title, subtitle, body, silent, icon }).show();
 });
@@ -251,6 +249,8 @@ ipcMain.on('quit-and-install', () => autoUpdater.quitAndInstall());
 
 // SSL/TSL: this is the self signed certificate support
 if (isDev) {
+  app.commandLine.appendSwitch('ignore-certificate-errors', 'true');
+
   app.on('certificate-error', (event, webContents, url, error, certificate, callback) => {
     // On certificate error we disable default behaviour (stop loading the page)
     // and we then say "it is all fine - true" to the callback
