@@ -8,10 +8,10 @@
   "main": "public/electron.js",
   "homepage": "./",
   "scripts": {
-    "dev": "concurrently \"wait-on npm run start-react\" \"npm run start-electron\"",
-    "dev2": "npm run start-react && npm run start-electron",
+    "start": "npm run start-react & npm run start-electron-delay",
     "start-react": "vite",
     "start-electron": "electron .",
+    "start-electron-delay": "sleep 3 && npm run start-electron",
     "react-build": "react-scripts build",
     "electron-build": "electron-builder",
     "build": "tsc && vite build && npm run electron-build",
