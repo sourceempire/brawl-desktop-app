@@ -1,4 +1,4 @@
-import { css, styled } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div<{ isFriendBarVisible: boolean }>`
   display: flex;
