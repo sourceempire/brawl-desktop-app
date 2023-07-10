@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from 'styled-components';
 import { Wrapper as Button } from '../Button/Button.styles';
 import { Icons } from '../Icon';
 

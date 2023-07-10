@@ -43,7 +43,7 @@ export const OpenIdLogin = ({ inactive = false }: Props) => {
       <SignUpText>
         No account? <p>You{`'`}ll be onboarded</p> the first time you sign in.
       </SignUpText>
-      <AppVersion>Version: {process.env.REACT_APP_VERSION}</AppVersion>
+      <AppVersion>Version: {import.meta.env.VITE_VERSION}</AppVersion>
     </LoginWrapper>
   );
 };
