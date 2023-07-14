@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useTournamentHubFeed, useTournamentTeamFeed } from 'api/feeds';
+import { usePartyFeed, useTournamentHubFeed, useTournamentTeamFeed } from 'api/feeds';
 import { isFeedWithTeam } from 'api/feeds/hooks/useTournamentTeamFeed';
 import * as TournamentRequests from 'api/requests/TournamentRequests';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -41,12 +41,15 @@ import {
   TournamentsWrapper,
   Wrapper
 } from './TournamentHubPage.styles';
+import { useJoinTournamentRequest } from 'api/requests/tournament';
 
 const TournamentHubPage = () => {
   const { hubId } = useParams() as { hubId: string };
   const user = useLoggedInUser();
   const tournamentTeamFeed = useTournamentTeamFeed(hubId, user.id);
   const { tournamentHub, tournamentIds, isLoading } = useTournamentHubFeed(hubId);
+  const { isInParty, party } = usePartyFeed();
+  const { joinTournament, loading, success, error } = useJoinTournamentRequest();
 
   // this knows that tournamentTeam exists (can be used instead of checking if it exists with falsy conditionals). Use if you want or remove it
   if (isFeedWithTeam(tournamentTeamFeed)) {
@@ -99,16 +102,13 @@ const TournamentHubPage = () => {
   };
 
   const signup = () => {
-    TournamentRequests.joinTournament(hubId)
-      .then(() => popup.info('Tournament joined'))
-      .catch((error) => {
-        switch (error.error) {
-          case 'invalidTeamSize':
-            return popup.error(`Your party needs ${tournamentHub.teamSize} players`);
-          default:
-            popup.error('Something went wrong');
-        }
-      });
+    if (!isInParty) popup.warning('You need to be in a party');
+
+    joinTournament({
+      tournamentHubId: hubId,
+      teamName: 'MockTeamName',
+      playerIds: party.players
+    });
   };
 
   const leave = () => {
