@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import PageContainer from 'common/components/PageContainer';
 import { useLoggedInUser } from 'common/hooks/useLoggedInUser';
 import { Backdrop, Button, Icons } from 'common/ui';
+import { TournamentHubModalType } from 'common/ui/Modal/Modal.types';
 import CountDown from 'pages/tournament/components/CountDown';
 import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
 import TournamentCard from 'pages/tournament/components/TournamentCard/TournamentCard';
@@ -88,16 +89,17 @@ const TournamentHubPage = () => {
     }
   ];
 
-  const [shownModal, setShownModal] = useState({
-    brackets: false,
-    mapPool: false,
-    rules: false,
-    howItWorks: false,
-    teamSettings: false
-  });
+  const [activeModal, setActiveModal] = useState<TournamentHubModalType>(null);
 
   const handleOpenModal = (name: string) => {
-    setShownModal({ ...shownModal, [name]: true });
+    const modalTypeMapping: Record<string, TournamentHubModalType> = {
+      brackets: 'brackets',
+      mapPool: 'mapPool',
+      rules: 'rules',
+      howItWorks: 'howItWorks'
+    };
+
+    setActiveModal(modalTypeMapping[name] || null);
   };
 
   const getLoggedInUserTournament = useCallback(async () => {
@@ -113,7 +115,7 @@ const TournamentHubPage = () => {
   useEffect(() => {
     // Replace with a feed
     getLoggedInUserTournament();
-  }, [getLoggedInUserTournament, shownModal]);
+  }, [getLoggedInUserTournament, activeModal]);
 
   const navigate = useNavigate();
 
@@ -171,38 +173,38 @@ const TournamentHubPage = () => {
                   <Button
                     disabled={!party ? true : false}
                     primary
-                    onClick={() => handleOpenModal('teamSettings')}>
+                    onClick={() => setActiveModal('teamSettings')}>
                     Join tournament
                   </Button>
                 ) : (
-                  <Button alert onClick={() => handleOpenModal('teamSettings')}>
+                  <Button alert onClick={() => setActiveModal('teamSettings')}>
                     Leave Tournament
                   </Button>
                 ))}
             </RightButtons>
           </ButtonsWrapper>
           <BracketsModal
-            isOpen={shownModal.brackets}
-            onRequestClose={() => setShownModal({ ...shownModal, brackets: false })}
+            isOpen={activeModal === 'brackets'}
+            onRequestClose={() => setActiveModal(null)}
           />
           <MapPoolModal
-            isOpen={shownModal.mapPool}
-            onRequestClose={() => setShownModal({ ...shownModal, mapPool: false })}
+            isOpen={activeModal === 'mapPool'}
+            onRequestClose={() => setActiveModal(null)}
           />
           <RulesModal
-            isOpen={shownModal.rules}
-            onRequestClose={() => setShownModal({ ...shownModal, rules: false })}
+            isOpen={activeModal === 'rules'}
+            onRequestClose={() => setActiveModal(null)}
           />
           <HowItWorksModal
-            isOpen={shownModal.howItWorks}
-            onRequestClose={() => setShownModal({ ...shownModal, howItWorks: false })}
+            isOpen={activeModal === 'howItWorks'}
+            onRequestClose={() => setActiveModal(null)}
           />
           {party && (
             <TeamSettingsModal
-              isOpen={shownModal.teamSettings}
+              isOpen={activeModal === 'teamSettings'}
               party={party}
               hubId={hubId}
-              onRequestClose={() => setShownModal({ ...shownModal, teamSettings: false })}
+              onRequestClose={() => setActiveModal(null)}
             />
           )}
           <TournamentHubInfoWrapper isRegistrationClosed={tournamentHub.registrationClosed}>
