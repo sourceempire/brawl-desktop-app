@@ -207,10 +207,3 @@ export const PrizePosition = styled.div`
   `}
   font-size: 16px;
 `;
-
-export const ErrorMessage = styled.div`
-  ${({ theme }) => css`
-    margin-right: ${theme.spacing.base}px;
-    color: ${theme.colors.statusError};
-  `}
-`;
