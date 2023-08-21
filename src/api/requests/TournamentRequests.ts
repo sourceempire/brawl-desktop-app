@@ -23,8 +23,8 @@ export const getTournament = (params: {
   matchId?: string;
 }) => Fetcher.get<{ tournament: Tournament }>(`${SERVER_URL}/api/tournament`, params);
 
-export const joinTournament = (tournamentHubId: string) =>
-  Fetcher.post(`${SERVER_URL}/api/tournament/join`, { tournamentHubId });
+export const joinTournament = (tournamentHubId: string, playerIds: string[], teamName: string) =>
+  Fetcher.post(`${SERVER_URL}/api/tournament/join`, { tournamentHubId, playerIds, teamName });
 
 export const leaveTournament = (tournamentHubId: string) =>
   Fetcher.post(`${SERVER_URL}/api/tournament/leave`, { tournamentHubId });
