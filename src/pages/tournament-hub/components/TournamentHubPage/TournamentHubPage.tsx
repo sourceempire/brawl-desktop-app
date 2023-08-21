@@ -5,6 +5,7 @@ import * as TournamentRequests from 'api/requests/TournamentRequests';
 import { useNavigate, useParams } from 'react-router-dom';
 import PageContainer from 'common/components/PageContainer';
 import { useLoggedInUser } from 'common/hooks/useLoggedInUser';
+import popup from 'common/popup';
 import { Backdrop, Button, Icons } from 'common/ui';
 import { TournamentHubModalType } from 'common/ui/Modal/Modal.types';
 import CountDown from 'pages/tournament/components/CountDown';
@@ -20,7 +21,6 @@ import TeamSettingsModal from './TournamentHubModals/TeamSettingsModal/TeamSetti
 import {
   ButtonsWrapper,
   CountDownInfo,
-  ErrorMessage,
   Header,
   HeaderHub,
   HeaderInfo,
@@ -102,6 +102,16 @@ const TournamentHubPage = () => {
     setActiveModal(modalTypeMapping[name] || null);
   };
 
+  const openTeamSettings = () => {
+    if (!party) {
+      popup.error('You need a party');
+    } else if (party.leaderId === user.id) {
+      setActiveModal('teamSettings');
+    } else {
+      popup.error('You are not the party leader');
+    }
+  };
+
   const getLoggedInUserTournament = useCallback(async () => {
     try {
       const res = await TournamentRequests.getTournament({ tournamentHubId: hubId });
@@ -166,18 +176,13 @@ const TournamentHubPage = () => {
               ))}
             </LeftButtons>
             <RightButtons>
-              {!party && <ErrorMessage>You need a party</ErrorMessage>}
               {!tournamentHub.registrationClosed &&
                 (!isFeedWithTeam(tournamentTeamFeed) ? (
-                  // MAKE THIS TO WORK WITHOUT PARTY OR MAKE A POPUP SAYING YOU NEED PARTY
-                  <Button
-                    disabled={!party ? true : false}
-                    primary
-                    onClick={() => setActiveModal('teamSettings')}>
+                  <Button primary onClick={() => openTeamSettings()}>
                     Join tournament
                   </Button>
                 ) : (
-                  <Button alert onClick={() => setActiveModal('teamSettings')}>
+                  <Button alert onClick={() => openTeamSettings()}>
                     Leave Tournament
                   </Button>
                 ))}
@@ -202,7 +207,7 @@ const TournamentHubPage = () => {
           {party && (
             <TeamSettingsModal
               isOpen={activeModal === 'teamSettings'}
-              party={party}
+              playerIds={party.players}
               hubId={hubId}
               onRequestClose={() => setActiveModal(null)}
             />
