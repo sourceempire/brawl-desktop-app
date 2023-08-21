@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { useTournamentHubFeed, useTournamentTeamFeed } from 'api/feeds';
 import { isFeedWithTeam } from 'api/feeds/hooks/useTournamentTeamFeed';
 import * as TournamentRequests from 'api/requests/TournamentRequests';
-import { useDebounce, useLoggedInUser, usePrevious, useUpdateEffect } from 'common/hooks';
+import { useLoggedInUser } from 'common/hooks';
 import popup from 'common/popup';
 import { Modal } from 'common/ui';
 import { InputSize } from 'common/ui/Input/Input.types';
-import { Party } from 'types/Party';
 import TeamSettingsPlayer from './TeamPlayer/TeamPlayer';
 import {
   ButtonWithMessage,
@@ -21,7 +20,7 @@ import {
 } from './TeamSettingsModal.styles';
 
 type Props = {
-  party: Party;
+  playerIds: string[];
   isOpen: boolean;
   hubId: string;
   onRequestClose: () => void;
@@ -29,75 +28,71 @@ type Props = {
 
 const TEAM_NAME_MAX_LENGTH = 20;
 
-const TeamSettingsModal = ({ party, isOpen, hubId, onRequestClose }: Props) => {
+const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) => {
   const [teamName, setTeamName] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const user = useLoggedInUser();
   const tournamentTeamFeed = useTournamentTeamFeed(hubId, user.id);
   const { tournamentHub } = useTournamentHubFeed(hubId);
+  const userInExistingTeam = isFeedWithTeam(tournamentTeamFeed);
 
-  const isLeader = party.leaderId === user.id;
-
-  // this knows that tournamentTeam exists (can be used instead of checking if it exists with falsy conditionals). Use if you want or remove it
-  if (isFeedWithTeam(tournamentTeamFeed)) {
-    tournamentTeamFeed.tournamentTeam;
-  }
-
-  const debouncedTeamName = useDebounce(teamName, 250);
-  const previousDebouncedTeamName = usePrevious(debouncedTeamName);
+  const onRequestCloseTeamSettings = () => {
+    setErrorMessage(null);
+    setTeamName(null);
+    onRequestClose();
+  };
 
   const handleTeamNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTeamName(event.target.value);
+    setErrorMessage(null);
   };
 
   const signup = () => {
-    onRequestClose();
-    TournamentRequests.joinTournament(hubId)
-      .then(() => popup.info('Tournament joined'))
-      .catch((error) => console.log('ERROR', error));
+    if (!teamName) {
+      setErrorMessage('You need a team name');
+    } else {
+      TournamentRequests.joinTournament(hubId, playerIds, teamName)
+        .then(() => {
+          popup.info('Tournament joined');
+          onRequestCloseTeamSettings();
+        })
+        .catch((error) => {
+          console.log('ERROR', error);
+        });
+    }
   };
 
   const leave = () => {
-    onRequestClose();
+    onRequestCloseTeamSettings();
     TournamentRequests.leaveTournament(hubId)
       .then(() => popup.info('Tournament leaved'))
       .catch((error) => popup.error(error.error));
   };
-
-  useUpdateEffect(() => {
-    if (previousDebouncedTeamName === debouncedTeamName) return;
-
-    // CREATE REQUEST FOR TEAM NAME
-
-    // TeamRequests.updateTeamName(debouncedTeamName).catch((error) => {
-    //   popup.error(error.error);
-    //   setTeamName(teamName);
-    // });
-  }, [debouncedTeamName]);
 
   return (
     <Modal
       title="Team Settings"
       isOpen={isOpen}
       onRequestClose={() => {
-        onRequestClose();
+        onRequestCloseTeamSettings();
       }}>
       <Wrapper>
         <Settings>
           <Label>Team Name</Label>
           <PartySettingsInput
             maxLength={TEAM_NAME_MAX_LENGTH}
-            value={teamName ?? ''}
+            value={userInExistingTeam ? tournamentTeamFeed.tournamentTeam.teamName : teamName ?? ''}
             onChange={handleTeamNameChange}
             placeholder="Enter a team name"
             size={InputSize.MEDIUM}
-            disabled={!isLeader ? true : false}
+            disabled={userInExistingTeam ? true : false}
           />
-          {!teamName && isLeader && <ErrorMessage>You need a team name</ErrorMessage>}
-          {party.players && (
+          {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+          {playerIds && (
             <>
               <Label>Team members</Label>
               <PlayersWrapper>
-                {party.players.map((player) => (
+                {playerIds.map((player) => (
                   <TeamSettingsPlayer key={`player_${player}`} userId={player} />
                 ))}
               </PlayersWrapper>
@@ -107,20 +102,16 @@ const TeamSettingsModal = ({ party, isOpen, hubId, onRequestClose }: Props) => {
             <ModalButton
               key="cancel"
               onClick={() => {
-                onRequestClose();
+                onRequestCloseTeamSettings();
               }}>
               Cancel
             </ModalButton>
             {!tournamentHub.registrationClosed &&
-              (!isFeedWithTeam(tournamentTeamFeed) ? (
+              (!userInExistingTeam ? (
                 <ButtonWithMessage>
-                  <ModalButton
-                    disabled={!teamName || !isLeader ? true : false}
-                    primary
-                    onClick={() => signup()}>
+                  <ModalButton primary onClick={() => signup()}>
                     Confirm
                   </ModalButton>
-                  {!isLeader && <ErrorMessage>You need to be party leader</ErrorMessage>}
                 </ButtonWithMessage>
               ) : (
                 <ModalButton alert onClick={() => leave()}>
