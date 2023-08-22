@@ -3,7 +3,7 @@ import useCurrentTournamentMatchFeed from 'api/feeds/hooks/useCurrentTournamentM
 import useTournamentFeed from 'api/feeds/hooks/useTournamentFeed';
 import { Link, Navigate, Route, Routes, useParams } from 'react-router-dom';
 import PageContainer from 'common/components/PageContainer';
-import { Backdrop, Button } from 'common/ui';
+import { Button } from 'common/ui';
 import { MatchContextProvider } from 'context/MatchContext';
 import Bracket from '../Bracket';
 import CurrentMatchStage from '../CurrentMatchStage';
@@ -35,7 +35,6 @@ const TournamentPage = () => {
   return (
     <PageContainer>
       <Wrapper>
-        <Backdrop />
         {isUserInTournament ? (
           <>
             <TournamentInfo tournament={tournament} currentMatchId={matchId} />

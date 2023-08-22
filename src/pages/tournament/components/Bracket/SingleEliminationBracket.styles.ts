@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from 'styled-components';
 import { teamGap, teamHeight } from '../BracketMatch/BracketMatch.styles';
 
 export const firstRoundMatchGap = 48;

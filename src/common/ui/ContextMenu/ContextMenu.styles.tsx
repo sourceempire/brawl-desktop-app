@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from 'styled-components';
 import { EllipsisText } from '../EllipsisText';
 import type { ArrowPosition, Position } from './ContextMenu.types';
 

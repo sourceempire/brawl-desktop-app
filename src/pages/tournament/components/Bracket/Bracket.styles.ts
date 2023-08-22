@@ -8,3 +8,7 @@ export const Wrapper = styled.div`
   position: relative;
   gap: ${roundGap}px;
 `;
+
+export const Container = styled.div`
+  overflow-x: scroll;
+`;

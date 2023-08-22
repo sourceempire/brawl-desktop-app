@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from 'styled-components';
 import { EllipsisText, Icons } from 'common/ui';
 import { InnerWrapper } from 'common/ui/EllipsisText/EllipsisText.styles';
 import { ProfileImage } from 'frames/main/friends/components/Shared.styles';

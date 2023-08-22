@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { IconEnum } from 'common/ui';
-import Game, { GameName } from 'types/Game';
-import { GameId } from 'types/MatchSettings';
+import Game, { GameId, GameName } from 'types/Game';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
 import { getTournamentModeShort, getTournamentSeriesTypeLong } from 'utils/tournamentUtils';
@@ -16,18 +15,21 @@ const InfoCards = ({ tournamentHub }: Props) => {
   const [gameMode, setGameMode] = useState('');
   const [gameType, setGameType] = useState('');
 
-  //TODO -> Replace type with gameId from matchSettings
   const setInfoSettings = (tournamentHub: TournamentHub) => {
-    if (tournamentHub.gameId === Game.CSGO) {
-      setGameName(GameName[Game.CSGO]);
-      tournamentHub.matchSettings.gameId = GameId.CSGO;
-      setGameType(getTournamentSeriesTypeLong(tournamentHub));
-      setGameMode(getTournamentModeShort(tournamentHub));
+    setGameName(GameName[tournamentHub.gameId]);
+
+    switch (tournamentHub.gameId) {
+      case Game.CSGO: {
+        setGameType(getTournamentSeriesTypeLong(tournamentHub));
+        setGameMode(getTournamentModeShort(tournamentHub));
+        break;
+      }
     }
   };
+
   useEffect(() => {
     setInfoSettings(tournamentHub);
-  });
+  }, [tournamentHub]);
 
   return (
     <InfoCardWrapper isRegistrationClosed={tournamentHub.registrationClosed}>

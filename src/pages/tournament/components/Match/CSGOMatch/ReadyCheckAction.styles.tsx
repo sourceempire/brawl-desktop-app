@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from 'styled-components';
 import { Animation, Icons } from 'common/ui';
 import simpleLoading from 'assets/animations/simple-loading.json';
 

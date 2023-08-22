@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from 'styled-components';
 import { Animation } from 'common/ui';
 import { InnerWrapper, OuterWrapper } from 'common/ui/EllipsisText/EllipsisText.styles';
 import simpleLoading from 'assets/animations/simple-loading.json';

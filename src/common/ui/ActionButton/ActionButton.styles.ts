@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from 'styled-components';
 import { ActionButtonSize, WrapperProps } from './ActionButton.types';
 import { theme } from 'assets/styles/Theme';
 

@@ -24,6 +24,7 @@ type Props = {
   margin?: string;
   noPadding?: boolean;
   className?: string;
+  scrollable?: boolean;
 };
 
 export function Modal({
@@ -43,7 +44,8 @@ export function Modal({
   width,
   height,
   margin,
-  noPadding = false
+  noPadding = false,
+  scrollable = false
 }: Props) {
   const element = useRef(document.createElement('div'));
 
@@ -75,7 +77,8 @@ export function Modal({
           width={width}
           height={height}
           margin={margin}
-          noPadding={noPadding}>
+          noPadding={noPadding}
+          scrollable={scrollable}>
           {header && (
             <Header>
               {closeButton && <CrossButton onClick={onRequestClose} />}

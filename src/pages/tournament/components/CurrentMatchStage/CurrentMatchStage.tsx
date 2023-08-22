@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import useMatchFeed from 'api/feeds/hooks/useMatchFeed';
-import { CSGOMatch, CSGOMatchStage } from 'types/match/Match';
+import { CSGOMatchStage, isCSGOMatch } from 'types/match/Match';
 import { CheckIcon, Edge, Stage, StageDot, StageName, Wrapper } from './CurrentMatchStage.styles';
 import { StageStatus } from './CurrentMatchStage.types';
 
@@ -9,15 +9,17 @@ type Props = {
 };
 
 const CurrentMatchStage = ({ matchId }: Props) => {
-  const matchInfo = useMatchFeed(matchId);
-
-  const match = matchInfo.match as CSGOMatch;
+  const { match } = useMatchFeed(matchId);
 
   const [preventAnimations, setPreventAnimations] = useState<boolean>(true);
 
   useEffect(() => {
     setTimeout(() => setPreventAnimations(false), 1000);
   }, []);
+
+  if (!isCSGOMatch(match)) {
+    return null;
+  }
 
   const readyStageStatus = getReadyStageStatus(match.matchStage);
   const vetoStageStatus = getVetoStageStatus(match.matchStage);

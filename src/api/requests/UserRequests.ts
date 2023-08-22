@@ -2,7 +2,7 @@ import Fetcher from 'api/Fetcher';
 import { UserStatusEnum } from 'common/ui';
 import { PublicUser, User } from 'types/user/User';
 
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 export const getLoggedInUser = () => {
   return Fetcher.get<{ user: User }>(`${SERVER_URL}/api/user`, {});

@@ -1,3 +1,4 @@
+import { Image } from 'brawl-image';
 import styled, { css } from 'styled-components';
 import { hsla } from 'utils/styledUtils';
 
@@ -18,7 +19,7 @@ export const Gradient = styled.div`
   `}
 `;
 
-export const BackgroundImage = styled.img`
+export const BackgroundImage = styled(Image)`
   position: absolute;
   width: 100%;
   left: 0;

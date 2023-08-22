@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTournamentHubFeed, useTournamentTeamFeed } from 'api/feeds';
 import { isFeedWithTeam } from 'api/feeds/hooks/useTournamentTeamFeed';
+import { useJoinTournamentRequest } from 'api/requests/tournament';
 import * as TournamentRequests from 'api/requests/TournamentRequests';
 import { useLoggedInUser } from 'common/hooks';
 import popup from 'common/popup';
@@ -35,6 +36,7 @@ const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) 
   const tournamentTeamFeed = useTournamentTeamFeed(hubId, user.id);
   const { tournamentHub } = useTournamentHubFeed(hubId);
   const userInExistingTeam = isFeedWithTeam(tournamentTeamFeed);
+  const { joinTournament, success, error } = useJoinTournamentRequest();
 
   const onRequestCloseTeamSettings = () => {
     setErrorMessage(null);
@@ -51,14 +53,17 @@ const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) 
     if (!teamName) {
       setErrorMessage('You need a team name');
     } else {
-      TournamentRequests.joinTournament(hubId, playerIds, teamName)
-        .then(() => {
-          popup.info('Tournament joined');
-          onRequestCloseTeamSettings();
-        })
-        .catch((error) => {
-          console.log('ERROR', error);
-        });
+      joinTournament({
+        tournamentHubId: hubId,
+        teamName: teamName,
+        playerIds: playerIds
+      });
+      if (success) {
+        popup.info('Tournament joined');
+        onRequestCloseTeamSettings();
+      } else if (error) {
+        console.log('ERROR', error);
+      }
     }
   };
 

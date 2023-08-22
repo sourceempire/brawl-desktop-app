@@ -1,7 +1,7 @@
 import Fetcher from 'api/Fetcher';
 import { User } from 'types/user/User';
 
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 export type PotentialFriend = User & { isRequestSent: boolean };
 
