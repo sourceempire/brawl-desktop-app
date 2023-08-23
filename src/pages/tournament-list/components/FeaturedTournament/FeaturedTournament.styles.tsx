@@ -1,28 +1,36 @@
+import { Image } from 'brawl-image';
 import styled, { css } from 'styled-components';
 
-export const Hero = styled.div<{ image: string; visible?: boolean }>`
-  ${({ image, theme, visible }) => css`
-    position: relative;
-    height: 100%;
-    background: url(${image});
-    background-size: cover;
-    text-align: center;
+export const TournamentImage = styled(Image)`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+`;
+
+export const Hero = styled.div<{ visible?: boolean }>`
+  position: relative;
+  height: 100%;
+  background-size: cover;
+  text-align: center;
+  transform-origin: top;
+  transition: transform 0.3s;
+
+  ${({ theme, visible }) => css`
     border-radius: ${theme.borderRadius.default};
-    transition: transform 0.3s;
     transform: translateY(-${visible ? 0 : 100}%);
-    transform-origin: top;
-    :before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-color: rgba(0, 0, 0, 0.3);
-    }
   `}
 `;
 
 export const Wrapper = styled.div`
   width: 100%;
   height: 100%;
+
+  :hover {
+    filter: brightness(1.2);
+  }
 `;
 
 export const HeroWrapper = styled.div`

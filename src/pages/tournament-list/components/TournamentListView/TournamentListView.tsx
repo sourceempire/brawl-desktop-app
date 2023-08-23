@@ -47,8 +47,9 @@ function Page() {
   const searchQueryDeffered = useDeferredValue(searchQuery);
   const [filterModalOpen, setFilterModalOpen] = useState(false);
 
-  const { tournamentHubs } = useTournamentHubsFeed();
-  const { featuredTournamentHubs, isLoading } = useFeaturedTourmanentsFeed();
+  const { tournamentHubs, isLoading: isLoadingTournamentHubs } = useTournamentHubsFeed();
+  const { featuredTournamentHubs, isLoading: isLoadingFeaturedTournaments } =
+    useFeaturedTourmanentsFeed();
 
   function removeFilter(filter: Filter) {
     setActiveFilters((filters) =>
@@ -58,9 +59,12 @@ function Page() {
 
   const navigate = useNavigate();
 
+  // ADD SKELETON
+  if (isLoadingFeaturedTournaments || isLoadingTournamentHubs) return null;
+
   return (
     <PageContainer>
-      {featuredTournamentHubs && !isLoading && (
+      {featuredTournamentHubs.length > 0 && (
         <>
           <FeaturedTournamentToggle onClick={() => setFeaturedExpanded((e) => !e)}>
             Featured Tournament

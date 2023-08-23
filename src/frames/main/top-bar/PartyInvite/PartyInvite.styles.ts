@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from 'styled-components';
 import { ActionButton, EllipsisText, Input } from 'common/ui';
 
 export const InvitePlayerAction = styled(ActionButton)`

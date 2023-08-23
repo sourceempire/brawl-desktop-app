@@ -1,11 +1,15 @@
 import { useRef, useState } from 'react';
 import useHint from 'common/hooks/useHint';
 import { DepositButton, DepositIcon, MoneyContainer, Wrapper } from './Wallet.styles';
+import useUserMoneyFeed from 'api/feeds/hooks/useUserMoneyFeed';
+import { useLoggedInUser } from 'common/hooks';
 
-// TODO -> useBalanceFeed();
 const Wallet = () => {
   const [isDepositHintVisible, setDepositHintVisible] = useState(false);
   const [isMoneyHintVisible, setMoneyHintVisible] = useState(false);
+
+  const { id } = useLoggedInUser();
+  const { display } = useUserMoneyFeed({ userId: id });
 
   const moneyContainerRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const { Hint: MoneyHint } = useHint({
@@ -39,7 +43,7 @@ const Wallet = () => {
           onClick={handleMoneyClick}
           onMouseEnter={() => setMoneyHintVisible(true)}
           onMouseLeave={() => setMoneyHintVisible(false)}>
-          €42.80
+          {display}
         </MoneyContainer>
         <DepositButton
           ref={depositButtonRef}

@@ -2,7 +2,7 @@ import Fetcher from 'api/Fetcher';
 import { Bracket } from 'types/tournaments/Bracket';
 import { Tournament } from 'types/tournaments/TournamentInfo';
 
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 /**
  * If tournamentHubId is provided, a tournament that the logged

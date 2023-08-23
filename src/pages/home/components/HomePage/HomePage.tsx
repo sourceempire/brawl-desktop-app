@@ -1,20 +1,28 @@
 // import useNewsFeed, { News as NewsType } from 'api/feeds/hooks/useNewsFeed';
+import { useFeaturedTourmanentsFeed } from 'api/feeds';
+import { useNavigate } from 'react-router-dom';
 import PageContainer from 'common/components/PageContainer';
-import Game, { GameName } from 'types/Game';
-import { CSGOMatchSettings } from 'types/MatchSettings';
-import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import Hero from '../Hero/Hero';
 import LatestWinners from '../LatestWinners/LatestWinners';
 // import News from '../News/News';
 import { PromotedTournament, Wrapper } from './HomePage.styles';
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
   // const { news: newsList } = useNewsFeed();
+  const { featuredTournamentHubs } = useFeaturedTourmanentsFeed();
+  const shownTournamentHub = featuredTournamentHubs.length > 0 ? featuredTournamentHubs[0] : null;
 
   return (
     <PageContainer>
       <Wrapper>
-        <PromotedTournament tournamentInfo={exampleTournamentInfo()}></PromotedTournament>
+        {shownTournamentHub && (
+          <PromotedTournament
+            tournamentInfo={shownTournamentHub}
+            onClick={() => navigate(`tournaments/hub/${shownTournamentHub.id}`)}
+          />
+        )}
         <Hero></Hero>
         <LatestWinners></LatestWinners>
 
@@ -25,26 +33,5 @@ const HomePage = () => {
     </PageContainer>
   );
 };
-
-const exampleTournamentInfo = (): TournamentHub => ({
-  id: 'eee18f6d-2a99-4176-b01d-271e12836929',
-  name: 'Sweden Masters Invitational',
-  gameId: '4747a477-3445-4b0a-9db9-bf0e68238208',
-  gameName: GameName[Game.CSGO],
-  startTime: '2022-09-29 14:30:00',
-  entryFee: '50.00',
-  matchSettings: {
-    gameId: '4747a477-3445-4b0a-9db9-bf0e68238208',
-    mode: 'competitive',
-    seriesType: 'bo1'
-  } as CSGOMatchSettings,
-  currentPrizePool: '200.00',
-  region: 'Europe',
-  teamsAllowed: 4,
-  teamSize: 5,
-  registrationClosed: false,
-  image: 'https://picsum.photos/600/200?random=9',
-  registrationCloseTime: '2022-09-29 14:30:00'
-});
 
 export default HomePage;

@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from 'styled-components';
 import { EllipsisText, UserStatus, UserStatusEnum } from 'common/ui';
 import { UserCard } from '../Shared.styles';
 

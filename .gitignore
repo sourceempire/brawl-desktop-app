@@ -66,6 +66,7 @@ typings/
 # project
 build/
 dist/
+cert/
 
 .DS_Store
 

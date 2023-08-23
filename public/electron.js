@@ -35,15 +35,20 @@ async function createWindow(appPath, options = {}) {
     }
   });
 
-  if (isExternal) {
-    await window.loadURL(appPath);
-  } else {
-    if (isDev) {
-      const port = process.env.APP_PORT || 3000;
-      await window.loadURL(`http://localhost:${port}/#/${appPath}`);
+  try {
+    if (isExternal) {
+      await window.loadURL(appPath);
     } else {
-      await window.loadFile(path.join(__dirname, `../build/index.html`), { hash: `/${appPath}` });
+      if (isDev) {
+        const port = process.env.APP_PORT || 5173;
+
+        await window.loadURL(`https://localhost:${port}/#/${appPath}`);
+      } else {
+        await window.loadFile(path.join(__dirname, `../build/index.html`), { hash: `/${appPath}` });
+      }
     }
+  } catch (error) {
+    console.log(error);
   }
 
   return window;
@@ -201,13 +206,6 @@ app.on('ready', () => {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
-  }
-});
-
-// TODO -> This is not evaluated, should probably be implemented in a different way to prevent unwanted behaviour
-app.on('activate', () => {
-  if (loadingWindow === null) {
-    createLoadingWindow();
   }
 });
 

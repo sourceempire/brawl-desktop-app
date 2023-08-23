@@ -1,11 +1,14 @@
 import ReactDOM from 'react-dom';
 import { BackgroundImage, Gradient, Wrapper } from './Backdrop.styles';
-import temporaryBackdrop from 'assets/images/temporary-csgo-backdrop.jpg';
 
-export const Backdrop = () => {
+type Props = {
+  imageId: string;
+};
+
+export const Backdrop = ({ imageId }: Props) => {
   return ReactDOM.createPortal(
     <Wrapper>
-      <BackgroundImage src={temporaryBackdrop} />
+      <BackgroundImage imageId={imageId} />
       <Gradient />
     </Wrapper>,
     document.getElementById('backdrop-root') as HTMLDivElement
