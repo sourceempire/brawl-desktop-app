@@ -36,7 +36,7 @@ const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) 
   const tournamentTeamFeed = useTournamentTeamFeed(hubId, user.id);
   const { tournamentHub } = useTournamentHubFeed(hubId);
   const userInExistingTeam = isFeedWithTeam(tournamentTeamFeed);
-  const { joinTournament, success, error } = useJoinTournamentRequest();
+  const { joinTournament } = useJoinTournamentRequest();
 
   const onRequestCloseTeamSettings = () => {
     setErrorMessage(null);
@@ -58,12 +58,6 @@ const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) 
         teamName: teamName,
         playerIds: playerIds
       });
-      if (success) {
-        popup.info('Tournament joined');
-        onRequestCloseTeamSettings();
-      } else if (error) {
-        console.log('ERROR', error);
-      }
     }
   };
 

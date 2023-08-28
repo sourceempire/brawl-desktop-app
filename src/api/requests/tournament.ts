@@ -16,10 +16,14 @@ type JoinTournamentRequestBody = {
 };
 
 export const useJoinTournamentRequest = () => {
+  const onComplete = () => popup.info(`Tournament joined`);
+
   const onError = (error: ServerError) => {
     switch (error.error) {
       case 'invalidTeamSize':
         return popup.error(`Invalid team size`);
+      case 'insufficientFunds':
+        return popup.error(`Insufficient funds for a player`);
       default:
         popup.error('Something went wrong');
     }
@@ -27,7 +31,7 @@ export const useJoinTournamentRequest = () => {
 
   const [joinTournament, { loading, success, error }] = usePost<void, JoinTournamentRequestBody>(
     tournamentEndpoints.joinTournament,
-    { onError }
+    { onError, onComplete }
   );
 
   return {
