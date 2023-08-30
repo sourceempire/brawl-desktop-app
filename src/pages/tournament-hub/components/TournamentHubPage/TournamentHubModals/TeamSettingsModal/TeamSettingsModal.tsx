@@ -36,13 +36,14 @@ const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) 
   const tournamentTeamFeed = useTournamentTeamFeed(hubId, user.id);
   const { tournamentHub } = useTournamentHubFeed(hubId);
   const userInExistingTeam = isFeedWithTeam(tournamentTeamFeed);
-  const { joinTournament } = useJoinTournamentRequest();
 
   const onRequestCloseTeamSettings = () => {
     setErrorMessage(null);
     setTeamName(null);
     onRequestClose();
   };
+
+  const { joinTournament } = useJoinTournamentRequest(onRequestCloseTeamSettings);
 
   const handleTeamNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTeamName(event.target.value);

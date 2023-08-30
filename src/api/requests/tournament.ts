@@ -15,8 +15,11 @@ type JoinTournamentRequestBody = {
   leaderId?: string;
 };
 
-export const useJoinTournamentRequest = () => {
-  const onComplete = () => popup.info(`Tournament joined`);
+export const useJoinTournamentRequest = (onRequestCloseTeamSettings: () => void) => {
+  const onComplete = () => {
+    popup.info(`Tournament joined`);
+    onRequestCloseTeamSettings();
+  };
 
   const onError = (error: ServerError) => {
     switch (error.error) {
