@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { Icons } from 'common/ui';
 
 export const Wrapper = styled.div`
   position: relative;
@@ -24,19 +23,6 @@ export const PlayerImage = styled.img`
   ${({ theme }) => css`
     border-radius: ${theme.borderRadius.default};
     background-color: ${theme.colors.secondary.base};
-  `}
-`;
-
-export const LeaderStar = styled(Icons.Star)`
-  position: absolute;
-  fill: yellow;
-  top: 0;
-  right: 0;
-  transform: translate(40%, -40%);
-  filter: drop-shadow(0 0 2px black);
-  ${({ theme }) => css`
-    height: ${theme.spacing.baseX2}px;
-    width: ${theme.spacing.baseX2}px;
   `}
 `;
 

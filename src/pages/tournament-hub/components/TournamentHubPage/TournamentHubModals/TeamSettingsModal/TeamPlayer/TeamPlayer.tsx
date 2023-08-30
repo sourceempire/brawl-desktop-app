@@ -1,6 +1,7 @@
 import { usePartyFeed, useUserFeed } from 'api/feeds';
-import { LeaderStar, ProfileImage, Wrapper } from './TeamPlayer.styles';
+import { PlayerProfileImage, Wrapper } from './TeamPlayer.styles';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
+import { LeaderStar } from 'frames/main/friends/components/Shared.styles';
 
 type Props = {
   userId: string;
@@ -16,8 +17,8 @@ const TeamSettingsModal = ({ userId }: Props) => {
 
   return (
     <Wrapper>
-      {isLeader && <LeaderStar />}
-      <ProfileImage src={user.imageUrl ? user.imageUrl : tempProfileImage} />
+      {isLeader && <LeaderStar size="medium" />}
+      <PlayerProfileImage src={user.imageUrl ? user.imageUrl : tempProfileImage} />
     </Wrapper>
   );
 };

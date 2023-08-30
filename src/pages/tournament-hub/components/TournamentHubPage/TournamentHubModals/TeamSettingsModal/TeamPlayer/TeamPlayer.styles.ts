@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Icons } from 'common/ui';
+import { ProfileImage } from 'frames/main/friends/components/Shared.styles';
 
 export const Wrapper = styled.div`
   position: relative;
@@ -13,23 +13,7 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const LeaderStar = styled(Icons.Star)`
-  position: absolute;
-  fill: yellow;
-  top: 0;
-  right: 0;
-  transform: translate(40%, -40%);
-  filter: drop-shadow(0 0 2px black);
-  ${({ theme }) => css`
-    height: ${theme.spacing.baseX3}px;
-    width: ${theme.spacing.baseX3}px;
-  `}
-`;
-
-export const ProfileImage = styled.img`
+export const PlayerProfileImage = styled(ProfileImage)`
   height: 100%;
   width: 100%;
-  ${({ theme }) => css`
-    border-radius: ${theme.borderRadius.default};
-  `}
 `;
