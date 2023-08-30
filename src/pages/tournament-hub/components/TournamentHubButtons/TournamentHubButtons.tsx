@@ -5,7 +5,7 @@ import HowItWorksModal from '../TournamentHubPage/HowItWorksModal/HowItWorksModa
 import BracketModal from '../TournamentHubPage/BracketModal/BracketModal';
 import MapPoolModal from '../TournamentHubPage/TournamentHubModals/MapPoolModal/MapPoolModal';
 import PrizesModal from '../TournamentHubPage/TournamentHubModals/PrizesModal/PrizesModal';
-import RulesModal from '../TournamentHubPage/TournamentHubModals/RulesModal/RulesModal';
+import RulesModal from '../TournamentHubPage/RulesModal/RulesModal';
 import { Buttons } from './TournamentHubButtons.styles';
 
 type Props = {
@@ -39,7 +39,11 @@ const TournamentHubButtons = ({ tournamentHub }: Props) => {
       )}
 
       <MapPoolModal isOpen={mapPoolModalOpen} onRequestClose={() => setMapPoolModalOpen(false)} />
-      <RulesModal isOpen={rulesModalOpen} onRequestClose={() => setRulesModalOpen(false)} />
+      <RulesModal
+        isOpen={rulesModalOpen}
+        onRequestClose={() => setRulesModalOpen(false)}
+        tournamentHubId={tournamentHub.id}
+      />
       <HowItWorksModal
         isOpen={howItWorksModalOpen}
         onRequestClose={() => setHowItWorksModalOpen(false)}
