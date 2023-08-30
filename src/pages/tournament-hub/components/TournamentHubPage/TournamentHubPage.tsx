@@ -104,9 +104,7 @@ const TournamentHubPage = () => {
   };
 
   const openTeamSettings = () => {
-    if (!party) {
-      popup.error('You need a party');
-    } else if (party.leaderId === user.id) {
+    if (!party || party.leaderId === user.id) {
       setActiveModal('teamSettings');
     } else {
       popup.error('You are not the party leader');
@@ -210,14 +208,14 @@ const TournamentHubPage = () => {
             isOpen={activeModal === 'howItWorks'}
             onRequestClose={() => setActiveModal(null)}
           />
-          {party && (
+          {
             <TeamSettingsModal
               isOpen={activeModal === 'teamSettings'}
-              playerIds={party.players}
+              playerIds={party ? party.players : [user.id]}
               hubId={hubId}
               onRequestClose={() => setActiveModal(null)}
             />
-          )}
+          }
           <TournamentHubInfoWrapper isRegistrationClosed={tournamentHub.registrationClosed}>
             <InfoHeaderWrapper>
               <Header>Tournament Information</Header>

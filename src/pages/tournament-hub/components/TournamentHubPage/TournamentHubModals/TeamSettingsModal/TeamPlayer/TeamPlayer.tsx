@@ -11,7 +11,7 @@ const TeamSettingsModal = ({ userId }: Props) => {
   const { user } = useUserFeed({ userId });
   const { party } = usePartyFeed();
 
-  const isLeader = userId === party.leaderId;
+  const isLeader = party ? userId === party.leaderId : userId;
 
   if (!user) return null;
 
