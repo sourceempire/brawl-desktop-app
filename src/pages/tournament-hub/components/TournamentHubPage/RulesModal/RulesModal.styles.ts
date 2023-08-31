@@ -13,27 +13,10 @@ export const ButtonsWrapper = styled.div`
 `;
 
 export const ModalButton = styled(Button)<{ active: boolean }>`
-  display: inline-flex;
-  width: auto;
-  border: none;
-  align-items: center;
-  justify-content: center;
-  outline-color: transparent;
   background-color: transparent;
-  ${({ theme }) => theme.textStyles.button}
-  :focus-visible {
-    outline: 2px solid ${(props) => props.theme.colors.accent.base};
-    outline-offset: 2px;
-    transition: outline-color 0.3s;
-  }
   ${({ theme, active }) => css`
     padding: ${theme.spacing.base}px ${theme.spacing.baseX4}px ${theme.spacing.base}px
       ${theme.spacing.baseX2}px;
-    border-radius: ${theme.borderRadius.default};
-    color: ${theme.colors.white};
-    :hover {
-      background-color: ${theme.colors.secondary.hover};
-    }
     ${active &&
     css`
       background-color: ${theme.colors.secondary.active};

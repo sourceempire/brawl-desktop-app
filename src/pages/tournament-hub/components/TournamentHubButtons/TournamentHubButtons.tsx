@@ -3,8 +3,8 @@ import { Button } from 'common/ui';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import HowItWorksModal from '../TournamentHubPage/HowItWorksModal/HowItWorksModal';
 import BracketModal from '../TournamentHubPage/BracketModal/BracketModal';
-import MapPoolModal from '../TournamentHubPage/TournamentHubModals/MapPoolModal/MapPoolModal';
-import PrizesModal from '../TournamentHubPage/TournamentHubModals/PrizesModal/PrizesModal';
+import MapPoolModal from '../TournamentHubPage/MapPoolModal/MapPoolModal';
+import PrizesModal from '../TournamentHubPage/PrizesModal/PrizesModal';
 import RulesModal from '../TournamentHubPage/RulesModal/RulesModal';
 import { Buttons } from './TournamentHubButtons.styles';
 

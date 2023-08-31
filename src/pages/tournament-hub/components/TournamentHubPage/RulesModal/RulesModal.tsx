@@ -72,14 +72,7 @@ const RulesModal = ({ isOpen, onRequestClose, tournamentHubId }: Props) => {
   };
 
   return (
-    <Modal
-      title="Rules"
-      isOpen={isOpen}
-      onRequestClose={() => {
-        onRequestClose();
-      }}
-      width="100%"
-      margin="50px">
+    <Modal title="Rules" isOpen={isOpen} onRequestClose={onRequestClose} width="100%" margin="50px">
       <Wrapper>
         <ButtonsWrapper>
           <ModalButton active={visibleText === 'general'} onClick={() => handleClick('general')}>
