@@ -5,7 +5,8 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 export const partyEndpoints = {
   invitePlayer: `${SERVER_URL}/api/party/invite`,
-  kickPlayer: `${SERVER_URL}/api/party/kick`
+  kickPlayer: `${SERVER_URL}/api/party/kick`,
+  acceptInvite: `${SERVER_URL}/api/party/invite/accept`
 };
 
 type invitePlayerRequestBody = {
@@ -14,6 +15,10 @@ type invitePlayerRequestBody = {
 
 type kickPlayerRequestBody = {
   kickedUserId: string;
+};
+
+type acceptInviteRequestBody = {
+  partyId: string;
 };
 
 export const useInvitePlayerRequest = () => {
@@ -46,6 +51,24 @@ export const useKickPlayerRequest = () => {
 
   return {
     kickPlayer: (body: kickPlayerRequestBody) => kickPlayer({ body }),
+    loading,
+    success,
+    error
+  };
+};
+
+export const useAcceptInviteRequest = () => {
+  const onError = (error: ServerError) => {
+    popup.warning(error.error, { timer: 3000 });
+  };
+
+  const [acceptInvite, { loading, success, error }] = usePost<void, acceptInviteRequestBody>(
+    partyEndpoints.acceptInvite,
+    { onError }
+  );
+
+  return {
+    acceptInvite: (body: acceptInviteRequestBody) => acceptInvite({ body }),
     loading,
     success,
     error
