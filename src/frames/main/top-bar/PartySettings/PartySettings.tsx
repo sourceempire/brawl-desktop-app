@@ -20,7 +20,7 @@ import {
   SettingsDisplay,
   SettingsDisplayDisabled
 } from './PartySettings.styles';
-import { useUpdatePartySizeRequest } from 'api/requests/party';
+import { useUpdatePartySizeRequest, useUpdatePartyTeamNameRequest } from 'api/requests/party';
 
 const PARTY_NAME_MAX_LENGTH = 20;
 
@@ -49,7 +49,16 @@ const PartySettings = () => {
     setPartySize(party.partySize);
   }, []);
 
+  const onUpdatePartyTeamNameError = useCallback(() => {
+    // HOW TO MAKE A POPUP HERE WITH ERROR?
+    // popup.error(error.error);
+    setTeamName(party.teamName);
+  }, []);
+
   const { updatePartySize } = useUpdatePartySizeRequest({ onError: onUpdatePartySizeError });
+  const { updatePartyTeamName } = useUpdatePartyTeamNameRequest({
+    onError: onUpdatePartyTeamNameError
+  });
 
   const handleOpenMenu = () => {
     setMenuVisible(true);
@@ -72,9 +81,8 @@ const PartySettings = () => {
     // which will throw an error.
     if (previousDebouncedTeamName === debouncedTeamName) return;
 
-    PartyRequests.updatePartyTeamName(debouncedTeamName).catch((error) => {
-      popup.error(error.error);
-      setTeamName(party.teamName);
+    updatePartyTeamName({
+      teamName: debouncedTeamName
     });
   }, [debouncedTeamName]);
 

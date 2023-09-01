@@ -8,6 +8,3 @@ export const leaveParty = () => Fetcher.post(`${SERVER_URL}/api/party/leave`);
 
 export const revokeInvite = (invitedUserId: string) =>
   Fetcher.post(`${SERVER_URL}/api/party/invite/revoke`, { invitedUserId });
-
-export const updatePartyTeamName = (teamName: string | null) =>
-  Fetcher.post(`${SERVER_URL}/api/party/update_team_name`, { teamName: teamName || null });
