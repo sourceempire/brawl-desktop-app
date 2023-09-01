@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { usePartyFeed } from 'api/feeds';
 import * as PartyRequests from 'api/requests/PartyRequests';
 import {
@@ -20,6 +20,7 @@ import {
   SettingsDisplay,
   SettingsDisplayDisabled
 } from './PartySettings.styles';
+import { useUpdatePartySizeRequest } from 'api/requests/party';
 
 const PARTY_NAME_MAX_LENGTH = 20;
 
@@ -42,6 +43,14 @@ const PartySettings = () => {
   const debouncedTeamName = useDebounce(teamName, 250);
   const previousDebouncedTeamName = usePrevious(debouncedTeamName);
 
+  const onUpdatePartySizeError = useCallback(() => {
+    // HOW TO MAKE A POPUP HERE WITH ERROR?
+    // popup.error(error.error);
+    setPartySize(party.partySize);
+  }, []);
+
+  const { updatePartySize } = useUpdatePartySizeRequest({ onError: onUpdatePartySizeError });
+
   const handleOpenMenu = () => {
     setMenuVisible(true);
   };
@@ -52,9 +61,8 @@ const PartySettings = () => {
 
   const handlePartySizeChange = (newPartySize: number) => {
     setPartySize(newPartySize);
-    PartyRequests.updatePartySize(newPartySize).catch((error) => {
-      popup.error(error.error);
-      setPartySize(party.partySize);
+    updatePartySize({
+      partySize: newPartySize
     });
   };
 

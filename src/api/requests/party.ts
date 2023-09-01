@@ -8,7 +8,8 @@ export const partyEndpoints = {
   kickPlayer: `${SERVER_URL}/api/party/kick`,
   acceptInvite: `${SERVER_URL}/api/party/invite/accept`,
   declineInvite: `${SERVER_URL}/api/party/invite/decline`,
-  giveLeader: `${SERVER_URL}/api/party/leader`
+  giveLeader: `${SERVER_URL}/api/party/leader`,
+  updatePartySize: `${SERVER_URL}/api/party/update_party_size`
 };
 
 type invitePlayerRequestBody = {
@@ -29,6 +30,14 @@ type declineInviteRequestBody = {
 
 type giveLeaderRequestBody = {
   newLeaderUserId: string;
+};
+
+type updatePartySizeRequestBody = {
+  partySize: number;
+};
+
+type Option = {
+  onError: () => void;
 };
 
 export const useInvitePlayerRequest = () => {
@@ -115,6 +124,20 @@ export const useGiveLeaderRequest = () => {
 
   return {
     giveLeader: (body: giveLeaderRequestBody) => giveLeader({ body }),
+    loading,
+    success,
+    error
+  };
+};
+
+export const useUpdatePartySizeRequest = ({ onError }: Option) => {
+  const [updatePartySize, { loading, success, error }] = usePost<void, updatePartySizeRequestBody>(
+    partyEndpoints.updatePartySize,
+    { onError }
+  );
+
+  return {
+    updatePartySize: (body: updatePartySizeRequestBody) => updatePartySize({ body }),
     loading,
     success,
     error
