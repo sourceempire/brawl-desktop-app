@@ -6,7 +6,8 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 export const partyEndpoints = {
   invitePlayer: `${SERVER_URL}/api/party/invite`,
   kickPlayer: `${SERVER_URL}/api/party/kick`,
-  acceptInvite: `${SERVER_URL}/api/party/invite/accept`
+  acceptInvite: `${SERVER_URL}/api/party/invite/accept`,
+  declineInvite: `${SERVER_URL}/api/party/invite/decline`
 };
 
 type invitePlayerRequestBody = {
@@ -18,6 +19,10 @@ type kickPlayerRequestBody = {
 };
 
 type acceptInviteRequestBody = {
+  partyId: string;
+};
+
+type declineInviteRequestBody = {
   partyId: string;
 };
 
@@ -69,6 +74,24 @@ export const useAcceptInviteRequest = () => {
 
   return {
     acceptInvite: (body: acceptInviteRequestBody) => acceptInvite({ body }),
+    loading,
+    success,
+    error
+  };
+};
+
+export const useDeclineInviteRequest = () => {
+  const onError = (error: ServerError) => {
+    popup.error(error.error, { timer: 3000 });
+  };
+
+  const [declineInvite, { loading, success, error }] = usePost<void, declineInviteRequestBody>(
+    partyEndpoints.declineInvite,
+    { onError }
+  );
+
+  return {
+    declineInvite: (body: declineInviteRequestBody) => declineInvite({ body }),
     loading,
     success,
     error
