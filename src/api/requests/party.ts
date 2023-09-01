@@ -5,6 +5,7 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 export const partyEndpoints = {
   createParty: `${SERVER_URL}/api/party/create`,
+  leaveParty: `${SERVER_URL}/api/party/leave`,
   invitePlayer: `${SERVER_URL}/api/party/invite`,
   kickPlayer: `${SERVER_URL}/api/party/kick`,
   acceptInvite: `${SERVER_URL}/api/party/invite/accept`,
@@ -62,6 +63,23 @@ export const useCreatePartyRequest = () => {
 
   return {
     createParty: () => createParty(),
+    loading,
+    success,
+    error
+  };
+};
+
+export const useLeavePartyRequest = () => {
+  const onError = (error: ServerError) => {
+    popup.error(error.error);
+  };
+
+  const [leaveParty, { loading, success, error }] = usePost<void>(partyEndpoints.leaveParty, {
+    onError
+  });
+
+  return {
+    leaveParty: () => leaveParty(),
     loading,
     success,
     error

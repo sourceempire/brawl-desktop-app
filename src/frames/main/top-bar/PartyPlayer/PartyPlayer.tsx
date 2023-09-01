@@ -1,13 +1,15 @@
 import { useRef, useState } from 'react';
 import { usePartyFeed } from 'api/feeds';
 import useUserFeed from 'api/feeds/hooks/useUserFeed';
-import * as PartyRequests from 'api/requests/PartyRequests';
 import { useContextMenuPosition, useHint, useLoggedInUser } from 'common/hooks';
-import popup from 'common/popup';
 import { ContextMenu } from 'common/ui';
 import { LeaderStar, MenuWrapper, PlayerAction, PlayerImage, Wrapper } from './PartyPlayer.styles';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
-import { useKickPlayerRequest, useGiveLeaderRequest } from 'api/requests/party';
+import {
+  useKickPlayerRequest,
+  useGiveLeaderRequest,
+  useLeavePartyRequest
+} from 'api/requests/party';
 
 type Props = {
   userId: string;
@@ -19,6 +21,7 @@ export const PartyPlayer = ({ userId }: Props) => {
   const { user, isLoading: isLoadingPartyPlayer } = useUserFeed({ userId });
   const { kickPlayer } = useKickPlayerRequest();
   const { giveLeader } = useGiveLeaderRequest();
+  const { leaveParty } = useLeavePartyRequest();
 
   const [isMenuVisible, setMenuVisible] = useState(false);
   const [isHintVisible, setHintVisible] = useState(false);
@@ -57,8 +60,8 @@ export const PartyPlayer = ({ userId }: Props) => {
     });
   };
 
-  const leaveParty = () => {
-    PartyRequests.leaveParty().catch((error) => popup.error(error.error));
+  const leave = () => {
+    leaveParty();
   };
 
   const makeRequest = (request: () => void) => {
@@ -119,7 +122,7 @@ export const PartyPlayer = ({ userId }: Props) => {
 
             {isLoggedInUser && (
               <>
-                <PlayerAction onClick={() => makeRequest(leaveParty)}>Leave party</PlayerAction>
+                <PlayerAction onClick={() => makeRequest(leave)}>Leave party</PlayerAction>
               </>
             )}
           </MenuWrapper>
