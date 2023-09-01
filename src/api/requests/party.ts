@@ -7,7 +7,8 @@ export const partyEndpoints = {
   invitePlayer: `${SERVER_URL}/api/party/invite`,
   kickPlayer: `${SERVER_URL}/api/party/kick`,
   acceptInvite: `${SERVER_URL}/api/party/invite/accept`,
-  declineInvite: `${SERVER_URL}/api/party/invite/decline`
+  declineInvite: `${SERVER_URL}/api/party/invite/decline`,
+  giveLeader: `${SERVER_URL}/api/party/leader`
 };
 
 type invitePlayerRequestBody = {
@@ -24,6 +25,10 @@ type acceptInviteRequestBody = {
 
 type declineInviteRequestBody = {
   partyId: string;
+};
+
+type giveLeaderRequestBody = {
+  newLeaderUserId: string;
 };
 
 export const useInvitePlayerRequest = () => {
@@ -92,6 +97,24 @@ export const useDeclineInviteRequest = () => {
 
   return {
     declineInvite: (body: declineInviteRequestBody) => declineInvite({ body }),
+    loading,
+    success,
+    error
+  };
+};
+
+export const useGiveLeaderRequest = () => {
+  const onError = (error: ServerError) => {
+    popup.error(error.error);
+  };
+
+  const [giveLeader, { loading, success, error }] = usePost<void, giveLeaderRequestBody>(
+    partyEndpoints.giveLeader,
+    { onError }
+  );
+
+  return {
+    giveLeader: (body: giveLeaderRequestBody) => giveLeader({ body }),
     loading,
     success,
     error
