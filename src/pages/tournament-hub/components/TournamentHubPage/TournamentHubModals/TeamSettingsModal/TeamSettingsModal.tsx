@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useTournamentHubFeed, useTournamentTeamFeed } from 'api/feeds';
 import { isFeedWithTeam } from 'api/feeds/hooks/useTournamentTeamFeed';
-import { useJoinTournamentRequest } from 'api/requests/tournament';
+import { useJoinTournamentRequest, useLeaveTournamentRequest } from 'api/requests/tournament';
 import * as TournamentRequests from 'api/requests/TournamentRequests';
 import { useLoggedInUser } from 'common/hooks';
 import popup from 'common/popup';
@@ -37,13 +37,24 @@ const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) 
   const { tournamentHub } = useTournamentHubFeed(hubId);
   const userInExistingTeam = isFeedWithTeam(tournamentTeamFeed);
 
-  const onRequestCloseTeamSettings = () => {
+  const closeTeamSettings = () => {
     setErrorMessage(null);
     setTeamName(null);
     onRequestClose();
   };
 
-  const { joinTournament } = useJoinTournamentRequest(onRequestCloseTeamSettings);
+  const onJoinTournamentComplete = useCallback(() => {
+    closeTeamSettings();
+    popup.info(`Tournament joined`);
+  }, []);
+
+  const onLeaveTournamentComplete = useCallback(() => {
+    closeTeamSettings();
+    popup.info(`Tournament left`);
+  }, []);
+
+  const { joinTournament } = useJoinTournamentRequest({ onComplete: onJoinTournamentComplete });
+  const { leaveTournament } = useLeaveTournamentRequest({ onComplete: onLeaveTournamentComplete });
 
   const handleTeamNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTeamName(event.target.value);
@@ -63,10 +74,9 @@ const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) 
   };
 
   const leave = () => {
-    onRequestCloseTeamSettings();
-    TournamentRequests.leaveTournament(hubId)
-      .then(() => popup.info('Tournament leaved'))
-      .catch((error) => popup.error(error.error));
+    leaveTournament({
+      tournamentHubId: hubId
+    });
   };
 
   return (
@@ -74,7 +84,7 @@ const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) 
       title="Team Settings"
       isOpen={isOpen}
       onRequestClose={() => {
-        onRequestCloseTeamSettings();
+        closeTeamSettings();
       }}>
       <Wrapper>
         <Settings>
@@ -102,7 +112,7 @@ const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) 
             <ModalButton
               key="cancel"
               onClick={() => {
-                onRequestCloseTeamSettings();
+                closeTeamSettings();
               }}>
               Cancel
             </ModalButton>

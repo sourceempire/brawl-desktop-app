@@ -4,7 +4,8 @@ import popup from 'common/popup';
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 export const tournamentEndpoints = {
-  joinTournament: `${SERVER_URL}/api/tournament/join`
+  joinTournament: `${SERVER_URL}/api/tournament/join`,
+  leaveTournament: `${SERVER_URL}/api/tournament/leave`
 };
 
 type JoinTournamentRequestBody = {
@@ -15,12 +16,15 @@ type JoinTournamentRequestBody = {
   leaderId?: string;
 };
 
-export const useJoinTournamentRequest = (onRequestCloseTeamSettings: () => void) => {
-  const onComplete = () => {
-    popup.info(`Tournament joined`);
-    onRequestCloseTeamSettings();
-  };
+type LeaveTournamentRequestBody = {
+  tournamentHubId: string;
+};
 
+type Options = {
+  onComplete: () => void;
+};
+
+export const useJoinTournamentRequest = ({ onComplete }: Options) => {
   const onError = (error: ServerError) => {
     switch (error.error) {
       case 'invalidTeamSize':
@@ -39,6 +43,24 @@ export const useJoinTournamentRequest = (onRequestCloseTeamSettings: () => void)
 
   return {
     joinTournament: (body: JoinTournamentRequestBody) => joinTournament({ body }),
+    loading,
+    success,
+    error
+  };
+};
+
+export const useLeaveTournamentRequest = ({ onComplete }: Options) => {
+  const onError = (error: ServerError) => {
+    popup.error(error.error);
+  };
+
+  const [leaveTournament, { loading, success, error }] = usePost<void, LeaveTournamentRequestBody>(
+    tournamentEndpoints.leaveTournament,
+    { onError, onComplete }
+  );
+
+  return {
+    leaveTournament: (body: LeaveTournamentRequestBody) => leaveTournament({ body }),
     loading,
     success,
     error
