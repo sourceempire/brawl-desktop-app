@@ -4,6 +4,7 @@ import popup from 'common/popup';
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 export const partyEndpoints = {
+  createParty: `${SERVER_URL}/api/party/create`,
   invitePlayer: `${SERVER_URL}/api/party/invite`,
   kickPlayer: `${SERVER_URL}/api/party/kick`,
   acceptInvite: `${SERVER_URL}/api/party/invite/accept`,
@@ -48,6 +49,23 @@ type revokeInviteRequestBody = {
 
 type Option = {
   onError: () => void;
+};
+
+export const useCreatePartyRequest = () => {
+  const onError = (error: ServerError) => {
+    popup.error(error.error);
+  };
+
+  const [createParty, { loading, success, error }] = usePost<void>(partyEndpoints.createParty, {
+    onError
+  });
+
+  return {
+    createParty: () => createParty(),
+    loading,
+    success,
+    error
+  };
 };
 
 export const useInvitePlayerRequest = () => {
