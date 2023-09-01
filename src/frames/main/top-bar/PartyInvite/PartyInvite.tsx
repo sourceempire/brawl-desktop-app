@@ -20,6 +20,7 @@ import {
 } from './PartyInvite.styles';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
 import { theme } from 'assets/styles/Theme';
+import { useInvitePlayerRequest } from 'api/requests/party';
 
 const PartyInvite = () => {
   const { party } = usePartyFeed();
@@ -28,6 +29,7 @@ const PartyInvite = () => {
   const [searchString, setSearchString] = useState('');
 
   const { friendItems } = useFriendList({ searchString });
+  const { invitePlayer } = useInvitePlayerRequest();
 
   const invitePlayerActionRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const { contextMenuRef, position, arrowPosition } = useContextMenuPosition({
@@ -41,7 +43,9 @@ const PartyInvite = () => {
   };
 
   const handleInvite = (userId: string) => {
-    PartyRequests.invitePlayer(userId).catch((error) => popup.error(error.error));
+    invitePlayer({
+      invitedUserId: userId
+    });
   };
 
   const handleRevokeInvite = (userId: string) => {

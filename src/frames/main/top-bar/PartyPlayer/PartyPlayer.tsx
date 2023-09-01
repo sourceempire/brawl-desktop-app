@@ -7,6 +7,7 @@ import popup from 'common/popup';
 import { ContextMenu } from 'common/ui';
 import { LeaderStar, MenuWrapper, PlayerAction, PlayerImage, Wrapper } from './PartyPlayer.styles';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
+import { useKickPlayerRequest } from 'api/requests/party';
 
 type Props = {
   userId: string;
@@ -16,6 +17,7 @@ export const PartyPlayer = ({ userId }: Props) => {
   const loggedInUser = useLoggedInUser();
   const { party } = usePartyFeed();
   const { user, isLoading: isLoadingPartyPlayer } = useUserFeed({ userId });
+  const { kickPlayer } = useKickPlayerRequest();
 
   const [isMenuVisible, setMenuVisible] = useState(false);
   const [isHintVisible, setHintVisible] = useState(false);
@@ -46,8 +48,10 @@ export const PartyPlayer = ({ userId }: Props) => {
     PartyRequests.giveLeader(userId).catch((error) => popup.error(error.error));
   };
 
-  const kickPlayer = () => {
-    PartyRequests.kickPlayer(userId).catch((error) => popup.error(error));
+  const kickPartyPlayer = () => {
+    kickPlayer({
+      kickedUserId: userId
+    });
   };
 
   const leaveParty = () => {
@@ -100,7 +104,9 @@ export const PartyPlayer = ({ userId }: Props) => {
                 {isLoggedInUserLeader && (
                   <>
                     <PlayerAction onClick={() => makeRequest(giveLeader)}>Give leader</PlayerAction>
-                    <PlayerAction onClick={() => makeRequest(kickPlayer)}>Kick player</PlayerAction>
+                    <PlayerAction onClick={() => makeRequest(kickPartyPlayer)}>
+                      Kick player
+                    </PlayerAction>
                   </>
                 )}
               </>

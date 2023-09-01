@@ -9,11 +9,11 @@ export const leaveParty = () => Fetcher.post(`${SERVER_URL}/api/party/leave`);
 export const giveLeader = (newLeaderUserId: string) =>
   Fetcher.post(`${SERVER_URL}/api/party/leader`, { newLeaderUserId });
 
-export const kickPlayer = (kickedUserId: string) =>
-  Fetcher.post(`${SERVER_URL}/api/party/kick`, { kickedUserId });
+// export const kickPlayer = (kickedUserId: string) =>
+//   Fetcher.post(`${SERVER_URL}/api/party/kick`, { kickedUserId });
 
-export const invitePlayer = (invitedUserId: string) =>
-  Fetcher.post(`${SERVER_URL}/api/party/invite`, { invitedUserId });
+// export const invitePlayer = (invitedUserId: string) =>
+//   Fetcher.post(`${SERVER_URL}/api/party/invite`, { invitedUserId });
 
 export const revokeInvite = (invitedUserId: string) =>
   Fetcher.post(`${SERVER_URL}/api/party/invite/revoke`, { invitedUserId });
