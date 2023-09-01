@@ -1,7 +1,5 @@
 import { useUserFeed } from 'api/feeds';
-import * as PartyRequests from 'api/requests/PartyRequests';
 import { useTimeSince } from 'common/hooks';
-import popup from 'common/popup';
 import { PartyInviteNotificationInfo } from 'types/notifications/Notifications';
 import { Highlight, Image, Text, TimeAgo } from '../../NotificationCard/NotificationCard.styles';
 import { ActionButton, Actions, Info, Wrapper } from '../NotificationInfo.styles';
