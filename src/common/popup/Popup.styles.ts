@@ -21,6 +21,7 @@ export const CloseIcon = styled(Icons.Cross)`
 
 export const Wrapper = styled.div<{ level: PopupLevel; isClosing: boolean; top: number }>`
   position: fixed;
+  z-index: 2;
   height: 43px;
   left: 50%;
   top: 200px;
@@ -34,12 +35,11 @@ export const Wrapper = styled.div<{ level: PopupLevel; isClosing: boolean; top: 
   padding: ${theme.spacing.baseX2}px ${theme.spacing.baseX8}px;
   ${theme.textStyles.body};
 
-  ${({ level, top }) =>
-    css`
-      color: ${PopupColors[level]};
-      background-color: ${PopupBackgroundColors[level]};
-      top: ${top}px;
-    `};
+  ${({ level, top }) => css`
+    color: ${PopupColors[level]};
+    background-color: ${PopupBackgroundColors[level]};
+    top: ${top}px;
+  `};
   ${({ isClosing }) =>
     isClosing &&
     css`
