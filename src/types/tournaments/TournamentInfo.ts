@@ -7,7 +7,8 @@ export interface TournamentHub {
   gameId: GameId;
   gameName: string;
   startTime: string;
-  entryFee: string;
+  entryFee: number;
+  entryFeeCutPercentage: number;
   matchSettings: MatchSettings;
   currentPrizePool: string;
   region: string;

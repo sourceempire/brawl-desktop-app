@@ -5,23 +5,32 @@ import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
 import { getTournamentModeShort, getTournamentSeriesTypeLong } from 'utils/tournamentUtils';
 import { InfoCard, InfoCardWrapper, InfoHeader, InfoText, StyledIcon } from './InfoCards.styles';
+import { formatMoney } from 'utils/moneyUtils';
 
 type Props = {
   tournamentHub: TournamentHub;
 };
 
 const InfoCards = ({ tournamentHub }: Props) => {
-  const [gameName, setGameName] = useState('');
-  const [gameMode, setGameMode] = useState('');
-  const [gameType, setGameType] = useState('');
+  const [gameInfo, setGameInfo] = useState({
+    name: '',
+    mode: '',
+    type: ''
+  });
 
   const setInfoSettings = (tournamentHub: TournamentHub) => {
-    setGameName(GameName[tournamentHub.gameId]);
+    setGameInfo({
+      ...gameInfo,
+      name: GameName[tournamentHub.gameId]
+    });
 
     switch (tournamentHub.gameId) {
       case Game.CSGO: {
-        setGameType(getTournamentSeriesTypeLong(tournamentHub));
-        setGameMode(getTournamentModeShort(tournamentHub));
+        setGameInfo({
+          ...gameInfo,
+          mode: getTournamentModeShort(tournamentHub),
+          type: getTournamentSeriesTypeLong(tournamentHub)
+        });
         break;
       }
     }
@@ -38,21 +47,21 @@ const InfoCards = ({ tournamentHub }: Props) => {
           <StyledIcon icon={IconEnum.Controller} />
           Game
         </InfoHeader>
-        <InfoText>{gameName}</InfoText>
+        <InfoText>{gameInfo.name}</InfoText>
       </InfoCard>
       <InfoCard>
         <InfoHeader>
           <StyledIcon icon={IconEnum.Sword} />
           Game Mode
         </InfoHeader>
-        <InfoText>{gameMode}</InfoText>
+        <InfoText>{gameInfo.mode}</InfoText>
       </InfoCard>
       <InfoCard>
         <InfoHeader>
           <StyledIcon icon={IconEnum.CrossedSwords} />
           Match Type
         </InfoHeader>
-        <InfoText>{gameType}</InfoText>
+        <InfoText>{gameInfo.type}</InfoText>
       </InfoCard>
       {/* //TODO -> Add Tournament Format */}
       {/* //TODO -> Add Side Decider */}
@@ -85,14 +94,14 @@ const InfoCards = ({ tournamentHub }: Props) => {
           <StyledIcon icon={IconEnum.Trophy} />
           {tournamentHub.registrationClosed ? 'Prize Pool' : 'Predicted Prize Pool'}
         </InfoHeader>
-        <InfoText>{tournamentHub.currentPrizePool}</InfoText>
+        <InfoText>€{tournamentHub.currentPrizePool}</InfoText>
       </InfoCard>
       <InfoCard>
         <InfoHeader>
           <StyledIcon icon={IconEnum.Ticket} />
-          Entry Fee
+          Entry Fee ({tournamentHub.entryFeeCutPercentage}% fee taken)
         </InfoHeader>
-        <InfoText>€{tournamentHub.entryFee} / person</InfoText>
+        <InfoText>€{formatMoney(tournamentHub.entryFee)} / person</InfoText>
       </InfoCard>
     </InfoCardWrapper>
   );

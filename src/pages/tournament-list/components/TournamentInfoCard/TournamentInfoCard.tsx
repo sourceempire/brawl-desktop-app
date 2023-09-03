@@ -27,6 +27,7 @@ import {
   TwoColHeader,
   Wrapper
 } from './TournamentInfoCard.styles';
+import { formatMoney } from 'utils/moneyUtils';
 
 type Props = {
   tournamentInfo: TournamentHub;
@@ -67,7 +68,7 @@ export default function TournamentInfoCard({ tournamentInfo, onClick, className 
             </TwoColHeader>
           </Column1>
           <Column2>
-            <EntryFee>€{tournamentInfo.entryFee} / person</EntryFee>
+            <EntryFee>€{formatMoney(tournamentInfo.entryFee)} / person</EntryFee>
             <TwoColHeader>
               <EntryFeeIcon />
               <PrizePoolHeader>Entry Fee</PrizePoolHeader>

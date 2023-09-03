@@ -42,6 +42,7 @@ import {
   Wrapper
 } from './TournamentHubPage.styles';
 import { useJoinTournamentRequest } from 'api/requests/tournament';
+import { formatMoney } from 'utils/moneyUtils';
 
 const TournamentHubPage = () => {
   const { hubId } = useParams() as { hubId: string };
@@ -78,7 +79,7 @@ const TournamentHubPage = () => {
     },
     {
       key: 'entryFee',
-      header: `€${tournamentHub.entryFee} / person`,
+      header: `€${formatMoney(tournamentHub.entryFee)} / person`,
       subtext: 'Entry Fee',
       icon: Icons.Ticket
     },
