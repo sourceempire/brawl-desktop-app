@@ -14,8 +14,8 @@ import { Tournament } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
 import BracketModal from './BracketModal/BracketModal';
 import HowItWorksModal from './HowItWorksModal/HowItWorksModal';
-import MapPoolModal from './TournamentHubModals/MapPoolModal/MapPoolModal';
-import RulesModal from './TournamentHubModals/RulesModal/RulesModal';
+import MapPoolModal from './MapPoolModal/MapPoolModal';
+import RulesModal from './RulesModal/RulesModal';
 import {
   ButtonsWrapper,
   CountDownInfo,
@@ -206,10 +206,13 @@ const TournamentHubPage = () => {
             isOpen={shownModal.mapPool}
             onRequestClose={() => setShownModal({ ...shownModal, mapPool: false })}
           />
-          <RulesModal
-            isOpen={shownModal.rules}
-            onRequestClose={() => setShownModal({ ...shownModal, rules: false })}
-          />
+          {tournamentHub && (
+            <RulesModal
+              isOpen={shownModal.rules}
+              onRequestClose={() => setShownModal({ ...shownModal, rules: false })}
+              tournamentHubId={tournamentHub.id}
+            />
+          )}
           <HowItWorksModal
             isOpen={shownModal.howItWorks}
             onRequestClose={() => setShownModal({ ...shownModal, howItWorks: false })}
