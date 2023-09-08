@@ -48,7 +48,7 @@ export const Wrapper = styled.button<Props>`
     transition: outline-color 0.3s;
   }
 
-  ${({ theme, primary, accent, alert, hasIcon, small, disabled }) => css`
+  ${({ theme, primary, accent, alert, hasIcon, small }) => css`
     border-radius: ${theme.borderRadius.default};
     background-color: ${theme.colors.secondary.base};
     :hover {
@@ -101,12 +101,6 @@ export const Wrapper = styled.button<Props>`
       :active {
         background-color: ${lightenColor(theme.colors.statusError, 50)};
       }
-    `}
-
-    ${disabled &&
-    css`
-      pointer-events: none;
-      opacity: 0.2;
     `}
   `}
 `;
