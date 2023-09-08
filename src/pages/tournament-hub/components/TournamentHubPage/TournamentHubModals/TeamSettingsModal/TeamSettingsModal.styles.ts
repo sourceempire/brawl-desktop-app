@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Button, Input } from 'common/ui';
+import { InputElement } from 'common/ui/Input/Input.styles';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -24,7 +25,7 @@ export const Label = styled.div`
 
 export const PartySettingsInput = styled(Input)`
   ${({ theme }) => css`
-    input {
+    ${InputElement} {
       font-weight: bold;
       padding-left: 4px;
       ::placeholder {
