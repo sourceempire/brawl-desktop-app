@@ -13,7 +13,6 @@ type Props = {
   placeholder?: string;
   tabIndex?: number;
   maxLength?: number;
-  disabled?: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -29,7 +28,6 @@ export const Input = ({
   placeholder,
   tabIndex = 0,
   maxLength,
-  disabled,
   onChange
 }: Props) => {
   const hasIcon = Boolean(icon);
@@ -50,7 +48,6 @@ export const Input = ({
           hasIcon={hasIcon}
           placeholder={placeholder}
           tabIndex={tabIndex}
-          disabled={disabled}
         />
       </InputWrapper>
     </Wrapper>

@@ -62,7 +62,9 @@ export const InputElement = styled.input<{
   box-sizing: border-box;
   border-color: transparent;
   outline-color: transparent;
-  transition: border-color 0.3s, outline-color 0.3s;
+  transition:
+    border-color 0.3s,
+    outline-color 0.3s;
 
   :focus {
     outline-offset: 2px;
@@ -73,7 +75,7 @@ export const InputElement = styled.input<{
     color: white;
     opacity: 0.4;
   }
-  ${({ theme, inputSize, hasIcon, withBorder, disabled }) => css`
+  ${({ theme, inputSize, hasIcon, withBorder }) => css`
     padding: 0 ${getInputPadding(inputSize)};
     height: 100%;
     font-size: ${getInputFontSize(inputSize)};
@@ -99,12 +101,6 @@ export const InputElement = styled.input<{
         border-color: ${theme.colors.accent.base};
       }
     `}
-
-    ${disabled &&
-    css`
-      pointer-events: none;
-      opacity: 0.2;
-    `}
   `}
 `;
 
@@ -113,25 +109,25 @@ const getIconSize = (size: InputSize) =>
     [InputSize.SMALL]: '15px',
     [InputSize.MEDIUM]: '18px',
     [InputSize.LARGE]: '18px'
-  }[size]);
+  })[size];
 
 const getInputFontSize = (size: InputSize) =>
   ({
     [InputSize.SMALL]: '13px',
     [InputSize.MEDIUM]: '15px',
     [InputSize.LARGE]: '17px'
-  }[size]);
+  })[size];
 
 const getInputHeight = (size: InputSize) =>
   ({
     [InputSize.SMALL]: '30px',
     [InputSize.MEDIUM]: '36px',
     [InputSize.LARGE]: '42px'
-  }[size]);
+  })[size];
 
 const getInputPadding = (size: InputSize) =>
   ({
     [InputSize.SMALL]: '6px',
     [InputSize.MEDIUM]: '9px',
     [InputSize.LARGE]: '12px'
-  }[size]);
+  })[size];

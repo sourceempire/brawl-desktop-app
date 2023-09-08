@@ -2,7 +2,6 @@ import { useCallback, useState } from 'react';
 import { useTournamentHubFeed, useTournamentTeamFeed } from 'api/feeds';
 import { isFeedWithTeam } from 'api/feeds/hooks/useTournamentTeamFeed';
 import { useJoinTournamentRequest, useLeaveTournamentRequest } from 'api/requests/tournament';
-import * as TournamentRequests from 'api/requests/TournamentRequests';
 import { useLoggedInUser } from 'common/hooks';
 import popup from 'common/popup';
 import { Modal } from 'common/ui';
@@ -95,7 +94,6 @@ const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) 
             onChange={handleTeamNameChange}
             placeholder="Enter a team name"
             size={InputSize.MEDIUM}
-            disabled={userInExistingTeam ? true : false}
           />
           {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
           {playerIds && (
