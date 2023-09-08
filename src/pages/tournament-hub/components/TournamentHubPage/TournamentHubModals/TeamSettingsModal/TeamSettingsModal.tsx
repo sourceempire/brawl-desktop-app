@@ -79,12 +79,7 @@ const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) 
   };
 
   return (
-    <Modal
-      title="Team Settings"
-      isOpen={isOpen}
-      onRequestClose={() => {
-        closeTeamSettings();
-      }}>
+    <Modal title="Team Settings" isOpen={isOpen} onRequestClose={closeTeamSettings}>
       <Wrapper>
         <Settings>
           <Label>Team Name</Label>
@@ -107,22 +102,18 @@ const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) 
             </>
           )}
           <ButtonsWrapper>
-            <ModalButton
-              key="cancel"
-              onClick={() => {
-                closeTeamSettings();
-              }}>
+            <ModalButton key="cancel" onClick={closeTeamSettings}>
               Cancel
             </ModalButton>
             {!tournamentHub.registrationClosed &&
               (!userInExistingTeam ? (
                 <ButtonWithMessage>
-                  <ModalButton primary onClick={() => signup()}>
+                  <ModalButton primary onClick={signup}>
                     Confirm
                   </ModalButton>
                 </ButtonWithMessage>
               ) : (
-                <ModalButton alert onClick={() => leave()}>
+                <ModalButton alert onClick={leave}>
                   Leave tournament
                 </ModalButton>
               ))}
