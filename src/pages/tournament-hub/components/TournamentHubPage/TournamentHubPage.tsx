@@ -181,11 +181,11 @@ const TournamentHubPage = () => {
             <RightButtons>
               {!tournamentHub.registrationClosed &&
                 (!isFeedWithTeam(tournamentTeamFeed) ? (
-                  <Button primary onClick={() => openTeamSettings()}>
+                  <Button primary onClick={openTeamSettings}>
                     Join tournament
                   </Button>
                 ) : (
-                  <Button alert onClick={() => openTeamSettings()}>
+                  <Button alert onClick={openTeamSettings}>
                     Leave Tournament
                   </Button>
                 ))}
