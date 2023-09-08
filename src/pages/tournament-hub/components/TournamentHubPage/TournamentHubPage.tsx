@@ -111,6 +111,10 @@ const TournamentHubPage = () => {
     }
   };
 
+  const closeModal = () => {
+    setActiveModal(null);
+  };
+
   const getLoggedInUserTournament = useCallback(async () => {
     try {
       const res = await TournamentRequests.getTournament({ tournamentHubId: hubId });
@@ -193,27 +197,18 @@ const TournamentHubPage = () => {
           </ButtonsWrapper>
           <BracketModal
             isOpen={activeModal === 'brackets'}
-            onRequestClose={() => setActiveModal(null)}
+            onRequestClose={closeModal}
             tournamentHub={tournamentHub}
           />
-          <MapPoolModal
-            isOpen={activeModal === 'mapPool'}
-            onRequestClose={() => setActiveModal(null)}
-          />
-          <RulesModal
-            isOpen={activeModal === 'rules'}
-            onRequestClose={() => setActiveModal(null)}
-          />
-          <HowItWorksModal
-            isOpen={activeModal === 'howItWorks'}
-            onRequestClose={() => setActiveModal(null)}
-          />
+          <MapPoolModal isOpen={activeModal === 'mapPool'} onRequestClose={closeModal} />
+          <RulesModal isOpen={activeModal === 'rules'} onRequestClose={closeModal} />
+          <HowItWorksModal isOpen={activeModal === 'howItWorks'} onRequestClose={closeModal} />
           {
             <TeamSettingsModal
               isOpen={activeModal === 'teamSettings'}
               playerIds={party ? party.players : [user.id]}
               hubId={hubId}
-              onRequestClose={() => setActiveModal(null)}
+              onRequestClose={closeModal}
             />
           }
           <TournamentHubInfoWrapper isRegistrationClosed={tournamentHub.registrationClosed}>
