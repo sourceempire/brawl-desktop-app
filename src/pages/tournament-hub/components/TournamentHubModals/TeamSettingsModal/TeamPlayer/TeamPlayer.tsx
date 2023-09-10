@@ -7,7 +7,7 @@ type Props = {
   userId: string;
 };
 
-const TeamSettingsModal = ({ userId }: Props) => {
+const TeamPlayer = ({ userId }: Props) => {
   const { user } = useUserFeed({ userId });
   const { party } = usePartyFeed();
 
@@ -23,4 +23,4 @@ const TeamSettingsModal = ({ userId }: Props) => {
   );
 };
 
-export default TeamSettingsModal;
+export default TeamPlayer;

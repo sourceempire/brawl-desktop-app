@@ -6,43 +6,31 @@ import { useNavigate, useParams } from 'react-router-dom';
 import PageContainer from 'common/components/PageContainer';
 import { useLoggedInUser } from 'common/hooks/useLoggedInUser';
 import popup from 'common/popup';
-import { Backdrop, Button, Icons } from 'common/ui';
+import { Backdrop, Icons } from 'common/ui';
 import { TournamentHubModalType } from 'common/ui/Modal/Modal.types';
 import CountDown from 'pages/tournament/components/CountDown';
-import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
 import TournamentCard from 'pages/tournament/components/TournamentCard/TournamentCard';
 import { Tournament } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
-import BracketModal from './BracketModal/BracketModal';
-import HowItWorksModal from './HowItWorksModal/HowItWorksModal';
-import MapPoolModal from './TournamentHubModals/MapPoolModal/MapPoolModal';
-import RulesModal from './TournamentHubModals/RulesModal/RulesModal';
-import TeamSettingsModal from './TournamentHubModals/TeamSettingsModal/TeamSettingsModal';
 import {
-  ButtonsWrapper,
   CountDownInfo,
-  Header,
   HeaderHub,
   HeaderInfo,
   HubHeaderWrapper,
   InfoContainer,
   InfoHeader,
-  InfoHeaderWrapper,
   InfoIcon,
   InfoSubText,
   InfoText,
   InfoWrapper,
-  LeftButtons,
-  PredictedPrize,
-  PrizeElement,
-  PrizePosition,
-  RightButtons,
-  TournamentHubInfoWrapper,
   TournamentInfo,
   TournamentName,
   TournamentsWrapper,
   Wrapper
 } from './TournamentHubPage.styles';
+import TournamentHubModal from '../TournamentHubModal/TournamentHubModal';
+import TournamentHubButtons from '../TournamentHubButtons/TournamentHubButtons';
+import TournamentHubInfo from '../TournamentHubInfo/TournamentHubInfo';
 
 const TournamentHubPage = () => {
   const { hubId } = useParams() as { hubId: string };
@@ -57,17 +45,6 @@ const TournamentHubPage = () => {
   }
 
   const [loggedInUserTournament, setLoggedInUserTournament] = useState<Tournament>();
-
-  // TODO -> This is static, should not be recreated on every render, put above the component.
-  const buttons = [
-    { name: 'brackets', text: 'Brackets' },
-    { name: 'mapPool', text: 'Map pool' },
-    { name: 'rules', text: 'Rules' },
-    { name: 'howItWorks', text: 'How it works' }
-  ];
-
-  //TODO -> Fetch correct prizepool data
-  const prizePool = [100, 200, 300, 400];
 
   const TournamentInfoArray = [
     {
@@ -174,64 +151,12 @@ const TournamentHubPage = () => {
           </HubHeaderWrapper>
         )}
         <InfoWrapper>
-          <ButtonsWrapper>
-            <LeftButtons>
-              {buttons.map((button) => (
-                <Button key={button.name} onClick={() => handleOpenModal(button.name)}>
-                  {button.text}
-                </Button>
-              ))}
-            </LeftButtons>
-            <RightButtons>
-              {!tournamentHub.registrationClosed &&
-                (!isFeedWithTeam(tournamentTeamFeed) ? (
-                  <Button primary onClick={openTeamSettings}>
-                    Join tournament
-                  </Button>
-                ) : (
-                  <Button alert onClick={openTeamSettings}>
-                    Leave Tournament
-                  </Button>
-                ))}
-            </RightButtons>
-          </ButtonsWrapper>
-          <BracketModal
-            isOpen={activeModal === 'brackets'}
-            onRequestClose={closeModal}
-            tournamentHub={tournamentHub}
+          <TournamentHubButtons
+            handleOpenModal={handleOpenModal}
+            openTeamSettings={openTeamSettings}
           />
-          <MapPoolModal isOpen={activeModal === 'mapPool'} onRequestClose={closeModal} />
-          <RulesModal isOpen={activeModal === 'rules'} onRequestClose={closeModal} />
-          <HowItWorksModal isOpen={activeModal === 'howItWorks'} onRequestClose={closeModal} />
-          {
-            <TeamSettingsModal
-              isOpen={activeModal === 'teamSettings'}
-              playerIds={party ? party.players : [user.id]}
-              hubId={hubId}
-              onRequestClose={closeModal}
-            />
-          }
-          <TournamentHubInfoWrapper isRegistrationClosed={tournamentHub.registrationClosed}>
-            <InfoHeaderWrapper>
-              <Header>Tournament Information</Header>
-              <InfoCards tournamentHub={tournamentHub} />
-            </InfoHeaderWrapper>
-            {!tournamentHub.registrationClosed && (
-              <InfoHeaderWrapper>
-                <Header>Predicted Prize Pool</Header>
-                <PredictedPrize>
-                  {prizePool.map((prize, index) => {
-                    const prizePosition = index + 1;
-                    return (
-                      <PrizeElement key={index}>
-                        <PrizePosition>{prizePosition}</PrizePosition>€{prize}
-                      </PrizeElement>
-                    );
-                  })}
-                </PredictedPrize>
-              </InfoHeaderWrapper>
-            )}
-          </TournamentHubInfoWrapper>
+          <TournamentHubModal activeModal={activeModal} closeModal={closeModal} />
+          <TournamentHubInfo />
         </InfoWrapper>
       </Wrapper>
     </PageContainer>

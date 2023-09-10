@@ -114,29 +114,6 @@ export const HeaderHub = styled.h2`
   `};
 `;
 
-export const LeftButtons = styled.div`
-  display: flex;
-  align-items: center;
-  ${({ theme }) => css`
-    column-gap: ${theme.spacing.base}px;
-  `}
-`;
-
-export const RightButtons = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-export const ButtonsWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  ${({ theme }) => css`
-    margin-bottom: ${theme.spacing.baseX2}px;
-  `}
-`;
-
 export const Wrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -146,74 +123,9 @@ export const Wrapper = styled.div`
 
 export const InfoWrapper = styled.div``;
 
-export const TournamentHubInfoWrapper = styled.div<{
-  isRegistrationClosed: boolean;
-}>`
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  ${({ theme }) => css`
-    column-gap: ${theme.spacing.base}px;
-    row-gap: ${theme.spacing.base}px;
-  `}
-  ${({ isRegistrationClosed }) =>
-    isRegistrationClosed &&
-    css`
-      grid-template-columns: repeat(1, 1fr);
-    `}
-`;
-
-export const InfoHeaderWrapper = styled.div`
-  display: grid;
-  grid-template-areas:
-    'header'
-    'main';
-  grid-auto-rows: 20px 1fr;
-`;
-
 export const HubHeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   flex: 1;
-`;
-
-export const Header = styled.h2`
-  display: block;
-  grid-area: header;
-`;
-
-export const PredictedPrize = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  ${({ theme }) => css`
-    row-gap: ${theme.spacing.base}px;
-  `};
-`;
-export const PrizeElement = styled.div`
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: space-between;
-  overflow: hidden;
-  ${({ theme }) => css`
-    background-color: ${theme.colors.surface.base};
-    border-radius: ${theme.borderRadius.default};
-    padding-right: ${theme.spacing.baseX4}px;
-    ${theme.textStyles.title}
-  `};
-`;
-
-export const PrizePosition = styled.div`
-  display: flex;
-  aspect-ratio: 1/1;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  ${({ theme }) => css`
-    background-color: ${theme.colors.surfaceSecondary.base};
-    ${theme.textStyles.title}
-  `}
-  font-size: 16px;
 `;

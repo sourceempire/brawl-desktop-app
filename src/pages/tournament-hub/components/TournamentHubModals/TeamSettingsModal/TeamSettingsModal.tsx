@@ -6,7 +6,7 @@ import { useLoggedInUser } from 'common/hooks';
 import popup from 'common/popup';
 import { Modal } from 'common/ui';
 import { InputSize } from 'common/ui/Input/Input.types';
-import TeamSettingsPlayer from './TeamPlayer/TeamPlayer';
+import TeamPlayer from './TeamPlayer/TeamPlayer';
 import {
   ButtonWithMessage,
   ButtonsWrapper,
@@ -96,7 +96,7 @@ const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) 
               <Label>Team members</Label>
               <PlayersWrapper>
                 {playerIds.map((player) => (
-                  <TeamSettingsPlayer key={`player_${player}`} userId={player} />
+                  <TeamPlayer key={`player_${player}`} userId={player} />
                 ))}
               </PlayersWrapper>
             </>
