@@ -16,35 +16,35 @@ export const partyEndpoints = {
   revokeInvite: `${SERVER_URL}/api/party/invite/revoke`
 };
 
-type invitePlayerRequestBody = {
+type InvitePlayerRequestBody = {
   invitedUserId: string;
 };
 
-type kickPlayerRequestBody = {
+type KickPlayerRequestBody = {
   kickedUserId: string;
 };
 
-type acceptInviteRequestBody = {
+type AcceptInviteRequestBody = {
   partyId: string;
 };
 
-type declineInviteRequestBody = {
+type DeclineInviteRequestBody = {
   partyId: string;
 };
 
-type giveLeaderRequestBody = {
+type GiveLeaderRequestBody = {
   newLeaderUserId: string;
 };
 
-type updatePartySizeRequestBody = {
+type UpdatePartySizeRequestBody = {
   partySize: number;
 };
 
-type updatePartyTeamNameRequestBody = {
+type UpdatePartyTeamNameRequestBody = {
   teamName: string | null;
 };
 
-type revokeInviteRequestBody = {
+type RevokeInviteRequestBody = {
   invitedUserId: string;
 };
 
@@ -62,7 +62,7 @@ export const useCreatePartyRequest = () => {
   });
 
   return {
-    createParty: () => createParty(),
+    createParty,
     loading,
     success,
     error
@@ -79,7 +79,7 @@ export const useLeavePartyRequest = () => {
   });
 
   return {
-    leaveParty: () => leaveParty(),
+    leaveParty,
     loading,
     success,
     error
@@ -91,13 +91,13 @@ export const useInvitePlayerRequest = () => {
     popup.error(error.error);
   };
 
-  const [invitePlayer, { loading, success, error }] = usePost<void, invitePlayerRequestBody>(
+  const [invitePlayer, { loading, success, error }] = usePost<void, InvitePlayerRequestBody>(
     partyEndpoints.invitePlayer,
     { onError }
   );
 
   return {
-    invitePlayer: (body: invitePlayerRequestBody) => invitePlayer({ body }),
+    invitePlayer: (body: InvitePlayerRequestBody) => invitePlayer({ body }),
     loading,
     success,
     error
@@ -109,13 +109,13 @@ export const useKickPlayerRequest = () => {
     popup.error(error.error);
   };
 
-  const [kickPlayer, { loading, success, error }] = usePost<void, kickPlayerRequestBody>(
+  const [kickPlayer, { loading, success, error }] = usePost<void, KickPlayerRequestBody>(
     partyEndpoints.kickPlayer,
     { onError }
   );
 
   return {
-    kickPlayer: (body: kickPlayerRequestBody) => kickPlayer({ body }),
+    kickPlayer: (body: KickPlayerRequestBody) => kickPlayer({ body }),
     loading,
     success,
     error
@@ -127,13 +127,13 @@ export const useAcceptInviteRequest = () => {
     popup.warning(error.error, { timer: 3000 });
   };
 
-  const [acceptInvite, { loading, success, error }] = usePost<void, acceptInviteRequestBody>(
+  const [acceptInvite, { loading, success, error }] = usePost<void, AcceptInviteRequestBody>(
     partyEndpoints.acceptInvite,
     { onError }
   );
 
   return {
-    acceptInvite: (body: acceptInviteRequestBody) => acceptInvite({ body }),
+    acceptInvite: (body: AcceptInviteRequestBody) => acceptInvite({ body }),
     loading,
     success,
     error
@@ -145,13 +145,13 @@ export const useDeclineInviteRequest = () => {
     popup.error(error.error, { timer: 3000 });
   };
 
-  const [declineInvite, { loading, success, error }] = usePost<void, declineInviteRequestBody>(
+  const [declineInvite, { loading, success, error }] = usePost<void, DeclineInviteRequestBody>(
     partyEndpoints.declineInvite,
     { onError }
   );
 
   return {
-    declineInvite: (body: declineInviteRequestBody) => declineInvite({ body }),
+    declineInvite: (body: DeclineInviteRequestBody) => declineInvite({ body }),
     loading,
     success,
     error
@@ -163,13 +163,13 @@ export const useGiveLeaderRequest = () => {
     popup.error(error.error);
   };
 
-  const [giveLeader, { loading, success, error }] = usePost<void, giveLeaderRequestBody>(
+  const [giveLeader, { loading, success, error }] = usePost<void, GiveLeaderRequestBody>(
     partyEndpoints.giveLeader,
     { onError }
   );
 
   return {
-    giveLeader: (body: giveLeaderRequestBody) => giveLeader({ body }),
+    giveLeader: (body: GiveLeaderRequestBody) => giveLeader({ body }),
     loading,
     success,
     error
@@ -177,13 +177,13 @@ export const useGiveLeaderRequest = () => {
 };
 
 export const useUpdatePartySizeRequest = ({ onError }: Option) => {
-  const [updatePartySize, { loading, success, error }] = usePost<void, updatePartySizeRequestBody>(
+  const [updatePartySize, { loading, success, error }] = usePost<void, UpdatePartySizeRequestBody>(
     partyEndpoints.updatePartySize,
     { onError }
   );
 
   return {
-    updatePartySize: (body: updatePartySizeRequestBody) => updatePartySize({ body }),
+    updatePartySize: (body: UpdatePartySizeRequestBody) => updatePartySize({ body }),
     loading,
     success,
     error
@@ -193,11 +193,11 @@ export const useUpdatePartySizeRequest = ({ onError }: Option) => {
 export const useUpdatePartyTeamNameRequest = ({ onError }: Option) => {
   const [updatePartyTeamName, { loading, success, error }] = usePost<
     void,
-    updatePartyTeamNameRequestBody
+    UpdatePartyTeamNameRequestBody
   >(partyEndpoints.updatePartyTeamName, { onError });
 
   return {
-    updatePartyTeamName: (body: updatePartyTeamNameRequestBody) => updatePartyTeamName({ body }),
+    updatePartyTeamName: (body: UpdatePartyTeamNameRequestBody) => updatePartyTeamName({ body }),
     loading,
     success,
     error
@@ -209,13 +209,13 @@ export const useRevokeInviteRequest = () => {
     popup.error(error.error);
   };
 
-  const [revokeInvite, { loading, success, error }] = usePost<void, revokeInviteRequestBody>(
+  const [revokeInvite, { loading, success, error }] = usePost<void, RevokeInviteRequestBody>(
     partyEndpoints.revokeInvite,
     { onError }
   );
 
   return {
-    revokeInvite: (body: revokeInviteRequestBody) => revokeInvite({ body }),
+    revokeInvite: (body: RevokeInviteRequestBody) => revokeInvite({ body }),
     loading,
     success,
     error
