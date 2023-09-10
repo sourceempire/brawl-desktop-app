@@ -12,7 +12,6 @@ export const partyEndpoints = {
   declineInvite: `${SERVER_URL}/api/party/invite/decline`,
   giveLeader: `${SERVER_URL}/api/party/leader`,
   updatePartySize: `${SERVER_URL}/api/party/update_party_size`,
-  updatePartyTeamName: `${SERVER_URL}/api/party/update_team_name`,
   revokeInvite: `${SERVER_URL}/api/party/invite/revoke`
 };
 
@@ -38,10 +37,6 @@ type GiveLeaderRequestBody = {
 
 type UpdatePartySizeRequestBody = {
   partySize: number;
-};
-
-type UpdatePartyTeamNameRequestBody = {
-  teamName: string | null;
 };
 
 type RevokeInviteRequestBody = {
@@ -184,20 +179,6 @@ export const useUpdatePartySizeRequest = ({ onError }: Option) => {
 
   return {
     updatePartySize: (body: UpdatePartySizeRequestBody) => updatePartySize({ body }),
-    loading,
-    success,
-    error
-  };
-};
-
-export const useUpdatePartyTeamNameRequest = ({ onError }: Option) => {
-  const [updatePartyTeamName, { loading, success, error }] = usePost<
-    void,
-    UpdatePartyTeamNameRequestBody
-  >(partyEndpoints.updatePartyTeamName, { onError });
-
-  return {
-    updatePartyTeamName: (body: UpdatePartyTeamNameRequestBody) => updatePartyTeamName({ body }),
     loading,
     success,
     error
