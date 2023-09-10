@@ -4,7 +4,7 @@ import PartyInvite from '../PartyInvite/PartyInvite';
 import PartyPlayer from '../PartyPlayer';
 import PartySettings from '../PartySettings';
 import { Wrapper } from './Party.styles';
-import { useCreatePartyRequest } from 'api/requests/party';
+import { useCreatePartyRequest } from 'api/requests/party/CreateParty';
 
 const Lobby = () => {
   const { isInParty, party } = usePartyFeed();

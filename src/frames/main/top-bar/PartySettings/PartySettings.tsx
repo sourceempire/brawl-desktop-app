@@ -5,8 +5,8 @@ import popup from 'common/popup';
 import { ActionButton, ContextMenu } from 'common/ui';
 import { Icons } from 'common/ui/Icon';
 import { Label, PartySizes, Settings, SettingsDisplay } from './PartySettings.styles';
-import { useUpdatePartySizeRequest } from 'api/requests/party';
 import { ServerError } from 'brawl-fetch';
+import { useUpdatePartySizeRequest } from 'api/requests/party/UpdatePartySize';
 
 const PartySettings = () => {
   const loggedInUser = useLoggedInUser();

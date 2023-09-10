@@ -4,7 +4,8 @@ import { PartyInviteNotificationInfo } from 'types/notifications/Notifications';
 import { Highlight, Image, Text, TimeAgo } from '../../NotificationCard/NotificationCard.styles';
 import { ActionButton, Actions, Info, Wrapper } from '../NotificationInfo.styles';
 import temporaryProfileImage from 'assets/images/temporary-profile-image.jpg';
-import { useAcceptInviteRequest, useDeclineInviteRequest } from 'api/requests/party';
+import { useAcceptInviteRequest } from 'api/requests/party/AcceptInvite';
+import { useDeclineInviteRequest } from 'api/requests/party/DeclineInvite';
 
 type Props = {
   info: PartyInviteNotificationInfo;
