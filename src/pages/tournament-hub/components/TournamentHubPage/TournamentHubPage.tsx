@@ -79,7 +79,7 @@ const TournamentHubPage = () => {
     },
     {
       key: 'entryFee',
-      header: `€${formatMoney(tournamentHub.entryFee)} / person`,
+      header: `${formatMoney(tournamentHub.entryFee)} / person`,
       subtext: 'Entry Fee',
       icon: Icons.Ticket
     },

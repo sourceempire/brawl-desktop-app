@@ -37,9 +37,9 @@ export default function FeaturedTournament({ tournamentHub, onClick, visible }: 
             <Column1>
               <Name>{tournamentHub.name}</Name>
               <TournamentInfo>
-                Starts {formatDateAndTime(tournamentHub.startTime)} | Registration closes{' '}
-                {formatDateAndTime(tournamentHub.registrationCloseTime)} | Entry fee €
-                {formatMoney(tournamentHub.entryFee)} / person |{' '}
+                {`Starts ${formatDateAndTime(tournamentHub.startTime)} | `}
+                {`Registration closes ${formatDateAndTime(tournamentHub.registrationCloseTime)} | `}
+                {`Entry fee ${formatMoney(tournamentHub.entryFee)} / person | `}
                 {getTournamentModeShort(tournamentHub)}
               </TournamentInfo>
             </Column1>

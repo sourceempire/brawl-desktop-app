@@ -68,7 +68,7 @@ export default function TournamentInfoCard({ tournamentInfo, onClick, className 
             </TwoColHeader>
           </Column1>
           <Column2>
-            <EntryFee>€{formatMoney(tournamentInfo.entryFee)} / person</EntryFee>
+            <EntryFee>{formatMoney(tournamentInfo.entryFee)} / person</EntryFee>
             <TwoColHeader>
               <EntryFeeIcon />
               <PrizePoolHeader>Entry Fee</PrizePoolHeader>
