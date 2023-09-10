@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { usePartyFeed } from 'api/feeds';
-import * as PartyRequests from 'api/requests/PartyRequests';
+// import * as PartyRequests from 'api/requests/PartyRequests';
 import {
   useContextMenuPosition,
   useDebounce,
@@ -21,6 +21,7 @@ import {
   SettingsDisplayDisabled
 } from './PartySettings.styles';
 import { useUpdatePartySizeRequest, useUpdatePartyTeamNameRequest } from 'api/requests/party';
+import { ServerError } from 'brawl-fetch';
 
 const PARTY_NAME_MAX_LENGTH = 20;
 
@@ -43,15 +44,13 @@ const PartySettings = () => {
   const debouncedTeamName = useDebounce(teamName, 250);
   const previousDebouncedTeamName = usePrevious(debouncedTeamName);
 
-  const onUpdatePartySizeError = useCallback(() => {
-    // HOW TO MAKE A POPUP HERE WITH ERROR?
-    // popup.error(error.error);
+  const onUpdatePartySizeError = useCallback((error: ServerError) => {
+    popup.error(error.error);
     setPartySize(party.partySize);
   }, []);
 
-  const onUpdatePartyTeamNameError = useCallback(() => {
-    // HOW TO MAKE A POPUP HERE WITH ERROR?
-    // popup.error(error.error);
+  const onUpdatePartyTeamNameError = useCallback((error: ServerError) => {
+    popup.error(error.error);
     setTeamName(party.teamName);
   }, []);
 

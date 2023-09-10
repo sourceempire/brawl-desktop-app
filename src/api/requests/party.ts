@@ -49,7 +49,7 @@ type RevokeInviteRequestBody = {
 };
 
 type Option = {
-  onError: () => void;
+  onError: (error: ServerError) => void;
 };
 
 export const useCreatePartyRequest = () => {
