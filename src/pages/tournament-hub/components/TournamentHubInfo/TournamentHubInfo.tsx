@@ -18,29 +18,27 @@ const TournamentHubInfo = () => {
   const prizePool = [100, 200, 300, 400];
 
   return (
-    <>
-      <TournamentHubInfoWrapper isRegistrationClosed={tournamentHub.registrationClosed}>
+    <TournamentHubInfoWrapper isRegistrationClosed={tournamentHub.registrationClosed}>
+      <InfoHeaderWrapper>
+        <Header>Tournament Information</Header>
+        <InfoCards tournamentHub={tournamentHub} />
+      </InfoHeaderWrapper>
+      {!tournamentHub.registrationClosed && (
         <InfoHeaderWrapper>
-          <Header>Tournament Information</Header>
-          <InfoCards tournamentHub={tournamentHub} />
+          <Header>Predicted Prize Pool</Header>
+          <PredictedPrize>
+            {prizePool.map((prize, index) => {
+              const prizePosition = index + 1;
+              return (
+                <PrizeElement key={index}>
+                  <PrizePosition>{prizePosition}</PrizePosition>€{prize}
+                </PrizeElement>
+              );
+            })}
+          </PredictedPrize>
         </InfoHeaderWrapper>
-        {!tournamentHub.registrationClosed && (
-          <InfoHeaderWrapper>
-            <Header>Predicted Prize Pool</Header>
-            <PredictedPrize>
-              {prizePool.map((prize, index) => {
-                const prizePosition = index + 1;
-                return (
-                  <PrizeElement key={index}>
-                    <PrizePosition>{prizePosition}</PrizePosition>€{prize}
-                  </PrizeElement>
-                );
-              })}
-            </PredictedPrize>
-          </InfoHeaderWrapper>
-        )}
-      </TournamentHubInfoWrapper>
-    </>
+      )}
+    </TournamentHubInfoWrapper>
   );
 };
 

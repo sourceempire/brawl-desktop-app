@@ -6,24 +6,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import PageContainer from 'common/components/PageContainer';
 import { useLoggedInUser } from 'common/hooks/useLoggedInUser';
 import popup from 'common/popup';
-import { Backdrop, Icons } from 'common/ui';
+import { Backdrop } from 'common/ui';
 import { TournamentHubModalType } from 'common/ui/Modal/Modal.types';
-import CountDown from 'pages/tournament/components/CountDown';
 import TournamentCard from 'pages/tournament/components/TournamentCard/TournamentCard';
 import { Tournament } from 'types/tournaments/TournamentInfo';
-import { formatDateAndTime } from 'utils/dateUtils';
 import {
-  CountDownInfo,
-  HeaderHub,
-  HeaderInfo,
-  HubHeaderWrapper,
-  InfoContainer,
-  InfoHeader,
-  InfoIcon,
-  InfoSubText,
-  InfoText,
   InfoWrapper,
-  TournamentInfo,
   TournamentName,
   TournamentsWrapper,
   Wrapper
@@ -31,6 +19,7 @@ import {
 import TournamentHubModal from '../TournamentHubModal/TournamentHubModal';
 import TournamentHubButtons from '../TournamentHubButtons/TournamentHubButtons';
 import TournamentHubInfo from '../TournamentHubInfo/TournamentHubInfo';
+import TournamentHubHeader from '../TournamentHubHeader/TournamentHubHeader';
 
 const TournamentHubPage = () => {
   const { hubId } = useParams() as { hubId: string };
@@ -45,27 +34,6 @@ const TournamentHubPage = () => {
   }
 
   const [loggedInUserTournament, setLoggedInUserTournament] = useState<Tournament>();
-
-  const TournamentInfoArray = [
-    {
-      key: 'prizePool',
-      header: `€${tournamentHub.currentPrizePool}`,
-      subtext: 'Predicted Prize Pool',
-      icon: Icons.Trophy
-    },
-    {
-      key: 'entryFee',
-      header: `€${tournamentHub.entryFee} / person`,
-      subtext: 'Entry Fee',
-      icon: Icons.Ticket
-    },
-    {
-      key: 'startTime',
-      header: tournamentHub.startTime && formatDateAndTime(tournamentHub.startTime),
-      subtext: 'Tournament Start',
-      icon: Icons.Clock
-    }
-  ];
 
   const [activeModal, setActiveModal] = useState<TournamentHubModalType>(null);
 
@@ -131,24 +99,7 @@ const TournamentHubPage = () => {
             </TournamentsWrapper>
           </>
         ) : (
-          <HubHeaderWrapper>
-            <HeaderInfo>
-              <HeaderHub>{tournamentHub.name}</HeaderHub>
-              <CountDownInfo>Registration closes in</CountDownInfo>
-              <CountDown startTime={Number(tournamentHub.registrationCloseTime)} />
-              <TournamentInfo>
-                {TournamentInfoArray.map((info) => (
-                  <InfoContainer key={info.key}>
-                    <InfoIcon icon={info.icon} />
-                    <InfoText>
-                      <InfoHeader>{info.header}</InfoHeader>
-                      <InfoSubText>{info.subtext}</InfoSubText>
-                    </InfoText>
-                  </InfoContainer>
-                ))}
-              </TournamentInfo>
-            </HeaderInfo>
-          </HubHeaderWrapper>
+          <TournamentHubHeader />
         )}
         <InfoWrapper>
           <TournamentHubButtons

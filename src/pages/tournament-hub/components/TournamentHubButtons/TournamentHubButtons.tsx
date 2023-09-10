@@ -25,29 +25,27 @@ const TournamentHubButtons = ({ handleOpenModal, openTeamSettings }: Props) => {
   ];
 
   return (
-    <>
-      <ButtonsWrapper>
-        <LeftButtons>
-          {buttons.map((button) => (
-            <Button key={button.name} onClick={() => handleOpenModal(button.name)}>
-              {button.text}
+    <ButtonsWrapper>
+      <LeftButtons>
+        {buttons.map((button) => (
+          <Button key={button.name} onClick={() => handleOpenModal(button.name)}>
+            {button.text}
+          </Button>
+        ))}
+      </LeftButtons>
+      <RightButtons>
+        {!tournamentHub.registrationClosed &&
+          (!isFeedWithTeam(tournamentTeamFeed) ? (
+            <Button primary onClick={openTeamSettings}>
+              Join tournament
+            </Button>
+          ) : (
+            <Button alert onClick={openTeamSettings}>
+              Leave Tournament
             </Button>
           ))}
-        </LeftButtons>
-        <RightButtons>
-          {!tournamentHub.registrationClosed &&
-            (!isFeedWithTeam(tournamentTeamFeed) ? (
-              <Button primary onClick={openTeamSettings}>
-                Join tournament
-              </Button>
-            ) : (
-              <Button alert onClick={openTeamSettings}>
-                Leave Tournament
-              </Button>
-            ))}
-        </RightButtons>
-      </ButtonsWrapper>
-    </>
+      </RightButtons>
+    </ButtonsWrapper>
   );
 };
 
