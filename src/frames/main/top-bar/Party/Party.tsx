@@ -10,10 +10,6 @@ const Lobby = () => {
   const { isInParty, party } = usePartyFeed();
   const { createParty } = useCreatePartyRequest();
 
-  const handleCreateParty = () => {
-    createParty();
-  };
-
   return isInParty ? (
     <Wrapper>
       {party.players.map((userId) => (
@@ -30,7 +26,7 @@ const Lobby = () => {
     </Wrapper>
   ) : (
     <Wrapper>
-      <ActionButton icon={<Icons.Party />} onClick={handleCreateParty} hint="Create party" />
+      <ActionButton icon={<Icons.Party />} onClick={createParty} hint="Create party" />
     </Wrapper>
   );
 };

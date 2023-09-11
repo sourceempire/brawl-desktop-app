@@ -64,10 +64,6 @@ export const PartyPlayer = ({ userId }: Props) => {
     });
   };
 
-  const leave = () => {
-    leaveParty();
-  };
-
   const makeRequest = (request: () => void) => {
     setMenuVisible(false);
     request();
@@ -126,7 +122,7 @@ export const PartyPlayer = ({ userId }: Props) => {
 
             {isLoggedInUser && (
               <>
-                <PlayerAction onClick={() => makeRequest(leave)}>Leave party</PlayerAction>
+                <PlayerAction onClick={() => makeRequest(leaveParty)}>Leave party</PlayerAction>
               </>
             )}
           </MenuWrapper>
