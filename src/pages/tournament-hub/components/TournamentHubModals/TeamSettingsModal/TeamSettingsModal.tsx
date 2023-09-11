@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
 import { useTournamentHubFeed, useTournamentTeamFeed } from 'api/feeds';
 import { isFeedWithTeam } from 'api/feeds/hooks/useTournamentTeamFeed';
-import { useJoinTournamentRequest, useLeaveTournamentRequest } from 'api/requests/tournament';
 import { useLoggedInUser } from 'common/hooks';
 import popup from 'common/popup';
 import { Modal } from 'common/ui';
@@ -18,6 +17,7 @@ import {
   Settings,
   Wrapper
 } from './TeamSettingsModal.styles';
+import { useJoinTournamentRequest, useLeaveTournamentRequest } from 'api/requests/tournament';
 
 type Props = {
   playerIds: string[];
@@ -65,16 +65,20 @@ const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) 
       setErrorMessage('You need a team name');
     } else {
       joinTournament({
-        tournamentHubId: hubId,
-        teamName: teamName,
-        playerIds: playerIds
+        body: {
+          tournamentHubId: hubId,
+          teamName: teamName,
+          playerIds: playerIds
+        }
       });
     }
   };
 
   const leave = () => {
     leaveTournament({
-      tournamentHubId: hubId
+      body: {
+        tournamentHubId: hubId
+      }
     });
   };
 
