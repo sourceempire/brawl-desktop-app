@@ -19,7 +19,7 @@ export const useInvitePlayerRequest = () => {
   });
 
   return {
-    invitePlayer: (body: Body) => invitePlayer({ body }),
+    invitePlayer,
     loading,
     success,
     error

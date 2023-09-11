@@ -19,7 +19,7 @@ export const useAcceptInviteRequest = () => {
   });
 
   return {
-    acceptInvite: (body: Body) => acceptInvite({ body }),
+    acceptInvite,
     loading,
     success,
     error

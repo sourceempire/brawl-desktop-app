@@ -50,13 +50,17 @@ export const PartyPlayer = ({ userId }: Props) => {
 
   const givePartyLeader = () => {
     giveLeader({
-      newLeaderUserId: userId
+      body: {
+        newLeaderUserId: userId
+      }
     });
   };
 
   const kickPartyPlayer = () => {
     kickPlayer({
-      kickedUserId: userId
+      body: {
+        kickedUserId: userId
+      }
     });
   };
 

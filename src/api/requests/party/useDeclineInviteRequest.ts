@@ -19,7 +19,7 @@ export const useDeclineInviteRequest = () => {
   });
 
   return {
-    declineInvite: (body: Body) => declineInvite({ body }),
+    declineInvite,
     loading,
     success,
     error

@@ -43,13 +43,17 @@ const PartyInvite = () => {
 
   const handleInvite = (userId: string) => {
     invitePlayer({
-      invitedUserId: userId
+      body: {
+        invitedUserId: userId
+      }
     });
   };
 
   const handleRevokeInvite = (userId: string) => {
     revokeInvite({
-      invitedUserId: userId
+      body: {
+        invitedUserId: userId
+      }
     });
   };
 

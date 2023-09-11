@@ -36,7 +36,9 @@ const PartySettings = () => {
   const handlePartySizeChange = (newPartySize: number) => {
     setPartySize(newPartySize);
     updatePartySize({
-      partySize: newPartySize
+      body: {
+        partySize: newPartySize
+      }
     });
   };
 

@@ -19,7 +19,7 @@ export const useRevokeInviteRequest = () => {
   });
 
   return {
-    revokeInvite: (body: Body) => revokeInvite({ body }),
+    revokeInvite,
     loading,
     success,
     error

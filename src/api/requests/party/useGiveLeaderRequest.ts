@@ -19,7 +19,7 @@ export const useGiveLeaderRequest = () => {
   });
 
   return {
-    giveLeader: (body: Body) => giveLeader({ body }),
+    giveLeader,
     loading,
     success,
     error

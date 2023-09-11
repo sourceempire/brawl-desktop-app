@@ -19,7 +19,7 @@ export const useKickPlayerRequest = () => {
   });
 
   return {
-    kickPlayer: (body: Body) => kickPlayer({ body }),
+    kickPlayer,
     loading,
     success,
     error

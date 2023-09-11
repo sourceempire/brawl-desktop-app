@@ -19,13 +19,17 @@ const PartyInviteInfo = ({ info, createdAt }: Props) => {
 
   const handleAccept = () => {
     acceptInvite({
-      partyId: info.partyId
+      body: {
+        partyId: info.partyId
+      }
     });
   };
 
   const handleDecline = () => {
     declineInvite({
-      partyId: info.partyId
+      body: {
+        partyId: info.partyId
+      }
     });
   };
 

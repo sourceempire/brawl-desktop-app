@@ -19,7 +19,7 @@ export const useUpdatePartySizeRequest = ({ onError }: Option) => {
   );
 
   return {
-    updatePartySize: (body: Body) => updatePartySize({ body }),
+    updatePartySize,
     loading,
     success,
     error
