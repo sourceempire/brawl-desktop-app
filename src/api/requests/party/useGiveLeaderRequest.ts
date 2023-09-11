@@ -3,9 +3,7 @@ import popup from 'common/popup';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
-export const giveLeaderEndpoints = {
-  giveLeader: `${SERVER_URL}/api/party/leader`
-};
+export const giveLeaderEndpoint = `${SERVER_URL}/api/party/leader`;
 
 type Body = {
   newLeaderUserId: string;
@@ -16,10 +14,9 @@ export const useGiveLeaderRequest = () => {
     popup.error(error.error);
   };
 
-  const [giveLeader, { loading, success, error }] = usePost<void, Body>(
-    giveLeaderEndpoints.giveLeader,
-    { onError }
-  );
+  const [giveLeader, { loading, success, error }] = usePost<void, Body>(giveLeaderEndpoint, {
+    onError
+  });
 
   return {
     giveLeader: (body: Body) => giveLeader({ body }),

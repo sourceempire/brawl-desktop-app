@@ -3,9 +3,7 @@ import popup from 'common/popup';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
-export const invitePlayerEndpoints = {
-  invitePlayer: `${SERVER_URL}/api/party/invite`
-};
+export const invitePlayerEndpoint = `${SERVER_URL}/api/party/invite`;
 
 type Body = {
   invitedUserId: string;
@@ -16,10 +14,9 @@ export const useInvitePlayerRequest = () => {
     popup.error(error.error);
   };
 
-  const [invitePlayer, { loading, success, error }] = usePost<void, Body>(
-    invitePlayerEndpoints.invitePlayer,
-    { onError }
-  );
+  const [invitePlayer, { loading, success, error }] = usePost<void, Body>(invitePlayerEndpoint, {
+    onError
+  });
 
   return {
     invitePlayer: (body: Body) => invitePlayer({ body }),

@@ -3,9 +3,7 @@ import popup from 'common/popup';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
-export const declineInviteEndpoints = {
-  declineInvite: `${SERVER_URL}/api/party/invite/decline`
-};
+export const declineInviteEndpoint = `${SERVER_URL}/api/party/invite/decline`;
 
 type Body = {
   partyId: string;
@@ -16,10 +14,9 @@ export const useDeclineInviteRequest = () => {
     popup.error(error.error, { timer: 3000 });
   };
 
-  const [declineInvite, { loading, success, error }] = usePost<void, Body>(
-    declineInviteEndpoints.declineInvite,
-    { onError }
-  );
+  const [declineInvite, { loading, success, error }] = usePost<void, Body>(declineInviteEndpoint, {
+    onError
+  });
 
   return {
     declineInvite: (body: Body) => declineInvite({ body }),

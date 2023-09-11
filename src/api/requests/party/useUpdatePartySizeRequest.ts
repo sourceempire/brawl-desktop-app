@@ -2,9 +2,7 @@ import { ServerError, usePost } from 'brawl-fetch';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
-export const updatePartySizeEndpoints = {
-  updatePartySize: `${SERVER_URL}/api/party/update_party_size`
-};
+export const updatePartySizeEndpoint = `${SERVER_URL}/api/party/update_party_size`;
 
 type Body = {
   partySize: number;
@@ -16,7 +14,7 @@ type Option = {
 
 export const useUpdatePartySizeRequest = ({ onError }: Option) => {
   const [updatePartySize, { loading, success, error }] = usePost<void, Body>(
-    updatePartySizeEndpoints.updatePartySize,
+    updatePartySizeEndpoint,
     { onError }
   );
 

@@ -3,9 +3,7 @@ import popup from 'common/popup';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
-export const acceptInviteEndpoints = {
-  acceptInvite: `${SERVER_URL}/api/party/invite/accept`
-};
+export const acceptInviteEndpoint = `${SERVER_URL}/api/party/invite/accept`;
 
 type Body = {
   partyId: string;
@@ -16,10 +14,9 @@ export const useAcceptInviteRequest = () => {
     popup.warning(error.error, { timer: 3000 });
   };
 
-  const [acceptInvite, { loading, success, error }] = usePost<void, Body>(
-    acceptInviteEndpoints.acceptInvite,
-    { onError }
-  );
+  const [acceptInvite, { loading, success, error }] = usePost<void, Body>(acceptInviteEndpoint, {
+    onError
+  });
 
   return {
     acceptInvite: (body: Body) => acceptInvite({ body }),
