@@ -5,9 +5,11 @@ import { useContextMenuPosition, useHint, useLoggedInUser } from 'common/hooks';
 import { ContextMenu } from 'common/ui';
 import { LeaderStar, MenuWrapper, PlayerAction, PlayerImage, Wrapper } from './PartyPlayer.styles';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
-import { useLeavePartyRequest } from 'api/requests/party/leavePartyRequest';
-import { useKickPlayerRequest } from 'api/requests/party/kickPlayerRequest';
-import { useGiveLeaderRequest } from 'api/requests/party/giveLeaderRequest';
+import {
+  useLeavePartyRequest,
+  useKickPlayerRequest,
+  useGiveLeaderRequest
+} from 'api/requests/party';
 
 type Props = {
   userId: string;

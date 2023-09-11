@@ -18,8 +18,7 @@ import {
 } from './PartyInvite.styles';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
 import { theme } from 'assets/styles/Theme';
-import { useInvitePlayerRequest } from 'api/requests/party/invitePlayerRequest';
-import { useRevokeInviteRequest } from 'api/requests/party/revokeInviteRequest';
+import { useInvitePlayerRequest, useRevokeInviteRequest } from 'api/requests/party';
 
 const PartyInvite = () => {
   const { party } = usePartyFeed();
