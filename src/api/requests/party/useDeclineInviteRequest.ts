@@ -14,14 +14,12 @@ export const useDeclineInviteRequest = () => {
     popup.error(error.error, { timer: 3000 });
   };
 
-  const [declineInvite, { loading, success, error }] = usePost<void, Body>(declineInviteEndpoint, {
+  const [declineInvite, ...response] = usePost<void, Body>(declineInviteEndpoint, {
     onError
   });
 
   return {
     declineInvite,
-    loading,
-    success,
-    error
+    ...response
   };
 };

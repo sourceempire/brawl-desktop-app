@@ -10,14 +10,12 @@ export const useLeavePartyRequest = () => {
     popup.error(error.error);
   };
 
-  const [leaveParty, { loading, success, error }] = usePost<void>(leavePartyEndpoint, {
+  const [leaveParty, ...response] = usePost<void>(leavePartyEndpoint, {
     onError
   });
 
   return {
     leaveParty,
-    loading,
-    success,
-    error
+    ...response
   };
 };

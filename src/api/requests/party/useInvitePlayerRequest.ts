@@ -14,14 +14,12 @@ export const useInvitePlayerRequest = () => {
     popup.error(error.error);
   };
 
-  const [invitePlayer, { loading, success, error }] = usePost<void, Body>(invitePlayerEndpoint, {
+  const [invitePlayer, ...response] = usePost<void, Body>(invitePlayerEndpoint, {
     onError
   });
 
   return {
     invitePlayer,
-    loading,
-    success,
-    error
+    ...response
   };
 };
