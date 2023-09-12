@@ -38,7 +38,6 @@ const RulesModal = ({ isOpen, onRequestClose, tournamentHubId }: Props) => {
       try {
         const res = await RulesRequests.getTournamentHubRules({ tournamentHubId });
         const { cheating, general, participation } = res.content;
-        console.log(res);
         setRules({
           cheating: {
             name: cheating.name,

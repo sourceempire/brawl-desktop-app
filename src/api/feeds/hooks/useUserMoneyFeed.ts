@@ -7,8 +7,6 @@ type Options = {
 function useUserMoneyFeed({ userId }: Options) {
   const { data, loading } = useFeed<{ balance: number }>(`user.money.${userId}`);
 
-  console.log(data);
-
   return {
     isLoading: loading,
     balance: data.balance,

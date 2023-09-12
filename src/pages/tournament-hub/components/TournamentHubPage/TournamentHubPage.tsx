@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { usePartyFeed, useTournamentHubFeed, useTournamentTeamFeed } from 'api/feeds';
 import { isFeedWithTeam } from 'api/feeds/hooks/useTournamentTeamFeed';
 import * as TournamentRequests from 'api/requests/TournamentRequests';
@@ -43,6 +43,7 @@ import {
 } from './TournamentHubPage.styles';
 import { useJoinTournamentRequest } from 'api/requests/tournament';
 import { formatMoney } from 'utils/moneyUtils';
+import { useHint } from 'common/hooks';
 
 const TournamentHubPage = () => {
   const { hubId } = useParams() as { hubId: string };
@@ -51,6 +52,15 @@ const TournamentHubPage = () => {
   const { tournamentHub, tournamentIds, isLoading } = useTournamentHubFeed(hubId);
   const { isInParty, party } = usePartyFeed();
   const { joinTournament, loading, success, error } = useJoinTournamentRequest();
+
+  const [isHintVisible, setHintVisible] = useState(false);
+  const entryFeeRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const { Hint } = useHint({
+    hintText: `${formatMoney(tournamentHub.entryFeeCut)} fee taken`,
+    isVisible: isHintVisible,
+    timeToVisibility: 300,
+    relatedElementRef: entryFeeRef
+  });
 
   // this knows that tournamentTeam exists (can be used instead of checking if it exists with falsy conditionals). Use if you want or remove it
   if (isFeedWithTeam(tournamentTeamFeed)) {
@@ -70,24 +80,30 @@ const TournamentHubPage = () => {
   //TODO -> Fetch correct prizepool data
   const prizePool = [100, 200, 300, 400];
 
+  const prizePoolRef = useRef(null);
+  const startTimeRef = useRef(null);
+
   const TournamentInfoArray = [
     {
       key: 'prizePool',
       header: `€${tournamentHub.currentPrizePool}`,
       subtext: 'Predicted Prize Pool',
-      icon: Icons.Trophy
+      icon: Icons.Trophy,
+      ref: prizePoolRef
     },
     {
       key: 'entryFee',
-      header: `${formatMoney(tournamentHub.entryFee)} / person`,
-      subtext: 'Entry Fee',
-      icon: Icons.Ticket
+      header: `${formatMoney(tournamentHub.entryFee, tournamentHub.entryFeeCut)} / player`,
+      subtext: 'Buy-In',
+      icon: Icons.Ticket,
+      ref: entryFeeRef
     },
     {
       key: 'startTime',
       header: tournamentHub.startTime && formatDateAndTime(tournamentHub.startTime),
       subtext: 'Tournament Start',
-      icon: Icons.Clock
+      icon: Icons.Clock,
+      ref: startTimeRef
     }
   ];
 
@@ -166,9 +182,21 @@ const TournamentHubPage = () => {
                 {TournamentInfoArray.map((info) => (
                   <InfoContainer key={info.key}>
                     <InfoIcon icon={info.icon} />
-                    <InfoText>
+                    <InfoText
+                      ref={info.ref}
+                      onMouseEnter={() => {
+                        if (info.key === 'entryFee') {
+                          setHintVisible(true);
+                        }
+                      }}
+                      onMouseLeave={() => {
+                        if (info.key === 'entryFee') {
+                          setHintVisible(false);
+                        }
+                      }}>
                       <InfoHeader>{info.header}</InfoHeader>
                       <InfoSubText>{info.subtext}</InfoSubText>
+                      {isHintVisible && info.key === 'entryFee' ? Hint : null}
                     </InfoText>
                   </InfoContainer>
                 ))}

@@ -39,7 +39,10 @@ export default function FeaturedTournament({ tournamentHub, onClick, visible }: 
               <TournamentInfo>
                 {`Starts ${formatDateAndTime(tournamentHub.startTime)} | `}
                 {`Registration closes ${formatDateAndTime(tournamentHub.registrationCloseTime)} | `}
-                {`Entry fee ${formatMoney(tournamentHub.entryFee)} / person | `}
+                {`Entry fee ${formatMoney(
+                  tournamentHub.entryFee,
+                  tournamentHub.entryFeeCut
+                )} / player | `}
                 {getTournamentModeShort(tournamentHub)}
               </TournamentInfo>
             </Column1>

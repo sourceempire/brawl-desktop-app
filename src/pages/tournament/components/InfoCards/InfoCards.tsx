@@ -1,11 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { IconEnum } from 'common/ui';
-import Game, { GameId, GameName } from 'types/Game';
+import Game, { GameName } from 'types/Game';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
 import { getTournamentModeShort, getTournamentSeriesTypeLong } from 'utils/tournamentUtils';
-import { InfoCard, InfoCardWrapper, InfoHeader, InfoText, StyledIcon } from './InfoCards.styles';
+import {
+  HeaderText,
+  InfoCard,
+  InfoCardWrapper,
+  InfoHeader,
+  InfoText,
+  StyledIcon
+} from './InfoCards.styles';
 import { formatMoney } from 'utils/moneyUtils';
+import { useHint } from 'common/hooks';
 
 type Props = {
   tournamentHub: TournamentHub;
@@ -16,6 +24,15 @@ const InfoCards = ({ tournamentHub }: Props) => {
     name: '',
     mode: '',
     type: ''
+  });
+
+  const [isHintVisible, setHintVisible] = useState(false);
+  const entryFeeRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const { Hint } = useHint({
+    hintText: `${formatMoney(tournamentHub.entryFeeCut)} fee taken`,
+    isVisible: isHintVisible,
+    timeToVisibility: 300,
+    relatedElementRef: entryFeeRef
   });
 
   const setInfoSettings = (tournamentHub: TournamentHub) => {
@@ -99,9 +116,18 @@ const InfoCards = ({ tournamentHub }: Props) => {
       <InfoCard>
         <InfoHeader>
           <StyledIcon icon={IconEnum.Ticket} />
-          Entry Fee ({tournamentHub.entryFeeCutPercentage}% fee taken)
+          <HeaderText
+            ref={entryFeeRef}
+            onMouseEnter={() => setHintVisible(true)}
+            onMouseLeave={() => setHintVisible(false)}>
+            {' '}
+            Buy-In
+          </HeaderText>
+          {Hint}
         </InfoHeader>
-        <InfoText>{formatMoney(tournamentHub.entryFee)} / person</InfoText>
+        <InfoText>
+          {formatMoney(tournamentHub.entryFee, tournamentHub.entryFeeCut)} / player
+        </InfoText>
       </InfoCard>
     </InfoCardWrapper>
   );
