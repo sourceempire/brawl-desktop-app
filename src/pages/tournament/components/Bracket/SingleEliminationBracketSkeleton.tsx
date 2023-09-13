@@ -6,7 +6,7 @@ import {
   TeamName,
   TeamScore
 } from '../BracketMatch/BracketMatch.styles';
-import { Container, Wrapper } from './Bracket.styles';
+import { Container, Wrapper, InnerWrapper } from './Bracket.styles';
 import { Matches, Round, RoundName } from './SingleEliminationBracket.styles';
 import placeholderTeamLogo from 'assets/images/placeholder-team-logo.png';
 
@@ -48,7 +48,7 @@ const SingleEliminationBracketSkeleton = ({ numberOfTeams }: Props) => {
             <RoundName active={false}>{round.roundName}</RoundName>
             <Matches matchCount={round.matches} roundIndex={roundIndex}>
               {[...Array(round.matches)].map((_, i) => (
-                <Wrapper key={i}>
+                <InnerWrapper key={i}>
                   <Team1 matchOutcome={null}>
                     <TeamLogo>
                       <TeamLogoImage src={placeholderTeamLogo} />
@@ -63,8 +63,26 @@ const SingleEliminationBracketSkeleton = ({ numberOfTeams }: Props) => {
                     <TeamName>-</TeamName>
                     <TeamScore winner={false}></TeamScore>
                   </Team2>
-                </Wrapper>
+                </InnerWrapper>
               ))}
+              {roundIndex === rounds.length - 1 && (
+                <InnerWrapper>
+                  <Team1 matchOutcome={null}>
+                    <TeamLogo>
+                      <TeamLogoImage src={placeholderTeamLogo} />
+                    </TeamLogo>
+                    <TeamName>-</TeamName>
+                    <TeamScore winner={false}></TeamScore>
+                  </Team1>
+                  <Team2>
+                    <TeamLogo>
+                      <TeamLogoImage src={placeholderTeamLogo} />
+                    </TeamLogo>
+                    <TeamName>-</TeamName>
+                    <TeamScore winner={false}></TeamScore>
+                  </Team2>
+                </InnerWrapper>
+              )}
             </Matches>
           </Round>
         ))}

@@ -7,6 +7,14 @@ export const Wrapper = styled.div`
   display: flex;
   position: relative;
   gap: ${roundGap}px;
+  justify-content: space-evenly;
+`;
+
+export const InnerWrapper = styled.div`
+  display: flex;
+  position: relative;
+  gap: ${theme.spacing.base}px;
+  flex-direction: column;
 `;
 
 export const Container = styled.div`
