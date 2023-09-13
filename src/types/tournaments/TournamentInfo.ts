@@ -1,3 +1,4 @@
+import { IconEnum, SVGComponent } from 'common/ui';
 import GameId from 'types/Game';
 import { MatchSettings } from 'types/MatchSettings';
 
@@ -48,4 +49,12 @@ export type TournamentMatchInfo = {
 export type TournamentMatchHistory = {
   tournamentId: string;
   matchList: TournamentMatchInfo[];
+};
+
+export type TournamentHubInfo = {
+  name: string;
+  header: string;
+  subtext: string;
+  icon: IconEnum | SVGComponent | string;
+  ref?: React.MutableRefObject<HTMLDivElement> | null;
 };

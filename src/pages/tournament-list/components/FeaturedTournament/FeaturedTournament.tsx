@@ -16,7 +16,7 @@ import {
   TournamentInfo,
   Wrapper
 } from './FeaturedTournament.styles';
-import { formatMoney } from 'utils/moneyUtils';
+import { formatCentsToCurrency } from 'utils/moneyUtils';
 
 type Props = {
   tournamentHub: TournamentHub;
@@ -39,7 +39,7 @@ export default function FeaturedTournament({ tournamentHub, onClick, visible }: 
               <TournamentInfo>
                 {`Starts ${formatDateAndTime(tournamentHub.startTime)} | `}
                 {`Registration closes ${formatDateAndTime(tournamentHub.registrationCloseTime)} | `}
-                {`Entry fee ${formatMoney(
+                {`Entry fee ${formatCentsToCurrency(
                   tournamentHub.entryFee,
                   tournamentHub.entryFeeCut
                 )} / player | `}

@@ -10,7 +10,7 @@ import { Backdrop, Button, Icons } from 'common/ui';
 import CountDown from 'pages/tournament/components/CountDown';
 import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
 import TournamentCard from 'pages/tournament/components/TournamentCard/TournamentCard';
-import { Tournament } from 'types/tournaments/TournamentInfo';
+import { Tournament, TournamentHubInfo } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
 import BracketModal from './BracketModal/BracketModal';
 import HowItWorksModal from './HowItWorksModal/HowItWorksModal';
@@ -42,7 +42,7 @@ import {
   Wrapper
 } from './TournamentHubPage.styles';
 import { useJoinTournamentRequest } from 'api/requests/tournament';
-import { formatMoney } from 'utils/moneyUtils';
+import { formatCentsToCurrency } from 'utils/moneyUtils';
 import { useHint } from 'common/hooks';
 
 const TournamentHubPage = () => {
@@ -53,11 +53,11 @@ const TournamentHubPage = () => {
   const { isInParty, party } = usePartyFeed();
   const { joinTournament, loading, success, error } = useJoinTournamentRequest();
 
-  const [isHintVisible, setHintVisible] = useState(false);
+  const [isEntryFeeHintVisible, setEntryFeeHintVisible] = useState(false);
   const entryFeeRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const { Hint } = useHint({
-    hintText: `${formatMoney(tournamentHub.entryFeeCut)} fee taken`,
-    isVisible: isHintVisible,
+    hintText: `${formatCentsToCurrency(tournamentHub.entryFeeCut)} fee taken`,
+    isVisible: isEntryFeeHintVisible,
     timeToVisibility: 300,
     relatedElementRef: entryFeeRef
   });
@@ -80,30 +80,28 @@ const TournamentHubPage = () => {
   //TODO -> Fetch correct prizepool data
   const prizePool = [100, 200, 300, 400];
 
-  const prizePoolRef = useRef(null);
-  const startTimeRef = useRef(null);
-
-  const TournamentInfoArray = [
+  const TournamentInfoArray: TournamentHubInfo[] = [
     {
-      key: 'prizePool',
+      name: 'prizePool',
       header: `€${tournamentHub.currentPrizePool}`,
       subtext: 'Predicted Prize Pool',
-      icon: Icons.Trophy,
-      ref: prizePoolRef
+      icon: Icons.Trophy
     },
     {
-      key: 'entryFee',
-      header: `${formatMoney(tournamentHub.entryFee, tournamentHub.entryFeeCut)} / player`,
+      name: 'entryFee',
+      header: `${formatCentsToCurrency(
+        tournamentHub.entryFee,
+        tournamentHub.entryFeeCut
+      )} / player`,
       subtext: 'Buy-In',
       icon: Icons.Ticket,
       ref: entryFeeRef
     },
     {
-      key: 'startTime',
+      name: 'startTime',
       header: tournamentHub.startTime && formatDateAndTime(tournamentHub.startTime),
       subtext: 'Tournament Start',
-      icon: Icons.Clock,
-      ref: startTimeRef
+      icon: Icons.Clock
     }
   ];
 
@@ -116,6 +114,12 @@ const TournamentHubPage = () => {
 
   const handleOpenModal = (name: string) => {
     setShownModal({ ...shownModal, [name]: true });
+  };
+
+  const handleMouseEnter = (name: string, shouldShowHint: boolean) => {
+    if (name === 'entryFee') {
+      setEntryFeeHintVisible(shouldShowHint);
+    }
   };
 
   const signup = () => {
@@ -180,23 +184,15 @@ const TournamentHubPage = () => {
               <CountDown startTime={Number(tournamentHub.registrationCloseTime)} />
               <TournamentInfo>
                 {TournamentInfoArray.map((info) => (
-                  <InfoContainer key={info.key}>
+                  <InfoContainer key={info.name}>
                     <InfoIcon icon={info.icon} />
                     <InfoText
                       ref={info.ref}
-                      onMouseEnter={() => {
-                        if (info.key === 'entryFee') {
-                          setHintVisible(true);
-                        }
-                      }}
-                      onMouseLeave={() => {
-                        if (info.key === 'entryFee') {
-                          setHintVisible(false);
-                        }
-                      }}>
+                      onMouseEnter={() => handleMouseEnter(info.name, true)}
+                      onMouseLeave={() => handleMouseEnter(info.name, false)}>
                       <InfoHeader>{info.header}</InfoHeader>
                       <InfoSubText>{info.subtext}</InfoSubText>
-                      {isHintVisible && info.key === 'entryFee' ? Hint : null}
+                      {isEntryFeeHintVisible && info.name === 'entryFee' ? Hint : null}
                     </InfoText>
                   </InfoContainer>
                 ))}
