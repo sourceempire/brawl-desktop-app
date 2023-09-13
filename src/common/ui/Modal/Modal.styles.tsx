@@ -34,7 +34,7 @@ export const Content = styled.div<ContentProps>`
 
 export const Header = styled.div`
   position: relative;
-  padding-bottom: 36px;
+  padding-bottom: ${({ theme }) => theme.spacing.baseX3}px;
   display: flex;
   justify-content: center;
   ${({ theme }) => theme.textStyles.title}
@@ -64,12 +64,16 @@ export const Overlay = styled.div<{ timeout: number; hidden: boolean }>`
     inset: 0;
     background-color: ${hidden ? 'transparent' : 'rgba(0, 0, 0, 0.5)'};
     opacity: 0;
-    transition: opacity ${timeout}ms ease-out, transform ${timeout}ms ease-out;
+    transition:
+      opacity ${timeout}ms ease-out,
+      transform ${timeout}ms ease-out;
 
     ${Content} {
       opacity: 0;
       transform: scale(0.9);
-      transition: opacity ${timeout}ms, transform ${timeout}ms;
+      transition:
+        opacity ${timeout}ms,
+        transform ${timeout}ms;
     }
 
     &.enter {
@@ -112,7 +116,9 @@ export const Overlay = styled.div<{ timeout: number; hidden: boolean }>`
 
     &.exit-active {
       opacity: 0;
-      transition: opacity ${timeout}ms, transform ${timeout}ms;
+      transition:
+        opacity ${timeout}ms,
+        transform ${timeout}ms;
 
       ${Content} {
         opacity: 0;
