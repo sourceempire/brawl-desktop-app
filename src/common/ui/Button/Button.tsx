@@ -1,17 +1,5 @@
-import { IconEnum, SVGComponent } from 'common/ui';
 import { ButtonIcon, Wrapper } from './Button.styles';
-
-type Props = {
-  children: React.ReactNode;
-  className?: string;
-  primary?: boolean;
-  accent?: boolean;
-  alert?: boolean;
-  small?: boolean;
-  icon?: IconEnum | SVGComponent | string;
-  tabIndex?: number;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-};
+import { Props } from './Button.types';
 
 export const Button = ({
   children,
