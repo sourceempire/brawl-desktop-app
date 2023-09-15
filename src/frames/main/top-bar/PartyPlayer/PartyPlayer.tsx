@@ -1,12 +1,15 @@
 import { useRef, useState } from 'react';
 import { usePartyFeed } from 'api/feeds';
 import useUserFeed from 'api/feeds/hooks/useUserFeed';
-import * as PartyRequests from 'api/requests/PartyRequests';
 import { useContextMenuPosition, useHint, useLoggedInUser } from 'common/hooks';
-import popup from 'common/popup';
 import { ContextMenu } from 'common/ui';
 import { LeaderStar, MenuWrapper, PlayerAction, PlayerImage, Wrapper } from './PartyPlayer.styles';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
+import {
+  useLeavePartyRequest,
+  useKickPlayerRequest,
+  useGiveLeaderRequest
+} from 'api/requests/party';
 
 type Props = {
   userId: string;
@@ -16,6 +19,9 @@ export const PartyPlayer = ({ userId }: Props) => {
   const loggedInUser = useLoggedInUser();
   const { party } = usePartyFeed();
   const { user, isLoading: isLoadingPartyPlayer } = useUserFeed({ userId });
+  const { kickPlayer } = useKickPlayerRequest();
+  const { giveLeader } = useGiveLeaderRequest();
+  const { leaveParty } = useLeavePartyRequest();
 
   const [isMenuVisible, setMenuVisible] = useState(false);
   const [isHintVisible, setHintVisible] = useState(false);
@@ -42,16 +48,20 @@ export const PartyPlayer = ({ userId }: Props) => {
     relatedElementRef: partyPlayerRef
   });
 
-  const giveLeader = () => {
-    PartyRequests.giveLeader(userId).catch((error) => popup.error(error.error));
+  const givePartyLeader = () => {
+    giveLeader({
+      body: {
+        newLeaderUserId: userId
+      }
+    });
   };
 
-  const kickPlayer = () => {
-    PartyRequests.kickPlayer(userId).catch((error) => popup.error(error));
-  };
-
-  const leaveParty = () => {
-    PartyRequests.leaveParty().catch((error) => popup.error(error.error));
+  const kickPartyPlayer = () => {
+    kickPlayer({
+      body: {
+        kickedUserId: userId
+      }
+    });
   };
 
   const makeRequest = (request: () => void) => {
@@ -99,8 +109,12 @@ export const PartyPlayer = ({ userId }: Props) => {
               <>
                 {isLoggedInUserLeader && (
                   <>
-                    <PlayerAction onClick={() => makeRequest(giveLeader)}>Give leader</PlayerAction>
-                    <PlayerAction onClick={() => makeRequest(kickPlayer)}>Kick player</PlayerAction>
+                    <PlayerAction onClick={() => makeRequest(givePartyLeader)}>
+                      Give leader
+                    </PlayerAction>
+                    <PlayerAction onClick={() => makeRequest(kickPartyPlayer)}>
+                      Kick player
+                    </PlayerAction>
                   </>
                 )}
               </>
