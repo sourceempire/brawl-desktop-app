@@ -3,6 +3,7 @@ import { Animation } from 'common/ui';
 import { InnerWrapper, OuterWrapper } from 'common/ui/EllipsisText/EllipsisText.styles';
 import simpleLoading from 'assets/animations/simple-loading.json';
 import { theme } from 'assets/styles/Theme';
+import { Icons } from 'common/ui';
 
 export const UserCard = styled.div`
   display: flex;
@@ -32,6 +33,7 @@ export const UserImage = styled.img`
 `;
 
 type ProfileImageSize = 'small' | 'medium' | 'large';
+type LeaderStarSize = 'small' | 'medium';
 
 export const getProfileImageSize = (size?: ProfileImageSize) => {
   switch (size) {
@@ -44,11 +46,33 @@ export const getProfileImageSize = (size?: ProfileImageSize) => {
   }
 };
 
+export const getLeaderStarSize = (size?: LeaderStarSize) => {
+  switch (size) {
+    case 'small':
+      return theme.spacing.baseX2 + 'px';
+    case 'medium':
+      return theme.spacing.baseX3 + 'px';
+  }
+};
+
 export const ProfileImage = styled.img<{ size?: ProfileImageSize }>`
   ${({ theme, size }) => css`
     height: ${getProfileImageSize(size ?? 'medium')};
     width: ${getProfileImageSize(size ?? 'medium')};
     border-radius: ${theme.borderRadius.default};
+  `}
+`;
+
+export const LeaderStar = styled(Icons.Star)<{ size?: LeaderStarSize }>`
+  position: absolute;
+  fill: yellow;
+  top: 0;
+  right: 0;
+  transform: translate(40%, -40%);
+  filter: drop-shadow(0 0 2px black);
+  ${({ size }) => css`
+    height: ${getLeaderStarSize(size ?? 'small')};
+    width: ${getLeaderStarSize(size ?? 'small')};
   `}
 `;
 

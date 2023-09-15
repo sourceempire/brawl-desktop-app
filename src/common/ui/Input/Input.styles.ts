@@ -62,7 +62,9 @@ export const InputElement = styled.input<{
   box-sizing: border-box;
   border-color: transparent;
   outline-color: transparent;
-  transition: border-color 0.3s, outline-color 0.3s;
+  transition:
+    border-color 0.3s,
+    outline-color 0.3s;
 
   :focus {
     outline-offset: 2px;
@@ -107,25 +109,25 @@ const getIconSize = (size: InputSize) =>
     [InputSize.SMALL]: '15px',
     [InputSize.MEDIUM]: '18px',
     [InputSize.LARGE]: '18px'
-  }[size]);
+  })[size];
 
 const getInputFontSize = (size: InputSize) =>
   ({
     [InputSize.SMALL]: '13px',
     [InputSize.MEDIUM]: '15px',
     [InputSize.LARGE]: '17px'
-  }[size]);
+  })[size];
 
 const getInputHeight = (size: InputSize) =>
   ({
     [InputSize.SMALL]: '30px',
     [InputSize.MEDIUM]: '36px',
     [InputSize.LARGE]: '42px'
-  }[size]);
+  })[size];
 
 const getInputPadding = (size: InputSize) =>
   ({
     [InputSize.SMALL]: '6px',
     [InputSize.MEDIUM]: '9px',
     [InputSize.LARGE]: '12px'
-  }[size]);
+  })[size];

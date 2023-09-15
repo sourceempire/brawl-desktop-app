@@ -1,8 +1,15 @@
 import styled, { css } from 'styled-components';
-import { Input } from 'common/ui';
+import { Button, Input } from 'common/ui';
+import { InputElement } from 'common/ui/Input/Input.styles';
+
+export const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const Settings = styled.div`
-  width: 170px;
+  width: 360px;
 `;
 
 export const Label = styled.div`
@@ -18,7 +25,7 @@ export const Label = styled.div`
 
 export const PartySettingsInput = styled(Input)`
   ${({ theme }) => css`
-    input {
+    ${InputElement} {
       font-weight: bold;
       padding-left: 4px;
       ::placeholder {
@@ -29,27 +36,31 @@ export const PartySettingsInput = styled(Input)`
   `}
 `;
 
-export const PartySizes = styled.div`
+export const PlayersWrapper = styled.div`
+  display: flex;
+`;
+
+export const ButtonsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   ${({ theme }) => css`
-    margin-left: -${theme.spacing.base}px;
-    margin-right: -${theme.spacing.base}px;
+    margin-top: ${theme.spacing.baseX2}px;
   `}
 `;
 
-export const SettingsDisplay = styled.div`
+export const ModalButton = styled(Button)`
+  width: fit-content;
+`;
+
+export const ButtonWithMessage = styled.div`
   display: flex;
-  align-items: center;
-  font-weight: bold;
-  font-size: 15px;
-  ${({ theme }) => css`
-    height: ${theme.spacing.baseX6}px;
-  `}
+  flex-direction: column;
+  align-items: end;
 `;
 
-export const SettingsDisplayDisabled = styled(SettingsDisplay)`
+export const ErrorMessage = styled.div`
   ${({ theme }) => css`
-    color: ${theme.colors.textDisabledLight};
+    margin-top: ${theme.spacing.base}px;
+    color: ${theme.colors.statusError};
   `}
 `;

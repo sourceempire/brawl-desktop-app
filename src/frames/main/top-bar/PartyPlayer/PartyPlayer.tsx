@@ -5,8 +5,9 @@ import * as PartyRequests from 'api/requests/PartyRequests';
 import { useContextMenuPosition, useHint, useLoggedInUser } from 'common/hooks';
 import popup from 'common/popup';
 import { ContextMenu } from 'common/ui';
-import { LeaderStar, MenuWrapper, PlayerAction, PlayerImage, Wrapper } from './PartyPlayer.styles';
+import { MenuWrapper, PlayerAction, PlayerImage, Wrapper } from './PartyPlayer.styles';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
+import { LeaderStar } from 'frames/main/friends/components/Shared.styles';
 
 type Props = {
   userId: string;
