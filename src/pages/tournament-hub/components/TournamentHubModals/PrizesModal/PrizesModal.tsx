@@ -12,9 +12,7 @@ const PrizesModal = ({ isOpen, onRequestClose }: Props) => {
     <Modal
       title="Prizes"
       isOpen={isOpen}
-      onRequestClose={() => {
-        onRequestClose();
-      }}
+      onRequestClose={onRequestClose}
       width="100%"
       margin="50px">
       {/*INSERT CONTENT HERE*/}
