@@ -1,18 +1,14 @@
 import { usePartyFeed } from 'api/feeds';
-import { createParty } from 'api/requests/PartyRequests';
-import popup from 'common/popup';
 import { ActionButton, Icons } from 'common/ui';
 import PartyInvite from '../PartyInvite/PartyInvite';
 import PartyPlayer from '../PartyPlayer';
 import PartySettings from '../PartySettings';
 import { Wrapper } from './Party.styles';
-
-const handleCreateParty = () => {
-  createParty().catch((error) => popup.error(error.error));
-};
+import { useCreatePartyRequest } from 'api/requests/party';
 
 const Lobby = () => {
   const { isInParty, party } = usePartyFeed();
+  const { createParty } = useCreatePartyRequest();
 
   return isInParty ? (
     <Wrapper>
@@ -30,7 +26,7 @@ const Lobby = () => {
     </Wrapper>
   ) : (
     <Wrapper>
-      <ActionButton icon={<Icons.Party />} onClick={handleCreateParty} hint="Create party" />
+      <ActionButton icon={<Icons.Party />} onClick={createParty} hint="Create party" />
     </Wrapper>
   );
 };

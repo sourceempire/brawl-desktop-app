@@ -28,7 +28,6 @@ const TournamentHubPage = () => {
   const { tournamentHub, tournamentIds, isLoading } = useTournamentHubFeed(hubId);
   const { party } = usePartyFeed();
 
-  // this knows that tournamentTeam exists (can be used instead of checking if it exists with falsy conditionals). Use if you want or remove it
   if (isFeedWithTeam(tournamentTeamFeed)) {
     tournamentTeamFeed.tournamentTeam;
   }
