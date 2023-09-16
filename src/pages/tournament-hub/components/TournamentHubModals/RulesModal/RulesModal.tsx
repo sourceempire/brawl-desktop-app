@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as RulesRequests from 'api/requests/RulesRequests';
 import { Modal } from 'common/ui';
 import { Rules } from 'types/Rules';

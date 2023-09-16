@@ -3,8 +3,9 @@ import { usePartyFeed } from 'api/feeds';
 import useUserFeed from 'api/feeds/hooks/useUserFeed';
 import { useContextMenuPosition, useHint, useLoggedInUser } from 'common/hooks';
 import { ContextMenu } from 'common/ui';
-import { LeaderStar, MenuWrapper, PlayerAction, PlayerImage, Wrapper } from './PartyPlayer.styles';
+import { MenuWrapper, PlayerAction, PlayerImage, Wrapper } from './PartyPlayer.styles';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
+import { LeaderStar } from 'frames/main/friends/components/Shared.styles';
 import {
   useLeavePartyRequest,
   useKickPlayerRequest,
