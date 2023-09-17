@@ -1,5 +1,5 @@
 export default class Money {
-  private money: number; // format 10000 =>
+  private money: number;
   private amount: number;
   private cents: number;
 
