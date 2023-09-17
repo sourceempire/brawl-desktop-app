@@ -27,9 +27,9 @@ import {
   TwoColHeader,
   Wrapper
 } from './TournamentInfoCard.styles';
-import { formatCentsToCurrency } from 'utils/moneyUtils';
 import { useRef, useState } from 'react';
 import { useHint } from 'common/hooks';
+import Money from 'types/Money';
 
 type Props = {
   tournamentInfo: TournamentHub;
@@ -40,8 +40,8 @@ type Props = {
 export default function TournamentInfoCard({ tournamentInfo, onClick, className }: Props) {
   const [isEntryFeeHintVisible, setEntryFeeHintVisible] = useState(false);
   const entryFeeRef = useRef() as React.MutableRefObject<HTMLDivElement>;
-  const { Hint } = useHint({
-    hintText: `${formatCentsToCurrency(tournamentInfo.entryFeeCut)} fee taken`,
+  const { Hint: EntryFeeHint } = useHint({
+    hintText: `€${new Money(tournamentInfo.entryFeeCut).format()} fee taken`,
     isVisible: isEntryFeeHintVisible,
     timeToVisibility: 300,
     relatedElementRef: entryFeeRef
@@ -83,16 +83,15 @@ export default function TournamentInfoCard({ tournamentInfo, onClick, className 
             onMouseLeave={() => setEntryFeeHintVisible(false)}>
             <EntryFee>
               {tournamentInfo &&
-                `${formatCentsToCurrency(
-                  tournamentInfo.entryFee,
-                  tournamentInfo.entryFeeCut
-                )} / player`}
+                `€${new Money(
+                  tournamentInfo.entryFee + tournamentInfo.entryFeeCut
+                ).format()} / player`}
             </EntryFee>
             <TwoColHeader>
               <EntryFeeIcon />
               <PrizePoolHeader ref={entryFeeRef}>
                 Buy-In
-                {Hint}
+                {EntryFeeHint}
               </PrizePoolHeader>
             </TwoColHeader>
           </Column2>

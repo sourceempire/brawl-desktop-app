@@ -12,8 +12,8 @@ import {
   InfoText,
   StyledIcon
 } from './InfoCards.styles';
-import { formatCentsToCurrency } from 'utils/moneyUtils';
 import { useHint } from 'common/hooks';
+import Money from 'types/Money';
 
 type Props = {
   tournamentHub: TournamentHub;
@@ -28,8 +28,9 @@ const InfoCards = ({ tournamentHub }: Props) => {
 
   const [isHintVisible, setHintVisible] = useState(false);
   const entryFeeRef = useRef() as React.MutableRefObject<HTMLDivElement>;
-  const { Hint } = useHint({
-    hintText: `${formatCentsToCurrency(tournamentHub.entryFeeCut)} fee taken`,
+  console.log(tournamentHub);
+  const { Hint: EntryFeeHint } = useHint({
+    hintText: `€${new Money(tournamentHub.entryFeeCut).format()} fee taken`,
     isVisible: isHintVisible,
     timeToVisibility: 300,
     relatedElementRef: entryFeeRef
@@ -122,11 +123,11 @@ const InfoCards = ({ tournamentHub }: Props) => {
             onMouseLeave={() => setHintVisible(false)}>
             Buy-In
           </HeaderText>
-          {Hint}
+          {EntryFeeHint}
         </InfoHeader>
-        <InfoText>
-          {formatCentsToCurrency(tournamentHub.entryFee, tournamentHub.entryFeeCut)} / player
-        </InfoText>
+        <InfoText>{`€${new Money(
+          tournamentHub.entryFee + tournamentHub.entryFeeCut
+        ).format()}`}</InfoText>
       </InfoCard>
     </InfoCardWrapper>
   );

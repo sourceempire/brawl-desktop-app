@@ -12,7 +12,7 @@ export interface TournamentHub {
   entryFeeCut: number;
   entryFeeCutPercentage: number;
   matchSettings: MatchSettings;
-  currentPrizePool: string;
+  currentPrizePool: number;
   region: string;
   teamSize: number;
   teamsAllowed: number;

@@ -42,8 +42,8 @@ import {
   Wrapper
 } from './TournamentHubPage.styles';
 import { useJoinTournamentRequest } from 'api/requests/tournament';
-import { formatCentsToCurrency } from 'utils/moneyUtils';
 import { useHint } from 'common/hooks';
+import Money from 'types/Money';
 
 const TournamentHubPage = () => {
   const { hubId } = useParams() as { hubId: string };
@@ -55,8 +55,8 @@ const TournamentHubPage = () => {
 
   const [isEntryFeeHintVisible, setEntryFeeHintVisible] = useState(false);
   const entryFeeRef = useRef() as React.MutableRefObject<HTMLDivElement>;
-  const { Hint } = useHint({
-    hintText: `${formatCentsToCurrency(tournamentHub.entryFeeCut)} fee taken`,
+  const { Hint: EntryFeeHint } = useHint({
+    hintText: `€${new Money(tournamentHub.entryFeeCut).format()} fee taken`,
     isVisible: isEntryFeeHintVisible,
     timeToVisibility: 300,
     relatedElementRef: entryFeeRef
@@ -89,10 +89,7 @@ const TournamentHubPage = () => {
     },
     {
       name: 'entryFee',
-      header: `${formatCentsToCurrency(
-        tournamentHub.entryFee,
-        tournamentHub.entryFeeCut
-      )} / player`,
+      header: `€${new Money(tournamentHub.entryFee + tournamentHub.entryFeeCut).format()} / player`,
       subtext: 'Buy-In',
       icon: Icons.Ticket,
       ref: entryFeeRef
@@ -192,7 +189,7 @@ const TournamentHubPage = () => {
                       onMouseLeave={() => handleMouseEnter(info.name, false)}>
                       <InfoHeader>{info.header}</InfoHeader>
                       <InfoSubText>{info.subtext}</InfoSubText>
-                      {isEntryFeeHintVisible && info.name === 'entryFee' ? Hint : null}
+                      {isEntryFeeHintVisible && info.name === 'entryFee' ? EntryFeeHint : null}
                     </InfoText>
                   </InfoContainer>
                 ))}

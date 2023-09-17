@@ -1,33 +1,38 @@
 export default class Money {
-  private moneyString: string; // format 100.00
+  private money: number; // format 10000 =>
   private amount: number;
   private cents: number;
 
-  constructor(moneyString: string) {
-    this.moneyString = moneyString;
-    [this.amount, this.cents] = moneyString.split('.').map((c) => parseInt(c));
+  constructor(money: number) {
+    this.money = money;
+    this.amount = Math.floor(money / 100);
+    this.cents = money % 100;
     if (this.amount < 0 || this.cents < 0 || this.cents > 99) {
       throw 'Illegal money string';
     }
   }
 
   lessThan(other: Money): boolean {
-    return parseFloat(this.moneyString) < parseFloat(other.moneyString);
+    return this.money < other.money;
   }
 
   lessOrEqualTo(other: Money): boolean {
-    return parseFloat(this.moneyString) <= parseFloat(other.moneyString);
+    return this.money <= other.money;
   }
 
   greaterThan(other: Money): boolean {
-    return parseFloat(this.moneyString) > parseFloat(other.moneyString);
+    return this.money > other.money;
   }
 
   greaterOrEqualTo(other: Money): boolean {
-    return parseFloat(this.moneyString) >= parseFloat(other.moneyString);
+    return this.money >= other.money;
+  }
+
+  format(): string {
+    return `${this.amount}.${this.cents.toString().padStart(2, '0')}`;
   }
 
   toString(): string {
-    return this.moneyString;
+    return this.money.toString();
   }
 }
