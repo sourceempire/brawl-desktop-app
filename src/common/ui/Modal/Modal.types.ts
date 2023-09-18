@@ -3,5 +3,6 @@ export type TournamentHubModalType =
   | 'mapPool'
   | 'rules'
   | 'howItWorks'
+  | 'prizes'
   | 'teamSettings'
   | null;

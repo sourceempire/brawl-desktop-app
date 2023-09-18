@@ -41,7 +41,8 @@ const TournamentHubPage = () => {
       brackets: 'brackets',
       mapPool: 'mapPool',
       rules: 'rules',
-      howItWorks: 'howItWorks'
+      howItWorks: 'howItWorks',
+      prizes: 'prizes'
     };
 
     setActiveModal(modalTypeMapping[name] || null);

@@ -32,6 +32,11 @@ const TournamentHubButtons = ({ handleOpenModal, openTeamSettings }: Props) => {
             {button.text}
           </Button>
         ))}
+        {tournamentHub.registrationClosed && (
+          <Button key="prizes" onClick={() => handleOpenModal('prizes')}>
+            Prizes
+          </Button>
+        )}
       </LeftButtons>
       <RightButtons>
         {!tournamentHub.registrationClosed &&

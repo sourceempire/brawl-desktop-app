@@ -7,6 +7,7 @@ import HowItWorksModal from '../TournamentHubModals/HowItWorksModal/HowItWorksMo
 import RulesModal from '../TournamentHubModals/RulesModal/RulesModal';
 import TeamSettingsModal from '../TournamentHubModals/TeamSettingsModal/TeamSettingsModal';
 import { TournamentHubModalType } from 'common/ui/Modal/Modal.types';
+import PrizesModal from '../TournamentHubModals/PrizesModal/PrizesModal';
 
 type Props = {
   activeModal: TournamentHubModalType;
@@ -29,8 +30,13 @@ const TournamentHubModal = ({ activeModal, closeModal }: Props) => {
         tournamentHub={tournamentHub}
       />
       <MapPoolModal isOpen={activeModal === 'mapPool'} onRequestClose={closeModal} />
-      <RulesModal isOpen={activeModal === 'rules'} onRequestClose={closeModal} />
+      <RulesModal
+        tournamentHubId={hubId}
+        isOpen={activeModal === 'rules'}
+        onRequestClose={closeModal}
+      />
       <HowItWorksModal isOpen={activeModal === 'howItWorks'} onRequestClose={closeModal} />
+      <PrizesModal isOpen={activeModal === 'prizes'} onRequestClose={closeModal} />
       <TeamSettingsModal
         isOpen={activeModal === 'teamSettings'}
         playerIds={party ? party.players : [user.id]}
