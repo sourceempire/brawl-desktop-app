@@ -1,8 +1,6 @@
 import React, { useMemo, useRef, useState } from 'react';
 import { usePartyFeed } from 'api/feeds';
-import * as PartyRequests from 'api/requests/PartyRequests';
 import { useContextMenuPosition } from 'common/hooks';
-import popup from 'common/popup';
 import { ContextMenu, ContextMenuTitle, Icons } from 'common/ui';
 import { InputSize } from 'common/ui/Input/Input.types';
 import { ProfileImage } from 'frames/main/friends/components/Shared.styles';
@@ -20,6 +18,7 @@ import {
 } from './PartyInvite.styles';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
 import { theme } from 'assets/styles/Theme';
+import { useInvitePlayerRequest, useRevokeInviteRequest } from 'api/requests/party';
 
 const PartyInvite = () => {
   const { party } = usePartyFeed();
@@ -28,6 +27,8 @@ const PartyInvite = () => {
   const [searchString, setSearchString] = useState('');
 
   const { friendItems } = useFriendList({ searchString });
+  const { invitePlayer } = useInvitePlayerRequest();
+  const { revokeInvite } = useRevokeInviteRequest();
 
   const invitePlayerActionRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const { contextMenuRef, position, arrowPosition } = useContextMenuPosition({
@@ -41,11 +42,19 @@ const PartyInvite = () => {
   };
 
   const handleInvite = (userId: string) => {
-    PartyRequests.invitePlayer(userId).catch((error) => popup.error(error.error));
+    invitePlayer({
+      body: {
+        invitedUserId: userId
+      }
+    });
   };
 
   const handleRevokeInvite = (userId: string) => {
-    PartyRequests.revokeInvite(userId).catch((error) => popup.error(error.error));
+    revokeInvite({
+      body: {
+        invitedUserId: userId
+      }
+    });
   };
 
   const playerList = useMemo(

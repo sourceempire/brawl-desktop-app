@@ -28,7 +28,7 @@ const InfoCards = ({ tournamentHub }: Props) => {
 
   const [isHintVisible, setHintVisible] = useState(false);
   const entryFeeRef = useRef() as React.MutableRefObject<HTMLDivElement>;
-  console.log(tournamentHub);
+
   const { Hint: EntryFeeHint } = useHint({
     hintText: `€${new Money(tournamentHub.entryFeeCut).format()} fee taken`,
     isVisible: isHintVisible,
@@ -127,7 +127,7 @@ const InfoCards = ({ tournamentHub }: Props) => {
         </InfoHeader>
         <InfoText>{`€${new Money(
           tournamentHub.entryFee + tournamentHub.entryFeeCut
-        ).format()}`}</InfoText>
+        ).format()} / player`}</InfoText>
       </InfoCard>
     </InfoCardWrapper>
   );

@@ -51,7 +51,7 @@ export type TournamentMatchHistory = {
   matchList: TournamentMatchInfo[];
 };
 
-export type TournamentHubInfo = {
+export type TournamentHubInfoRow = {
   name: string;
   header: string;
   subtext: string;
