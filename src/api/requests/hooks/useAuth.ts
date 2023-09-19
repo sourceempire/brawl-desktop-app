@@ -12,6 +12,7 @@ import {
 import { useGet } from 'brawl-fetch';
 import Window from 'electron-window';
 import { useNavigate } from 'react-router-dom';
+import { ErrorCode } from 'types/ErrorCode';
 
 const useAuth = () => {
   const [authType, setAuthType] = useState<AuthType>('openid');
@@ -22,8 +23,9 @@ const useAuth = () => {
 
   const [loginValidate, { loading: loadingValidate }] = useGet(endpoints.LOGIN_VALIDATE, {
     onComplete: () => closeLoginWindowAndOpenMain(),
-    onError: (err: any) => {
-      if (err.status === 200) {
+    onError: (err) => {
+      console.log(err);
+      if (err.errorCode === ErrorCode.LoginValidateFail) {
         closeMainWindowAndOpenLogin();
         return;
       }
