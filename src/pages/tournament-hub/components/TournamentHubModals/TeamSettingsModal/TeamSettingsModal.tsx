@@ -90,9 +90,7 @@ const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) 
           )}
           {!userInExistingTeam && (
             <ButtonsWrapper>
-              <ModalButton key="cancel" onClick={closeTeamSettings}>
-                Cancel
-              </ModalButton>
+              <ModalButton onClick={closeTeamSettings}>Cancel</ModalButton>
               <ButtonWithMessage>
                 <ModalButton primary onClick={signup}>
                   Confirm
