@@ -1,5 +1,6 @@
-import { ServerError, usePost } from 'brawl-fetch';
+import { ErrorResponse, usePost } from 'brawl-fetch';
 import popup from 'common/popup';
+import { ErrorCode } from 'types/ErrorCode';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
@@ -18,14 +19,14 @@ type Options = {
 };
 
 export const useJoinTournamentRequest = ({ onComplete }: Options) => {
-  const onError = (error: ServerError) => {
-    switch (error.error) {
-      case 'invalidTeamSize':
+  const onError = (error: ErrorResponse) => {
+    switch (error.errorCode) {
+      case ErrorCode.InvalidTeamSize:
         return popup.error(`Invalid team size`);
-      case 'insufficientFunds':
+      case ErrorCode.InsufficientFunds:
         return popup.error(`Insufficient funds for a player`);
       default:
-        popup.error('Something went wrong');
+        popup.error(error.message);
     }
   };
 

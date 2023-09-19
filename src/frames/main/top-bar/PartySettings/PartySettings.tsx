@@ -5,7 +5,7 @@ import popup from 'common/popup';
 import { ActionButton, ContextMenu } from 'common/ui';
 import { Icons } from 'common/ui/Icon';
 import { Label, PartySizes, Settings, SettingsDisplay } from './PartySettings.styles';
-import { ServerError } from 'brawl-fetch';
+import { ErrorResponse } from 'brawl-fetch';
 import { useUpdatePartySizeRequest } from 'api/requests/party';
 
 const PartySettings = () => {
@@ -22,8 +22,8 @@ const PartySettings = () => {
     relatedElementRef: settingsRef
   });
 
-  const onUpdatePartySizeError = useCallback((error: ServerError) => {
-    popup.error(error.error);
+  const onUpdatePartySizeError = useCallback((error: ErrorResponse) => {
+    popup.error(error.message);
     setPartySize(party.partySize);
   }, []);
 

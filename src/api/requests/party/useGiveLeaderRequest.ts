@@ -1,4 +1,4 @@
-import { ServerError, usePost } from 'brawl-fetch';
+import { ErrorResponse, usePost } from 'brawl-fetch';
 import popup from 'common/popup';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
@@ -10,8 +10,8 @@ type Body = {
 };
 
 export const useGiveLeaderRequest = () => {
-  const onError = (error: ServerError) => {
-    popup.error(error.error);
+  const onError = (error: ErrorResponse) => {
+    popup.error(error.message);
   };
 
   const [giveLeader, ...response] = usePost<void, Body>(giveLeaderEndpoint, {

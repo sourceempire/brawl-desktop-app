@@ -1,4 +1,4 @@
-import { ServerError, usePost } from 'brawl-fetch';
+import { ErrorResponse, usePost } from 'brawl-fetch';
 import popup from 'common/popup';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
@@ -10,8 +10,8 @@ type Body = {
 };
 
 export const useDeclineInviteRequest = () => {
-  const onError = (error: ServerError) => {
-    popup.error(error.error, { timer: 3000 });
+  const onError = (error: ErrorResponse) => {
+    popup.error(error.message, { timer: 3000 });
   };
 
   const [declineInvite, ...response] = usePost<void, Body>(declineInviteEndpoint, {
