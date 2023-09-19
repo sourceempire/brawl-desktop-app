@@ -50,6 +50,9 @@ const TournamentHubButtons = ({ handleOpenModal, openTeamSettings, handleCloseMo
             {button.text}
           </Button>
         ))}
+        {tournamentHub.registrationClosed && (
+          <Button onClick={() => handleOpenModal('prizes')}>Prizes</Button>
+        )}
       </LeftButtons>
       <RightButtons>
         {!tournamentHub.registrationClosed &&
