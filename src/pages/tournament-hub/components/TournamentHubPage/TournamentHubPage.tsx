@@ -103,6 +103,7 @@ const TournamentHubPage = () => {
         <InfoWrapper>
           <TournamentHubButtons
             handleOpenModal={handleOpenModal}
+            handleCloseModal={closeModal}
             openTeamSettings={openTeamSettings}
           />
           <TournamentHubModal activeModal={activeModal} closeModal={closeModal} />

@@ -19,6 +19,9 @@ export const LeftButtons = styled.div`
 `;
 
 export const RightButtons = styled.div`
-  display: flex;
-  align-items: center;
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    gap: ${theme.spacing.base}px;
+  `}
 `;

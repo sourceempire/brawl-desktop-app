@@ -1,8 +1,7 @@
 import { useCallback, useState } from 'react';
-import { useTournamentHubFeed, useTournamentTeamFeed } from 'api/feeds';
+import { useTournamentTeamFeed } from 'api/feeds';
 import { isFeedWithTeam } from 'api/feeds/hooks/useTournamentTeamFeed';
 import { useLoggedInUser } from 'common/hooks';
-import popup from 'common/popup';
 import { Modal } from 'common/ui';
 import { InputSize } from 'common/ui/Input/Input.types';
 import TeamPlayer from './TeamPlayer/TeamPlayer';
@@ -17,7 +16,7 @@ import {
   Settings,
   Wrapper
 } from './TeamSettingsModal.styles';
-import { useJoinTournamentRequest, useLeaveTournamentRequest } from 'api/requests/tournament';
+import { useJoinTournamentRequest } from 'api/requests/tournament';
 
 type Props = {
   playerIds: string[];
@@ -33,7 +32,6 @@ const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const user = useLoggedInUser();
   const tournamentTeamFeed = useTournamentTeamFeed(hubId, user.id);
-  const { tournamentHub } = useTournamentHubFeed(hubId);
   const userInExistingTeam = isFeedWithTeam(tournamentTeamFeed);
 
   const closeTeamSettings = () => {
@@ -44,16 +42,9 @@ const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) 
 
   const onJoinTournamentComplete = useCallback(() => {
     closeTeamSettings();
-    popup.info(`Tournament joined`);
-  }, []);
-
-  const onLeaveTournamentComplete = useCallback(() => {
-    closeTeamSettings();
-    popup.info(`Tournament left`);
   }, []);
 
   const { joinTournament } = useJoinTournamentRequest({ onComplete: onJoinTournamentComplete });
-  const { leaveTournament } = useLeaveTournamentRequest({ onComplete: onLeaveTournamentComplete });
 
   const handleTeamNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTeamName(event.target.value);
@@ -72,14 +63,6 @@ const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) 
         }
       });
     }
-  };
-
-  const leave = () => {
-    leaveTournament({
-      body: {
-        tournamentHubId: hubId
-      }
-    });
   };
 
   return (
@@ -105,23 +88,16 @@ const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) 
               </PlayersWrapper>
             </>
           )}
-          <ButtonsWrapper>
-            <ModalButton key="cancel" onClick={closeTeamSettings}>
-              Cancel
-            </ModalButton>
-            {!tournamentHub.registrationClosed &&
-              (!userInExistingTeam ? (
-                <ButtonWithMessage>
-                  <ModalButton primary onClick={signup}>
-                    Confirm
-                  </ModalButton>
-                </ButtonWithMessage>
-              ) : (
-                <ModalButton alert onClick={leave}>
-                  Leave tournament
+          {!userInExistingTeam && (
+            <ButtonsWrapper>
+              <ModalButton onClick={closeTeamSettings}>Cancel</ModalButton>
+              <ButtonWithMessage>
+                <ModalButton primary onClick={signup}>
+                  Confirm
                 </ModalButton>
-              ))}
-          </ButtonsWrapper>
+              </ButtonWithMessage>
+            </ButtonsWrapper>
+          )}
         </Settings>
       </Wrapper>
     </Modal>

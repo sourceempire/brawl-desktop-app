@@ -29,7 +29,11 @@ const TournamentHubModal = ({ activeModal, closeModal }: Props) => {
         tournamentHub={tournamentHub}
       />
       <MapPoolModal isOpen={activeModal === 'mapPool'} onRequestClose={closeModal} />
-      <RulesModal isOpen={activeModal === 'rules'} onRequestClose={closeModal} />
+      <RulesModal
+        tournamentHubId={hubId}
+        isOpen={activeModal === 'rules'}
+        onRequestClose={closeModal}
+      />
       <HowItWorksModal isOpen={activeModal === 'howItWorks'} onRequestClose={closeModal} />
       <TeamSettingsModal
         isOpen={activeModal === 'teamSettings'}
