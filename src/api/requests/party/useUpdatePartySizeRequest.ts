@@ -1,4 +1,4 @@
-import { ServerError, usePost } from 'brawl-fetch';
+import { ErrorResponse, usePost } from 'brawl-fetch';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
@@ -9,7 +9,7 @@ type Body = {
 };
 
 type Option = {
-  onError: (error: ServerError) => void;
+  onError: (error: ErrorResponse) => void;
 };
 
 export const useUpdatePartySizeRequest = ({ onError }: Option) => {
