@@ -23,12 +23,10 @@ function checkStatus<T>(res: globalThis.Response) {
       localStorage.setItem('XSRF-TOKEN', res.headers.get('X-XSRF-TOKEN')!);
     }
     res.json().then((body: Response & T) => {
-      if (res.ok && body.succeeded === true) {
-        delete body.succeeded;
+      if (res.ok) {
         resolve(body);
       } else {
         reject({
-          jsError: new Error(res.statusText),
           status: res.status,
           ...body
         });
