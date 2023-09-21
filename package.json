@@ -26,9 +26,9 @@
   },
   "dependencies": {
     "babel-plugin-styled-components": "^2.1.4",
-    "brawl-fetch": "github:sourceempire/brawl-fetch#v1.3.1",
+    "brawl-fetch": "github:sourceempire/brawl-fetch#v1.3.2",
     "brawl-image": "github:sourceempire/brawl-image#v1.0.5",
-    "brawl-websocket": "github:sourceempire/brawl-websocket#v1.0.0",
+    "brawl-websocket": "github:sourceempire/brawl-websocket#v1.0.3",
     "dotenv": "^16.3.1",
     "electron-is-dev": "^2.0.0",
     "electron-updater": "^6.1.1",

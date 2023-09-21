@@ -9,7 +9,7 @@ import {
   type RegisterForm,
   endpoints
 } from 'api/requests/AuthRequests';
-import { useGet } from 'brawl-fetch';
+import { ErrorResponse, useGet } from 'brawl-fetch';
 import Window from 'electron-window';
 import { useNavigate } from 'react-router-dom';
 import { ErrorCode } from 'types/ErrorCode';
@@ -21,18 +21,18 @@ const useAuth = () => {
 
   const navigate = useNavigate();
 
-  const [loginValidate, { loading: loadingValidate }] = useGet(endpoints.LOGIN_VALIDATE, {
-    onComplete: () => closeLoginWindowAndOpenMain(),
-    onError: (err) => {
-      console.log(err);
-      if (err.errorCode === ErrorCode.LoginValidateFail) {
-        closeMainWindowAndOpenLogin();
-        return;
+  const [loginValidate, { loading: loadingValidate }] = useGet<ErrorResponse>(
+    endpoints.LOGIN_VALIDATE,
+    {
+      onComplete: (error) => {
+        console.log({ error });
+        if (error.errorCode === ErrorCode.LoginValidateFail) {
+          return closeMainWindowAndOpenLogin();
+        }
+        closeLoginWindowAndOpenMain();
       }
-      // handle errors that are not expected
-      console.error(err);
     }
-  });
+  );
 
   const { current: getAuthType } = useRef(async () => {
     setLoading(true);
