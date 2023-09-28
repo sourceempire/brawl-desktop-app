@@ -1,4 +1,4 @@
-import Game from 'types/Game';
+import Game, { GameTag } from 'types/Game';
 import { CSGOMatchSettings } from 'types/MatchSettings';
 import { Team, TeamId } from 'types/team/Team';
 import { UserId } from 'types/user/User';
@@ -113,6 +113,18 @@ export type RoundWin = {
   roundIndex: 0;
   side: CSGOTeamSide;
   winner: string;
+};
+
+export const getMatchType = (match: Match) => {
+  if (isMockMatch(match)) {
+    return GameTag.MOCK;
+  } else {
+    return GameTag.CSGO;
+  }
+};
+
+export const isMockMatch = (match: Match) => {
+  return match.gameId === Game.MOCK;
 };
 
 export const isCSGOMatch = (match: Match): match is CSGOMatch => {

@@ -1,11 +1,20 @@
 import { useMatchContext } from 'context/MatchContext';
-import { isCSGOMatch } from 'types/match/Match';
+import { getMatchType } from 'types/match/Match';
 import CSGOMatch from './CSGOMatch';
+import { GameTag } from 'types/Game';
+import MockMatch from './MockMatch';
 
 const Match = () => {
   const { match } = useMatchContext();
 
-  return <>{isCSGOMatch(match) && <CSGOMatch />}</>;
+  const matchType = getMatchType(match);
+
+  return (
+    <>
+      {matchType === GameTag.CSGO && <CSGOMatch />}
+      {matchType === GameTag.MOCK && <MockMatch />}
+    </>
+  );
 };
 
 export default Match;
