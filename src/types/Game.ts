@@ -8,9 +8,4 @@ export const GameName = {
   [GameId.MOCK]: 'Mock Game'
 };
 
-export enum GameTag {
-  CSGO = 'CSGO',
-  MOCK = 'MOCK'
-}
-
 export default GameId;

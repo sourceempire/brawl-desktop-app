@@ -114,15 +114,7 @@ export type RoundWin = {
   winner: string;
 };
 
-export const getMatchType = (match: Match) => {
-  if (isMockMatch(match)) {
-    return GameTag.MOCK;
-  } else {
-    return GameTag.CSGO;
-  }
-};
-
-export const isMockMatch = (match: Match) => {
+export const isMockMatch = (match: Match): match is MockGameMatch => {
   return match.gameId === Game.MOCK;
 };
 
