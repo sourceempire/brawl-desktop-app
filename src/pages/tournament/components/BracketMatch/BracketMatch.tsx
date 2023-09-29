@@ -24,8 +24,12 @@ type Props = {
 
 const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }: Props) => {
   const user = useLoggedInUser();
-  const { match, isLoading } = useMatchFeed(matchId);
-  const { hasMatchStats, matchStats, isLoading: isLoadingMatchStats } = useMatchStatsFeed(matchId);
+  const { match, isLoading } = useMatchFeed({ matchId });
+  const {
+    hasMatchStats,
+    matchStats,
+    isLoading: isLoadingMatchStats
+  } = useMatchStatsFeed({ matchId });
 
   const team1Score = hasMatchStats
     ? getTeamScore({ matchStats, teamId: match.teams?.[0].id })

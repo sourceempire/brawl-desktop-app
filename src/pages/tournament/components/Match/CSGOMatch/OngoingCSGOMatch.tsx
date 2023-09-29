@@ -20,7 +20,7 @@ import {
 
 const OngoingCSGOMatch = () => {
   const { match, team1, team2 } = useMatchContext<CSGOMatch>();
-  const { matchStats } = useMatchStatsFeed(match.id);
+  const { matchStats } = useMatchStatsFeed({ matchId: match.id });
 
   if (!match.matchSettings.maps?.[0]) return null;
   if (!team1 || !team2) return null;

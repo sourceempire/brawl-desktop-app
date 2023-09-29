@@ -1,11 +1,15 @@
 import { useFeed } from 'brawl-websocket';
 import { useLoggedInUser } from 'common/hooks';
 
-const useCurrentTournamentMatchFeed = (touramentId: string) => {
+type Params = {
+  tournamentId: string;
+};
+
+const useCurrentTournamentMatchFeed = ({ tournamentId }: Params) => {
   const user = useLoggedInUser();
 
   const { data, loading } = useFeed<{ matchId: string | null }>(
-    `tournament.match.${touramentId}.${user.id}`
+    `tournament.match.${tournamentId}.${user.id}`
   );
 
   return { matchId: data.matchId, isLoading: loading };

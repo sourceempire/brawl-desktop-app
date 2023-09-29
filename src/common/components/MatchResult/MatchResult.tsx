@@ -7,13 +7,13 @@ import { Wrapper } from './MatchResult.styles';
 
 const MatchResult = () => {
   const matchId = useParams().matchId as string;
-  const { match, team1, team2, isLoading: isLoadingMatch } = useMatchFeed(matchId);
+  const { match, team1, team2, isLoading: isLoadingMatch } = useMatchFeed({ matchId });
   const {
     matchStats,
     roundWins,
     hasMatchStats,
     isLoading: isLoadngMatchStats
-  } = useMatchStatsFeed(matchId);
+  } = useMatchStatsFeed({ matchId });
 
   if (isLoadingMatch || isLoadngMatchStats) return null;
 

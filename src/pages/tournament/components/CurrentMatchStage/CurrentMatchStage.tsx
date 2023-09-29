@@ -9,7 +9,7 @@ type Props = {
 };
 
 const CurrentMatchStage = ({ matchId }: Props) => {
-  const { match } = useMatchFeed(matchId);
+  const { match } = useMatchFeed({ matchId });
 
   const [preventAnimations, setPreventAnimations] = useState<boolean>(true);
 

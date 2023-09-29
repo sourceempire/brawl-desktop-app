@@ -6,7 +6,11 @@ type FeedType = {
   tournamentIds: string[];
 };
 
-const useTournamentHubFeed = (tournamentHubId: string) => {
+type Params = {
+  tournamentHubId: string;
+};
+
+const useTournamentHubFeed = ({ tournamentHubId }: Params) => {
   const { data, loading } = useFeed<FeedType>(`tournament.hub.${tournamentHubId}`);
 
   return {

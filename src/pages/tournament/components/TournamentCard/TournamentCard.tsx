@@ -24,8 +24,8 @@ const TournamentCard = ({
   isUserInTournament,
   onClick
 }: Props) => {
-  const { tournament } = useTournamentFeed(tournamentId);
-  const { bracket, isLoading } = useBracketFeed(tournamentId);
+  const { tournament } = useTournamentFeed({ tournamentId });
+  const { bracket, isLoading } = useBracketFeed({ tournamentId });
 
   return (
     <Tournament

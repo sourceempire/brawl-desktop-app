@@ -1,7 +1,11 @@
 import { useFeed } from 'brawl-websocket';
 import { MatchStats, RoundWin } from 'types/match/Match';
 
-export const useMatchStatsFeed = (matchId: string) => {
+type Params = {
+  matchId: string;
+};
+
+export const useMatchStatsFeed = ({ matchId }: Params) => {
   const { data, loading } = useFeed<{
     matchStats: MatchStats;
     roundWins: RoundWin[];

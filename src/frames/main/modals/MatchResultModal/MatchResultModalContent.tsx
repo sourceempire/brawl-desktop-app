@@ -18,13 +18,13 @@ type Props = {
 
 const MatchResultModalContent = ({ matchId }: Props) => {
   const navigate = useNavigate();
-  const { match, team1, team2, isLoading: isLoadingMatch } = useMatchFeed(matchId);
+  const { match, team1, team2, isLoading: isLoadingMatch } = useMatchFeed({ matchId });
   const {
     matchStats,
     roundWins,
     isLoading: isLoadingMatchStats,
     hasMatchStats
-  } = useMatchStatsFeed(matchId);
+  } = useMatchStatsFeed({ matchId });
   const { hideModal } = useContext(MatchResultModalContext);
 
   const [tournament, setTournament] = useState<Tournament>();

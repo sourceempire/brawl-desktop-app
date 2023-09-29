@@ -1,10 +1,10 @@
 import { useFeed } from 'brawl-websocket';
 
-type Options = {
+type Params = {
   userId: string;
 };
 
-function useUserMoneyFeed({ userId }: Options) {
+function useUserMoneyFeed({ userId }: Params) {
   const { data, loading } = useFeed<{ balance: number }>(`user.money.${userId}`);
 
   return {

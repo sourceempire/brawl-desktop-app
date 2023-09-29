@@ -2,7 +2,11 @@ import { useFeed } from 'brawl-websocket';
 import { useLoggedInUser } from 'common/hooks';
 import { Match } from 'types/match/Match';
 
-const useMatchFeed = (matchId: string) => {
+type Params = {
+  matchId: string;
+};
+
+const useMatchFeed = ({ matchId }: Params) => {
   const { data, loading } = useFeed<{ match: Match }>(`match.${matchId}`);
 
   const loggedInUser = useLoggedInUser();

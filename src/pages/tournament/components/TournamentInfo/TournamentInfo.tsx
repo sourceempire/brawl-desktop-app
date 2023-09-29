@@ -11,7 +11,7 @@ type Props = {
 };
 
 const TournamentInfo = ({ tournament, currentMatchId }: Props) => {
-  const { bracket, isLoading } = useBracketFeed(tournament.id);
+  const { bracket, isLoading } = useBracketFeed({ tournamentId: tournament.id });
 
   return (
     <Wrapper>
