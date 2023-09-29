@@ -80,7 +80,7 @@ const TournamentHubPage = () => {
                 <TournamentCard
                   key={tournamentId}
                   tournamentId={tournamentId}
-                  tournamentHubImage={tournamentHub.imageId}
+                  imageId={tournamentHub.imageId}
                   isUserInTournament={loggedInUsersTournamentId === tournamentId}
                   onClick={() => navigate(`/main/tournaments/${tournamentId}`)}
                 />
