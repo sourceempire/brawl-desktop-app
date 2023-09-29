@@ -1,23 +1,18 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { useMatchFeed } from 'api/feeds';
 import { useMatchStatsFeed } from 'api/feeds/hooks/useMatchStatsFeed';
-import { getTournamentByMatchId } from 'api/requests/TournamentRequests';
-import { useNavigate } from 'react-router-dom';
+
 import CSGOMatchResult from 'common/components/MatchResult/CSGOMatchResult';
 import { Button } from 'common/ui';
 import { MatchResultModalContext } from 'context/MatchResultModalContext';
 import { isCSGOMatch } from 'types/match/Match';
-import { Tournament } from 'types/tournaments/TournamentInfo';
 import { Buttons, Header, Wrapper } from './MatchResultModalContent.styles';
 
 type Props = {
   matchId: string;
 };
 
-// TODO -> Add a header with tournament name and "Defeat" or "Victory"
-
 const MatchResultModalContent = ({ matchId }: Props) => {
-  const navigate = useNavigate();
   const { match, team1, team2, isLoading: isLoadingMatch } = useMatchFeed({ matchId });
   const {
     matchStats,
@@ -27,25 +22,6 @@ const MatchResultModalContent = ({ matchId }: Props) => {
   } = useMatchStatsFeed({ matchId });
   const { hideModal } = useContext(MatchResultModalContext);
 
-  const [tournament, setTournament] = useState<Tournament>();
-
-  useEffect(() => {
-    if (isLoadingMatch || isLoadingMatchStats) return;
-    if (!match) return;
-
-    getTournamentByMatchId(match.id).then((result) => {
-      setTournament(result.tournament);
-    });
-  }, [isLoadingMatch, isLoadingMatchStats, match]);
-
-  const handleNavigate = () => {
-    if (tournament) {
-      navigate(`tournaments/${tournament.id}`);
-    }
-
-    hideModal();
-  };
-
   if (isLoadingMatch || isLoadingMatchStats) return null;
 
   if (!hasMatchStats) {
@@ -54,11 +30,7 @@ const MatchResultModalContent = ({ matchId }: Props) => {
 
   return (
     <Wrapper>
-      {tournament && (
-        <Header>
-          Tournament - {tournament.name} {tournament.tournamentNumber}
-        </Header>
-      )}
+      <Header>Match result</Header>
 
       {isCSGOMatch(match) && (
         <CSGOMatchResult
@@ -73,11 +45,6 @@ const MatchResultModalContent = ({ matchId }: Props) => {
 
       <Buttons>
         <Button onClick={hideModal}>Close</Button>
-        {tournament && (
-          <Button onClick={handleNavigate} primary>
-            Go to tournament
-          </Button>
-        )}
       </Buttons>
     </Wrapper>
   );
