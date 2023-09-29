@@ -16,6 +16,7 @@ import {
   TournamentInfo,
   Wrapper
 } from './FeaturedTournament.styles';
+import Money from 'types/Money';
 
 type Props = {
   tournamentHub: TournamentHub;
@@ -36,9 +37,12 @@ export default function FeaturedTournament({ tournamentHub, onClick, visible }: 
             <Column1>
               <Name>{tournamentHub.name}</Name>
               <TournamentInfo>
-                Starts {formatDateAndTime(tournamentHub.startTime)} | Registration closes{' '}
-                {formatDateAndTime(tournamentHub.registrationCloseTime)} | Entry fee €
-                {tournamentHub.entryFee} / person | {getTournamentModeShort(tournamentHub)}
+                {`Starts ${formatDateAndTime(tournamentHub.startTime)} | `}
+                {`Registration closes ${formatDateAndTime(tournamentHub.registrationCloseTime)} | `}
+                {`Entry fee €${new Money(
+                  tournamentHub.entryFee + tournamentHub.entryFeeCut
+                ).format()}  / player | `}
+                {getTournamentModeShort(tournamentHub)}
               </TournamentInfo>
             </Column1>
             <Column2>

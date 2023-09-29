@@ -41,15 +41,16 @@ export function filter(tournaments: TournamentHub[], filters: Filter[]): Tournam
           case FilterTypes.ENTRANCE_FEE: {
             const [start, end] = filter.value.split('-');
             return (
-              new Money(tournament.entryFee).greaterOrEqualTo(new Money(start)) &&
-              new Money(tournament.entryFee).lessOrEqualTo(new Money(end))
+              new Money(tournament.entryFee).greaterOrEqualTo(new Money(parseFloat(start))) &&
+              new Money(tournament.entryFee).lessOrEqualTo(new Money(parseFloat(end)))
             );
           }
           case FilterTypes.PRIZE_POOL: {
             const [start, end] = filter.value.split('-');
             return (
-              new Money(tournament.currentPrizePool).greaterOrEqualTo(new Money(start)) &&
-              new Money(tournament.currentPrizePool).lessOrEqualTo(new Money(end))
+              new Money(tournament.currentPrizePool).greaterOrEqualTo(
+                new Money(parseFloat(start))
+              ) && new Money(tournament.currentPrizePool).lessOrEqualTo(new Money(parseFloat(end)))
             );
           }
           case FilterTypes.FROM_DATE: {

@@ -257,7 +257,7 @@ export default function TournamentsFilters({
       </Section1>
       <Section2>
         <MoneySlider>
-          <MoneyLabel>Entry Fee</MoneyLabel>
+          <MoneyLabel>Buy-In</MoneyLabel>
           <MoneyValue>{entranceFee && `€${entranceFee[0]} - €${entranceFee[1]}`}</MoneyValue>
           <RangedSlider
             onChange={(start, end) => setEntranceFee([start, end])}
