@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import CSGOMatchResult from 'common/components/MatchResult/CSGOMatchResult';
 import { Button } from 'common/ui';
 import { MatchResultModalContext } from 'context/MatchResultModalContext';
-import { MatchType, isCSGOMatch } from 'types/match/Match';
+import { isCSGOMatch } from 'types/match/Match';
 import { Tournament } from 'types/tournaments/TournamentInfo';
 import { Buttons, Header, Wrapper } from './MatchResultModalContent.styles';
 
@@ -33,11 +33,9 @@ const MatchResultModalContent = ({ matchId }: Props) => {
     if (isLoadingMatch || isLoadingMatchStats) return;
     if (!match) return;
 
-    if (match.matchType === MatchType.TOURNAMENT) {
-      getTournamentByMatchId(match.id).then((result) => {
-        setTournament(result.tournament);
-      });
-    }
+    getTournamentByMatchId(match.id).then((result) => {
+      setTournament(result.tournament);
+    });
   }, [isLoadingMatch, isLoadingMatchStats, match]);
 
   const handleNavigate = () => {
