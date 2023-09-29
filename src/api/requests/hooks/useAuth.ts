@@ -25,7 +25,6 @@ const useAuth = () => {
     endpoints.LOGIN_VALIDATE,
     {
       onComplete: (error) => {
-        console.log({ error });
         if (error.errorCode === ErrorCode.LoginValidateFail) {
           return closeMainWindowAndOpenLogin();
         }

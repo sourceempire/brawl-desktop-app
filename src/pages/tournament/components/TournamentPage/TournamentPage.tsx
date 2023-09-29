@@ -25,9 +25,9 @@ import {
 const TournamentPage = () => {
   const { tournamentId } = useParams() as { tournamentId: string };
 
-  const { tournament, isLoading: isLoadingTournament } = useTournamentFeed(tournamentId);
-  const { matchId, isLoading: isLoadingMatchId } = useCurrentTournamentMatchFeed(tournamentId);
-  const { matchHistoryList } = useTournamentMatchHistoryFeed(tournamentId);
+  const { tournament, isLoading: isLoadingTournament } = useTournamentFeed({ tournamentId });
+  const { matchId, isLoading: isLoadingMatchId } = useCurrentTournamentMatchFeed({ tournamentId });
+  const { matchHistoryList } = useTournamentMatchHistoryFeed({ tournamentId });
   const isUserInTournament = matchId !== null;
 
   if (isLoadingMatchId || isLoadingTournament) return null;

@@ -6,32 +6,26 @@ import {
   InfoWrapper,
   RoundInfo,
   StatusIcon,
-  Tournament,
+  StyledImage,
+  Wrapper,
   TournamentName,
   TournamentStatus
 } from './TournamentCard.styles';
 
 type Props = {
   tournamentId: string;
-  tournamentHubImage: string;
+  imageId: string;
   isUserInTournament: boolean;
   onClick?: ((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void) | undefined;
 };
 
-const TournamentCard = ({
-  tournamentId,
-  tournamentHubImage,
-  isUserInTournament,
-  onClick
-}: Props) => {
-  const { tournament } = useTournamentFeed(tournamentId);
-  const { bracket, isLoading } = useBracketFeed(tournamentId);
+const TournamentCard = ({ tournamentId, imageId, isUserInTournament, onClick }: Props) => {
+  const { tournament } = useTournamentFeed({ tournamentId });
+  const { bracket, isLoading } = useBracketFeed({ tournamentId });
 
   return (
-    <Tournament
-      image={tournamentHubImage}
-      isUserInTournament={isUserInTournament}
-      onClick={onClick}>
+    <Wrapper isUserInTournament={isUserInTournament} onClick={onClick}>
+      <StyledImage imageId={imageId} />
       {isUserInTournament ? <BorderText>Your tournament</BorderText> : null}
       {!isLoading && isSingleElimination(bracket) ? (
         <TournamentStatus>
@@ -49,7 +43,7 @@ const TournamentCard = ({
           </RoundInfo>
         ) : null}
       </InfoWrapper>
-    </Tournament>
+    </Wrapper>
   );
 };
 

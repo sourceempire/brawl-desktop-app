@@ -18,7 +18,7 @@ import {
 
 const TournamentHubHeader = () => {
   const { hubId } = useParams() as { hubId: string };
-  const { tournamentHub } = useTournamentHubFeed(hubId);
+  const { tournamentHub } = useTournamentHubFeed({ tournamentHubId: hubId });
 
   const TournamentInfoArray = [
     {

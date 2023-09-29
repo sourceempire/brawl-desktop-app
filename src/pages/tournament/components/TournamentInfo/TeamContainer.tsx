@@ -7,6 +7,6 @@ type Props = {
 };
 
 export const TeamContainer = ({ currentMatchId, teamNumber }: Props) => {
-  const { team1, team2 } = useMatchFeed(currentMatchId);
+  const { team1, team2 } = useMatchFeed({ matchId: currentMatchId });
   return <Wrapper>{teamNumber === 1 ? team1?.teamName : team2?.teamName}</Wrapper>;
 };

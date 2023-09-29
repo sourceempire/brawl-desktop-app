@@ -1,11 +1,7 @@
-import Game, { GameTag } from 'types/Game';
+import Game, { GameId } from 'types/Game';
 import { CSGOMatchSettings } from 'types/MatchSettings';
 import { Team, TeamId } from 'types/team/Team';
 import { UserId } from 'types/user/User';
-
-export enum MatchType {
-  TOURNAMENT = 'tournament'
-}
 
 type Score = number;
 
@@ -13,7 +9,6 @@ export type Match = {
   id: string;
   winnerTeamId?: string;
   gameId: Game;
-  matchType: MatchType;
   teams?: Team[];
 };
 
@@ -76,6 +71,10 @@ export type CSGOMatch = Match & {
   matchStage: CSGOMatchStage;
   veto?: CSGOVeto;
   serverAddress: string | null;
+};
+
+export type MockGameMatch = Match & {
+  gameId: GameId.MOCK;
 };
 
 export type PlayerStats = {

@@ -14,25 +14,19 @@ type FeedWithTeam = {
 
 type Feed = FeedWithoutTeam | FeedWithTeam;
 
+type Params = {
+  tournamentHubId: string;
+  userId: string;
+};
+
 export function isFeedWithTeam(feed: Feed): feed is FeedWithTeam {
   return feed.isInTournamentTeam;
 }
 
-function useTournamentTeamFeed(tournamentHubId: string, userId: string): Feed {
+function useTournamentTeamFeed({ tournamentHubId, userId }: Params): Feed {
   const { data, loading } = useFeed<Feed>(`tournament.team.${tournamentHubId}.${userId}`);
 
-  if (isFeedWithTeam(data)) {
-    return {
-      isLoading: loading,
-      isInTournamentTeam: true,
-      tournamentTeam: data.tournamentTeam
-    };
-  }
-
-  return {
-    isInTournamentTeam: false,
-    isLoading: loading
-  };
+  return { ...data, isLoading: loading };
 }
 
 export default useTournamentTeamFeed;

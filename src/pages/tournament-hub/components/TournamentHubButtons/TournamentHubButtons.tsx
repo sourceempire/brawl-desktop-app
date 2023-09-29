@@ -17,8 +17,8 @@ type Props = {
 const TournamentHubButtons = ({ handleOpenModal, openTeamSettings, handleCloseModal }: Props) => {
   const { hubId } = useParams() as { hubId: string };
   const user = useLoggedInUser();
-  const tournamentTeamFeed = useTournamentTeamFeed(hubId, user.id);
-  const { tournamentHub } = useTournamentHubFeed(hubId);
+  const tournamentTeamFeed = useTournamentTeamFeed({ tournamentHubId: hubId, userId: user.id });
+  const { tournamentHub } = useTournamentHubFeed({ tournamentHubId: hubId });
 
   const onLeaveTournamentComplete = useCallback(() => {
     handleCloseModal();

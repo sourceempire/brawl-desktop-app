@@ -12,7 +12,7 @@ import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
 
 const TournamentHubInfo = () => {
   const { hubId } = useParams() as { hubId: string };
-  const { tournamentHub } = useTournamentHubFeed(hubId);
+  const { tournamentHub } = useTournamentHubFeed({ tournamentHubId: hubId });
 
   //TODO -> Fetch correct prizepool data
   const prizePool = [100, 200, 300, 400];

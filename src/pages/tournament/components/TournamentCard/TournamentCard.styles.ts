@@ -1,10 +1,8 @@
+import { Image } from 'brawl-image';
 import styled, { css } from 'styled-components';
 
-export const Tournament = styled.div<{ image: string; isUserInTournament: boolean }>`
-  ${({ theme, isUserInTournament, image }) => css`
-    background-image: url('${image}');
-    background-size: cover;
-    background-position: center;
+export const Wrapper = styled.div<{ isUserInTournament: boolean }>`
+  ${({ theme, isUserInTournament }) => css`
     position: relative;
     border-radius: ${theme.borderRadius.default};
     min-height: 140px;
@@ -30,6 +28,13 @@ export const Tournament = styled.div<{ image: string; isUserInTournament: boolea
       background-color: rgba(0, 0, 0, 0.2);
     }
   }
+`;
+
+export const StyledImage = styled(Image)`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 export const BorderText = styled.div`

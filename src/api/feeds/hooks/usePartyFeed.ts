@@ -3,7 +3,7 @@ import { PartyContext } from 'context/PartyContext';
 import { Party } from 'types/Party';
 
 /**
- * It is important to note that if isInParty is not true, party is undefined
+ * Note that if isInParty is not true, party is undefined
  * @returns
  */
 const usePartyFeed = () => {

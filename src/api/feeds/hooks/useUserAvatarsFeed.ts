@@ -2,7 +2,11 @@ import { useMemo } from 'react';
 import { useFeed } from 'brawl-websocket';
 import { Avatar } from 'types/user/User';
 
-export default function useUserAvatarsFeed(userId: string) {
+type Params = {
+  userId: string;
+};
+
+export default function useUserAvatarsFeed({ userId }: Params) {
   const { data, loading } = useFeed<{ avatars: Avatar[] }>(`user.avatars.${userId}`);
 
   const avatarsMemo = useMemo(

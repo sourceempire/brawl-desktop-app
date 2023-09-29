@@ -9,7 +9,7 @@ type Props = {
 };
 
 const Bracket = ({ tournamentId, numberOfTeams }: Props) => {
-  const { bracket, isLoading } = useBracketFeed(tournamentId);
+  const { bracket, isLoading } = useBracketFeed({ tournamentId });
 
   if (isLoading) {
     return <SingleEliminationBracketSkeleton numberOfTeams={numberOfTeams} />;

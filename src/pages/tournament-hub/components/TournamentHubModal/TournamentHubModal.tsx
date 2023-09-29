@@ -17,7 +17,7 @@ type Props = {
 const TournamentHubModal = ({ activeModal, closeModal }: Props) => {
   const { hubId } = useParams() as { hubId: string };
   const user = useLoggedInUser();
-  const { tournamentHub, isLoading } = useTournamentHubFeed(hubId);
+  const { tournamentHub, isLoading } = useTournamentHubFeed({ tournamentHubId: hubId });
   const { party } = usePartyFeed();
 
   if (isLoading) return null;

@@ -1,11 +1,11 @@
 import { useFeed } from 'brawl-websocket';
 import { PublicUser } from 'types/user/User';
 
-type Options = {
+type Params = {
   userId: string;
 };
 
-function useUserFeed<T = PublicUser>({ userId }: Options) {
+function useUserFeed<T = PublicUser>({ userId }: Params) {
   const { data, loading } = useFeed<{ user: T }>(`user.${userId}`);
 
   return {

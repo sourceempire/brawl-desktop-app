@@ -1,7 +1,11 @@
 import { useFeed } from 'brawl-websocket';
 import { Bracket as BracketType } from 'types/tournaments/Bracket';
 
-const useBracketFeed = (tournamentId: string) => {
+type Params = {
+  tournamentId: string;
+};
+
+const useBracketFeed = ({ tournamentId }: Params) => {
   const { data, loading } = useFeed<BracketType>(`bracket.${tournamentId}`);
 
   return {
