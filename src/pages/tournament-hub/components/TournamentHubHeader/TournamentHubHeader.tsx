@@ -15,32 +15,51 @@ import {
   InfoHeader,
   InfoSubText
 } from './TournamentHubHeader.styles';
+import { TournamentHubInfoRow } from 'types/tournaments/TournamentInfo';
+import { useRef, useState } from 'react';
+import { useHint } from 'common/hooks';
+import Money from 'types/Money';
 
 const TournamentHubHeader = () => {
   const { hubId } = useParams() as { hubId: string };
   const { tournamentHub } = useTournamentHubFeed({ tournamentHubId: hubId });
 
-  const TournamentInfoArray = [
+  const [isEntryFeeHintVisible, setEntryFeeHintVisible] = useState(false);
+  const entryFeeRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const { Hint: EntryFeeHint } = useHint({
+    hintText: `€${new Money(tournamentHub.entryFeeCut).format()} fee taken`,
+    isVisible: isEntryFeeHintVisible,
+    timeToVisibility: 300,
+    relatedElementRef: entryFeeRef
+  });
+
+  const TournamentInfoArray: TournamentHubInfoRow[] = [
     {
-      key: 'prizePool',
+      name: 'prizePool',
       header: `€${tournamentHub.currentPrizePool}`,
       subtext: 'Predicted Prize Pool',
       icon: Icons.Trophy
     },
     {
-      key: 'entryFee',
-      header: `€${tournamentHub.entryFee} / person`,
-      subtext: 'Entry Fee',
-      icon: Icons.Ticket
+      name: 'entryFee',
+      header: `€${new Money(tournamentHub.entryFee + tournamentHub.entryFeeCut).format()} / player`,
+      subtext: 'Buy-In',
+      icon: Icons.Ticket,
+      ref: entryFeeRef
     },
     {
-      key: 'startTime',
+      name: 'startTime',
       header: tournamentHub.startTime && formatDateAndTime(tournamentHub.startTime),
       subtext: 'Tournament Start',
       icon: Icons.Clock
     }
   ];
 
+  const handleMouseEnter = (name: string, shouldShowHint: boolean) => {
+    if (name === 'entryFee') {
+      setEntryFeeHintVisible(shouldShowHint);
+    }
+  };
   return (
     <HubHeaderWrapper>
       <HeaderInfo>
@@ -49,11 +68,15 @@ const TournamentHubHeader = () => {
         <CountDown startTime={Number(tournamentHub.registrationCloseTime)} />
         <TournamentInfo>
           {TournamentInfoArray.map((info) => (
-            <InfoContainer key={info.key}>
+            <InfoContainer key={info.name}>
               <InfoIcon icon={info.icon} />
-              <InfoText>
+              <InfoText
+                ref={info.ref}
+                onMouseEnter={() => handleMouseEnter(info.name, true)}
+                onMouseLeave={() => handleMouseEnter(info.name, false)}>
                 <InfoHeader>{info.header}</InfoHeader>
                 <InfoSubText>{info.subtext}</InfoSubText>
+                {isEntryFeeHintVisible && info.name === 'entryFee' ? EntryFeeHint : null}
               </InfoText>
             </InfoContainer>
           ))}

@@ -1,27 +1,54 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { IconEnum } from 'common/ui';
-import Game, { GameId, GameName } from 'types/Game';
+import Game, { GameName } from 'types/Game';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
 import { getTournamentModeShort, getTournamentSeriesTypeLong } from 'utils/tournamentUtils';
-import { InfoCard, InfoCardWrapper, InfoHeader, InfoText, StyledIcon } from './InfoCards.styles';
+import {
+  HeaderText,
+  InfoCard,
+  InfoCardWrapper,
+  InfoHeader,
+  InfoText,
+  StyledIcon
+} from './InfoCards.styles';
+import { useHint } from 'common/hooks';
+import Money from 'types/Money';
 
 type Props = {
   tournamentHub: TournamentHub;
 };
 
 const InfoCards = ({ tournamentHub }: Props) => {
-  const [gameName, setGameName] = useState('');
-  const [gameMode, setGameMode] = useState('');
-  const [gameType, setGameType] = useState('');
+  const [gameInfo, setGameInfo] = useState({
+    name: '',
+    mode: '',
+    type: ''
+  });
+
+  const [isHintVisible, setHintVisible] = useState(false);
+  const entryFeeRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+
+  const { Hint: EntryFeeHint } = useHint({
+    hintText: `€${new Money(tournamentHub.entryFeeCut).format()} fee taken`,
+    isVisible: isHintVisible,
+    timeToVisibility: 300,
+    relatedElementRef: entryFeeRef
+  });
 
   const setInfoSettings = (tournamentHub: TournamentHub) => {
-    setGameName(GameName[tournamentHub.gameId]);
+    setGameInfo({
+      ...gameInfo,
+      name: GameName[tournamentHub.gameId]
+    });
 
     switch (tournamentHub.gameId) {
       case Game.CSGO: {
-        setGameType(getTournamentSeriesTypeLong(tournamentHub));
-        setGameMode(getTournamentModeShort(tournamentHub));
+        setGameInfo({
+          ...gameInfo,
+          mode: getTournamentModeShort(tournamentHub),
+          type: getTournamentSeriesTypeLong(tournamentHub)
+        });
         break;
       }
     }
@@ -38,21 +65,21 @@ const InfoCards = ({ tournamentHub }: Props) => {
           <StyledIcon icon={IconEnum.Controller} />
           Game
         </InfoHeader>
-        <InfoText>{gameName}</InfoText>
+        <InfoText>{gameInfo.name}</InfoText>
       </InfoCard>
       <InfoCard>
         <InfoHeader>
           <StyledIcon icon={IconEnum.Sword} />
           Game Mode
         </InfoHeader>
-        <InfoText>{gameMode}</InfoText>
+        <InfoText>{gameInfo.mode}</InfoText>
       </InfoCard>
       <InfoCard>
         <InfoHeader>
           <StyledIcon icon={IconEnum.CrossedSwords} />
           Match Type
         </InfoHeader>
-        <InfoText>{gameType}</InfoText>
+        <InfoText>{gameInfo.type}</InfoText>
       </InfoCard>
       {/* //TODO -> Add Tournament Format */}
       {/* //TODO -> Add Side Decider */}
@@ -85,14 +112,22 @@ const InfoCards = ({ tournamentHub }: Props) => {
           <StyledIcon icon={IconEnum.Trophy} />
           {tournamentHub.registrationClosed ? 'Prize Pool' : 'Predicted Prize Pool'}
         </InfoHeader>
-        <InfoText>{tournamentHub.currentPrizePool}</InfoText>
+        <InfoText>€{tournamentHub.currentPrizePool}</InfoText>
       </InfoCard>
       <InfoCard>
         <InfoHeader>
           <StyledIcon icon={IconEnum.Ticket} />
-          Entry Fee
+          <HeaderText
+            ref={entryFeeRef}
+            onMouseEnter={() => setHintVisible(true)}
+            onMouseLeave={() => setHintVisible(false)}>
+            Buy-In
+          </HeaderText>
+          {EntryFeeHint}
         </InfoHeader>
-        <InfoText>€{tournamentHub.entryFee} / person</InfoText>
+        <InfoText>{`€${new Money(
+          tournamentHub.entryFee + tournamentHub.entryFeeCut
+        ).format()} / player`}</InfoText>
       </InfoCard>
     </InfoCardWrapper>
   );

@@ -1,33 +1,49 @@
+/**
+ * Represents a monetary amount in a currency, holding the value in minor units (e.g., cents) for precise integer arithmetic.
+ *
+ * - Major units: The whole number portion of the amount (e.g., dollars, euros).
+ * - Minor units: The fractional part of the amount (e.g., cents), where 100 minor units equal 1 major unit.
+ * - Total minor units: The entire amount represented in minor units.
+ *
+ * Usage:
+ * const amount = new Money(150);  // 150 minor units, equivalent to 1 major unit and 50 minor units (e.g., $1.50).
+ * const formattedAmount = amount.format();  // Returns a string formatted as "1.50"
+ */
 export default class Money {
-  private moneyString: string; // format 100.00
-  private amount: number;
-  private cents: number;
+  private totalMinorUnits: number;
+  private majorUnits: number;
+  private minorUnits: number;
 
-  constructor(moneyString: string) {
-    this.moneyString = moneyString;
-    [this.amount, this.cents] = moneyString.split('.').map((c) => parseInt(c));
-    if (this.amount < 0 || this.cents < 0 || this.cents > 99) {
-      throw 'Illegal money string';
+  constructor(totalMinorUnits: number) {
+    if (totalMinorUnits < 0) {
+      throw new Error('Illegal money amount: negative value not allowed');
     }
+    this.totalMinorUnits = totalMinorUnits;
+    this.majorUnits = Math.floor(totalMinorUnits / 100);
+    this.minorUnits = totalMinorUnits % 100;
   }
 
-  lessThan(other: Money): boolean {
-    return parseFloat(this.moneyString) < parseFloat(other.moneyString);
+  lessThan(amount: Money): boolean {
+    return this.totalMinorUnits < amount.totalMinorUnits;
   }
 
-  lessOrEqualTo(other: Money): boolean {
-    return parseFloat(this.moneyString) <= parseFloat(other.moneyString);
+  lessOrEqualTo(amount: Money): boolean {
+    return this.totalMinorUnits <= amount.totalMinorUnits;
   }
 
-  greaterThan(other: Money): boolean {
-    return parseFloat(this.moneyString) > parseFloat(other.moneyString);
+  greaterThan(amount: Money): boolean {
+    return this.totalMinorUnits > amount.totalMinorUnits;
   }
 
-  greaterOrEqualTo(other: Money): boolean {
-    return parseFloat(this.moneyString) >= parseFloat(other.moneyString);
+  greaterOrEqualTo(amount: Money): boolean {
+    return this.totalMinorUnits >= amount.totalMinorUnits;
+  }
+
+  format(): string {
+    return `${this.majorUnits}.${this.minorUnits.toString().padStart(2, '0')}`;
   }
 
   toString(): string {
-    return this.moneyString;
+    return this.totalMinorUnits.toString();
   }
 }

@@ -36,6 +36,9 @@ export const InfoHeader = styled.div`
     color: ${theme.colors.textSecondaryLight}
   `}
 `;
+
+export const HeaderText = styled.span``;
+
 export const InfoText = styled.h2`
   ${({ theme }) => css`
     ${theme.textStyles.title}

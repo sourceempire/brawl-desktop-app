@@ -1,3 +1,4 @@
+import { IconEnum, SVGComponent } from 'common/ui';
 import GameId from 'types/Game';
 import { MatchSettings } from 'types/MatchSettings';
 
@@ -7,9 +8,11 @@ export interface TournamentHub {
   gameId: GameId;
   gameName: string;
   startTime: string;
-  entryFee: string;
+  entryFee: number;
+  entryFeeCut: number;
+  entryFeeCutPercentage: number;
   matchSettings: MatchSettings;
-  currentPrizePool: string;
+  currentPrizePool: number;
   region: string;
   teamSize: number;
   teamsAllowed: number;
@@ -46,4 +49,12 @@ export type TournamentMatchInfo = {
 export type TournamentMatchHistory = {
   tournamentId: string;
   matchList: TournamentMatchInfo[];
+};
+
+export type TournamentHubInfoRow = {
+  name: string;
+  header: string;
+  subtext: string;
+  icon: IconEnum | SVGComponent | string;
+  ref?: React.MutableRefObject<HTMLDivElement> | null;
 };
