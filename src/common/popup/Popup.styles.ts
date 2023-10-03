@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { Animation, Icons } from 'common/ui';
 import { PopupBackgroundColors, PopupColors, PopupLevel } from './Popup.types';
 import { theme } from 'assets/styles/Theme';
@@ -19,6 +20,8 @@ export const CloseIcon = styled(Icons.Cross)`
   fill: ${theme.colors.textSecondaryDark};
 `;
 
+export const Wrapperr = styled.div<{ level: PopupLevel; isClosing: boolean; top: number }>``;
+
 export const Wrapper = styled.div<{ level: PopupLevel; isClosing: boolean; top: number }>`
   position: fixed;
   z-index: 2;
@@ -33,7 +36,7 @@ export const Wrapper = styled.div<{ level: PopupLevel; isClosing: boolean; top: 
   animation: fadeIn 0.3s forwards;
 
   padding: ${theme.spacing.baseX2}px ${theme.spacing.baseX8}px;
-  ${theme.textStyles.body};
+  font: ${theme.textStyles.body};
 
   ${({ level, top }) => css`
     color: ${PopupColors[level]};

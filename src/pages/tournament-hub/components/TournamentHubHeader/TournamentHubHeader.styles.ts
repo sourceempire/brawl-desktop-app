@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { Icon } from 'common/ui/Icon';
 
 export const HubHeaderWrapper = styled.div`
@@ -24,7 +25,7 @@ export const HeaderHub = styled.h2`
   width: 100%;
   text-align: center;
   ${({ theme }) => css`
-    ${theme.textStyles.stylizedHeader}
+    font: ${theme.textStyles.stylizedHeader};
     margin-bottom: ${theme.spacing.baseX2}px;
     font-size: 24px;
   `};
@@ -72,7 +73,7 @@ export const InfoText = styled.div``;
 
 export const InfoHeader = styled.div`
   ${({ theme }) => css`
-    ${theme.textStyles.title}
+    font: ${theme.textStyles.title};
   `}
 `;
 

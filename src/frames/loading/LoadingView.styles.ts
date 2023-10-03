@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Animation } from 'common/ui';
 
 export const Wrapper = styled.div`

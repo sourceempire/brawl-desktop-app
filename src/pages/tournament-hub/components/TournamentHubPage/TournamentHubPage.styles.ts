@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 export const TournamentsWrapper = styled.div<{ listLength: number }>`
   flex: 1;
@@ -34,7 +35,7 @@ export const TournamentName = styled.div`
   text-align: center;
   text-transform: uppercase;
   ${({ theme }) => css`
-    ${theme.textStyles.stylizedHeader}
+    font: ${theme.textStyles.stylizedHeader};
     padding: ${theme.spacing.baseX4}px 0 ${theme.spacing.baseX2}px;
   `}
 `;

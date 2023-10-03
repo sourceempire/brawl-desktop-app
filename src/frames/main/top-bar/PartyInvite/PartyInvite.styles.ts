@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { ActionButton, EllipsisText, Input } from 'common/ui';
 
 export const InvitePlayerAction = styled(ActionButton)`
@@ -56,7 +57,7 @@ export const UserInfoContainer = styled.div`
 
 export const UserTag = styled(EllipsisText)`
   ${({ theme }) => css`
-    ${theme.textStyles.title}
+    font: ${theme.textStyles.title};
   `}
 `;
 

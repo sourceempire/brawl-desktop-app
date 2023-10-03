@@ -1,4 +1,5 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled from '@emotion/styled';
+import { css, keyframes } from '@emotion/react';
 import { hsla } from 'utils/styledUtils';
 
 export const Wrapper = styled.div`

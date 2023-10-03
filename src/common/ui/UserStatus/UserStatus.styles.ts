@@ -1,5 +1,6 @@
-import styled, { css } from 'styled-components';
-import { StatusStyle, UserStatusEnum } from './UserStatus.types';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
+import { UserStatusEnum } from './UserStatus.types';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -20,8 +21,26 @@ export const StatusCircle = styled.div<{ status: UserStatusEnum }>`
   height: 9px;
   width: 9px;
 
-  ${({ status }) => css`
-    ${StatusStyle[status]};
+  ${({ status, theme }) => css`
+    ${status === UserStatusEnum.ONLINE &&
+    css`
+      background-color: ${theme.colors.statusSuccess};
+    `}
+
+    ${status === UserStatusEnum.AWAY &&
+    css`
+      background-color: ${theme.colors.statusWarning};
+    `}
+
+    ${status === UserStatusEnum.BUSY &&
+    css`
+      background-color: ${theme.colors.statusError};
+    `}
+
+    ${status === UserStatusEnum.OFFLINE &&
+    css`
+      border: 2px solid rgb(155, 155, 166);
+    `}
   `}
 `;
 

@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { Animation, Icons } from 'common/ui';
 import { Hero } from 'pages/tournament-list/components/FeaturedTournament/FeaturedTournament.styles';
 
