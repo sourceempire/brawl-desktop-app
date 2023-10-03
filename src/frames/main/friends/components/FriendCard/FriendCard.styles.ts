@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { EllipsisText, UserStatus, UserStatusEnum } from 'common/ui';
 import { UserCard } from '../Shared.styles';
 
@@ -36,7 +37,7 @@ export const FriendOptions = styled.div`
 `;
 export const FriendOption = styled.div`
   ${({ theme }) => css`
-    ${theme.textStyles.note}
+    font: ${theme.textStyles.note};
     margin-left: -${theme.spacing.base}px;
     margin-right: -${theme.spacing.base}px;
     padding: calc(${theme.spacing.base}px * 1.5) ${theme.spacing.base}px;
@@ -49,7 +50,7 @@ export const FriendOption = styled.div`
 
 export const UserTag = styled(EllipsisText)`
   ${({ theme }) => css`
-    ${theme.textStyles.title}
+    font: ${theme.textStyles.title};
     margin-left: ${theme.spacing.baseX2}px;
   `}
 `;

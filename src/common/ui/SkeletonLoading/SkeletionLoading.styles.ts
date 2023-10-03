@@ -1,13 +1,12 @@
-import { css } from 'styled-components';
+import { css } from '@emotion/react';
+import { theme } from 'assets/styles/Theme';
 
 export const skeletonLoadingStyle = css`
   position: relative;
   background-color: #fff0ff30;
   overflow: hidden;
 
-  ${({ theme }) => css`
-    border-radius: ${theme.borderRadius.default};
-  `}
+  border-radius: ${theme.borderRadius.default};
 
   :before {
     content: '';

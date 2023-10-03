@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { Wrapper as Button } from '../Button/Button.styles';
 import { Icons } from '../Icon';
 
@@ -43,31 +44,44 @@ export const DayName = styled.span`
 `;
 
 export const Day = styled.span<{ active: boolean; picked: boolean; today: boolean; dark: boolean }>`
-  ${({ theme }) => theme.textStyles.note}
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  background-color: transparent;
 
-  ${({ active, picked, today, dark, theme }) => css`
-    width: 24px;
-    height: 24px;
-    line-height: 24px;
+  ${({ theme }) => css`
+    font: ${theme.textStyles.note};
     border-radius: ${theme.borderRadius.default};
+  `}
 
-    background-color: ${() => {
-      if (picked) {
-        return theme.colors.primary.base;
-      } else if (dark && active) {
-        return theme.colors.secondary.base;
-      } else if (!dark && active) {
-        return theme.colors.surface.base;
-      }
-      return 'transparent';
-    }};
+  ${({ theme, dark, active }) =>
+    !dark &&
+    active &&
+    css`
+      background-color: ${theme.colors.surface.base};
+    `}
 
-    ${!active &&
+  ${({ theme, dark, active }) =>
+    dark &&
+    active &&
+    css`
+      background-color: ${theme.colors.secondary.base};
+    `}
+
+  ${({ theme, picked }) =>
+    picked &&
+    css`
+      background-color: ${theme.colors.primary.base};
+    `}
+
+  ${({ theme, active }) =>
+    active &&
     css`
       color: ${theme.colors.textSecondaryLight};
     `}
-
-    ${!picked &&
+  
+  ${({ theme, picked, today }) =>
+    !picked &&
     today &&
     css`
       border: 2px solid ${theme.colors.accent.base};
@@ -75,16 +89,20 @@ export const Day = styled.span<{ active: boolean; picked: boolean; today: boolea
     `}
 
     :hover {
-      background-color: ${() => {
-        if (picked) {
-          return theme.colors.primary.hover;
-        } else if (active) {
-          return theme.colors.surface.hover;
-        }
-        return 'transparent';
-      }};
-    }
-  `}
+    background-color: transparent;
+
+    ${({ theme, active }) =>
+      active &&
+      css`
+        background-color: ${theme.colors.surface.hover};
+      `}
+
+    ${({ theme, picked }) =>
+      picked &&
+      css`
+        background-color: ${theme.colors.primary.hover};
+      `}
+  }
 `;
 
 export const Header = styled.div`

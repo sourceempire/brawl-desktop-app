@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { Icons } from '../Icon';
 
 export const Wrapper = styled.div`
@@ -24,7 +25,7 @@ export const Box = styled.div<{ checked: boolean }>`
   ${({ theme, checked }) => css`
     background-color: ${checked ? theme.colors.accent.base : 'trasnparent'};
     border: 2px solid ${theme.colors.accent.base};
-    border-radius: ${(props) => props.theme.borderRadius.default};
+    border-radius: ${theme.borderRadius.default};
 
     :hover {
       border: 2px solid ${theme.colors.accent.hover};

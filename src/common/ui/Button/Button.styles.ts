@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { Icon } from '../Icon/Icon';
 import { lightenColor } from 'assets/styles/colorBrightness';
 
@@ -40,7 +41,9 @@ export const Wrapper = styled.button<Props>`
   justify-content: center;
   outline-color: transparent;
 
-  ${({ theme }) => theme.textStyles.button}
+  ${({ theme }) => css`
+    font: ${theme.textStyles.button};
+  `}
 
   :focus-visible {
     outline: 2px solid ${(props) => props.theme.colors.accent.base};

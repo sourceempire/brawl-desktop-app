@@ -1,4 +1,6 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
+
 import { CSGOTeamSide } from 'types/match/Match';
 
 export const Wrapper = styled.div`

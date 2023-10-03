@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { Icon } from 'common/ui/Icon';
 
 export const InfoCardWrapper = styled.div<{
@@ -32,8 +33,8 @@ export const InfoHeader = styled.div`
   display: flex;
   align-items: center;
   ${({ theme }) => css`
-    ${theme.textStyles.body}
-    color: ${theme.colors.textSecondaryLight}
+    font: ${theme.textStyles.body};
+    color: ${theme.colors.textSecondaryLight};
   `}
 `;
 
@@ -41,7 +42,7 @@ export const HeaderText = styled.span``;
 
 export const InfoText = styled.h2`
   ${({ theme }) => css`
-    ${theme.textStyles.title}
+    font: ${theme.textStyles.title};
   `}
 `;
 

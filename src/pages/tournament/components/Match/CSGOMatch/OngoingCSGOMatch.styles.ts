@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { Button, EllipsisText, Icons } from 'common/ui';
 import { hsla } from 'utils/styledUtils';
 

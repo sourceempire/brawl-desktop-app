@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -16,7 +17,7 @@ export const NoNotificationImage = styled.img`
 export const NoNotificationText = styled.div`
   ${({ theme }) => css`
     margin-top: ${theme.spacing.base}px;
-    ${theme.textStyles.header}
-    color: ${theme.colors.textSecondaryLight}
+    font: ${theme.textStyles.header};
+    color: ${theme.colors.textSecondaryLight};
   `}
 `;

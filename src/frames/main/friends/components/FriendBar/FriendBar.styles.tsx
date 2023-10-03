@@ -1,5 +1,6 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { ActionButton, Input } from 'common/ui';
 import { hsla } from 'utils/styledUtils';
 
@@ -52,11 +53,10 @@ export const FriendAction = styled(ActionButton)`
 export const Title = styled.div`
   display: flex;
   align-items: center;
-  ${({ theme }) =>
-    css`
-      ${theme.textStyles.title};
-      margin-bottom: ${theme.spacing.base}px;
-    `}
+  ${({ theme }) => css`
+    ${theme.textStyles.title};
+    margin-bottom: ${theme.spacing.base}px;
+  `}
 `;
 
 export const ScrollContentWrapper = styled.div`
