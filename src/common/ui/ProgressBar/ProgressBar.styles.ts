@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -35,7 +36,7 @@ export const Progression = styled.div<{ percent?: number }>`
   ${(props) =>
     props.percent !== undefined &&
     css`
-      transform: translateX(calc(-100% + ${props.percent}%)); ;
+      transform: translateX(calc(-100% + ${props.percent}%));
     `}
 `;
 

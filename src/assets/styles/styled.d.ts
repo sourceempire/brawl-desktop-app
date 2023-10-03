@@ -1,7 +1,7 @@
-import 'styled-components';
+import '@emotion/react';
 
-declare module 'styled-components' {
-  export interface DefaultTheme {
+declare module '@emotion/react' {
+  export interface Theme {
     colors: {
       primary: {
         base: string;
@@ -77,13 +77,13 @@ declare module 'styled-components' {
       stylized: string;
     };
     textStyles: {
-      header: FlattenSimpleInterpolation;
-      stylizedHeader: FlattenSimpleInterpolation;
-      title: striFlattenSimpleInterpolationng;
-      body: FlattenSimpleInterpolation;
-      menu: FlattenSimpleInterpolation;
-      button: FlattenSimpleInterpolation;
-      note: FlattenSimpleInterpolation;
+      header: string;
+      stylizedHeader: string;
+      title: string;
+      body: string;
+      menu: string;
+      button: string;
+      note: string;
     };
 
     titleBarHeight: number;

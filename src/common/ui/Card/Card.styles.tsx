@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 type Props = {
   width?: string;
@@ -10,9 +11,13 @@ export const Wrapper = styled.div<Props>`
   display: flex;
   flex-direction: column;
   position: relative;
-  background-color: ${(props) => props.theme.colors.surface.base};
-  ${(props) => (props.padding ? 'padding: 12px;' : '')}
-  border-radius: ${(props) => props.theme.borderRadius.default};
-  ${(props) => (props.width ? `width: ${props.width};` : '')}
-  ${(props) => (props.height ? `height: ${props.height};` : '')}
+
+  ${({ theme, padding, width, height }) => css`
+    background-color: ${theme.colors.surface.base};
+    border-radius: ${theme.borderRadius.default};
+
+    ${padding ? 'padding: 12px;' : ''}
+    ${width ? `width: ${width};` : ''}
+    ${height ? `height: ${height};` : ''}
+  `}
 `;

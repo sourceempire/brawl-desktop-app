@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { Button, Input } from 'common/ui';
 import { InputElement } from 'common/ui/Input/Input.styles';
 

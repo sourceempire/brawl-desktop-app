@@ -1,5 +1,6 @@
 import { NavLink as ReactRouterNavLink } from 'react-router-dom';
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -18,7 +19,7 @@ export const NavLink = styled(ReactRouterNavLink)`
   top: 2px;
 
   ${({ theme }) => css`
-    ${theme.textStyles.body}
+    font: ${theme.textStyles.body};
     color: ${theme.colors.textPrimaryLight};
   `}
 `;

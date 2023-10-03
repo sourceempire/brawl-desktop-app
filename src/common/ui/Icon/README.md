@@ -44,7 +44,7 @@ import exampleIcon from 'path/to/example-example.svg'
 Additionaly, You can use the "styled" function to wrap the Icon component, allowing you to add custom styles to it. Here's an example of how to use a styled component to add a custom background color to the Icon component:
 
 ```tsx
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 const StyledIcon = styled(Icon)`
   background-color: red;

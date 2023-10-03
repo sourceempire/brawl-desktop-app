@@ -9,7 +9,8 @@ import {
   StyledImage,
   Wrapper,
   TournamentName,
-  TournamentStatus
+  TournamentStatus,
+  ImageContainer
 } from './TournamentCard.styles';
 
 type Props = {
@@ -25,7 +26,10 @@ const TournamentCard = ({ tournamentId, imageId, isUserInTournament, onClick }: 
 
   return (
     <Wrapper isUserInTournament={isUserInTournament} onClick={onClick}>
-      <StyledImage imageId={imageId} />
+      <ImageContainer>
+        <StyledImage imageId={imageId} />
+      </ImageContainer>
+
       {isUserInTournament ? <BorderText>Your tournament</BorderText> : null}
       {!isLoading && isSingleElimination(bracket) ? (
         <TournamentStatus>
