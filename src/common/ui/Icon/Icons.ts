@@ -35,7 +35,13 @@ import Sword from './icons/Sword.svg?react';
 import Ticket from './icons/Ticket.svg?react';
 import Trophy from './icons/Trophy.svg?react';
 
-const Icons: Record<string, typeof Abort> = {
+type SVGComponent = React.FunctionComponent<
+  React.SVGProps<SVGSVGElement> & {
+    title?: string | undefined;
+  }
+>;
+
+const Icons: Record<IconEnum, SVGComponent> = {
   [IconEnum.Abort]: Abort,
   [IconEnum.AddFriend]: AddFriend,
   [IconEnum.ArrowDown]: ArrowDown,
