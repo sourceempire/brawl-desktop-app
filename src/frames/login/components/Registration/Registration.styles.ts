@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { Button as Btn } from 'common/ui';
 
 export const Wrapper = styled.div<{ active: boolean }>`

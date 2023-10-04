@@ -1,4 +1,4 @@
-import { DefaultTheme, css } from 'styled-components';
+import { Theme } from '@emotion/react';
 import { getPlatform } from 'utils/processUtils';
 
 enum PlatformName {
@@ -34,41 +34,27 @@ enum Fonts {
   STYLIZED = "'Orbitron', sans-serif"
 }
 
-const TextStyles = {
-  HEADER: css`
-    font-size: 20px;
-    font-weight: 500;
-  `,
-  STYLIZED_HEADER: css`
-    font-family: 'Orbitron', sans-serif;
-    font-size: 18px;
-    font-weight: bold;
-  `,
-  TITLE: css`
-    font-size: 13px;
-    font-weight: bold;
-  `,
-  BODY: css`
-    font-size: 13px;
-    font-weight: normal;
-    line-height: 1.4;
-  `,
-  MENU: css`
-    font-size: 13px;
-    font-weight: normal;
-    text-transform: uppercase;
-  `,
-  BUTTON: css`
-    font-size: 12px;
-    font-weight: normal;
-  `,
-  NOTE: css`
-    font-size: 11px;
-    font-weight: normal;
-  `
+type TextStylesType = {
+  header: string;
+  stylizedHeader: string;
+  title: string;
+  body: string;
+  menu: string;
+  button: string;
+  note: string;
 };
 
-export const theme: DefaultTheme = {
+const textStyles: TextStylesType = {
+  header: 'bold 20px ' + Fonts.DEFAULT,
+  stylizedHeader: 'bold 18px ' + Fonts.STYLIZED,
+  title: 'bold 13px ' + Fonts.DEFAULT,
+  body: 'normal 13px ' + Fonts.DEFAULT,
+  menu: 'normal 13px ' + Fonts.DEFAULT,
+  button: 'normal 12px ' + Fonts.DEFAULT,
+  note: 'normal 11px ' + Fonts.DEFAULT
+};
+
+export const theme: Theme = {
   colors: {
     primary: {
       base: 'hsl(39, 100%, 47%)',
@@ -143,16 +129,7 @@ export const theme: DefaultTheme = {
     default: Fonts.DEFAULT,
     stylized: Fonts.STYLIZED
   },
-  textStyles: {
-    header: TextStyles.HEADER,
-    stylizedHeader: TextStyles.STYLIZED_HEADER,
-    title: TextStyles.TITLE,
-    body: TextStyles.BODY,
-    menu: TextStyles.MENU,
-    button: TextStyles.BUTTON,
-    note: TextStyles.NOTE
-  },
-
+  textStyles,
   titleBarHeight: titleBarHeight(),
   topBarHeight: Spacing.BASEx8,
   friendsBarWidth: 230

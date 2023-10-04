@@ -1,7 +1,7 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
-import mkcert from 'vite-plugin-mkcert'
+import mkcert from 'vite-plugin-mkcert';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,7 +10,7 @@ export default defineConfig({
     mkcert({ savePath: './cert', certFileName: 'vite-cert.pem' }),
     react({
       babel: {
-        plugins: ['babel-plugin-styled-components']
+        plugins: ['@emotion/babel-plugin']
       }
     }),
     svgr()

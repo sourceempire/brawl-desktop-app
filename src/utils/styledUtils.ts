@@ -1,4 +1,4 @@
-import { keyframes } from 'styled-components';
+import { keyframes } from '@emotion/react';
 
 function hexToRgb(hex: string) {
   // http://stackoverflow.com/a/5624139

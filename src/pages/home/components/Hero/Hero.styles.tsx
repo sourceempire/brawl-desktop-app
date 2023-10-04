@@ -1,9 +1,10 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { Card } from 'common/ui';
 import heroBackground from 'assets/images/hero-background.png';
 import heroForeground from 'assets/images/hero-foreground.png';
 
-export const Wrapper = styled(Card).attrs({ padding: false })`
+export const Wrapper = styled(Card)`
   grid-column: span 2;
   position: relateive;
 

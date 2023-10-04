@@ -9,7 +9,7 @@ export default function News({ news }: Props) {
   const image = news.imageUrl;
 
   return (
-    <Wrapper>
+    <Wrapper padding={false}>
       <Image src={image} />
       <Text>
         <Title>{news.title}</Title>

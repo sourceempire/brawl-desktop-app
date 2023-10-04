@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { InputSize } from './Input.types';
 
 // TODO -> Add support for which side icons should be

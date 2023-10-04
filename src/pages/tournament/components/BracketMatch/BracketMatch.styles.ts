@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { roundGap } from '../Bracket/Bracket.styles';
 import { firstRoundMatchGap } from '../Bracket/SingleEliminationBracket.styles';
 import { MatchOutcome, WrapperProps } from './BracketMatch.types';

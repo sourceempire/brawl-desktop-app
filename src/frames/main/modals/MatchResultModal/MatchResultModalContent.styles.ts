@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { Wrapper as MatchResultWrapper } from 'common/components/MatchResult/MatchResult.styles';
 
 export const Wrapper = styled.div`

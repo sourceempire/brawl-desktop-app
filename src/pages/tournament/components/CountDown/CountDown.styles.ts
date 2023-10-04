@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -24,7 +25,7 @@ export const Number = styled.div`
   height: 50px;
   width: 35px;
   ${({ theme }) => css`
-    ${theme.textStyles.stylizedHeader}
+    font: ${theme.textStyles.stylizedHeader};
     border-radius: ${theme.borderRadius.default};
     background-color: ${theme.colors.surface.base};
   `}

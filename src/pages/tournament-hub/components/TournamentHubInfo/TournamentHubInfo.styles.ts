@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 export const TournamentHubInfoWrapper = styled.div<{
   isRegistrationClosed: boolean;
@@ -49,7 +50,7 @@ export const PrizeElement = styled.div`
     background-color: ${theme.colors.surface.base};
     border-radius: ${theme.borderRadius.default};
     padding-right: ${theme.spacing.baseX4}px;
-    ${theme.textStyles.title}
+    font: ${theme.textStyles.title};
   `};
 `;
 
@@ -61,7 +62,7 @@ export const PrizePosition = styled.div`
   justify-content: center;
   ${({ theme }) => css`
     background-color: ${theme.colors.surfaceSecondary.base};
-    ${theme.textStyles.title}
+    font: ${theme.textStyles.title};
   `}
   font-size: 16px;
 `;

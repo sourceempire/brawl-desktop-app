@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { teamGap, teamHeight } from '../BracketMatch/BracketMatch.styles';
 
 export const firstRoundMatchGap = 48;
