@@ -18,10 +18,11 @@ const MatchContext = createContext<MatchContextType>({
 type Props = {
   children: React.ReactNode;
   matchId: string;
+  gameId: string;
 };
 
-export const MatchContextProvider = ({ children, matchId }: Props) => {
-  const { match, team1, team2, isLoading } = useMatchFeed({ matchId });
+export const MatchContextProvider = ({ children, matchId, gameId }: Props) => {
+  const { match, team1, team2, isLoading } = useMatchFeed({ matchId, gameId });
 
   return (
     <MatchContext.Provider value={{ isLoading, match, team1, team2 }}>

@@ -9,7 +9,8 @@ export type Match = {
   id: string;
   winnerTeamId?: string;
   gameId: Game;
-  teams?: Team[];
+  team1: Team;
+  team2: Team;
 };
 
 export enum CSGOTeamSide {

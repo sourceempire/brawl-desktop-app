@@ -4,21 +4,20 @@ import { Match } from 'types/match/Match';
 
 type Params = {
   matchId: string;
+  gameId: string;
 };
 
-const useMatchFeed = ({ matchId }: Params) => {
-  const { data, loading } = useFeed<{ match: Match }>(`match.${matchId}`);
+const useMatchFeed = ({ matchId, gameId }: Params) => {
+  const { data, loading } = useFeed<{ match: Match }>(`match.${matchId}.${gameId}`);
 
   const loggedInUser = useLoggedInUser();
 
-  const teams = Object.values(data.match?.teams ?? {});
+  let team1 = data.match?.team1;
+  let team2 = data.match?.team2;
 
-  let team1 = teams[0];
-  let team2 = teams[1];
-
-  if (teams[1]?.players.includes(loggedInUser.id)) {
-    team1 = teams[1];
-    team2 = teams[0];
+  if (team2 && team2?.players.includes(loggedInUser.id)) {
+    team1 = data.match?.team2;
+    team2 = data.match?.team1;
   }
 
   return {
