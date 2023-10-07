@@ -36,6 +36,6 @@ export function useMatchContext<T = Match>() {
 
   return {
     ...context,
-    match: context.match as unknown as T
+    match: context.match as T
   };
 }
