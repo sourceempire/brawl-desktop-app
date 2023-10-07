@@ -24,14 +24,10 @@ export const Label = styled.div`
   `}
 `;
 
-export const PartySettingsInput = styled(Input)`
+export const TeamSettingsInput = styled(Input)`
   ${({ theme }) => css`
     ${InputElement} {
-      font-weight: bold;
       padding-left: 4px;
-      ::placeholder {
-        font-weight: normal;
-      }
       background-color: ${theme.colors.surfaceSecondary.base};
     }
   `}

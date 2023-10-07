@@ -11,7 +11,7 @@ import {
   ErrorMessage,
   Label,
   ModalButton,
-  PartySettingsInput,
+  TeamSettingsInput,
   PlayersWrapper,
   Settings,
   Wrapper
@@ -70,7 +70,7 @@ const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) 
       <Wrapper>
         <Settings>
           <Label>Team Name</Label>
-          <PartySettingsInput
+          <TeamSettingsInput
             maxLength={TEAM_NAME_MAX_LENGTH}
             value={userInExistingTeam ? tournamentTeamFeed.tournamentTeam.teamName : teamName ?? ''}
             onChange={handleTeamNameChange}
