@@ -1,4 +1,5 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled from '@emotion/styled';
+import { css, keyframes } from '@emotion/react';
 import { Icons } from 'common/ui';
 import { bounceAnimation, hsla } from 'utils/styledUtils';
 import { StageStatus } from './CurrentMatchStage.types';
@@ -49,7 +50,9 @@ export const StageDot = styled.div<{ status: StageStatus }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color ${animationTime}s, border ${animationTime}s;
+  transition:
+    background-color ${animationTime}s,
+    border ${animationTime}s;
 
   ${({ theme, status }) => css`
     width: ${theme.spacing.base * 1.7}px;
@@ -133,7 +136,7 @@ export const StageName = styled.div`
   transform: translateY(150%);
 
   ${({ theme }) => css`
-    ${theme.textStyles.note}
-    color: ${theme.colors.textPrimaryLight}
+    font: ${theme.textStyles.note};
+    color: ${theme.colors.textPrimaryLight};
   `}
 `;

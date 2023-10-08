@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 export const Wrapper = styled.div`
   .page-container {
@@ -10,7 +11,9 @@ export const Wrapper = styled.div`
     position: absolute;
     transform: translateX(0);
     opacity: 1;
-    transition: opacity 500ms ease-out 300ms, transform 500ms ease-out 300ms;
+    transition:
+      opacity 500ms ease-out 300ms,
+      transform 500ms ease-out 300ms;
   }
 
   .page.enter {
@@ -30,7 +33,9 @@ export const Wrapper = styled.div`
   .page.exit-active {
     opacity: 0;
     transform: translateX(-100px);
-    transition: opacity 500ms ease-in, transform 500ms ease-in;
+    transition:
+      opacity 500ms ease-in,
+      transform 500ms ease-in;
   }
 
   .order-right {

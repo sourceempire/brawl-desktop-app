@@ -1,9 +1,11 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { EllipsisText, skeletonLoadingStyle } from 'common/ui';
+import { theme } from 'assets/styles/Theme';
 
 export const Text = styled(EllipsisText)`
   ${({ theme }) => css`
-    ${theme.textStyles.body}
+    font: ${theme.textStyles.body};
     color: ${theme.colors.textSecondaryLight};
     margin-bottom: ${theme.spacing.base / 2}px;
   `}
@@ -41,12 +43,10 @@ export const Wrapper = styled.div<{ isRead: boolean }>`
 `;
 
 const imageStyle = css`
-  ${({ theme }) => css`
-    width: ${theme.spacing.baseX7}px;
-    height: ${theme.spacing.baseX7}px;
-    border-radius: ${theme.borderRadius.default};
-    margin-right: ${theme.spacing.base}px;
-  `}
+  width: ${theme.spacing.baseX7}px;
+  height: ${theme.spacing.baseX7}px;
+  border-radius: ${theme.borderRadius.default};
+  margin-right: ${theme.spacing.base}px;
 `;
 
 export const Image = styled.img`
@@ -55,7 +55,7 @@ export const Image = styled.img`
 
 export const TimeAgo = styled.div`
   ${({ theme }) => css`
-    ${theme.textStyles.note}
+    font: ${theme.textStyles.note};
     color: ${theme.colors.textSecondaryLight};
   `}
 `;
@@ -84,9 +84,7 @@ export const IsReadIndicator = styled.div<{ isRead: boolean }>`
 
 const notificationLoadingStyle = css`
   ${skeletonLoadingStyle}
-  ${({ theme }) => css`
-    background-color: ${theme.colors.secondary.hover};
-  `}
+  background-color: ${theme.colors.secondary.hover};
 `;
 
 export const ImageSkeleton = styled.div`

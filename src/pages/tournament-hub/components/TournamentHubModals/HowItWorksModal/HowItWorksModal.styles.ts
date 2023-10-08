@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { Icon } from 'common/ui/Icon';
 
 export const Wrapper = styled.div`
@@ -17,7 +18,7 @@ export const Section = styled.div`
 
 export const Title = styled.h2`
   ${({ theme }) => css`
-    ${theme.textStyles.header}
+    font: ${theme.textStyles.header};
     margin-bottom: ${theme.spacing.baseX2}px;
   `}
 `;

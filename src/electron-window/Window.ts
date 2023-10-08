@@ -35,6 +35,7 @@ let Window = {
 
   quitAndInstall: () => {},
 
+  //@ts-ignore
   notification: ({
     title,
     subtitle,

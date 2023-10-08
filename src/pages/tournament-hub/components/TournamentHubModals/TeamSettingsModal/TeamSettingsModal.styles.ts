@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { Button, Input } from 'common/ui';
 import { InputElement } from 'common/ui/Input/Input.styles';
 
@@ -23,14 +24,10 @@ export const Label = styled.div`
   `}
 `;
 
-export const PartySettingsInput = styled(Input)`
+export const TeamSettingsInput = styled(Input)`
   ${({ theme }) => css`
     ${InputElement} {
-      font-weight: bold;
       padding-left: 4px;
-      ::placeholder {
-        font-weight: normal;
-      }
       background-color: ${theme.colors.surfaceSecondary.base};
     }
   `}

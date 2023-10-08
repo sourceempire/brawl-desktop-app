@@ -1,16 +1,17 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 export const Wrapper = styled.div``;
 
 export const ConfirmationText = styled.div`
   ${({ theme }) => css`
-    ${theme.textStyles.body}
+    font: ${theme.textStyles.body};
   `}
 `;
 export const FriendToRemove = styled.p`
   display: inline;
   ${({ theme }) => css`
-    ${theme.textStyles.body}
+    font: ${theme.textStyles.body};
     color: ${theme.colors.accent.base};
   `}
 `;

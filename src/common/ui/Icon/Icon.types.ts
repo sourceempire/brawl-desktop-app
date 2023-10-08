@@ -35,11 +35,3 @@ export enum IconEnum {
   Ticket = 'Ticket',
   Trophy = 'Trophy'
 }
-
-export type SVGComponent = React.FunctionComponent<
-  React.SVGProps<SVGSVGElement> & {
-    title?: string | undefined;
-  }
-> & {
-  url: string;
-};

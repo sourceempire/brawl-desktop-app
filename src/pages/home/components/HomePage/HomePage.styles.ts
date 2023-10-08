@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import TournamentInfoCard from 'pages/tournament-list/components/TournamentInfoCard/TournamentInfoCard';
 import { Header as TournamentInfoCardHeader } from 'pages/tournament-list/components/TournamentInfoCard/TournamentInfoCard.styles';
 

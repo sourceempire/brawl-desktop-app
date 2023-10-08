@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { ProfileImage } from 'frames/main/friends/components/Shared.styles';
 
 export const Wrapper = styled.div`

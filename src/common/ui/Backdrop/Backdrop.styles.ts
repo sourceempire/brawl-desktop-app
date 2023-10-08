@@ -1,5 +1,6 @@
 import { Image } from 'brawl-image';
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { hsla } from 'utils/styledUtils';
 
 export const Wrapper = styled.div`

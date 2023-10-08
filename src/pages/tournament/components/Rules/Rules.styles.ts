@@ -1,5 +1,6 @@
 import ReactMarkdown from 'react-markdown';
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 export const RulesMarkdown = styled(ReactMarkdown)`
   overflow: scroll;

@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { Animation } from 'common/ui';
 import { InnerWrapper, OuterWrapper } from 'common/ui/EllipsisText/EllipsisText.styles';
 import simpleLoading from 'assets/animations/simple-loading.json';
@@ -86,10 +87,8 @@ const LoadingAnimation = styled(Animation)`
 export const SimpleLoading = () => <LoadingAnimation src={simpleLoading} />;
 
 const skeletonLoadingStyle = css`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.surface.base};
-    border-radius: ${theme.borderRadius.default};
-  `}
+  background-color: ${theme.colors.surface.base};
+  border-radius: ${theme.borderRadius.default};
 
   animation: loading 3s infinite linear;
 

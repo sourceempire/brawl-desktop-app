@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { ActionButtonSize, WrapperProps } from './ActionButton.types';
 import { theme } from 'assets/styles/Theme';
 

@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 export const Wrapper = styled.div`
   display: grid;
@@ -22,7 +23,8 @@ export const TournamentName = styled.div`
   width: 100%;
   text-align: center;
   ${({ theme }) => css`
-    ${theme.textStyles.stylizedHeader}
+    font: ${theme.textStyles.stylizedHeader};
+
     margin-bottom: ${theme.spacing.baseX2}px;
     font-size: 24px;
   `};
