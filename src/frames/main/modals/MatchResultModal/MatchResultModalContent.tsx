@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { useMatchFeed } from 'api/feeds';
 import { useMatchStatsFeed } from 'api/feeds/hooks/useMatchStatsFeed';
-
 import CSGOMatchResult from 'common/components/MatchResult/CSGOMatchResult';
 import { Button } from 'common/ui';
 import { MatchResultModalContext } from 'context/MatchResultModalContext';
@@ -13,7 +12,12 @@ type Props = {
 };
 
 const MatchResultModalContent = ({ matchId }: Props) => {
-  const { match, team1, team2, isLoading: isLoadingMatch } = useMatchFeed({ matchId });
+  const {
+    match,
+    team1,
+    team2,
+    isLoading: isLoadingMatch
+  } = useMatchFeed({ matchId, gameId: 'e65080ad-79d6-48dc-9887-55344225d119' }); // Should not be a hardcoded string as gameId
   const {
     matchStats,
     roundWins,

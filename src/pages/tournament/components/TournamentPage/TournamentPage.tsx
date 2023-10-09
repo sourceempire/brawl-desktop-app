@@ -41,8 +41,12 @@ const TournamentPage = () => {
 
             <TournamentContent>
               <TournamentNavbar>
-                <NavItems tournamentId={tournamentId} matchId={matchId} />
-                {matchId ? <CurrentMatchStage matchId={matchId} /> : <div />}
+                <NavItems tournamentId={tournamentId} />
+                {matchId ? (
+                  <CurrentMatchStage matchId={matchId} gameId={tournament.gameId} />
+                ) : (
+                  <div />
+                )}
                 <RightAlignedContainer>
                   {tournament.tournamentHubId && (
                     <Link to={`/main/tournaments/hub/${tournament.tournamentHubId}`}>
@@ -62,11 +66,16 @@ const TournamentPage = () => {
                       </MatchContextProvider>
                     }
                   />
-                  <Route path="bracket" element={<Bracket tournamentId={tournament.id} />} />
+                  <Route
+                    path="bracket"
+                    element={<Bracket tournamentId={tournament.id} gameId={tournament.gameId} />}
+                  />
                   <Route path="rules" element={<Rules />} />
                   <Route
                     path="match-history/*"
-                    element={<MatchHistory matchList={matchHistoryList} />}
+                    element={
+                      <MatchHistory matchList={matchHistoryList} gameId={tournament.gameId} />
+                    }
                   />
                   <Route path="*" element={<Navigate to="bracket" replace />} />
                 </Routes>
@@ -76,7 +85,7 @@ const TournamentPage = () => {
         ) : (
           <SpectatorWrapper>
             <TournamentName>{tournament.name}</TournamentName>
-            <Bracket tournamentId={tournament.id} />
+            <Bracket tournamentId={tournament.id} gameId={tournament.gameId} />
           </SpectatorWrapper>
         )}
       </Wrapper>

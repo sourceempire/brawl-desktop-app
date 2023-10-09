@@ -5,9 +5,13 @@ import { isCSGOMatch } from 'types/match/Match';
 import CSGOMatchResult from './CSGOMatchResult';
 import { Wrapper } from './MatchResult.styles';
 
-const MatchResult = () => {
+type Props = {
+  gameId: string;
+};
+
+const MatchResult = ({ gameId }: Props) => {
   const matchId = useParams().matchId as string;
-  const { match, team1, team2, isLoading: isLoadingMatch } = useMatchFeed({ matchId });
+  const { match, team1, team2, isLoading: isLoadingMatch } = useMatchFeed({ matchId, gameId });
   const {
     matchStats,
     roundWins,

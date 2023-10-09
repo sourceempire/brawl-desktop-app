@@ -17,7 +17,11 @@ const BracketsModal = ({ isOpen, onRequestClose, tournamentHub }: Props) => {
       width="100%"
       margin="50px"
       scrollable={true}>
-      <Bracket tournamentId={tournamentHub.id} numberOfTeams={tournamentHub.teamsAllowed} />
+      <Bracket
+        tournamentId={tournamentHub.id}
+        numberOfTeams={tournamentHub.teamsAllowed}
+        gameId={tournamentHub.gameId}
+      />
     </Modal>
   );
 };
