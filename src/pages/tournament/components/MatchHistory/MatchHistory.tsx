@@ -6,10 +6,9 @@ import { MatchResultWrapper, MatchRoundLink, Matches, Wrapper } from './MatchHis
 
 type Props = {
   matchList: TournamentMatchInfo[];
-  gameId: string;
 };
 
-const MatchHistory = ({ matchList, gameId }: Props) => {
+const MatchHistory = ({ matchList }: Props) => {
   if (matchList.length < 1) {
     return null;
   }
@@ -25,7 +24,7 @@ const MatchHistory = ({ matchList, gameId }: Props) => {
       </Matches>
       <MatchResultWrapper>
         <Routes>
-          <Route path=":matchId" element={<MatchResult gameId={gameId} />} />
+          <Route path=":matchId" element={<MatchResult />} />
           <Route
             path="*"
             element={<Navigate to={matchList[matchList.length - 1].matchId} replace />}

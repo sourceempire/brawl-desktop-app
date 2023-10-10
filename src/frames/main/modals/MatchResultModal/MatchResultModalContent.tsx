@@ -12,12 +12,7 @@ type Props = {
 };
 
 const MatchResultModalContent = ({ matchId }: Props) => {
-  const {
-    match,
-    team1,
-    team2,
-    isLoading: isLoadingMatch
-  } = useMatchFeed({ matchId, gameId: 'e65080ad-79d6-48dc-9887-55344225d119' }); // Should not be a hardcoded string as gameId
+  const { match, team1, team2, isLoading: isLoadingMatch } = useMatchFeed({ matchId });
   const {
     matchStats,
     roundWins,

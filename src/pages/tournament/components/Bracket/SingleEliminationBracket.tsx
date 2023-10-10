@@ -5,10 +5,9 @@ import { Matches, Round, RoundName } from './SingleEliminationBracket.styles';
 
 type Props = {
   bracket: SingleEliminationBracketType;
-  gameId: string;
 };
 
-const SingleEliminationBracket = ({ bracket, gameId }: Props) => {
+const SingleEliminationBracket = ({ bracket }: Props) => {
   return (
     <Wrapper>
       {bracket.bracketStructure.map((round, roundIndex) => {
@@ -34,7 +33,6 @@ const SingleEliminationBracket = ({ bracket, gameId }: Props) => {
                     roundIndex={roundIndex}
                     isFirstMatch={isFirstMatch}
                     isFinal={match.nextMatchIndex === null}
-                    gameId={gameId}
                   />
                 );
               })}

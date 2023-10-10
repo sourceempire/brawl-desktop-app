@@ -6,10 +6,9 @@ import SingleEliminationBracketSkeleton from './SingleEliminationBracketSkeleton
 type Props = {
   tournamentId: string;
   numberOfTeams?: number;
-  gameId: string;
 };
 
-const Bracket = ({ tournamentId, numberOfTeams, gameId }: Props) => {
+const Bracket = ({ tournamentId, numberOfTeams }: Props) => {
   const { bracket, isLoading } = useBracketFeed({ tournamentId });
 
   if (isLoading) {
@@ -17,7 +16,7 @@ const Bracket = ({ tournamentId, numberOfTeams, gameId }: Props) => {
   }
 
   if (isSingleElimination(bracket)) {
-    return <SingleEliminationBracket bracket={bracket} gameId={gameId} />;
+    return <SingleEliminationBracket bracket={bracket} />;
   }
 
   return null;

@@ -6,11 +6,10 @@ import { StageStatus } from './CurrentMatchStage.types';
 
 type Props = {
   matchId: string;
-  gameId: string;
 };
 
-const CurrentMatchStage = ({ matchId, gameId }: Props) => {
-  const { match } = useMatchFeed({ matchId, gameId });
+const CurrentMatchStage = ({ matchId }: Props) => {
+  const { match } = useMatchFeed({ matchId });
 
   const [preventAnimations, setPreventAnimations] = useState<boolean>(true);
 

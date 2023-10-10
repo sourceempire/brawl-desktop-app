@@ -42,11 +42,7 @@ const TournamentPage = () => {
             <TournamentContent>
               <TournamentNavbar>
                 <NavItems tournamentId={tournamentId} />
-                {matchId ? (
-                  <CurrentMatchStage matchId={matchId} gameId={tournament.gameId} />
-                ) : (
-                  <div />
-                )}
+                {matchId ? <CurrentMatchStage matchId={matchId} /> : <div />}
                 <RightAlignedContainer>
                   {tournament.tournamentHubId && (
                     <Link to={`/main/tournaments/hub/${tournament.tournamentHubId}`}>
@@ -61,21 +57,16 @@ const TournamentPage = () => {
                   <Route
                     index
                     element={
-                      <MatchContextProvider matchId={matchId} gameId={tournament.gameId}>
+                      <MatchContextProvider matchId={matchId}>
                         <Match />
                       </MatchContextProvider>
                     }
                   />
-                  <Route
-                    path="bracket"
-                    element={<Bracket tournamentId={tournament.id} gameId={tournament.gameId} />}
-                  />
+                  <Route path="bracket" element={<Bracket tournamentId={tournament.id} />} />
                   <Route path="rules" element={<Rules />} />
                   <Route
                     path="match-history/*"
-                    element={
-                      <MatchHistory matchList={matchHistoryList} gameId={tournament.gameId} />
-                    }
+                    element={<MatchHistory matchList={matchHistoryList} />}
                   />
                   <Route path="*" element={<Navigate to="bracket" replace />} />
                 </Routes>
@@ -85,7 +76,7 @@ const TournamentPage = () => {
         ) : (
           <SpectatorWrapper>
             <TournamentName>{tournament.name}</TournamentName>
-            <Bracket tournamentId={tournament.id} gameId={tournament.gameId} />
+            <Bracket tournamentId={tournament.id} />
           </SpectatorWrapper>
         )}
       </Wrapper>

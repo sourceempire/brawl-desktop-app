@@ -15,11 +15,7 @@ const TournamentInfo = ({ tournament, currentMatchId }: Props) => {
 
   return (
     <Wrapper>
-      {currentMatchId ? (
-        <TeamContainer currentMatchId={currentMatchId} teamNumber={1} gameId={tournament.gameId} />
-      ) : (
-        <div />
-      )}
+      {currentMatchId ? <TeamContainer currentMatchId={currentMatchId} teamNumber={1} /> : <div />}
 
       <MiddleInfo>
         <TournamentName>
@@ -33,11 +29,7 @@ const TournamentInfo = ({ tournament, currentMatchId }: Props) => {
         <CountDown startTime={tournament.startTime} />
       </MiddleInfo>
 
-      {currentMatchId ? (
-        <TeamContainer currentMatchId={currentMatchId} teamNumber={2} gameId={tournament.gameId} />
-      ) : (
-        <div />
-      )}
+      {currentMatchId ? <TeamContainer currentMatchId={currentMatchId} teamNumber={2} /> : <div />}
     </Wrapper>
   );
 };

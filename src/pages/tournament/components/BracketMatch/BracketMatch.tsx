@@ -20,19 +20,11 @@ type Props = {
   roundIndex: number;
   isFirstMatch: boolean;
   isFinal: boolean;
-  gameId: string;
 };
 
-const BracketMatch = ({
-  matchId,
-  matchIndex,
-  roundIndex,
-  isFirstMatch,
-  isFinal,
-  gameId
-}: Props) => {
+const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }: Props) => {
   const user = useLoggedInUser();
-  const { match, isLoading } = useMatchFeed({ matchId, gameId });
+  const { match, isLoading } = useMatchFeed({ matchId });
   const {
     hasMatchStats,
     matchStats,
