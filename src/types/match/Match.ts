@@ -9,7 +9,8 @@ export type Match = {
   id: string;
   winnerTeamId?: string;
   gameId: Game;
-  teams?: Team[];
+  team1: Team;
+  team2: Team;
 };
 
 export enum CSGOTeamSide {
@@ -112,6 +113,10 @@ export type RoundWin = {
   roundIndex: 0;
   side: CSGOTeamSide;
   winner: string;
+};
+
+export const isMockMatch = (match: Match): match is MockGameMatch => {
+  return match.gameId === Game.MOCK;
 };
 
 export const isCSGOMatch = (match: Match): match is CSGOMatch => {

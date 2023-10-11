@@ -57,7 +57,7 @@ const TournamentPage = () => {
                   <Route
                     index
                     element={
-                      <MatchContextProvider matchId={matchId}>
+                      <MatchContextProvider matchId={matchId} gameId={tournament.gameId}>
                         <Match />
                       </MatchContextProvider>
                     }
