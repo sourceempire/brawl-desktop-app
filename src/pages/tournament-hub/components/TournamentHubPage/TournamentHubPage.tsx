@@ -14,13 +14,13 @@ import {
   TournamentsWrapper,
   Wrapper
 } from './TournamentHubPage.styles';
-import TournamentHubModal from '../TournamentHubModal/TournamentHubModal';
+import { TournamentHubModal } from '../TournamentHubModal';
 import TournamentHubButtons from '../TournamentHubButtons/TournamentHubButtons';
 import TournamentHubInfo from '../TournamentHubInfo/TournamentHubInfo';
 import TournamentHubHeader from '../TournamentHubHeader/TournamentHubHeader';
 import useTournamentIdFeed from 'api/feeds/hooks/useTournamentIdFeed';
 
-const TournamentHubPage = () => {
+export function TournamentHubPage() {
   const { hubId } = useParams() as { hubId: string };
   const user = useLoggedInUser();
   const tournamentTeamFeed = useTournamentTeamFeed({ tournamentHubId: hubId, userId: user.id });
@@ -103,6 +103,4 @@ const TournamentHubPage = () => {
       </Wrapper>
     </PageContainer>
   );
-};
-
-export default TournamentHubPage;
+}
