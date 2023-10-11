@@ -1,0 +1,1 @@
+export { useTournamentHubRulesRequest } from './useTournamentHubRulesRequest';

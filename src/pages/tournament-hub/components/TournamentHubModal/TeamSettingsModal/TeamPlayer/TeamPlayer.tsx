@@ -7,7 +7,7 @@ type Props = {
   userId: string;
 };
 
-const TeamPlayer = ({ userId }: Props) => {
+export function TeamPlayer({ userId }: Props) {
   const { user } = useUserFeed({ userId });
   const { party } = usePartyFeed();
 
@@ -21,6 +21,4 @@ const TeamPlayer = ({ userId }: Props) => {
       <PlayerProfileImage src={user.imageUrl ? user.imageUrl : tempProfileImage} />
     </Wrapper>
   );
-};
-
-export default TeamPlayer;
+}

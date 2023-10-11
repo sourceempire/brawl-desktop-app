@@ -1,20 +1,20 @@
 import { usePartyFeed, useTournamentHubFeed } from 'api/feeds';
 import { useParams } from 'react-router-dom';
 import { useLoggedInUser } from 'common/hooks/useLoggedInUser';
-import BracketModal from '../TournamentHubModals/BracketModal/BracketModal';
-import MapPoolModal from '../TournamentHubModals/MapPoolModal/MapPoolModal';
-import HowItWorksModal from '../TournamentHubModals/HowItWorksModal/HowItWorksModal';
-import RulesModal from '../TournamentHubModals/RulesModal/RulesModal';
-import TeamSettingsModal from '../TournamentHubModals/TeamSettingsModal/TeamSettingsModal';
+import { BracketModal } from './BracketModal';
+import { MapPoolModal } from './MapPoolModal';
+import { HowItWorksModal } from './HowItWorksModal/';
+import { RulesModal } from './RulesModal';
+import { TeamSettingsModal } from './TeamSettingsModal';
 import { TournamentHubModalType } from 'common/ui/Modal/Modal.types';
-import PrizesModal from '../TournamentHubModals/PrizesModal/PrizesModal';
+import { PrizesModal } from './PrizesModal';
 
 type Props = {
   activeModal: TournamentHubModalType;
   closeModal: () => void;
 };
 
-const TournamentHubModal = ({ activeModal, closeModal }: Props) => {
+export function TournamentHubModal({ activeModal, closeModal }: Props) {
   const { hubId } = useParams() as { hubId: string };
   const user = useLoggedInUser();
   const { tournamentHub, isLoading } = useTournamentHubFeed({ tournamentHubId: hubId });
@@ -45,6 +45,4 @@ const TournamentHubModal = ({ activeModal, closeModal }: Props) => {
       />
     </>
   );
-};
-
-export default TournamentHubModal;
+}
