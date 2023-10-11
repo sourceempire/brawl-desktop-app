@@ -40,16 +40,6 @@ export const Wrapper = styled.div`
   height: 100%;
 `;
 
-export const ErrorMessage = styled.div`
-  display: flex;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  ${({ theme }) => css`
-    color: ${theme.colors.statusError};
-  `}
-`;
-
 export const RulesMarkdown = styled(Markdown)`
   h1 {
     font-size: 20px;
