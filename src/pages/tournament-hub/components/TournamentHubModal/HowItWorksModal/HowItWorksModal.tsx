@@ -14,7 +14,7 @@ type Props = {
   onRequestClose: () => void;
 };
 
-const HowItWorksModal = ({ isOpen, onRequestClose }: Props) => {
+export function HowItWorksModal({ isOpen, onRequestClose }: Props) {
   const sections = {
     upperSection: {
       title: 'Before a tournament starts',
@@ -82,6 +82,4 @@ const HowItWorksModal = ({ isOpen, onRequestClose }: Props) => {
       </Wrapper>
     </Modal>
   );
-};
-
-export default HowItWorksModal;
+}

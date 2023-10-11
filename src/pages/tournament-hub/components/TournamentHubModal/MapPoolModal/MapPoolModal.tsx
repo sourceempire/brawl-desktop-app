@@ -5,12 +5,12 @@ type Props = {
   onRequestClose: () => void;
 };
 
-const PrizesModal = ({ isOpen, onRequestClose }: Props) => {
+export function MapPoolModal({ isOpen, onRequestClose }: Props) {
   //TODO -> Replace type with gameId from matchSettings
 
   return (
     <Modal
-      title="Prizes"
+      title="Map Pool"
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       width="100%"
@@ -18,6 +18,4 @@ const PrizesModal = ({ isOpen, onRequestClose }: Props) => {
       {/*INSERT CONTENT HERE*/}
     </Modal>
   );
-};
-
-export default PrizesModal;
+}

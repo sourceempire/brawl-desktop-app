@@ -1,0 +1,1 @@
+export { TournamentHubModal } from './TournamentHubModal';
