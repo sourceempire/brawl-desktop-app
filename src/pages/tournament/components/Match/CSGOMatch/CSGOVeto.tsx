@@ -21,23 +21,12 @@ const CSGOVeto = () => {
   const { match } = useMatchContext<CSGOMatch>();
   const [mapToBan, setMapToBan] = useState<string>();
 
-  let loggedInUsersTeam;
-  if (match.team1?.players.includes(user.id)) {
-    loggedInUsersTeam = match.team1;
-  } else if (match.team2?.players.includes(user.id)) {
-    loggedInUsersTeam = match.team2;
-  }
+  const loggedInUsersTeam = match.teams?.find((team) => team.players.includes(user.id));
 
   if (!match.veto) return null;
   if (!loggedInUsersTeam) return null;
 
-  let banningTeam;
-  if (match.team1?.id === match.veto?.teamToBanMap) {
-    banningTeam = match.team1;
-  } else if (match.team2?.id === match.veto?.teamToBanMap) {
-    banningTeam = match.team2;
-  }
-
+  const banningTeam = match.teams?.find((team) => team.id === match.veto?.teamToBanMap);
   const isBanningTeam = match.veto?.teamToBanMap === loggedInUsersTeam.id;
   const loggedInUserIsLeader = loggedInUsersTeam.teamLeaderId === user.id;
   const loggedInUserIsBanningPlayer = isBanningTeam && loggedInUserIsLeader;

@@ -31,16 +31,14 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
     isLoading: isLoadingMatchStats
   } = useMatchStatsFeed({ matchId });
 
-  const team1Score = hasMatchStats ? getTeamScore({ matchStats, teamId: match.team1.id }) : null;
-  const team2Score = hasMatchStats ? getTeamScore({ matchStats, teamId: match.team2.id }) : null;
+  const team1Score = hasMatchStats
+    ? getTeamScore({ matchStats, teamId: match.teams?.[0].id })
+    : null;
+  const team2Score = hasMatchStats
+    ? getTeamScore({ matchStats, teamId: match.teams?.[1].id })
+    : null;
 
-  let teamIdOfLoggedInUser;
-
-  if (match.team1?.players.includes(user.id)) {
-    teamIdOfLoggedInUser = match.team1.id;
-  } else if (match.team2?.players.includes(user.id)) {
-    teamIdOfLoggedInUser = match.team2.id;
-  }
+  const teamIdOfLoggedInUser = match.teams?.find((team) => team.players.includes(user.id))?.id;
 
   const loggedInUserMatchOutcome =
     hasMatchStats && teamIdOfLoggedInUser
@@ -57,20 +55,24 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
       isFirstMatch={isFirstMatch}
       isMatchOver={hasMatchStats}>
       <Team1
-        matchOutcome={match.team1?.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null}>
+        matchOutcome={
+          match.teams?.[0].id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null
+        }>
         <TeamLogo>
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
-        <TeamName>{match.team1?.teamName}</TeamName>
-        <TeamScore winner={matchStats.winner === match.team1?.id}>{team1Score}</TeamScore>
+        <TeamName>{match.teams?.[0].teamName}</TeamName>
+        <TeamScore winner={matchStats.winner === match.teams?.[0].id}>{team1Score}</TeamScore>
       </Team1>
       <Team2
-        matchOutcome={match.team2?.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null}>
+        matchOutcome={
+          match.teams?.[1].id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null
+        }>
         <TeamLogo>
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
-        <TeamName>{match.team2?.teamName}</TeamName>
-        <TeamScore winner={matchStats.winner === match.team2?.id}>{team2Score}</TeamScore>
+        <TeamName>{match.teams?.[1].teamName}</TeamName>
+        <TeamScore winner={matchStats.winner === match.teams?.[1].id}>{team2Score}</TeamScore>
       </Team2>
     </Wrapper>
   );
