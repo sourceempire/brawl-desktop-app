@@ -1,0 +1,1 @@
+export { TeamSettingsModal } from './TeamSettingsModal';

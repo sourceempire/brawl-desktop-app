@@ -29,6 +29,7 @@ export const Content = styled.div`
   width: 100%;
   max-height: 700px;
   overflow: scroll;
+  margin: auto;
 `;
 
 export const Wrapper = styled.div`
@@ -36,6 +37,7 @@ export const Wrapper = styled.div`
   align-items: flex-start;
   flex: 1 1 auto;
   column-gap: 15px;
+  height: 100%;
 `;
 
 export const RulesMarkdown = styled(Markdown)`

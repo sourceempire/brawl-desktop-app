@@ -7,7 +7,7 @@ import { DragableArea } from 'common/ui';
 import { FriendBar } from 'frames/main/friends';
 import HomePage from 'pages/home';
 import TournamentPage from 'pages/tournament';
-import TournamentHubPage from 'pages/tournament-hub';
+import { TournamentHubPage } from 'pages/tournament-hub';
 import TournamentListView from '../../pages/tournament-list';
 import { RoutesContainer, Wrapper } from './MainFrame.styles';
 import TopBar from './top-bar/TopBar';

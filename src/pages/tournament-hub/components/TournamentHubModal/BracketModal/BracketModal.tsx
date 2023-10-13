@@ -8,7 +8,7 @@ type Props = {
   tournamentHub: TournamentHub;
 };
 
-const BracketsModal = ({ isOpen, onRequestClose, tournamentHub }: Props) => {
+export function BracketModal({ isOpen, onRequestClose, tournamentHub }: Props) {
   return (
     <Modal
       title="Bracket structure"
@@ -20,6 +20,4 @@ const BracketsModal = ({ isOpen, onRequestClose, tournamentHub }: Props) => {
       <Bracket tournamentId={tournamentHub.id} numberOfTeams={tournamentHub.teamsAllowed} />
     </Modal>
   );
-};
-
-export default BracketsModal;
+}

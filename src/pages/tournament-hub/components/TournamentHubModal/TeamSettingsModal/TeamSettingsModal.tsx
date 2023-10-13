@@ -4,7 +4,7 @@ import { isFeedWithTeam } from 'api/feeds/hooks/useTournamentTeamFeed';
 import { useLoggedInUser } from 'common/hooks';
 import { Modal } from 'common/ui';
 import { InputSize } from 'common/ui/Input/Input.types';
-import TeamPlayer from './TeamPlayer/TeamPlayer';
+import { TeamPlayer } from './TeamPlayer';
 import {
   ButtonWithMessage,
   ButtonsWrapper,
@@ -27,11 +27,11 @@ type Props = {
 
 const TEAM_NAME_MAX_LENGTH = 20;
 
-const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) => {
+export function TeamSettingsModal({ playerIds, isOpen, hubId, onRequestClose }: Props) {
   const [teamName, setTeamName] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const user = useLoggedInUser();
-  const tournamentTeamFeed = useTournamentTeamFeed(hubId, user.id);
+  const tournamentTeamFeed = useTournamentTeamFeed({ tournamentHubId: hubId, userId: user.id });
   const userInExistingTeam = isFeedWithTeam(tournamentTeamFeed);
 
   const closeTeamSettings = () => {
@@ -102,6 +102,4 @@ const TeamSettingsModal = ({ playerIds, isOpen, hubId, onRequestClose }: Props) 
       </Wrapper>
     </Modal>
   );
-};
-
-export default TeamSettingsModal;
+}
