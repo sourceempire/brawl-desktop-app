@@ -4,11 +4,10 @@ import { Match } from 'types/match/Match';
 
 type Params = {
   matchId: string;
-  gameId: string;
 };
 
-const useMatchFeed = ({ matchId, gameId }: Params) => {
-  const { data, loading } = useFeed<{ match: Match }>(`match.${matchId}.${gameId}`);
+const useMatchFeed = ({ matchId }: Params) => {
+  const { data, loading } = useFeed<{ match: Match }>(`match.${matchId}`);
 
   const loggedInUser = useLoggedInUser();
 
