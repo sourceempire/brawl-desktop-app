@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { useMatchFeed } from 'api/feeds';
 import { useMatchStatsFeed } from 'api/feeds/hooks/useMatchStatsFeed';
-
 import CSGOMatchResult from 'common/components/MatchResult/CSGOMatchResult';
 import { Button } from 'common/ui';
 import { MatchResultModalContext } from 'context/MatchResultModalContext';

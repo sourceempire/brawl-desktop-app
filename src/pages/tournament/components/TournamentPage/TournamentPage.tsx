@@ -41,7 +41,7 @@ const TournamentPage = () => {
 
             <TournamentContent>
               <TournamentNavbar>
-                <NavItems tournamentId={tournamentId} matchId={matchId} />
+                <NavItems tournamentId={tournamentId} />
                 {matchId ? <CurrentMatchStage matchId={matchId} /> : <div />}
                 <RightAlignedContainer>
                   {tournament.tournamentHubId && (
@@ -57,7 +57,7 @@ const TournamentPage = () => {
                   <Route
                     index
                     element={
-                      <MatchContextProvider matchId={matchId} gameId={tournament.gameId}>
+                      <MatchContextProvider matchId={matchId}>
                         <Match />
                       </MatchContextProvider>
                     }
