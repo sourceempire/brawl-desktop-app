@@ -41,7 +41,7 @@ const TournamentPage = () => {
 
             <TournamentContent>
               <TournamentNavbar>
-                <NavItems tournamentId={tournamentId} />
+                <NavItems tournamentId={tournamentId} matchId={matchId} />
                 {matchId ? <CurrentMatchStage matchId={matchId} /> : <div />}
                 <RightAlignedContainer>
                   {tournament.tournamentHubId && (
