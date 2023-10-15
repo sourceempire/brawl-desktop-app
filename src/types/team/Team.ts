@@ -5,9 +5,15 @@ import { UserId } from 'types/user/User';
  */
 export type TeamId = string;
 
+export type TeamPlayer = {
+  kills: number;
+  userId: UserId;
+};
+
 export type Team = {
   id: TeamId;
-  teamName: string;
-  players: UserId[];
+  name: string;
+  players: TeamPlayer[];
   teamLeaderId: UserId;
+  score: number;
 };
