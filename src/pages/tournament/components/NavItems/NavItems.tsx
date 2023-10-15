@@ -1,19 +1,19 @@
 import { useEffect, useRef } from 'react';
 import useActiveLineStyle from 'pages/tournament/hooks/useActiveLineStyle';
 import { ActiveLine, NavLink, Wrapper } from './NavItems.styles';
-import { useTournamentMatchHistoryFeed } from 'api/feeds';
-import { useMatchContext } from 'context/MatchContext';
+import { useMatchFeed, useTournamentMatchHistoryFeed } from 'api/feeds';
 import { useNavigate } from 'react-router-dom';
 
 type Props = {
   tournamentId: string;
+  matchId: string;
 };
 
-export const NavItems = ({ tournamentId }: Props) => {
+export const NavItems = ({ tournamentId, matchId }: Props) => {
   const linkListRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const [{ style, shouldAnimate }] = useActiveLineStyle({ linkListRef });
   const { matchHistoryList } = useTournamentMatchHistoryFeed({ tournamentId });
-  const { match } = useMatchContext();
+  const { match } = useMatchFeed({ matchId });
 
   const navigate = useNavigate();
 
@@ -22,6 +22,8 @@ export const NavItems = ({ tournamentId }: Props) => {
   useEffect(() => {
     if (!isMatch) {
       navigate(`/main/tournaments/${tournamentId}/bracket`);
+    } else {
+      navigate(`/main/tournaments/${tournamentId}`);
     }
   }, [isMatch]);
 
