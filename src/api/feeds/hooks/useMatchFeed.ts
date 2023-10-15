@@ -14,7 +14,7 @@ const useMatchFeed = ({ matchId }: Params) => {
   let team1 = data.match?.team1;
   let team2 = data.match?.team2;
 
-  if (team2 && team2?.players.includes(loggedInUser.id)) {
+  if (team2 && team2.players.some((player) => player.userId === loggedInUser.id)) {
     team1 = data.match?.team2;
     team2 = data.match?.team1;
   }
