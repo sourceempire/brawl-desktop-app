@@ -24,7 +24,7 @@ const TeamTable = ({ team, teamStats }: Props) => {
     <Wrapper>
       <TableHeader>
         <TeamLogo src={placeholderTeamLogo} />
-        {team.teamName}
+        {team.name}
       </TableHeader>
       <TableHeader>K</TableHeader>
       <TableHeader>D</TableHeader>
@@ -33,16 +33,16 @@ const TeamTable = ({ team, teamStats }: Props) => {
       <TableHeader>MVP</TableHeader>
       <TableHeader>HS</TableHeader>
 
-      {team.players.map((userId) => {
-        const { kills, deaths, assists, mvp, headshotKills } = teamStats.players[userId];
+      {team.players.map((player) => {
+        const { kills, deaths, assists, mvp, headshotKills } = teamStats.players[player.userId];
 
         const headshotPercentage = isNaN(headshotKills / kills)
           ? 0
           : `${((headshotKills / kills) * 100).toFixed(1)}`;
 
         return (
-          <React.Fragment key={userId}>
-            <PlayerCell userId={userId} />
+          <React.Fragment key={player.userId}>
+            <PlayerCell userId={player.userId} />
             <TableData>{kills}</TableData>
             <TableData>{deaths}</TableData>
             <TableData>{assists}</TableData>

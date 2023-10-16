@@ -36,9 +36,9 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
 
   let teamIdOfLoggedInUser;
 
-  if (match.team1?.players.includes(user.id)) {
+  if (match.team1?.players.some((player) => player.userId === user.id)) {
     teamIdOfLoggedInUser = match.team1.id;
-  } else if (match.team2?.players.includes(user.id)) {
+  } else if (match.team2?.players.some((player) => player.userId === user.id)) {
     teamIdOfLoggedInUser = match.team2.id;
   }
 
@@ -61,7 +61,7 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
         <TeamLogo>
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
-        <TeamName>{match.team1?.teamName}</TeamName>
+        <TeamName>{match.team1?.name}</TeamName>
         <TeamScore winner={matchStats.winner === match.team1?.id}>{team1Score}</TeamScore>
       </Team1>
       <Team2
@@ -69,7 +69,7 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
         <TeamLogo>
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
-        <TeamName>{match.team2?.teamName}</TeamName>
+        <TeamName>{match.team2?.name}</TeamName>
         <TeamScore winner={matchStats.winner === match.team2?.id}>{team2Score}</TeamScore>
       </Team2>
     </Wrapper>
