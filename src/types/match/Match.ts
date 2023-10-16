@@ -7,7 +7,7 @@ type Score = number;
 
 export type Match = {
   id: string;
-  winnerTeamId?: string;
+  winnerTeamId?: TeamId;
   gameId: Game;
   team1: Team;
   team2: Team;
