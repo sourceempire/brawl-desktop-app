@@ -1,7 +1,7 @@
 import React from 'react';
 import { useUserFeed } from 'api/feeds';
 import { useLoggedInUser } from 'common/hooks';
-import { EllipsisText, Icons } from 'common/ui';
+import { EllipsisText } from 'common/ui';
 import { TeamStats } from 'types/match/Match';
 import { Team } from 'types/team/Team';
 import {
@@ -13,6 +13,7 @@ import {
   Wrapper
 } from './TeamTable.styles';
 import placeholderTeamLogo from 'assets/images/placeholder-team-logo.png';
+import { Icons } from 'brawl-ui';
 
 type Props = {
   team: Team;
@@ -52,7 +53,7 @@ const TeamTable = ({ team, teamStats }: Props) => {
                 mvp
               ) : (
                 <>
-                  <Icons.Star fill="yellow" height={14} />
+                  <Icons.Star color="yellow" height={14} />
                   <MVPCount>{mvp}</MVPCount>
                 </>
               )}

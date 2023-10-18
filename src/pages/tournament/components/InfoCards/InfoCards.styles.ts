@@ -1,10 +1,8 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Icon } from 'common/ui/Icon';
+import { theme } from 'assets/styles/Theme';
 
-export const InfoCardWrapper = styled.div<{
-  isRegistrationClosed: boolean;
-}>`
+export const InfoCardWrapper = styled.div<{ isRegistrationClosed: boolean }>`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   ${({ theme }) => css`
@@ -32,6 +30,9 @@ export const InfoCard = styled.div`
 export const InfoHeader = styled.div`
   display: flex;
   align-items: center;
+  svg {
+    margin-right: ${theme.spacing.base}px;
+  }
   ${({ theme }) => css`
     font: ${theme.textStyles.body};
     color: ${theme.colors.textSecondaryLight};
@@ -43,14 +44,5 @@ export const HeaderText = styled.span``;
 export const InfoText = styled.h2`
   ${({ theme }) => css`
     font: ${theme.textStyles.title};
-  `}
-`;
-
-export const StyledIcon = styled(Icon)`
-  height: 14px;
-  width: 14px;
-  ${({ theme }) => css`
-    fill: ${theme.colors.textSecondaryLight};
-    margin-right: ${theme.spacing.base}px;
   `}
 `;

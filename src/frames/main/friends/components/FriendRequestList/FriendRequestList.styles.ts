@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Icons } from 'common/ui';
+import { Icons } from 'brawl-ui';
 
-export const ArrowDown = styled(Icons.SelectArrow)`
+export const ArrowDown = styled(Icons.ChevronDown)`
   width: 12px;
   height: 12px;
   ${({ theme }) => css`

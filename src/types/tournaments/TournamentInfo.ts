@@ -55,6 +55,6 @@ export type TournamentHubInfoRow = {
   name: string;
   header: string;
   subtext: string;
-  icon: IconEnum | SVGComponent | string;
+  Icon: IconEnum | SVGComponent | string;
   ref?: React.MutableRefObject<HTMLDivElement> | null;
 };

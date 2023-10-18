@@ -22,7 +22,3 @@ export * from './UserStatus';
 export * from './EllipsisText';
 export {} from './Icon';
 export * as Text from './Text';
-
-import { IconEnum, Icons, type SVGComponent } from './Icon';
-
-export { Icons, IconEnum, SVGComponent };

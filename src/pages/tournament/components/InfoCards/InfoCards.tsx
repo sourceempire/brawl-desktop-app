@@ -1,19 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { IconEnum } from 'common/ui';
 import Game, { GameName } from 'types/Game';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
 import { getTournamentModeShort, getTournamentSeriesTypeLong } from 'utils/tournamentUtils';
-import {
-  HeaderText,
-  InfoCard,
-  InfoCardWrapper,
-  InfoHeader,
-  InfoText,
-  StyledIcon
-} from './InfoCards.styles';
+import { HeaderText, InfoCard, InfoCardWrapper, InfoHeader, InfoText } from './InfoCards.styles';
 import { useHint } from 'common/hooks';
 import Money from 'types/Money';
+import { Icons } from 'brawl-ui';
 
 type Props = {
   tournamentHub: TournamentHub;
@@ -62,21 +55,21 @@ const InfoCards = ({ tournamentHub }: Props) => {
     <InfoCardWrapper isRegistrationClosed={tournamentHub.registrationClosed}>
       <InfoCard>
         <InfoHeader>
-          <StyledIcon icon={IconEnum.Controller} />
+          <Icons.GamePad />
           Game
         </InfoHeader>
         <InfoText>{gameInfo.name}</InfoText>
       </InfoCard>
       <InfoCard>
         <InfoHeader>
-          <StyledIcon icon={IconEnum.Sword} />
+          <Icons.Sword />
           Game Mode
         </InfoHeader>
         <InfoText>{gameInfo.mode}</InfoText>
       </InfoCard>
       <InfoCard>
         <InfoHeader>
-          <StyledIcon icon={IconEnum.CrossedSwords} />
+          <Icons.Swords />
           Match Type
         </InfoHeader>
         <InfoText>{gameInfo.type}</InfoText>
@@ -85,14 +78,14 @@ const InfoCards = ({ tournamentHub }: Props) => {
       {/* //TODO -> Add Side Decider */}
       <InfoCard>
         <InfoHeader>
-          <StyledIcon icon={IconEnum.Friends} />
+          <Icons.Users />
           Size of Tournament
         </InfoHeader>
         <InfoText>{tournamentHub.teamsAllowed}</InfoText>
       </InfoCard>
       <InfoCard>
         <InfoHeader>
-          <StyledIcon icon={IconEnum.LockClosed} />
+          <Icons.Unlock />
           Registration Closes
         </InfoHeader>
         <InfoText>
@@ -102,21 +95,21 @@ const InfoCards = ({ tournamentHub }: Props) => {
       </InfoCard>
       <InfoCard>
         <InfoHeader>
-          <StyledIcon icon={IconEnum.Calendar} />
+          <Icons.Calendar />
           Tournament Start
         </InfoHeader>
         <InfoText>{tournamentHub.startTime && formatDateAndTime(tournamentHub.startTime)}</InfoText>
       </InfoCard>
       <InfoCard>
         <InfoHeader>
-          <StyledIcon icon={IconEnum.Trophy} />
+          <Icons.Trophy />
           {tournamentHub.registrationClosed ? 'Prize Pool' : 'Predicted Prize Pool'}
         </InfoHeader>
         <InfoText>€{tournamentHub.currentPrizePool}</InfoText>
       </InfoCard>
       <InfoCard>
         <InfoHeader>
-          <StyledIcon icon={IconEnum.Ticket} />
+          <Icons.Ticket />
           <HeaderText
             ref={entryFeeRef}
             onMouseEnter={() => setHintVisible(true)}

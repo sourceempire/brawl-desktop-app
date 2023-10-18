@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Animation, Icons } from 'common/ui';
+import { Animation } from 'common/ui';
 import { Hero } from 'pages/tournament-list/components/FeaturedTournament/FeaturedTournament.styles';
+import { Icons } from 'brawl-ui';
 
 export const Slider = styled.div`
   ${({ theme }) => css`
@@ -26,11 +27,13 @@ export const SliderContainer = styled.div<{ width: number }>`
   `}
 `;
 
-export const SliderButtonContainer = styled.div<{
+type SliderButtonContainerProps = {
   visible?: boolean;
   leftContainer?: boolean;
   rightContainer?: boolean;
-}>`
+};
+
+export const SliderButtonContainer = styled.div<SliderButtonContainerProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,14 +51,14 @@ export const SliderButtonContainer = styled.div<{
   `}
 `;
 
-export const SliderButtonPrev = styled(Icons.ArrowLeft)<{ visible?: boolean }>`
+export const SliderButtonPrev = styled(Icons.ChevronLeft)<{ visible?: boolean }>`
   ${({ theme }) => css`
     width: 20px;
     fill: ${theme.colors.white};
   `}
 `;
 
-export const SliderButtonNext = styled(Icons.ArrowRight)<{ visible?: boolean }>`
+export const SliderButtonNext = styled(Icons.ChevronRight)<{ visible?: boolean }>`
   ${({ theme }) => css`
     width: 20px;
     fill: ${theme.colors.white};

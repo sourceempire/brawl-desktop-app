@@ -1,15 +1,15 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Animation, Icons } from 'common/ui';
+import { Animation } from 'common/ui';
 import { PopupBackgroundColors, PopupColors, PopupLevel } from './Popup.types';
 import { theme } from 'assets/styles/Theme';
+import { Icons } from 'brawl-ui';
 
 export const CloseIcon = styled(Icons.Cross)`
   position: absolute;
   height: 26px;
   width: 26px;
   box-sizing: border-box;
-  fill: ${theme.colors.white};
   border-radius: 50%;
   top: 50%;
   transform: translateY(-50%);
@@ -17,7 +17,7 @@ export const CloseIcon = styled(Icons.Cross)`
 
   padding: ${theme.spacing.base}px;
   right: ${theme.spacing.base}px;
-  fill: ${theme.colors.textSecondaryDark};
+  color: ${theme.colors.textSecondaryDark};
 `;
 
 export const Wrapperr = styled.div<{ level: PopupLevel; isClosing: boolean; top: number }>``;

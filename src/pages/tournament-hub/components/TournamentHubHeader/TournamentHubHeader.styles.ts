@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Icon } from 'common/ui/Icon';
+import { theme } from 'assets/styles/Theme';
 
 export const HubHeaderWrapper = styled.div`
   display: flex;
@@ -59,14 +59,12 @@ export const InfoContainer = styled.div`
     padding: ${theme.spacing.baseX3}px ${theme.spacing.baseX5}px;
     background-color: ${theme.colors.surface.base};
   `}
-`;
 
-export const InfoIcon = styled(Icon)`
-  ${({ theme }) => css`
-    width: 20px;
-    fill: ${theme.colors.accent.base};
-    margin-right: ${theme.spacing.base}px;
-  `}
+  svg {
+    height: 18px;
+    width: 18px;
+    color: ${theme.colors.accent.base};
+  }
 `;
 
 export const InfoText = styled.div``;
