@@ -5,9 +5,9 @@ import OngoingMockGameMatch from './OngoingMockGameMatch';
 import Team from './Team';
 
 const MockMatch = () => {
-  const { match, team1, team2 } = useMatchContext<MockGameMatchType>();
+  const { gameMatchInfo, team1, team2 } = useMatchContext<MockGameMatchType>();
 
-  console.log('MATCH', match);
+  console.log('MATCH', gameMatchInfo);
   console.log('TEAM 1', team1);
   console.log('TEAM 2', team2);
 

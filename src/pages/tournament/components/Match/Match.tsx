@@ -4,12 +4,12 @@ import CSGOMatch from './CSGOMatch';
 import MockMatch from './MockMatch';
 
 const Match = () => {
-  const { match } = useMatchContext();
+  const { gameMatchInfo } = useMatchContext();
 
   return (
     <>
-      {isCSGOMatch(match) && <CSGOMatch />}
-      {isMockMatch(match) && <MockMatch />}
+      {isCSGOMatch(gameMatchInfo) && <CSGOMatch />}
+      {isMockMatch(gameMatchInfo) && <MockMatch />}
     </>
   );
 };

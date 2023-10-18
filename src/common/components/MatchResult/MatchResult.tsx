@@ -7,7 +7,7 @@ import { Wrapper } from './MatchResult.styles';
 
 const MatchResult = () => {
   const matchId = useParams().matchId as string;
-  const { match, team1, team2, isLoading: isLoadingMatch } = useMatchFeed({ matchId });
+  const { gameMatchInfo, team1, team2, isLoading: isLoadingMatch } = useMatchFeed({ matchId });
   const {
     matchStats,
     roundWins,
@@ -21,12 +21,12 @@ const MatchResult = () => {
     return <Wrapper>No match result for this match yet</Wrapper>;
   }
 
-  if (isCSGOMatch(match)) {
+  if (isCSGOMatch(gameMatchInfo)) {
     return (
       <CSGOMatchResult
         matchStats={matchStats}
         roundWins={roundWins}
-        match={match}
+        match={gameMatchInfo}
         team1={team1}
         team2={team2}
       />

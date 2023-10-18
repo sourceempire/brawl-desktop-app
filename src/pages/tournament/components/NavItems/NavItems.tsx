@@ -13,11 +13,11 @@ export const NavItems = ({ tournamentId, matchId }: Props) => {
   const linkListRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const [{ style, shouldAnimate }] = useActiveLineStyle({ linkListRef });
   const { matchHistoryList } = useTournamentMatchHistoryFeed({ tournamentId });
-  const { match } = useMatchFeed({ matchId });
+  const { gameMatchInfo } = useMatchFeed({ matchId });
 
   const navigate = useNavigate();
 
-  const isMatch = Object.keys(match).length > 0;
+  const isMatch = Object.keys(gameMatchInfo).length > 0;
 
   useEffect(() => {
     if (!isMatch) {

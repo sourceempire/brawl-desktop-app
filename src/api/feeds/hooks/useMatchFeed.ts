@@ -7,20 +7,20 @@ type Params = {
 };
 
 const useMatchFeed = ({ matchId }: Params) => {
-  const { data, loading } = useFeed<{ match: Match }>(`match.${matchId}`);
+  const { data, loading } = useFeed<{ gameMatchInfo: Match }>(`match.${matchId}`);
 
   const loggedInUser = useLoggedInUser();
 
-  let team1 = data.match?.team1;
-  let team2 = data.match?.team2;
+  let team1 = data.gameMatchInfo?.team1;
+  let team2 = data.gameMatchInfo?.team2;
 
   if (team2 && team2.players.some((player) => player.userId === loggedInUser.id)) {
-    team1 = data.match?.team2;
-    team2 = data.match?.team1;
+    team1 = data.gameMatchInfo?.team2;
+    team2 = data.gameMatchInfo?.team1;
   }
 
   return {
-    match: data.match ?? {},
+    gameMatchInfo: data.gameMatchInfo ?? {},
     team1,
     team2,
     isLoading: loading

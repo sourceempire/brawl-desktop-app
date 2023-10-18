@@ -11,10 +11,10 @@ type Props = {
 };
 
 const Team = ({ team, reversed }: Props) => {
-  const { match } = useMatchContext<CSGOMatch>();
+  const { gameMatchInfo } = useMatchContext<CSGOMatch>();
 
-  const isReadyCheck = match.matchStage === CSGOMatchStage.READY;
-  const isVeto = match.matchStage === CSGOMatchStage.VETO;
+  const isReadyCheck = gameMatchInfo.matchStage === CSGOMatchStage.READY;
+  const isVeto = gameMatchInfo.matchStage === CSGOMatchStage.VETO;
 
   if (!team) return null;
 
@@ -23,7 +23,7 @@ const Team = ({ team, reversed }: Props) => {
       <Wrapper>
         {team?.players.map((player) => {
           const isLeader = team.teamLeaderId === player.userId;
-          const isPlayerReady = match?.veto?.playersReady?.[player.userId] ?? true;
+          const isPlayerReady = gameMatchInfo?.veto?.playersReady?.[player.userId] ?? true;
           return (
             <PlayerContainer key={player.userId} transparent={!isPlayerReady} reversed={reversed}>
               <PlayerInfo
@@ -47,7 +47,7 @@ const Team = ({ team, reversed }: Props) => {
       <Wrapper>
         {team?.players.map((player) => {
           const isLeader = team.teamLeaderId === player.userId;
-          const isBanningPlayer = isLeader && match.veto?.teamToBanMap === team.id;
+          const isBanningPlayer = isLeader && gameMatchInfo.veto?.teamToBanMap === team.id;
 
           return (
             <PlayerContainer key={player.userId} reversed={reversed} transparent={!isBanningPlayer}>

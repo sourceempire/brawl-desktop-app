@@ -24,22 +24,26 @@ type Props = {
 
 const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }: Props) => {
   const user = useLoggedInUser();
-  const { match, isLoading } = useMatchFeed({ matchId });
+  const { gameMatchInfo, isLoading } = useMatchFeed({ matchId });
   const {
     hasMatchStats,
     matchStats,
     isLoading: isLoadingMatchStats
   } = useMatchStatsFeed({ matchId });
 
-  const team1Score = hasMatchStats ? getTeamScore({ matchStats, teamId: match.team1.id }) : null;
-  const team2Score = hasMatchStats ? getTeamScore({ matchStats, teamId: match.team2.id }) : null;
+  const team1Score = hasMatchStats
+    ? getTeamScore({ matchStats, teamId: gameMatchInfo.team1.id })
+    : null;
+  const team2Score = hasMatchStats
+    ? getTeamScore({ matchStats, teamId: gameMatchInfo.team2.id })
+    : null;
 
   let teamIdOfLoggedInUser;
 
-  if (match.team1?.players.some((player) => player.userId === user.id)) {
-    teamIdOfLoggedInUser = match.team1.id;
-  } else if (match.team2?.players.some((player) => player.userId === user.id)) {
-    teamIdOfLoggedInUser = match.team2.id;
+  if (gameMatchInfo.team1?.players.some((player) => player.userId === user.id)) {
+    teamIdOfLoggedInUser = gameMatchInfo.team1.id;
+  } else if (gameMatchInfo.team2?.players.some((player) => player.userId === user.id)) {
+    teamIdOfLoggedInUser = gameMatchInfo.team2.id;
   }
 
   const loggedInUserMatchOutcome =
@@ -57,20 +61,24 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
       isFirstMatch={isFirstMatch}
       isMatchOver={hasMatchStats}>
       <Team1
-        matchOutcome={match.team1?.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null}>
+        matchOutcome={
+          gameMatchInfo.team1?.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null
+        }>
         <TeamLogo>
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
-        <TeamName>{match.team1?.name}</TeamName>
-        <TeamScore winner={matchStats.winner === match.team1?.id}>{team1Score}</TeamScore>
+        <TeamName>{gameMatchInfo.team1?.name}</TeamName>
+        <TeamScore winner={matchStats.winner === gameMatchInfo.team1?.id}>{team1Score}</TeamScore>
       </Team1>
       <Team2
-        matchOutcome={match.team2?.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null}>
+        matchOutcome={
+          gameMatchInfo.team2?.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null
+        }>
         <TeamLogo>
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
-        <TeamName>{match.team2?.name}</TeamName>
-        <TeamScore winner={matchStats.winner === match.team2?.id}>{team2Score}</TeamScore>
+        <TeamName>{gameMatchInfo.team2?.name}</TeamName>
+        <TeamScore winner={matchStats.winner === gameMatchInfo.team2?.id}>{team2Score}</TeamScore>
       </Team2>
     </Wrapper>
   );

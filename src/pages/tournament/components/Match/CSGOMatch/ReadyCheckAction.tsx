@@ -11,9 +11,9 @@ type Props = {
 
 const ReadyCheckAction = ({ userId }: Props) => {
   const loggedInUser = useLoggedInUser();
-  const { match } = useMatchContext<CSGOMatch>();
+  const { gameMatchInfo } = useMatchContext<CSGOMatch>();
 
-  const isPlayerReady = match.veto?.playersReady[userId];
+  const isPlayerReady = gameMatchInfo.veto?.playersReady[userId];
 
   if (isPlayerReady) {
     return (
@@ -26,7 +26,7 @@ const ReadyCheckAction = ({ userId }: Props) => {
   if (userId === loggedInUser.id) {
     return (
       <Wrapper>
-        <Button primary onClick={() => CSGOMatchRequests.setReady(match.id)}>
+        <Button primary onClick={() => CSGOMatchRequests.setReady(gameMatchInfo.id)}>
           {`I'm ready`}
         </Button>
       </Wrapper>

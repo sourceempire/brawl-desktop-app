@@ -7,13 +7,13 @@ import ReadyCheckTimer from './ReadyCheckTimer';
 import Team from './Team';
 
 const CSGOMatch = () => {
-  const { match, team1, team2 } = useMatchContext<CSGOMatchType>();
+  const { gameMatchInfo, team1, team2 } = useMatchContext<CSGOMatchType>();
 
-  const isReadyCheck = match.matchStage === CSGOMatchStage.READY;
-  const isVeto = match.matchStage === CSGOMatchStage.VETO;
-  const isStarting = match.matchStage === CSGOMatchStage.STARTING_MATCH;
-  const isOngoing = match.matchStage === CSGOMatchStage.ONGOING;
-  const isComplete = match.matchStage === CSGOMatchStage.COMPLETE;
+  const isReadyCheck = gameMatchInfo.matchStage === CSGOMatchStage.READY;
+  const isVeto = gameMatchInfo.matchStage === CSGOMatchStage.VETO;
+  const isStarting = gameMatchInfo.matchStage === CSGOMatchStage.STARTING_MATCH;
+  const isOngoing = gameMatchInfo.matchStage === CSGOMatchStage.ONGOING;
+  const isComplete = gameMatchInfo.matchStage === CSGOMatchStage.COMPLETE;
 
   return (
     <Wrapper>

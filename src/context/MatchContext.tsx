@@ -5,14 +5,14 @@ import { Team } from 'types/team/Team';
 
 type MatchContextType = {
   isLoading: boolean;
-  match: Match;
+  gameMatchInfo: Match;
   team1?: Team;
   team2?: Team;
 };
 
 const MatchContext = createContext<MatchContextType>({
   isLoading: true,
-  match: {} as Match
+  gameMatchInfo: {} as Match
 });
 
 type Props = {
@@ -21,10 +21,10 @@ type Props = {
 };
 
 export const MatchContextProvider = ({ children, matchId }: Props) => {
-  const { match, team1, team2, isLoading } = useMatchFeed({ matchId });
+  const { gameMatchInfo, team1, team2, isLoading } = useMatchFeed({ matchId });
 
   return (
-    <MatchContext.Provider value={{ isLoading, match, team1, team2 }}>
+    <MatchContext.Provider value={{ isLoading, gameMatchInfo, team1, team2 }}>
       {children}
     </MatchContext.Provider>
   );
@@ -35,6 +35,6 @@ export function useMatchContext<T = Match>() {
 
   return {
     ...context,
-    match: context.match as T
+    gameMatchInfo: context.gameMatchInfo as T
   };
 }

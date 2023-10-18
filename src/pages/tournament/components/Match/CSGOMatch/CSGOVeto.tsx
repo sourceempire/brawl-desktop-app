@@ -18,31 +18,31 @@ import {
 
 const CSGOVeto = () => {
   const user = useLoggedInUser();
-  const { match } = useMatchContext<CSGOMatch>();
+  const { gameMatchInfo } = useMatchContext<CSGOMatch>();
   const [mapToBan, setMapToBan] = useState<string>();
 
   let loggedInUsersTeam;
-  if (match.team1?.players.some((player) => player.userId === user.id)) {
-    loggedInUsersTeam = match.team1;
-  } else if (match.team2?.players.some((player) => player.userId === user.id)) {
-    loggedInUsersTeam = match.team2;
+  if (gameMatchInfo.team1?.players.some((player) => player.userId === user.id)) {
+    loggedInUsersTeam = gameMatchInfo.team1;
+  } else if (gameMatchInfo.team2?.players.some((player) => player.userId === user.id)) {
+    loggedInUsersTeam = gameMatchInfo.team2;
   }
 
-  if (!match.veto) return null;
+  if (!gameMatchInfo.veto) return null;
   if (!loggedInUsersTeam) return null;
 
   let banningTeam;
-  if (match.team1?.id === match.veto?.teamToBanMap) {
-    banningTeam = match.team1;
-  } else if (match.team2?.id === match.veto?.teamToBanMap) {
-    banningTeam = match.team2;
+  if (gameMatchInfo.team1?.id === gameMatchInfo.veto?.teamToBanMap) {
+    banningTeam = gameMatchInfo.team1;
+  } else if (gameMatchInfo.team2?.id === gameMatchInfo.veto?.teamToBanMap) {
+    banningTeam = gameMatchInfo.team2;
   }
 
-  const isBanningTeam = match.veto?.teamToBanMap === loggedInUsersTeam.id;
+  const isBanningTeam = gameMatchInfo.veto?.teamToBanMap === loggedInUsersTeam.id;
   const loggedInUserIsLeader = loggedInUsersTeam.teamLeaderId === user.id;
   const loggedInUserIsBanningPlayer = isBanningTeam && loggedInUserIsLeader;
 
-  const maps = Object.keys(match.veto.bannedMaps).sort((mapNameA, mapNameB) =>
+  const maps = Object.keys(gameMatchInfo.veto.bannedMaps).sort((mapNameA, mapNameB) =>
     mapNameA > mapNameB ? 1 : -1
   );
 
@@ -50,7 +50,7 @@ const CSGOVeto = () => {
     if (!mapToBan) return;
     setMapToBan(undefined);
 
-    CSGOMatchRequests.banMap(match.id, mapToBan).catch((error) => {
+    CSGOMatchRequests.banMap(gameMatchInfo.id, mapToBan).catch((error) => {
       setMapToBan(mapToBan);
       popup.error(error.error);
     });
@@ -60,7 +60,7 @@ const CSGOVeto = () => {
     <Wrapper>
       <Maps>
         {maps.map((mapName) => {
-          const isBanned = Boolean(match.veto?.bannedMaps[mapName]);
+          const isBanned = Boolean(gameMatchInfo.veto?.bannedMaps[mapName]);
           const isActive = mapToBan === mapName;
           const isDisabled = !loggedInUserIsBanningPlayer || isBanned;
           return (
@@ -102,7 +102,7 @@ const CSGOVeto = () => {
       )}
 
       <div>A random map is dropped in</div>
-      <CountDown startTime={match.veto.currentMapBanExpiration || 0} />
+      <CountDown startTime={gameMatchInfo.veto.currentMapBanExpiration || 0} />
     </Wrapper>
   );
 };
