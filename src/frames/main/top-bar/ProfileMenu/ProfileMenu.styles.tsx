@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Icons, UserStatus, UserStatusEnum } from 'common/ui';
+import { UserStatus, UserStatusEnum } from 'common/ui';
 import { ArrowDown } from 'frames/main/friends/components/FriendRequestList/FriendRequestList.styles';
 
 export const MyUserStatus = styled(UserStatus)`
