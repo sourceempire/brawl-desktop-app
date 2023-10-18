@@ -4,7 +4,7 @@ import useTournamentHubsFeed from 'api/feeds/hooks/useTournamentHubsFeed';
 import { useNavigate } from 'react-router-dom';
 import FeaturedTournamentSlider from 'common/components/FeaturedTournamentSlider';
 import PageContainer from 'common/components/PageContainer';
-import { IconEnum, Icons as IconsOld, Option, Tab, Tabs } from 'common/ui';
+import { Option, Tab, Tabs } from 'common/ui';
 import { InputSize } from 'common/ui/Input/Input.types';
 import TournamentInfoCard from '../TournamentInfoCard/TournamentInfoCard';
 import TournamentsFilters from '../TournamentsFiltersModal/TournamentsFiltersModal';
@@ -23,7 +23,6 @@ import {
   TournamentGallery,
   TournamentList
 } from './TournamentListView.styles';
-import { theme } from 'assets/styles/Theme';
 import { Icons } from 'brawl-ui';
 
 export default function TournamentListView() {
