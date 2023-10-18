@@ -54,6 +54,6 @@ export type TournamentHubInfoRow = {
   name: string;
   header: string;
   subtext: string;
-  Icon: React.ReactNode;
+  icon: React.ReactNode;
   ref?: React.MutableRefObject<HTMLDivElement> | null;
 };

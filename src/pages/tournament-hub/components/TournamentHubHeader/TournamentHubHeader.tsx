@@ -37,20 +37,20 @@ const TournamentHubHeader = () => {
       name: 'prizePool',
       header: `€${tournamentHub.currentPrizePool}`,
       subtext: 'Predicted Prize Pool',
-      Icon: Icons.Trophy
+      icon: <Icons.Trophy />
     },
     {
       name: 'entryFee',
       header: `€${new Money(tournamentHub.entryFee + tournamentHub.entryFeeCut).format()} / player`,
       subtext: 'Buy-In',
-      Icon: Icons.Ticket,
+      icon: <Icons.Ticket />,
       ref: entryFeeRef
     },
     {
       name: 'startTime',
       header: tournamentHub.startTime && formatDateAndTime(tournamentHub.startTime),
       subtext: 'Tournament Start',
-      Icon: Icons.Clock
+      icon: <Icons.Clock />
     }
   ];
 
@@ -66,9 +66,9 @@ const TournamentHubHeader = () => {
         <CountDownInfo>Registration closes in</CountDownInfo>
         <CountDown startTime={Number(tournamentHub.registrationCloseTime)} />
         <TournamentInfo>
-          {TournamentInfoArray.map(({ name, header, subtext, ref, Icon }) => (
+          {TournamentInfoArray.map(({ name, header, subtext, ref, icon }) => (
             <InfoContainer key={name}>
-              <Icon />
+              {icon}
               <InfoText
                 ref={ref}
                 onMouseEnter={() => handleMouseEnter(name, true)}
