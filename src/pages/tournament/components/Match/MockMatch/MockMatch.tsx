@@ -5,11 +5,7 @@ import OngoingMockGameMatch from './OngoingMockGameMatch';
 import Team from './Team';
 
 const MockMatch = () => {
-  const { gameMatchInfo, team1, team2 } = useMatchContext<MockGameMatchType>();
-
-  console.log('MATCH', gameMatchInfo);
-  console.log('TEAM 1', team1);
-  console.log('TEAM 2', team2);
+  const { team1, team2 } = useMatchContext<MockGameMatchType>();
 
   return (
     <Wrapper>
