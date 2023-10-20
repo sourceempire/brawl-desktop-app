@@ -17,9 +17,11 @@ type Props = {
 const MockMatchResult = ({ match, team1, team2 }: Props) => {
   const { tournamentId } = useParams() as { tournamentId: string };
   const { tournament } = useTournamentFeed({ tournamentId });
-  const { tournamentHub } = useTournamentHubFeed({
+  const { tournamentHub, isLoading } = useTournamentHubFeed({
     tournamentHubId: tournament.tournamentHubId
   });
+
+  if (isLoading) return null;
 
   return (
     <Wrapper>
