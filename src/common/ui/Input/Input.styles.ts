@@ -17,7 +17,7 @@ export const IconWrapper = styled.div<{ inputSize: InputSize }>`
   ${({ inputSize }) => css`
     width: calc((${getIconSize(inputSize)}) + (${getInputPadding(inputSize)} * 2));
     // IconWrapper should only take one child.
-    & > :first-child {
+    & > :first-of-type {
       width: ${getIconSize(inputSize)};
       height: ${getIconSize(inputSize)};
     }

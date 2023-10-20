@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
     margin-right: ${theme.spacing.baseX3}px;
     background-color: ${theme.colors.secondary.base};
     border-radius: ${theme.borderRadius.default};
-    > *:first-child {
+    > *:first-of-type {
       fill: ${theme.colors.textPrimaryLight};
     }
     :hover {

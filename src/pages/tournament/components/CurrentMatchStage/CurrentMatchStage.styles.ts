@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import { css, keyframes } from '@emotion/react';
-import { Icons } from 'common/ui';
 import { bounceAnimation, hsla } from 'utils/styledUtils';
 import { StageStatus } from './CurrentMatchStage.types';
+import { Icons } from 'brawl-ui';
 
 const animationTime = 0.3;
 

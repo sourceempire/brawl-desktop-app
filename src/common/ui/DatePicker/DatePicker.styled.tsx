@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { Wrapper as Button } from '../Button/Button.styles';
-import { Icons } from '../Icon';
+import { Icons } from 'brawl-ui';
+import { theme } from 'assets/styles/Theme';
 
 export const Wrapper = styled.div`
   position: relative;
@@ -112,20 +113,21 @@ export const Header = styled.div`
   margin-bottom: 6px;
 `;
 
-export const PrevArrow = styled(Icons.DatePickerArrow)`
-  ${({ theme }) => css`
-    width: 18px;
-    height: 18px;
-    fill: ${theme.colors.white};
-    padding: 6px;
-    box-sizing: border-box;
-    background-color: ${theme.colors.surface.base};
-    border-radius: ${theme.borderRadius.default};
-  `}
+const arrowStyle = css`
+  width: 20px;
+  height: 20px;
+  padding: 3px;
+  box-sizing: border-box;
+  background-color: ${theme.colors.surface.base};
+  border-radius: ${theme.borderRadius.default};
 `;
 
-export const NextArrow = styled(PrevArrow)`
-  transform: rotate(180deg);
+export const PrevArrow = styled(Icons.ChevronLeft)`
+  ${arrowStyle}
+`;
+
+export const NextArrow = styled(Icons.ChevronRight)`
+  ${arrowStyle}
 `;
 
 export const Actions = styled.div`
@@ -162,7 +164,7 @@ export const DateInput = styled.span<{ isEmpty: boolean }>`
   `}
 `;
 
-export const DateInputArrow = styled(Icons.SelectArrow)`
+export const DateInputArrow = styled(Icons.ChevronDown)`
   fill: ${({ theme }) => theme.colors.white};
   position: absolute;
   top: 10px;

@@ -5,10 +5,11 @@ import {
   sendFriendRequest
 } from 'api/requests/FriendRequests';
 import popup from 'common/popup';
-import { ActionButton, Icons } from 'common/ui';
+import { ActionButton } from 'common/ui';
 import { ProfileImage, SimpleLoading, UserCard } from '../Shared.styles';
-import { RemoveRequestIcon, RequestSentText, UserTag } from './AddFriendCard.styles';
+import { RequestSentText, UserTag } from './AddFriendCard.styles';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
+import { Icons } from 'brawl-ui';
 
 type Props = {
   user: PotentialFriend;
@@ -70,14 +71,10 @@ export const AddFriendCard = ({ user, onFriendRequestSuccess, onFriendRequestCan
       ) : user.isRequestSent ? (
         <>
           <RequestSentText>Request pending</RequestSentText>
-          <ActionButton
-            icon={<RemoveRequestIcon />}
-            onClick={cancelRequest}
-            hint="Cancel request"
-          />
+          <ActionButton icon={<Icons.UserMinus />} onClick={cancelRequest} hint="Cancel request" />
         </>
       ) : (
-        <ActionButton hint="Add friend" icon={<Icons.AddFriend />} onClick={sendRequest} />
+        <ActionButton hint="Add friend" icon={<Icons.UserPlus />} onClick={sendRequest} />
       )}
     </UserCard>
   );

@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Icon } from '../Icon/Icon';
 import { lightenColor } from 'assets/styles/colorBrightness';
 
 type Props = {
@@ -14,22 +13,6 @@ type Props = {
 // TODO -> Add focused style
 // TODO -> Add support for icons
 // TODO -> Add support for which side icons should be
-
-const iconStyle = css`
-  display: inline-block;
-  height: 100%;
-  width: 100%;
-  padding: 8px 10px 8px 15px;
-  box-sizing: border-box;
-`;
-
-export const ButtonIcon = styled(Icon)`
-  ${iconStyle};
-`;
-
-export const ButtonIconImg = styled.img`
-  ${iconStyle};
-`;
 
 export const Wrapper = styled.button<Props>`
   display: inline-flex;
@@ -106,4 +89,13 @@ export const Wrapper = styled.button<Props>`
       }
     `}
   `}
+`;
+
+export const IconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 7px 9px 7px 12px;
+  box-sizing: border-box;
 `;

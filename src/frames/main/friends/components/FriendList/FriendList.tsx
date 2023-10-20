@@ -3,7 +3,6 @@ import { useFriendList } from 'frames/main/friends/hooks/useFriendList';
 import { Title } from '../FriendBar/FriendBar.styles';
 import FriendCard from '../FriendCard';
 import {
-  BigAddFriendIcon,
   FriendListSkeleton,
   Friends,
   NoFriendsContainer,
@@ -46,7 +45,6 @@ const FriendList = ({ searchString, openAddFriendModal }: Props) => {
 
       {numberOfFriends === 0 && !isLoading && (
         <NoFriendsContainer>
-          <BigAddFriendIcon />
           <NoFriendsText>
             You have no friends yet
             <br />

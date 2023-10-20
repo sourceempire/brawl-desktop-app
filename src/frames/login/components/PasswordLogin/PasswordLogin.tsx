@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useAuth } from 'api/requests';
-import { Icons } from 'common/ui';
 import { InputSize } from 'common/ui/Input/Input.types';
 import { LoginButton, LoginInput, Wrapper } from './PasswordLogin.styles';
-import { theme } from 'assets/styles/Theme';
+import { Icons } from 'brawl-ui';
 
 export const PasswordLogin = () => {
   const { loginWithUsernameAndPassword, error } = useAuth();
@@ -23,7 +22,7 @@ export const PasswordLogin = () => {
         placeholder="Enter Email Address"
         label="Email"
         size={InputSize.SMALL}
-        icon={<Icons.Profile fill={theme.colors.white} />}
+        icon={<Icons.User />}
       />
 
       <LoginInput
@@ -33,7 +32,7 @@ export const PasswordLogin = () => {
         label="Password"
         placeholder="Enter Password"
         size={InputSize.SMALL}
-        icon={<Icons.Key fill={theme.colors.white} />}
+        icon={<Icons.KeyRound />}
       />
 
       <LoginButton onClick={() => loginWithUsernameAndPassword(username, password)} primary>

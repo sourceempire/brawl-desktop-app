@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Button, Icons, Input, Select } from 'common/ui';
+import { Button, Input, Select } from 'common/ui';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
+import { Icons } from 'brawl-ui';
 
 export const FeaturedTournamentToggle = styled.div`
   ${(props) => props.theme.textStyles.menu}
@@ -10,7 +11,7 @@ export const FeaturedTournamentToggle = styled.div`
   align-items: center;
 `;
 
-export const SelectArrow = styled(Icons.SelectArrow)<{ expanded: boolean }>`
+export const SelectArrow = styled(Icons.ChevronDown)<{ expanded: boolean }>`
   height: 8px;
   width: 8px;
   transform: ${({ expanded }) => (expanded ? 'rotate(0)' : 'rotate(-180deg)')};
@@ -20,10 +21,12 @@ export const SelectArrow = styled(Icons.SelectArrow)<{ expanded: boolean }>`
   `}
 `;
 
-export const TournamentGallery = styled.div<{
+type TournamentGalleryProps = {
   featuredTournamentHubs: TournamentHub[];
   featuredExpanded: boolean;
-}>`
+};
+
+export const TournamentGallery = styled.div<TournamentGalleryProps>`
   transition: transform 0.3s;
   transform: ${({ featuredExpanded, featuredTournamentHubs }) =>
     featuredExpanded && featuredTournamentHubs ? 'translateY(0)' : 'translateY(-250px)'};
@@ -66,12 +69,12 @@ export const FilterBullet = styled.div`
 
 export const CrossIcon = styled(Icons.Cross)`
   position: absolute;
-  height: 8px;
-  width: 8px;
+  height: 10px;
+  width: 10px;
   left: 12px;
 
   ${({ theme }) => css`
-    fill: ${theme.colors.textSecondaryLight};
+    color: ${theme.colors.textSecondaryLight};
   `}
 `;
 
@@ -86,7 +89,7 @@ export const SearchInput = styled(Input)`
 `;
 
 export const FilterButton = styled(Button)`
-  fill: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 export const FilterSort = styled(Select)``;

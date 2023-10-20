@@ -29,6 +29,7 @@
     "@emotion/styled": "^11.11.0",
     "brawl-fetch": "github:sourceempire/brawl-fetch#v1.3.2",
     "brawl-image": "github:sourceempire/brawl-image#v1.0.6",
+    "brawl-ui": "github:sourceempire/brawl-ui#semver:v1.0.4",
     "brawl-websocket": "github:sourceempire/brawl-websocket#v1.0.3",
     "dotenv": "^16.3.1",
     "electron-is-dev": "^2.0.0",

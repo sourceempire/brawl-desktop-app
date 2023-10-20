@@ -1,7 +1,8 @@
 import { Image } from 'brawl-image';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Card, Icons } from 'common/ui';
+import { Card } from 'common/ui';
+import { Icons } from 'brawl-ui';
 
 export const TournamentImage = styled(Image)`
   position: absolute;
@@ -62,7 +63,7 @@ export const GameMode = styled.div`
 export const GameModeIcon = styled(Icons.Sword)`
   height: 14px;
   width: 14px;
-  fill: #94ace8;
+  color: #94ace8;
   margin: 0px 6px 0px 0px;
 `;
 
@@ -113,20 +114,20 @@ export const PrizePoolIcon = styled(Icons.Trophy)`
   height: 14px;
   width: 14px;
   margin: 0px 6px 0px 0px;
-  fill: ${({ theme }) => theme.colors.primary.base};
+  color: ${({ theme }) => theme.colors.primary.base};
 `;
 
-export const StatusIconLocked = styled(Icons.LockClosed)`
+export const StatusIconLocked = styled(Icons.Lock)`
   height: 14px;
   width: 14px;
-  fill: ${({ theme }) => theme.colors.textPrimaryLight};
+  color: ${({ theme }) => theme.colors.textPrimaryLight};
   margin: 0px 6px 0px 0px;
 `;
 
-export const StatusIconOpen = styled(Icons.LockOpen)`
+export const StatusIconOpen = styled(Icons.Unlock)`
   height: 14px;
   width: 14px;
-  fill: ${({ theme }) => theme.colors.textPrimaryLight};
+  color: ${({ theme }) => theme.colors.textPrimaryLight};
   margin: 0px 6px 0px 0px;
 `;
 
@@ -147,7 +148,7 @@ export const EntryFeeIcon = styled(Icons.Ticket)`
   height: 14px;
   width: 14px;
   margin: 0px 6px 0px 0px;
-  fill: ${({ theme }) => theme.colors.accent.base};
+  color: ${({ theme }) => theme.colors.accent.base};
 `;
 
 export const StartTime = styled.div`

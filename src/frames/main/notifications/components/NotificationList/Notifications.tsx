@@ -2,11 +2,12 @@ import React, { useRef, useState } from 'react';
 import { usePushNotifications } from 'api/events';
 import useNotificationFeed from 'api/feeds/hooks/useNotificationsFeed';
 import { useContextMenuPosition } from 'common/hooks';
-import { ActionButton, ContextMenu, ContextMenuTitle, Icons } from 'common/ui';
+import { ActionButton, ContextMenu, ContextMenuTitle } from 'common/ui';
 import NoNotifications from '../NoNotifications/NoNotifications';
 import NotificationCard from '../NotificationCard';
 import { NotificationCardSkeletion } from '../NotificationCard/NotificationCard.skeletion';
 import { NotificationList, NotificationsCount, Wrapper } from './Notifications.styles';
+import { Icons } from 'brawl-ui';
 
 const Notifications = () => {
   usePushNotifications();
@@ -48,7 +49,7 @@ const Notifications = () => {
       <Wrapper>
         <ActionButton
           ref={actionButtonRef}
-          icon={<Icons.Notification />}
+          icon={<Icons.Bell />}
           onClick={() => setMenuVisible(true)}
           hint={isMenuVisible ? undefined : 'Notifications'}
         />

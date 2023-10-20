@@ -4,7 +4,7 @@ import useTournamentHubsFeed from 'api/feeds/hooks/useTournamentHubsFeed';
 import { useNavigate } from 'react-router-dom';
 import FeaturedTournamentSlider from 'common/components/FeaturedTournamentSlider';
 import PageContainer from 'common/components/PageContainer';
-import { IconEnum, Icons, Option, Tab, Tabs } from 'common/ui';
+import { Option, Tab, Tabs } from 'common/ui';
 import { InputSize } from 'common/ui/Input/Input.types';
 import TournamentInfoCard from '../TournamentInfoCard/TournamentInfoCard';
 import TournamentsFilters from '../TournamentsFiltersModal/TournamentsFiltersModal';
@@ -23,7 +23,7 @@ import {
   TournamentGallery,
   TournamentList
 } from './TournamentListView.styles';
-import { theme } from 'assets/styles/Theme';
+import { Icons } from 'brawl-ui';
 
 export default function TournamentListView() {
   return (
@@ -87,13 +87,13 @@ function Page() {
           </FilterBullets>
           <FilterControls>
             <SearchInput
-              icon={<Icons.Search fill={theme.colors.white} height={14} />}
+              icon={<Icons.Search />}
               placeholder="Search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               size={InputSize.SMALL}
             />
-            <FilterButton icon={IconEnum.Filter} onClick={() => setFilterModalOpen(true)}>
+            <FilterButton icon={<Icons.Filter />} onClick={() => setFilterModalOpen(true)}>
               Filter
             </FilterButton>
             <TournamentsFilters

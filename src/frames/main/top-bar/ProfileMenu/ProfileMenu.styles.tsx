@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Icons, UserStatus, UserStatusEnum } from 'common/ui';
+import { UserStatus, UserStatusEnum } from 'common/ui';
+import { ArrowDown } from 'frames/main/friends/components/FriendRequestList/FriendRequestList.styles';
 
 export const MyUserStatus = styled(UserStatus)`
   position: absolute;
@@ -58,7 +59,7 @@ export const ProfileImageContainer = styled.div`
   `}
 `;
 
-export const ArrowIcon = styled(Icons.ArrowDown)`
+export const ArrowIcon = styled(ArrowDown)`
   width: 10px;
   margin-right: 12px;
 `;

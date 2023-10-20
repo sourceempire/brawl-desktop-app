@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Icons } from 'common/ui';
 import { InputSize } from 'common/ui/Input/Input.types';
 import AddFriendModal from '../AddFriendModal';
 import FriendList from '../FriendList';
@@ -12,6 +11,7 @@ import {
   Wrapper
 } from './FriendBar.styles';
 import { theme } from 'assets/styles/Theme';
+import { Icons } from 'brawl-ui';
 
 type Props = {
   visible: boolean;
@@ -40,13 +40,13 @@ const FriendBar = ({ visible }: Props) => {
       <Wrapper onPointerDown={(e) => e.stopPropagation}>
         <FriendActions>
           <SearchFriendsInput
-            icon={<Icons.Search fill={theme.colors.white} height={14} />}
+            icon={<Icons.Search />}
             value={searchString}
             onChange={handleSearch}
             size={InputSize.SMALL}
             placeholder="Friends Filter"
           />
-          <FriendAction icon={<Icons.AddFriend />} onClick={openAddFriendModal} hint="Add Friend" />
+          <FriendAction icon={<Icons.UserPlus />} onClick={openAddFriendModal} hint="Add Friend" />
         </FriendActions>
         <ScrollContent>
           <FriendRequestList />
