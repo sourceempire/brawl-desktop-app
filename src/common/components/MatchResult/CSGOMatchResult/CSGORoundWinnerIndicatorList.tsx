@@ -9,7 +9,7 @@ import {
   ScrollContainer,
   SideSwapIndicator,
   Wrapper
-} from './RoundWinnerIndicatorList.styles';
+} from './CSGORoundWinnerIndicatorList.styles';
 import { theme } from 'assets/styles/Theme';
 
 const { COMPETITIVE, WINGMAN, ONE_VS_ONE } = CSGOGameModes;
