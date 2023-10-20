@@ -1,4 +1,4 @@
-import { useFeed } from 'brawl-websocket';
+import { useFeed } from '@sourceempire/brawl-websocket';
 import { MatchStats, RoundWin } from 'types/match/Match';
 
 type Params = {

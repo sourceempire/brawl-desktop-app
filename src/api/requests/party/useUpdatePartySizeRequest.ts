@@ -1,4 +1,4 @@
-import { ErrorResponse, usePost } from 'brawl-fetch';
+import { ErrorResponse, usePost } from '@sourceempire/brawl-fetch';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 

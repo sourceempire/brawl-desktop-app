@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PotentialFriend, potentialFriendsSearch } from 'api/requests/FriendRequests';
-import { useEvent } from 'brawl-websocket';
+import { useEvent } from '@sourceempire/brawl-websocket';
 import { useDebounce } from 'common/hooks';
 import popup from 'common/popup';
 import { Icons, Input, Modal } from 'common/ui';

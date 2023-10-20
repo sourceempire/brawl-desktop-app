@@ -5,7 +5,7 @@ import popup from 'common/popup';
 import { ActionButton, ContextMenu } from 'common/ui';
 import { Icons } from 'common/ui/Icon';
 import { Label, PartySizes, Settings, SettingsDisplay } from './PartySettings.styles';
-import { ErrorResponse } from 'brawl-fetch';
+import { ErrorResponse } from '@sourceempire/brawl-fetch';
 import { useUpdatePartySizeRequest } from 'api/requests/party';
 
 const PartySettings = () => {

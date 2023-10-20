@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useEvent } from 'brawl-websocket';
+import { useEvent } from '@sourceempire/brawl-websocket';
 import Window from 'electron-window';
 import { Notification } from 'types/notifications/Notifications';
 import { getPushNotificationMessage } from '../push-notifications';
