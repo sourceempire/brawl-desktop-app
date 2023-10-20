@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { EllipsisText, Icons } from 'common/ui';
+import { EllipsisText } from 'common/ui';
 import { InnerWrapper } from 'common/ui/EllipsisText/EllipsisText.styles';
 import { ProfileImage } from 'frames/main/friends/components/Shared.styles';
+import { Icons } from '@sourceempire/brawl-ui';
 
 export const ProfileImageWrapper = styled.div`
   position: relative;
@@ -24,7 +25,7 @@ export const PlayerProfileImage = styled(ProfileImage)<{ transparent?: boolean }
 export const LeaderIcon = styled(Icons.Star)<{ reversed?: boolean }>`
   position: absolute;
   height: 25px;
-  fill: #ffcc00;
+  color: #ffcc00;
 
   ${({ reversed }) =>
     reversed

@@ -3,10 +3,10 @@ import { usePartyFeed } from 'api/feeds';
 import { useContextMenuPosition, useLoggedInUser } from 'common/hooks';
 import popup from 'common/popup';
 import { ActionButton, ContextMenu } from 'common/ui';
-import { Icons } from 'common/ui/Icon';
 import { Label, PartySizes, Settings, SettingsDisplay } from './PartySettings.styles';
 import { ErrorResponse } from '@sourceempire/brawl-fetch';
 import { useUpdatePartySizeRequest } from 'api/requests/party';
+import { Icons } from '@sourceempire/brawl-ui';
 
 const PartySettings = () => {
   const loggedInUser = useLoggedInUser();
@@ -46,7 +46,7 @@ const PartySettings = () => {
     <>
       <ActionButton
         ref={settingsRef}
-        icon={<Icons.Cog />}
+        icon={<Icons.Settings />}
         onClick={handleOpenMenu}
         hint={isMenuVisible ? undefined : 'Party settings'}
       />

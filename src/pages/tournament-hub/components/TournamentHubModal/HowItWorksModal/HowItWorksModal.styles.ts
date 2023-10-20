@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Icon } from 'common/ui/Icon';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -28,19 +27,6 @@ export const Row = styled.div`
   justify-content: space-between;
   ${({ theme }) => css`
     margin-bottom: ${theme.spacing.baseX3}px;
-  `};
-`;
-
-export const StyledIcon = styled(Icon)<{ reversed?: boolean }>`
-  width: 60px;
-  height: 60px;
-  display: none;
-  ${({ theme, reversed }) => css`
-    fill: ${theme.colors.white};
-    ${reversed &&
-    css`
-      display: block;
-    `}
   `};
 `;
 

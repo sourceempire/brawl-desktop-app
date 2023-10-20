@@ -20,8 +20,10 @@ export const Wrapper = styled.div<WrapperProps>`
     padding: ${size === ActionButtonSize.SMALL ? `5px` : `${theme.spacing.base}px`};
     background-color: ${theme.colors.secondary.base};
     border-radius: ${isCircle ? '50%' : theme.borderRadius.default};
-    > *:first-child {
-      fill: ${iconColor ? iconColor : theme.colors.textPrimaryLight};
+    > svg {
+      color: ${iconColor ? iconColor : theme.colors.textPrimaryLight};
+      width: 18px;
+      height: 18px;
     }
     :hover {
       background-color: ${theme.colors.secondary.hover};

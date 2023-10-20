@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Icons } from 'common/ui';
 import { UserCardSkeleton } from '../Shared.styles';
 
 export const Wrapper = styled.div`
@@ -26,20 +25,10 @@ export const NoFriendsContainer = styled.div`
   `}
 `;
 
-export const BigAddFriendIcon = styled(Icons.AddFriend)`
-  width: 48px;
-  height: 48px;
-
-  ${({ theme }) => css`
-    fill: ${theme.colors.textSecondaryLight};
-    margin-bottom: ${theme.spacing.baseX2}px;
-  `}
-`;
-
 export const NoFriendsText = styled.div`
   text-align: center;
   ${({ theme }) => css`
-    ${theme.textStyles.body}
+    ${theme.textStyles.body};
     margin-bottom: ${theme.spacing.baseX2}px;
   `};
 `;

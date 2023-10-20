@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
-import { ActionButton, Icons } from 'common/ui';
+import { ActionButton } from 'common/ui';
 import Notifications from '../../notifications/components/NotificationList';
 import MainNavLink from '../MainNavLink';
 import Party from '../Party';
 import ProfileMenu from '../ProfileMenu';
 import Wallet from '../Wallet';
 import { PlaceholderLogo, TopBarActions, Wrapper } from './TopBar.styles';
+import { Icons } from '@sourceempire/brawl-ui';
 
 type Props = {
   toggleFriends: () => void;
@@ -43,7 +44,7 @@ const TopBar = ({ toggleFriends, isFriendBarVisible }: Props) => {
 
       <TopBarActions>
         <Party />
-        <ActionButton icon={<Icons.Friends />} onClick={toggleFriends} hint="Toggle Friends" />
+        <ActionButton icon={<Icons.Users />} onClick={toggleFriends} hint="Toggle Friends" />
         <Notifications />
         <Wallet />
         <ProfileMenu />
