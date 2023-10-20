@@ -11,7 +11,7 @@ import {
   TableHeader,
   TeamLogo,
   Wrapper
-} from './TeamTable.styles';
+} from './CSGOTeamTable.styles';
 import placeholderTeamLogo from 'assets/images/placeholder-team-logo.png';
 
 type Props = {
