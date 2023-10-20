@@ -1,25 +1,17 @@
 import { useMatchFeed } from 'api/feeds';
 import { useMatchStatsFeed } from 'api/feeds/hooks/useMatchStatsFeed';
 import { useParams } from 'react-router-dom';
-import { isCSGOMatch } from 'types/match/Match';
+import { isCSGOMatch, isMockMatch } from 'types/match/Match';
 import CSGOMatchResult from './CSGOMatchResult';
 import { Wrapper } from './MatchResult.styles';
+import MockMatchResult from './MockMatchResult';
 
 const MatchResult = () => {
   const matchId = useParams().matchId as string;
   const { gameMatchInfo, team1, team2, isLoading: isLoadingMatch } = useMatchFeed({ matchId });
-  const {
-    matchStats,
-    roundWins,
-    hasMatchStats,
-    isLoading: isLoadngMatchStats
-  } = useMatchStatsFeed({ matchId });
+  const { matchStats, roundWins } = useMatchStatsFeed({ matchId });
 
-  if (isLoadingMatch || isLoadngMatchStats) return null;
-
-  if (!hasMatchStats) {
-    return <Wrapper>No match result for this match yet</Wrapper>;
-  }
+  if (isLoadingMatch) return null;
 
   if (isCSGOMatch(gameMatchInfo)) {
     return (
@@ -31,6 +23,9 @@ const MatchResult = () => {
         team2={team2}
       />
     );
+  }
+  if (isMockMatch(gameMatchInfo)) {
+    return <MockMatchResult match={gameMatchInfo} team1={team1} team2={team2} />;
   }
 
   return <Wrapper>No match result yet</Wrapper>;
