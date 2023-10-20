@@ -1,10 +1,10 @@
 import { csgoMaps } from 'types/csgo/maps';
 import { CSGOMatch, MatchStats, RoundWin } from 'types/match/Match';
 import { Team } from 'types/team/Team';
-import { MapName, MapScore, Score, TeamTables } from './CSGOMatchResult.styles';
-import { Backdrop, Content, Wrapper } from './MatchResult.styles';
-import RoundWinnerIndicatorList from './RoundWinnerIndicatorList';
-import TeamTable from './TeamTable';
+import { MapName } from './CSGOMatchResult.styles';
+import { Backdrop, Content, Score, TeamScore, TeamTables, Wrapper } from '../MatchResult.styles';
+import RoundWinnerIndicatorList from './CSGORoundWinnerIndicatorList';
+import TeamTable from './CSGOTeamTable';
 
 type Props = {
   matchStats: MatchStats;
@@ -29,12 +29,12 @@ const CSGOMatchResult = ({
   const mapImage = csgoMaps[map.mapName].imageUrl.big;
   return (
     <Wrapper>
-      <Backdrop mapImageUrl={mapImage} disableFade={disableBackgroundFadeIn} />
+      <Backdrop imageUrl={mapImage} disableFade={disableBackgroundFadeIn} />
       <Content>
         <Score>
-          <MapScore isWinner={map.winner === team1.id}>{map.teams[team1.id].score}</MapScore>
+          <TeamScore isWinner={map.winner === team1.id}>{map.teams[team1.id].score}</TeamScore>
           <MapName>{mapDisplayName}</MapName>
-          <MapScore isWinner={map.winner === team2.id}>{map.teams[team2.id].score}</MapScore>
+          <TeamScore isWinner={map.winner === team2.id}>{map.teams[team2.id].score}</TeamScore>
         </Score>
         <TeamTables>
           <TeamTable team={team1} teamStats={map.teams[team1.id]} />
