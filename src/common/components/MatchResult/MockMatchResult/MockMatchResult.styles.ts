@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Image } from 'brawl-image';
+import { Image } from '@sourceempire/brawl-image';
 import { css } from '@emotion/react';
 import { hsla } from 'utils/styledUtils';
 
