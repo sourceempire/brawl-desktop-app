@@ -44,14 +44,14 @@ export const TableCell = styled.div<TableCellProps>`
       font-weight: bold;
     `}
 
-    :nth-child(2),
-    :nth-child(4),
-    :nth-child(6) {
+    :nth-of-type(2),
+    :nth-of-type(4),
+    :nth-of-type(6) {
       background-color: ${theme.colors.surfaceElement.base};
       border-radius: ${theme.borderRadius.default};
     }
 
-    :nth-child(7n + 5) {
+    :nth-of-type(7n + 5) {
       color: ${theme.colors.accent.base};
     }
   `}

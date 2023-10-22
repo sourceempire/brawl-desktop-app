@@ -42,14 +42,14 @@ export const TableCell = styled.div<TableCellProps>`
     css`
       font-weight: bold;
     `}
-    :nth-child(7n + 1) {
+    :nth-of-type(7n + 1) {
       border-radius: ${theme.borderRadius.default};
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
       margin-left: -6px;
       padding-left: 6px;
     }
-    :nth-child(7n + 7) {
+    :nth-of-type(7n + 7) {
       border-radius: ${theme.borderRadius.default};
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
@@ -57,17 +57,17 @@ export const TableCell = styled.div<TableCellProps>`
       padding-right: 6px;
     }
 
-    :nth-child(14n + 8),
-    :nth-child(14n + 9),
-    :nth-child(14n + 10),
-    :nth-child(14n + 11),
-    :nth-child(14n + 12),
-    :nth-child(14n + 13),
-    :nth-child(14n + 14) {
+    :nth-of-type(14n + 8),
+    :nth-of-type(14n + 9),
+    :nth-of-type(14n + 10),
+    :nth-of-type(14n + 11),
+    :nth-of-type(14n + 12),
+    :nth-of-type(14n + 13),
+    :nth-of-type(14n + 14) {
       background-color: ${theme.colors.surface.base};
     }
 
-    :nth-child(7n + 5) {
+    :nth-of-type(7n + 5) {
       color: ${theme.colors.accent.base};
     }
   `}
