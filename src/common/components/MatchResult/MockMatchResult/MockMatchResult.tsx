@@ -8,13 +8,13 @@ import TeamTable from './MockTeamTable';
 import useTournamentFeed from 'api/feeds/hooks/useTournamentFeed';
 
 type Props = {
-  match: MockGameMatch;
+  gameMatchInfo: MockGameMatch;
   team1: Team;
   team2: Team;
   disableBackgroundFadeIn?: boolean;
 };
 
-const MockMatchResult = ({ match, team1, team2 }: Props) => {
+const MockMatchResult = ({ gameMatchInfo, team1, team2 }: Props) => {
   const { tournamentId } = useParams() as { tournamentId: string };
   const { tournament } = useTournamentFeed({ tournamentId });
   const { tournamentHub, isLoading } = useTournamentHubFeed({
@@ -29,9 +29,9 @@ const MockMatchResult = ({ match, team1, team2 }: Props) => {
       <Overlay />
       <Content>
         <Score>
-          <TeamScore isWinner={match.winner === team1.id}>{team1.score}</TeamScore>
+          <TeamScore isWinner={gameMatchInfo.winner === team1.id}>{team1.score}</TeamScore>
           <ScoreMiddleSection>Result</ScoreMiddleSection>
-          <TeamScore isWinner={match.winner === team2.id}>{team2.score}</TeamScore>
+          <TeamScore isWinner={gameMatchInfo.winner === team2.id}>{team2.score}</TeamScore>
         </Score>
         <TeamTables>
           <TeamTable team={team1} />

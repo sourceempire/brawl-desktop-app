@@ -25,7 +25,7 @@ const MatchResult = () => {
     );
   }
   if (isMockMatch(gameMatchInfo)) {
-    return <MockMatchResult match={gameMatchInfo} team1={team1} team2={team2} />;
+    return <MockMatchResult gameMatchInfo={gameMatchInfo} team1={team1} team2={team2} />;
   }
 
   return <Wrapper>No match result yet</Wrapper>;
