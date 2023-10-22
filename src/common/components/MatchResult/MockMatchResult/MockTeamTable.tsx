@@ -19,7 +19,7 @@ const TeamTable = ({ team }: Props) => {
       </TableHeader>
 
       {team.players.map((player) => {
-        return <PlayerCell userId={player.userId} />;
+        return <PlayerCell key={player.userId} userId={player.userId} />;
       })}
     </Wrapper>
   );
