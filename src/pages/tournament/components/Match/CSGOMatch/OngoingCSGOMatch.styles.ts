@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Button, EllipsisText, Icons } from 'common/ui';
+import { Button, EllipsisText } from 'common/ui';
 import { hsla } from 'utils/styledUtils';
+import { Icons } from '@sourceempire/brawl-ui';
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -92,7 +93,7 @@ export const ClipBoard = styled.div`
 export const CopyIcon = styled(Icons.Copy)`
   height: 60%;
   ${({ theme }) => css`
-    fill: ${theme.colors.textPrimaryLight};
+    color: ${theme.colors.textPrimaryLight};
   `}
 `;
 

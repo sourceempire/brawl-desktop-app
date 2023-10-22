@@ -5,13 +5,10 @@ import LoginView from 'frames/login/LoginFrame';
 import MainView from 'frames/main/MainFrame';
 import { AppContainer } from './App.styles';
 import { theme } from 'assets/styles/Theme';
-import GlobalStyle from 'assets/styles/GlobalStyle';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
-
       <HashRouter>
         <AppContainer>
           <Routes>

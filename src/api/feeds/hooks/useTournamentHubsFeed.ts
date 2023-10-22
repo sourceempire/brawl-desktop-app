@@ -1,4 +1,4 @@
-import { useFeed } from 'brawl-websocket';
+import { useFeed } from '@sourceempire/brawl-websocket';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 
 export default function useTournamentHubsFeed() {

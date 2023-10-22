@@ -4,7 +4,7 @@ import { Animation } from 'common/ui';
 import { InnerWrapper, OuterWrapper } from 'common/ui/EllipsisText/EllipsisText.styles';
 import simpleLoading from 'assets/animations/simple-loading.json';
 import { theme } from 'assets/styles/Theme';
-import { Icons } from 'common/ui';
+import { Icons } from '@sourceempire/brawl-ui';
 
 export const UserCard = styled.div`
   display: flex;
@@ -66,7 +66,7 @@ export const ProfileImage = styled.img<{ size?: ProfileImageSize }>`
 
 export const LeaderStar = styled(Icons.Star)<{ size?: LeaderStarSize }>`
   position: absolute;
-  fill: yellow;
+  color: yellow;
   top: 0;
   right: 0;
   transform: translate(40%, -40%);

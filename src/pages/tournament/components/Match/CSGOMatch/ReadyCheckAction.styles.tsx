@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Animation, Icons } from 'common/ui';
+import { Animation } from 'common/ui';
 import simpleLoading from 'assets/animations/simple-loading.json';
+import { Icons } from '@sourceempire/brawl-ui';
 
 export const Wrapper = styled.div``;
 

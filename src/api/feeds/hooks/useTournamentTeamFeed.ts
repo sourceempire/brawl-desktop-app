@@ -1,4 +1,4 @@
-import { useFeed } from 'brawl-websocket';
+import { useFeed } from '@sourceempire/brawl-websocket';
 import { TournamentTeam } from 'types/tournaments/TournamentTeam';
 
 type FeedWithoutTeam = {

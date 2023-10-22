@@ -1,16 +1,12 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { EllipsisText, Icons } from 'common/ui';
+import { EllipsisText } from 'common/ui';
 
 export const RequestSentText = styled.div`
   opacity: 0.5;
   ${({ theme }) => css`
     margin-right: ${theme.spacing.base}px;
   `}
-`;
-
-export const RemoveRequestIcon = styled(Icons.RemoveFriend)`
-  padding: 1px;
 `;
 
 export const UserTag = styled(EllipsisText)`

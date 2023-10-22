@@ -80,6 +80,4 @@ Thumbs.db
 
 electron-builder.yml
 
-
-
-
+.npmrc

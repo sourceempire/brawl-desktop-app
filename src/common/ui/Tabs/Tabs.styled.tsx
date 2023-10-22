@@ -79,11 +79,11 @@ export const TabsBarTab = styled.div<{ active?: boolean }>`
     position: relative;
     margin: 0px 9px;
 
-    :first-child {
+    :first-of-type {
       margin-left: 0px;
     }
 
-    :last-child {
+    :last-of-type {
       margin-right: 0px;
     }
 

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useFeed } from 'brawl-websocket';
+import { useFeed } from '@sourceempire/brawl-websocket';
 import { Avatar } from 'types/user/User';
 
 type Params = {

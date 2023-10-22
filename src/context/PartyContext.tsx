@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { useFeed } from 'brawl-websocket';
+import { useFeed } from '@sourceempire/brawl-websocket';
 import { useLoggedInUser } from 'common/hooks';
 import { PartyState } from 'types/Party';
 

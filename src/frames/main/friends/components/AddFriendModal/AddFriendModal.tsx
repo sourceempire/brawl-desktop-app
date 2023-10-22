@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { PotentialFriend, potentialFriendsSearch } from 'api/requests/FriendRequests';
-import { useEvent } from 'brawl-websocket';
+import { useEvent } from '@sourceempire/brawl-websocket';
 import { useDebounce } from 'common/hooks';
 import popup from 'common/popup';
-import { Icons, Input, Modal } from 'common/ui';
+import { Input, Modal } from 'common/ui';
 import { InputSize } from 'common/ui/Input/Input.types';
 import AddFriendCard from '../AddFriendCard';
 import { Players, maxNumberOfUsers } from './AddFriendModal.styles';
 import { theme } from 'assets/styles/Theme';
+import { Icons } from '@sourceempire/brawl-ui';
 
 type Props = {
   isOpen: boolean;
@@ -56,7 +57,7 @@ const AddFriendModal = ({ isOpen, onClose }: Props) => {
   return (
     <Modal isOpen={isOpen} title="Add Friend" width="350px" onRequestClose={onClose}>
       <Input
-        icon={<Icons.Search fill={theme.colors.white} height={14} />}
+        icon={<Icons.Search />}
         onChange={search}
         value={searchString}
         size={InputSize.SMALL}

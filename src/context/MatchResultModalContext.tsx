@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { useEvent } from 'brawl-websocket';
+import { useEvent } from '@sourceempire/brawl-websocket';
 import { Modal } from 'common/ui';
 import MatchResultModalContent from 'frames/main/modals/MatchResultModal/MatchResultModalContent';
 

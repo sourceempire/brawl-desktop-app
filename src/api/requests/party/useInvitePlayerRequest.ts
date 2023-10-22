@@ -1,4 +1,4 @@
-import { usePost, ErrorResponse } from 'brawl-fetch';
+import { usePost, ErrorResponse } from '@sourceempire/brawl-fetch';
 import popup from 'common/popup';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;

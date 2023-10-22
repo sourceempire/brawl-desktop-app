@@ -1,5 +1,3 @@
-import { IconEnum, SVGComponent } from 'common/ui';
-
 export type Props = {
   children: React.ReactNode;
   className?: string;
@@ -7,7 +5,7 @@ export type Props = {
   accent?: boolean;
   alert?: boolean;
   small?: boolean;
-  icon?: IconEnum | SVGComponent | string;
+  icon?: React.ReactNode;
   tabIndex?: number;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };

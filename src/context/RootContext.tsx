@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { UserRequests } from 'api/requests';
-import { ImageCacheProvider } from 'brawl-image';
-import ServerSubscriptionProvider from 'brawl-websocket';
+import { ImageCacheProvider } from '@sourceempire/brawl-image';
+import ServerSubscriptionProvider from '@sourceempire/brawl-websocket';
 import { MatchResultModalContextProvider } from './MatchResultModalContext';
 import { PartyContextProvider } from './PartyContext';
 import { UserContextProvider } from './UserContext';
