@@ -1,4 +1,4 @@
-import brawlFetch from 'brawl-fetch';
+import brawlFetch from '@sourceempire/brawl-fetch';
 
 export type AuthType = 'password' | 'openid';
 

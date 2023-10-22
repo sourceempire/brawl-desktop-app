@@ -9,7 +9,7 @@ import {
   type RegisterForm,
   endpoints
 } from 'api/requests/AuthRequests';
-import { ErrorResponse, useGet } from 'brawl-fetch';
+import { ErrorResponse, useGet } from '@sourceempire/brawl-fetch';
 import Window from 'electron-window';
 import { useNavigate } from 'react-router-dom';
 import { ErrorCode } from 'types/ErrorCode';

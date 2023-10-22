@@ -1,4 +1,4 @@
-import { useFeed } from 'brawl-websocket';
+import { useFeed } from '@sourceempire/brawl-websocket';
 import { Bracket as BracketType } from 'types/tournaments/Bracket';
 
 type Params = {

@@ -128,12 +128,12 @@ export const MarkdownStyling = styled.div`
       padding: 0;
     }
 
-    a:first-child h1,
-    a:first-child h2,
-    a:first-child h3,
-    a:first-child h4,
-    a:first-child h5,
-    a:first-child h6 {
+    a:first-of-type h1,
+    a:first-of-type h2,
+    a:first-of-type h3,
+    a:first-of-type h4,
+    a:first-of-type h5,
+    a:first-of-type h6 {
       margin-top: 0;
       padding-top: 0;
     }
@@ -155,8 +155,8 @@ export const MarkdownStyling = styled.div`
       padding-left: 20px;
     }
 
-    ul :first-child,
-    ol :first-child {
+    ul :first-of-type,
+    ol :first-of-type {
       margin-top: 0;
     }
 
@@ -170,10 +170,10 @@ export const MarkdownStyling = styled.div`
       padding: 0;
       margin: 15px 0 5px;
     }
-    dl dt:first-child {
+    dl dt:first-of-type {
       padding: 0;
     }
-    dl dt > :first-child {
+    dl dt > :first-of-type {
       margin-top: 0;
     }
     dl dt > :last-child {
@@ -183,7 +183,7 @@ export const MarkdownStyling = styled.div`
       margin: 0 0 15px;
       padding: 0 15px;
     }
-    dl dd > :first-child {
+    dl dd > :first-of-type {
       margin-top: 0;
     }
     dl dd > :last-child {
@@ -195,7 +195,7 @@ export const MarkdownStyling = styled.div`
       padding: 0 15px;
       color: #777777;
     }
-    blockquote > :first-child {
+    blockquote > :first-of-type {
       margin-top: 0;
     }
     blockquote > :last-child {
@@ -226,8 +226,8 @@ export const MarkdownStyling = styled.div`
       margin: 0;
       padding: 6px 13px;
     }
-    table tr th :first-child,
-    table tr td :first-child {
+    table tr th :first-of-type,
+    table tr td :first-of-type {
       margin-top: 0;
     }
     table tr th :last-child,

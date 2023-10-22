@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Icons } from 'common/ui';
 import { AvatarImage } from './AvatarChoice.styles';
+import { Icons } from '@sourceempire/brawl-ui';
 
 export const Wrapper = styled.div<{ hide: boolean }>`
   display: grid;
@@ -27,7 +27,7 @@ export const NewAvatarIcon = styled(Icons.Plus)`
   width: 59px;
 
   ${({ theme }) => css`
-    fill: ${theme.colors.textPrimaryLight};
+    color: ${theme.colors.textPrimaryLight};
   `}
 `;
 

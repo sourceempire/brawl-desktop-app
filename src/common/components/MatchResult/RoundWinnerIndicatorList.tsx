@@ -1,5 +1,4 @@
 import { Fragment, MutableRefObject, useEffect, useRef } from 'react';
-import { Icons } from 'common/ui';
 import { CSGORoundEndReason, RoundWin } from 'types/match/Match';
 import { CSGOGameModes } from 'types/MatchSettings';
 import { Team } from 'types/team/Team';
@@ -11,6 +10,7 @@ import {
   Wrapper
 } from './RoundWinnerIndicatorList.styles';
 import { theme } from 'assets/styles/Theme';
+import { GameIcons, Icons } from '@sourceempire/brawl-ui';
 
 const { COMPETITIVE, WINGMAN, ONE_VS_ONE } = CSGOGameModes;
 const { ELIMINATION, EXPLODE, DEFUSE, TIME } = CSGORoundEndReason;
@@ -31,11 +31,11 @@ type Props = {
 const RoundWinnerIcon = ({ reason }: { reason: CSGORoundEndReason }) => {
   switch (reason) {
     case ELIMINATION:
-      return <Icons.Skull fill={theme.colors.white} height={15} />;
+      return <GameIcons.DeathSkull fill={theme.colors.white} height={15} />;
     case EXPLODE:
-      return <Icons.Explosion fill={theme.colors.white} height={15} />;
+      return <GameIcons.MineExplosion fill={theme.colors.white} height={15} />;
     case DEFUSE:
-      return <Icons.DefuseKit fill={theme.colors.white} height={15} />;
+      return <GameIcons.BoltCutter fill={theme.colors.white} height={15} />;
     case TIME:
       return <Icons.Clock fill={theme.colors.white} height={15} />;
   }

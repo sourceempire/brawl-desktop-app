@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Icons } from '../Icon';
+import { Icons } from '@sourceempire/brawl-ui';
 
 type ContentProps = {
   width?: string;
@@ -42,14 +42,14 @@ export const Header = styled.div`
 `;
 
 export const CrossButton = styled(Icons.Cross)`
-  height: 14px;
-  width: 14px;
-  fill: ${({ theme }) => theme.colors.white};
+  height: 18px;
+  width: 18px;
+  color: ${({ theme }) => theme.colors.white};
   opacity: 0.5;
   position: absolute;
   left: -12px;
   top: -12px;
-  padding: 12px;
+  padding: 6px;
 
   :hover {
     background-color: ${({ theme }) => theme.colors.surface.hover};

@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { acceptFriendRequest, declineFriendRequest } from 'api/requests/FriendRequests';
 import popup from 'common/popup';
-import { Icons } from 'common/ui';
 import { PublicUser } from 'types/user/User';
 import { UserTag } from '../FriendCard/FriendCard.styles';
 import { ProfileImage, SimpleLoading, UserCard } from '../Shared.styles';
 import { AcceptAction, DeclineAction, RequestActions } from './FriendRequestCard.styles';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
-import { theme } from 'assets/styles/Theme';
+import { Icons } from '@sourceempire/brawl-ui';
 
 type Props = {
   user: PublicUser;
@@ -42,7 +41,7 @@ const FriendRequestCard = ({ user }: Props) => {
           />
           <DeclineAction
             onClick={() => makeRequest(declineFriendRequest)}
-            icon={<Icons.Cross fill={theme.colors.white} height={14} />}
+            icon={<Icons.Cross height={18} />}
             isCircle
           />
         </RequestActions>

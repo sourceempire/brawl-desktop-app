@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Icons } from '../Icon';
+import { Icons } from '@sourceempire/brawl-ui';
 
 export const Wrapper = styled.div`
   display: inline-flex;
@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 
 export const Check = styled(Icons.Check)`
   ${({ theme }) => css`
-    fill: ${theme.colors.textPrimaryDark};
+    color: ${theme.colors.textPrimaryDark};
   `}
 `;
 

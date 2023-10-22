@@ -1,4 +1,4 @@
-import { ErrorResponse, usePost } from 'brawl-fetch';
+import { ErrorResponse, usePost } from '@sourceempire/brawl-fetch';
 import popup from 'common/popup';
 import { ErrorCode } from 'types/ErrorCode';
 

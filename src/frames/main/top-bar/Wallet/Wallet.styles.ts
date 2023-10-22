@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import { Icons } from 'common/ui';
+import { Icons } from '@sourceempire/brawl-ui';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -32,9 +32,9 @@ export const MoneyContainer = styled.div`
 
 export const DepositIcon = styled(Icons.Plus)`
   ${({ theme }) => css`
-    fill: ${theme.colors.accent.base};
-    width: ${theme.spacing.baseX2}px;
-    height: ${theme.spacing.baseX2}px;
+    color: ${theme.colors.accent.base};
+    width: ${theme.spacing.baseX3}px;
+    height: ${theme.spacing.baseX3}px;
   `};
 `;
 

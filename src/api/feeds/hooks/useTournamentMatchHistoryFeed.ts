@@ -1,4 +1,4 @@
-import { useFeed } from 'brawl-websocket';
+import { useFeed } from '@sourceempire/brawl-websocket';
 import { useLoggedInUser } from 'common/hooks';
 import { TournamentMatchHistory } from 'types/tournaments/TournamentInfo';
 

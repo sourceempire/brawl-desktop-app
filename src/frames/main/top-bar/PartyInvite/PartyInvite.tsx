@@ -1,7 +1,7 @@
 import React, { useMemo, useRef, useState } from 'react';
 import { usePartyFeed } from 'api/feeds';
 import { useContextMenuPosition } from 'common/hooks';
-import { ContextMenu, ContextMenuTitle, Icons } from 'common/ui';
+import { ContextMenu, ContextMenuTitle } from 'common/ui';
 import { InputSize } from 'common/ui/Input/Input.types';
 import { ProfileImage } from 'frames/main/friends/components/Shared.styles';
 import { useFriendList } from 'frames/main/friends/hooks/useFriendList';
@@ -17,8 +17,8 @@ import {
   Wrapper
 } from './PartyInvite.styles';
 import tempProfileImage from 'assets/images/temporary-profile-image.jpg';
-import { theme } from 'assets/styles/Theme';
 import { useInvitePlayerRequest, useRevokeInviteRequest } from 'api/requests/party';
+import { Icons } from '@sourceempire/brawl-ui';
 
 const PartyInvite = () => {
   const { party } = usePartyFeed();
@@ -106,7 +106,7 @@ const PartyInvite = () => {
 
                     {hasInvite && (
                       <CancelInviteAction
-                        icon={<Icons.Cross fill={theme.colors.white} height={14} />}
+                        icon={<Icons.Cross height={18} />}
                         onClick={() => handleRevokeInvite(friend.id)}
                         hint="Revoke Invite"
                       />

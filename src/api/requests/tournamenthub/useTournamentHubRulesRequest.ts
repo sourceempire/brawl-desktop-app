@@ -1,4 +1,4 @@
-import { useGetImmediate } from 'brawl-fetch';
+import { useGetImmediate } from '@sourceempire/brawl-fetch';
 import { Rules } from 'types/Rules';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;

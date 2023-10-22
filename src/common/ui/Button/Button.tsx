@@ -1,4 +1,4 @@
-import { ButtonIcon, Wrapper } from './Button.styles';
+import { IconContainer, Wrapper } from './Button.styles';
 import { Props } from './Button.types';
 
 export const Button = ({
@@ -22,7 +22,7 @@ export const Button = ({
       small={small}
       hasIcon={icon !== undefined}
       tabIndex={tabIndex}>
-      {icon && <ButtonIcon icon={icon} />}
+      {icon && <IconContainer>{icon}</IconContainer>}
       {children}
     </Wrapper>
   );
