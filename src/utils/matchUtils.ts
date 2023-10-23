@@ -1,5 +1,5 @@
 import { MatchOutcome } from 'pages/tournament/components/BracketMatch/BracketMatch.types';
-import { MatchStats } from 'types/match/Match';
+import { Match, MatchStats } from 'types/match/Match';
 import { CSGOGameModes, CSGOSeriesType } from 'types/MatchSettings';
 
 type Options = {
@@ -10,7 +10,7 @@ type Options = {
 type MatchOutcomeProps = {
   hasMatchStats?: boolean;
   teamIdOfLoggedInUser?: string;
-  matchStats: MatchStats;
+  gameMatchInfo: Match;
 };
 
 export const csgoMatchSettingsModeShortForm = (mode: CSGOGameModes) => {
@@ -37,8 +37,8 @@ export const getTeamScore = ({ matchStats, teamId }: Options) => {
   return matchStats.maps[0].teams[teamId].score;
 };
 
-export const getMatchOutcome = ({ teamIdOfLoggedInUser, matchStats }: MatchOutcomeProps) => {
-  if (matchStats.winner === teamIdOfLoggedInUser) {
+export const getMatchOutcome = ({ teamIdOfLoggedInUser, gameMatchInfo }: MatchOutcomeProps) => {
+  if (gameMatchInfo.winner === teamIdOfLoggedInUser) {
     return MatchOutcome.Win;
   } else {
     return MatchOutcome.Loss;

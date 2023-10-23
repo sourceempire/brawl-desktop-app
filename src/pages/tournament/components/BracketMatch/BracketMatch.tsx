@@ -24,19 +24,7 @@ type Props = {
 
 const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }: Props) => {
   const user = useLoggedInUser();
-  const { gameMatchInfo, isLoading } = useMatchFeed({ matchId });
-  const {
-    hasMatchStats,
-    matchStats,
-    isLoading: isLoadingMatchStats
-  } = useMatchStatsFeed({ matchId });
-
-  const team1Score = hasMatchStats
-    ? getTeamScore({ matchStats, teamId: gameMatchInfo.team1.id })
-    : null;
-  const team2Score = hasMatchStats
-    ? getTeamScore({ matchStats, teamId: gameMatchInfo.team2.id })
-    : null;
+  const { gameMatchInfo, team1, team2, isLoading } = useMatchFeed({ matchId });
 
   let teamIdOfLoggedInUser;
 
@@ -47,19 +35,18 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
   }
 
   const loggedInUserMatchOutcome =
-    hasMatchStats && teamIdOfLoggedInUser
-      ? getMatchOutcome({ teamIdOfLoggedInUser, matchStats })
+    !isLoading && teamIdOfLoggedInUser
+      ? getMatchOutcome({ teamIdOfLoggedInUser, gameMatchInfo })
       : MatchOutcome.NotDecided;
 
-  if (isLoading || isLoadingMatchStats) return null;
+  if (isLoading) return null;
 
   return (
     <Wrapper
       matchIndex={matchIndex}
       roundIndex={roundIndex}
       isFinal={isFinal}
-      isFirstMatch={isFirstMatch}
-      isMatchOver={hasMatchStats}>
+      isFirstMatch={isFirstMatch}>
       <Team1
         matchOutcome={
           gameMatchInfo.team1?.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null
@@ -68,7 +55,9 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
         <TeamName>{gameMatchInfo.team1?.name}</TeamName>
-        <TeamScore winner={matchStats.winner === gameMatchInfo.team1?.id}>{team1Score}</TeamScore>
+        <TeamScore winner={gameMatchInfo.winner === gameMatchInfo.team1?.id}>
+          {team1.score}
+        </TeamScore>
       </Team1>
       <Team2
         matchOutcome={
@@ -78,7 +67,9 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
         <TeamName>{gameMatchInfo.team2?.name}</TeamName>
-        <TeamScore winner={matchStats.winner === gameMatchInfo.team2?.id}>{team2Score}</TeamScore>
+        <TeamScore winner={gameMatchInfo.winner === gameMatchInfo.team2?.id}>
+          {team2.score}
+        </TeamScore>
       </Team2>
     </Wrapper>
   );
