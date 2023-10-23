@@ -23,9 +23,15 @@ export const ProfileImage = styled.img`
   width: 33px;
   object-fit: contain;
   ${({ theme }) => css`
-    margin-right: ${theme.spacing.baseX2}px;
     margin-left: ${theme.spacing.base}px;
     border-radius: ${theme.borderRadius.default};
+  `}
+`;
+
+export const ProfileWrapper = styled.div`
+  position: relative;
+  ${({ theme }) => css`
+    margin-right: ${theme.spacing.baseX2}px;
   `}
 `;
 

@@ -3,14 +3,27 @@ import { useUserFeed } from 'api/feeds';
 import { useLoggedInUser } from 'common/hooks';
 import { EllipsisText } from 'common/ui';
 import { Team } from 'types/team/Team';
-import { ProfileImage, TableData, TableHeader, TeamLogo, Wrapper } from './MockTeamTable.styles';
+import {
+  ProfileImage,
+  ProfileWrapper,
+  TableData,
+  TableHeader,
+  TeamLogo,
+  Wrapper
+} from './MockTeamTable.styles';
 import placeholderTeamLogo from 'assets/images/placeholder-team-logo.png';
+import { LeaderStar } from 'frames/main/friends/components/Shared.styles';
 
-type Props = {
+type TeamTableProps = {
   team: Team;
 };
 
-const TeamTable = ({ team }: Props) => {
+type PlayerCellProps = {
+  userId: string;
+  team: Team;
+};
+
+const TeamTable = ({ team }: TeamTableProps) => {
   return (
     <Wrapper>
       <TableHeader>
@@ -19,7 +32,7 @@ const TeamTable = ({ team }: Props) => {
       </TableHeader>
 
       {team.players.map((player) => {
-        return <PlayerCell key={player.userId} userId={player.userId} />;
+        return <PlayerCell key={player.userId} userId={player.userId} team={team} />;
       })}
     </Wrapper>
   );
@@ -27,7 +40,7 @@ const TeamTable = ({ team }: Props) => {
 
 export default TeamTable;
 
-const PlayerCell = ({ userId }: { userId: string }) => {
+const PlayerCell = ({ userId, team }: PlayerCellProps) => {
   const loggedInUser = useLoggedInUser();
   const { user } = useUserFeed({ userId });
 
@@ -35,9 +48,14 @@ const PlayerCell = ({ userId }: { userId: string }) => {
 
   const isLoggedInUser = loggedInUser.id === user.id;
 
+  const isLeader = user.id === team.teamLeaderId;
+
   return (
     <TableData bold={isLoggedInUser}>
-      <ProfileImage src={user?.imageUrl} />
+      <ProfileWrapper>
+        {isLeader && <LeaderStar size="small" />}
+        <ProfileImage src={user?.imageUrl} />
+      </ProfileWrapper>
       <EllipsisText>{user?.userTag}</EllipsisText>
     </TableData>
   );
