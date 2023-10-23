@@ -1,13 +1,27 @@
 import styled from '@emotion/styled';
 import { Image } from '@sourceempire/brawl-image';
-import { css } from '@emotion/react';
+import { css, keyframes } from '@emotion/react';
 import { hsla } from 'utils/styledUtils';
 
 export const ScoreMiddleSection = styled.div`
   font-size: 20px;
 `;
 
-export const BackgroundImage = styled(Image)`
+type BackgroundProps = {
+  disableFade?: boolean;
+};
+
+const fadeInKeyframes = keyframes`
+  from {
+    opacity: 0;
+    background-position: 0 -200px;
+  } to {
+    opacity: 1;
+    background-position: 0 -230px;
+  }
+`;
+
+export const BackgroundImage = styled(Image)<BackgroundProps>`
   position: absolute;
   width: 100%;
   height: 100%;
@@ -16,6 +30,12 @@ export const BackgroundImage = styled(Image)`
   z-index: 0;
   object-fit: cover;
   filter: grayscale(1);
+  ${({ disableFade }) => css`
+    ${!disableFade &&
+    css`
+      animation: ${fadeInKeyframes} 0.6s forwards;
+    `}
+  `}
 `;
 
 export const Overlay = styled.div`
