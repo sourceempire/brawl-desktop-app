@@ -1,7 +1,6 @@
 import useMatchFeed from 'api/feeds/hooks/useMatchFeed';
-import { useMatchStatsFeed } from 'api/feeds/hooks/useMatchStatsFeed';
 import { useLoggedInUser } from 'common/hooks';
-import { getMatchOutcome, getTeamScore } from 'utils/matchUtils';
+import { getMatchOutcome } from 'utils/matchUtils';
 import {
   Team1,
   Team2,
