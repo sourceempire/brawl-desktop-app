@@ -27,10 +27,10 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
 
   let teamIdOfLoggedInUser;
 
-  if (gameMatchInfo.team1?.players.some((player) => player.userId === user.id)) {
-    teamIdOfLoggedInUser = gameMatchInfo.team1.id;
-  } else if (gameMatchInfo.team2?.players.some((player) => player.userId === user.id)) {
-    teamIdOfLoggedInUser = gameMatchInfo.team2.id;
+  if (team1.players.some((player) => player.userId === user.id)) {
+    teamIdOfLoggedInUser = team1.id;
+  } else if (team2.players.some((player) => player.userId === user.id)) {
+    teamIdOfLoggedInUser = team2.id;
   }
 
   const loggedInUserMatchOutcome =
@@ -46,29 +46,19 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
       roundIndex={roundIndex}
       isFinal={isFinal}
       isFirstMatch={isFirstMatch}>
-      <Team1
-        matchOutcome={
-          gameMatchInfo.team1?.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null
-        }>
+      <Team1 matchOutcome={team1.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null}>
         <TeamLogo>
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
-        <TeamName>{gameMatchInfo.team1?.name}</TeamName>
-        <TeamScore winner={gameMatchInfo.winner === gameMatchInfo.team1?.id}>
-          {team1.score}
-        </TeamScore>
+        <TeamName>{team1.name}</TeamName>
+        <TeamScore winner={gameMatchInfo.winner === team1.id}>{team1.score}</TeamScore>
       </Team1>
-      <Team2
-        matchOutcome={
-          gameMatchInfo.team2?.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null
-        }>
+      <Team2 matchOutcome={team2.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null}>
         <TeamLogo>
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
-        <TeamName>{gameMatchInfo.team2?.name}</TeamName>
-        <TeamScore winner={gameMatchInfo.winner === gameMatchInfo.team2?.id}>
-          {team2.score}
-        </TeamScore>
+        <TeamName>{team2.name}</TeamName>
+        <TeamScore winner={gameMatchInfo.winner === team2.id}>{team2.score}</TeamScore>
       </Team2>
     </Wrapper>
   );
