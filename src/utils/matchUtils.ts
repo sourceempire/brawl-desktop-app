@@ -27,7 +27,9 @@ export const csgoMatchSettingsSeriesTypeLongForm = (type: CSGOSeriesType) => {
 export const getMatchOutcome = ({ teamIdOfLoggedInUser, gameMatchInfo }: MatchOutcomeProps) => {
   if (gameMatchInfo.winner === teamIdOfLoggedInUser) {
     return MatchOutcome.Win;
-  } else {
+  } else if (gameMatchInfo.winner && gameMatchInfo.winner !== teamIdOfLoggedInUser) {
     return MatchOutcome.Loss;
+  } else {
+    return MatchOutcome.NotDecided;
   }
 };
