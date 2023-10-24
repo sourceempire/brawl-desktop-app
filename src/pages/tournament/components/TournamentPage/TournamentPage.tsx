@@ -1,4 +1,4 @@
-import { useTournamentMatchHistoryFeed } from 'api/feeds';
+import { useBracketFeed, useTournamentMatchHistoryFeed } from 'api/feeds';
 import useCurrentTournamentMatchFeed from 'api/feeds/hooks/useCurrentTournamentMatchFeed';
 import useTournamentFeed from 'api/feeds/hooks/useTournamentFeed';
 import { Link, Navigate, Route, Routes, useParams } from 'react-router-dom';
@@ -21,6 +21,7 @@ import {
   TournamentRoutesWrapper,
   Wrapper
 } from './TournamentPage.styles';
+import { isSingleElimination } from 'types/tournaments/Bracket';
 
 const TournamentPage = () => {
   const { tournamentId } = useParams() as { tournamentId: string };
@@ -28,6 +29,7 @@ const TournamentPage = () => {
   const { tournament, isLoading: isLoadingTournament } = useTournamentFeed({ tournamentId });
   const { matchId, isLoading: isLoadingMatchId } = useCurrentTournamentMatchFeed({ tournamentId });
   const { matchHistoryList } = useTournamentMatchHistoryFeed({ tournamentId });
+  const { bracket, isLoading: isLoadingBracket } = useBracketFeed({ tournamentId });
   const isUserInTournament = matchId !== null;
 
   if (isLoadingMatchId || isLoadingTournament) return null;
@@ -35,7 +37,7 @@ const TournamentPage = () => {
   return (
     <PageContainer>
       <Wrapper>
-        {isUserInTournament ? (
+        {isUserInTournament && !bracket.isFinished ? (
           <>
             <TournamentInfo tournament={tournament} currentMatchId={matchId} />
 
@@ -76,7 +78,9 @@ const TournamentPage = () => {
         ) : (
           <SpectatorWrapper>
             <TournamentName>{tournament.name}</TournamentName>
-            <Bracket tournamentId={tournament.id} />
+            {!isLoadingBracket && isSingleElimination(bracket) ? (
+              <Bracket tournamentId={tournament.id} />
+            ) : null}
           </SpectatorWrapper>
         )}
       </Wrapper>
