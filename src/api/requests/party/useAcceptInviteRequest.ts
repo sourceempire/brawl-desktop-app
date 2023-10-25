@@ -14,12 +14,11 @@ export const useAcceptInviteRequest = () => {
     popup.warning(error.message, { timer: 3000 });
   };
 
-  const [acceptInvite, ...response] = usePost<void, Body>(acceptInviteEndpoint, {
+  const [acceptInvite] = usePost<void, Body>(acceptInviteEndpoint, {
     onError
   });
 
   return {
-    acceptInvite,
-    ...response
+    acceptInvite
   };
 };
