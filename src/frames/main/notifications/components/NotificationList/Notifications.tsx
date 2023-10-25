@@ -24,6 +24,8 @@ const Notifications = () => {
     relatedElementRef: actionButtonRef
   });
 
+  if (isLoading) return null;
+
   const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
     const { scrollTop, scrollHeight, clientHeight } = event.currentTarget;
     const scrollBottom = scrollHeight - scrollTop - clientHeight;

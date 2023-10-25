@@ -1,5 +1,5 @@
 import { useTournamentMatchHistoryFeed } from 'api/feeds';
-import useCurrentTournamentMatchFeed from 'api/feeds/hooks/useCurrentTournamentMatchFeed';
+import useCurrentTournamentMatchIdFeed from 'api/feeds/hooks/useCurrentTournamentMatchIdFeed';
 import useTournamentFeed from 'api/feeds/hooks/useTournamentFeed';
 import { Link, Navigate, Route, Routes, useParams } from 'react-router-dom';
 import PageContainer from 'common/components/PageContainer';
@@ -26,11 +26,16 @@ const TournamentPage = () => {
   const { tournamentId } = useParams() as { tournamentId: string };
 
   const { tournament, isLoading: isLoadingTournament } = useTournamentFeed({ tournamentId });
-  const { matchId, isLoading: isLoadingMatchId } = useCurrentTournamentMatchFeed({ tournamentId });
-  const { matchHistoryList } = useTournamentMatchHistoryFeed({ tournamentId });
-  const isUserInTournament = matchId !== null;
+  const { matchId, isLoading: isLoadingCurrentMatchId } = useCurrentTournamentMatchIdFeed({
+    tournamentId
+  });
+  const { isLoading: isLoadingMatchHistory, matchHistoryList } = useTournamentMatchHistoryFeed({
+    tournamentId
+  });
 
-  if (isLoadingMatchId || isLoadingTournament) return null;
+  if (isLoadingCurrentMatchId || isLoadingTournament) return null;
+
+  const isUserInTournament = matchId !== null;
 
   return (
     <PageContainer>
@@ -64,10 +69,12 @@ const TournamentPage = () => {
                   />
                   <Route path="bracket" element={<Bracket tournamentId={tournament.id} />} />
                   <Route path="rules" element={<Rules />} />
-                  <Route
-                    path="match-history/*"
-                    element={<MatchHistory matchList={matchHistoryList} />}
-                  />
+                  {!isLoadingMatchHistory && (
+                    <Route
+                      path="match-history/*"
+                      element={<MatchHistory matchList={matchHistoryList} />}
+                    />
+                  )}
                   <Route path="*" element={<Navigate to="bracket" replace />} />
                 </Routes>
               </TournamentRoutesWrapper>

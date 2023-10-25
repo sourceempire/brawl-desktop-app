@@ -2,10 +2,16 @@ import { useFeed } from '@sourceempire/brawl-websocket';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 
 export default function useTournamentHubsFeed() {
-  const { data, loading } = useFeed<{ tournamentHubs: TournamentHub[] }>('tournament.hubs');
+  const feed = useFeed<{ tournamentHubs: TournamentHub[] }>('tournament.hubs');
+
+  if (feed.loading) {
+    return {
+      isLoading: feed.loading
+    };
+  }
 
   return {
-    tournamentHubs: data.tournamentHubs ?? [],
-    isLoading: loading
+    tournamentHubs: feed.data.tournamentHubs,
+    isLoading: feed.loading
   };
 }

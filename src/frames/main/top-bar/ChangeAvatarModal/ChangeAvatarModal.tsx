@@ -18,7 +18,7 @@ type Props = {
 
 const ChangeAvatarModal = ({ isOpen, onClose }: Props) => {
   const user = useLoggedInUser();
-  const { avatars } = useUserAvatarsFeed({ userId: user.id });
+  const { avatars, isLoading } = useUserAvatarsFeed({ userId: user.id });
 
   const [fileToUpload, setFileToUpload] = useState<File>();
 
@@ -39,6 +39,8 @@ const ChangeAvatarModal = ({ isOpen, onClose }: Props) => {
   useEffect(() => {
     if (!fileToUpload) return;
   }, [fileToUpload]);
+
+  if (isLoading) return null;
 
   return (
     <Modal isOpen={isOpen} title="Select an avatar" onRequestClose={onClose}>

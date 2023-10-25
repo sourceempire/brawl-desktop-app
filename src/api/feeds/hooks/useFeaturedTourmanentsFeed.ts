@@ -6,11 +6,14 @@ type FeedType = {
 };
 
 const useFeaturedTourmanentsFeed = () => {
-  const { data, loading } = useFeed<FeedType>('tournament.hubs.featured');
+  const feed = useFeed<FeedType>('tournament.hubs.featured');
 
+  if (feed.loading) {
+    return { isLoading: feed.loading };
+  }
   return {
-    featuredTournamentHubs: data.featuredTournamentHubs ?? [],
-    isLoading: loading
+    featuredTournamentHubs: feed.data.featuredTournamentHubs,
+    isLoading: feed.loading
   };
 };
 

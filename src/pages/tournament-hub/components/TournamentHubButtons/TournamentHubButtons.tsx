@@ -2,7 +2,6 @@ import { useCallback } from 'react';
 import { Button } from 'common/ui';
 import { ButtonsWrapper, LeftButtons, RightButtons } from './TournamentHubButtons.styles';
 import { useTournamentTeamFeed, useTournamentHubFeed } from 'api/feeds';
-import { isFeedWithTeam } from 'api/feeds/hooks/useTournamentTeamFeed';
 import { useLoggedInUser } from 'common/hooks';
 import { useParams } from 'react-router-dom';
 import { PromptButton } from 'common/ui/PromptButton';
@@ -17,8 +16,8 @@ type Props = {
 const TournamentHubButtons = ({ handleOpenModal, openTeamSettings, handleCloseModal }: Props) => {
   const { hubId } = useParams() as { hubId: string };
   const user = useLoggedInUser();
-  const tournamentTeamFeed = useTournamentTeamFeed({ tournamentHubId: hubId, userId: user.id });
-  const { tournamentHub } = useTournamentHubFeed({ tournamentHubId: hubId });
+  const { isInTournamentTeam } = useTournamentTeamFeed({ tournamentHubId: hubId, userId: user.id });
+  const { tournamentHub, isLoading } = useTournamentHubFeed({ tournamentHubId: hubId });
 
   const onLeaveTournamentComplete = useCallback(() => {
     handleCloseModal();
@@ -42,6 +41,8 @@ const TournamentHubButtons = ({ handleOpenModal, openTeamSettings, handleCloseMo
     });
   };
 
+  if (isLoading) return null;
+
   return (
     <ButtonsWrapper>
       <LeftButtons>
@@ -56,7 +57,7 @@ const TournamentHubButtons = ({ handleOpenModal, openTeamSettings, handleCloseMo
       </LeftButtons>
       <RightButtons>
         {!tournamentHub.registrationClosed &&
-          (!isFeedWithTeam(tournamentTeamFeed) ? (
+          (!isInTournamentTeam ? (
             <Button primary onClick={openTeamSettings}>
               Join tournament
             </Button>
