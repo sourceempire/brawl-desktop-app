@@ -11,12 +11,18 @@ type Params = {
 };
 
 const useTournamentHubFeed = ({ tournamentHubId }: Params) => {
-  const { data, loading } = useFeed<FeedType>(`tournament.hub.${tournamentHubId}`);
+  const feed = useFeed<FeedType>(`tournament.hub.${tournamentHubId}`);
+
+  if (feed.loading) {
+    return {
+      isLoading: feed.loading
+    };
+  }
 
   return {
-    tournamentHub: data.tournamentHub ?? {},
-    tournamentIds: data.tournamentIds ?? [],
-    isLoading: loading
+    tournamentHub: feed.data.tournamentHub,
+    tournamentIds: feed.data.tournamentIds,
+    isLoading: feed.loading
   };
 };
 

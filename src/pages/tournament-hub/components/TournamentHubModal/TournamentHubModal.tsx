@@ -18,7 +18,7 @@ export function TournamentHubModal({ activeModal, closeModal }: Props) {
   const { hubId } = useParams() as { hubId: string };
   const user = useLoggedInUser();
   const { tournamentHub, isLoading } = useTournamentHubFeed({ tournamentHubId: hubId });
-  const { party } = usePartyFeed();
+  const partyState = usePartyFeed();
 
   if (isLoading) return null;
 
@@ -39,7 +39,7 @@ export function TournamentHubModal({ activeModal, closeModal }: Props) {
       <PrizesModal isOpen={activeModal === 'prizes'} onRequestClose={closeModal} />
       <TeamSettingsModal
         isOpen={activeModal === 'teamSettings'}
-        playerIds={party ? party.players : [user.id]}
+        playerIds={partyState.isInParty ? partyState.party.players : [user.id]}
         hubId={hubId}
         onRequestClose={closeModal}
       />

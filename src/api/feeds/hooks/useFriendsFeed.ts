@@ -6,10 +6,15 @@ type Params = {
 };
 
 const useFriendsFeed = ({ userId }: Params) => {
-  const { data, loading } = useFeed<{ friends: PublicUser[] }>(`friends.${userId}`);
+  const feed = useFeed<{ friends: PublicUser[] }>(`friends.${userId}`);
+
+  if (feed.loading) {
+    return { isLoading: feed.loading };
+  }
+
   return {
-    friends: data?.friends ?? [],
-    isLoading: loading
+    friends: feed.data.friends,
+    isLoading: feed.loading
   };
 };
 

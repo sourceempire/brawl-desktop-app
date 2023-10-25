@@ -15,17 +15,16 @@ const HomePage = () => {
 
   // const { news: newsList } = useNewsFeed();
   const { featuredTournamentHubs } = useFeaturedTourmanentsFeed();
-  const shownTournamentHub = featuredTournamentHubs.length > 0 ? featuredTournamentHubs[0] : null;
 
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
 
   return (
     <PageContainer>
       <Wrapper>
-        {shownTournamentHub && (
+        {featuredTournamentHubs?.[0] && (
           <PromotedTournament
-            tournamentInfo={shownTournamentHub}
-            onClick={() => navigate(`tournaments/hub/${shownTournamentHub.id}`)}
+            tournamentInfo={featuredTournamentHubs[0]}
+            onClick={() => navigate(`tournaments/hub/${featuredTournamentHubs[0].id}`)}
           />
         )}
         <Hero></Hero>

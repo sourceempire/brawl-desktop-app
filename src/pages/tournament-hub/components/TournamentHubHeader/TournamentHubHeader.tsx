@@ -21,16 +21,22 @@ import { Icons } from '@sourceempire/brawl-ui';
 
 const TournamentHubHeader = () => {
   const { hubId } = useParams() as { hubId: string };
-  const { tournamentHub } = useTournamentHubFeed({ tournamentHubId: hubId });
+  const state = useTournamentHubFeed({ tournamentHubId: hubId });
 
   const [isEntryFeeHintVisible, setEntryFeeHintVisible] = useState(false);
   const entryFeeRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const { Hint: EntryFeeHint } = useHint({
-    hintText: `€${new Money(tournamentHub.entryFeeCut).format()} fee taken`,
+    hintText: `€${new Money(
+      !state.isLoading ? state.tournamentHub.entryFeeCut : 0
+    ).format()} fee taken`,
     isVisible: isEntryFeeHintVisible,
     timeToVisibility: 300,
     relatedElementRef: entryFeeRef
   });
+
+  if (state.isLoading) return null;
+
+  const { tournamentHub } = state;
 
   const TournamentInfoArray: TournamentHubInfoRow[] = [
     {
