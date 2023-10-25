@@ -21,17 +21,14 @@ const useAuth = () => {
 
   const navigate = useNavigate();
 
-  const [loginValidate, { loading: loadingValidate }] = useGet<ErrorResponse>(
-    endpoints.LOGIN_VALIDATE,
-    {
-      onComplete: (error) => {
-        if (error.errorCode === ErrorCode.LoginValidateFail) {
-          return closeMainWindowAndOpenLogin();
-        }
-        closeLoginWindowAndOpenMain();
+  const [loginValidate, { state }] = useGet<ErrorResponse>(endpoints.LOGIN_VALIDATE, {
+    onComplete: (error) => {
+      if (error.errorCode === ErrorCode.LoginValidateFail) {
+        return closeMainWindowAndOpenLogin();
       }
+      closeLoginWindowAndOpenMain();
     }
-  );
+  });
 
   const { current: getAuthType } = useRef(async () => {
     setLoading(true);
@@ -106,7 +103,7 @@ const useAuth = () => {
     loginWithOpenId,
     register,
     logout,
-    isLoading: isLoading || loadingValidate,
+    isLoading: isLoading || state.status === 'loading',
     error
   };
 };
