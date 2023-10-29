@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { Image } from '@sourceempire/brawl-image';
 import { css, keyframes } from '@emotion/react';
 import { hsla } from 'utils/styledUtils';
 
@@ -21,7 +20,7 @@ const fadeInKeyframes = keyframes`
   }
 `;
 
-export const BackgroundImage = styled(Image)<BackgroundProps>`
+export const BackgroundImage = styled.img<BackgroundProps>`
   position: absolute;
   width: 100%;
   height: 100%;

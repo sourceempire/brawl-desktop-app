@@ -1,31 +1,24 @@
-import { useParams } from 'react-router-dom';
 import { Content, Score, TeamScore, TeamTables, Wrapper } from '../MatchResult.styles';
-import { useTournamentHubFeed } from 'api/feeds';
 import { Team } from 'types/team/Team';
 import { MockGameMatch } from 'types/match/Match';
 import { BackgroundImage, Overlay, ScoreMiddleSection } from './MockMatchResult.styles';
 import TeamTable from './MockTeamTable';
-import useTournamentFeed from 'api/feeds/hooks/useTournamentFeed';
+import defaultImage from 'assets/images/temporary-space.webp';
 
 type Props = {
   gameMatchInfo: MockGameMatch;
   team1: Team;
   team2: Team;
+  imageId?: string;
   disableBackgroundFadeIn?: boolean;
 };
 
-const MockMatchResult = ({ gameMatchInfo, team1, team2 }: Props) => {
-  const { tournamentId } = useParams() as { tournamentId: string };
-  const { tournament } = useTournamentFeed({ tournamentId });
-  const { tournamentHub, isLoading } = useTournamentHubFeed({
-    tournamentHubId: tournament.tournamentHubId
-  });
-
-  if (isLoading) return null;
+const MockMatchResult = ({ gameMatchInfo, team1, team2, imageId }: Props) => {
+  const backgroundImage = imageId ? imageId : defaultImage;
 
   return (
     <Wrapper>
-      <BackgroundImage imageId={tournamentHub.imageId} />
+      <BackgroundImage src={backgroundImage} />
       <Overlay />
       <Content>
         <Score>
