@@ -66,7 +66,6 @@ export const ProfileImage = styled.img<{ size?: ProfileImageSize }>`
 
 export const LeaderStar = styled(Icons.Star)<{ size?: LeaderStarSize }>`
   position: absolute;
-  fill: yellow;
   color: yellow;
   top: 0;
   right: 0;
