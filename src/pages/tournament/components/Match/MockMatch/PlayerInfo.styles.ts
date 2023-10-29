@@ -25,7 +25,7 @@ export const PlayerProfileImage = styled(ProfileImage)<{ transparent?: boolean }
 export const LeaderIcon = styled(Icons.Star)<{ reversed?: boolean }>`
   position: absolute;
   height: 25px;
-  fill: #ffcc00;
+  color: #ffcc00;
 
   ${({ reversed }) =>
     reversed
