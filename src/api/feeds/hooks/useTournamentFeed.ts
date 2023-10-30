@@ -6,11 +6,15 @@ type Params = {
 };
 
 const useTournamentFeed = ({ tournamentId }: Params) => {
-  const { data, loading } = useFeed<{ tournament: Tournament }>(`tournament.${tournamentId}`);
+  const feed = useFeed<{ tournament: Tournament }>(`tournament.${tournamentId}`);
+
+  if (feed.loading) {
+    return { isLoading: feed.loading };
+  }
 
   return {
-    tournament: data.tournament ?? {},
-    isLoading: loading
+    tournament: feed.data.tournament,
+    isLoading: feed.loading
   };
 };
 

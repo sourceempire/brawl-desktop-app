@@ -10,6 +10,6 @@ export { default as useFeaturedTourmanentsFeed } from './hooks/useFeaturedTourma
 export { default as useUserFeed } from './hooks/useUserFeed';
 export { default as useUserStatusFeed } from './hooks/useUserStatusFeed';
 export { default as useTournamentMatchHistoryFeed } from './hooks/useTournamentMatchHistoryFeed';
-export { default as useCurrentTournamentMatchFeed } from './hooks/useCurrentTournamentMatchFeed';
+export { default as useCurrentTournamentMatchIdFeed } from './hooks/useCurrentTournamentMatchIdFeed';
 export { default as useMatchFeed } from './hooks/useMatchFeed';
 export { default as useTournamentTeamFeed } from './hooks/useTournamentTeamFeed';

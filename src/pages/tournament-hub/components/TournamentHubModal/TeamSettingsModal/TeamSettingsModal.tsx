@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react';
 import { useTournamentTeamFeed } from 'api/feeds';
-import { isFeedWithTeam } from 'api/feeds/hooks/useTournamentTeamFeed';
 import { useLoggedInUser } from 'common/hooks';
 import { Modal } from 'common/ui';
 import { InputSize } from 'common/ui/Input/Input.types';
@@ -31,8 +30,10 @@ export function TeamSettingsModal({ playerIds, isOpen, hubId, onRequestClose }: 
   const [teamName, setTeamName] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const user = useLoggedInUser();
-  const tournamentTeamFeed = useTournamentTeamFeed({ tournamentHubId: hubId, userId: user.id });
-  const userInExistingTeam = isFeedWithTeam(tournamentTeamFeed);
+  const { isInTournamentTeam, tournamentTeam } = useTournamentTeamFeed({
+    tournamentHubId: hubId,
+    userId: user.id
+  });
 
   const closeTeamSettings = () => {
     setErrorMessage(null);
@@ -72,7 +73,7 @@ export function TeamSettingsModal({ playerIds, isOpen, hubId, onRequestClose }: 
           <Label>Team Name</Label>
           <TeamSettingsInput
             maxLength={TEAM_NAME_MAX_LENGTH}
-            value={userInExistingTeam ? tournamentTeamFeed.tournamentTeam.teamName : teamName ?? ''}
+            value={isInTournamentTeam ? tournamentTeam.teamName : teamName ?? ''}
             onChange={handleTeamNameChange}
             placeholder="Enter a team name"
             size={InputSize.MEDIUM}
@@ -88,7 +89,7 @@ export function TeamSettingsModal({ playerIds, isOpen, hubId, onRequestClose }: 
               </PlayersWrapper>
             </>
           )}
-          {!userInExistingTeam && (
+          {!isInTournamentTeam && (
             <ButtonsWrapper>
               <ModalButton onClick={closeTeamSettings}>Cancel</ModalButton>
               <ButtonWithMessage>

@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { usePartyFeed, useTournamentHubFeed, useTournamentTeamFeed } from 'api/feeds';
-import { isFeedWithTeam } from 'api/feeds/hooks/useTournamentTeamFeed';
+import { usePartyFeed, useTournamentHubFeed } from 'api/feeds';
 import { useNavigate, useParams } from 'react-router-dom';
 import PageContainer from 'common/components/PageContainer';
 import { useLoggedInUser } from 'common/hooks/useLoggedInUser';
@@ -23,17 +22,11 @@ import useTournamentIdFeed from 'api/feeds/hooks/useTournamentIdFeed';
 export function TournamentHubPage() {
   const { hubId } = useParams() as { hubId: string };
   const user = useLoggedInUser();
-  const tournamentTeamFeed = useTournamentTeamFeed({ tournamentHubId: hubId, userId: user.id });
   const { tournamentHub, tournamentIds, isLoading } = useTournamentHubFeed({
     tournamentHubId: hubId
   });
 
-  const { party } = usePartyFeed();
-
-  // this knows that tournamentTeam exists (can be used instead of checking if it exists with falsy conditionals). Use if you want or remove it
-  if (isFeedWithTeam(tournamentTeamFeed)) {
-    tournamentTeamFeed.tournamentTeam;
-  }
+  const partyFeed = usePartyFeed();
 
   const { tournamentId: loggedInUsersTournamentId } = useTournamentIdFeed({
     tournamentHubId: hubId
@@ -54,7 +47,7 @@ export function TournamentHubPage() {
   };
 
   const openTeamSettings = () => {
-    if (!party || party.leaderId === user.id) {
+    if (partyFeed.isInParty && partyFeed.party.leaderId === user.id) {
       setActiveModal('teamSettings');
     } else {
       popup.error('You are not the party leader');

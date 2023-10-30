@@ -8,24 +8,30 @@ import { useCreatePartyRequest } from 'api/requests/party';
 import { Icons } from '@sourceempire/brawl-ui';
 
 const Lobby = () => {
-  const { isInParty, party } = usePartyFeed();
+  const state = usePartyFeed();
   const { createParty } = useCreatePartyRequest();
 
-  return isInParty ? (
-    <Wrapper>
-      {party.players.map((userId) => (
-        <PartyPlayer key={userId} userId={userId} />
-      ))}
+  if (state.isInParty) {
+    const { party } = state;
 
-      {Array(party.partySize - party.players.length)
-        .fill('')
-        .map((_, index) => (
-          <PartyInvite key={index} />
+    return (
+      <Wrapper>
+        {party.players.map((userId) => (
+          <PartyPlayer key={userId} userId={userId} />
         ))}
 
-      <PartySettings />
-    </Wrapper>
-  ) : (
+        {Array(party.partySize - party.players.length)
+          .fill('')
+          .map((_, index) => (
+            <PartyInvite key={index} />
+          ))}
+
+        <PartySettings />
+      </Wrapper>
+    );
+  }
+
+  return (
     <Wrapper>
       <ActionButton icon={<Icons.PartyPopper />} onClick={createParty} hint="Create party" />
     </Wrapper>

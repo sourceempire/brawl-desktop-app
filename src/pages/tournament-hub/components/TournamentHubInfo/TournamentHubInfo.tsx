@@ -12,10 +12,12 @@ import InfoCards from 'pages/tournament/components/InfoCards/InfoCards';
 
 const TournamentHubInfo = () => {
   const { hubId } = useParams() as { hubId: string };
-  const { tournamentHub } = useTournamentHubFeed({ tournamentHubId: hubId });
+  const { tournamentHub, isLoading } = useTournamentHubFeed({ tournamentHubId: hubId });
 
   //TODO -> Fetch correct prizepool data
   const prizePool = [100, 200, 300, 400];
+
+  if (isLoading) return null;
 
   return (
     <TournamentHubInfoWrapper isRegistrationClosed={tournamentHub.registrationClosed}>

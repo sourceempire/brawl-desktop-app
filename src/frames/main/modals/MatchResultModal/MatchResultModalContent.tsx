@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { useMatchFeed } from 'api/feeds';
-import { useMatchStatsFeed } from 'api/feeds/hooks/useMatchStatsFeed';
 import CSGOMatchResult from 'common/components/MatchResult/CSGOMatchResult';
 import { Button } from 'common/ui';
 import { MatchResultModalContext } from 'context/MatchResultModalContext';
@@ -12,40 +11,41 @@ type Props = {
 };
 
 const MatchResultModalContent = ({ matchId }: Props) => {
-  const { match, team1, team2, isLoading: isLoadingMatch } = useMatchFeed({ matchId });
-  const {
-    matchStats,
-    roundWins,
-    isLoading: isLoadingMatchStats,
-    hasMatchStats
-  } = useMatchStatsFeed({ matchId });
+  // const { match, team1, team2, isLoading: isLoadingMatch } = useMatchFeed({ matchId });
+  // const {
+  //   matchStats,
+  //   roundWins,
+  //   isLoading: isLoadingMatchStats,
+  //   hasMatchStats
+  // } = useMatchStatsFeed({ matchId });
   const { hideModal } = useContext(MatchResultModalContext);
 
-  if (isLoadingMatch || isLoadingMatchStats) return null;
+  // if (isLoadingMatch || isLoadingMatchStats) return null;
 
-  if (!hasMatchStats) {
-    return <Wrapper>No match result for this match yet</Wrapper>;
-  }
+  // if (!hasMatchStats) {
+  //   return <Wrapper>No match result for this match yet</Wrapper>;
+  // }
 
   return (
-    <Wrapper>
-      <Header>Match result</Header>
+    <div />
+    // <Wrapper>
+    //   <Header>Match result</Header>
 
-      {isCSGOMatch(match) && (
-        <CSGOMatchResult
-          matchStats={matchStats}
-          roundWins={roundWins}
-          match={match}
-          team1={team1}
-          team2={team2}
-          disableBackgroundFadeIn
-        />
-      )}
+    //   {isCSGOMatch(match) && (
+    //     <CSGOMatchResult
+    //       matchStats={matchStats}
+    //       roundWins={roundWins}
+    //       match={match}
+    //       team1={team1}
+    //       team2={team2}
+    //       disableBackgroundFadeIn
+    //     />
+    //   )}
 
-      <Buttons>
-        <Button onClick={hideModal}>Close</Button>
-      </Buttons>
-    </Wrapper>
+    //   <Buttons>
+    //     <Button onClick={hideModal}>Close</Button>
+    //   </Buttons>
+    // </Wrapper>
   );
 };
 

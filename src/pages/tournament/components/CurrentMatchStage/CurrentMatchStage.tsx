@@ -9,13 +9,15 @@ type Props = {
 };
 
 const CurrentMatchStage = ({ matchId }: Props) => {
-  const { match } = useMatchFeed({ matchId });
+  const { match, isLoading } = useMatchFeed({ matchId });
 
   const [preventAnimations, setPreventAnimations] = useState<boolean>(true);
 
   useEffect(() => {
     setTimeout(() => setPreventAnimations(false), 1000);
   }, []);
+
+  if (isLoading) return null;
 
   if (!isCSGOMatch(match)) {
     return null;

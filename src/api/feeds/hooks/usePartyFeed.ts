@@ -1,15 +1,14 @@
 import { useContext } from 'react';
 import { PartyContext } from 'context/PartyContext';
-import { Party } from 'types/Party';
 
-/**
- * Note that if isInParty is not true, party is undefined
- * @returns
- */
 const usePartyFeed = () => {
-  const { isInParty, party } = useContext(PartyContext);
+  const feed = useContext(PartyContext);
 
-  return { isInParty, party: party as Party };
+  if (feed.isInParty) {
+    return { isInParty: feed.isInParty, party: feed.party };
+  }
+
+  return { isInParty: feed.isInParty };
 };
 
 export default usePartyFeed;
