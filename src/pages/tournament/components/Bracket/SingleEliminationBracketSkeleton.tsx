@@ -1,4 +1,5 @@
 import {
+  Wrapper,
   Team1,
   Team2,
   TeamLogo,
@@ -6,7 +7,7 @@ import {
   TeamName,
   TeamScore
 } from '../BracketMatch/BracketMatch.styles';
-import { Container, Wrapper } from './Bracket.styles';
+import { Container, Wrapper as WrapperBracket } from './Bracket.styles';
 import { Matches, Round, RoundName } from './SingleEliminationBracket.styles';
 import placeholderTeamLogo from 'assets/images/placeholder-team-logo.png';
 
@@ -40,35 +41,58 @@ const SingleEliminationBracketSkeleton = ({ numberOfTeams }: Props) => {
     }
   }
 
+  const renderTeam = () => (
+    <>
+      <Team1 matchOutcome={null}>
+        <TeamLogo>
+          <TeamLogoImage src={placeholderTeamLogo} />
+        </TeamLogo>
+        <TeamName>-</TeamName>
+        <TeamScore winner={false}></TeamScore>
+      </Team1>
+      <Team2>
+        <TeamLogo>
+          <TeamLogoImage src={placeholderTeamLogo} />
+        </TeamLogo>
+        <TeamName>-</TeamName>
+        <TeamScore winner={false}></TeamScore>
+      </Team2>
+    </>
+  );
+
   return (
     <Container>
-      <Wrapper>
+      <WrapperBracket>
         {rounds.map((round, roundIndex) => (
           <Round key={round.roundName}>
             <RoundName active={false}>{round.roundName}</RoundName>
             <Matches matchCount={round.matches} roundIndex={roundIndex}>
               {[...Array(round.matches)].map((_, i) => (
-                <Wrapper key={i}>
-                  <Team1 matchOutcome={null}>
-                    <TeamLogo>
-                      <TeamLogoImage src={placeholderTeamLogo} />
-                    </TeamLogo>
-                    <TeamName>-</TeamName>
-                    <TeamScore winner={false}></TeamScore>
-                  </Team1>
-                  <Team2>
-                    <TeamLogo>
-                      <TeamLogoImage src={placeholderTeamLogo} />
-                    </TeamLogo>
-                    <TeamName>-</TeamName>
-                    <TeamScore winner={false}></TeamScore>
-                  </Team2>
+                <Wrapper
+                  key={i}
+                  matchIndex={i}
+                  roundIndex={roundIndex}
+                  isFinal={roundIndex + 1 === rounds.length}
+                  isFirstMatch={roundIndex === 0}
+                  isMatchOver={false}>
+                  {renderTeam()}
                 </Wrapper>
               ))}
+              {roundIndex + 1 === rounds.length && (
+                <Wrapper
+                  key={roundIndex}
+                  matchIndex={roundIndex}
+                  roundIndex={roundIndex}
+                  isFinal={roundIndex + 1 === rounds.length}
+                  isFirstMatch={true}
+                  isMatchOver={false}>
+                  {renderTeam()}
+                </Wrapper>
+              )}
             </Matches>
           </Round>
         ))}
-      </Wrapper>
+      </WrapperBracket>
     </Container>
   );
 };
