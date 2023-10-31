@@ -1,6 +1,5 @@
 import { useDeferredValue, useState } from 'react';
 import { useFeaturedTourmanentsFeed } from 'api/feeds';
-import useTournamentHubsFeed from 'api/feeds/hooks/useTournamentHubsFeed';
 import { useNavigate } from 'react-router-dom';
 import FeaturedTournamentSlider from 'common/components/FeaturedTournamentSlider';
 import PageContainer from 'common/components/PageContainer';
@@ -12,7 +11,7 @@ import { Filter, filter, search } from './TournamentListView.model';
 import {
   CrossIcon,
   FeaturedTournamentToggle,
-  FilterBar,
+  FilterBar as FilterBarOld,
   FilterBullet,
   FilterBullets,
   FilterButton,
@@ -24,6 +23,8 @@ import {
   TournamentList
 } from './TournamentListView.styles';
 import { Icons } from '@sourceempire/brawl-ui';
+import { useTournamentHubListContext } from 'pages/tournament-list/context/TournamentHubListContext';
+import { FilterBar } from '../FilterBar';
 
 export default function TournamentListView() {
   return (
@@ -47,9 +48,8 @@ function Page() {
   const searchQueryDeffered = useDeferredValue(searchQuery);
   const [filterModalOpen, setFilterModalOpen] = useState(false);
 
-  const { tournamentHubs, isLoading: isLoadingTournamentHubs } = useTournamentHubsFeed();
-  const { featuredTournamentHubs, isLoading: isLoadingFeaturedTournaments } =
-    useFeaturedTourmanentsFeed();
+  const { feed: tournamentHubsFeed } = useTournamentHubListContext();
+  const featuredTournamentFeed = useFeaturedTourmanentsFeed();
 
   function removeFilter(filter: Filter) {
     setActiveFilters((filters) =>
@@ -60,7 +60,10 @@ function Page() {
   const navigate = useNavigate();
 
   // ADD SKELETON
-  if (isLoadingFeaturedTournaments || isLoadingTournamentHubs) return null;
+  if (featuredTournamentFeed.loading || tournamentHubsFeed.loading) return null;
+
+  const { featuredTournamentHubs } = featuredTournamentFeed.data;
+  const { tournamentHubs } = tournamentHubsFeed.data;
 
   return (
     <PageContainer>
@@ -76,7 +79,7 @@ function Page() {
       <TournamentGallery
         featuredTournamentHubs={featuredTournamentHubs}
         featuredExpanded={featuredExpanded}>
-        <FilterBar>
+        {/* <FilterBarOld>
           <FilterBullets>
             {activeFilters.map((filter) => (
               <FilterBullet key={filter.type + filter.value} onClick={() => removeFilter(filter)}>
@@ -108,7 +111,9 @@ function Page() {
               <Option value="3">c</Option>
             </FilterSort>
           </FilterControls>
-        </FilterBar>
+        </FilterBarOld> */}
+
+        <FilterBar />
         <TournamentList>
           {search(filter(tournamentHubs, activeFilters), searchQueryDeffered).map(
             (tournamentHub) => (

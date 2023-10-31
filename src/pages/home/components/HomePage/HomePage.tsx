@@ -12,15 +12,15 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   // const { news: newsList } = useNewsFeed();
-  const { featuredTournamentHubs } = useFeaturedTourmanentsFeed();
+  const { data, loading } = useFeaturedTourmanentsFeed();
 
   return (
     <PageContainer>
       <Wrapper>
-        {featuredTournamentHubs?.[0] && (
+        {!loading && data.featuredTournamentHubs[0] && (
           <PromotedTournament
-            tournamentInfo={featuredTournamentHubs[0]}
-            onClick={() => navigate(`tournaments/hub/${featuredTournamentHubs[0].id}`)}
+            tournamentInfo={data.featuredTournamentHubs[0]}
+            onClick={() => navigate(`tournaments/hub/${data.featuredTournamentHubs[0].id}`)}
           />
         )}
         <Hero></Hero>

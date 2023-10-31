@@ -1,8 +1,11 @@
 import { useTournamentHubsFeed } from 'api/feeds';
-import { createContext } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 type Context = {
   feed: ReturnType<typeof useTournamentHubsFeed>;
+  actions: {
+    search: (searchString: string) => void;
+  };
 };
 
 type Props = {
@@ -11,16 +14,25 @@ type Props = {
 
 const TournamentHubListContext = createContext<Context>({
   feed: {
-    isLoading: true
+    loading: true
+  },
+  actions: {
+    search: () => undefined
   }
 });
 
-function TournamentHubListContextProvider({ children }: Props) {
-  const feed = useTournamentHubsFeed();
+export function TournamentHubListContextProvider({ children }: Props) {
+  const [searchString, setSearchString] = useState<string>();
+
+  const feed = useTournamentHubsFeed({ searchString });
 
   return (
-    <TournamentHubListContext.Provider value={{ feed }}>
+    <TournamentHubListContext.Provider value={{ feed, actions: { search: setSearchString } }}>
       {children}
     </TournamentHubListContext.Provider>
   );
+}
+
+export function useTournamentHubListContext() {
+  return useContext(TournamentHubListContext);
 }
