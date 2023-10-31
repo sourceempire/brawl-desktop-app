@@ -14,12 +14,11 @@ export const useRevokeInviteRequest = () => {
     popup.error(error.message);
   };
 
-  const [revokeInvite, ...response] = usePost<void, Body>(revokeInviteEndpoint, {
+  const [revokeInvite] = usePost<void, Body>(revokeInviteEndpoint, {
     onError
   });
 
   return {
-    revokeInvite,
-    ...response
+    revokeInvite
   };
 };

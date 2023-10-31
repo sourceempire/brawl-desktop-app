@@ -18,13 +18,12 @@ export const useLeaveTournamentRequest = ({ onComplete }: Options) => {
     popup.error(error.message);
   };
 
-  const [leaveTournament, ...response] = usePost<void, Body>(leaveTournamentEndpoint, {
+  const [leaveTournament] = usePost<void, Body>(leaveTournamentEndpoint, {
     onError,
     onComplete
   });
 
   return {
-    leaveTournament,
-    ...response
+    leaveTournament
   };
 };

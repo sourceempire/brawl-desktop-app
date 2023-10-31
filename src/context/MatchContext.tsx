@@ -4,14 +4,12 @@ import { Match } from 'types/match/Match';
 import { Team } from 'types/team/Team';
 
 type MatchContextType = {
-  isLoading: boolean;
   match: Match;
   team1?: Team;
   team2?: Team;
 };
 
 const MatchContext = createContext<MatchContextType>({
-  isLoading: true,
   match: {} as Match
 });
 
@@ -23,14 +21,12 @@ type Props = {
 export const MatchContextProvider = ({ children, matchId }: Props) => {
   const { match, team1, team2, isLoading } = useMatchFeed({ matchId });
 
-  return (
-    <MatchContext.Provider value={{ isLoading, match, team1, team2 }}>
-      {children}
-    </MatchContext.Provider>
-  );
+  if (isLoading) return null;
+
+  return <MatchContext.Provider value={{ match, team1, team2 }}>{children}</MatchContext.Provider>;
 };
 
-export function useMatchContext<T = Match>() {
+export function useMatchContext<T extends Match>() {
   const context = useContext(MatchContext);
 
   return {

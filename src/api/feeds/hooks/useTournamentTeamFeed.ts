@@ -2,12 +2,10 @@ import { useFeed } from '@sourceempire/brawl-websocket';
 import { TournamentTeam } from 'types/tournaments/TournamentTeam';
 
 type FeedWithoutTeam = {
-  isLoading: boolean;
   isInTournamentTeam: false;
 };
 
 type FeedWithTeam = {
-  isLoading: boolean;
   isInTournamentTeam: true;
   tournamentTeam: TournamentTeam;
 };
@@ -19,14 +17,27 @@ type Params = {
   userId: string;
 };
 
-export function isFeedWithTeam(feed: Feed): feed is FeedWithTeam {
-  return feed.isInTournamentTeam;
-}
+function useTournamentTeamFeed({ tournamentHubId, userId }: Params) {
+  const feed = useFeed<Feed>(`tournament.team.${tournamentHubId}.${userId}`);
 
-function useTournamentTeamFeed({ tournamentHubId, userId }: Params): Feed {
-  const { data, loading } = useFeed<Feed>(`tournament.team.${tournamentHubId}.${userId}`);
+  if (feed.loading) {
+    return {
+      isLoading: feed.loading
+    };
+  }
 
-  return { ...data, isLoading: loading };
+  if (feed.data.isInTournamentTeam) {
+    return {
+      isLoading: feed.loading,
+      isInTournamentTeam: feed.data.isInTournamentTeam,
+      tournamentTeam: feed.data.tournamentTeam
+    };
+  }
+
+  return {
+    isLoading: feed.loading,
+    isInTournamentTeam: feed.data.isInTournamentTeam
+  };
 }
 
 export default useTournamentTeamFeed;

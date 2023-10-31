@@ -13,13 +13,14 @@ type Props = {
 export function RulesModal({ isOpen, onRequestClose, tournamentHubId }: Props) {
   const [visibleText, setVisibleText] = useState<keyof Rules>('general');
 
-  const { rules, loading } = useTournamentHubRulesRequest({ tournamentHubId });
+  const state = useTournamentHubRulesRequest({ tournamentHubId });
 
   const handleClick = (text: keyof Rules) => {
     setVisibleText(text);
   };
 
-  if (loading) return null;
+  if (state.status === 'loading') return null;
+  if (state.status === 'error') return null;
 
   return (
     <Modal title="Rules" isOpen={isOpen} onRequestClose={onRequestClose} width="100%" margin="50px">
@@ -38,9 +39,7 @@ export function RulesModal({ isOpen, onRequestClose, tournamentHubId }: Props) {
           </ModalButton>
         </ButtonsWrapper>
         <Content>
-          <RulesMarkdown
-            key={visibleText}
-            text={rules?.[visibleText].content ?? ''}></RulesMarkdown>
+          <RulesMarkdown key={visibleText} text={state.data[visibleText].content}></RulesMarkdown>
         </Content>
       </Wrapper>
     </Modal>

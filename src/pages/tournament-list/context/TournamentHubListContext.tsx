@@ -1,9 +1,8 @@
 import { useTournamentHubsFeed } from 'api/feeds';
 import { createContext } from 'react';
-import { TournamentHub } from 'types/tournaments/TournamentInfo';
 
 type Context = {
-  tournamentHubs: TournamentHub[] | null;
+  feed: ReturnType<typeof useTournamentHubsFeed>;
 };
 
 type Props = {
@@ -11,11 +10,17 @@ type Props = {
 };
 
 const TournamentHubListContext = createContext<Context>({
-  tournamentHubs: null
+  feed: {
+    isLoading: true
+  }
 });
 
 function TournamentHubListContextProvider({ children }: Props) {
-  const { tournamentHubs, loading } = useTournamentHubsFeed();
+  const feed = useTournamentHubsFeed();
 
-  return <TournamentHubListContext.Provider>{children}</TournamentHubListContext.Provider>;
+  return (
+    <TournamentHubListContext.Provider value={{ feed }}>
+      {children}
+    </TournamentHubListContext.Provider>
+  );
 }

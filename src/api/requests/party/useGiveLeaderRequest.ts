@@ -14,12 +14,11 @@ export const useGiveLeaderRequest = () => {
     popup.error(error.message);
   };
 
-  const [giveLeader, ...response] = usePost<void, Body>(giveLeaderEndpoint, {
+  const [giveLeader] = usePost<void, Body>(giveLeaderEndpoint, {
     onError
   });
 
   return {
-    giveLeader,
-    ...response
+    giveLeader
   };
 };
