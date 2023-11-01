@@ -1,5 +1,5 @@
 import { useTournamentHubsFeed } from 'api/feeds';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 type Context = {
   feed: ReturnType<typeof useTournamentHubsFeed>;
@@ -40,17 +40,8 @@ date.setFullYear(new Date().getFullYear() + 1);
 
 export function TournamentHubListContextProvider({ children }: Props) {
   const [searchString, setSearchString] = useState<string>('');
-  const [startTimeFrom, setStartTimeFrom] = useState<Date | null>(null);
+  const [startTimeFrom, setStartTimeFrom] = useState<Date | null>(new Date());
   const [startTimeTo, setStartTimeTo] = useState<Date | null>(null);
-
-  useEffect(() => {
-    console.log('START TIME FroM', startTimeFrom);
-  }, [startTimeFrom]);
-
-  const handleStartTimeFrom = (date: Date | null) => {
-    console.log('handle start time from', date);
-    setStartTimeFrom(date);
-  };
 
   const feed = useTournamentHubsFeed({
     searchString,
@@ -62,7 +53,7 @@ export function TournamentHubListContextProvider({ children }: Props) {
     <TournamentHubListContext.Provider
       value={{
         feed,
-        actions: { search: setSearchString, setStartTimeFrom: handleStartTimeFrom, setStartTimeTo },
+        actions: { search: setSearchString, setStartTimeFrom, setStartTimeTo },
         state: { searchString, startTimeFrom, startTimeTo }
       }}>
       {children}
