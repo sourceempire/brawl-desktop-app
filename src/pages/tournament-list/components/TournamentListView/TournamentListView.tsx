@@ -60,6 +60,9 @@ function Page() {
   const navigate = useNavigate();
 
   // ADD SKELETON
+
+  console.log(tournamentHubsFeed.loading);
+
   if (featuredTournamentFeed.loading || tournamentHubsFeed.loading) return null;
 
   const { featuredTournamentHubs } = featuredTournamentFeed.data;
