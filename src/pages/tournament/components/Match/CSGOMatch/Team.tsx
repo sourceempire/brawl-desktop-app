@@ -11,10 +11,10 @@ type Props = {
 };
 
 const Team = ({ team, reversed }: Props) => {
-  const { gameMatchInfo } = useMatchContext<CSGOMatch>();
+  const { match } = useMatchContext<CSGOMatch>();
 
-  const isReadyCheck = gameMatchInfo.matchStage === CSGOMatchStage.READY;
-  const isVeto = gameMatchInfo.matchStage === CSGOMatchStage.VETO;
+  const isReadyCheck = match.matchStage === CSGOMatchStage.READY;
+  const isVeto = match.matchStage === CSGOMatchStage.VETO;
 
   if (!team) return null;
 
@@ -22,19 +22,17 @@ const Team = ({ team, reversed }: Props) => {
     return (
       <Wrapper>
         {team?.players.map((player) => {
-          const isLeader = team.teamLeaderId === player.userId;
-          const isPlayerReady = gameMatchInfo?.veto?.playersReady?.[player.userId] ?? true;
+          const isLeader = team.teamLeaderId === player;
+          const isPlayerReady = match?.veto?.playersReady?.[player] ?? true;
           return (
-            <PlayerContainer key={player.userId} transparent={!isPlayerReady} reversed={reversed}>
+            <PlayerContainer key={player} transparent={!isPlayerReady} reversed={reversed}>
               <PlayerInfo
-                userId={player.userId}
+                userId={player}
                 isLeader={isLeader}
                 transparent={!isPlayerReady}
                 reversed={reversed}
               />
-              <CurrentState>
-                {isReadyCheck && <ReadyCheckAction userId={player.userId} />}
-              </CurrentState>
+              <CurrentState>{isReadyCheck && <ReadyCheckAction userId={player} />}</CurrentState>
             </PlayerContainer>
           );
         })}
@@ -46,13 +44,13 @@ const Team = ({ team, reversed }: Props) => {
     return (
       <Wrapper>
         {team?.players.map((player) => {
-          const isLeader = team.teamLeaderId === player.userId;
-          const isBanningPlayer = isLeader && gameMatchInfo.veto?.teamToBanMap === team.id;
+          const isLeader = team.teamLeaderId === player;
+          const isBanningPlayer = isLeader && match.veto?.teamToBanMap === team.id;
 
           return (
-            <PlayerContainer key={player.userId} reversed={reversed} transparent={!isBanningPlayer}>
+            <PlayerContainer key={player} reversed={reversed} transparent={!isBanningPlayer}>
               <PlayerInfo
-                userId={player.userId}
+                userId={player}
                 isLeader={isLeader}
                 transparent={!isBanningPlayer}
                 reversed={reversed}
@@ -67,10 +65,10 @@ const Team = ({ team, reversed }: Props) => {
   return (
     <Wrapper>
       {team?.players.map((player) => {
-        const isLeader = team.teamLeaderId === player.userId;
+        const isLeader = team.teamLeaderId === player;
         return (
-          <PlayerContainer key={player.userId} reversed={reversed}>
-            <PlayerInfo userId={player.userId} isLeader={isLeader} reversed={reversed} />
+          <PlayerContainer key={player} reversed={reversed}>
+            <PlayerInfo userId={player} isLeader={isLeader} reversed={reversed} />
           </PlayerContainer>
         );
       })}

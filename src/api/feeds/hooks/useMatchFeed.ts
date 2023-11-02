@@ -1,48 +1,29 @@
 import { useFeed } from '@sourceempire/brawl-websocket';
-import { useLoggedInUser } from 'common/hooks';
-import { Match } from 'types/match/Match';
+import { MockGameMatch } from 'types/match/Match';
 
 type Params = {
   matchId: string;
 };
 
 const useMatchFeed = ({ matchId }: Params) => {
-  const { data, loading } = useFeed<{ gameMatchInfo: Match; internalMatchInfo: Match }>(
-    `match.${matchId}`
-  );
-
-  const loggedInUser = useLoggedInUser();
+  const { data, loading } = useFeed<{ match: MockGameMatch }>(`match.${matchId}`);
 
   const defaultTeam = {
     id: '',
-    name: '',
+    teamName: '',
     players: [],
     teamLeaderId: '',
-    score: 0
+    score: 0,
+    playerStats: {}
   };
 
-  let team1 = data.gameMatchInfo?.team1
-    ? {
-        ...data.gameMatchInfo.team1,
-        teamLeaderId: data.internalMatchInfo?.team1?.teamLeaderId
-      }
-    : defaultTeam;
-
-  let team2 = data.gameMatchInfo?.team2
-    ? {
-        ...data.gameMatchInfo.team2,
-        teamLeaderId: data.internalMatchInfo?.team2?.teamLeaderId
-      }
-    : defaultTeam;
-
-  if (team2 && team2.players.some((player) => player.userId === loggedInUser.id)) {
-    [team1, team2] = [team2, team1];
-  }
+  let team1 = data.match?.team1;
+  let team2 = data.match?.team2;
 
   return {
-    gameMatchInfo: data.gameMatchInfo ?? {},
-    team1,
-    team2,
+    match: data.match ?? {},
+    team1: team1 ?? defaultTeam,
+    team2: team2 ?? defaultTeam,
     isLoading: loading
   };
 };

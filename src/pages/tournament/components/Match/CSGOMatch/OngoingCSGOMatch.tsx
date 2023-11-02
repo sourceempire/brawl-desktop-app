@@ -19,23 +19,23 @@ import {
 } from './OngoingCSGOMatch.styles';
 
 const OngoingCSGOMatch = () => {
-  const { gameMatchInfo, team1, team2 } = useMatchContext<CSGOMatch>();
-  const { matchStats } = useMatchStatsFeed({ matchId: gameMatchInfo.id });
+  const { match, team1, team2 } = useMatchContext<CSGOMatch>();
+  const { matchStats } = useMatchStatsFeed({ matchId: match.id });
 
-  if (!gameMatchInfo.matchSettings.maps?.[0]) return null;
+  if (!match.matchSettings.maps?.[0]) return null;
   if (!team1 || !team2) return null;
 
-  const isStarting = gameMatchInfo.matchStage === CSGOMatchStage.STARTING_MATCH;
-  const isOngoing = gameMatchInfo.matchStage === CSGOMatchStage.ONGOING;
+  const isStarting = match.matchStage === CSGOMatchStage.STARTING_MATCH;
+  const isOngoing = match.matchStage === CSGOMatchStage.ONGOING;
 
-  const map = gameMatchInfo.matchSettings.maps[0];
+  const map = match.matchSettings.maps[0];
   const { displayName, imageUrl } = csgoMaps[map];
 
   const handleCopyServerUrl = () => {
-    if (!gameMatchInfo?.serverAddress) return;
-    const textToCopy = `connect ${gameMatchInfo.serverAddress}`;
+    if (!match?.serverAddress) return;
+    const textToCopy = `connect ${match.serverAddress}`;
 
-    navigator.clipboard.writeText('connect ' + gameMatchInfo.serverAddress);
+    navigator.clipboard.writeText('connect ' + match.serverAddress);
     popup.info(`Copied '${textToCopy}' to clipboard`, { timer: 2000 });
   };
 
@@ -62,7 +62,7 @@ const OngoingCSGOMatch = () => {
               <ClipBoard>
                 <CopyIcon />
               </ClipBoard>
-              <ServerUrl>connect {gameMatchInfo.serverAddress}</ServerUrl>
+              <ServerUrl>connect {match.serverAddress}</ServerUrl>
             </ServerUrlWrapper>
             <JoinServerButton primary>Connect to server</JoinServerButton>
           </JoinServerWrapper>

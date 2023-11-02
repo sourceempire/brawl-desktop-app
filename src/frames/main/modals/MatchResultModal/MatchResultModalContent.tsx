@@ -13,11 +13,11 @@ type Props = {
 };
 
 const MatchResultModalContent = ({ matchId }: Props) => {
-  const { gameMatchInfo, team1, team2, isLoading: isLoadingMatch } = useMatchFeed({ matchId });
+  const { match, team1, team2, isLoading } = useMatchFeed({ matchId });
   const { matchStats, roundWins } = useMatchStatsFeed({ matchId });
   const { hideModal } = useContext(MatchResultModalContext);
 
-  if (isLoadingMatch) return null;
+  if (isLoading) return null;
 
   return (
     <Wrapper>
@@ -28,24 +28,19 @@ const MatchResultModalContent = ({ matchId }: Props) => {
         </Buttons>
       </TopWrapper>
 
-      {isCSGOMatch(gameMatchInfo) && (
+      {isCSGOMatch(match) && (
         <CSGOMatchResult
           matchStats={matchStats}
           roundWins={roundWins}
-          match={gameMatchInfo}
+          match={match}
           team1={team1}
           team2={team2}
           disableBackgroundFadeIn
         />
       )}
 
-      {isMockMatch(gameMatchInfo) && (
-        <MockMatchResult
-          gameMatchInfo={gameMatchInfo}
-          team1={team1}
-          team2={team2}
-          disableBackgroundFadeIn
-        />
+      {isMockMatch(match) && (
+        <MockMatchResult match={match} team1={team1} team2={team2} disableBackgroundFadeIn />
       )}
     </Wrapper>
   );

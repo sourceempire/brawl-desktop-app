@@ -13,23 +13,21 @@ export const NavItems = ({ tournamentId, matchId }: Props) => {
   const linkListRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const [{ style, shouldAnimate }] = useActiveLineStyle({ linkListRef });
   const { matchHistoryList } = useTournamentMatchHistoryFeed({ tournamentId });
-  const { gameMatchInfo } = useMatchFeed({ matchId });
+  const { match } = useMatchFeed({ matchId });
 
   const navigate = useNavigate();
 
-  const isMatch = Object.keys(gameMatchInfo).length > 0;
-
   useEffect(() => {
-    if (!isMatch) {
+    if (match.hasGameData === false) {
       navigate(`/main/tournaments/${tournamentId}/bracket`);
     } else {
       navigate(`/main/tournaments/${tournamentId}`);
     }
-  }, [isMatch]);
+  }, [match.hasGameData]);
 
   return (
     <Wrapper ref={linkListRef}>
-      {isMatch && (
+      {match.hasGameData === true && (
         <NavLink to={`/main/tournaments/${tournamentId}`} end>
           Match
         </NavLink>

@@ -3,9 +3,8 @@ import { Match } from 'types/match/Match';
 import { CSGOGameModes, CSGOSeriesType } from 'types/MatchSettings';
 
 type MatchOutcomeProps = {
-  hasMatchStats?: boolean;
   teamIdOfLoggedInUser?: string;
-  gameMatchInfo: Match;
+  match: Match;
 };
 
 export const csgoMatchSettingsModeShortForm = (mode: CSGOGameModes) => {
@@ -24,10 +23,10 @@ export const csgoMatchSettingsSeriesTypeLongForm = (type: CSGOSeriesType) => {
   }[type];
 };
 
-export const getMatchOutcome = ({ teamIdOfLoggedInUser, gameMatchInfo }: MatchOutcomeProps) => {
-  if (gameMatchInfo.winner === teamIdOfLoggedInUser) {
+export const getMatchOutcome = ({ teamIdOfLoggedInUser, match }: MatchOutcomeProps) => {
+  if (match.winnerTeamId === teamIdOfLoggedInUser) {
     return MatchOutcome.Win;
-  } else if (gameMatchInfo.winner && gameMatchInfo.winner !== teamIdOfLoggedInUser) {
+  } else if (match.winnerTeamId && match.winnerTeamId !== teamIdOfLoggedInUser) {
     return MatchOutcome.Loss;
   } else {
     return MatchOutcome.NotDecided;

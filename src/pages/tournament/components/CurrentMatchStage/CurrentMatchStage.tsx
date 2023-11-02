@@ -9,7 +9,7 @@ type Props = {
 };
 
 const CurrentMatchStage = ({ matchId }: Props) => {
-  const { gameMatchInfo } = useMatchFeed({ matchId });
+  const { match } = useMatchFeed({ matchId });
 
   const [preventAnimations, setPreventAnimations] = useState<boolean>(true);
 
@@ -17,13 +17,13 @@ const CurrentMatchStage = ({ matchId }: Props) => {
     setTimeout(() => setPreventAnimations(false), 1000);
   }, []);
 
-  if (!isCSGOMatch(gameMatchInfo)) {
+  if (!isCSGOMatch(match)) {
     return null;
   }
 
-  const readyStageStatus = getReadyStageStatus(gameMatchInfo.matchStage);
-  const vetoStageStatus = getVetoStageStatus(gameMatchInfo.matchStage);
-  const matchStageStatus = getMatchStageStatus(gameMatchInfo.matchStage);
+  const readyStageStatus = getReadyStageStatus(match.matchStage);
+  const vetoStageStatus = getVetoStageStatus(match.matchStage);
+  const matchStageStatus = getMatchStageStatus(match.matchStage);
 
   return (
     <Wrapper preventAnimations={preventAnimations}>

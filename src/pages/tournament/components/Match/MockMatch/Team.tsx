@@ -13,10 +13,10 @@ const Team = ({ team, reversed }: Props) => {
   return (
     <Wrapper>
       {team?.players.map((player) => {
-        const isLeader = team.teamLeaderId === player.userId;
+        const isLeader = team.teamLeaderId === player;
         return (
-          <PlayerContainer key={player.userId} reversed={reversed}>
-            <PlayerInfo userId={player.userId} isLeader={isLeader} reversed={reversed} />
+          <PlayerContainer key={player} reversed={reversed}>
+            <PlayerInfo userId={player} isLeader={isLeader} reversed={reversed} />
           </PlayerContainer>
         );
       })}

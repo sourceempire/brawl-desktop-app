@@ -9,7 +9,7 @@ import useTournamentFeed from 'api/feeds/hooks/useTournamentFeed';
 
 const MatchResult = () => {
   const matchId = useParams().matchId as string;
-  const { gameMatchInfo, team1, team2, isLoading: isLoadingMatch } = useMatchFeed({ matchId });
+  const { match, team1, team2, isLoading: isLoadingMatch } = useMatchFeed({ matchId });
   const { matchStats, roundWins } = useMatchStatsFeed({ matchId });
 
   const { tournamentId } = useParams() as { tournamentId: string };
@@ -20,25 +20,20 @@ const MatchResult = () => {
 
   if (isLoadingMatch || isLoadingTournamentHub) return null;
 
-  if (isCSGOMatch(gameMatchInfo)) {
+  if (isCSGOMatch(match)) {
     return (
       <CSGOMatchResult
         matchStats={matchStats}
         roundWins={roundWins}
-        match={gameMatchInfo}
+        match={match}
         team1={team1}
         team2={team2}
       />
     );
   }
-  if (isMockMatch(gameMatchInfo)) {
+  if (isMockMatch(match)) {
     return (
-      <MockMatchResult
-        gameMatchInfo={gameMatchInfo}
-        team1={team1}
-        team2={team2}
-        imageId={tournamentHub.imageId}
-      />
+      <MockMatchResult match={match} team1={team1} team2={team2} imageId={tournamentHub.imageId} />
     );
   }
 

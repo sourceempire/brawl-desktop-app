@@ -4,9 +4,9 @@ import CountDown from '../../CountDown';
 import { Text, Wrapper } from './ReadyCheckTimer.styles';
 
 const ReadyCheckTimer = () => {
-  const { gameMatchInfo } = useMatchContext<CSGOMatch>();
+  const { match } = useMatchContext<CSGOMatch>();
 
-  const readyCheckExpiration = gameMatchInfo.veto?.readyCheckExpiration;
+  const readyCheckExpiration = match.veto?.readyCheckExpiration;
 
   if (!readyCheckExpiration) return null;
 
