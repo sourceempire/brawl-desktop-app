@@ -5,7 +5,7 @@
   margin-bottom: var(--spacing-base-x2);
 }
 
-.left_options {
+.options {
   display: flex;
   gap: var(--spacing-base);
 } 
