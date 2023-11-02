@@ -28,11 +28,19 @@ const TeamTable = ({ team }: TeamTableProps) => {
     <Wrapper>
       <TableHeader>
         <TeamLogo src={placeholderTeamLogo} />
-        {team.name}
+        {team.teamName}
       </TableHeader>
+      <TableHeader>Kills</TableHeader>
 
       {team.players.map((player) => {
-        return <PlayerCell key={player.userId} userId={player.userId} team={team} />;
+        const kills = team.playerStats?.[player]?.kills || '-';
+
+        return (
+          <React.Fragment key={player}>
+            <PlayerCell userId={player} team={team} />
+            <TableData>{kills}</TableData>
+          </React.Fragment>
+        );
       })}
     </Wrapper>
   );

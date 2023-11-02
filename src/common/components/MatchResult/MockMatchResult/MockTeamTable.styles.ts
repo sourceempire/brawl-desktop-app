@@ -6,7 +6,7 @@ const tableCellHeight = 45;
 export const Wrapper = styled.div`
   display: grid;
   flex-grow: 1;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: 80% repeat(1, 1fr);
   grid-template-rows: repeat(6, ${tableCellHeight}px);
   width: 100%;
   font-size: 15px;
@@ -42,7 +42,7 @@ type TableCellProps = {
 export const TableCell = styled.div<TableCellProps>`
   display: flex;
   align-items: center;
-  padding-right: 6px;
+  justify-content: center;
 
   ${({ theme, bold }) => css`
     ${bold &&
@@ -50,9 +50,12 @@ export const TableCell = styled.div<TableCellProps>`
       font-weight: bold;
     `}
 
-    :nth-of-type(2),
-    :nth-of-type(4),
-    :nth-of-type(6) {
+    :nth-of-type(1) {
+      justify-content: flex-start;
+    }
+
+    :nth-of-type(4n + 3),
+    :nth-of-type(4n + 4) {
       background-color: ${theme.colors.surfaceElement.base};
       border-radius: ${theme.borderRadius.default};
     }
