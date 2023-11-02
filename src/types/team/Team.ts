@@ -12,8 +12,9 @@ export type TeamPlayer = {
 
 export type Team = {
   id: TeamId;
-  name: string;
-  players: TeamPlayer[];
+  teamName: string;
+  players: UserId[];
   teamLeaderId: UserId;
-  score: number;
+  score?: number;
+  playerStats?: Record<UserId, TeamPlayer>;
 };
