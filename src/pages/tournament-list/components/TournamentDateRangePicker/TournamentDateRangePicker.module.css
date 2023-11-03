@@ -1,20 +1,64 @@
 .from_to_button {
+  --remove-cross-width: 22px;
+
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 9px;
-  border-radius: 20px !important;
+  gap: var(--spacing-base-x2);
+
+  &:active {
+    background-color: var(--color-secondary-hover) !important;
+  }
 }
 
-.from_to_container {
+.remove {
+  width: var(--remove-cross-width);
+  height: var(--remove-cross-width);
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  padding: 3px;
+  box-sizing: border-box;
+  border-radius: var(--border-radius-round);
+}
+
+.from_to_button:hover .remove {
+  opacity: 0.3;
+  pointer-events: all;
+}
+
+.remove:hover {
+  background-color: var(--color-surface-secondary-hover);
+  opacity: 1 !important;
+}
+
+.remove:active {
+  background-color: var(--color-surface-secondary-active);
+}
+
+.from_to_button:hover .from_to_container {
+  padding-left: calc(var(--remove-cross-width) + 9px);
+}
+
+.from_to_container,
+.from_to_placeholder {
+  position: relative;
   display: flex;
-  align-items: center;  
+  align-items: center;
   text-align: left;
   white-space: nowrap;
   gap: 9px;
   min-width: 60px;
+  overflow: hidden;
+}
+
+.from_to_container {
+  transition: padding-left 0.3s;
 }
 
 .from_to_date {
+  position: relative;
   font-size: 24px;
 }
 

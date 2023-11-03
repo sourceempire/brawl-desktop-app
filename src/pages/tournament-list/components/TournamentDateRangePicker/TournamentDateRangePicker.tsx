@@ -11,9 +11,17 @@ export function TournamentDateRangePicker() {
   return (
     <>
       <Button className={styles.from_to_button} onClick={() => setIsDateRangeModalOpen(true)}>
-        <DateDisplay date={state.startTimeFrom} placeholder="From" />
-        <Icons.ChevronRight />
-        <DateDisplay date={state.startTimeTo} placeholder="To" />
+        <DateDisplay
+          date={state.startTimeFrom}
+          placeholder="From"
+          clearDate={() => actions.setStartTimeFrom(null)}
+        />
+        <Icons.ArrowRight />
+        <DateDisplay
+          date={state.startTimeTo}
+          placeholder="To"
+          clearDate={() => actions.setStartTimeTo(null)}
+        />
       </Button>
 
       <Modal
@@ -50,11 +58,25 @@ const monthDisplays = [
 
 const dayDisplays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-function DateDisplay({ date, placeholder }: { date: Date | null; placeholder: string }) {
+function DateDisplay({
+  date,
+  placeholder,
+  clearDate
+}: {
+  date: Date | null;
+  placeholder: string;
+  clearDate: () => void;
+}) {
+  const handleRemove = (event: React.MouseEvent<SVGElement, MouseEvent>) => {
+    event.stopPropagation();
+    clearDate();
+  };
+
   return (
-    <div className={styles.from_to_container}>
+    <>
       {date ? (
         <div className={styles.from_to_container}>
+          {date && <Icons.Cross className={styles.remove} onClick={handleRemove} />}
           <div className={styles.from_to_date}>{('0' + date?.getDate()).slice(-2)}</div>
           <div className={styles.month_year_dayname}>
             <div>
@@ -64,11 +86,11 @@ function DateDisplay({ date, placeholder }: { date: Date | null; placeholder: st
           </div>
         </div>
       ) : (
-        <div className={`${styles.from_to_container}`}>
+        <div className={styles.from_to_placeholder}>
           <Icons.Calendar />
           <div className={styles.date_placeholder}>{placeholder}</div>
         </div>
       )}
-    </div>
+    </>
   );
 }

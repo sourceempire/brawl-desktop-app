@@ -22,19 +22,17 @@ export const Wrapper = styled.div`
   align-items: center;
   height: 100%;
   box-sizing: content-box;
+  border-radius: var(--border-radius-default);
+  cursor: pointer;
+
+  :hover {
+    filter: brightness(1.1);
+  }
 
   ${({ theme }) => css`
     padding-left: ${theme.spacing.base}px;
-    border-radius: ${theme.borderRadius.default};
     right: -${theme.spacing.base / 2}px;
     padding: ${theme.spacing.base}px;
-
-    :hover {
-      background-color: ${theme.colors.background.hover};
-      ${MyUserStatus} {
-        outline: 3px solid ${theme.colors.background.hover};
-      }
-    }
   `}
 `;
 
@@ -43,20 +41,14 @@ export const ProfileImage = styled.img`
   height: 100%;
   object-fit: cover;
 
-  ${({ theme }) => css`
-    border-radius: ${theme.borderRadius.default};
-  `}
+  border-radius: var(--border-radius-default);
 `;
 
 export const ProfileImageContainer = styled.div`
   position: relative;
   height: 48px;
   width: 48px;
-
-  ${({ theme }) => css`
-    border-radius: ${theme.borderRadius.default};
-    background-color: black;
-  `}
+  border-radius: var(--border-radius-default);
 `;
 
 export const ArrowIcon = styled(ArrowDown)`
@@ -70,13 +62,13 @@ export const MenuItem = styled.div`
   display: flex;
   align-items: center;
   width: 170px;
+  border-radius: var(--border-radius-round);
 
   ${({ theme }) => css`
     ${theme.textStyles.note}
     margin-left: -${theme.spacing.base}px;
     margin-right: -${theme.spacing.base}px;
     padding: ${theme.spacing.base * 1.5}px ${theme.spacing.base}px;
-    border-radius: ${theme.borderRadius.default};
     :hover {
       background-color: ${theme.colors.secondary.hover};
     }
