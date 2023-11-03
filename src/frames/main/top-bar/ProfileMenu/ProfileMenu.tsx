@@ -30,7 +30,7 @@ const orderedStatusItems = [
  */
 const ProfileMenu = () => {
   const user = useLoggedInUser();
-  const { status } = useUserStatusFeed({ userId: user.id });
+  const { isLoading, status } = useUserStatusFeed({ userId: user.id });
   const { logout } = useAuth();
 
   const [isMenuShown, setIsMenuShown] = useState<boolean>(false);
@@ -54,11 +54,12 @@ const ProfileMenu = () => {
     UserRequests.setUserStatus(newStatus).catch((error) => {
       console.error(error);
       popup.error(`Could not set status, please try again later.`);
-      setLocalStatus(status);
+      setLocalStatus(status!);
     });
   };
 
   useEffect(() => {
+    if (isLoading) return;
     // updates the local status whenever an update of the actual status is
     // noticed on the backend
     setLocalStatus(status);

@@ -4,8 +4,8 @@ import { ActionButtonSize, WrapperProps } from './ActionButton.types';
 import { theme } from 'assets/styles/Theme';
 
 const buttonSize = {
-  [ActionButtonSize.SMALL]: '20px',
-  [ActionButtonSize.MEDIUM]: theme.spacing.baseX5 + 'px',
+  [ActionButtonSize.SMALL]: '22px',
+  [ActionButtonSize.MEDIUM]: '31px',
   [ActionButtonSize.LARGE]: theme.spacing.baseX6 + 'px'
 };
 
@@ -19,7 +19,7 @@ export const Wrapper = styled.div<WrapperProps>`
     height: ${buttonSize[size]};
     padding: ${size === ActionButtonSize.SMALL ? `5px` : `${theme.spacing.base}px`};
     background-color: ${theme.colors.secondary.base};
-    border-radius: ${isCircle ? '50%' : theme.borderRadius.default};
+    border-radius: ${isCircle ? '50%' : '50%'};
     > svg {
       color: ${iconColor ? iconColor : theme.colors.textPrimaryLight};
       width: 18px;
