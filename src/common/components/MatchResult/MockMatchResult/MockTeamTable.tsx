@@ -32,12 +32,12 @@ const TeamTable = ({ team }: TeamTableProps) => {
       </TableHeader>
       <TableHeader>Kills</TableHeader>
 
-      {team.players.map((player) => {
-        const kills = team.playerStats?.[player]?.kills || '-';
+      {team.players.map((playerId) => {
+        const kills = team.playerStats?.[playerId]?.kills || '-';
 
         return (
-          <React.Fragment key={player}>
-            <PlayerCell userId={player} team={team} />
+          <React.Fragment key={playerId}>
+            <PlayerCell userId={playerId} team={team} />
             <TableData>{kills}</TableData>
           </React.Fragment>
         );
