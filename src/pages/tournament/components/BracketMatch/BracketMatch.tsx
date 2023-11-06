@@ -25,13 +25,13 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
   const user = useLoggedInUser();
   const { match, team1, team2, isLoading } = useMatchFeed({ matchId });
 
-  if (!team1 || !team2) return null;
+  if (isLoading) return null;
 
   let teamIdOfLoggedInUser;
 
-  if (team1.players.some((player) => player === user.id)) {
+  if (team1 && team1.players.some((player) => player === user.id)) {
     teamIdOfLoggedInUser = team1.id;
-  } else if (team2.players.some((player) => player === user.id)) {
+  } else if (team2 && team2.players.some((player) => player === user.id)) {
     teamIdOfLoggedInUser = team2.id;
   }
 
@@ -46,22 +46,24 @@ const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }
       roundIndex={roundIndex}
       isFinal={isFinal}
       isFirstMatch={isFirstMatch}>
-      <Team1 matchOutcome={team1.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null}>
+      <Team1
+        matchOutcome={team1 && team1.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null}>
         <TeamLogo>
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
-        <TeamName>{team1.teamName}</TeamName>
-        <TeamScore winner={match.winnerTeamId === team1.id}>
-          {team1.score ? team1.score : 0}
+        <TeamName>{team1 && team1.teamName ? team1.teamName : '-'}</TeamName>
+        <TeamScore winner={team1 ? match.winnerTeamId === team1.id : false}>
+          {team1 && team1.score ? team1.score : 0}
         </TeamScore>
       </Team1>
-      <Team2 matchOutcome={team2.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null}>
+      <Team2
+        matchOutcome={team2 && team2.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null}>
         <TeamLogo>
           <TeamLogoImage src={placeholderTeamLogo} />
         </TeamLogo>
-        <TeamName>{team2.teamName}</TeamName>
-        <TeamScore winner={match.winnerTeamId === team2.id}>
-          {team2.score ? team2.score : 0}
+        <TeamName>{team2 && team2.teamName ? team2.teamName : '-'}</TeamName>
+        <TeamScore winner={team2 ? match.winnerTeamId === team2.id : false}>
+          {team2 && team2.score ? team2.score : 0}
         </TeamScore>
       </Team2>
     </Wrapper>

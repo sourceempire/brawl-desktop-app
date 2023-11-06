@@ -19,11 +19,10 @@ import {
 } from './OngoingCSGOMatch.styles';
 
 const OngoingCSGOMatch = () => {
-  const { match, team1, team2 } = useMatchContext<CSGOMatch>();
+  const { match, team1, team2, isLoading } = useMatchContext<CSGOMatch>();
   const { matchStats } = useMatchStatsFeed({ matchId: match.id });
 
-  if (!match.matchSettings.maps?.[0]) return null;
-  if (!team1 || !team2) return null;
+  if (!match.matchSettings.maps?.[0] || isLoading) return null;
 
   const isStarting = match.matchStage === CSGOMatchStage.STARTING_MATCH;
   const isOngoing = match.matchStage === CSGOMatchStage.ONGOING;
