@@ -12,15 +12,16 @@ import {
   MapImage,
   MapImageWrapper,
   MapName,
-  Score,
+  // Score,
   ServerUrl,
   ServerUrlWrapper,
   Wrapper
 } from './OngoingCSGOMatch.styles';
 
 const OngoingCSGOMatch = () => {
-  const { match, team1, team2, isLoading } = useMatchContext<CSGOMatch>();
-  const { matchStats } = useMatchStatsFeed({ matchId: match.id });
+  const { match, isLoading } = useMatchContext<CSGOMatch>();
+  // const { match, team1, team2, isLoading } = useMatchContext<CSGOMatch>();
+  // const { matchStats } = useMatchStatsFeed({ matchId: match.id });
 
   if (!match.matchSettings.maps?.[0] || isLoading) return null;
 
@@ -44,9 +45,9 @@ const OngoingCSGOMatch = () => {
         <MapImage src={imageUrl.big} />
         <MapName>{displayName}</MapName>
 
-        <Score>{matchStats?.maps?.[0]?.teams[team1.id].score}</Score>
+        {/* <Score>{matchStats?.maps?.[0]?.teams[team1.id].score}</Score>
         <Score>-</Score>
-        <Score>{matchStats?.maps?.[0]?.teams[team2.id].score}</Score>
+        <Score>{matchStats?.maps?.[0]?.teams[team2.id].score}</Score> */}
       </MapImageWrapper>
       {isStarting && (
         <>

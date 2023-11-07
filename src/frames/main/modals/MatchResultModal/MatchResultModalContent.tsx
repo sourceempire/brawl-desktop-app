@@ -1,9 +1,10 @@
 import { useContext } from 'react';
 import { useMatchFeed } from 'api/feeds';
-import CSGOMatchResult from 'common/components/MatchResult/CSGOMatchResult';
+// import CSGOMatchResult from 'common/components/MatchResult/CSGOMatchResult';
 import { Button } from 'common/ui';
 import { MatchResultModalContext } from 'context/MatchResultModalContext';
-import { isCSGOMatch, isMockMatch } from 'types/match/Match';
+// import { isCSGOMatch, isMockMatch } from 'types/match/Match';
+import { isMockMatch } from 'types/match/Match';
 import { Buttons, Header, TopWrapper, Wrapper } from './MatchResultModalContent.styles';
 import MockMatchResult from 'common/components/MatchResult/MockMatchResult';
 
@@ -13,7 +14,7 @@ type Props = {
 
 const MatchResultModalContent = ({ matchId }: Props) => {
   const { match, team1, team2, isLoading } = useMatchFeed({ matchId });
-  const { matchStats, roundWins } = useMatchStatsFeed({ matchId });
+  // const { matchStats, roundWins } = useMatchStatsFeed({ matchId });
   const { hideModal } = useContext(MatchResultModalContext);
 
   if (isLoading) return null;
@@ -27,7 +28,7 @@ const MatchResultModalContent = ({ matchId }: Props) => {
         </Buttons>
       </TopWrapper>
 
-      {isCSGOMatch(match) && (
+      {/* {isCSGOMatch(match) && (
         <CSGOMatchResult
           matchStats={matchStats}
           roundWins={roundWins}
@@ -36,7 +37,7 @@ const MatchResultModalContent = ({ matchId }: Props) => {
           team2={team2}
           disableBackgroundFadeIn
         />
-      )}
+      )} */}
 
       {isMockMatch(match) && (
         <MockMatchResult match={match} team1={team1} team2={team2} disableBackgroundFadeIn />
