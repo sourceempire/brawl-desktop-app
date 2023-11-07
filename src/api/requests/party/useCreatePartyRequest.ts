@@ -10,12 +10,9 @@ export const useCreatePartyRequest = () => {
     popup.error(error.message);
   };
 
-  const [createParty, ...response] = usePost<void>(createPartyEndpoint, {
+  const [createParty] = usePost<void>(createPartyEndpoint, {
     onError
   });
 
-  return {
-    createParty,
-    ...response
-  };
+  return { createParty };
 };

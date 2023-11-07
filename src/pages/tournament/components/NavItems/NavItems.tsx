@@ -12,7 +12,6 @@ type Props = {
 export const NavItems = ({ tournamentId, matchId }: Props) => {
   const linkListRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const [{ style, shouldAnimate }] = useActiveLineStyle({ linkListRef });
-  const { matchHistoryList } = useTournamentMatchHistoryFeed({ tournamentId });
   const { gameMatchInfo } = useMatchFeed({ matchId });
 
   const navigate = useNavigate();
@@ -37,9 +36,9 @@ export const NavItems = ({ tournamentId, matchId }: Props) => {
 
       <NavLink to={`/main/tournaments/${tournamentId}/bracket`}>Bracket</NavLink>
       <NavLink to={`/main/tournaments/${tournamentId}/rules`}>Rules</NavLink>
-      {matchHistoryList.length > 1 && (
+      {/* {matchHistoryList.length < 1 && (
         <NavLink to={`/main/tournaments/${tournamentId}/match-history`}>Match History</NavLink>
-      )}
+      )} */}
       <ActiveLine style={style} shouldAnimate={shouldAnimate} />
     </Wrapper>
   );

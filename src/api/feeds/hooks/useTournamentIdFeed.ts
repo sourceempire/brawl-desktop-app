@@ -8,11 +8,16 @@ type Params = {
 export default function useTournamentIdFeed({ tournamentHubId }: Params) {
   const { id: userId } = useLoggedInUser();
 
-  const { data } = useFeed<{ tournamentId: string | null }>(
+  const feed = useFeed<{ tournamentId: string | null }>(
     `tournament.id.${tournamentHubId}.${userId}`
   );
 
+  if (feed.loading) {
+    return { isLoading: feed.loading };
+  }
+
   return {
-    tournamentId: data.tournamentId
+    tournamentId: feed.data.tournamentId,
+    isLoading: feed.loading
   };
 }

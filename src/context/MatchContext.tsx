@@ -23,6 +23,8 @@ type Props = {
 export const MatchContextProvider = ({ children, matchId }: Props) => {
   const { gameMatchInfo, team1, team2, isLoading } = useMatchFeed({ matchId });
 
+  if (isLoading) return null;
+
   return (
     <MatchContext.Provider value={{ isLoading, gameMatchInfo, team1, team2 }}>
       {children}
@@ -30,7 +32,7 @@ export const MatchContextProvider = ({ children, matchId }: Props) => {
   );
 };
 
-export function useMatchContext<T = Match>() {
+export function useMatchContext<T extends Match>() {
   const context = useContext(MatchContext);
 
   return {

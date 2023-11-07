@@ -29,18 +29,20 @@ export default function FeaturedTournamentSlider({ expanded }: Props) {
   const [autoSlideActive, setAutoSlideActive] = useState(true);
   const [sliderWidth, setSliderWidth] = useState(0);
 
-  const { featuredTournamentHubs } = useFeaturedTourmanentsFeed();
+  const { data, loading } = useFeaturedTourmanentsFeed();
 
   const navigate = useNavigate();
 
   const changeSlide = useCallback(
     (step: number) => {
-      const slideCount = featuredTournamentHubs.length;
+      if (loading) return;
+
+      const slideCount = data.featuredTournamentHubs.length;
       const nextSlideIndex = (currentSlideRef.current + step + slideCount) % slideCount;
       setCurrentSlide(nextSlideIndex);
       currentSlideRef.current = nextSlideIndex;
     },
-    [featuredTournamentHubs.length]
+    [data?.featuredTournamentHubs.length]
   );
 
   const handleDotClick = (index: number) => changeSlide(index - currentSlideRef.current);
@@ -64,7 +66,9 @@ export default function FeaturedTournamentSlider({ expanded }: Props) {
   };
 
   useEffect(() => {
-    const nrOfSlides = featuredTournamentHubs.length;
+    if (loading) return;
+
+    const nrOfSlides = data.featuredTournamentHubs.length;
     setSliderWidth(100 * nrOfSlides);
     if (autoSlideActive) {
       timeoutRef.current = setInterval(() => {
@@ -78,7 +82,11 @@ export default function FeaturedTournamentSlider({ expanded }: Props) {
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [autoSlideActive, changeSlide, featuredTournamentHubs.length]);
+  }, [autoSlideActive, changeSlide, data?.featuredTournamentHubs.length]);
+
+  if (loading) return;
+
+  const { featuredTournamentHubs } = data;
 
   return (
     <>

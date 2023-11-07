@@ -1,5 +1,4 @@
 import { useMatchFeed } from 'api/feeds';
-import { useMatchStatsFeed } from 'api/feeds/hooks/useMatchStatsFeed';
 import { useParams } from 'react-router-dom';
 import { isCSGOMatch, isMockMatch } from 'types/match/Match';
 import CSGOMatchResult from './CSGOMatchResult';

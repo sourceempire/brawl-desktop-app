@@ -6,9 +6,13 @@ type Params = {
 };
 
 const useUserStatusFeed = ({ userId }: Params) => {
-  const { data, loading } = useFeed<{ status: UserStatusEnum }>(`user.status.${userId}`);
+  const feed = useFeed<{ status: UserStatusEnum }>(`user.status.${userId}`);
 
-  return { status: UserStatusEnum[data.status], isLoading: loading };
+  if (feed.loading) {
+    return { isLoading: feed.loading };
+  }
+
+  return { status: UserStatusEnum[feed.data.status], isLoading: feed.loading };
 };
 
 export default useUserStatusFeed;

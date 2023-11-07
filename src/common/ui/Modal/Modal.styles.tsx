@@ -23,7 +23,7 @@ export const Content = styled.div<ContentProps>`
     margin: ${margin ? margin : 'auto'};
     background-color: ${theme.colors.surface.base};
     border: 1px solid ${theme.colors.secondary.base};
-    border-radius: ${theme.borderRadius.default};
+    border-radius: 12px;
     overflow: ${scrollable ? 'scroll' : 'visible'};
 
     ${!noPadding &&

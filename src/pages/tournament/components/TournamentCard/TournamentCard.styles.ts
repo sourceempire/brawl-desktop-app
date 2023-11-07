@@ -32,7 +32,6 @@ export const Wrapper = styled.div<{ isUserInTournament: boolean }>`
     css`
       border-color: ${theme.colors.accent.base};
       border: 2px solid ${theme.colors.accent.base};
-      border-radius: ${theme.borderRadius.default};
     `}
 
   :hover {

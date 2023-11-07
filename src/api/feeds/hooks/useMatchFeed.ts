@@ -7,43 +7,27 @@ type Params = {
 };
 
 const useMatchFeed = ({ matchId }: Params) => {
-  const { data, loading } = useFeed<{ gameMatchInfo: Match; internalMatchInfo: Match }>(
-    `match.${matchId}`
-  );
+  const feed = useFeed<{ match: Match }>(`match.${matchId}`);
+
+  if (feed.loading) {
+    return { isLoading: feed.loading };
+  }
 
   const loggedInUser = useLoggedInUser();
 
-  const defaultTeam = {
-    id: '',
-    name: '',
-    players: [],
-    teamLeaderId: '',
-    score: 0
-  };
-
-  let team1 = data.gameMatchInfo?.team1
-    ? {
-        ...data.gameMatchInfo.team1,
-        teamLeaderId: data.internalMatchInfo?.team1?.teamLeaderId
-      }
-    : defaultTeam;
-
-  let team2 = data.gameMatchInfo?.team2
-    ? {
-        ...data.gameMatchInfo.team2,
-        teamLeaderId: data.internalMatchInfo?.team2?.teamLeaderId
-      }
-    : defaultTeam;
+  let team1 = feed.data.match.team1;
+  let team2 = feed.data.match.team2;
 
   if (team2 && team2.players.some((player) => player.userId === loggedInUser.id)) {
-    [team1, team2] = [team2, team1];
+    team1 = feed.data.match.team2;
+    team2 = feed.data.match.team1;
   }
 
   return {
-    gameMatchInfo: data.gameMatchInfo ?? {},
+    match: feed.data.match,
     team1,
     team2,
-    isLoading: loading
+    isLoading: feed.loading
   };
 };
 

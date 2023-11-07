@@ -6,11 +6,15 @@ type Params = {
 };
 
 const useBracketFeed = ({ tournamentId }: Params) => {
-  const { data, loading } = useFeed<BracketType>(`bracket.${tournamentId}`);
+  const feed = useFeed<BracketType>(`bracket.${tournamentId}`);
+
+  if (feed.loading) {
+    return { isLoading: feed.loading };
+  }
 
   return {
-    bracket: data,
-    isLoading: loading
+    bracket: feed.data,
+    isLoading: feed.loading
   };
 };
 

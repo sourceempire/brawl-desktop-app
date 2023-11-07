@@ -21,7 +21,7 @@ import { useInvitePlayerRequest, useRevokeInviteRequest } from 'api/requests/par
 import { Icons } from '@sourceempire/brawl-ui';
 
 const PartyInvite = () => {
-  const { party } = usePartyFeed();
+  const state = usePartyFeed();
 
   const [isMenuVisible, setMenuVisible] = useState(false);
   const [searchString, setSearchString] = useState('');
@@ -56,6 +56,10 @@ const PartyInvite = () => {
       }
     });
   };
+
+  if (!state.isInParty) return null;
+
+  const { party } = state;
 
   const playerList = useMemo(
     () =>
