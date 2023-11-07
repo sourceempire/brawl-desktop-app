@@ -18,7 +18,7 @@ export const NavItems = ({ tournamentId, matchId }: Props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (match.hasGameData === false) {
+    if (!match.hasGameData) {
       navigate(`/main/tournaments/${tournamentId}/bracket`);
     } else {
       navigate(`/main/tournaments/${tournamentId}`);
