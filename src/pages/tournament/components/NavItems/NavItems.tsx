@@ -27,7 +27,7 @@ export const NavItems = ({ tournamentId, matchId }: Props) => {
 
   return (
     <Wrapper ref={linkListRef}>
-      {match.hasGameData === true && (
+      {match.hasGameData && (
         <NavLink to={`/main/tournaments/${tournamentId}`} end>
           Match
         </NavLink>
