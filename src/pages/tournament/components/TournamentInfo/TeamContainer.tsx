@@ -11,5 +11,9 @@ export const TeamContainer = ({ currentMatchId, teamNumber }: Props) => {
 
   if (isLoading) return null;
 
-  return <Wrapper>{teamNumber === 1 ? team1.teamName : team2.teamName}</Wrapper>;
+  return (
+    <Wrapper>
+      {teamNumber === 1 ? (team1 && team1.teamName) || '-' : (team2 && team2.teamName) || '-'}
+    </Wrapper>
+  );
 };
