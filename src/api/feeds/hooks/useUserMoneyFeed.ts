@@ -5,13 +5,21 @@ type Params = {
 };
 
 function useUserMoneyFeed({ userId }: Params) {
-  const { data, loading } = useFeed<{ balance: number }>(`user.money.${userId}`);
+  const feed = useFeed<{ balance: number }>(`user.money.${userId}`);
+
+  if (feed.loading) {
+    return {
+      isLoading: feed.loading
+    };
+  }
 
   return {
-    isLoading: loading,
-    balance: data.balance,
-    display: loading ? 'loading' : `€${(data.balance / 100).toFixed(2)}`
+    isLoading: feed.loading,
+    balance: feed.data.balance,
+    display: feed.loading ? 'loading' : `€${(feed.data.balance / 100).toFixed(2)}`
   };
+
+  return {};
 }
 
 export default useUserMoneyFeed;

@@ -30,13 +30,12 @@ export const useJoinTournamentRequest = ({ onComplete }: Options) => {
     }
   };
 
-  const [joinTournament, ...response] = usePost<void, Body>(joinTournamentEndpoint, {
+  const [joinTournament] = usePost<void, Body>(joinTournamentEndpoint, {
     onError,
     onComplete
   });
 
   return {
-    joinTournament,
-    ...response
+    joinTournament
   };
 };

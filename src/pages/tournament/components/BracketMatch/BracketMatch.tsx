@@ -1,5 +1,4 @@
 import useMatchFeed from 'api/feeds/hooks/useMatchFeed';
-import { useMatchStatsFeed } from 'api/feeds/hooks/useMatchStatsFeed';
 import { useLoggedInUser } from 'common/hooks';
 import { getMatchOutcome, getTeamScore } from 'utils/matchUtils';
 import {
@@ -22,65 +21,61 @@ type Props = {
   isFinal: boolean;
 };
 
-const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }: Props) => {
+const BracketMatch = (/*{ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }: Props*/) => {
   const user = useLoggedInUser();
-  const { gameMatchInfo, isLoading } = useMatchFeed({ matchId });
-  const {
-    hasMatchStats,
-    matchStats,
-    isLoading: isLoadingMatchStats
-  } = useMatchStatsFeed({ matchId });
 
-  const team1Score = hasMatchStats
-    ? getTeamScore({ matchStats, teamId: gameMatchInfo.team1.id })
-    : null;
-  const team2Score = hasMatchStats
-    ? getTeamScore({ matchStats, teamId: gameMatchInfo.team2.id })
-    : null;
+  // const { match, isLoading } = useMatchFeed({ matchId });
+  // const {
+  //   hasMatchStats,
+  //   matchStats,
+  //   isLoading: isLoadingMatchStats
+  // } = useMatchStatsFeed({ matchId });
+
+  // if (isLoading) return null; // TODO -> add bracket match skeleton?
+
+  // const team1Score = hasMatchStats ? getTeamScore({ matchStats, teamId: match.team1.id }) : null;
+  // const team2Score = hasMatchStats ? getTeamScore({ matchStats, teamId: match.team2.id }) : null;
 
   let teamIdOfLoggedInUser;
 
-  if (gameMatchInfo.team1?.players.some((player) => player.userId === user.id)) {
-    teamIdOfLoggedInUser = gameMatchInfo.team1.id;
-  } else if (gameMatchInfo.team2?.players.some((player) => player.userId === user.id)) {
-    teamIdOfLoggedInUser = gameMatchInfo.team2.id;
-  }
+  // if (match.team1?.players.includes(user.id)) {
+  //   teamIdOfLoggedInUser = match.team1.id;
+  // } else if (match.team2?.players.includes(user.id)) {
+  //   teamIdOfLoggedInUser = match.team2.id;
+  // }
 
-  const loggedInUserMatchOutcome =
-    hasMatchStats && teamIdOfLoggedInUser
-      ? getMatchOutcome({ teamIdOfLoggedInUser, matchStats })
-      : MatchOutcome.NotDecided;
+  // const loggedInUserMatchOutcome =
+  //   hasMatchStats && teamIdOfLoggedInUser
+  //     ? getMatchOutcome({ teamIdOfLoggedInUser, matchStats })
+  //     : MatchOutcome.NotDecided;
 
-  if (isLoading || isLoadingMatchStats) return null;
+  // if (isLoading || isLoadingMatchStats) return null;
 
   return (
-    <Wrapper
-      matchIndex={matchIndex}
-      roundIndex={roundIndex}
-      isFinal={isFinal}
-      isFirstMatch={isFirstMatch}
-      isMatchOver={hasMatchStats}>
-      <Team1
-        matchOutcome={
-          gameMatchInfo.team1?.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null
-        }>
-        <TeamLogo>
-          <TeamLogoImage src={placeholderTeamLogo} />
-        </TeamLogo>
-        <TeamName>{gameMatchInfo.team1?.name}</TeamName>
-        <TeamScore winner={matchStats.winner === gameMatchInfo.team1?.id}>{team1Score}</TeamScore>
-      </Team1>
-      <Team2
-        matchOutcome={
-          gameMatchInfo.team2?.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null
-        }>
-        <TeamLogo>
-          <TeamLogoImage src={placeholderTeamLogo} />
-        </TeamLogo>
-        <TeamName>{gameMatchInfo.team2?.name}</TeamName>
-        <TeamScore winner={matchStats.winner === gameMatchInfo.team2?.id}>{team2Score}</TeamScore>
-      </Team2>
-    </Wrapper>
+    <div />
+    // <Wrapper
+    //   matchIndex={matchIndex}
+    //   roundIndex={roundIndex}
+    //   isFinal={isFinal}
+    //   isFirstMatch={isFirstMatch}
+    //   isMatchOver={hasMatchStats}>
+    //   <Team1
+    //     matchOutcome={match.team1?.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null}>
+    //     <TeamLogo>
+    //       <TeamLogoImage src={placeholderTeamLogo} />
+    //     </TeamLogo>
+    //     <TeamName>{match.team1?.teamName}</TeamName>
+    //     <TeamScore winner={matchStats.winner === match.team1?.id}>{team1Score}</TeamScore>
+    //   </Team1>
+    //   <Team2
+    //     matchOutcome={match.team2?.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null}>
+    //     <TeamLogo>
+    //       <TeamLogoImage src={placeholderTeamLogo} />
+    //     </TeamLogo>
+    //     <TeamName>{match.team2?.teamName}</TeamName>
+    //     <TeamScore winner={matchStats.winner === match.team2?.id}>{team2Score}</TeamScore>
+    //   </Team2>
+    // </Wrapper>
   );
 };
 

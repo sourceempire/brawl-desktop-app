@@ -8,7 +8,11 @@ export type Party = {
   teamName: string | null;
 };
 
-export type PartyState = {
-  isInParty: boolean;
-  party?: Party;
-};
+export type PartyState =
+  | {
+      isInParty: false;
+    }
+  | {
+      isInParty: true;
+      party: Party;
+    };

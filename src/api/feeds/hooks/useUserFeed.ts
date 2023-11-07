@@ -6,11 +6,17 @@ type Params = {
 };
 
 function useUserFeed<T = PublicUser>({ userId }: Params) {
-  const { data, loading } = useFeed<{ user: T }>(`user.${userId}`);
+  const state = useFeed<{ user: T }>(`user.${userId}`);
+
+  if (state.loading) {
+    return {
+      isLoading: state.loading
+    };
+  }
 
   return {
-    isLoading: loading,
-    user: data?.user as T
+    isLoading: state.loading,
+    user: state.data.user
   };
 }
 
