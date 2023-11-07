@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { useMatchFeed } from 'api/feeds';
-import { useMatchStatsFeed } from 'api/feeds/hooks/useMatchStatsFeed';
 import CSGOMatchResult from 'common/components/MatchResult/CSGOMatchResult';
 import { Button } from 'common/ui';
 import { MatchResultModalContext } from 'context/MatchResultModalContext';
@@ -28,16 +27,16 @@ const MatchResultModalContent = ({ matchId }: Props) => {
         </Buttons>
       </TopWrapper>
 
-      {isCSGOMatch(gameMatchInfo) && (
-        <CSGOMatchResult
-          matchStats={matchStats}
-          roundWins={roundWins}
-          match={gameMatchInfo}
-          team1={team1}
-          team2={team2}
-          disableBackgroundFadeIn
-        />
-      )}
+    //   {isCSGOMatch(match) && (
+    //     <CSGOMatchResult
+    //       matchStats={matchStats}
+    //       roundWins={roundWins}
+    //       match={match}
+    //       team1={team1}
+    //       team2={team2}
+    //       disableBackgroundFadeIn
+    //     />
+    //   )}
 
       {isMockMatch(gameMatchInfo) && (
         <MockMatchResult

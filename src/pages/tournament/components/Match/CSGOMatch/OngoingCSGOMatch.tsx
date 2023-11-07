@@ -1,4 +1,4 @@
-import { useMatchStatsFeed } from 'api/feeds/hooks/useMatchStatsFeed';
+// import { useMatchStatsFeed } from 'api/feeds/hooks/useMatchStatsFeed';
 import popup from 'common/popup';
 import { useMatchContext } from 'context/MatchContext';
 import { SimpleLoading } from 'frames/main/friends/components/Shared.styles';
@@ -20,7 +20,7 @@ import {
 
 const OngoingCSGOMatch = () => {
   const { gameMatchInfo, team1, team2 } = useMatchContext<CSGOMatch>();
-  const { matchStats } = useMatchStatsFeed({ matchId: gameMatchInfo.id });
+  // const { matchStats } = useMatchStatsFeed({ matchId: match.id });
 
   if (!gameMatchInfo.matchSettings.maps?.[0]) return null;
   if (!team1 || !team2) return null;
@@ -45,9 +45,9 @@ const OngoingCSGOMatch = () => {
         <MapImage src={imageUrl.big} />
         <MapName>{displayName}</MapName>
 
-        <Score>{matchStats?.maps?.[0]?.teams[team1.id].score}</Score>
+        {/* <Score>{matchStats?.maps?.[0]?.teams[team1.id].score}</Score>
         <Score>-</Score>
-        <Score>{matchStats?.maps?.[0]?.teams[team2.id].score}</Score>
+        <Score>{matchStats?.maps?.[0]?.teams[team2.id].score}</Score> */}
       </MapImageWrapper>
       {isStarting && (
         <>

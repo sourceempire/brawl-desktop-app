@@ -10,12 +10,9 @@ type Options = {
 };
 
 export const useTournamentHubRulesRequest = ({ tournamentHubId }: Options) => {
-  const { loading, data } = useGetImmediate<Rules>(endpoint, {
-    params: { tournamentHubId }
+  const { state } = useGetImmediate<Rules, { tournamentHubId: string }>(endpoint, {
+    fetchOptions: { params: { tournamentHubId } }
   });
 
-  return {
-    loading,
-    rules: data
-  };
+  return state;
 };

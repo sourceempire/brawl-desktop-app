@@ -8,10 +8,17 @@ type Params = {
 
 function useTournamentMatchHistoryFeed({ tournamentId }: Params) {
   const user = useLoggedInUser();
-  const feedString = `tournament.match.history.${tournamentId}.${user.id}`;
-  const { data, loading } = useFeed<{ matchHistory: TournamentMatchHistory }>(feedString);
+  const feed = useFeed<{ matchHistory: TournamentMatchHistory }>(
+    `tournament.match.history.${tournamentId}.${user.id}`
+  );
 
-  return { matchHistoryList: data.matchHistory?.matchList ?? [], isLoading: loading };
+  if (feed.loading) {
+    return {
+      isLoading: feed.loading
+    };
+  }
+
+  return { matchHistoryList: feed.data.matchHistory?.matchList ?? [], isLoading: feed.loading };
 }
 
 export default useTournamentMatchHistoryFeed;

@@ -9,10 +9,15 @@ export type News = {
 };
 
 const useNewsFeed = () => {
-  const { data, loading } = useFeed<{ news: News[] }>('news');
+  const feed = useFeed<{ news: News[] }>('news');
+
+  if (feed.loading) {
+    return { isLoading: feed.loading };
+  }
+
   return {
-    news: (data.news ?? []) as News[],
-    isLoading: loading
+    news: feed.data.news,
+    isLoading: feed.loading
   };
 };
 
