@@ -1,27 +1,19 @@
 import { useFeed } from '@sourceempire/brawl-websocket';
-import { useLoggedInUser } from 'common/hooks';
-import { Match } from 'types/match/Match';
+import { MockGameMatch } from 'types/match/Match';
 
 type Params = {
   matchId: string;
 };
 
 const useMatchFeed = ({ matchId }: Params) => {
-  const feed = useFeed<{ match: Match }>(`match.${matchId}`);
+  const feed = useFeed<{ match: MockGameMatch }>(`match.${matchId}`);
 
   if (feed.loading) {
     return { isLoading: feed.loading };
   }
 
-  const loggedInUser = useLoggedInUser();
-
   let team1 = feed.data.match.team1;
   let team2 = feed.data.match.team2;
-
-  if (team2 && team2.players.includes(loggedInUser.id)) {
-    team1 = feed.data.match.team2;
-    team2 = feed.data.match.team1;
-  }
 
   return {
     match: feed.data.match,

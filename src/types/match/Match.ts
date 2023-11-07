@@ -7,10 +7,11 @@ type Score = number;
 
 export type Match = {
   id: string;
-  winnerTeamId?: string;
+  winnerTeamId: TeamId;
   gameId: Game;
   team1: Team;
   team2: Team;
+  type: string;
 };
 
 export enum CSGOTeamSide {
@@ -76,6 +77,9 @@ export type CSGOMatch = Match & {
 
 export type MockGameMatch = Match & {
   gameId: GameId.MOCK;
+  hasGameData: boolean;
+  loserTeamId: TeamId;
+  scoreToWin?: number;
 };
 
 export type PlayerStats = {

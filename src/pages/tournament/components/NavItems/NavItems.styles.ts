@@ -17,6 +17,7 @@ export const NavLink = styled(ReactRouterNavLink)`
   height: 100%;
   padding: 12px;
   top: 2px;
+  text-decoration: none;
 
   ${({ theme }) => css`
     font: ${theme.textStyles.body};

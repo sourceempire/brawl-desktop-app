@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 `;
 
 type BackdropProps = {
-  mapImageUrl: string;
+  imageUrl: string;
   disableFade?: boolean;
 };
 
@@ -31,8 +31,8 @@ export const Backdrop = styled.div<BackdropProps>`
   content: '';
   inset: 0;
   background-position: 0 -230px;
-  ${({ theme, mapImageUrl, disableFade }) => css`
-    background-image: url(${mapImageUrl});
+  ${({ theme, imageUrl, disableFade }) => css`
+    background-image: url(${imageUrl});
     background-size: cover;
 
     ${!disableFade &&
@@ -55,4 +55,38 @@ export const Backdrop = styled.div<BackdropProps>`
 
 export const Content = styled.div`
   position: relative;
+`;
+
+export const Score = styled.div`
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 1fr 200px 1fr;
+`;
+
+export const TeamScore = styled.div<{ isWinner: boolean }>`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 40px;
+  ${({ isWinner, theme }) =>
+    isWinner &&
+    css`
+      ::after {
+        content: 'WINNER';
+        position: absolute;
+        bottom: 0;
+        font-size: 20px;
+        transform: translateY(100%);
+        color: ${theme.colors.accent.base};
+      }
+    `}
+`;
+
+export const TeamTables = styled.div`
+  padding-top: 50px;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 46% auto 46%;
 `;

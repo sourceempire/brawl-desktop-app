@@ -4,7 +4,9 @@ import CSGOMatch from './CSGOMatch';
 import MockMatch from './MockMatch';
 
 const Match = () => {
-  const { match } = useMatchContext();
+  const { match, isLoading } = useMatchContext();
+
+  if (isLoading) return null;
 
   return (
     <>

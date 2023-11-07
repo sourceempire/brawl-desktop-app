@@ -43,7 +43,7 @@ export const MatchResultModalContextProvider = ({ children }: Props) => {
     <MatchResultModalContext.Provider value={{ setMatchResultId, hideModal }}>
       <>
         {children}
-        <Modal isOpen={isModalOpen} onRequestClose={hideModal} closeButton={false}>
+        <Modal isOpen={isModalOpen} onRequestClose={hideModal} closeButton={false} header={false}>
           {matchId && <MatchResultModalContent matchId={matchId} />}
         </Modal>
       </>
