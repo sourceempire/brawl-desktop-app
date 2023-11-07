@@ -9,7 +9,7 @@ type Props = {
 };
 
 const CurrentMatchStage = ({ matchId }: Props) => {
-  const { match } = useMatchFeed({ matchId });
+  const { match, isLoading } = useMatchFeed({ matchId });
 
   const [preventAnimations, setPreventAnimations] = useState<boolean>(true);
 
@@ -17,7 +17,7 @@ const CurrentMatchStage = ({ matchId }: Props) => {
     setTimeout(() => setPreventAnimations(false), 1000);
   }, []);
 
-  if (!isCSGOMatch(match)) {
+  if (!isCSGOMatch(match) || isLoading) {
     return null;
   }
 
