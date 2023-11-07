@@ -12,22 +12,24 @@ type Props = {
 export const NavItems = ({ tournamentId, matchId }: Props) => {
   const linkListRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const [{ style, shouldAnimate }] = useActiveLineStyle({ linkListRef });
-  const { matchHistoryList } = useTournamentMatchHistoryFeed({ tournamentId });
-  const { match } = useMatchFeed({ matchId });
+  const { matchHistoryList, isLoading: isLoadingMatchHirstory } = useTournamentMatchHistoryFeed({
+    tournamentId
+  });
+  const { match, isLoading: isLoadingMatch } = useMatchFeed({ matchId });
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!match.hasGameData) {
+    if (!isLoadingMatch && !match.hasGameData) {
       navigate(`/main/tournaments/${tournamentId}/bracket`);
     } else {
       navigate(`/main/tournaments/${tournamentId}`);
     }
-  }, [match.hasGameData]);
+  }, [!isLoadingMatch && match.hasGameData]);
 
   return (
     <Wrapper ref={linkListRef}>
-      {match.hasGameData && (
+      {!isLoadingMatch && match.hasGameData && (
         <NavLink to={`/main/tournaments/${tournamentId}`} end>
           Match
         </NavLink>
@@ -35,7 +37,7 @@ export const NavItems = ({ tournamentId, matchId }: Props) => {
 
       <NavLink to={`/main/tournaments/${tournamentId}/bracket`}>Bracket</NavLink>
       <NavLink to={`/main/tournaments/${tournamentId}/rules`}>Rules</NavLink>
-      {matchHistoryList.length > 1 && (
+      {!isLoadingMatchHirstory && matchHistoryList.length > 1 && (
         <NavLink to={`/main/tournaments/${tournamentId}/match-history`}>Match History</NavLink>
       )}
       <ActiveLine style={style} shouldAnimate={shouldAnimate} />

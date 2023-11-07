@@ -14,12 +14,11 @@ export const useKickPlayerRequest = () => {
     popup.error(error.message);
   };
 
-  const [kickPlayer, ...response] = usePost<void, Body>(kickPlayerEndpoint, {
+  const [kickPlayer] = usePost<void, Body>(kickPlayerEndpoint, {
     onError
   });
 
   return {
-    kickPlayer,
-    ...response
+    kickPlayer
   };
 };

@@ -11,6 +11,7 @@ import { TournamentHubPage } from 'pages/tournament-hub';
 import TournamentListView from '../../pages/tournament-list';
 import { RoutesContainer, Wrapper } from './MainFrame.styles';
 import TopBar from './top-bar/TopBar';
+import { TournamentHubListContextProvider } from 'pages/tournament-list/context/TournamentHubListContext';
 
 const MainView = () => {
   const { loginValidate, error } = useAuth();
@@ -44,7 +45,14 @@ const MainView = () => {
             <Route path="/">
               <Route index element={<HomePage />} />
               <Route path="tournaments">
-                <Route index element={<TournamentListView />} />
+                <Route
+                  index
+                  element={
+                    <TournamentHubListContextProvider>
+                      <TournamentListView />
+                    </TournamentHubListContextProvider>
+                  }
+                />
                 <Route path="hub/:hubId" element={<TournamentHubPage />} />
                 <Route path=":tournamentId/*" element={<TournamentPage />} />
               </Route>

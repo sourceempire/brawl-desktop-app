@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
     margin-right: ${theme.spacing.baseX2}px;
     height: ${theme.spacing.baseX5}px;
     width: ${theme.spacing.baseX5}px;
-    border-radius: ${theme.borderRadius.default};
+    border-radius: 50%;
     :hover {
       outline: 2px solid ${theme.colors.secondary.hover};
     }
@@ -22,7 +22,7 @@ export const PlayerImage = styled.img`
   height: 100%;
   width: 100%;
   ${({ theme }) => css`
-    border-radius: ${theme.borderRadius.default};
+    border-radius: 50%;
     background-color: ${theme.colors.secondary.base};
   `}
 `;

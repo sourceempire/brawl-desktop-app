@@ -13,10 +13,9 @@ type Option = {
 };
 
 export const useUpdatePartySizeRequest = ({ onError }: Option) => {
-  const [updatePartySize, ...response] = usePost<void, Body>(updatePartySizeEndpoint, { onError });
+  const [updatePartySize] = usePost<void, Body>(updatePartySizeEndpoint, { onError });
 
   return {
-    updatePartySize,
-    ...response
+    updatePartySize
   };
 };

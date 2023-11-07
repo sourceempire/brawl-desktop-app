@@ -17,7 +17,9 @@ const CurrentMatchStage = ({ matchId }: Props) => {
     setTimeout(() => setPreventAnimations(false), 1000);
   }, []);
 
-  if (!isCSGOMatch(match) || isLoading) {
+  if (isLoading) return null;
+
+  if (!isCSGOMatch(match)) {
     return null;
   }
 

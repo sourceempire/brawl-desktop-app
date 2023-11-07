@@ -13,7 +13,10 @@ const MatchResult = () => {
   const { matchStats, roundWins } = useMatchStatsFeed({ matchId });
 
   const { tournamentId } = useParams() as { tournamentId: string };
-  const { tournament } = useTournamentFeed({ tournamentId });
+  const { tournament, isLoading: isLoadingTournament } = useTournamentFeed({ tournamentId });
+
+  if (isLoadingTournament) return null;
+
   const { tournamentHub, isLoading: isLoadingTournamentHub } = useTournamentHubFeed({
     tournamentHubId: tournament.tournamentHubId
   });

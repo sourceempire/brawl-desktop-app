@@ -21,6 +21,8 @@ type Props = {
 export const MatchContextProvider = ({ children, matchId }: Props) => {
   const { match, team1, team2, isLoading } = useMatchFeed({ matchId });
 
+  if (isLoading) return null;
+
   return (
     <MatchContext.Provider value={{ isLoading, match, team1, team2 }}>
       {children}

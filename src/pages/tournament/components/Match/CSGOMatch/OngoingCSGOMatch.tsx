@@ -1,4 +1,4 @@
-import { useMatchStatsFeed } from 'api/feeds/hooks/useMatchStatsFeed';
+// import { useMatchStatsFeed } from 'api/feeds/hooks/useMatchStatsFeed';
 import popup from 'common/popup';
 import { useMatchContext } from 'context/MatchContext';
 import { SimpleLoading } from 'frames/main/friends/components/Shared.styles';
