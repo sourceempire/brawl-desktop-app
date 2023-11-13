@@ -1,6 +1,5 @@
 import { useMatchContext } from 'context/MatchContext';
-import { isCSGOMatch, isMockMatch } from 'types/match/Match';
-import CSGOMatch from './CSGOMatch';
+import { isMockMatch } from 'types/match/Match';
 import MockMatch from './MockMatch';
 
 const Match = () => {
@@ -8,12 +7,7 @@ const Match = () => {
 
   if (isLoading) return null;
 
-  return (
-    <>
-      {isCSGOMatch(match) && <CSGOMatch />}
-      {isMockMatch(match) && <MockMatch />}
-    </>
-  );
+  return <>{isMockMatch(match) && <MockMatch />}</>;
 };
 
 export default Match;
