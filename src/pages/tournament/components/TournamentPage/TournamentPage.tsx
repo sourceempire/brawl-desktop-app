@@ -6,7 +6,6 @@ import PageContainer from 'common/components/PageContainer';
 import { Button } from 'common/ui';
 import { MatchContextProvider } from 'context/MatchContext';
 import Bracket from '../Bracket';
-import CurrentMatchStage from '../CurrentMatchStage';
 import Match from '../Match';
 import MatchHistory from '../MatchHistory/MatchHistory';
 import NavItems from '../NavItems';
@@ -49,7 +48,6 @@ const TournamentPage = () => {
             <TournamentContent>
               <TournamentNavbar>
                 <NavItems tournamentId={tournamentId} matchId={matchId} />
-                {matchId ? <CurrentMatchStage matchId={matchId} /> : <div />}
                 <RightAlignedContainer>
                   {tournament.tournamentHubId && (
                     <Link to={`/main/tournaments/hub/${tournament.tournamentHubId}`}>
