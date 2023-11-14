@@ -2,7 +2,6 @@ import { usePartyFeed, useTournamentHubFeed } from 'api/feeds';
 import { useParams } from 'react-router-dom';
 import { useLoggedInUser } from 'common/hooks/useLoggedInUser';
 import { BracketModal } from './BracketModal';
-import { MapPoolModal } from './MapPoolModal';
 import { HowItWorksModal } from './HowItWorksModal/';
 import { RulesModal } from './RulesModal';
 import { TeamSettingsModal } from './TeamSettingsModal';
@@ -29,7 +28,6 @@ export function TournamentHubModal({ activeModal, closeModal }: Props) {
         onRequestClose={closeModal}
         tournamentHub={tournamentHub}
       />
-      <MapPoolModal isOpen={activeModal === 'mapPool'} onRequestClose={closeModal} />
       <RulesModal
         tournamentHubId={hubId}
         isOpen={activeModal === 'rules'}
