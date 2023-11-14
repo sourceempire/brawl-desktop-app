@@ -6,8 +6,6 @@ type Props = {
 };
 
 export function MapPoolModal({ isOpen, onRequestClose }: Props) {
-  //TODO -> Replace type with gameId from matchSettings
-
   return (
     <Modal
       title="Map Pool"
