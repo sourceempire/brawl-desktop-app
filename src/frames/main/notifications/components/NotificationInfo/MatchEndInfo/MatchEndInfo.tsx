@@ -2,7 +2,7 @@ import { useTimeSince } from 'common/hooks';
 import { MatchEndNotificationInfo } from 'types/notifications/Notifications';
 import { Image, Text, TimeAgo } from '../../NotificationCard/NotificationCard.styles';
 import { Info, Wrapper } from '../NotificationInfo.styles';
-import csgoLogo from 'assets/images/csgo-logo.svg';
+import placeholderImage from 'assets/images/placeholder-team-logo.png';
 
 type Props = {
   info: MatchEndNotificationInfo;
@@ -15,7 +15,7 @@ const MatchEndInfo = ({ createdAt }: Props) => {
 
   return (
     <Wrapper>
-      <Image src={csgoLogo} />
+      <Image src={placeholderImage} />
       <Info>
         <Text>Match ended, click here for result</Text>
         <TimeAgo>{timeSince}</TimeAgo>
