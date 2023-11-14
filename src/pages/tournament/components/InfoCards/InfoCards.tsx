@@ -30,15 +30,11 @@ const InfoCards = ({ tournamentHub }: Props) => {
   });
 
   const setInfoSettings = (tournamentHub: TournamentHub) => {
-    setGameInfo({
-      ...gameInfo,
-      name: GameName[tournamentHub.gameId]
-    });
-
     switch (tournamentHub.gameId) {
-      case Game.CSGO: {
+      case Game.MOCK: {
         setGameInfo({
           ...gameInfo,
+          name: GameName[tournamentHub.gameId],
           mode: getTournamentModeShort(tournamentHub),
           type: getTournamentSeriesTypeLong(tournamentHub)
         });
