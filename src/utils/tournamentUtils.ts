@@ -1,27 +1,24 @@
-import { isCSGOMatchSettings } from 'types/MatchSettings';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
-import {
-  csgoMatchSettingsModeShortForm,
-  csgoMatchSettingsSeriesTypeLongForm
-} from 'utils/matchUtils';
 import {
   MILLISECONDS_IN_DAY,
   MILLISECONDS_IN_HOUR,
   MILLISECONDS_IN_MINUTE,
   MILLISECONDS_IN_WEEK
 } from './timeUtils';
+import { isMockMatchSettings } from 'types/MatchSettings';
+import { matchSettingsModeShortForm, matchSettingsSeriesTypeLongForm } from './matchUtils';
 
 export const getTournamentModeShort = (tournamentInfo: TournamentHub) => {
-  if (isCSGOMatchSettings(tournamentInfo.matchSettings)) {
-    return `${csgoMatchSettingsModeShortForm(tournamentInfo.matchSettings.mode)}`;
+  if (isMockMatchSettings(tournamentInfo.gameId)) {
+    return `${matchSettingsModeShortForm(tournamentInfo.teamSize)}`;
   } else {
     return '';
   }
 };
 
 export const getTournamentSeriesTypeLong = (tournamentInfo: TournamentHub) => {
-  if (isCSGOMatchSettings(tournamentInfo.matchSettings)) {
-    return `${csgoMatchSettingsSeriesTypeLongForm(tournamentInfo.matchSettings.seriesType)}`;
+  if (isMockMatchSettings(tournamentInfo.gameId)) {
+    return `${matchSettingsSeriesTypeLongForm(tournamentInfo.teamSize)}`;
   } else {
     return '';
   }
