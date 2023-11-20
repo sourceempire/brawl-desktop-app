@@ -212,7 +212,7 @@ export const MarkdownStyling = styled.div`
       margin: 0;
       padding: 0;
     }
-    table tr:nth-child(2n) {
+    table tr:nth-of-type(2n) {
       background-color: #f8f8f8;
     }
     table tr th {

@@ -11,7 +11,7 @@ import {
   TableHeader,
   TeamLogo,
   Wrapper
-} from './TeamTable.styles';
+} from './CSGOTeamTable.styles';
 import placeholderTeamLogo from 'assets/images/placeholder-team-logo.png';
 import { Icons } from '@sourceempire/brawl-ui';
 
@@ -34,16 +34,16 @@ const TeamTable = ({ team, teamStats }: Props) => {
       <TableHeader>MVP</TableHeader>
       <TableHeader>HS</TableHeader>
 
-      {team.players.map((userId) => {
-        const { kills, deaths, assists, mvp, headshotKills } = teamStats.players[userId];
+      {team.players.map((playerId) => {
+        const { kills, deaths, assists, mvp, headshotKills } = teamStats.players[playerId];
 
         const headshotPercentage = isNaN(headshotKills / kills)
           ? 0
           : `${((headshotKills / kills) * 100).toFixed(1)}`;
 
         return (
-          <React.Fragment key={userId}>
-            <PlayerCell userId={userId} />
+          <React.Fragment key={playerId}>
+            <PlayerCell userId={playerId} />
             <TableData>{kills}</TableData>
             <TableData>{deaths}</TableData>
             <TableData>{assists}</TableData>

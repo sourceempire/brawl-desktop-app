@@ -22,9 +22,9 @@ const CSGOVeto = () => {
   const [mapToBan, setMapToBan] = useState<string>();
 
   let loggedInUsersTeam;
-  if (match.team1?.players.includes(user.id)) {
+  if (match.team1?.players.some((player) => player === user.id)) {
     loggedInUsersTeam = match.team1;
-  } else if (match.team2?.players.includes(user.id)) {
+  } else if (match.team2?.players.some((player) => player === user.id)) {
     loggedInUsersTeam = match.team2;
   }
 

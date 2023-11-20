@@ -15,15 +15,13 @@ export const Header = styled.div`
   position: relative;
   background-size: cover;
   height: 90px;
-
-  ${({ theme }) => css`
-    border-radius: ${theme.borderRadius.default} ${theme.borderRadius.default} 0 0;
-  `}
 `;
 
 export const Wrapper = styled(Card)`
   width: 100%;
   height: 214px;
+  border-radius: var(--border-radius-default);
+  overflow: hidden;
   :hover {
     background-color: ${({ theme }) => theme.colors.surfaceElement.base};
   }

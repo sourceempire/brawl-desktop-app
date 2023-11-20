@@ -1,6 +1,6 @@
 import useMatchFeed from 'api/feeds/hooks/useMatchFeed';
 import { useLoggedInUser } from 'common/hooks';
-import { getMatchOutcome, getTeamScore } from 'utils/matchUtils';
+import { getMatchOutcome } from 'utils/matchUtils';
 import {
   Team1,
   Team2,
@@ -21,60 +21,52 @@ type Props = {
   isFinal: boolean;
 };
 
-const BracketMatch = (/*{ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }: Props*/) => {
+const BracketMatch = ({ matchId, matchIndex, roundIndex, isFirstMatch, isFinal }: Props) => {
   const user = useLoggedInUser();
-  // const { match, isLoading } = useMatchFeed({ matchId });
-  // const {
-  //   hasMatchStats,
-  //   matchStats,
-  //   isLoading: isLoadingMatchStats
-  // } = useMatchStatsFeed({ matchId });
+  const { match, team1, team2, isLoading } = useMatchFeed({ matchId });
 
-  // if (isLoading) return null; // TODO -> add bracket match skeleton?
-
-  // const team1Score = hasMatchStats ? getTeamScore({ matchStats, teamId: match.team1.id }) : null;
-  // const team2Score = hasMatchStats ? getTeamScore({ matchStats, teamId: match.team2.id }) : null;
+  if (isLoading) return null;
 
   let teamIdOfLoggedInUser;
 
-  // if (match.team1?.players.includes(user.id)) {
-  //   teamIdOfLoggedInUser = match.team1.id;
-  // } else if (match.team2?.players.includes(user.id)) {
-  //   teamIdOfLoggedInUser = match.team2.id;
-  // }
+  if (team1 && team1.players.some((player) => player === user.id)) {
+    teamIdOfLoggedInUser = team1.id;
+  } else if (team2 && team2.players.some((player) => player === user.id)) {
+    teamIdOfLoggedInUser = team2.id;
+  }
 
-  // const loggedInUserMatchOutcome =
-  //   hasMatchStats && teamIdOfLoggedInUser
-  //     ? getMatchOutcome({ teamIdOfLoggedInUser, matchStats })
-  //     : MatchOutcome.NotDecided;
-
-  // if (isLoading || isLoadingMatchStats) return null;
+  const loggedInUserMatchOutcome =
+    !isLoading && teamIdOfLoggedInUser
+      ? getMatchOutcome({ teamIdOfLoggedInUser, match })
+      : MatchOutcome.NotDecided;
 
   return (
-    <div />
-    // <Wrapper
-    //   matchIndex={matchIndex}
-    //   roundIndex={roundIndex}
-    //   isFinal={isFinal}
-    //   isFirstMatch={isFirstMatch}
-    //   isMatchOver={hasMatchStats}>
-    //   <Team1
-    //     matchOutcome={match.team1?.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null}>
-    //     <TeamLogo>
-    //       <TeamLogoImage src={placeholderTeamLogo} />
-    //     </TeamLogo>
-    //     <TeamName>{match.team1?.teamName}</TeamName>
-    //     <TeamScore winner={matchStats.winner === match.team1?.id}>{team1Score}</TeamScore>
-    //   </Team1>
-    //   <Team2
-    //     matchOutcome={match.team2?.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null}>
-    //     <TeamLogo>
-    //       <TeamLogoImage src={placeholderTeamLogo} />
-    //     </TeamLogo>
-    //     <TeamName>{match.team2?.teamName}</TeamName>
-    //     <TeamScore winner={matchStats.winner === match.team2?.id}>{team2Score}</TeamScore>
-    //   </Team2>
-    // </Wrapper>
+    <Wrapper
+      matchIndex={matchIndex}
+      roundIndex={roundIndex}
+      isFinal={isFinal}
+      isFirstMatch={isFirstMatch}>
+      <Team1
+        matchOutcome={team1 && team1.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null}>
+        <TeamLogo>
+          <TeamLogoImage src={placeholderTeamLogo} />
+        </TeamLogo>
+        <TeamName>{team1 && team1.teamName ? team1.teamName : '-'}</TeamName>
+        <TeamScore winner={team1 ? match.winnerTeamId === team1.id : false}>
+          {team1 && team1.score ? team1.score : 0}
+        </TeamScore>
+      </Team1>
+      <Team2
+        matchOutcome={team2 && team2.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null}>
+        <TeamLogo>
+          <TeamLogoImage src={placeholderTeamLogo} />
+        </TeamLogo>
+        <TeamName>{team2 && team2.teamName ? team2.teamName : '-'}</TeamName>
+        <TeamScore winner={team2 ? match.winnerTeamId === team2.id : false}>
+          {team2 && team2.score ? team2.score : 0}
+        </TeamScore>
+      </Team2>
+    </Wrapper>
   );
 };
 

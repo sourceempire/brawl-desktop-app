@@ -36,7 +36,7 @@ export const InputWrapper = styled.div<{
   position: relative;
   ${({ theme, inputSize, hasLabel, hasIcon }) => css`
     height: ${getInputHeight(inputSize)};
-    border-radius: ${theme.borderRadius.default};
+    border-radius: --var(--border-radius-special);
 
     ${hasLabel &&
     css`
@@ -80,7 +80,7 @@ export const InputElement = styled.input<{
     padding: 0 ${getInputPadding(inputSize)};
     height: 100%;
     font-size: ${getInputFontSize(inputSize)};
-    border-radius: ${theme.borderRadius.default};
+    border-radius: 20px;
     background-color: ${theme.colors.secondary.base};
 
     :focus {

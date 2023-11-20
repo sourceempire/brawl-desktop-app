@@ -8,7 +8,7 @@ import {
   ScrollContainer,
   SideSwapIndicator,
   Wrapper
-} from './RoundWinnerIndicatorList.styles';
+} from './CSGORoundWinnerIndicatorList.styles';
 import { theme } from 'assets/styles/Theme';
 import { GameIcons, Icons } from '@sourceempire/brawl-ui';
 
