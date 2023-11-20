@@ -8,12 +8,25 @@ export const Round = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-
+  position: relative;
   gap: 24px;
+  :last-of-type {
+    padding-right: 70px;
+  }
+`;
+
+export const RoundHeader = styled.div`
+  position: sticky;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
 `;
 
 export const RoundName = styled.div<{ active: boolean }>`
-  background-color: red;
+  flex-grow: 0;
+  flex-shrink: 1;
   ${({ theme, active }) => css`
     padding: ${theme.spacing.base}px ${theme.spacing.baseX3}px;
     border-radius: ${theme.borderRadius.default};
