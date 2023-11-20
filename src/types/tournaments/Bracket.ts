@@ -20,7 +20,7 @@ interface SingleEliminationBracketRound {
 
 export interface SingleEliminationBracket extends Bracket {
   bracketStructure: SingleEliminationBracketRound[];
-  currentRoundIndex: number;
+  currentRoundIndex?: number;
   numberOfRounds: number;
 }
 export function isSingleElimination(bracket: Bracket): bracket is SingleEliminationBracket {

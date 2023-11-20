@@ -3,6 +3,7 @@ export type WrapperProps = {
   roundIndex: number;
   isFinal: boolean;
   isFirstMatch: boolean;
+  isThirdPlaceMatch?: boolean;
 };
 
 export enum MatchOutcome {
