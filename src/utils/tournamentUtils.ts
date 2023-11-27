@@ -6,19 +6,11 @@ import {
   MILLISECONDS_IN_WEEK
 } from './timeUtils';
 import { isMockMatchSettings } from 'types/MatchSettings';
-import { matchSettingsModeShortForm, matchSettingsSeriesTypeLongForm } from './matchUtils';
+import { matchSettingsModeShortForm } from './matchUtils';
 
 export const getTournamentModeShort = (tournamentInfo: TournamentHub) => {
   if (isMockMatchSettings(tournamentInfo.gameId)) {
     return `${matchSettingsModeShortForm(tournamentInfo.teamSize)}`;
-  } else {
-    return '';
-  }
-};
-
-export const getTournamentSeriesTypeLong = (tournamentInfo: TournamentHub) => {
-  if (isMockMatchSettings(tournamentInfo.gameId)) {
-    return `${matchSettingsSeriesTypeLongForm(tournamentInfo.teamSize)}`;
   } else {
     return '';
   }

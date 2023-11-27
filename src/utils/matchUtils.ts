@@ -9,29 +9,25 @@ type MatchOutcomeProps = {
 export const matchSettingsModeShortForm = (TournamentTeamSize: number) => {
   if (TournamentTeamSize === 1) {
     return `1v1`;
-  } else if (TournamentTeamSize === 2) {
-    return '2v2';
-  } else if (TournamentTeamSize === 3) {
-    return '3v3';
-  } else if (TournamentTeamSize === 4) {
-    return '4v4';
-  } else if (TournamentTeamSize === 5) {
-    return '5v5';
-  } else {
-    return '';
   }
-};
 
-export const matchSettingsSeriesTypeLongForm = (TournamentTeamSize: number) => {
-  if (TournamentTeamSize === 1) {
-    return `One vs One`;
-  } else if (TournamentTeamSize === 2) {
-    return 'Wingman';
-  } else if (TournamentTeamSize >= 3) {
-    return 'Competitive';
-  } else {
-    return '';
+  if (TournamentTeamSize === 2) {
+    return '2v2';
   }
+
+  if (TournamentTeamSize === 3) {
+    return '3v3';
+  }
+
+  if (TournamentTeamSize === 4) {
+    return '4v4';
+  }
+
+  if (TournamentTeamSize === 5) {
+    return '5v5';
+  }
+
+  return;
 };
 
 export const getMatchOutcome = ({ teamIdOfLoggedInUser, match }: MatchOutcomeProps) => {

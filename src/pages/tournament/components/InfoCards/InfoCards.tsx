@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import Game, { GameName } from 'types/Game';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import { formatDateAndTime } from 'utils/dateUtils';
-import { getTournamentModeShort, getTournamentSeriesTypeLong } from 'utils/tournamentUtils';
+import { getTournamentModeShort } from 'utils/tournamentUtils';
 import { HeaderText, InfoCard, InfoCardWrapper, InfoHeader, InfoText } from './InfoCards.styles';
 import { useHint } from 'common/hooks';
 import Money from 'types/Money';
@@ -35,8 +35,7 @@ const InfoCards = ({ tournamentHub }: Props) => {
         setGameInfo({
           ...gameInfo,
           name: GameName[tournamentHub.gameId],
-          mode: getTournamentModeShort(tournamentHub),
-          type: getTournamentSeriesTypeLong(tournamentHub)
+          mode: getTournamentModeShort(tournamentHub)
         });
         break;
       }
