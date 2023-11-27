@@ -38,7 +38,7 @@ export const Header = styled.div`
   padding-bottom: ${({ theme }) => theme.spacing.baseX3}px;
   display: flex;
   justify-content: center;
-  ${({ theme }) => theme.textStyles.title}
+  ${({ theme }) => theme.textStyles.title};
 `;
 
 export const CrossButton = styled(Icons.Cross)`
