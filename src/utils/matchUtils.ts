@@ -1,26 +1,33 @@
 import { MatchOutcome } from 'pages/tournament/components/BracketMatch/BracketMatch.types';
 import { Match } from 'types/match/Match';
-import { CSGOGameModes, CSGOSeriesType } from 'types/MatchSettings';
 
 type MatchOutcomeProps = {
   teamIdOfLoggedInUser?: string;
   match: Match;
 };
 
-export const csgoMatchSettingsModeShortForm = (mode: CSGOGameModes) => {
-  return {
-    [CSGOGameModes.COMPETITIVE]: '5v5',
-    [CSGOGameModes.WINGMAN]: '2v2',
-    [CSGOGameModes.ONE_VS_ONE]: '1v1'
-  }[mode];
-};
+export const matchSettingsModeShortForm = (TournamentTeamSize: number) => {
+  if (TournamentTeamSize === 1) {
+    return `1v1`;
+  }
 
-export const csgoMatchSettingsSeriesTypeLongForm = (type: CSGOSeriesType) => {
-  return {
-    [CSGOSeriesType.BO1]: 'Best of 1',
-    [CSGOSeriesType.BO2]: 'Best of 2',
-    [CSGOSeriesType.BO3]: 'Best of 3'
-  }[type];
+  if (TournamentTeamSize === 2) {
+    return '2v2';
+  }
+
+  if (TournamentTeamSize === 3) {
+    return '3v3';
+  }
+
+  if (TournamentTeamSize === 4) {
+    return '4v4';
+  }
+
+  if (TournamentTeamSize === 5) {
+    return '5v5';
+  }
+
+  return;
 };
 
 export const getMatchOutcome = ({ teamIdOfLoggedInUser, match }: MatchOutcomeProps) => {
