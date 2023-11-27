@@ -5,17 +5,17 @@ import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import { Icons } from '@sourceempire/brawl-ui';
 
 export const FeaturedTournamentToggle = styled.div`
-  ${(props) => props.theme.textStyles.menu}
+  ${({ theme }) => theme.textStyles.menu};
   margin: 18px 0;
   display: flex;
   align-items: center;
 `;
 
 export const SelectArrow = styled(Icons.ChevronDown)<{ expanded: boolean }>`
-  height: 8px;
-  width: 8px;
   transform: ${({ expanded }) => (expanded ? 'rotate(0)' : 'rotate(-180deg)')};
   ${({ theme }) => css`
+    height: ${theme.spacing.baseX2}px;
+    width: ${theme.spacing.baseX2}px;
     fill: ${theme.colors.white};
     margin-left: ${theme.spacing.base}px;
   `}
