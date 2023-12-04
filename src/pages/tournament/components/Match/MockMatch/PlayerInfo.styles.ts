@@ -2,8 +2,11 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { EllipsisText } from 'common/ui';
 import { InnerWrapper } from 'common/ui/EllipsisText/EllipsisText.styles';
-import { ProfileImage } from 'frames/main/friends/components/Shared.styles';
-import { Icons } from '@sourceempire/brawl-ui';
+import {
+  LeaderStar,
+  LeaderStarSize,
+  ProfileImage
+} from 'frames/main/friends/components/Shared.styles';
 
 export const ProfileImageWrapper = styled.div`
   position: relative;
@@ -22,22 +25,17 @@ export const PlayerProfileImage = styled(ProfileImage)<{ transparent?: boolean }
     `}
 `;
 
-export const LeaderIcon = styled(Icons.Star)<{ reversed?: boolean }>`
-  position: absolute;
-  height: 25px;
-  color: #ffcc00;
-
+export const LeaderIcon = styled(LeaderStar)<{ reversed?: boolean; size?: LeaderStarSize }>`
   ${({ reversed }) =>
     reversed
       ? css`
           left: 0;
-          bottom: 0;
-          transform: translate(-8px, 4px);
+          right: unset;
+          transform: translate(-40%, 0%);
         `
       : css`
-          bottom: 0;
           right: 0;
-          transform: translate(8px, 4px);
+          transform: translate(40%, 0%);
         `}
 `;
 

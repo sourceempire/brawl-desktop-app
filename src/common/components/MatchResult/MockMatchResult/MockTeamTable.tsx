@@ -9,10 +9,10 @@ import {
   TableData,
   TableHeader,
   TeamLogo,
+  TeamLeaderStar,
   Wrapper
 } from './MockTeamTable.styles';
 import placeholderTeamLogo from 'assets/images/placeholder-team-logo.png';
-import { LeaderStar } from 'frames/main/friends/components/Shared.styles';
 
 type TeamTableProps = {
   team: Team;
@@ -61,7 +61,7 @@ const PlayerCell = ({ userId, team }: PlayerCellProps) => {
   return (
     <TableData bold={isLoggedInUser}>
       <ProfileWrapper>
-        {isLeader && <LeaderStar size="small" />}
+        {isLeader && <TeamLeaderStar />}
         <ProfileImage src={user?.imageUrl} />
       </ProfileWrapper>
       <EllipsisText>{user?.userTag}</EllipsisText>

@@ -23,7 +23,7 @@ const PlayerInfo = ({ userId, isLeader, transparent, reversed }: Props) => {
           size="large"
           transparent={transparent}
         />
-        {isLeader && <LeaderIcon reversed={reversed} />}
+        {isLeader && <LeaderIcon reversed={reversed} size="medium" />}
       </ProfileImageWrapper>
       <UserTag transparent={transparent} reversed={reversed}>
         {user.userTag}
