@@ -34,7 +34,7 @@ export const UserImage = styled.img`
 `;
 
 type ProfileImageSize = 'small' | 'medium' | 'large';
-type LeaderStarSize = 'small' | 'medium';
+export type LeaderStarSize = 'small' | 'medium';
 
 export const getProfileImageSize = (size?: ProfileImageSize) => {
   switch (size) {
