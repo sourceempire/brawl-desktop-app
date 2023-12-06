@@ -10,7 +10,7 @@ export const Section1 = styled.div`
 `;
 
 export const CategoryTitle = styled.div`
-  ${({ theme }) => theme.textStyles.menu}
+  ${({ theme }) => theme.textStyles.menu};
 `;
 
 export const Option = styled.div`
