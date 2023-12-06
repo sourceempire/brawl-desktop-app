@@ -45,7 +45,7 @@ const TournamentHubButtons = ({ handleOpenModal, openTeamSettings, handleCloseMo
     <ButtonsWrapper>
       <LeftButtons>
         {!tournamentHub.registrationClosed && (
-          <Button onClick={() => handleOpenModal('brackets')}>Brackets</Button>
+          <Button onClick={() => handleOpenModal('brackets')}>Bracket structure</Button>
         )}
         {buttons.map((button) => (
           <Button key={button.name} onClick={() => handleOpenModal(button.name)}>
