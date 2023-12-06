@@ -13,14 +13,13 @@ import Rules from '../Rules';
 import TournamentInfo from '../TournamentInfo';
 import {
   RightAlignedContainer,
-  SpectatorWrapper,
   TournamentContent,
   TournamentName,
   TournamentNavbar,
   TournamentRoutesWrapper,
   Wrapper
 } from './TournamentPage.styles';
-import { isSingleElimination } from 'types/tournaments/Bracket';
+import { SpectatorView } from '../SpectatorView';
 
 const TournamentPage = () => {
   const { tournamentId } = useParams() as { tournamentId: string };
@@ -81,12 +80,10 @@ const TournamentPage = () => {
             </TournamentContent>
           </>
         ) : (
-          <SpectatorWrapper>
+          <>
             <TournamentName>{tournament.name}</TournamentName>
-            {!isLoadingBracket && isSingleElimination(bracket) ? (
-              <Bracket tournamentId={tournament.id} />
-            ) : null}
-          </SpectatorWrapper>
+            <SpectatorView />
+          </>
         )}
       </Wrapper>
     </PageContainer>

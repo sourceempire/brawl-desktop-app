@@ -57,18 +57,13 @@ export const TournamentRoutesWrapper = styled.div`
   `}
 `;
 
-export const SpectatorWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 export const TournamentName = styled.h2`
   display: block;
   width: 100%;
   text-align: center;
+  text-transform: uppercase;
   ${({ theme }) => css`
     font: ${theme.textStyles.stylizedHeader};
-    margin-bottom: ${theme.spacing.baseX4}px;
-    font-size: 24px;
+    padding: ${theme.spacing.baseX4}px 0 0;
   `};
 `;
