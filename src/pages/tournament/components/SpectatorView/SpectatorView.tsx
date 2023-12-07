@@ -12,29 +12,34 @@ export function SpectatorView() {
     <PageContainer>
       <Tabs underlined={true}>
         <Tab name="Brackets">
-          <Page />
+          <BracketsContent />
         </Tab>
         <Tab name="Prizes">
-          <Page />
+          <PrizesContent />
         </Tab>
       </Tabs>
     </PageContainer>
   );
 }
 
-function Page() {
+function BracketsContent() {
   const { tournamentId } = useParams() as { tournamentId: string };
 
   const { tournament, isLoading: isLoadingTournament } = useTournamentFeed({ tournamentId });
   const { bracket, isLoading: isLoadingBracket } = useBracketFeed({ tournamentId });
 
-  if (isLoadingTournament || isLoadingBracket) return null;
+  if (isLoadingTournament) return null;
+
+  // ADD SKELETON
+  if (isLoadingBracket) return null;
 
   return (
     <Wrapper>
-      {!isLoadingBracket && isSingleElimination(bracket) ? (
-        <Bracket tournamentId={tournament.id} />
-      ) : null}
+      {isSingleElimination(bracket) ? <Bracket tournamentId={tournament.id} /> : null}
     </Wrapper>
   );
+}
+
+function PrizesContent() {
+  return <Wrapper>This is the prizes page</Wrapper>;
 }
