@@ -1,4 +1,4 @@
-import { Image } from '@sourceempire/brawl-image';
+import { Image } from '@sourceempire/brawl-ui';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
@@ -32,7 +32,6 @@ export const Wrapper = styled.div<{ isUserInTournament: boolean }>`
     css`
       border-color: ${theme.colors.accent.base};
       border: 2px solid ${theme.colors.accent.base};
-      border-radius: ${theme.borderRadius.default};
     `}
 
   :hover {

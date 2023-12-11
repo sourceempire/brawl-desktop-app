@@ -21,7 +21,7 @@ export const TournamentContent = styled.div`
   max-height: 512px;
 
   ${({ theme }) => css`
-    padding: 0 ${theme.spacing.baseX3}px ${theme.spacing.baseX2}px;
+    padding: 0 ${theme.spacing.baseX3}px;
     background-color: ${theme.colors.surface.base};
     border-radius: ${theme.borderRadius.default};
   `}
@@ -31,7 +31,7 @@ export const TournamentNavbar = styled.div`
   display: grid;
   grid-auto-flow: column;
   align-items: center;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 1fr auto;
   min-height: 52px;
   ${({ theme }) => css`
     border-bottom: 2px solid ${theme.colors.surface.base};
@@ -51,7 +51,8 @@ export const TournamentRoutesWrapper = styled.div`
   overflow: scroll;
 
   ${({ theme }) => css`
-    padding: ${theme.spacing.baseX3}px ${theme.spacing.baseX3}px 0;
+    padding: ${theme.spacing.baseX3}px ${theme.spacing.baseX3}px ${theme.spacing.baseX2}px
+      ${theme.spacing.baseX3}px;
     margin: 0 -${theme.spacing.baseX3}px;
   `}
 `;

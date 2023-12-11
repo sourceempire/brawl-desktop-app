@@ -16,7 +16,7 @@ export const Settings = styled.div`
 export const Label = styled.div`
   font-size: 13px;
   ${({ theme }) => css`
-    margin-bottom: ${theme.spacing.base}px;
+    margin-bottom: ${theme.spacing.baseX2}px;
     margin-top: ${theme.spacing.baseX2}px;
     :first-of-type {
       margin-top: 0;

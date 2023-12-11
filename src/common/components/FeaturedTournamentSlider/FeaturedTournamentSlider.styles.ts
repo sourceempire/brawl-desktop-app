@@ -90,7 +90,7 @@ export const DotContainer = styled.div<{ active: boolean }>`
     justify-content: center;
     align-items: center;
     /* position the TimerAnimation in the center of the active Dot */
-    &:nth-child(${active ? '2' : '1'}) {
+    &:nth-of-type(${active ? '2' : '1'}) {
       .timer-animation {
         position: absolute;
         left: 50%;

@@ -7,7 +7,7 @@ type FeedType = {
 };
 
 type Params = {
-  tournamentHubId: string;
+  tournamentHubId: string | null;
 };
 
 const useTournamentHubFeed = ({ tournamentHubId }: Params) => {

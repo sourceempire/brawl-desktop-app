@@ -1,4 +1,4 @@
-import { useTournamentMatchHistoryFeed } from 'api/feeds';
+import { useBracketFeed, useTournamentMatchHistoryFeed } from 'api/feeds';
 import useCurrentTournamentMatchIdFeed from 'api/feeds/hooks/useCurrentTournamentMatchIdFeed';
 import useTournamentFeed from 'api/feeds/hooks/useTournamentFeed';
 import { Link, Navigate, Route, Routes, useParams } from 'react-router-dom';
@@ -6,7 +6,6 @@ import PageContainer from 'common/components/PageContainer';
 import { Button } from 'common/ui';
 import { MatchContextProvider } from 'context/MatchContext';
 import Bracket from '../Bracket';
-import CurrentMatchStage from '../CurrentMatchStage';
 import Match from '../Match';
 import MatchHistory from '../MatchHistory/MatchHistory';
 import NavItems from '../NavItems';
@@ -21,11 +20,13 @@ import {
   TournamentRoutesWrapper,
   Wrapper
 } from './TournamentPage.styles';
+import { isSingleElimination } from 'types/tournaments/Bracket';
 
 const TournamentPage = () => {
   const { tournamentId } = useParams() as { tournamentId: string };
 
   const { tournament, isLoading: isLoadingTournament } = useTournamentFeed({ tournamentId });
+  const { bracket, isLoading: isLoadingBracket } = useBracketFeed({ tournamentId });
   const { matchId, isLoading: isLoadingCurrentMatchId } = useCurrentTournamentMatchIdFeed({
     tournamentId
   });
@@ -33,21 +34,20 @@ const TournamentPage = () => {
     tournamentId
   });
 
-  if (isLoadingCurrentMatchId || isLoadingTournament) return null;
+  if (isLoadingCurrentMatchId || isLoadingTournament || isLoadingBracket) return null;
 
   const isUserInTournament = matchId !== null;
 
   return (
     <PageContainer>
       <Wrapper>
-        {isUserInTournament ? (
+        {isUserInTournament && !bracket.isFinished ? (
           <>
             <TournamentInfo tournament={tournament} currentMatchId={matchId} />
 
             <TournamentContent>
               <TournamentNavbar>
-                <NavItems tournamentId={tournamentId} />
-                {matchId ? <CurrentMatchStage matchId={matchId} /> : <div />}
+                <NavItems tournamentId={tournamentId} matchId={matchId} />
                 <RightAlignedContainer>
                   {tournament.tournamentHubId && (
                     <Link to={`/main/tournaments/hub/${tournament.tournamentHubId}`}>
@@ -83,7 +83,9 @@ const TournamentPage = () => {
         ) : (
           <SpectatorWrapper>
             <TournamentName>{tournament.name}</TournamentName>
-            <Bracket tournamentId={tournament.id} />
+            {!isLoadingBracket && isSingleElimination(bracket) ? (
+              <Bracket tournamentId={tournament.id} />
+            ) : null}
           </SpectatorWrapper>
         )}
       </Wrapper>

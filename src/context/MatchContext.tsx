@@ -1,17 +1,17 @@
 import React, { createContext, useContext } from 'react';
 import useMatchFeed from 'api/feeds/hooks/useMatchFeed';
-import { Match } from 'types/match/Match';
-import { Team } from 'types/team/Team';
+import { MockGameMatch } from 'types/match/Match';
 
-type MatchContextType = {
-  match: Match;
-  team1?: Team;
-  team2?: Team;
+type MatchContextType = ReturnType<typeof useMatchFeed>;
+
+const defaultContextValue: Partial<MatchContextType> = {
+  isLoading: true,
+  match: undefined,
+  team1: undefined,
+  team2: undefined
 };
 
-const MatchContext = createContext<MatchContextType>({
-  match: {} as Match
-});
+const MatchContext = createContext<MatchContextType>(defaultContextValue as MatchContextType);
 
 type Props = {
   children: React.ReactNode;
@@ -23,11 +23,19 @@ export const MatchContextProvider = ({ children, matchId }: Props) => {
 
   if (isLoading) return null;
 
-  return <MatchContext.Provider value={{ match, team1, team2 }}>{children}</MatchContext.Provider>;
+  return (
+    <MatchContext.Provider value={{ isLoading, match, team1, team2 }}>
+      {children}
+    </MatchContext.Provider>
+  );
 };
 
-export function useMatchContext<T extends Match>() {
+export function useMatchContext<T = MockGameMatch>() {
   const context = useContext(MatchContext);
+
+  if (!context) {
+    throw new Error('useMatchContext must be used within a MatchContextProvider');
+  }
 
   return {
     ...context,

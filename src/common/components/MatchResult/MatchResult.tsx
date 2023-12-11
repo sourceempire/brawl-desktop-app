@@ -1,36 +1,30 @@
-import { useMatchFeed } from 'api/feeds';
+import { useMatchFeed, useTournamentHubFeed } from 'api/feeds';
 import { useParams } from 'react-router-dom';
-import { isCSGOMatch } from 'types/match/Match';
-import CSGOMatchResult from './CSGOMatchResult';
+import { isMockMatch } from 'types/match/Match';
 import { Wrapper } from './MatchResult.styles';
+import MockMatchResult from './MockMatchResult';
+import useTournamentFeed from 'api/feeds/hooks/useTournamentFeed';
 
 const MatchResult = () => {
   const matchId = useParams().matchId as string;
-  // const { match, team1, team2, isLoading: isLoadingMatch } = useMatchFeed({ matchId });
-  // const {
-  //   matchStats,
-  //   roundWins,
-  //   hasMatchStats,
-  //   isLoading: isLoadngMatchStats
-  // } = useMatchStatsFeed({ matchId });
+  const { match, team1, team2, isLoading: isLoadingMatch } = useMatchFeed({ matchId });
 
-  // if (isLoadingMatch || isLoadngMatchStats) return null;
+  const { tournamentId } = useParams() as { tournamentId: string };
+  const { tournament } = useTournamentFeed({ tournamentId });
 
-  // if (!hasMatchStats) {
-  //   return <Wrapper>No match result for this match yet</Wrapper>;
-  // }
+  let tournamentHubId = tournament ? tournament.tournamentHubId : null;
 
-  // if (isCSGOMatch(match)) {
-  //   return (
-  //     <CSGOMatchResult
-  //       matchStats={matchStats}
-  //       roundWins={roundWins}
-  //       match={match}
-  //       team1={team1}
-  //       team2={team2}
-  //     />
-  //   );
-  // }
+  const { tournamentHub, isLoading: isLoadingTournamentHub } = useTournamentHubFeed({
+    tournamentHubId: tournamentHubId
+  });
+
+  if (isLoadingMatch || isLoadingTournamentHub) return null;
+
+  if (isMockMatch(match)) {
+    return (
+      <MockMatchResult match={match} team1={team1} team2={team2} imageId={tournamentHub.imageId} />
+    );
+  }
 
   return <Wrapper>No match result yet</Wrapper>;
 };

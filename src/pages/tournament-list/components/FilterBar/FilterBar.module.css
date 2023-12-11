@@ -1,0 +1,11 @@
+.wrapper {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-base-x2);
+}
+
+.options {
+  display: flex;
+  gap: var(--spacing-base);
+} 

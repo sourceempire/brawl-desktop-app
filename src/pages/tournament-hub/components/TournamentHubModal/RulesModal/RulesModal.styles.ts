@@ -21,6 +21,10 @@ export const ModalButton = styled(Button)<{ active: boolean }>`
     ${active &&
     css`
       background-color: ${theme.colors.secondary.active};
+
+      &:hover {
+        background-color: ${theme.colors.secondary.active};
+      }
     `}
   `}
 `;

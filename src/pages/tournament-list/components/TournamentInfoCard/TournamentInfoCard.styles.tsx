@@ -1,4 +1,4 @@
-import { Image } from '@sourceempire/brawl-image';
+import { Image } from '@sourceempire/brawl-ui';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { Card } from 'common/ui';
@@ -15,15 +15,13 @@ export const Header = styled.div`
   position: relative;
   background-size: cover;
   height: 90px;
-
-  ${({ theme }) => css`
-    border-radius: ${theme.borderRadius.default} ${theme.borderRadius.default} 0 0;
-  `}
 `;
 
 export const Wrapper = styled(Card)`
   width: 100%;
   height: 214px;
+  border-radius: var(--border-radius-default);
+  overflow: hidden;
   :hover {
     background-color: ${({ theme }) => theme.colors.surfaceElement.base};
   }
@@ -52,7 +50,7 @@ export const Info = styled.div`
   ${({ theme }) => css`
     padding: ${theme.spacing.baseX2}px;
   `}
-  ${({ theme }) => theme.textStyles.body}
+  ${({ theme }) => theme.textStyles.body};
   line-height: 1.6em;
 `;
 

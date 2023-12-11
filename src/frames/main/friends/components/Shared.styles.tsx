@@ -34,7 +34,7 @@ export const UserImage = styled.img`
 `;
 
 type ProfileImageSize = 'small' | 'medium' | 'large';
-type LeaderStarSize = 'small' | 'medium';
+export type LeaderStarSize = 'small' | 'medium';
 
 export const getProfileImageSize = (size?: ProfileImageSize) => {
   switch (size) {
@@ -70,7 +70,6 @@ export const LeaderStar = styled(Icons.Star)<{ size?: LeaderStarSize }>`
   top: 0;
   right: 0;
   transform: translate(40%, -40%);
-  filter: drop-shadow(0 0 2px black);
   ${({ size }) => css`
     height: ${getLeaderStarSize(size ?? 'small')};
     width: ${getLeaderStarSize(size ?? 'small')};

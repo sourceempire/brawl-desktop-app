@@ -28,7 +28,6 @@ const TournamentHubButtons = ({ handleOpenModal, openTeamSettings, handleCloseMo
   // TODO -> This is static, should not be recreated on every render, put above the component.
   const buttons = [
     { name: 'brackets', text: 'Brackets' },
-    { name: 'mapPool', text: 'Map pool' },
     { name: 'rules', text: 'Rules' },
     { name: 'howItWorks', text: 'How it works' }
   ];

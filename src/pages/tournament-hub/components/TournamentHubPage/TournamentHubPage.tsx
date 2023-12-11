@@ -47,7 +47,7 @@ export function TournamentHubPage() {
   };
 
   const openTeamSettings = () => {
-    if (partyFeed.isInParty && partyFeed.party.leaderId === user.id) {
+    if (!partyFeed.party || (partyFeed.party && partyFeed.party.leaderId === user.id)) {
       setActiveModal('teamSettings');
     } else {
       popup.error('You are not the party leader');
