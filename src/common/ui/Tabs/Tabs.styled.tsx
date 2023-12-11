@@ -1,64 +1,6 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
-export const Wrapper = styled.div`
-  .page-container {
-    position: relative;
-  }
-
-  .page {
-    inset: 0;
-    position: absolute;
-    transform: translateX(0);
-    opacity: 1;
-    transition:
-      opacity 500ms ease-out 300ms,
-      transform 500ms ease-out 300ms;
-  }
-
-  .page.enter {
-    position: absolute;
-    opacity: 0;
-    transform: translateX(100px);
-  }
-  .page.enter-active {
-    opacity: 1;
-    transform: translateX(0) !important;
-  }
-  .page.exit {
-    position: absolute;
-    opacity: 1;
-    transform: translateX(0);
-  }
-  .page.exit-active {
-    opacity: 0;
-    transform: translateX(-100px);
-    transition:
-      opacity 500ms ease-in,
-      transform 500ms ease-in;
-  }
-
-  .order-right {
-    .page.enter {
-      transform: translateX(100px);
-    }
-
-    .page.exit-active {
-      transform: translateX(-100px);
-    }
-  }
-
-  .order-left {
-    .page.enter {
-      transform: translateX(-100px);
-    }
-
-    .page.exit-active {
-      transform: translateX(100px);
-    }
-  }
-`;
-
 type TabsBarProps = {
   underline?: boolean;
 };
