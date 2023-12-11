@@ -27,8 +27,9 @@ const TournamentHubButtons = ({ handleOpenModal, openTeamSettings, handleCloseMo
 
   // TODO -> This is static, should not be recreated on every render, put above the component.
   const buttons = [
-    { name: 'rules', text: 'Rules' },
-    { name: 'howItWorks', text: 'How it works' }
+    { name: 'brackets', text: 'Bracket structure', enabled: !tournamentHub?.registrationClosed },
+    { name: 'rules', text: 'Rules', enabled: true },
+    { name: 'howItWorks', text: 'How it works', enabled: true }
   ];
 
   const leaveTournamentFunction = () => {
@@ -44,14 +45,14 @@ const TournamentHubButtons = ({ handleOpenModal, openTeamSettings, handleCloseMo
   return (
     <ButtonsWrapper>
       <LeftButtons>
-        {!tournamentHub.registrationClosed && (
-          <Button onClick={() => handleOpenModal('brackets')}>Bracket structure</Button>
+        {buttons.map(
+          (button) =>
+            button.enabled && (
+              <Button key={button.name} onClick={() => handleOpenModal(button.name)}>
+                {button.text}
+              </Button>
+            )
         )}
-        {buttons.map((button) => (
-          <Button key={button.name} onClick={() => handleOpenModal(button.name)}>
-            {button.text}
-          </Button>
-        ))}
       </LeftButtons>
       <RightButtons>
         {!tournamentHub.registrationClosed &&
