@@ -122,4 +122,33 @@ BracketMatch.Skeleton = ({
   );
 };
 
+BracketMatch.Skeleton = ({
+  matchIndex,
+  roundIndex,
+  isFirstMatch,
+  isFinal,
+  isThirdPlaceMatch
+}: Omit<Props, 'matchId'>) => {
+  return (
+    <Wrapper
+      matchIndex={matchIndex}
+      roundIndex={roundIndex}
+      isFinal={isFinal}
+      isFirstMatch={isFirstMatch}
+      isThirdPlaceMatch={isThirdPlaceMatch}>
+      {isThirdPlaceMatch && <MatchTitle>Third place</MatchTitle>}
+      <Team1>
+        <TeamLogo />
+        <TeamName></TeamName>
+        <TeamScore></TeamScore>
+      </Team1>
+      <Team2>
+        <TeamLogo />
+        <TeamName></TeamName>
+        <TeamScore></TeamScore>
+      </Team2>
+    </Wrapper>
+  );
+};
+
 export default BracketMatch;

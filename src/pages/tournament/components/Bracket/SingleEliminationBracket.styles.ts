@@ -28,11 +28,9 @@ export const RoundHeader = styled.div`
 export const RoundName = styled.div<{ active: boolean }>`
   flex-grow: 0;
   flex-shrink: 1;
-
   ${({ theme, active }) => css`
     padding: ${theme.spacing.base}px ${theme.spacing.baseX3}px;
     border-radius: ${theme.borderRadius.default};
-
     background-color: ${active ? theme.colors.accent.base : theme.colors.surface.base};
     color: ${active ? theme.colors.textPrimaryDark : theme.colors.textPrimaryLight};
   `}
