@@ -39,7 +39,7 @@ export const Days = styled.div`
 `;
 
 export const DayName = styled.span`
-  ${({ theme }) => theme.textStyles.note}
+  ${({ theme }) => theme.textStyles.note};
   color: ${({ theme }) => theme.colors.textSecondaryLight};
   align-self: end;
 `;

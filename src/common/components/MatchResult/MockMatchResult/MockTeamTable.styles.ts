@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
+import { LeaderStar } from 'frames/main/friends/components/Shared.styles';
 
 const tableCellHeight = 45;
 
@@ -33,6 +34,10 @@ export const ProfileWrapper = styled.div`
   ${({ theme }) => css`
     margin-right: ${theme.spacing.baseX2}px;
   `}
+`;
+
+export const TeamLeaderStar = styled(LeaderStar)`
+  transform: translate(40%, 0%);
 `;
 
 type TableCellProps = {

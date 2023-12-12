@@ -1,4 +1,4 @@
-import { Image } from '@sourceempire/brawl-image';
+import { Image } from '@sourceempire/brawl-ui';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { hsla } from 'utils/styledUtils';

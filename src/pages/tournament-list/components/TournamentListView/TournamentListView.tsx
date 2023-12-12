@@ -6,7 +6,7 @@ import PageContainer from 'common/components/PageContainer';
 import { Option, Tab, Tabs } from 'common/ui';
 import { InputSize } from 'common/ui/Input/Input.types';
 import TournamentInfoCard from '../TournamentInfoCard/TournamentInfoCard';
-import TournamentsFilters from '../TournamentsFiltersModal/TournamentsFiltersModal';
+// import TournamentsFilters from '../TournamentsFiltersModal/TournamentsFiltersModal';
 import { Filter, filter, search } from './TournamentListView.model';
 import {
   CrossIcon,

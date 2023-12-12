@@ -1,4 +1,4 @@
-import { Image } from '@sourceempire/brawl-image';
+import { Image } from '@sourceempire/brawl-ui';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { Card } from 'common/ui';
@@ -50,7 +50,7 @@ export const Info = styled.div`
   ${({ theme }) => css`
     padding: ${theme.spacing.baseX2}px;
   `}
-  ${({ theme }) => theme.textStyles.body}
+  ${({ theme }) => theme.textStyles.body};
   line-height: 1.6em;
 `;
 

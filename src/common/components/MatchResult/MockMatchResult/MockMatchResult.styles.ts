@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { css, keyframes } from '@emotion/react';
 import { hsla } from 'utils/styledUtils';
-import { Image } from '@sourceempire/brawl-image';
+import { Image } from '@sourceempire/brawl-ui';
 
 export const ScoreMiddleSection = styled.div`
   font-size: 20px;

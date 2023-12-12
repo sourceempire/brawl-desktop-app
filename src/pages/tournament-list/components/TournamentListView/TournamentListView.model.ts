@@ -1,4 +1,4 @@
-import { isCSGOMatchSettings } from 'types/MatchSettings';
+// import { isMockMatchSettings } from 'types/MatchSettings';
 import Money from 'types/Money';
 import { TournamentHub } from 'types/tournaments/TournamentInfo';
 
@@ -31,13 +31,13 @@ export function filter(tournaments: TournamentHub[], filters: Filter[]): Tournam
         switch (filter.type) {
           case FilterTypes.GAME:
             return tournament.gameId === filter.value;
-          case FilterTypes.GAME_MODE:
-            if (isCSGOMatchSettings(tournament.matchSettings)) {
-              // only csgo support gamemodes so far
-              return tournament.matchSettings.mode === filter.value;
-            } else {
-              return false;
-            }
+          // case FilterTypes.GAME_MODE:
+          //   if (isMockMatchSettings(tournament.matchSettings)) {
+          //     // only csgo support gamemodes so far
+          //     return tournament.matchSettings.mode === filter.value;
+          //   } else {
+          //     return false;
+          //   }
           case FilterTypes.ENTRANCE_FEE: {
             const [start, end] = filter.value.split('-');
             return (
