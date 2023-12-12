@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { teamGap, teamHeight } from '../BracketMatch/BracketMatch.styles';
+import { theme } from 'assets/styles/Theme';
 
 export const firstRoundMatchGap = 48;
 
@@ -17,7 +18,7 @@ export const Round = styled.div`
 
 export const RoundHeader = styled.div`
   position: sticky;
-  top: 0;
+  top: ${theme.spacing.baseX2}px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -27,6 +28,7 @@ export const RoundHeader = styled.div`
 export const RoundName = styled.div<{ active: boolean }>`
   flex-grow: 0;
   flex-shrink: 1;
+
   ${({ theme, active }) => css`
     padding: ${theme.spacing.base}px ${theme.spacing.baseX3}px;
     border-radius: ${theme.borderRadius.default};

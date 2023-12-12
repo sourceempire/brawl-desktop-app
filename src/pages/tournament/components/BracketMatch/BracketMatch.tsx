@@ -2,6 +2,8 @@ import useMatchFeed from 'api/feeds/hooks/useMatchFeed';
 import { useLoggedInUser } from 'common/hooks';
 import { getMatchOutcome } from 'utils/matchUtils';
 import {
+  Backdrop,
+  Background,
   MatchTitle,
   Team1,
   Team2,
@@ -50,34 +52,41 @@ const BracketMatch = ({
       : MatchOutcome.NotDecided;
 
   return (
-    <Wrapper
-      matchIndex={matchIndex}
-      roundIndex={roundIndex}
-      isFinal={isFinal}
-      isFirstMatch={isFirstMatch}
-      isThirdPlaceMatch={isThirdPlaceMatch}>
-      {isThirdPlaceMatch && <MatchTitle>Third place</MatchTitle>}
-      <Team1
-        matchOutcome={team1 && team1.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null}>
-        <TeamLogo>
-          <TeamLogoImage src={placeholderTeamLogo} />
-        </TeamLogo>
-        <TeamName>{team1?.teamName ?? '-'}</TeamName>
-        <TeamScore winner={team1 ? match.winnerTeamId === team1.id : false}>
-          {team1?.score ?? 0}
-        </TeamScore>
-      </Team1>
-      <Team2
-        matchOutcome={team2 && team2.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null}>
-        <TeamLogo>
-          <TeamLogoImage src={placeholderTeamLogo} />
-        </TeamLogo>
-        <TeamName>{team2?.teamName ?? '-'}</TeamName>
-        <TeamScore winner={team2 ? match.winnerTeamId === team2.id : false}>
-          {team2?.score ?? 0}
-        </TeamScore>
-      </Team2>
-    </Wrapper>
+    <Background isThirdPlaceMatch={isThirdPlaceMatch}>
+      <Backdrop />
+      <Wrapper
+        matchIndex={matchIndex}
+        roundIndex={roundIndex}
+        isFinal={isFinal}
+        isFirstMatch={isFirstMatch}
+        isThirdPlaceMatch={isThirdPlaceMatch}>
+        {isThirdPlaceMatch && <MatchTitle>Third place</MatchTitle>}
+        <Team1
+          matchOutcome={
+            team1 && team1.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null
+          }>
+          <TeamLogo>
+            <TeamLogoImage src={placeholderTeamLogo} />
+          </TeamLogo>
+          <TeamName>{team1?.teamName ?? '-'}</TeamName>
+          <TeamScore winner={team1 ? match.winnerTeamId === team1.id : false}>
+            {team1?.score ?? 0}
+          </TeamScore>
+        </Team1>
+        <Team2
+          matchOutcome={
+            team2 && team2.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null
+          }>
+          <TeamLogo>
+            <TeamLogoImage src={placeholderTeamLogo} />
+          </TeamLogo>
+          <TeamName>{team2?.teamName ?? '-'}</TeamName>
+          <TeamScore winner={team2 ? match.winnerTeamId === team2.id : false}>
+            {team2?.score ?? 0}
+          </TeamScore>
+        </Team2>
+      </Wrapper>
+    </Background>
   );
 };
 
@@ -89,24 +98,27 @@ BracketMatch.Skeleton = ({
   isThirdPlaceMatch
 }: Omit<Props, 'matchId'>) => {
   return (
-    <Wrapper
-      matchIndex={matchIndex}
-      roundIndex={roundIndex}
-      isFinal={isFinal}
-      isFirstMatch={isFirstMatch}
-      isThirdPlaceMatch={isThirdPlaceMatch}>
-      {isThirdPlaceMatch && <MatchTitle>Third place</MatchTitle>}
-      <Team1>
-        <TeamLogo />
-        <TeamName></TeamName>
-        <TeamScore></TeamScore>
-      </Team1>
-      <Team2>
-        <TeamLogo />
-        <TeamName></TeamName>
-        <TeamScore></TeamScore>
-      </Team2>
-    </Wrapper>
+    <Background isThirdPlaceMatch={isThirdPlaceMatch}>
+      <Backdrop />
+      <Wrapper
+        matchIndex={matchIndex}
+        roundIndex={roundIndex}
+        isFinal={isFinal}
+        isFirstMatch={isFirstMatch}
+        isThirdPlaceMatch={isThirdPlaceMatch}>
+        {isThirdPlaceMatch && <MatchTitle>Third place</MatchTitle>}
+        <Team1>
+          <TeamLogo />
+          <TeamName></TeamName>
+          <TeamScore></TeamScore>
+        </Team1>
+        <Team2>
+          <TeamLogo />
+          <TeamName></TeamName>
+          <TeamScore></TeamScore>
+        </Team2>
+      </Wrapper>
+    </Background>
   );
 };
 

@@ -60,6 +60,8 @@ export const TournamentRoutesWrapper = styled.div`
 export const SpectatorWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  overflow: scroll;
+  flex-grow: 1;
 `;
 
 export const TournamentName = styled.h2`

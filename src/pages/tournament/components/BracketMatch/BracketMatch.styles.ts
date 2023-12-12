@@ -14,15 +14,33 @@ const outline = {
   [MatchOutcome.NotDecided]: theme.colors.surfaceElement.hover
 };
 
-const lineColor = theme.colors.secondary.hover;
+const lineColor = theme.colors.surface.base;
 
 export const MatchTitle = styled.div`
   position: absolute;
   left: 0;
   top: 0;
   transform: translateY(calc(-100% - var(--spacing-base)));
-  opacity: 0;
-  transition: opacity 0.3s;
+`;
+
+export const Background = styled.div<{ isThirdPlaceMatch?: boolean | undefined }>`
+  position: relative;
+
+  ${({ isThirdPlaceMatch }) =>
+    isThirdPlaceMatch &&
+    css`
+      position: absolute;
+      top: calc(50% + (${teamHeight}px * 2) + calc(var(--spacing-base) * 12));
+      transform: translateX(var(--spacing-base-x7));
+    `}
+`;
+
+export const Backdrop = styled.div`
+  position: absolute;
+  inset: 0;
+  border-radius: ${theme.borderRadius.default};
+  box-shadow: 0 0 0 3px ${theme.colors.surface.base};
+  background-color: ${theme.colors.surface.base};
 `;
 
 export const Wrapper = styled.div<WrapperProps>`
@@ -82,16 +100,6 @@ export const Wrapper = styled.div<WrapperProps>`
   ${({ isThirdPlaceMatch }) =>
     isThirdPlaceMatch &&
     css`
-      position: absolute;
-      top: calc(50% + (${teamHeight}px * 2) + calc(var(--spacing-base) * 12));
-      transform: translateX(var(--spacing-base-x7));
-
-      :hover {
-        ${MatchTitle} {
-          opacity: 0.5;
-        }
-      }
-
       :after,
       :before {
         display: none;
@@ -131,7 +139,7 @@ export const TeamScore = styled.div<{ winner?: boolean }>`
   height: ${teamHeight}px;
   width: ${teamHeight}px;
   ${({ theme, winner }) => css`
-    background-color: ${theme.colors.surfaceElement.base};
+    background-color: ${theme.colors.surfaceSecondary.base};
     ${winner &&
     css`
       background-color: ${theme.colors.accent.base};
@@ -167,10 +175,9 @@ export const Team1 = styled(Team)<{ matchOutcome?: MatchOutcome | null }>`
 
     ${matchOutcome &&
     css`
-      outline: ${outline[matchOutcome]};
-      outline-offset: 3px;
-      border-top-left-radius: ${theme.borderRadius.default};
-      border-top-right-radius: ${theme.borderRadius.default};
+      outline: 3px solid ${outline[matchOutcome]};
+      outline-offset: 0;
+      border-radius: ${theme.borderRadius.default};
     `}
   `}
 `;
@@ -186,10 +193,9 @@ export const Team2 = styled(Team)<{ matchOutcome?: MatchOutcome | null }>`
 
     ${matchOutcome &&
     css`
-      outline: 1px solid ${outline[matchOutcome]};
-      outline-offset: 1px;
-      border-bottom-left-radius: ${theme.borderRadius.default};
-      border-bottom-right-radius: ${theme.borderRadius.default};
+      outline: 3px solid ${outline[matchOutcome]};
+      outline-offset: 0px;
+      border-radius: ${theme.borderRadius.default};
     `}
   `}
 `;
