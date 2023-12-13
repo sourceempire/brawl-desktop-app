@@ -11,10 +11,10 @@ export const teamGap = 3;
 const outline = {
   [MatchOutcome.Win]: theme.colors.statusSuccess,
   [MatchOutcome.Loss]: theme.colors.statusError,
-  [MatchOutcome.NotDecided]: theme.colors.surfaceElement.hover
+  [MatchOutcome.NotDecided]: theme.colors.secondary.hover
 };
 
-const lineColor = theme.colors.surface.base;
+const lineColor = theme.colors.surfaceSecondary.base;
 
 export const MatchTitle = styled.div`
   position: absolute;
@@ -39,8 +39,8 @@ export const Backdrop = styled.div`
   position: absolute;
   inset: 0;
   border-radius: ${theme.borderRadius.default};
-  box-shadow: 0 0 0 3px ${theme.colors.surface.base};
-  background-color: ${theme.colors.surface.base};
+  box-shadow: 0 0 0 3px ${theme.colors.surfaceSecondary.base};
+  background-color: ${theme.colors.surfaceSecondary.base};
 `;
 
 export const Wrapper = styled.div<WrapperProps>`
@@ -114,7 +114,7 @@ export const TeamLogo = styled.div`
   ${({ theme }) => css`
     height: ${theme.spacing.baseX5}px;
     width: ${theme.spacing.baseX5}px;
-    background-color: ${theme.colors.surfaceElement.base};
+    background-color: ${theme.colors.secondary.base};
   `};
 `;
 
@@ -139,7 +139,7 @@ export const TeamScore = styled.div<{ winner?: boolean }>`
   height: ${teamHeight}px;
   width: ${teamHeight}px;
   ${({ theme, winner }) => css`
-    background-color: ${theme.colors.surfaceSecondary.base};
+    background-color: ${theme.colors.secondary.base};
     ${winner &&
     css`
       background-color: ${theme.colors.accent.base};
@@ -160,7 +160,7 @@ export const TeamName = styled.div`
 
   ${({ theme }) => css`
     padding: 0 ${theme.spacing.base}px;
-    background-color: ${theme.colors.surfaceElement.base};
+    background-color: ${theme.colors.secondary.base};
   `}
 `;
 
