@@ -20,7 +20,7 @@ const SingleEliminationBracket = ({ bracket }: Props) => {
         return (
           <Round key={round.roundName}>
             <RoundHeader>
-              <RoundName active={bracket.currentRoundIndex === roundIndex}>
+              <RoundName active={!bracket.isFinished && bracket.currentRoundIndex === roundIndex}>
                 {round.roundName}
               </RoundName>
             </RoundHeader>

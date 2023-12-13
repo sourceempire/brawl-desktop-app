@@ -7,4 +7,5 @@ export const Wrapper = styled.div`
   display: flex;
   position: relative;
   gap: ${roundGap}px;
+  padding: ${theme.spacing.baseX2}px;
 `;
