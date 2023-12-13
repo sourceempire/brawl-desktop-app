@@ -57,9 +57,9 @@ export const Wrapper = styled.div<WrapperProps>`
   }
 
   :before {
-    left: -2.5px;
-    top: ${teamHeight + 1}px;
-    height: 2px;
+    left: -3.5px;
+    top: ${teamHeight + 0.5}px;
+    height: 3px;
     background-color: ${lineColor};
     transform: translateX(calc(-100% - 3px));
 
@@ -72,7 +72,7 @@ export const Wrapper = styled.div<WrapperProps>`
 
   :after {
     right: -2.5px;
-    border-right: 2px solid ${lineColor};
+    border-right: 3px solid ${lineColor};
     transform: translateX(calc(100% + 3px));
 
     ${({ roundIndex }) => css`
@@ -82,11 +82,13 @@ export const Wrapper = styled.div<WrapperProps>`
     ${({ matchIndex }) =>
       matchIndex % 2 === 0
         ? css`
-            border-top: 2px solid ${lineColor};
+            border-top: 3px solid ${lineColor};
+            border-top-right-radius: 6px;
             top: ${-1 + teamHeight + teamGap / 2}px;
           `
         : css`
-            border-bottom: 2px solid ${lineColor};
+            border-bottom: 3px solid ${lineColor};
+            border-bottom-right-radius: 6px;
             bottom: ${-2 + teamHeight + teamGap / 2}px;
           `};
 
@@ -103,6 +105,22 @@ export const Wrapper = styled.div<WrapperProps>`
       :after,
       :before {
         display: none;
+      }
+    `}
+
+  ${({ matchOutcome }) =>
+    matchOutcome !== null &&
+    css`
+      :before {
+        background-color: ${theme.colors.statusSuccess};
+      }
+    `}
+
+    ${({ matchOutcome }) =>
+    matchOutcome === MatchOutcome.Win &&
+    css`
+      :after {
+        border-color: ${theme.colors.statusSuccess};
       }
     `}
 `;

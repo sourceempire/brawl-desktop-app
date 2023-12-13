@@ -4,6 +4,7 @@ export type WrapperProps = {
   isFinal: boolean;
   isFirstMatch: boolean;
   isThirdPlaceMatch?: boolean;
+  matchOutcome: MatchOutcome | null;
 };
 
 export enum MatchOutcome {

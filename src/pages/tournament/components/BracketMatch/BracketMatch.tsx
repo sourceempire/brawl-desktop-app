@@ -51,6 +51,11 @@ const BracketMatch = ({
       ? getMatchOutcome({ teamIdOfLoggedInUser, match })
       : MatchOutcome.NotDecided;
 
+  const matchOutcomeTeam1 =
+    team1 && team1.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null;
+  const matchOutcomeTeam2 =
+    team2 && team2.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null;
+
   return (
     <Background isThirdPlaceMatch={isThirdPlaceMatch}>
       <Backdrop />
@@ -59,12 +64,10 @@ const BracketMatch = ({
         roundIndex={roundIndex}
         isFinal={isFinal}
         isFirstMatch={isFirstMatch}
-        isThirdPlaceMatch={isThirdPlaceMatch}>
+        isThirdPlaceMatch={isThirdPlaceMatch}
+        matchOutcome={matchOutcomeTeam1 ?? matchOutcomeTeam2}>
         {isThirdPlaceMatch && <MatchTitle>Third place</MatchTitle>}
-        <Team1
-          matchOutcome={
-            team1 && team1.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null
-          }>
+        <Team1 matchOutcome={matchOutcomeTeam1}>
           <TeamLogo>
             <TeamLogoImage src={placeholderTeamLogo} />
           </TeamLogo>
@@ -73,10 +76,7 @@ const BracketMatch = ({
             {team1?.score ?? 0}
           </TeamScore>
         </Team1>
-        <Team2
-          matchOutcome={
-            team2 && team2.id === teamIdOfLoggedInUser ? loggedInUserMatchOutcome : null
-          }>
+        <Team2 matchOutcome={matchOutcomeTeam2}>
           <TeamLogo>
             <TeamLogoImage src={placeholderTeamLogo} />
           </TeamLogo>
