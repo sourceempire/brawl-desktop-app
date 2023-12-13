@@ -7,8 +7,5 @@ export const Wrapper = styled.div`
   display: flex;
   position: relative;
   gap: ${roundGap}px;
-`;
-
-export const Container = styled.div`
-  overflow-x: scroll;
+  padding: ${theme.spacing.baseX2}px;
 `;
