@@ -22,7 +22,6 @@ export const RoundHeader = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  z-index: 2;
 `;
 
 export const RoundName = styled.div<{ active: boolean }>`
@@ -39,6 +38,7 @@ export const RoundName = styled.div<{ active: boolean }>`
 export const Matches = styled.div<{ matchCount: number; roundIndex: number }>`
   display: grid;
   align-items: center;
+  z-index: -1;
 
   ${({ matchCount, roundIndex }) => css`
     grid-template-rows: repeat(
