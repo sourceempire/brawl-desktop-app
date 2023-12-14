@@ -36,7 +36,15 @@ const BracketMatch = ({
   const user = useLoggedInUser();
   const { match, team1, team2, isLoading } = useMatchFeed({ matchId });
 
-  if (isLoading) return null;
+  if (isLoading)
+    return (
+      <BracketMatch.Skeleton
+        matchIndex={matchIndex}
+        roundIndex={roundIndex}
+        isFinal={isFinal}
+        isFirstMatch={isFirstMatch}
+      />
+    );
 
   let teamIdOfLoggedInUser;
 
@@ -105,7 +113,8 @@ BracketMatch.Skeleton = ({
         roundIndex={roundIndex}
         isFinal={isFinal}
         isFirstMatch={isFirstMatch}
-        isThirdPlaceMatch={isThirdPlaceMatch}>
+        isThirdPlaceMatch={isThirdPlaceMatch}
+        matchOutcome={null}>
         {isThirdPlaceMatch && <MatchTitle>Third place</MatchTitle>}
         <Team1>
           <TeamLogo />
@@ -119,35 +128,6 @@ BracketMatch.Skeleton = ({
         </Team2>
       </Wrapper>
     </Background>
-  );
-};
-
-BracketMatch.Skeleton = ({
-  matchIndex,
-  roundIndex,
-  isFirstMatch,
-  isFinal,
-  isThirdPlaceMatch
-}: Omit<Props, 'matchId'>) => {
-  return (
-    <Wrapper
-      matchIndex={matchIndex}
-      roundIndex={roundIndex}
-      isFinal={isFinal}
-      isFirstMatch={isFirstMatch}
-      isThirdPlaceMatch={isThirdPlaceMatch}>
-      {isThirdPlaceMatch && <MatchTitle>Third place</MatchTitle>}
-      <Team1>
-        <TeamLogo />
-        <TeamName></TeamName>
-        <TeamScore></TeamScore>
-      </Team1>
-      <Team2>
-        <TeamLogo />
-        <TeamName></TeamName>
-        <TeamScore></TeamScore>
-      </Team2>
-    </Wrapper>
   );
 };
 
