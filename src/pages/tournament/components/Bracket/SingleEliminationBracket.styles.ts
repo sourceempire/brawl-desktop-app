@@ -22,7 +22,6 @@ export const RoundHeader = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  z-index: 2;
 `;
 
 export const RoundName = styled.div<{ active: boolean }>`
