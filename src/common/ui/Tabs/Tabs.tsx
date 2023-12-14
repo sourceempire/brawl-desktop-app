@@ -27,9 +27,7 @@ export function Tabs({ children }: TabsProp) {
     <>
       <TabsBar ref={linkListRef}>
         {children.map((child) => (
-          <NavLink
-            to="#" // Dummy link since you're not using routing
-            onClick={() => changeTab(child.props.name)}>
+          <NavLink to="#" onClick={() => changeTab(child.props.name)}>
             {child.props.name}
           </NavLink>
         ))}
