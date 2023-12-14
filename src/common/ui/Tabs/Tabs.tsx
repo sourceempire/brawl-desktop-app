@@ -1,5 +1,6 @@
-import { ReactElement, ReactNode, useState } from 'react';
-import { TabsBar, TabsBarTab } from './Tabs.styled';
+import { ReactElement, ReactNode, useRef, useState } from 'react';
+import { ActiveLine, NavLink, TabsBar } from './Tabs.styled';
+import useActiveLineStyle from 'pages/tournament/hooks/useActiveLineStyle';
 
 type TabsProp = {
   underlined?: boolean;
@@ -10,7 +11,11 @@ export function Tabs({ children }: TabsProp) {
   if (!Array.isArray(children)) {
     children = [children];
   }
+
   const [active, setActive] = useState(children[0].props.name);
+
+  const linkListRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const [{ style, shouldAnimate }] = useActiveLineStyle({ linkListRef, activeTabName: active });
 
   function changeTab(name: string) {
     if (name === active) return;
@@ -20,15 +25,15 @@ export function Tabs({ children }: TabsProp) {
 
   return (
     <>
-      <TabsBar>
+      <TabsBar ref={linkListRef}>
         {children.map((child) => (
-          <TabsBarTab
-            key={child.props.name}
-            onClick={() => changeTab(child.props.name)}
-            active={child.props.name === active}>
+          <NavLink
+            to="#" // Dummy link since you're not using routing
+            onClick={() => changeTab(child.props.name)}>
             {child.props.name}
-          </TabsBarTab>
+          </NavLink>
         ))}
+        <ActiveLine style={style} shouldAnimate={shouldAnimate} />
       </TabsBar>
       {children.map((child) => {
         if (child.props.name === active) {
