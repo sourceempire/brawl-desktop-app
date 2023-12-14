@@ -3,9 +3,10 @@ import { useLocation } from 'react-router-dom';
 
 type Options = {
   linkListRef: MutableRefObject<HTMLDivElement>;
+  activeTabName?: string;
 };
 
-const useActiveLineStyle = ({ linkListRef }: Options) => {
+const useActiveLineStyle = ({ linkListRef, activeTabName }: Options) => {
   const [style, setActiveLineStyle] = useState<Record<string, string | number>>({
     transform: 'scale(0)'
   });
@@ -14,9 +15,13 @@ const useActiveLineStyle = ({ linkListRef }: Options) => {
   const location = useLocation();
 
   useLayoutEffect(() => {
-    const activeLink = Array.from(linkListRef.current.children).find((link) =>
-      link.className.includes('active')
-    ) as HTMLAnchorElement;
+    const activeLink = activeTabName
+      ? (Array.from(linkListRef.current.children).find(
+          (link) => link.textContent === activeTabName
+        ) as HTMLAnchorElement)
+      : (Array.from(linkListRef.current.children).find((link) =>
+          link.className.includes('active')
+        ) as HTMLAnchorElement);
 
     const waitTime = shouldAnimate ? 0 : 20;
     const activeLineStyleTimout = setTimeout(() => {
@@ -35,7 +40,7 @@ const useActiveLineStyle = ({ linkListRef }: Options) => {
       clearTimeout(activeLineStyleTimout);
       clearTimeout(shouldAnimateLineTimeout);
     };
-  }, [linkListRef, location.pathname, shouldAnimate]);
+  }, [linkListRef, location.pathname, shouldAnimate, activeTabName]);
 
   return [{ style, shouldAnimate }];
 };

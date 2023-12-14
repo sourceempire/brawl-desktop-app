@@ -1,48 +1,43 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
+import { NavLink as ReactRouterNavLink } from 'react-router-dom';
 
-type TabsBarProps = {
-  underline?: boolean;
-};
+export const TabsBar = styled.div`
+  display: flex;
+  flex-grow: 1;
+  position: relative;
+  gap: 6px;
 
-export const TabsBar = styled.div<TabsBarProps>`
-  ${({ underline, theme }) => css`
-    display: inline-flex;
-    flex-direction: row;
-    border-bottom: 1px solid ${underline === true ? 'rgba(255, 255, 255, 0.5)' : 'transparent'};
-
-    ${theme.textStyles.menu}
+  ${({ theme }) => css`
+    ${theme.textStyles.menu};
   `}
 `;
 
-export const TabsBarTab = styled.div<{ active?: boolean }>`
-  ${({ active, theme }) => css`
-    padding: 9px 0px;
-    position: relative;
-    margin: 0px 9px;
+export const NavLink = styled(ReactRouterNavLink)`
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 12px;
+  top: 2px;
+  text-decoration: none;
 
-    :first-of-type {
-      margin-left: 0px;
-    }
+  ${({ theme }) => css`
+    font: ${theme.textStyles.body};
+    color: ${theme.colors.textPrimaryLight};
+  `}
+`;
 
-    :last-of-type {
-      margin-right: 0px;
-    }
+export const ActiveLine = styled.div<{ shouldAnimate: boolean }>`
+  position: absolute;
+  bottom: -2px;
+  height: 2px;
+  width: 1px;
+  transform-origin: left;
 
-    ${active &&
-    css`
-      cursor: default;
+  ${({ theme, shouldAnimate }) => css`
+    background-color: ${theme.colors.primary.base};
 
-      :after {
-        content: '';
-        position: absolute;
-        bottom: -1px;
-        left: -3px;
-        right: -3px;
-        height: 3px;
-        border-radius: 1.5px;
-        background-color: ${theme.colors.primary.base};
-      }
-    `}
+    transition: ${shouldAnimate ? 'transform 0.3s' : 'transform 0'};
   `}
 `;
