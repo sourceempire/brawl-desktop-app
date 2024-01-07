@@ -41,3 +41,7 @@ export const ActiveLine = styled.div<{ shouldAnimate: boolean }>`
     transition: ${shouldAnimate ? 'transform 0.3s' : 'transform 0'};
   `}
 `;
+
+export const TabsPage = styled.div`
+  height: 100%;
+`;
