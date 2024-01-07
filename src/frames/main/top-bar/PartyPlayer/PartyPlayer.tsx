@@ -38,9 +38,9 @@ export const PartyPlayer = ({ userId }: Props) => {
     relatedElementRef: partyPlayerRef
   });
 
-  const isLeader = userId === party.leaderId;
+  const isLeader = userId === party?.leaderId;
   const isLoggedInUser = userId === loggedInUser.id;
-  const isLoggedInUserLeader = party.leaderId === loggedInUser.id;
+  const isLoggedInUserLeader = party?.leaderId === loggedInUser.id;
 
   const { Hint } = useHint({
     hintText: isLoggedInUser ? 'You' : user?.userTag,
