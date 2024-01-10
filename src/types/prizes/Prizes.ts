@@ -4,15 +4,11 @@ export type PrizesProps = {
   tournamentId: string;
 };
 
-export type PrizeTeamProps = {
-  teamId: TeamId;
-};
-
-export type Prize = {
+export type TournamentPrize = {
   placement: number;
   percentage: number;
   prize: number;
   teamId: TeamId;
 };
 
-export type GroupedData = { [key: number]: Prize[] };
+export type GroupedData = { [key: number]: TournamentPrize[] };
