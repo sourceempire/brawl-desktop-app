@@ -1,12 +1,12 @@
 import { useFeed } from '@sourceempire/brawl-websocket';
-import { TournamentTeam } from 'types/tournaments/TournamentTeam';
+import { Team } from 'types/team/Team';
 
 type Params = {
   teamId: string;
 };
 
 const useTeamFeed = ({ teamId }: Params) => {
-  const feed = useFeed<{ team: TournamentTeam }>(`team.${teamId}`);
+  const feed = useFeed<{ team: Team }>(`team.${teamId}`);
 
   if (feed.loading) {
     return { isLoading: feed.loading };
