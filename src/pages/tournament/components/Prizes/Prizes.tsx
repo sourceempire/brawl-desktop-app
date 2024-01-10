@@ -1,4 +1,4 @@
-import { PrizesProps, Prize, GroupedData } from 'types/prizes/Prizes';
+import { PrizesProps, TournamentPrize, GroupedData } from 'types/prizes/Prizes';
 import {
   PrizeList,
   PrizeItem,
@@ -23,7 +23,7 @@ export const Prizes = ({ tournamentId }: PrizesProps) => {
     return null;
   }
 
-  const groupByPlacement = (prizes: Prize[]): GroupedData => {
+  const groupByPlacement = (prizes: TournamentPrize[]): GroupedData => {
     const groupedData: GroupedData = {};
 
     prizes.forEach((prize) => {

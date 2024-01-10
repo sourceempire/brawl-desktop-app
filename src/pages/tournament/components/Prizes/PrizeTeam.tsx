@@ -1,8 +1,12 @@
-import { PrizeTeamProps } from 'types/prizes/Prizes';
 import { Team } from './Prizes.styles';
 import { useTeamFeed } from 'api/feeds';
+import { TeamId } from 'types/team/Team';
 
-export const PrizeTeam = ({ teamId }: PrizeTeamProps) => {
+type Props = {
+  teamId: TeamId;
+};
+
+export const PrizeTeam = ({ teamId }: Props) => {
   const { team, isLoading: isLoadingTeam } = useTeamFeed({
     teamId
   });
