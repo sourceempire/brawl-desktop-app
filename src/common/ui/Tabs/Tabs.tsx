@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode, useRef, useState } from 'react';
-import { ActiveLine, NavLink, TabsBar } from './Tabs.styled';
+import { ActiveLine, NavLink, TabsBar, TabsPage } from './Tabs.styled';
 import useActiveLineStyle from 'pages/tournament/hooks/useActiveLineStyle';
 
 type TabsProp = {
@@ -27,7 +27,7 @@ export function Tabs({ children }: TabsProp) {
     <>
       <TabsBar ref={linkListRef}>
         {children.map((child) => (
-          <NavLink to="#" onClick={() => changeTab(child.props.name)}>
+          <NavLink key={child.props.name} to="#" onClick={() => changeTab(child.props.name)}>
             {child.props.name}
           </NavLink>
         ))}
@@ -50,5 +50,5 @@ type TabProp = {
 };
 
 export function Tab({ children }: TabProp) {
-  return <div className="page">{children}</div>;
+  return <TabsPage>{children}</TabsPage>;
 }

@@ -13,3 +13,5 @@ export { default as useTournamentMatchHistoryFeed } from './hooks/useTournamentM
 export { default as useCurrentTournamentMatchIdFeed } from './hooks/useCurrentTournamentMatchIdFeed';
 export { default as useMatchFeed } from './hooks/useMatchFeed';
 export { default as useTournamentTeamFeed } from './hooks/useTournamentTeamFeed';
+export { default as useTournamentPrizesFeed } from './hooks/useTournamentPrizesFeed';
+export { default as useTeamFeed } from './hooks/useTeamFeed';
