@@ -2,7 +2,6 @@ import { usePartyFeed } from 'api/feeds';
 import { ActionButton } from 'common/ui';
 import PartyInvite from '../PartyInvite/PartyInvite';
 import PartyPlayer from '../PartyPlayer';
-import PartySettings from '../PartySettings';
 import { Wrapper } from './Party.styles';
 import { useCreatePartyRequest } from 'api/requests/party';
 import { Icons } from '@sourceempire/brawl-ui';
@@ -25,8 +24,6 @@ const Lobby = () => {
           .map((_, index) => (
             <PartyInvite key={index} />
           ))}
-
-        <PartySettings />
       </Wrapper>
     );
   }

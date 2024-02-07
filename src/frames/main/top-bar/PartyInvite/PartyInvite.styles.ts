@@ -6,6 +6,10 @@ export const InvitePlayerAction = styled(ActionButton)`
   ${({ theme }) => css`
     margin-right: ${theme.spacing.baseX2}px;
   `}
+
+  &:last-child {
+    margin-right: 0px;
+  }
 `;
 
 export const Wrapper = styled.div`
