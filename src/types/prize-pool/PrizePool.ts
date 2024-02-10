@@ -1,3 +1,3 @@
-export type PrizePools = {
+export type PrizePool = {
   [key: string]: number;
 };

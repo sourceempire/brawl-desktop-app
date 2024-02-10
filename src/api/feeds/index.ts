@@ -15,4 +15,4 @@ export { default as useMatchFeed } from './hooks/useMatchFeed';
 export { default as useTournamentTeamFeed } from './hooks/useTournamentTeamFeed';
 export { default as useTournamentPrizesFeed } from './hooks/useTournamentPrizesFeed';
 export { default as useTeamFeed } from './hooks/useTeamFeed';
-export { default as useTournamentHubPrizePoolsFeed } from './hooks/useTournamentHubPrizePoolsFeed';
+export { default as useTournamentPrizePoolFeed } from './hooks/useTournamentPrizePoolFeed';
