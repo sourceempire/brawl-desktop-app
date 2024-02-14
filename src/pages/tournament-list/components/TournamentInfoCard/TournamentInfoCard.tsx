@@ -27,9 +27,11 @@ import {
   TwoColHeader,
   Wrapper
 } from './TournamentInfoCard.styles';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useHint } from 'common/hooks';
 import Money from 'types/Money';
+import { useTournamentHubPrizePoolFeed } from 'api/feeds';
+import { getMinMaxPrizePoolValues } from 'utils/tournamentHubUtils';
 
 type Props = {
   tournamentInfo: TournamentHub;
@@ -39,6 +41,8 @@ type Props = {
 
 export default function TournamentInfoCard({ tournamentInfo, onClick, className }: Props) {
   const [isEntryFeeHintVisible, setEntryFeeHintVisible] = useState(false);
+  const [minPrizePoolValue, setMinPrizePoolValue] = useState<number>(0);
+  const [maxPrizePoolValue, setMaxPrizePoolValue] = useState<number>(0);
   const entryFeeRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const { Hint: EntryFeeHint } = useHint({
     hintText: `€${new Money(tournamentInfo.entryFeeCut).format()} fee taken`,
@@ -46,6 +50,20 @@ export default function TournamentInfoCard({ tournamentInfo, onClick, className 
     timeToVisibility: 300,
     relatedElementRef: entryFeeRef
   });
+
+  const { prizePool, isLoading: isLoadingPrizePool } = useTournamentHubPrizePoolFeed({
+    tournamentHubId: tournamentInfo.id
+  });
+
+  useEffect(() => {
+    if (!isLoadingPrizePool && prizePool) {
+      const { minPrize, maxPrize } = getMinMaxPrizePoolValues(prizePool);
+      if (minPrize && maxPrize) {
+        setMinPrizePoolValue(minPrize);
+        setMaxPrizePoolValue(maxPrize);
+      }
+    }
+  }, [isLoadingPrizePool, prizePool]);
 
   return (
     <Wrapper padding={false} onClick={onClick} className={className}>
@@ -72,7 +90,16 @@ export default function TournamentInfoCard({ tournamentInfo, onClick, className 
         </Row1>
         <Row2>
           <Column1>
-            <PrizePool>€{tournamentInfo.currentPrizePool}</PrizePool>
+            <PrizePool>
+              {tournamentInfo.registrationClosed &&
+                !isLoadingPrizePool &&
+                (minPrizePoolValue === maxPrizePoolValue
+                  ? `€${new Money(maxPrizePoolValue).format()}`
+                  : `€${new Money(minPrizePoolValue).format()} - €${new Money(
+                      maxPrizePoolValue
+                    ).format()}`)}
+              {!tournamentInfo.registrationClosed && `€${tournamentInfo.currentPrizePool}`}
+            </PrizePool>
             <TwoColHeader>
               <PrizePoolIcon />
               <PrizePoolHeader>Prize Pool*</PrizePoolHeader>

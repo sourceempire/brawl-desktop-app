@@ -7,6 +7,8 @@ import { HeaderText, InfoCard, InfoCardWrapper, InfoHeader, InfoText } from './I
 import { useHint } from 'common/hooks';
 import Money from 'types/Money';
 import { Icons } from '@sourceempire/brawl-ui';
+import { useTournamentHubPrizePoolFeed } from 'api/feeds';
+import { getMinMaxPrizePoolValues } from 'utils/tournamentHubUtils';
 
 type Props = {
   tournamentHub: TournamentHub;
@@ -20,7 +22,13 @@ const InfoCards = ({ tournamentHub }: Props) => {
   });
 
   const [isHintVisible, setHintVisible] = useState(false);
+  const [minPrizePoolValue, setMinPrizePoolValue] = useState<number>(0);
+  const [maxPrizePoolValue, setMaxPrizePoolValue] = useState<number>(0);
   const entryFeeRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+
+  const { prizePool, isLoading: isLoadingPrizePool } = useTournamentHubPrizePoolFeed({
+    tournamentHubId: tournamentHub.id
+  });
 
   const { Hint: EntryFeeHint } = useHint({
     hintText: `€${new Money(tournamentHub.entryFeeCut).format()} fee taken`,
@@ -45,6 +53,33 @@ const InfoCards = ({ tournamentHub }: Props) => {
   useEffect(() => {
     setInfoSettings(tournamentHub);
   }, [tournamentHub]);
+
+  useEffect(() => {
+    if (!isLoadingPrizePool && prizePool) {
+      // const allValues: number[] = [];
+      // for (const key in prizePool) {
+      //   if (prizePool.hasOwnProperty(key)) {
+      //     const value = prizePool[key];
+      //     if (typeof value === 'number') {
+      //       allValues.push(value);
+      //     }
+      //   }
+      // }
+
+      // if (allValues.length > 0) {
+      //   const minPrize = Math.min(...allValues);
+      //   const maxPrize = Math.max(...allValues);
+
+      //   setMinPrizePoolValue(minPrize);
+      //   setMaxPrizePoolValue(maxPrize);
+      // }
+      const { minPrize, maxPrize } = getMinMaxPrizePoolValues(prizePool);
+      if (minPrize && maxPrize) {
+        setMinPrizePoolValue(minPrize);
+        setMaxPrizePoolValue(maxPrize);
+      }
+    }
+  }, [isLoadingPrizePool, prizePool]);
 
   return (
     <InfoCardWrapper isRegistrationClosed={tournamentHub.registrationClosed}>
@@ -100,7 +135,16 @@ const InfoCards = ({ tournamentHub }: Props) => {
           <Icons.Trophy />
           {tournamentHub.registrationClosed ? 'Prize Pool' : 'Predicted Prize Pool'}
         </InfoHeader>
-        <InfoText>€{tournamentHub.currentPrizePool}</InfoText>
+        <InfoText>
+          {tournamentHub.registrationClosed &&
+            !isLoadingPrizePool &&
+            (minPrizePoolValue === maxPrizePoolValue
+              ? `€${new Money(maxPrizePoolValue).format()}`
+              : `€${new Money(minPrizePoolValue).format()} - €${new Money(
+                  maxPrizePoolValue
+                ).format()}`)}
+          {!tournamentHub.registrationClosed && `€${tournamentHub.currentPrizePool}`}
+        </InfoText>
       </InfoCard>
       <InfoCard>
         <InfoHeader>
