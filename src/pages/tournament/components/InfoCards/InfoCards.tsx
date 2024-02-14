@@ -56,23 +56,6 @@ const InfoCards = ({ tournamentHub }: Props) => {
 
   useEffect(() => {
     if (!isLoadingPrizePool && prizePool) {
-      // const allValues: number[] = [];
-      // for (const key in prizePool) {
-      //   if (prizePool.hasOwnProperty(key)) {
-      //     const value = prizePool[key];
-      //     if (typeof value === 'number') {
-      //       allValues.push(value);
-      //     }
-      //   }
-      // }
-
-      // if (allValues.length > 0) {
-      //   const minPrize = Math.min(...allValues);
-      //   const maxPrize = Math.max(...allValues);
-
-      //   setMinPrizePoolValue(minPrize);
-      //   setMaxPrizePoolValue(maxPrize);
-      // }
       const { minPrize, maxPrize } = getMinMaxPrizePoolValues(prizePool);
       if (minPrize && maxPrize) {
         setMinPrizePoolValue(minPrize);
