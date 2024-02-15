@@ -1,19 +1,21 @@
 import { useFeed } from '@sourceempire/brawl-websocket';
-import { PrizePool } from 'types/prize-pool/PrizePool';
+import { PrizePoolRange } from 'types/prize-pool/PrizePool';
 
 type Params = {
   tournamentHubId: string;
 };
 
 const useTournamentHubPrizePoolFeed = ({ tournamentHubId }: Params) => {
-  const feed = useFeed<{ prizePool: PrizePool[] }>(`tournament.hub.prizePool.${tournamentHubId}`);
+  const feed = useFeed<{ prizePoolRange: PrizePoolRange }>(
+    `tournament.hub.prizePoolRange.${tournamentHubId}`
+  );
 
   if (feed.loading) {
     return { isLoading: feed.loading };
   }
 
   return {
-    prizePool: feed.data.prizePool,
+    prizePoolRange: feed.data.prizePoolRange,
     isLoading: feed.loading
   };
 };

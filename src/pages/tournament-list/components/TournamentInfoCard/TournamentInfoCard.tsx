@@ -27,11 +27,10 @@ import {
   TwoColHeader,
   Wrapper
 } from './TournamentInfoCard.styles';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useHint } from 'common/hooks';
 import Money from 'types/Money';
 import { useTournamentHubPrizePoolFeed } from 'api/feeds';
-import { getMinMaxPrizePoolValues } from 'utils/tournamentHubUtils';
 
 type Props = {
   tournamentInfo: TournamentHub;
@@ -41,8 +40,6 @@ type Props = {
 
 export default function TournamentInfoCard({ tournamentInfo, onClick, className }: Props) {
   const [isEntryFeeHintVisible, setEntryFeeHintVisible] = useState(false);
-  const [minPrizePoolValue, setMinPrizePoolValue] = useState<number>(0);
-  const [maxPrizePoolValue, setMaxPrizePoolValue] = useState<number>(0);
   const entryFeeRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const { Hint: EntryFeeHint } = useHint({
     hintText: `€${new Money(tournamentInfo.entryFeeCut).format()} fee taken`,
@@ -51,19 +48,9 @@ export default function TournamentInfoCard({ tournamentInfo, onClick, className 
     relatedElementRef: entryFeeRef
   });
 
-  const { prizePool, isLoading: isLoadingPrizePool } = useTournamentHubPrizePoolFeed({
+  const { prizePoolRange, isLoading: isLoadingPrizePool } = useTournamentHubPrizePoolFeed({
     tournamentHubId: tournamentInfo.id
   });
-
-  useEffect(() => {
-    if (!isLoadingPrizePool && prizePool) {
-      const { minPrize, maxPrize } = getMinMaxPrizePoolValues(prizePool);
-      if (minPrize && maxPrize) {
-        setMinPrizePoolValue(minPrize);
-        setMaxPrizePoolValue(maxPrize);
-      }
-    }
-  }, [isLoadingPrizePool, prizePool]);
 
   return (
     <Wrapper padding={false} onClick={onClick} className={className}>
@@ -93,10 +80,10 @@ export default function TournamentInfoCard({ tournamentInfo, onClick, className 
             <PrizePool>
               {tournamentInfo.registrationClosed &&
                 !isLoadingPrizePool &&
-                (minPrizePoolValue === maxPrizePoolValue
-                  ? `€${new Money(maxPrizePoolValue).format()}`
-                  : `€${new Money(minPrizePoolValue).format()} - €${new Money(
-                      maxPrizePoolValue
+                (prizePoolRange.minPrizePool === prizePoolRange.maxPrizePool
+                  ? `€${new Money(prizePoolRange.maxPrizePool).format()}`
+                  : `€${new Money(prizePoolRange.minPrizePool).format()} - €${new Money(
+                      prizePoolRange.maxPrizePool
                     ).format()}`)}
               {!tournamentInfo.registrationClosed && `€${tournamentInfo.currentPrizePool}`}
             </PrizePool>

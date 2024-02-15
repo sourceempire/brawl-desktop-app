@@ -8,7 +8,6 @@ import { useHint } from 'common/hooks';
 import Money from 'types/Money';
 import { Icons } from '@sourceempire/brawl-ui';
 import { useTournamentHubPrizePoolFeed } from 'api/feeds';
-import { getMinMaxPrizePoolValues } from 'utils/tournamentHubUtils';
 
 type Props = {
   tournamentHub: TournamentHub;
@@ -22,11 +21,9 @@ const InfoCards = ({ tournamentHub }: Props) => {
   });
 
   const [isHintVisible, setHintVisible] = useState(false);
-  const [minPrizePoolValue, setMinPrizePoolValue] = useState<number>(0);
-  const [maxPrizePoolValue, setMaxPrizePoolValue] = useState<number>(0);
   const entryFeeRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
-  const { prizePool, isLoading: isLoadingPrizePool } = useTournamentHubPrizePoolFeed({
+  const { prizePoolRange, isLoading: isLoadingPrizePool } = useTournamentHubPrizePoolFeed({
     tournamentHubId: tournamentHub.id
   });
 
@@ -53,16 +50,6 @@ const InfoCards = ({ tournamentHub }: Props) => {
   useEffect(() => {
     setInfoSettings(tournamentHub);
   }, [tournamentHub]);
-
-  useEffect(() => {
-    if (!isLoadingPrizePool && prizePool) {
-      const { minPrize, maxPrize } = getMinMaxPrizePoolValues(prizePool);
-      if (minPrize && maxPrize) {
-        setMinPrizePoolValue(minPrize);
-        setMaxPrizePoolValue(maxPrize);
-      }
-    }
-  }, [isLoadingPrizePool, prizePool]);
 
   return (
     <InfoCardWrapper isRegistrationClosed={tournamentHub.registrationClosed}>
@@ -121,10 +108,10 @@ const InfoCards = ({ tournamentHub }: Props) => {
         <InfoText>
           {tournamentHub.registrationClosed &&
             !isLoadingPrizePool &&
-            (minPrizePoolValue === maxPrizePoolValue
-              ? `€${new Money(maxPrizePoolValue).format()}`
-              : `€${new Money(minPrizePoolValue).format()} - €${new Money(
-                  maxPrizePoolValue
+            (prizePoolRange.minPrizePool === prizePoolRange.maxPrizePool
+              ? `€${new Money(prizePoolRange.maxPrizePool).format()}`
+              : `€${new Money(prizePoolRange.minPrizePool).format()} - €${new Money(
+                  prizePoolRange.maxPrizePool
                 ).format()}`)}
           {!tournamentHub.registrationClosed && `€${tournamentHub.currentPrizePool}`}
         </InfoText>
