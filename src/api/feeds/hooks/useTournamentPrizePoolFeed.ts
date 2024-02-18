@@ -1,12 +1,16 @@
 import { useFeed } from '@sourceempire/brawl-websocket';
-import { PrizePool } from 'types/prize-pool/PrizePool';
 
 type Params = {
   tournamentId: string;
 };
 
+type TournamentId = string;
+type PrizePool = number;
+
 const useTournamentPrizePoolFeed = ({ tournamentId }: Params) => {
-  const feed = useFeed<{ prizePool: PrizePool }>(`tournament.prizePool.${tournamentId}`);
+  const feed = useFeed<{ prizePool: Record<TournamentId, PrizePool> }>(
+    `tournament.prizePool.${tournamentId}`
+  );
 
   if (feed.loading) {
     return { isLoading: feed.loading };
