@@ -1,4 +1,4 @@
 export type PrizePoolRange = {
-  minPrizePool: number;
-  maxPrizePool: number;
+  min: number;
+  max: number;
 };
