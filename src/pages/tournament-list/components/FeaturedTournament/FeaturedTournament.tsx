@@ -17,7 +17,7 @@ import {
   Wrapper
 } from './FeaturedTournament.styles';
 import Money from 'types/Money';
-import { useTournamentHubPrizePoolFeed } from 'api/feeds';
+import { PrizePoolRange } from 'common/components/PrizePoolRange';
 
 type Props = {
   tournamentHub: TournamentHub;
@@ -27,10 +27,6 @@ type Props = {
 
 export default function FeaturedTournament({ tournamentHub, onClick, visible }: Props) {
   const formattedRemainingTime = useFormattedRemainingTime(tournamentHub.startTime);
-
-  const { prizePoolRange, isLoading: isLoadingPrizePool } = useTournamentHubPrizePoolFeed({
-    tournamentHubId: tournamentHub.id
-  });
 
   return (
     <Wrapper>
@@ -52,13 +48,9 @@ export default function FeaturedTournament({ tournamentHub, onClick, visible }: 
             </Column1>
             <Column2>
               <PrizePoolAmount>
-                {tournamentHub.registrationClosed &&
-                  !isLoadingPrizePool &&
-                  (prizePoolRange.minPrizePool === prizePoolRange.maxPrizePool
-                    ? `€${new Money(prizePoolRange.maxPrizePool).format()}`
-                    : `€${new Money(prizePoolRange.minPrizePool).format()} - €${new Money(
-                        prizePoolRange.maxPrizePool
-                      ).format()}`)}
+                {tournamentHub.registrationClosed && (
+                  <PrizePoolRange tournamentHub={tournamentHub} />
+                )}
                 {!tournamentHub.registrationClosed && `€${tournamentHub.currentPrizePool}`}
               </PrizePoolAmount>
               <PrizePool>Prize Pool</PrizePool>

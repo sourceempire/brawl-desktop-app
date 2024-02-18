@@ -7,7 +7,7 @@ import { HeaderText, InfoCard, InfoCardWrapper, InfoHeader, InfoText } from './I
 import { useHint } from 'common/hooks';
 import Money from 'types/Money';
 import { Icons } from '@sourceempire/brawl-ui';
-import { useTournamentHubPrizePoolFeed } from 'api/feeds';
+import { PrizePoolRange } from 'common/components/PrizePoolRange';
 
 type Props = {
   tournamentHub: TournamentHub;
@@ -22,10 +22,6 @@ const InfoCards = ({ tournamentHub }: Props) => {
 
   const [isHintVisible, setHintVisible] = useState(false);
   const entryFeeRef = useRef() as React.MutableRefObject<HTMLDivElement>;
-
-  const { prizePoolRange, isLoading: isLoadingPrizePool } = useTournamentHubPrizePoolFeed({
-    tournamentHubId: tournamentHub.id
-  });
 
   const { Hint: EntryFeeHint } = useHint({
     hintText: `€${new Money(tournamentHub.entryFeeCut).format()} fee taken`,
@@ -106,13 +102,7 @@ const InfoCards = ({ tournamentHub }: Props) => {
           {tournamentHub.registrationClosed ? 'Prize Pool' : 'Predicted Prize Pool'}
         </InfoHeader>
         <InfoText>
-          {tournamentHub.registrationClosed &&
-            !isLoadingPrizePool &&
-            (prizePoolRange.minPrizePool === prizePoolRange.maxPrizePool
-              ? `€${new Money(prizePoolRange.maxPrizePool).format()}`
-              : `€${new Money(prizePoolRange.minPrizePool).format()} - €${new Money(
-                  prizePoolRange.maxPrizePool
-                ).format()}`)}
+          {tournamentHub.registrationClosed && <PrizePoolRange tournamentHub={tournamentHub} />}
           {!tournamentHub.registrationClosed && `€${tournamentHub.currentPrizePool}`}
         </InfoText>
       </InfoCard>

@@ -30,7 +30,7 @@ import {
 import { useRef, useState } from 'react';
 import { useHint } from 'common/hooks';
 import Money from 'types/Money';
-import { useTournamentHubPrizePoolFeed } from 'api/feeds';
+import { PrizePoolRange } from 'common/components/PrizePoolRange';
 
 type Props = {
   tournamentInfo: TournamentHub;
@@ -46,10 +46,6 @@ export default function TournamentInfoCard({ tournamentInfo, onClick, className 
     isVisible: isEntryFeeHintVisible,
     timeToVisibility: 300,
     relatedElementRef: entryFeeRef
-  });
-
-  const { prizePoolRange, isLoading: isLoadingPrizePool } = useTournamentHubPrizePoolFeed({
-    tournamentHubId: tournamentInfo.id
   });
 
   return (
@@ -78,13 +74,9 @@ export default function TournamentInfoCard({ tournamentInfo, onClick, className 
         <Row2>
           <Column1>
             <PrizePool>
-              {tournamentInfo.registrationClosed &&
-                !isLoadingPrizePool &&
-                (prizePoolRange.minPrizePool === prizePoolRange.maxPrizePool
-                  ? `€${new Money(prizePoolRange.maxPrizePool).format()}`
-                  : `€${new Money(prizePoolRange.minPrizePool).format()} - €${new Money(
-                      prizePoolRange.maxPrizePool
-                    ).format()}`)}
+              {tournamentInfo.registrationClosed && (
+                <PrizePoolRange tournamentHub={tournamentInfo} />
+              )}
               {!tournamentInfo.registrationClosed && `€${tournamentInfo.currentPrizePool}`}
             </PrizePool>
             <TwoColHeader>
