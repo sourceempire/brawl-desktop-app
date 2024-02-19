@@ -102,7 +102,9 @@ const InfoCards = ({ tournamentHub }: Props) => {
           {tournamentHub.registrationClosed ? 'Prize Pool' : 'Predicted Prize Pool'}
         </InfoHeader>
         <InfoText>
-          {tournamentHub.registrationClosed && <PrizePoolRange tournamentHub={tournamentHub} />}
+          {tournamentHub.registrationClosed && (
+            <PrizePoolRange tournamentHubId={tournamentHub.id} />
+          )}
           {!tournamentHub.registrationClosed && `€${tournamentHub.currentPrizePool}`}
         </InfoText>
       </InfoCard>

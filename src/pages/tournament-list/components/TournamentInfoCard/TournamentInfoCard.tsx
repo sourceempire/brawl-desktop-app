@@ -75,7 +75,7 @@ export default function TournamentInfoCard({ tournamentInfo, onClick, className 
           <Column1>
             <PrizePool>
               {tournamentInfo.registrationClosed && (
-                <PrizePoolRange tournamentHub={tournamentInfo} />
+                <PrizePoolRange tournamentHubId={tournamentInfo.id} />
               )}
               {!tournamentInfo.registrationClosed && `€${tournamentInfo.currentPrizePool}`}
             </PrizePool>

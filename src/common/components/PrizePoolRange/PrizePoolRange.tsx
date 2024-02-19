@@ -1,14 +1,13 @@
 import { useTournamentHubPrizePoolFeed } from 'api/feeds';
-import { TournamentHub } from 'types/tournaments/TournamentInfo';
 import { formatMoney } from 'utils/moneyUtils';
 
 type Props = {
-  tournamentHub: TournamentHub;
+  tournamentHubId: string;
 };
 
-export const PrizePoolRange = ({ tournamentHub }: Props) => {
+export const PrizePoolRange = ({ tournamentHubId }: Props) => {
   const { prizePoolRange, isLoading: isLoadingPrizePool } = useTournamentHubPrizePoolFeed({
-    tournamentHubId: tournamentHub.id
+    tournamentHubId: tournamentHubId
   });
 
   if (isLoadingPrizePool) {
@@ -19,8 +18,5 @@ export const PrizePoolRange = ({ tournamentHub }: Props) => {
   const maxPrizePool = formatMoney(prizePoolRange.max);
   const arePrizePoolMaxMinEqual = minPrizePool === maxPrizePool;
 
-  return (
-    !isLoadingPrizePool &&
-    (arePrizePoolMaxMinEqual ? maxPrizePool : `${minPrizePool} - ${maxPrizePool}`)
-  );
+  return arePrizePoolMaxMinEqual ? maxPrizePool : `${minPrizePool} - ${maxPrizePool}`;
 };

@@ -49,7 +49,7 @@ export default function FeaturedTournament({ tournamentHub, onClick, visible }: 
             <Column2>
               <PrizePoolAmount>
                 {tournamentHub.registrationClosed && (
-                  <PrizePoolRange tournamentHub={tournamentHub} />
+                  <PrizePoolRange tournamentHubId={tournamentHub.id} />
                 )}
                 {!tournamentHub.registrationClosed && `€${tournamentHub.currentPrizePool}`}
               </PrizePoolAmount>
