@@ -17,6 +17,7 @@ import {
   Wrapper
 } from './FeaturedTournament.styles';
 import Money from 'types/Money';
+import { PrizePoolRange } from 'common/components/PrizePoolRange';
 
 type Props = {
   tournamentHub: TournamentHub;
@@ -46,7 +47,12 @@ export default function FeaturedTournament({ tournamentHub, onClick, visible }: 
               </TournamentInfo>
             </Column1>
             <Column2>
-              <PrizePoolAmount>€{tournamentHub.entryFee}</PrizePoolAmount>
+              <PrizePoolAmount>
+                {tournamentHub.registrationClosed && (
+                  <PrizePoolRange tournamentHubId={tournamentHub.id} />
+                )}
+                {!tournamentHub.registrationClosed && `€${tournamentHub.currentPrizePool}`}
+              </PrizePoolAmount>
               <PrizePool>Prize Pool</PrizePool>
             </Column2>
           </Info>
