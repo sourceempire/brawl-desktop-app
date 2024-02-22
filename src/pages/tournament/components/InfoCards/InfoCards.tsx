@@ -7,6 +7,7 @@ import { HeaderText, InfoCard, InfoCardWrapper, InfoHeader, InfoText } from './I
 import { useHint } from 'common/hooks';
 import Money from 'types/Money';
 import { Icons } from '@sourceempire/brawl-ui';
+import { PrizePoolRange } from 'common/components/PrizePoolRange';
 
 type Props = {
   tournamentHub: TournamentHub;
@@ -100,7 +101,12 @@ const InfoCards = ({ tournamentHub }: Props) => {
           <Icons.Trophy />
           {tournamentHub.registrationClosed ? 'Prize Pool' : 'Predicted Prize Pool'}
         </InfoHeader>
-        <InfoText>€{tournamentHub.currentPrizePool}</InfoText>
+        <InfoText>
+          {tournamentHub.registrationClosed && (
+            <PrizePoolRange tournamentHubId={tournamentHub.id} />
+          )}
+          {!tournamentHub.registrationClosed && `€${tournamentHub.currentPrizePool}`}
+        </InfoText>
       </InfoCard>
       <InfoCard>
         <InfoHeader>

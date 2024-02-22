@@ -30,6 +30,7 @@ import {
 import { useRef, useState } from 'react';
 import { useHint } from 'common/hooks';
 import Money from 'types/Money';
+import { PrizePoolRange } from 'common/components/PrizePoolRange';
 
 type Props = {
   tournamentInfo: TournamentHub;
@@ -72,7 +73,12 @@ export default function TournamentInfoCard({ tournamentInfo, onClick, className 
         </Row1>
         <Row2>
           <Column1>
-            <PrizePool>€{tournamentInfo.currentPrizePool}</PrizePool>
+            <PrizePool>
+              {tournamentInfo.registrationClosed && (
+                <PrizePoolRange tournamentHubId={tournamentInfo.id} />
+              )}
+              {!tournamentInfo.registrationClosed && `€${tournamentInfo.currentPrizePool}`}
+            </PrizePool>
             <TwoColHeader>
               <PrizePoolIcon />
               <PrizePoolHeader>Prize Pool*</PrizePoolHeader>
