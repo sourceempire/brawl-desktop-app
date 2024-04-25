@@ -1,6 +1,6 @@
 # Brawl Desktop App
 
-Fork from original source empire repoOB
+Fork from original source empire repo
 
 ## Start script
 
